@@ -1,0 +1,12 @@
+{
+  "name": "webAnalizes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "bancomundial-build": "node ./bancoMundial/src/main.js"
+  },
+  "dependencies": {
+    "xml-js": "^1.6.11"
+  }
+}
