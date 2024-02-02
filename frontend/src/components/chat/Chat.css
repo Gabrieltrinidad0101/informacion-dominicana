@@ -9,20 +9,23 @@
 
 .custom-chart-card{
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 1fr 1fr;
     border-radius: 30px;
     justify-content: center;
     overflow: hidden;
     height: 350px;
+    width: 450px;
 }
 
 .custom-chart-card-title{
     justify-self: center;
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;    
 }
+
+
 
 .custom-chart-card-body{
     width: 100%;

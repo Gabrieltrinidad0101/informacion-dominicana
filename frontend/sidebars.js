@@ -17,27 +17,11 @@ const sidebars = {
 
   tutorialSidebar: [
     'index',
-    {
-      type: 'category',
-      label: 'Economico',
-      items: ['tutorial-basics/Economia'],
-    },
-    {
-      type: 'category',
-      label: 'Social',
-      items: ['tutorial-basics/Economia'],
-    },
-    {
-      type: 'category',
-      label: 'Medioambiente',
-      items: ['tutorial-basics/Economia'],
-    },
-    {
-      type: 'category',
-      label: 'Instituciones',
-      items: ['tutorial-basics/Economia'],
-    },
-
+    'Economía',
+    'Social',
+    'Educación',
+    'Medioambiente',
+    'Ayutamientos',
   ],
   
 };

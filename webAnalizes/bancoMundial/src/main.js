@@ -4,8 +4,9 @@ const fs = require('fs')
 
 const concepts = analizeJson(jsonData)
 for (const concept of Object.keys(concepts)){
-    Object.values(concepts[concept]).forEach((data,index)=>{
-        const fileDirrection = `../processedData/bancoMundial/${concept}/${index}.json`
-        fs.writeFile(fileDirrection,JSON.stringify(data),()=> {})
+    fs.mkdir(`../processedData/bancoMundial/${concept}`,{},_=> {})
+    concepts[concept].forEach((value,description)=>{
+        const fileDirrection = `../processedData/bancoMundial/${concept}/${description}.json`
+        fs.writeFile(fileDirrection,JSON.stringify(value),_=> {})
     })
 }

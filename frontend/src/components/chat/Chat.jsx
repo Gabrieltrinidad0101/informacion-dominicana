@@ -1,15 +1,20 @@
 import React, {useRef, useEffect, useState } from 'react'
 import { ChatBase } from './chatBase'
 import "./Chat.css"
-export function Chat({description}) {
+const isLoad = {}
+export function Chat({description,topic}) {
   const containerChat = useRef()
-  const verifyVisibility = (element)=>{
-    if(!element[0].isIntersecting) return
+  const verifyVisibility =(entry)=>{
+    if (isLoad[description] || !entry[0].isIntersecting) return
+    isLoad[description] = entry[0].isIntersecting
+    ChatBase(containerChat.current,description.replaceAll("%","%25").replaceAll("U+00a0"," "),topic)
   }
+
   useEffect(()=>{
     const observer = new IntersectionObserver(verifyVisibility)
     observer.observe(containerChat.current)
   },[])
+
   return (
       <div className='custom-chart-card'>
         <div className='custom-chart-card-title'>

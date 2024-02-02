@@ -1,6 +1,6 @@
 import * as LightweightCharts from "lightweight-charts"
 
-export const ChatBase = async (container,description) => {
+export const ChatBase = async (container,description,topic) => {
 	var chartElement = document.createElement('div');
 
 	var chart = LightweightCharts.createChart(chartElement, {
@@ -51,7 +51,7 @@ export const ChatBase = async (container,description) => {
 	chart.applyOptions(darkTheme.chart);
 
 	try{
-		const res = await fetch(`http://127.0.0.1:5500/processedData/bancoMundial/${description}.json`)
+		const res = await fetch(`http://127.0.0.1:5500/processedData/bancoMundial/${topic}/${description}.json`)
 		const data = await res.json()
 		areaSeries.setData(data);
 	}catch(error){
