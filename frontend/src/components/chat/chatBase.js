@@ -51,7 +51,7 @@ export const ChatBase = async (container,description,topic) => {
 	chart.applyOptions(darkTheme.chart);
 
 	try{
-		const res = await fetch(`http://127.0.0.1:5500/processedData/bancoMundial/${topic}/${description}.json`)
+		const res = await fetch(`http://127.0.0.1:5500/processedData/${topic}/${description.replaceAll("%","%25")}.json`)
 		const data = await res.json()
 		areaSeries.setData(data);
 	}catch(error){

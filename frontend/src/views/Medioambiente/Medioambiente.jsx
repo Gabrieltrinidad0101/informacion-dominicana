@@ -4,7 +4,7 @@ import { Chats } from '../../components/chats/Chats'
 export function Medioambiente() {
   return (
     <div>
-      <Chats descriptions={topics} topic="Medioambiente" />
+      <Chats descriptions={topics} topic="bancoMundial/Medioambiente" />
     </div>
   )
 }

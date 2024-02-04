@@ -1,16 +1,17 @@
 import React, {useRef, useEffect, useState } from 'react'
 import { ChatBase } from './chatBase'
 import "./Chat.css"
-const isLoad = {}
+let isLoad = {}
 export function Chat({description,topic}) {
   const containerChat = useRef()
   const verifyVisibility =(entry)=>{
     if (isLoad[description] || !entry[0].isIntersecting) return
     isLoad[description] = entry[0].isIntersecting
-    ChatBase(containerChat.current,description.replaceAll("%","%25").replaceAll("U+00a0"," "),topic)
+    ChatBase(containerChat.current,description,topic)
   }
 
   useEffect(()=>{
+    isLoad = {}
     const observer = new IntersectionObserver(verifyVisibility)
     observer.observe(containerChat.current)
   },[])

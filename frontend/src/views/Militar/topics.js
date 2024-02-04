@@ -1,0 +1,2 @@
+// NOT EDIT THIS FILE IS AUTO GENERATE
+ export const topics = ["Muertes producto de la guerra (cantidad de personas)","Gasto militar (UMN a precios actuales)","Gasto militar (% del gasto del gobierno central)"]

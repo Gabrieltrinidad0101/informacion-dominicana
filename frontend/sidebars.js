@@ -19,9 +19,12 @@ const sidebars = {
     'index',
     'Economía',
     'Social',
+    'Salud',
     'Educación',
     'Medioambiente',
+    'Militar',
     'Ayutamientos',
+    'Fuentes'
   ],
   
 };

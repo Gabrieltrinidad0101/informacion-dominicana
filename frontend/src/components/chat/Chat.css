@@ -10,7 +10,6 @@
 .custom-chart-card{
     display: grid;
     grid-template-rows: 1fr 1fr;
-    border-radius: 30px;
     justify-content: center;
     overflow: hidden;
     height: 350px;
