@@ -8,6 +8,8 @@
     "ayuntamientos-build": "node ./src/ayuntamientos/main.js"
   },
   "dependencies": {
+    "node-downloader-helper": "^2.1.9",
+    "puppeteer": "^22.0.0",
     "tesseract.js": "^5.0.4",
     "xml-js": "^1.6.11"
   }
