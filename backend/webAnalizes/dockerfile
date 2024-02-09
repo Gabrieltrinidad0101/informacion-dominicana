@@ -1,0 +1,9 @@
+FROM node:alpine:18
+
+COPY package.json .
+RUN npm i
+
+COPY . .
+
+RUN apk add graphicsmagick
+CMD ["yarn","run","ayuntamientos-build"]

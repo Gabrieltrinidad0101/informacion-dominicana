@@ -1,22 +1,19 @@
-const puppeteer = require("puppeteer")
-const path = require("path")
-void async function(){
-    const browser = await puppeteer.launch(
-        {
-            headless: false,
-            timeout: 10_000_000,
-            protocolTimeout: 10_000_000
-        }
-    )
-    const page = await browser.newPage()
-    await page.goto(`https://smallpdf.com/es/pdf-a-jpg`,{ waitUntil: 'load' })
-    // Locate the file input element
-    const fileInput = await page.$('input[type=file]');
+const { fromPath } = require("pdf2pic");
 
-    // Upload file
-    await fileInput.uploadFile(path.join(__dirname,"../downloadPdf/pdf/ayuntamientojarabacoa/nomina-septiembre-2018.pdf"));
-}()
+const options = {
+  density: 100,
+  saveFilename: "prueba",
+  savePath: __dirname + "/images",
+  format: "jpg",
+  width: 2000,
+  height: 2000
+};
+const convert = fromPath("/home/gabriel/Desktop/Javascript/informacion-dominicana/backend/webAnalizes/src/ayuntamientos/downloadPdf/pdf/ayuntamientojarabacoa/nomina-noviembre-2018.pdf", options);
+const pageToConvertAsImage = 1;
 
+convert(pageToConvertAsImage, { responseType: "image" })
+  .then((resolve) => {
+    console.log("Page 1 is now converted as image");
 
-
-
+    return resolve;
+  });

@@ -9,13 +9,7 @@ const townHalls = [{
 }]
 
 void async function(){
-    const browser = await puppeteer.launch(
-        {
-            headless: false,
-            timeout: 10_000_000,
-            protocolTimeout: 10_000_000
-        }
-    )
+    const browser = await puppeteer.launch()
     const page = await browser.newPage()
     
     for(const {link,name} of townHalls ){
@@ -36,7 +30,6 @@ void async function(){
 
 const downloadPdf = (name,link)=> new Promise((res,rej)=>{
     const folderName = path.join(__dirname,`pdf/${name}`)
-    console.log(folderName)
     fs.mkdir(folderName,_=>{})
     const dl = new DownloaderHelper(link, folderName);
     dl.on('end', res);
