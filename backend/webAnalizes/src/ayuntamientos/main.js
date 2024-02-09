@@ -1,1 +1,2 @@
-require("./downloadImage/downloadImage")
+//require("./downloadPdf/downloadPdf")
+require("./convertPdfToImage/convertPdfToImage")
