@@ -8,7 +8,8 @@ const townHalls = [{
     name: "ayuntamientojarabacoa"
 }]
 
-void async function(){
+
+const downloadPdf = async ()=>{
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     
@@ -20,15 +21,14 @@ void async function(){
             const downloadsLink = await page.$$(".btn.btn-descargar.pull-right")
             for(const downloadLink of downloadsLink){
                 const link = await page.evaluate(el => el.href, downloadLink)
-                await downloadPdf(name,link)      
+                await savePdf(name,link)      
             }
         }
     }
+    browser.close()
+}
 
-}()
-
-
-const downloadPdf = (name,link)=> new Promise((res,rej)=>{
+const savePdf = (name,link)=> new Promise((res,rej)=>{
     const folderName = path.join(__dirname,`pdf/${name}`)
     fs.mkdir(folderName,_=>{})
     const dl = new DownloaderHelper(link, folderName);
@@ -37,3 +37,5 @@ const downloadPdf = (name,link)=> new Promise((res,rej)=>{
     dl.start().catch(rej);
 })
 
+
+module.exports = {downloadPdf}

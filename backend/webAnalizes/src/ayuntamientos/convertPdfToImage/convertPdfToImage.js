@@ -1,19 +1,18 @@
 const { fromPath } = require("pdf2pic");
 
 const options = {
-  density: 100,
-  saveFilename: "prueba",
+  density: 700,
+  saveFilename: "ayuntamientojarabacoa",
   savePath: __dirname + "/images",
   format: "jpg",
-  width: 2000,
-  height: 2000
+  width: 1500,
+  height: 1500
 };
-const convert = fromPath("/home/gabriel/Desktop/Javascript/informacion-dominicana/backend/webAnalizes/src/ayuntamientos/downloadPdf/pdf/ayuntamientojarabacoa/nomina-noviembre-2018.pdf", options);
-const pageToConvertAsImage = 1;
 
-convert(pageToConvertAsImage, { responseType: "image" })
-  .then((resolve) => {
-    console.log("Page 1 is now converted as image");
+const convert = fromPath("/home/gabriel/Desktop/Javascript/informacion-dominicana/backend/webAnalizes/src/ayuntamientos/downloadPdf/pdf/ayuntamientojarabacoa/Nomina-de-Enero-2018.pdf", options);
 
-    return resolve;
-  });
+const convertPdfToImage = async ()=>{
+  return await convert.bulk(-1)
+}
+
+module.exports = {convertPdfToImage}
