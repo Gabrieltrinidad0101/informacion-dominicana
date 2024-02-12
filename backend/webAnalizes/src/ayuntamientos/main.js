@@ -7,7 +7,7 @@ void async function (){
   try{
       //await downloadPdf()
       //await convertPdfToImage()
-      const text = await getTextFromImage("/home/gabriel/Desktop/Javascript/informacion-dominicana/backend/webAnalizes/src/ayuntamientos/convertPdfToImage/images")
+      const text = await getTextFromImage()
       analize(text)
     }catch(error){
       console.log(error)

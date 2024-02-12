@@ -21,18 +21,33 @@ const cropOptions = {
 };
 
 const convertPdfToImage = async ()=>{
-  //await convert.bulk(-1)
-  const folderImagesTemp = path.join(__dirname,"./imagesTemp")
-  const files = await fs.readdir(folderImagesTemp)  
-  console.log("Getting image from pdf")
-  for(const file of files){
-    await cutImage(file,path.join(folderImagesTemp,file))
+  const pdfs = path.join(__dirname,"../downloadPdf/pdf")
+  const townHalls = await fs.readdir(pdfs)
+
+  for(const townHall of townHalls){
+    const nominas = await fs.readdir(path.join(pdfs,townHall))
+    for(const nomina of nominas){
+      const pdfNomina = path.join(pdfs,townHall,nomina)
+      const convert = fromPath(pdfNomina, options);
+      await convert.bulk(-1)
+
+      const folderImagesTemp = path.join(__dirname,"./imagesTemp",townHall)
+      const folderImages = path.join(__dirname,"./images",townHall)
+      fs.mkdir(folderImagesTemp)
+      fs.mkdir(folderImages)
+      const files = await fs.readdir(folderImagesTemp)  
+      console.log("Getting image from pdf")
+      for(const file of files){
+        await cutImage(file,path.join(folderImagesTemp,file),folderImages)
+      }
+    }
   }
+
 }
 
 
-const cutImage = (file,fileFullpath)=> new Promise((res,rej)=>{
-  const fileName = path.join(__dirname,"/images/",file)
+const cutImage = (file,fileFullpath,folderImages)=> new Promise((res,rej)=>{
+  const fileName = path.join(folderImages,file)
   sharp(fileFullpath)
     .extract(cropOptions)
     .toFile(fileName, (err, info) => {
