@@ -1,7 +1,8 @@
 const puppeteer = require("puppeteer")
 const { DownloaderHelper } = require('node-downloader-helper');
 const fs = require("fs")
-const path = require("path")
+const path = require("path");
+const { fileExists } = require("../../../utils");
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
@@ -38,22 +39,6 @@ const getFileNameFromURL = url => {
     const pathname = parsedUrl.pathname;
     const filename = path.basename(pathname);
     return filename;
-}
-
-function fileExists(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.access(filePath, fs.constants.F_OK, (err) => {
-            if (err) {
-                if (err.code === 'ENOENT') {
-                    resolve(false); // File does not exist
-                } else {
-                    reject(err); // Other error
-                }
-            } else {
-                resolve(true); // File exists
-            }
-        });
-    });
 }
 
 const savePdf = (name, link) => new Promise((res, rej) => {
