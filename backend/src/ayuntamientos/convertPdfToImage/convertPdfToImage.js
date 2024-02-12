@@ -1,16 +1,17 @@
 const path = require("path");
 const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
+const { getMonth } = require("../../../utils");
 const fs = require("fs").promises
 
-const options = {
+const options = (savePath)=>({
   density: 700,
   saveFilename: "ayuntamientojarabacoa",
-  savePath: __dirname + "/imageTemp",
+  savePath,
   format: "jpg",
   width: 2000,
   height: 2000
-};
+});
 
 // Define the crop coordinates and dimensions
 const cropOptions = {
@@ -20,21 +21,28 @@ const cropOptions = {
   height: 1150
 };
 
-const convertPdfToImage = async ()=>{
-  const pdfs = path.join(__dirname,"../downloadPdf/pdf")
-  const townHalls = await fs.readdir(pdfs)
+const getPath = (...paths)=>{
+  const pathToReturn = path.join(...paths)
+  if(pathToReturn === "") return pathToReturn
+  fs.mkdir(pathToReturn,{ recursive: true }).catch((error)=>{console.log(error)})
+  return pathToReturn
+}
 
+
+const convertPdfToImage = async ()=>{
+  const townHallsPath = getPath(__dirname,"../../../../processedData/townHalls")
+  const townHalls = await fs.readdir(townHallsPath)
   for(const townHall of townHalls){
-    const nominas = await fs.readdir(path.join(pdfs,townHall))
+    const townHallPdf =getPath(townHallsPath,townHall,"pdf")
+    const nominas = await fs.readdir(townHallPdf)
     for(const nomina of nominas){
-      const pdfNomina = path.join(pdfs,townHall,nomina)
-      const convert = fromPath(pdfNomina, options);
+      const pdfNomina = getPath(townHallPdf,nomina)
+      const month = getMonth(nomina)
+      const folderImagesTemp = getPath(townHallsPath,townHall,"imagestemp",month)
+      const folderImages = getPath(townHallsPath,townHall,"images",month)
+      const convert = fromPath(pdfNomina, options(folderImagesTemp));
       await convert.bulk(-1)
 
-      const folderImagesTemp = path.join(__dirname,"./imagesTemp",townHall)
-      const folderImages = path.join(__dirname,"./images",townHall)
-      fs.mkdir(folderImagesTemp)
-      fs.mkdir(folderImages)
       const files = await fs.readdir(folderImagesTemp)  
       console.log("Getting image from pdf")
       for(const file of files){

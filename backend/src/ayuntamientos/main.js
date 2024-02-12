@@ -5,8 +5,8 @@ const {analize} = require("./analize/analize")
 
 void async function (){
   try{
-      await downloadPdf()
-      //await convertPdfToImage()
+      //await downloadPdf()
+      await convertPdfToImage()
       //const text = await getTextFromImage()
       //analize(text)
     }catch(error){
