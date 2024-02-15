@@ -18,6 +18,7 @@ const getTextFromImage = async (analize)=>{
       const yearsPath = path.join(townHallsPath,townHall,"images")  
       const years = await fs.readdir(yearsPath)
       const nominaData = []
+      const employee = []
       for(const year of years){
         const monthsPath = path.join(yearsPath,year)
         const months = await fs.readdir(monthsPath)
@@ -26,8 +27,15 @@ const getTextFromImage = async (analize)=>{
           const filePath = path.join(nominaImages,"data.txt")
           if(await fileExists(filePath)) {
             const dataText = await fs.readFile(filePath, 'utf8');
-            const jsonData = analize({townHall,dataText,year,month})
-            nominaData.push(...jsonData)
+            const jsonData = analize({townHall,dataText,year,month, parse: (data)=>{
+              return {
+                value: data.salary,
+                time: data.time 
+              }
+            }})
+
+            nominaData.push(jsonData)
+            employee.push({value: jsonData.length,date: jsonData[0].time})
             continue
           }
           const images = await fs.readdir(nominaImages)
@@ -41,10 +49,16 @@ const getTextFromImage = async (analize)=>{
             dataText += `${text.data.text}\n`
           }
           await fs.writeFile(filePath, dataText);
-          nominaData.concat(analize({dataText,year,month}))
+          nominaData.concat(analize({dataText,year,month,parse: (data)=>{
+            return {
+              value: data.salary,
+              time: data.time 
+            }
+          }}))
         }
         const jsonFilePath = getPath(townHallsPath,townHall,`datas`)
-        await fs.writeFile(path.join(jsonFilePath,`/${year}.json`),JSON.stringify(nominaData))
+        await fs.writeFile(path.join(jsonFilePath,`/${year}-nomina.json`),JSON.stringify(nominaData))
+        await fs.writeFile(path.join(jsonFilePath,`/${year}-employee.json`),JSON.stringify(employee))
       }
   }
 }

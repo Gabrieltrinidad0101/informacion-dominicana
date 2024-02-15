@@ -36,4 +36,19 @@ const getMonth = (text)=>{
     if(text.toLowerCase().includes("diciembre")) return "december"
 }
 
-module.exports = {fileExists,getMonth}
+const getNumberOfMonth = (text)=>{
+    if(text === "january") return 1
+    if(text === "february") return 2
+    if(text === "march") return 3
+    if(text === "april") return 4
+    if(text === "may") return 5
+    if(text === "june") return 6
+    if(text === "july") return 7
+    if(text === "august") return 8
+    if(text === "september") return 9 
+    if(text === "october") return 10
+    if(text === "november") return 11
+    if(text === "december") return 12
+}
+
+module.exports = {fileExists,getMonth,getNumberOfMonth}

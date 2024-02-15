@@ -1,3 +1,5 @@
+const { getNumberOfMonth } = require('../../../utils');
+
 const fs = require('fs').promises;
 
 const numbers = new Set(["0","1","2","3","4","5","6","7","8","9"])
@@ -60,7 +62,7 @@ const getPosition = (line)=>{
  * @returns 
  */
 
-const analize = ({year,month,dataText})=>{
+const analize = ({year,month,dataText,parse})=>{
     const lines = dataText.split("\n")
     const nomina = []
     
@@ -69,8 +71,8 @@ const analize = ({year,month,dataText})=>{
         if(line === "" || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
         if(!data.name || !data.position) return
-        data.date = `${year}-${month}-00`
-        nomina.push(data)
+        data.time = `${year}-${getNumberOfMonth(month)}-00`
+        nomina.push(parse(data))
     })
 
     return nomina
