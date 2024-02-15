@@ -1,7 +1,7 @@
 const path = require("path");
 const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
-const { getMonth } = require("../../../utils");
+const { getMonth, fileExists } = require("../../../utils");
 const fs = require("fs").promises
 
 const options = (savePath)=>({
@@ -28,34 +28,39 @@ const getPath = (...paths)=>{
   return pathToReturn
 }
 
+const join = (...paths)=> path.join(...paths)
 
 const convertPdfToImage = async ()=>{
   const townHallsPath = getPath(__dirname,"../../../../processedData/townHalls")
   const townHalls = await fs.readdir(townHallsPath)
   for(const townHall of townHalls){
-    const townHallPdf =getPath(townHallsPath,townHall,"pdf")
-    const nominas = await fs.readdir(townHallPdf)
-    for(const nomina of nominas){
-      const pdfNomina = getPath(townHallPdf,nomina)
-      const month = getMonth(nomina)
-      const folderImagesTemp = getPath(townHallsPath,townHall,"imagestemp",month)
-      const folderImages = getPath(townHallsPath,townHall,"images",month)
-      const convert = fromPath(pdfNomina, options(folderImagesTemp));
-      await convert.bulk(-1)
-
-      const files = await fs.readdir(folderImagesTemp)  
-      console.log("Getting image from pdf")
-      for(const file of files){
-        await cutImage(file,path.join(folderImagesTemp,file),folderImages)
+    const townHallPdf = getPath(townHallsPath,townHall,"pdf")
+    const years = await fs.readdir(townHallPdf)
+    for(const year of years){
+      const nominas = await fs.readdir(getPath(townHallPdf,year))
+      for(const nomina of nominas){
+        const pdfNomina = join(townHallPdf,year,nomina)
+        const month = getMonth(nomina)
+        const folderImagesTemp = getPath(townHallsPath,townHall,`imagestemp/${year}/${month}`)
+        const folderImages = getPath(townHallsPath,townHall,"images",year,month)
+        const files = await fs.readdir(folderImagesTemp)  
+        if(files.length < 0) {
+          const convert = fromPath(pdfNomina, options(folderImagesTemp));
+          await convert.bulk(-1)
+        }
+        console.log(`Getting image from pdf ${folderImages}`)
+        for(const file of files){
+          await cutImage(file,path.join(folderImagesTemp,file),folderImages)
+        }
       }
     }
   }
-
 }
 
 
 const cutImage = (file,fileFullpath,folderImages)=> new Promise((res,rej)=>{
   const fileName = path.join(folderImages,file)
+  if(fileExists(file)) return res()
   sharp(fileFullpath)
     .extract(cropOptions)
     .toFile(fileName, (err, info) => {

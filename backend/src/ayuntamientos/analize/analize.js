@@ -21,7 +21,7 @@ const getData = (line)=>{
 
     const regex = /(?:\d{1,3},)?\d{1,3}\.\d{2}/g;
     const salary = line.match(regex);
-    if(!salary) return {}
+    if(!salary || salary?.length <= 0) return {}
 
     // (radom text) (some number) (employe name)
     // (some number) (employe name)
@@ -39,7 +39,7 @@ const getData = (line)=>{
         const indexOfFirstNumber = line.indexOf("0")
         name = line.slice(indexOfFirstSpace,indexOfFirstNumber)
     }
-    return {name,position,salary}
+    return {name,position,salary: salary[0]}
 }
 
 const getPosition = (line)=>{
@@ -60,7 +60,7 @@ const getPosition = (line)=>{
  * @returns 
  */
 
-const analize = (dataText)=>{
+const analize = ({year,month,dataText})=>{
     const lines = dataText.split("\n")
     const nomina = []
     
@@ -69,8 +69,10 @@ const analize = (dataText)=>{
         if(line === "" || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
         if(!data.name || !data.position) return
+        data.date = `${year}-${month}-00`
         nomina.push(data)
     })
+
     return nomina
 }
 
