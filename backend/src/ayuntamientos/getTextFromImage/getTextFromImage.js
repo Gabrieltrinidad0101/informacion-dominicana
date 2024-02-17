@@ -1,7 +1,7 @@
 const Tesseract = require('tesseract.js');
 const fs = require('fs').promises;
 const path = require('path');
-const { fileExists } = require('../../../utils');
+const { fileExists, monthsOrdes } = require('../../../utils');
 
 const getPath = (...paths)=>{
   const pathToReturn = path.join(...paths)
@@ -17,11 +17,11 @@ const getTextFromImage = async (analize)=>{
   for(const townHall of townHalls){
       const yearsPath = path.join(townHallsPath,townHall,"images")  
       const years = await fs.readdir(yearsPath)
-      const nominaData = []
-      const employee = []
       for(const year of years){
+        const nominaData = []
+        const employee = []
         const monthsPath = path.join(yearsPath,year)
-        const months = await fs.readdir(monthsPath)
+        const months = monthsOrdes(await fs.readdir(monthsPath))
         for(const month of months){
           const nominaImages = path.join(monthsPath,month)
           const filePath = path.join(nominaImages,"data.txt")
