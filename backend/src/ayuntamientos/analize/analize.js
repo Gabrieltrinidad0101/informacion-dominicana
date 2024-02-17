@@ -41,7 +41,7 @@ const getData = (line)=>{
         const indexOfFirstNumber = line.indexOf("0")
         name = line.slice(indexOfFirstSpace,indexOfFirstNumber)
     }
-    return {name,position,salary: salary[0]}
+    return {name,position,salary: parseInt(salary[0].replace(",",""))}
 }
 
 const getPosition = (line)=>{
@@ -71,7 +71,7 @@ const analize = ({year,month,dataText,parse})=>{
         if(line === "" || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
         if(!data.name || !data.position) return
-        data.time = `${year}-${getNumberOfMonth(month)}-00`
+        data.time = `${year}-${getNumberOfMonth(month)}-01`
         nomina.push(parse(data))
     })
 

@@ -23,7 +23,7 @@ const sidebars = {
     'Educación',
     'Medioambiente',
     'Militar',
-    'Ayutamientos',
+    'Ayuntamientos',
     'Fuentes'
   ],
   

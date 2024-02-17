@@ -44,7 +44,7 @@ const convertPdfToImage = async ()=>{
         const folderImagesTemp = getPath(townHallsPath,townHall,`imagestemp/${year}/${month}`)
         const folderImages = getPath(townHallsPath,townHall,"images",year,month)
         const files = await fs.readdir(folderImagesTemp)  
-        if(files.length < 0) {
+        if(files.length <= 0) {
           const convert = fromPath(pdfNomina, options(folderImagesTemp));
           await convert.bulk(-1)
         }
@@ -58,9 +58,9 @@ const convertPdfToImage = async ()=>{
 }
 
 
-const cutImage = (file,fileFullpath,folderImages)=> new Promise((res,rej)=>{
+const cutImage = (file,fileFullpath,folderImages)=> new Promise(async (res,rej)=>{
   const fileName = path.join(folderImages,file)
-  if(fileExists(file)) return res()
+  if(await fileExists(fileName)) return res()
   sharp(fileFullpath)
     .extract(cropOptions)
     .toFile(fileName, (err, info) => {

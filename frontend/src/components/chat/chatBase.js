@@ -14,6 +14,11 @@ export const ChatBase = async (container, description, topic) => {
 			timeScale: {
 				borderVisible: false,
 			},
+
+			localization: {
+				priceFormatter: (val) => val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+			},
+			
 		});
 
 		container.appendChild(chartElement);
@@ -51,7 +56,6 @@ export const ChatBase = async (container, description, topic) => {
 			},
 		};
 		chart.applyOptions(darkTheme.chart);
-
 		const res = await fetch(`${constants.urlData}/${topic}/${description.replaceAll("%", "%25")}.json`)
 		const data = await res.json()
 		areaSeries.setData(data);

@@ -27,15 +27,18 @@ const getTextFromImage = async (analize)=>{
           const filePath = path.join(nominaImages,"data.txt")
           if(await fileExists(filePath)) {
             const dataText = await fs.readFile(filePath, 'utf8');
+            let totalNomina = 0
             const jsonData = analize({townHall,dataText,year,month, parse: (data)=>{
-              return {
-                value: data.salary,
-                time: data.time 
-              }
+              totalNomina += data.salary
+              return data
             }})
-
-            nominaData.push(jsonData)
-            employee.push({value: jsonData.length,date: jsonData[0].time})
+            if(jsonData.length > 0){
+              nominaData.push({
+                value: totalNomina,
+                time: jsonData[0].time
+              })
+              employee.push({value: jsonData.length,time: jsonData[0].time})
+            } 
             continue
           }
           const images = await fs.readdir(nominaImages)
