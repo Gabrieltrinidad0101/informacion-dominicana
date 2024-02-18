@@ -21,15 +21,20 @@ const downloadPdf = async () => {
         await page.goto(urlLink, { waitUntil: 'load' })
         const nominationsByYear = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6 > a")
         console.log(`Downloading pdf from ${urlLink}`)
+        const links = []
         for (const nomination of nominationsByYear.reverse()) {
-            await page.goto(await page.evaluate(el => el.href, nomination), { waitUntil: 'load' })
+            links.push(await page.evaluate(el => el.href, nomination))
+        }
+
+        for(const link of links){
+            await page.goto(link)
             const downloadsLink = await page.$$(".btn.btn-descargar.pull-right")
             for (const downloadLink of downloadsLink) {
                 const link = await page.evaluate(el => el.href, downloadLink)
                 console.log(`   pdf: ${link}`)
-                await savePdf(name, link)
             }
         }
+    
     }
     browser.close()
 }
