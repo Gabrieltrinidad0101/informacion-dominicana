@@ -1,7 +1,7 @@
 const Tesseract = require('tesseract.js');
 const fs = require('fs').promises;
 const path = require('path');
-const { fileExists, monthsOrdes } = require('../../../utils');
+const { fileExists, monthsOrdes } = require('../../utils');
 
 const getPath = (...paths)=>{
   const pathToReturn = path.join(...paths)

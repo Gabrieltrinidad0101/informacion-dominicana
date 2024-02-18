@@ -1,4 +1,4 @@
-const { getNumberOfMonth } = require('../../../utils');
+const { getNumberOfMonth } = require('../../utils');
 
 const fs = require('fs').promises;
 
