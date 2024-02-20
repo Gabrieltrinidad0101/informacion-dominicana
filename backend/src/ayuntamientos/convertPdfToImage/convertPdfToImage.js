@@ -22,14 +22,14 @@ const cropOptions = {
 };
 
 const getPath = async (...paths)=>{
-  const pathToReturn = path.join(...paths)
-  if(pathToReturn === "") return pathToReturn
   try{
+    const pathToReturn = path.join(...paths)
+    if(pathToReturn === "") return pathToReturn
     await fs.mkdir(pathToReturn,{ recursive: true })
+    return pathToReturn
   }catch(err){
-    console.log(err)
+    console.log(paths,"   ",err)
   }
-  return pathToReturn
 }
 
 const join = (...paths)=> path.join(...paths)
@@ -38,6 +38,7 @@ const convertPdfToImage = async ()=>{
   const townHallsPath = await getPath(__dirname,"../../../../processedData/townHalls")
   const townHalls = await fs.readdir(townHallsPath)
   for(const townHall of townHalls){
+    if(path.extname(townHall) !== "") continue
     const townHallPdf = await getPath(townHallsPath,townHall,"pdf")
     const years = await fs.readdir(townHallPdf)
     for(const year of years){
@@ -45,9 +46,13 @@ const convertPdfToImage = async ()=>{
       for(const nomina of nominas){
         const pdfNomina = join(townHallPdf,year,nomina)
         const month = getMonth(nomina)
-        const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}`)
+        if(!month) {
+          console.log(`Error getting month in ${pdfNomina}`)
+          continue
+        }
+        const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}/`)
         const images = await fs.readdir(folderImagesTemp)
-        const folderImages = await getPath(townHallsPath,townHall,"images",year,month)
+        const folderImages = await getPath(townHallsPath,townHall,`images/${year}/${month}/`)
         const imagesCut = await fs.readdir(folderImages)
         if(imagesCut.length > 0) continue
         if(images.length <= 0) {
@@ -59,6 +64,7 @@ const convertPdfToImage = async ()=>{
           await cutImage(image,path.join(folderImagesTemp,image),folderImages)
         }
       }
+      await new Promise(res=>setTimeout(res,2000))
     }
   }
 }

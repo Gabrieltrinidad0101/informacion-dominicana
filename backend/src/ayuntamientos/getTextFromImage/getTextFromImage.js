@@ -58,6 +58,7 @@ const getTextFromImage = async (analize)=>{
               time: data.time 
             }
           }}))
+          await new Promise(res=>setTimeout(res,500))
         }
         const jsonFilePath = getPath(townHallsPath,townHall,`datas`)
         await fs.writeFile(path.join(jsonFilePath,`/${year}-nomina.json`),JSON.stringify(nominaData))

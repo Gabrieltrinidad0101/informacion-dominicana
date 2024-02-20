@@ -6,7 +6,7 @@ const { fileExists, getMonth } = require("../../utils");
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
-    name: "ayuntamientojarabacoa"
+    name: "ayuntamiento_jarabacoa"
 }]
 
 const downloadPdf = async () => {
@@ -17,7 +17,7 @@ const downloadPdf = async () => {
     }
     else{
         links = await getLinkPdf(filePath)
-        fs.writeFileSync(filePath,JSON.stringify(links))
+        fs.writeFile(filePath,JSON.stringify(links))
     }
     await savePdf(links)
 }
@@ -32,12 +32,12 @@ const getLinkPdf = async () => {
     const townHallsLink = []
     for (const { link, name } of townHalls) {
         const urlLink = `${link}/transparencia/documentos/nomina/`
-        await page.goto(urlLink, { waitUntil: 'load' })
+        await page.goto(urlLink)
         const nominationsByYearLink = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6 > a")
         const nominationsByYear = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6")
         console.log(`Downloading pdf from ${urlLink}`)
         const datas = []
-        for (const i in nominationsByYearLink.reverse()) {
+        for (const i in nominationsByYearLink) {
             datas.push({
                 link: await page.evaluate(el => el.href, nominationsByYearLink[i]),
                 year: await page.evaluate(el => el.textContent, nominationsByYear[i])
@@ -52,12 +52,13 @@ const getLinkPdf = async () => {
             for (const i in downloadsLink) {
                 const link = await page.evaluate(el => el.href, downloadsLink[i])
                 const payroll = await page.evaluate(el => el.textContent, payrolls[i])
-                const year = link.split("uploads/")[1].split("/")[0]
+                const regex = /\d{4}/
+                const year = regex.exec(data.year)
                 townHallsLink.push({
                     name,
                     payroll,
                     link,
-                    year
+                    year: year[0]
                 })
             }
         }
@@ -76,23 +77,30 @@ const getFileNameFromURL = url => {
 
 /**
  * 
- * @param {Array<{name: string,year: number,link: string,payroll: string}>} links 
+ * @param {Array<{name: string,year: number,link: string,payroll: string}>} linkData 
  * @returns 
  */
 
-const savePdf = (linkData) => new Promise((res, rej) => {
-    linkData.forEach( async data => {
+const savePdf = async (linkData) =>{
+    for(const data of linkData){
         const fileName = getFileNameFromURL(data.link)
+        if(path.extname(fileName) !== ".pdf") continue
         const folderPath = path.join(__dirname,`../../../../processedData/townHalls/${data.name}/pdf/${data.year}`)
+        fs.mkdir(folderPath,{
+            recursive: true
+        }, _ => { })
         const filePath = path.join(folderPath, fileName)
-        if (await fileExists(filePath)) return res()
-        fs.mkdir(folderPath, _ => { })
+        if (await fileExists(filePath)) continue
         console.log(`       into: ${filePath}`)
-        const dl = new DownloaderHelper(data.link, folderPath);
-        dl.on('end', res);
-        dl.on('error', rej);
-        dl.start().catch(rej);
-    })
+        await download(data.link,folderPath)
+    }
+}
+
+const download = (link,folderPath) => new Promise(async (res, rej) => {
+    const dl = new DownloaderHelper(link, folderPath);
+    dl.on('end', res);
+    dl.on('error', rej);
+    dl.start().catch(rej);
 })
 
 

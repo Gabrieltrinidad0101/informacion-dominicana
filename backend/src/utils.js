@@ -33,7 +33,7 @@ const getMonth = (text) => {
     if (textloweCase.includes("agosto")) return "august"
     if (textloweCase.includes("septiembre")) return "september"
     if (textloweCase.includes("octubre")) return "october"
-    if (textloweCase.includes("noviembre")) return "november"
+    if (textloweCase.includes("noviembre") || textloweCase === "11.pdf") return "november"
     if (textloweCase.includes("diciembre")) return "december"
 }
 
