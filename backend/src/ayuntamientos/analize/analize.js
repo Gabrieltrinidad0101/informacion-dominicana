@@ -11,7 +11,7 @@ const analize = async () => {
     const townHalls = await fs.readdir(townHallsPath)
     for (const townHall of townHalls) {
         if (path.extname(townHall) !== "") continue
-        const townHallPdf = await getPath(townHallsPath, townHall, "images")
+        const townHallPdf = await getPath(townHallsPath, townHall, "preData")
         const years = await fs.readdir(townHallPdf)
         for (const year of years) {
             const monthsPath = path.join(yearsPath,year)

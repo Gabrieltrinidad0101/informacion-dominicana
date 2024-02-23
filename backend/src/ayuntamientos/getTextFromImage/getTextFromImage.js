@@ -22,7 +22,7 @@ const getTextFromImage = async (analize)=>{
         const months = monthsOrdes(await fs.readdir(monthsPath))
         for(const month of months){
           const nominaImages = path.join(monthsPath,month)
-          const filePath = path.join(nominaImages,"data.txt")
+          const filePath = getPath(__dirname,`../preData/${year}/${month}/data.txt`)
           if(await fileExists(filePath)) {
             continue
           }
