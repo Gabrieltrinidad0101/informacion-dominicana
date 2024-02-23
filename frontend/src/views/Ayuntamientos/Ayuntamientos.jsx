@@ -4,7 +4,7 @@ import { Chats } from '../../components/chats/Chats'
 export function Ayuntamientos() {
   return (
     <div>
-      <Chats descriptions={topics} topic="townHalls/ayuntamientoJarabacoa/datas" />
+      <Chats descriptions={topics} topic="townHalls/ayuntamiento_jarabacoa/datas" />
     </div>
   )
 }
