@@ -50,25 +50,37 @@ const convertPdfToImage = async ()=>{
           console.log(`Error getting month in ${pdfNomina}`)
           continue
         }
-        const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}/`)
-        const images = await fs.readdir(folderImagesTemp)
-        const folderImages = await getPath(townHallsPath,townHall,`images/${year}/${month}/`)
-        const imagesCut = await fs.readdir(folderImages)
-        if(imagesCut.length > 0) continue
-        if(images.length <= 0) {
-          const convert = fromPath(pdfNomina, options(folderImagesTemp));
-          await convert.bulk(-1)
-        }
-        console.log(`Getting image from pdf ${folderImages}`)
-        for(const image of images){
-          await cutImage(image,path.join(folderImagesTemp,image),folderImages)
-        }
+        const getDataFromDownload = await getPath(townHallsPath,townHall,`extraData/${year}/${month}/`)
+        const files = await fs.readdir(downloadData)
+        if(path.extname(files[0])) continue
+        getImageFromPdf({
+          townHallsPath,
+          townHall,
+          year,
+          month,
+          getDataFromDownload,
+          files
+        })
       }
       await new Promise(res=>setTimeout(res,2000))
     }
   }
 }
 
+const getImageFromPdf = async ({townHallsPath,townHall,year,month,getDataFromDownload,files})=>{
+  const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}/`)
+  const imagesTemp = await fs.readdir(folderImagesTemp)
+  
+  if(files.length > 0) return
+  if(imagesTemp.length <= 0) {
+    const convert = fromPath(pdfNomina, options(folderImagesTemp));
+    await convert.bulk(-1)
+  }
+  console.log(`Getting image from pdf ${getDataFromDownload}`)
+  for(const image of imagesTemp){
+    await cutImage(image,path.join(folderImagesTemp,image),getDataFromDownload)
+  }
+}
 
 const cutImage = (file,fileFullpath,folderImages)=> new Promise(async (res,rej)=>{
   const fileName = path.join(folderImages,file)

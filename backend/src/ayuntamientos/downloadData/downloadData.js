@@ -9,7 +9,7 @@ const townHalls = [{
     name: "ayuntamiento_jarabacoa"
 }]
 
-const downloadPdf = async () => {
+const downloadData = async () => {
     let links = []
     const filePath = path.join(__dirname,"../../../../processedData/townHalls/pdfLinks.json")
     if (await fileExists(filePath)){

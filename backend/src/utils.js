@@ -1,5 +1,12 @@
 const fs = require("fs");
 
+const getPath = (...paths)=>{
+    const pathToReturn = path.join(...paths)
+    if(pathToReturn === "") return pathToReturn
+    fs.mkdir(pathToReturn,{ recursive: true }).catch((error)=>{console.log(error)})
+    return pathToReturn
+  }
+
 function fileExists(filePath) {
     return new Promise((resolve, reject) => {
         fs.access(filePath, fs.constants.F_OK, (err) => {
@@ -76,4 +83,4 @@ const monthsOrdes = (months) => {
     return months.sort((a, b) => monthOrder[a.toLocaleLowerCase()] - monthOrder[b.toLocaleLowerCase()]);
 }
 
-module.exports = { fileExists, getMonth, getNumberOfMonth,monthsOrdes }
+module.exports = { fileExists, getMonth, getNumberOfMonth,monthsOrdes,getPath }
