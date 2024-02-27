@@ -3,6 +3,7 @@ const { DownloaderHelper } = require('node-downloader-helper');
 const fs = require("fs").promises
 const path = require("path");
 const { fileExists, getMonth } = require("../../utils");
+const { constants } = require("../constants");
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
@@ -11,19 +12,19 @@ const townHalls = [{
 
 const downloadData = async () => {
     let links = []
-    const filePath = path.join(__dirname,"../../../../processedData/townHalls/pdfLinks.json")
-    if (await fileExists(filePath)){
+    const filePath = path.join(constants.townHalls(),"pdfLinks.json")
+    if (fileExists(filePath)){
         links = JSON.parse(await fs.readFile(filePath))
     }
     else{
-        links = await getLinkPdf(filePath)
+        links = await getDownloadLinks(filePath)
         fs.writeFile(filePath,JSON.stringify(links))
     }
-    await savePdf(links)
+    await downloadFiles(links)
 }
 
 
-const getLinkPdf = async () => {
+const getDownloadLinks = async () => {
     const browser = await puppeteer.launch({
         headless: false
     })
@@ -81,16 +82,15 @@ const getFileNameFromURL = url => {
  * @returns 
  */
 
-const savePdf = async (linkData) =>{
+const downloadFiles = async (linkData) =>{
     for(const data of linkData){
         const fileName = getFileNameFromURL(data.link)
-        if(path.extname(fileName) !== ".pdf") continue
-        const folderPath = path.join(__dirname,`../../../../processedData/townHalls/${data.name}/pdf/${data.year}`)
-        fs.mkdir(folderPath,{
-            recursive: true
-        }, _ => { })
+        const folderPath = await constants.downloadData({
+            townHall: data.name,
+            year: data.year
+        }) 
         const filePath = path.join(folderPath, fileName)
-        if (await fileExists(filePath)) continue
+        if (fileExists(filePath)) continue
         console.log(`       into: ${filePath}`)
         await download(data.link,folderPath)
     }
@@ -104,4 +104,4 @@ const download = (link,folderPath) => new Promise(async (res, rej) => {
 })
 
 
-module.exports = { downloadPdf }
+module.exports = { downloadData }

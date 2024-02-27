@@ -1,26 +1,19 @@
 const fs = require("fs");
+const path = require("path");
 
 const getPath = (...paths)=>{
     const pathToReturn = path.join(...paths)
     if(pathToReturn === "") return pathToReturn
-    fs.mkdir(pathToReturn,{ recursive: true }).catch((error)=>{console.log(error)})
+    fs.mkdirSync(pathToReturn,{ recursive: true })
     return pathToReturn
-  }
+}
 
-function fileExists(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.access(filePath, fs.constants.F_OK, (err) => {
-            if (err) {
-                if (err.code === 'ENOENT') {
-                    resolve(false); // File does not exist
-                } else {
-                    reject(err); // Other error
-                }
-            } else {
-                resolve(true); // File exists
-            }
-        });
-    });
+const fileExists = (filePath)=> {
+    try{
+        return fs.existsSync(filePath)
+    }catch{
+        return false
+    }
 }
 
 /**

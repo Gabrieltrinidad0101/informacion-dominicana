@@ -12,10 +12,10 @@ async function excelToArrayOfObjects(filePath) {
             if (rowIndex !== 1) { // Skip header row
                 const rowData = {};
                 row.eachCell((cell, colIndex) => {
-                    rowData[worksheet.getRow(1).getCell(colIndex).value] = cell.value;
+                    rowData[worksheet.getRow(2).getCell(colIndex).value] = cell.value;
                 });
                 data.push(rowData);
-            }
+            }   
         });
     } catch (error) {
         console.error('Error:', error);
@@ -24,9 +24,18 @@ async function excelToArrayOfObjects(filePath) {
     return data;
 }
 
-// Usage
-const filePath = 'example.xlsx'; // Path to your Excel file
-excelToArrayOfObjects(filePath)
-    .then(data => {
-        console.log(data); // Array of objects representing Excel data
-    });
+const excelAnalize = async ({year,month,filePath})=>{
+    const data = await excelToArrayOfObjects(filePath)
+    const nomina = []
+    for(let i = 1; i < data.length; i++){
+        nomina.push({
+            value: data[i].Sueldo,
+            time: `${year}-${month}-01`
+        })
+    }
+    return nomina
+}
+
+module.exports = {
+    excelAnalize
+}
