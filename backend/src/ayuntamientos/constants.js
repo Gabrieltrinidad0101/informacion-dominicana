@@ -8,7 +8,7 @@ const constants = {
     townHalls: (...paths)=> getPath(processedData,"townHalls",...paths),
     downloadData: ({townHall,year}) => getPath(processedData,"townHalls",townHall,"downloadData",year),
     extractedData: ({townHall,year}) => getPath(processedData,"extractedData"),
-    preData: ({townHall,year}) => getPath(processedData,"preData"),
+    preData: ({townHall}) => getPath(processedData,townHall,"preData"),
     data: ({townHall,year}) => getPath(processedData,"data"),
 }
 

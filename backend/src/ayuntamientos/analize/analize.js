@@ -1,3 +1,5 @@
+const { constants } = require("../constants")
+const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 
 /**
@@ -7,19 +9,23 @@ const {generalAnalize} = require("./general")
  */
 
 const analize = async () => {
-    const townHallsPath = await getPath(__dirname, "../../../../processedData/townHalls")
+    const townHallsPath = constants.townHalls()
     const townHalls = await fs.readdir(townHallsPath)
     for (const townHall of townHalls) {
         if (path.extname(townHall) !== "") continue
-        const townHallPdf = await getPath(townHallsPath, townHall, "preData")
-        const years = await fs.readdir(townHallPdf)
+        const townHallPath = constants.preData(townHall)
+        const years = await fs.readdir(townHallPath)
         for (const year of years) {
-            const monthsPath = path.join(yearsPath,year)
-            const months = monthsOrdes(await fs.readdir(monthsPath))
-            for(const month of months){
-                const nominaImages = path.join(monthsPath,month)
-                const filePath = path.join(nominaImages,"data.txt")
-                if(await fileExists(filePath)) continue
+            const payrollByYear = []
+            const payrolls = monthsOrdes(await fs.readdir(year))
+            for(const payroll of payrolls){
+                const filePath = path.join(townHallPath,year,payroll)
+                const fileType = path.extname(filePath)
+                if(fileType == ".excel"){
+                    const payrollData = excelAnalize(filePath)
+                    payrollByYear.push(...payrollData)
+                    continue
+                }
                 const dataText = await fs.readFile(filePath, 'utf8');
                 generalAnalize(dataText)
             }
