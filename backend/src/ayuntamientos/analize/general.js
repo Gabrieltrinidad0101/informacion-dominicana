@@ -56,20 +56,18 @@ const getPosition = (line) => {
     }
 }
 
-const generalAnalize = (dataText)=>{
+const generalAnalize = ({year,month,dataText})=>{
     const lines = dataText.split("\n")
-    const nomina = []
-
+    let total = 0
     lines.forEach(line => {
         if (line.length < 20) return
         if (line === "" || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
         if (!data.name || !data.position) return
-        data.time = `${year}-${getNumberOfMonth(month)}-01`
-        nomina.push(parse(data))
+        total += data.salary
     })
 
-    return nomina
+    return {time: `${year}-${getNumberOfMonth(month)}-01`,value: total}
 }
 
 module.exports = { generalAnalize }

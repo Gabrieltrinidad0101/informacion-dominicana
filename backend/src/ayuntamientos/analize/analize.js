@@ -1,6 +1,9 @@
+const fs = require("fs").promises
+const path = require("path")
 const { constants } = require("../constants")
 const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
+const { monthsOrdes, getNumberOfMonth } = require("../../utils")
 
 /**
  * 
@@ -17,18 +20,20 @@ const analize = async () => {
         const years = await fs.readdir(townHallPath)
         for (const year of years) {
             const payrollByYear = []
-            const payrolls = monthsOrdes(await fs.readdir(year))
+            const payrolls = monthsOrdes(await fs.readdir(path.join(townHallPath,year)))
             for(const payroll of payrolls){
                 const filePath = path.join(townHallPath,year,payroll)
                 const fileType = path.extname(filePath)
-                if(fileType == ".excel"){
-                    const payrollData = excelAnalize(filePath)
-                    payrollByYear.push(...payrollData)
+                const month = getNumberOfMonth(path.basename(filePath))
+                if(fileType == ".xlsx"){
+                    const payrollData = await excelAnalize({year,month,filePath})
+                    payrollByYear.push(payrollData)
                     continue
                 }
                 const dataText = await fs.readFile(filePath, 'utf8');
-                generalAnalize(dataText)
+                payrollByYear.push(generalAnalize({year,month,dataText}))
             }
+            console.log(payrollByYear)
         }
     }
 }

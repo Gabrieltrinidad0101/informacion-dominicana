@@ -1,39 +1,49 @@
 const ExcelJS = require('exceljs');
 
+/**
+ * 
+ * @param {*} filePath 
+ * @returns any[]
+ */
 async function excelToArrayOfObjects(filePath) {
-    const workbook = new ExcelJS.Workbook();
-    const data = [];
-
     try {
+        const workbook = new ExcelJS.Workbook();
         await workbook.xlsx.readFile(filePath);
-        const worksheet = workbook.getWorksheet(1); // Assuming data is in the first worksheet
-
-        worksheet.eachRow((row, rowIndex) => {
-            if (rowIndex !== 1) { // Skip header row
-                const rowData = {};
-                row.eachCell((cell, colIndex) => {
-                    rowData[worksheet.getRow(2).getCell(colIndex).value] = cell.value;
-                });
-                data.push(rowData);
-            }   
+        
+        const worksheet = workbook.getWorksheet(1); // Assuming the data is in the first worksheet
+        
+        const headers = [];
+        worksheet.getRow(2).eachCell((cell) => {
+            headers.push(cell.value.richText[0].text);
         });
+
+        const data = [];
+        worksheet.eachRow({ includeEmpty: false, firstRow: 2 }, (row, rowNum) => {
+            if(rowNum <= 2) return
+            const rowData = {};
+            row.eachCell((cell, colNum) => {
+                if(cell.value.richText){
+                    rowData[headers[colNum - 1]] = cell.value.richText[0].text;
+                    return
+                }
+                rowData[headers[colNum - 1]] = cell.value;
+            });
+            data.push(rowData);
+        });
+        return data;
     } catch (error) {
         console.error('Error:', error);
     }
 
-    return data;
 }
 
 const excelAnalize = async ({year,month,filePath})=>{
     const data = await excelToArrayOfObjects(filePath)
-    const nomina = []
-    for(let i = 1; i < data.length; i++){
-        nomina.push({
-            value: data[i].Sueldo,
-            time: `${year}-${month}-01`
-        })
+    const total = data.reduce((a,b)=> a + b.Salario,0)
+    return {
+        value: total,
+        time: `${year}-${month}-01`
     }
-    return nomina
 }
 
 module.exports = {
