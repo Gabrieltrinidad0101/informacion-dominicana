@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer")
 const { DownloaderHelper } = require('node-downloader-helper');
 const fs = require("fs").promises
 const path = require("path");
-const { fileExists, getMonth } = require("../../utils");
+const { fileExists, getMonth, isNullEmptyUndefinerNan } = require("../../utils");
 const { constants } = require("../constants");
 
 const townHalls = [{
@@ -85,23 +85,43 @@ const getFileNameFromURL = url => {
 const downloadFiles = async (linkData) =>{
     for(const data of linkData){
         const fileName = getFileNameFromURL(data.link)
-        const folderPath = await constants.downloadData({
-            townHall: data.name,
-            year: data.year
-        }) 
+        let folderPath = ""
+        if(path.extname(data.fileName) == "xlsx") {
+            folderPath = constants.preData({
+                townHall: data.name,
+                year: data.year
+            })
+        }else{
+            folderPath = constants.downloadData({
+                townHall: data.name,
+                year: data.year
+            }) 
+        }
         const filePath = path.join(folderPath, fileName)
+
         if (fileExists(filePath)) continue
         console.log(`       into: ${filePath}`)
-        await download(data.link,folderPath)
+        await download(data.fileName,data.link,folderPath)
     }
 }
 
-const download = (link,folderPath) => new Promise(async (res, rej) => {
-    const dl = new DownloaderHelper(link, folderPath);
+const download = (fileName,link,folderPath) => new Promise(async (res, rej) => {
+    const month = getFilename(fileName)
+    if(isNullEmptyUndefinerNan(month)) return
+    const dl = new DownloaderHelper(link, folderPath,{
+        fileName: `${getMonth(path.parse(fileName))}.${path.extname(fileName)}`
+    });
     dl.on('end', res);
     dl.on('error', rej);
     dl.start().catch(rej);
 })
+
+const getFilename =(fileName)=>{
+    const month = getMonth(path.parse(fileName)) 
+    const extname = path.extname(fileName)
+    if(isNullEmptyUndefinerNan(month)) return
+    return `${month}.${extname}`
+}
 
 
 module.exports = { downloadData }

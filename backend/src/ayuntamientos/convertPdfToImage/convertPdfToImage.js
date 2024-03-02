@@ -2,6 +2,7 @@ const path = require("path");
 const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
 const { getMonth, fileExists } = require("../../utils");
+const { constants } = require("../constants");
 const fs = require("fs").promises
 
 const options = (savePath)=>({
@@ -35,16 +36,16 @@ const getPath = async (...paths)=>{
 const join = (...paths)=> path.join(...paths)
 
 const convertPdfToImage = async ()=>{
-  const townHallsPath = await getPath(__dirname,"../../../../processedData/townHalls")
+  const townHallsPath = constants.townHalls()
   const townHalls = await fs.readdir(townHallsPath)
   for(const townHall of townHalls){
     if(path.extname(townHall) !== "") continue
-    const townHallPdf = await getPath(townHallsPath,townHall,"pdf")
+    const townHallPdf = constants.downloadData(townHall)
     const years = await fs.readdir(townHallPdf)
     for(const year of years){
-      const nominas = await fs.readdir(await getPath(townHallPdf,year))
-      for(const nomina of nominas){
-        const pdfNomina = join(townHallPdf,year,nomina)
+      const payrolls = await fs.readdir(await getPath(townHallPdf,year))
+      for(const payroll of payrolls){
+        const pdfNomina = join(townHallPdf,year,payroll)
         const month = getMonth(nomina)
         if(!month) {
           console.log(`Error getting month in ${pdfNomina}`)

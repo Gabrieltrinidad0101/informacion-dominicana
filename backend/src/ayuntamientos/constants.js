@@ -7,10 +7,10 @@ const townHalls = (...paths)=> getPath(processedData,"townHalls",...paths)
 const constants = {
     processedData,
     townHalls,
-    downloadData: ({townHall,year}) => getPath(processedData,"townHalls",townHall,"downloadData",year),
+    downloadData: (townHall) => townHalls(townHall,"downloadData"),
     extractedData: ({townHall,year}) => getPath(processedData,"extractedData"),
     preData: (townHall) => townHalls(townHall,"preData"),
-    data: ({townHall,year}) => getPath(processedData,"data"),
+    data: ({townHall,year}) => townHalls(townHall,"data")
 }
 
 module.exports = {constants}

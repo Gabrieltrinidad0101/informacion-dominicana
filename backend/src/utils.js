@@ -54,6 +54,16 @@ const getNumberOfMonth = (text) => {
 
 /**
  * 
+ * @param  {...any[]} values 
+ * @returns 
+ */
+
+const isNullEmptyUndefinerNan =(...values)=>
+    values.some(value => value === undefined || value === null || Object.is(value,NaN) || value === "")
+
+
+/**
+ * 
  * @param {Array<string>} months 
  */
 const monthsOrdes = (months) => {
@@ -76,4 +86,4 @@ const monthsOrdes = (months) => {
     return months.sort((a, b) => monthOrder[a.toLocaleLowerCase()] - monthOrder[b.toLocaleLowerCase()]);
 }
 
-module.exports = { fileExists, getMonth, getNumberOfMonth,monthsOrdes,getPath }
+module.exports = { fileExists, getMonth, getNumberOfMonth,monthsOrdes,getPath,isNullEmptyUndefinerNan }

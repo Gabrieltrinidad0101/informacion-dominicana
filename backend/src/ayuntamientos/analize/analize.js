@@ -19,21 +19,25 @@ const analize = async () => {
         const townHallPath = constants.preData(townHall)
         const years = await fs.readdir(townHallPath)
         for (const year of years) {
-            const payrollByYear = []
+            const payrollsByYear = []
+            const employeesByYear = []
             const payrolls = monthsOrdes(await fs.readdir(path.join(townHallPath,year)))
             for(const payroll of payrolls){
                 const filePath = path.join(townHallPath,year,payroll)
                 const fileType = path.extname(filePath)
-                const month = getNumberOfMonth(path.basename(filePath))
+                const month = getNumberOfMonth(path.parse(payroll).name)
                 if(fileType == ".xlsx"){
-                    const payrollData = await excelAnalize({year,month,filePath})
-                    payrollByYear.push(payrollData)
+                    const [payrollData,employeesData] =  excelAnalize({year,month,filePath})
+                    payrollsByYear.push(payrollData)
+                    employeesByYear.push(employeesData)
                     continue
                 }
                 const dataText = await fs.readFile(filePath, 'utf8');
-                payrollByYear.push(generalAnalize({year,month,dataText}))
+                const [payrollData,employeesData] = generalAnalize({year,month,dataText})
+                payrollsByYear.push(payrollData)
+                employeesByYear.push(employeesData)
             }
-            console.log(payrollByYear)
+            constants.data()   
         }
     }
 }

@@ -1,49 +1,44 @@
-const ExcelJS = require('exceljs');
+const XLSX = require('xlsx');
+const { isNullEmptyUndefinerNan } = require('../../utils');
 
 /**
  * 
  * @param {*} filePath 
  * @returns any[]
  */
-async function excelToArrayOfObjects(filePath) {
+const excelToArrayOfObjects = (filePath) => {
     try {
-        const workbook = new ExcelJS.Workbook();
-        await workbook.xlsx.readFile(filePath);
-        
-        const worksheet = workbook.getWorksheet(1); // Assuming the data is in the first worksheet
-        
-        const headers = [];
-        worksheet.getRow(2).eachCell((cell) => {
-            headers.push(cell.value.richText[0].text);
-        });
+        // Load the Excel file
+        const workbook = XLSX.readFile(filePath);
 
-        const data = [];
-        worksheet.eachRow({ includeEmpty: false, firstRow: 2 }, (row, rowNum) => {
-            if(rowNum <= 2) return
-            const rowData = {};
-            row.eachCell((cell, colNum) => {
-                if(cell.value.richText){
-                    rowData[headers[colNum - 1]] = cell.value.richText[0].text;
-                    return
-                }
-                rowData[headers[colNum - 1]] = cell.value;
-            });
-            data.push(rowData);
-        });
-        return data;
+        const totalData = []
+        for(const sheetName of workbook.SheetNames){
+            const sheet = workbook.Sheets[sheetName];
+            const data = XLSX.utils.sheet_to_json(sheet);
+            totalData.push(...data)
+        }
+        return totalData;
     } catch (error) {
         console.error('Error:', error);
     }
-
 }
 
-const excelAnalize = async ({year,month,filePath})=>{
-    const data = await excelToArrayOfObjects(filePath)
-    const total = data.reduce((a,b)=> a + b.Salario,0)
-    return {
-        value: total,
+const excelAnalize = ({year,month,filePath})=>{
+    const data = excelToArrayOfObjects(filePath)
+    let employees = 0
+    const payroll = data.reduce((a,b)=> {
+        if(isNullEmptyUndefinerNan(b["__EMPTY_3"]) || typeof b["__EMPTY_3"] === "string") return a
+        ++employees
+        return a + b["__EMPTY_3"]
+    },0)
+
+    return [{
+        value: payroll,
         time: `${year}-${month}-01`
-    }
+    },{
+        value: employees,
+        time: `${year}-${month}-01`
+    }]
 }
 
 module.exports = {
