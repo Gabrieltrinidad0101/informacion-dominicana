@@ -4,14 +4,11 @@
 
 # Información Dominicana
 
-Este proyecto fue creado con el unico proposito de mostrar información del país de una forma rapida y simple a todas las dominicanas y dominicanos.  
-
-
-
+Este proyecto fue creado con el único propósito de mostrar información del país de manera rápida y sencilla a todos los dominicanos y dominicanas.  
 
 ## Appendix
 
-El backend unicamente es utilizado para generar los archivos json que luego el frontend lo utilizar para generar las graficas tambien los titulos de cada graficas son generados en el backend puedes todos los datos en https://drive.google.com/drive/folders/1pUYbezr2N0WbzFh56TFHaL3R9b-kFo7-?usp=sharing
+El backend se utiliza únicamente para generar los archivos JSON, que luego son empleados por el frontend para crear las gráficas. Además, los títulos de cada gráfica son generados en el backend. Puedes encontrar todos los datos en https://drive.google.com/drive/folders/1pUYbezr2N0WbzFh56TFHaL3R9b-kFo7-?usp=sharing.
 
 ## Demo
 
@@ -114,7 +111,7 @@ To run tests, run the following command
 
 
 ## 🚀 Acarca de mi
-Solo soy un simple desarrollador de software que se intereso por saber mas de nuestro hermoso pais y al ver el tal mal estado de las paginas oficiales gurnamentales decidio cambiar eso.
+Soy simplemente un desarrollador de software que se interesó en conocer más sobre nuestro hermoso país. Al observar el lamentable estado de las páginas oficiales gubernamentales, decidí cambiar esa situación.
 
 
 ## Feedback
