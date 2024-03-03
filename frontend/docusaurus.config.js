@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.png',
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -62,7 +62,7 @@ const config = {
         title: 'Informacion Dominicana',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.jpeg',
+          src: 'img/logo.png',
         },
         items: [
           {
