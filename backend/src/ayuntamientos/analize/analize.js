@@ -4,7 +4,8 @@ const { constants } = require("../constants")
 const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 const { monthsOrdes, getNumberOfMonth } = require("../../utils")
-
+const fileLinks = path.join(constants.townHalls(),"pdfLinks.json")
+const links = JSON.parse(await fs.readFile(fileLinks))
 /**
  * 
  * @param {string} dataText 
@@ -18,6 +19,7 @@ const analize = async () => {
         if (path.extname(townHall) !== "") continue
         const townHallPath = constants.preData(townHall)
         const years = await fs.readdir(townHallPath)
+        const topics = "// NOT EDIT THIS FILE IS AUTO GENERATE\nexport const topics = ["
         for (const year of years) {
             const payrollsByYear = []
             const employeesByYear = []
@@ -27,7 +29,7 @@ const analize = async () => {
                 const fileType = path.extname(filePath)
                 const month = getNumberOfMonth(path.parse(payroll).name)
                 if(fileType == ".xlsx"){
-                    const [payrollData,employeesData] =  excelAnalize({year,month,filePath})
+                    const [payrollData,employeesData] = excelAnalize({year,month,filePath})
                     payrollsByYear.push(payrollData)
                     employeesByYear.push(employeesData)
                     continue
@@ -37,8 +39,16 @@ const analize = async () => {
                 payrollsByYear.push(payrollData)
                 employeesByYear.push(employeesData)
             }
-            constants.data()   
+            const payrollFileName = `${year}-payroll.json`
+            const employeesFileName = `${year}-employee.json`
+            const dataPathPayroll = path.join(constants.datas(townHall),`${year}-payroll.json`)
+            const dataPathEmployee = path.join(constants.datas(townHall),`${year}-employee.json`)
+            fs.writeFile(dataPathPayroll,JSON.stringify(payrollsByYear))
+            fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
+            topics += `${payrollFileName},${employeesFileName}`
         }
+        //creating the frontend file
+        fs.writeFile(constants.frontendTownHall(townHall),`${topics}]`)
     }
 }
 

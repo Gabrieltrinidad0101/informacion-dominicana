@@ -31,7 +31,7 @@ const getDownloadLinks = async () => {
     const page = await browser.newPage()
 
     const townHallsLink = []
-    for (const { link, name } of townHalls) {
+    for (const { link, townHall } of townHalls) {
         const urlLink = `${link}/transparencia/documentos/nomina/`
         await page.goto(urlLink)
         const nominationsByYearLink = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6 > a")
@@ -56,10 +56,11 @@ const getDownloadLinks = async () => {
                 const regex = /\d{4}/
                 const year = regex.exec(data.year)
                 townHallsLink.push({
-                    name,
+                    townHall,
                     payroll,
                     link,
-                    year: year[0]
+                    year: year[0],
+                    filePath: filePath({link,townHall,year: year[0]})
                 })
             }
         }
@@ -85,18 +86,7 @@ const getFileNameFromURL = url => {
 const downloadFiles = async (linkData) =>{
     for(const data of linkData){
         const fileName = getFileNameFromURL(data.link)
-        let folderPath = ""
-        if(path.extname(data.fileName) == "xlsx") {
-            folderPath = constants.preData({
-                townHall: data.name,
-                year: data.year
-            })
-        }else{
-            folderPath = constants.downloadData({
-                townHall: data.name,
-                year: data.year
-            }) 
-        }
+        let folderPath = filePath
         const filePath = path.join(folderPath, fileName)
 
         if (fileExists(filePath)) continue
@@ -105,12 +95,26 @@ const downloadFiles = async (linkData) =>{
     }
 }
 
-const download = (fileName,link,folderPath) => new Promise(async (res, rej) => {
-    const month = getFilename(fileName)
-    if(isNullEmptyUndefinerNan(month)) return
-    const dl = new DownloaderHelper(link, folderPath,{
-        fileName: `${getMonth(path.parse(fileName))}.${path.extname(fileName)}`
-    });
+const filePath = ({link,townHall,year})=>{
+    let folderPath = ""
+    if(path.extname(link) == "xlsx") {
+        folderPath = constants.preData({
+            townHall,
+            year: year
+        })
+    }else{
+        folderPath = constants.downloadData({
+           townHall,
+           year: year
+       }) 
+    }
+
+    return path.join(folderPath,getFilename(link))
+}
+
+const download = (link,filePath) => new Promise(async (res, rej) => {
+    if(filePath === "") return
+    const dl = new DownloaderHelper(link, filePath);
     dl.on('end', res);
     dl.on('error', rej);
     dl.start().catch(rej);
@@ -119,7 +123,7 @@ const download = (fileName,link,folderPath) => new Promise(async (res, rej) => {
 const getFilename =(fileName)=>{
     const month = getMonth(path.parse(fileName)) 
     const extname = path.extname(fileName)
-    if(isNullEmptyUndefinerNan(month)) return
+    if(isNullEmptyUndefinerNan(month)) return ""
     return `${month}.${extname}`
 }
 

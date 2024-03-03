@@ -2,22 +2,22 @@ const Tesseract = require('tesseract.js');
 const fs = require('fs').promises;
 const path = require('path');
 const { fileExists, monthsOrdes } = require('../../utils');
+const { constants } = require('../constants');
 
-const getTextFromImage = async (analize)=>{
-  const townHallsPath = path.join(__dirname,"../../../../processedData/townHalls")
+const getTextFromImage = async (analize)=>{ 
+  const townHallsPath = constants.townHalls()
   const townHalls = await fs.readdir(townHallsPath)
-
   for(const townHall of townHalls){
-      const yearsPath = path.join(townHallsPath,townHall,"images")  
+      const yearsPath = constants.images(townHall)
       const years = await fs.readdir(yearsPath)
       for(const year of years){
         const monthsPath = path.join(yearsPath,year)
         const months = monthsOrdes(await fs.readdir(monthsPath))
         for(const month of months){
           const nominaImages = path.join(monthsPath,month)
-          const folder = getPath(__dirname,`../../../../processedData/townHalls/${townHall}/preData/${year}/${month}`)
+          const folder = constants.preData(townHall,year,month)
           const filePath = path.join(folder,"data.txt")
-          if(await fileExists(filePath)) continue
+          if(fileExists(filePath)) continue
           const images = await fs.readdir(nominaImages)
           let dataText = ""
           console.log(`converting image to text ${nominaImages}`)
