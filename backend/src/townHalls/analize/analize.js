@@ -1,6 +1,6 @@
 const fs = require("fs").promises
 const path = require("path")
-const { constants } = require("../constants")
+const { constants } = require("../../constants")
 const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 const { monthsOrdes, getNumberOfMonth } = require("../../utils")

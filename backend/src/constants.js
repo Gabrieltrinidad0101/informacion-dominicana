@@ -1,18 +1,20 @@
 const path = require("path")
-const {getPath} = require("../utils")
+const {getPath} = require("./utils")
 
-const processedData = path.join(__dirname,"../../../processedData")
+const dataPreprocessing = getPath(__dirname,"../../../dataPreprocessing")
+const datas = (...paths)=> getPath(__dirname,"../../../datas",...paths)
 const frontend = path.join(__dirname,"../../../frontend")
-const townHalls = (...paths)=> getPath(processedData,"townHalls",...paths)
+const townHalls = (...paths)=> getPath(dataPreprocessing,"townHalls",...paths)
      
 const constants = {
-    processedData,
+    dataPreprocessing,
+    datas,
     townHalls,
     downloadData: (townHall) => townHalls(townHall,"downloadData"),
     images: (townHall) => townHalls(townHall,"images"),
-    extractedData: ({townHall,year}) => getPath(processedData,"extractedData"),
+    extractedData: ({townHall,year}) => getPath(dataPreprocessing,"extractedData"),
     preData: (townHall,...paths) => townHalls(townHall,"preData",...paths),
-    datas: (townHall,...paths) => townHalls(townHall,"datas",...paths),
+    dataWorldBank: (...paths) => datas(...paths),
     frontendTownHall: (townHall)=> path.join(frontend,"src/views/ayuntamientos/",townHall,"topic.js")
 }
 
