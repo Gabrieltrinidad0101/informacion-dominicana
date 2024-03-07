@@ -79,16 +79,16 @@ const getDownloadLinks = async () => {
 
 const downloadFiles = async (linkData) =>{
     for(const data of linkData){
-        const filePath = data.filePath
-        if (fileExists(filePath)) continue
-        console.log(`       into: ${filePath}`)
-        await download(data.link,filePath)
+        const filePath = data.fileName
+        if (fileExists(path.join(data.folderPath,data.fileName))) continue
+        console.log(`downloading: ${data.year} ${filePath} link: ${data.link}`)
+        await download(data.link,data.folderPath,data.fileName)
     }
 }
 
 const filePath = ({link,townHall,year})=>{
     let folderPath = ""
-    if(path.extname(link) == "xlsx") {
+    if(path.extname(link) == ".xlsx") {
         folderPath = constants.preData(townHall,year)
     }else
         folderPath = constants.downloadData(townHall,year) 

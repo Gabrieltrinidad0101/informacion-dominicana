@@ -37,6 +37,22 @@ const getMonth = (text) => {
     if (textloweCase.includes("diciembre")) return "december"
 }
 
+const getMonth = (text) => {
+    const textloweCase = text.toLowerCase()
+    if (textloweCase.includes("enero")) return "january"
+    if (textloweCase.includes("febrero") || textloweCase.includes("feb")) return "february"
+    if (textloweCase.includes("marzo")) return "march"
+    if (textloweCase.includes("abril")) return "april"
+    if (textloweCase.includes("mayo")) return "may"
+    if (textloweCase.includes("junio")) return "june"
+    if (textloweCase.includes("julio")) return "july"
+    if (textloweCase.includes("agosto")) return "august"
+    if (textloweCase.includes("septiembre")) return "september"
+    if (textloweCase.includes("octubre")) return "october"
+    if (textloweCase.includes("noviembre") || textloweCase === "11.pdf") return "november"
+    if (textloweCase.includes("diciembre")) return "december"
+}
+
 const getNumberOfMonth = (text) => {
     if (text === "january") return "01"
     if (text === "february") return "02"

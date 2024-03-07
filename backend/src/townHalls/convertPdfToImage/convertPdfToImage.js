@@ -1,13 +1,13 @@
 const path = require("path");
 const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
-const { getMonth, fileExists } = require("../../utils");
+const { getMonth, fileExists, isNullEmptyUndefinerNan } = require("../../utils");
 const { constants } = require("../../constants");
 const fs = require("fs").promises
 
 const options = (savePath)=>({
   density: 700,
-  saveFilename: "ayuntamientojarabacoa",
+  saveFilename: "jarabacoaTownHall",
   savePath,
   format: "jpg",
   width: 2000,
@@ -46,15 +46,15 @@ const convertPdfToImage = async ()=>{
       const payrolls = await fs.readdir(await getPath(townHallPdf,year))
       for(const payroll of payrolls){
         const pdfNomina = join(townHallPdf,year,payroll)
-        const month = getMonth(nomina)
-        if(!month) {
+        const month = path.parse(pdfNomina).name
+        if(isNullEmptyUndefinerNan(month)) {
           console.log(`Error getting month in ${pdfNomina}`)
           continue
         }
-        const getDataFromDownload = await getPath(townHallsPath,townHall,`extraData/${year}/${month}/`)
-        const files = await fs.readdir(downloadData)
-        if(path.extname(files[0])) continue
-        getImageFromPdf({
+        const getDataFromDownload = constants.extractedData(townHall,year,month)
+        const files = await fs.readdir(getDataFromDownload)
+        if(files.length > 0 && !path.extname(files[0])) continue
+        await getImageFromPdf({
           townHallsPath,
           townHall,
           year,
@@ -71,10 +71,10 @@ const convertPdfToImage = async ()=>{
 const getImageFromPdf = async ({townHallsPath,townHall,year,month,getDataFromDownload,files})=>{
   const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}/`)
   const imagesTemp = await fs.readdir(folderImagesTemp)
-  
+
   if(files.length > 0) return
   if(imagesTemp.length <= 0) {
-    const convert = fromPath(pdfNomina, options(folderImagesTemp));
+    const convert = fromPath(getDataFromDownload, options(folderImagesTemp));
     await convert.bulk(-1)
   }
   console.log(`Getting image from pdf ${getDataFromDownload}`)

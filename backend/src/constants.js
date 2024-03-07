@@ -12,7 +12,7 @@ const constants = {
     townHalls,
     downloadData: (townHall,...paths) => townHalls(townHall,"downloadData",...paths),
     images: (townHall) => townHalls(townHall,"images"),
-    extractedData: ({townHall,year}) => getPath(dataPreprocessing,"extractedData"),
+    extractedData: (townHall,...paths) => townHalls(townHall,"extractedData",...paths),
     preData: (townHall,...paths) => townHalls(townHall,"preData",...paths),
     dataWorldBank: (...paths) => datas("worldBank",...paths),
     frontendTownHall: (townHall)=> path.join(frontend,"src/views/ayuntamientos/",townHall,"topic.js")
