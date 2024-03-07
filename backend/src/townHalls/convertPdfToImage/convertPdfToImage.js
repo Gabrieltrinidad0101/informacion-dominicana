@@ -2,7 +2,7 @@ const path = require("path");
 const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
 const { getMonth, fileExists } = require("../../utils");
-const { constants } = require("../constants");
+const { constants } = require("../../constants");
 const fs = require("fs").promises
 
 const options = (savePath)=>({

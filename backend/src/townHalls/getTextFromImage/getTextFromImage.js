@@ -2,7 +2,7 @@ const Tesseract = require('tesseract.js');
 const fs = require('fs').promises;
 const path = require('path');
 const { fileExists, monthsOrdes } = require('../../utils');
-const { constants } = require('../constants');
+const { constants } = require('../../constants');
 
 const getTextFromImage = async (analize)=>{ 
   const townHallsPath = constants.townHalls()

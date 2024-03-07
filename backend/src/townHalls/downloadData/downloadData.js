@@ -2,12 +2,12 @@ const puppeteer = require("puppeteer")
 const { DownloaderHelper } = require('node-downloader-helper');
 const fs = require("fs").promises
 const path = require("path");
-const { fileExists, getMonth, isNullEmptyUndefinerNan } = require("../../utils");
-const { constants } = require("../constants");
+const { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } = require("../../utils");
+const { constants } = require("../../constants");
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
-    name: "jarabacoaTownHall"
+    townHall: "jarabacoaTownHall"
 }]
 
 const downloadData = async () => {
@@ -55,26 +55,20 @@ const getDownloadLinks = async () => {
                 const payroll = await page.evaluate(el => el.textContent, payrolls[i])
                 const regex = /\d{4}/
                 const year = regex.exec(data.year)
+                const {fileName,folderPath} = filePath({link,townHall,year: year[0]})
                 townHallsLink.push({
                     townHall,
                     payroll,
                     link,
                     year: year[0],
-                    filePath: filePath({link,townHall,year: year[0]})
+                    fileName,
+                    folderPath
                 })
             }
         }
     }
     browser.close()
     return townHallsLink
-}
-
-
-const getFileNameFromURL = url => {
-    const parsedUrl = new URL(url);
-    const pathname = parsedUrl.pathname;
-    const filename = path.basename(pathname);
-    return filename;
 }
 
 /**
@@ -85,46 +79,37 @@ const getFileNameFromURL = url => {
 
 const downloadFiles = async (linkData) =>{
     for(const data of linkData){
-        const fileName = getFileNameFromURL(data.link)
-        let folderPath = filePath
-        const filePath = path.join(folderPath, fileName)
-
+        const filePath = data.filePath
         if (fileExists(filePath)) continue
         console.log(`       into: ${filePath}`)
-        await download(data.fileName,data.link,folderPath)
+        await download(data.link,filePath)
     }
 }
 
 const filePath = ({link,townHall,year})=>{
     let folderPath = ""
     if(path.extname(link) == "xlsx") {
-        folderPath = constants.preData({
-            townHall,
-            year: year
-        })
-    }else{
-        folderPath = constants.downloadData({
-           townHall,
-           year: year
-       }) 
-    }
-
-    return path.join(folderPath,getFilename(link))
+        folderPath = constants.preData(townHall,year)
+    }else
+        folderPath = constants.downloadData(townHall,year) 
+    return {folderPath,fileName: getFilename(link)}
 }
 
-const download = (link,filePath) => new Promise(async (res, rej) => {
-    if(filePath === "") return
-    const dl = new DownloaderHelper(link, filePath);
+const download = (link,folderPath,fileName) => new Promise(async (res, rej) => {
+    if(folderPath === "") return
+    const dl = new DownloaderHelper(link, folderPath,{
+        fileName
+    });
     dl.on('end', res);
     dl.on('error', rej);
     dl.start().catch(rej);
 })
 
 const getFilename =(fileName)=>{
-    const month = getMonth(path.parse(fileName)) 
+    const month = getMonth(path.parse(fileName).name) 
     const extname = path.extname(fileName)
     if(isNullEmptyUndefinerNan(month)) return ""
-    return `${month}.${extname}`
+    return `${month}${extname}`
 }
 
 

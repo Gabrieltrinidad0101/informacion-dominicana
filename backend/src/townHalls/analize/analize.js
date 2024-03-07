@@ -5,7 +5,7 @@ const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 const { monthsOrdes, getNumberOfMonth } = require("../../utils")
 const fileLinks = path.join(constants.townHalls(),"pdfLinks.json")
-const links = JSON.parse(await fs.readFile(fileLinks))
+//const links = JSON.parse(await fs.readFile(fileLinks))
 /**
  * 
  * @param {string} dataText 
