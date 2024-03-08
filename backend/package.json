@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "world-bank-build": "node ./src/worldBanck/main.js",
+    "world-bank-build": "node ./src/worldBank/main.js",
     "town-halls-build": "node ./src/townHalls/main.js"
   },
   "dependencies": {
