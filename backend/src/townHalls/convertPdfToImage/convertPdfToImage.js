@@ -51,14 +51,14 @@ const convertPdfToImage = async ()=>{
           console.log(`Error getting month in ${pdfNomina}`)
           continue
         }
-        const getDataFromDownload = constants.extractedData(townHall,year,month)
+        const getDataFromDownload = constants.images(townHall,year,month)
         const files = await fs.readdir(getDataFromDownload)
         if(files.length > 0 && !path.extname(files[0])) continue
         await getImageFromPdf({
-          townHallsPath,
           townHall,
           year,
           month,
+          pdfNomina,
           getDataFromDownload,
           files
         })
@@ -68,13 +68,13 @@ const convertPdfToImage = async ()=>{
   }
 }
 
-const getImageFromPdf = async ({townHallsPath,townHall,year,month,getDataFromDownload,files})=>{
-  const folderImagesTemp = await getPath(townHallsPath,townHall,`imagestemp/${year}/${month}/`)
+const getImageFromPdf = async ({townHall,year,month,pdfNomina,getDataFromDownload,files})=>{
+  const folderImagesTemp = constants.imagesTemp(townHall,year,month)
   const imagesTemp = await fs.readdir(folderImagesTemp)
 
   if(files.length > 0) return
   if(imagesTemp.length <= 0) {
-    const convert = fromPath(getDataFromDownload, options(folderImagesTemp));
+    const convert = fromPath(pdfNomina, options(folderImagesTemp));
     await convert.bulk(-1)
   }
   console.log(`Getting image from pdf ${getDataFromDownload}`)
