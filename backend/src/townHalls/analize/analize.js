@@ -19,7 +19,7 @@ const analize = async () => {
         if (path.extname(townHall) !== "") continue
         const townHallPath = constants.preData(townHall)
         const years = await fs.readdir(townHallPath)
-        const topics = "// NOT EDIT THIS FILE IS AUTO GENERATE\nexport const topics = ["
+        let topics = "// NOT EDIT THIS FILE IS AUTO GENERATE\nexport const topics = ["
         for (const year of years) {
             const payrollsByYear = []
             const employeesByYear = []
@@ -43,12 +43,12 @@ const analize = async () => {
             const employeesFileName = `${year}-employee.json`
             const dataPathPayroll = path.join(constants.datas(townHall),`${year}-payroll.json`)
             const dataPathEmployee = path.join(constants.datas(townHall),`${year}-employee.json`)
-            fs.writeFile(dataPathPayroll,JSON.stringify(payrollsByYear))
-            fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
-            topics += `${payrollFileName},${employeesFileName}`
+            await fs.writeFile(dataPathPayroll,JSON.stringify(payrollsByYear))
+            await fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
+            topics += `"${payrollFileName}","${employeesFileName}",`
         }
         //creating the frontend file
-        fs.writeFile(constants.frontendTownHall(townHall),`${topics}]`)
+        await fs.writeFile(constants.frontendTownHall(townHall),`${topics}]`)
     }
 }
 
