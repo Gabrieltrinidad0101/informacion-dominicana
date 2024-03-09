@@ -7,7 +7,7 @@ const { constants } = require("../../constants");
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
-    townHall: "jarabacoaTownHall"
+    townHall: "Jarabacoa"
 }]
 
 const downloadData = async () => {

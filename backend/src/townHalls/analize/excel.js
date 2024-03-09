@@ -66,12 +66,6 @@ const excelAnalize = ({year,month,filePath})=>{
     }]
 }
 
-console.log(excelAnalize({
-    year: 2023,
-    month: 7,
-    filePath: "/home/gabriel/Desktop/Javascript/informacion-dominicana/dataPreprocessing/townHalls/Jarabacoa/preData/2022/june.xlsx"
-}))
-
 module.exports = {
     excelAnalize
 }

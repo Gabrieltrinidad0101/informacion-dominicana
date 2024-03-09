@@ -3,6 +3,7 @@ const { fromPath } = require("pdf2pic");
 const sharp = require('sharp');
 const { getMonth, fileExists, isNullEmptyUndefinerNan } = require("../../utils");
 const { constants } = require("../../constants");
+const { fixesRotationImages, fixesCutImages } = require("./fixes");
 const fs = require("fs").promises
 
 const options = (savePath)=>({
@@ -79,15 +80,15 @@ const getImageFromPdf = async ({townHall,year,month,pdfNomina,getDataFromDownloa
   }
   console.log(`Getting image from pdf ${getDataFromDownload}`)
   for(const image of imagesTemp){
-    await cutImage(image,path.join(folderImagesTemp,image),getDataFromDownload)
+    await processImage(image,path.join(folderImagesTemp,image),getDataFromDownload)
   }
 }
 
-const cutImage = (file,fileFullpath,folderImages)=> new Promise(async (res,rej)=>{
+const processImage = (file,fileFullpath,folderImages)=> new Promise(async (res,rej)=>{
   const fileName = path.join(folderImages,file)
-  if(await fileExists(fileName)) return res()
+  if(fileExists(fileName)) return res()
   sharp(fileFullpath)
-    .extract(cropOptions)
+    .rotate(fixesRotationImages(fileFullpath))
     .toFile(fileName, (err, info) => {
       if (err) {
         rej(err)

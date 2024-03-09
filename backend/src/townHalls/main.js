@@ -7,7 +7,7 @@ void async function () {
   try {
     // await downloadData()
     // await convertPdfToImage()
-    // await getTextFromImage()
+    await getTextFromImage()
     await analize()
   } catch (error) {
     console.log("Error ", error)

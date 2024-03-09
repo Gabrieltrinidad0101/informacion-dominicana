@@ -1,4 +1,4 @@
-const { getNumberOfMonth } = require('../../utils');
+const { getNumberOfMonth, isNullEmptyUndefinerNan } = require('../../utils');
 
 const fs = require('fs').promises;
 
@@ -21,7 +21,7 @@ const getData = (line) => {
     let findNumber = false
     let findAletter = false
 
-    const regex = /(?:\d{1,3},)?\d{1,3}\.\d{2}/g;
+    const regex = /(?:\d{1,3},)?\d{1,3}(\.\d{2}|,\d{2})/g;
     const salary = line.match(regex);
     if (!salary || salary?.length <= 0) return {}
 
@@ -62,9 +62,9 @@ const generalAnalize = ({year,month,dataText})=>{
     let employee = 0
     lines.forEach(line => {
         if (line.length < 20) return
-        if (line === "" || line.includes("Total:") || line.includes("Carnet")) return
+        if (isNullEmptyUndefinerNan(line) || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
-        if (!data.name || !data.position) return
+        if (isNullEmptyUndefinerNan(data.salary)) return
         payroll += data.salary
         ++employee
     })
