@@ -23,14 +23,39 @@ const excelToArrayOfObjects = (filePath) => {
     }
 }
 
+/**
+ * 
+ * @param {Object<string,string>} headers 
+ * @returns String
+ */
+const getSalaryKey = (headers)=>{
+    const headersValue = Object.values(headers)
+    let salaryKey = ""
+    for (const i in headersValue) {
+        const salary = headersValue[i].toString().toLowerCase()
+        if(!salary.includes("salario") && !salary.includes("sueldo")) continue
+        salaryKey = Object.keys(headers)[i]
+    }
+    return salaryKey
+}
+
 const excelAnalize = ({year,month,filePath})=>{
     const data = excelToArrayOfObjects(filePath)
     let employees = 0
+    let findSalary = false
+    let salaryKey = ""
     const payroll = data.reduce((a,b)=> {
-        if(isNullEmptyUndefinerNan(b["__EMPTY_3"]) || typeof b["__EMPTY_3"] === "string") return a
+        if(!findSalary){
+            salaryKey = getSalaryKey(b) 
+            findSalary = !isNullEmptyUndefinerNan(salaryKey)  
+            if(!findSalary) return 0 
+        }
+        if(isNullEmptyUndefinerNan(b[salaryKey]) || typeof b[salaryKey] === "string") return a
         ++employees
-        return a + b["__EMPTY_3"]
+        return a + b[salaryKey]
     },0)
+
+    if(!salaryKey) console.log(filePath)
 
     return [{
         value: payroll,
@@ -40,6 +65,12 @@ const excelAnalize = ({year,month,filePath})=>{
         time: `${year}-${month}-01`
     }]
 }
+
+console.log(excelAnalize({
+    year: 2023,
+    month: 7,
+    filePath: "/home/gabriel/Desktop/Javascript/informacion-dominicana/dataPreprocessing/townHalls/Jarabacoa/preData/2022/june.xlsx"
+}))
 
 module.exports = {
     excelAnalize

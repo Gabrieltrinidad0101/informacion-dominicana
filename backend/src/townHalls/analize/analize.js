@@ -20,9 +20,9 @@ const analize = async () => {
         const townHallPath = constants.preData(townHall)
         const years = await fs.readdir(townHallPath)
         let topics = "// NOT EDIT THIS FILE IS AUTO GENERATE\nexport const topics = ["
+        const payrollsByYear = []
+        const employeesByYear = []
         for (const year of years) {
-            const payrollsByYear = []
-            const employeesByYear = []
             const payrolls = monthsOrdes(await fs.readdir(path.join(townHallPath,year)))
             for(const payroll of payrolls){
                 const filePath = path.join(townHallPath,year,payroll)
@@ -41,14 +41,12 @@ const analize = async () => {
             }
             const payrollFileName = `${year}-payroll.json`
             const employeesFileName = `${year}-employee.json`
-            const dataPathPayroll = path.join(constants.datas(townHall),`${year}-payroll.json`)
-            const dataPathEmployee = path.join(constants.datas(townHall),`${year}-employee.json`)
-            await fs.writeFile(dataPathPayroll,JSON.stringify(payrollsByYear))
-            await fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
             topics += `"${payrollFileName}","${employeesFileName}",`
         }
-        //creating the frontend file
-        await fs.writeFile(constants.frontendTownHall(townHall),`${topics}]`)
+        const dataPathPayroll = path.join(constants.datasTownHalls(townHall),`payrolls.json`)
+        const dataPathEmployee = path.join(constants.datasTownHalls(townHall),`employees.json`)
+        await fs.writeFile(dataPathPayroll,JSON.stringify(payrollsByYear))
+        await fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
     }
 }
 

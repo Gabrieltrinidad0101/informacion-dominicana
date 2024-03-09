@@ -1,17 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 
-const getPath = (...paths)=>{
+const getPath = (...paths) => {
     const pathToReturn = path.join(...paths)
-    if(pathToReturn === "") return pathToReturn
-    fs.mkdirSync(pathToReturn,{ recursive: true })
+    if (pathToReturn === "") return pathToReturn
+    fs.mkdirSync(pathToReturn, { recursive: true })
     return pathToReturn
 }
 
-const fileExists = (filePath)=> {
-    try{
+const fileExists = (filePath) => {
+    try {
         return fs.existsSync(filePath)
-    }catch{
+    } catch {
         return false
     }
 }
@@ -58,8 +58,8 @@ const getNumberOfMonth = (text) => {
  * @returns 
  */
 
-const isNullEmptyUndefinerNan =(...values)=>
-    values.some(value => value === undefined || value === null || Object.is(value,NaN) || value === "")
+const isNullEmptyUndefinerNan = (...values) =>
+    values.some(value => value === undefined || value === null || Object.is(value, NaN) || value === "")
 
 
 /**
@@ -70,7 +70,6 @@ const monthsOrdes = (months) => {
     const monthOrder = {
         january: 1,
         february: 2,
-        feb: 2,
         march: 3,
         april: 4,
         may: 5,
@@ -83,7 +82,12 @@ const monthsOrdes = (months) => {
         december: 12
     }
 
-    return months.sort((a, b) => monthOrder[a.toLocaleLowerCase()] - monthOrder[b.toLocaleLowerCase()]);
+    const monthsInOrden = Array(12)
+    months.forEach(month => {
+        const index = monthOrder[path.parse(month).name]
+        monthsInOrden[index] = month
+    })
+    return monthsInOrden.filter(month => !isNullEmptyUndefinerNan(month))
 }
 
-module.exports = { fileExists, getMonth, getNumberOfMonth,monthsOrdes,getPath,isNullEmptyUndefinerNan }
+module.exports = { fileExists, getMonth, getNumberOfMonth, monthsOrdes, getPath, isNullEmptyUndefinerNan }

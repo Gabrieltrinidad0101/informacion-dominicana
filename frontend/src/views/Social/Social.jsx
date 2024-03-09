@@ -4,7 +4,7 @@ import { Chats } from '../../components/chats/Chats'
 export function Social() {
   return (
     <div>
-      <Chats descriptions={topics} topic="bancoMundial/Social" />
+      <Chats descriptions={topics} topic="worldBank/Social" />
     </div>
   )
 }

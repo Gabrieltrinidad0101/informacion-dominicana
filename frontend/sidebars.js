@@ -23,7 +23,11 @@ const sidebars = {
     'Educación',
     'Medioambiente',
     'Militar',
-    'Ayuntamientos',
+    {
+      type: 'category',
+      label: 'Ayuntamientos',
+      items: ['Jarabacoa'],
+    },
     'Fuentes'
   ],
   

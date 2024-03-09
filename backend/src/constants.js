@@ -9,13 +9,14 @@ const townHalls = (...paths)=> getPath(dataPreprocessing,"townHalls",...paths)
 const constants = {
     dataPreprocessing,
     datas,
+    datasTownHalls: (...paths) => datas("townHalls",...paths),
     townHalls,
     downloadData: (townHall,...paths) => townHalls(townHall,"downloadData",...paths),
     images: (townHall,...paths) => townHalls(townHall,"images",...paths),
     imagesTemp: (townHall,...paths) => townHalls(townHall,"imagestemp",...paths),
     preData: (townHall,...paths) => townHalls(townHall,"preData",...paths),
     dataWorldBank: (...paths) => datas("worldBank",...paths),
-    frontendTownHall: (townHall)=> path.join(frontend,"src/views/Ayuntamientos/",townHall,"topic.js")
+    frontendTownHall: (townHall)=> path.join(frontend,"src/views/Ayuntamientos/",townHall,"topics.js")
 }
 
 module.exports = {constants}
