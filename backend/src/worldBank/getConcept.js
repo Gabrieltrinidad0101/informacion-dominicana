@@ -32,6 +32,7 @@ const getConcept = (description)=>{
     "Alumnos de mayor edad",
     "Educacin terciaria",
     "Educación",
+    "alfabetización",
     "Relación alumno-maestro",
     "escuela",
     "educación",
@@ -102,6 +103,10 @@ const getConcept = (description)=>{
 
     const militar = ["militar","Muertes producto de la guerra"]
 
+    if(educacion.some(data=>description.includes(data))){
+        return "Educacion"
+    }
+
     if(social.some(data=>description.includes(data))){
         return "Social"
     }
@@ -112,10 +117,6 @@ const getConcept = (description)=>{
 
     if(economia.some(data=>description.includes(data))){
         return "Economia"
-    }
-
-    if(educacion.some(data=>description.includes(data))){
-        return "Educacion"
     }
 
     if(salud.some(data=>description.includes(data))){

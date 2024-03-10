@@ -4,6 +4,7 @@ const { constants } = require("../../constants")
 const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 const { monthsOrdes, getNumberOfMonth } = require("../../utils")
+const { getDatafixes } = require("./fixes")
 const fileLinks = path.join(constants.townHalls(),"pdfLinks.json")
 //const links = JSON.parse(await fs.readFile(fileLinks))
 /**
@@ -25,6 +26,12 @@ const analize = async () => {
         for (const year of years) {
             const payrolls = monthsOrdes(await fs.readdir(path.join(townHallPath,year)))
             for(const payroll of payrolls){
+                const hasFix = getDatafixes({year,month: payroll})
+                if(hasFix){
+                    payrollsByYear.push(hasFix.payroll)
+                    employeesByYear.push(hasFix.employee)
+                    continue
+                }
                 const filePath = path.join(townHallPath,year,payroll)
                 const fileType = path.extname(filePath)
                 const month = getNumberOfMonth(path.parse(payroll).name)

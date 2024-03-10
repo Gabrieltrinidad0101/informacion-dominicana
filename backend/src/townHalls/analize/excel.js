@@ -30,13 +30,21 @@ const excelToArrayOfObjects = (filePath) => {
  */
 const getSalaryKey = (headers)=>{
     const headersValue = Object.values(headers)
+    const headersKeys = Object.keys(headers)
     let salaryKey = ""
     for (const i in headersValue) {
         const salary = headersValue[i].toString().toLowerCase()
         if(!salary.includes("salario") && !salary.includes("sueldo")) continue
-        salaryKey = Object.keys(headers)[i]
+        salaryKey = headersKeys[i]
+        return salaryKey
     }
-    return salaryKey
+
+    for (const i in headersKeys) {
+        const salary = headersKeys[i].toString().toLowerCase()
+        if(!salary.includes("salario") && !salary.includes("sueldo")) continue
+        salaryKey = headersKeys[i]
+        return salaryKey
+    }
 }
 
 const excelAnalize = ({year,month,filePath})=>{

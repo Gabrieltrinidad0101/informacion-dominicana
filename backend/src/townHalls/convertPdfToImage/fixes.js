@@ -4,7 +4,8 @@
  */
 const fixesRotationImages = (filePath)=>{
     if(
-        (filePath.includes("2021") && filePath.includes("november"))      
+        (filePath.includes("2021") && filePath.includes("november")) ||     
+        (filePath.includes("2018") && filePath.includes("april"))      
     ){
         return -90
     }
