@@ -6,8 +6,8 @@ const { analize } = require("./analize/analize")
 void async function () {
   try {
     // await downloadData()
-    // await convertPdfToImage()
-    // await getTextFromImage()
+    await convertPdfToImage()
+    await getTextFromImage()
     await analize()
   } catch (error) {
     console.log("Error ", error)
