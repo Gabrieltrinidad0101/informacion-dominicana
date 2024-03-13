@@ -1,7 +1,7 @@
-import jsonData from "./readXmlFile"
-import analizeJson from "./analizeJson"
+import jsonData from "./readXmlFile.js"
+import analizeJson from "./analizeJson.js"
 import fs from 'fs'
-import { constants } from "../constants"
+import { constants } from "../constants.js"
 import path from "path"
 
 const concepts = analizeJson(jsonData)

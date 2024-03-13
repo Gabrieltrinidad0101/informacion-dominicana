@@ -2,8 +2,8 @@ import puppeteer from "puppeteer"
 import { DownloaderHelper } from 'node-downloader-helper';
 import fs from "fs"
 import path from "path";
-import { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } from "../../utils";
-import { constants } from "../../constants";
+import { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } from "../../utils.js";
+import { constants } from "../../constants.js";
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",

@@ -1,9 +1,9 @@
-const Tesseract = require('tesseract.js');
-const fs = require('fs').promises;
-const path = require('path');
-const { fileExists, monthsOrdes, isNullEmptyUndefinerNan } = require('../../utils');
-const { constants } = require('../../constants');
-const { clean } = require('./clean');
+import Tesseract from 'tesseract.js';
+import fs from 'fs'
+import path from 'path';
+import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils';
+import { constants } from '../../constants';
+import { clean } from './clean';
 
 export const getTextFromImage = async () => {
   const townHallsPath = constants.townHalls()

@@ -1,11 +1,11 @@
 import fs from "fs"
 import path from "path"
 import { constants } from "../../constants"
-import { excelAnalize } from "./excel"
-import {generalAnalize} from "./general"
-import { monthsOrdes, getNumberOfMonth } from "../../utils"
-import { getDatafixes } from "./fixes"
-import { aiAnalize } from "./aiAnalize"
+import { excelAnalize } from "./excel.js"
+import {generalAnalize} from "./general.js"
+import { monthsOrdes, getNumberOfMonth } from "../../utils.js"
+import { getDatafixes } from "./fixes.js"
+import { aiAnalize } from "./aiAnalize.js"
 
 /**
  * 
