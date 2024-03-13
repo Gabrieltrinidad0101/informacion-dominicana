@@ -1,5 +1,5 @@
-const XLSX = require('xlsx');
-const { isNullEmptyUndefinerNan } = require('../../utils');
+import XLSX from 'xlsx';
+import { isNullEmptyUndefinerNan } from '../../utils';
 
 /**
  * 

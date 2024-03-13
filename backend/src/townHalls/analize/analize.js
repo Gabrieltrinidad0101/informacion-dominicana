@@ -1,13 +1,12 @@
-const fs = require("fs").promises
-const path = require("path")
-const { constants } = require("../../constants")
-const { excelAnalize } = require("./excel")
-const {generalAnalize} = require("./general")
-const { monthsOrdes, getNumberOfMonth } = require("../../utils")
-const { getDatafixes } = require("./fixes")
-const { aiAnalize } = require("./aiAnalize")
-const fileLinks = path.join(constants.townHalls(),"pdfLinks.json")
-//const links = JSON.parse(await fs.readFile(fileLinks))
+import fs from "fs"
+import path from "path"
+import { constants } from "../../constants"
+import { excelAnalize } from "./excel"
+import {generalAnalize} from "./general"
+import { monthsOrdes, getNumberOfMonth } from "../../utils"
+import { getDatafixes } from "./fixes"
+import { aiAnalize } from "./aiAnalize"
+
 /**
  * 
  * @param {string} dataText 

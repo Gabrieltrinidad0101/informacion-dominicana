@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "world-bank-build": "node ./src/worldBank/main.js",
     "town-halls-build": "node ./src/townHalls/main.js"
   },
   "dependencies": {
     "chatgpt": "^5.2.5",
+    "dotenv": "^16.4.5",
     "node-downloader-helper": "^2.1.9",
     "pdf2pic": "^3.1.1",
     "puppeteer": "^22.0.0",

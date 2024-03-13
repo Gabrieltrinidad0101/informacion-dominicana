@@ -1,4 +1,4 @@
-const getDatafixes = ({year,month})=>{
+export const getDatafixes = ({year,month})=>{
     if(year === "2018" && month === "december.txt"){
         return {
         payroll: {
@@ -47,5 +47,3 @@ const getDatafixes = ({year,month})=>{
         }}
     }
 }
-
-module.exports = {getDatafixes}

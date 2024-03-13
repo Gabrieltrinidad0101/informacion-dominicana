@@ -1,7 +1,7 @@
-const ChatGPTAPIBrowser = require('chatgpt')
-const payrollProp = require('./props')
+import ChatGPTAPIBrowser from  'chatgpt'
+import payrollProp from './props'
 
-const aiAnalize = async (text)=> {
+export const aiAnalize = async (text)=> {
   const api = new ChatGPTAPIBrowser({
     email: process.env.OPENAI_EMAIL,
     password: process.env.OPENAI_PASSWORD
@@ -14,5 +14,3 @@ const aiAnalize = async (text)=> {
   const result = await api.sendMessage(prop)
   return result.response
 }
-
-module.exports = {aiAnalize}

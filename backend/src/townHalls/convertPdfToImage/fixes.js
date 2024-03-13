@@ -2,7 +2,7 @@
  * 
  * @param {string} filePath 
  */
-const fixesRotationImages = (filePath)=>{
+export const fixesRotationImages = (filePath)=>{
     if(
         (filePath.includes("2021") && filePath.includes("november")) ||     
         (filePath.includes("2021") && filePath.includes("october")) ||     
@@ -25,4 +25,3 @@ const fixesRotationImages = (filePath)=>{
 }
 
 
-module.exports = {fixesRotationImages}

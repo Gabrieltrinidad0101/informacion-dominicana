@@ -1,9 +1,9 @@
-const puppeteer = require("puppeteer")
-const { DownloaderHelper } = require('node-downloader-helper');
-const fs = require("fs").promises
-const path = require("path");
-const { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } = require("../../utils");
-const { constants } = require("../../constants");
+import puppeteer from "puppeteer"
+import { DownloaderHelper } from 'node-downloader-helper';
+import fs from "fs"
+import path from "path";
+import { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } from "../../utils";
+import { constants } from "../../constants";
 
 const townHalls = [{
     link: "https:ayuntamientojarabacoa.gob.do",
@@ -14,7 +14,7 @@ const downloadData = async () => {
     let links = []
     const filePath = path.join(constants.townHalls(),"pdfLinks.json")
     if (fileExists(filePath)){
-        links = JSON.parse(await fs.readFile(filePath))
+        links = JSON.parse(fs.readFile(filePath))
     }
     else{
         links = await getDownloadLinks(filePath)

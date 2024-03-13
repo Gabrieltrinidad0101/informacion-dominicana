@@ -1,8 +1,8 @@
-const jsonData = require("./readXmlFile")
-const analizeJson = require("./analizeJson")
-const fs = require('fs')
-const { constants } = require("../constants")
-const path = require("path")
+import jsonData from "./readXmlFile"
+import analizeJson from "./analizeJson"
+import fs from 'fs'
+import { constants } from "../constants"
+import path from "path"
 
 const concepts = analizeJson(jsonData)
 for (const concept of Object.keys(concepts)){

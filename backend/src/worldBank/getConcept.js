@@ -2,7 +2,7 @@
  * 
  * @param {string} description 
  */
-const getConcept = (description)=>{
+export const getConcept = (description)=>{
     const social =  ["Desempleo",
     "Relación entre empleo y población",
     "Tasa de participación en la fuerza laboral",
@@ -131,4 +131,3 @@ const getConcept = (description)=>{
 
 }
 
-module.exports = getConcept

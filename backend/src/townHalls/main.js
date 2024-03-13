@@ -1,7 +1,9 @@
-const { downloadData } = require("./downloadData/downloadData")
-const { convertPdfToImage } = require("./convertPdfToImage/convertPdfToImage")
-const { getTextFromImage } = require("./getTextFromImage/getTextFromImage")
-const { analize } = require("./analize/analize")
+import dotenv from "dotenv"
+dotenv.config()
+import { downloadData } from "./downloadData/downloadData"
+import { convertPdfToImage } from "./convertPdfToImage/convertPdfToImage"
+import { getTextFromImage } from "./getTextFromImage/getTextFromImage"
+import { analize } from "./analize/analize"
 
 void async function () {
   try {

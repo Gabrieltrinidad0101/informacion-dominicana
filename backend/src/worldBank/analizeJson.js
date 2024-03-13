@@ -1,11 +1,11 @@
-const getConcept = require("./getConcept")
-const fs = require('fs')
+import getConcept from "./getConcept"
+import fs from 'fs'
 
 /**
  * 
  * @param {Object} records 
  */
-const analizeJson = (records)=>{
+export const analizeJson = (records)=>{
     const dataByConcept = {
         Social: new Map(),
         Medioambiente: new Map(),
@@ -45,5 +45,3 @@ const generateFileDescriptions = (dataByConcept)=>{
         fs.writeFile(fileDirrection,data,()=> {})
     })
 }
-
-module.exports = analizeJson

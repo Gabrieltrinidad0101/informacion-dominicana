@@ -1,10 +1,10 @@
-const path = require("path");
-const { fromPath } = require("pdf2pic");
-const sharp = require('sharp');
-const { getMonth, fileExists, isNullEmptyUndefinerNan } = require("../../utils");
-const { constants } = require("../../constants");
-const { fixesRotationImages, fixesCutImages } = require("./fixes");
-const fs = require("fs").promises
+import path from "path";
+import { fromPath } from "pdf2pic";
+import sharp from 'sharp';
+import { getMonth, fileExists, isNullEmptyUndefinerNan } from "..../utils";
+import { constants } from "..../constants";
+import { fixesRotationImages, fixesCutImages } from "./fixes";
+import fs from "fs"
 
 const options = (savePath)=>({
   density: 700,
@@ -36,7 +36,7 @@ const getPath = async (...paths)=>{
 
 const join = (...paths)=> path.join(...paths)
 
-const convertPdfToImage = async ()=>{
+export const convertPdfToImage = async ()=>{
   const townHallsPath = constants.townHalls()
   const townHalls = await fs.readdir(townHallsPath)
   for(const townHall of townHalls){
@@ -99,7 +99,3 @@ const processImage = (file,fileFullpath,folderImages)=> new Promise(async (res,r
       console.log(`       image: ${fileName}`);
     });
 })
-
-
-
-module.exports = {convertPdfToImage}
