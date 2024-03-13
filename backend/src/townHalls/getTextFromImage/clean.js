@@ -2,7 +2,7 @@
  * 
  * @param {string} text 
  */
-const clean = (text)=>{
+export const clean = (text)=>{
     const lines = text.split("\n")
     let linesWithFilter = ""
     for (const line of lines) {
@@ -12,5 +12,3 @@ const clean = (text)=>{
     }
     return linesWithFilter
 }
-
-module.exports = {clean}

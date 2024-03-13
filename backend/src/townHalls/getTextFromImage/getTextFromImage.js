@@ -5,7 +5,7 @@ const { fileExists, monthsOrdes, isNullEmptyUndefinerNan } = require('../../util
 const { constants } = require('../../constants');
 const { clean } = require('./clean');
 
-const getTextFromImage = async () => {
+export const getTextFromImage = async () => {
   const townHallsPath = constants.townHalls()
   const townHalls = await fs.readdir(townHallsPath)
   for (const townHall of townHalls) {
@@ -37,5 +37,3 @@ const getTextFromImage = async () => {
     }
   }
 }
-
-module.exports = { getTextFromImage }

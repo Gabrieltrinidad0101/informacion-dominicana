@@ -10,7 +10,7 @@ const townHalls = [{
     townHall: "Jarabacoa"
 }]
 
-const downloadData = async () => {
+export const downloadData = async () => {
     let links = []
     const filePath = path.join(constants.townHalls(),"pdfLinks.json")
     if (fileExists(filePath)){
@@ -111,6 +111,3 @@ const getFilename =(fileName)=>{
     if(isNullEmptyUndefinerNan(month)) return ""
     return `${month}${extname}`
 }
-
-
-module.exports = { downloadData }
