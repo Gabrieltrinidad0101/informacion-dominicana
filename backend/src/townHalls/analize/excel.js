@@ -1,5 +1,5 @@
 import XLSX from 'xlsx';
-import { isNullEmptyUndefinerNan } from '../../utils';
+import { isNullEmptyUndefinerNan } from '../../utils.js';
 
 /**
  * 

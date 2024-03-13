@@ -1,9 +1,9 @@
 import Tesseract from 'tesseract.js';
 import fs from 'fs'
 import path from 'path';
-import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils';
-import { constants } from '../../constants';
-import { clean } from './clean';
+import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils.js';
+import { constants } from '../../constants.js';
+import { clean } from './clean.js';
 
 export const getTextFromImage = async () => {
   const townHallsPath = constants.townHalls()

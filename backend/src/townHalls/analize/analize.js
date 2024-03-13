@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { constants } from "../../constants"
+import { constants } from "../../constants.js"
 import { excelAnalize } from "./excel.js"
 import {generalAnalize} from "./general.js"
 import { monthsOrdes, getNumberOfMonth } from "../../utils.js"

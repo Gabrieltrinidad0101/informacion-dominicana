@@ -1,14 +1,14 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-const getPath = (...paths) => {
+export const getPath = (...paths) => {
     const pathToReturn = path.join(...paths)
     if (pathToReturn === "") return pathToReturn
     fs.mkdirSync(pathToReturn, { recursive: true })
     return pathToReturn
 }
 
-const fileExists = (filePath) => {
+export const fileExists = (filePath) => {
     try {
         return fs.existsSync(filePath)
     } catch {
@@ -21,7 +21,7 @@ const fileExists = (filePath) => {
  * @param {string} text 
  */
 
-const getMonth = (text) => {
+export const getMonth = (text) => {
     const textloweCase = text.toLowerCase()
     if (textloweCase.includes("enero")) return "january"
     if (textloweCase.includes("febrero") || textloweCase.includes("feb")) return "february"
@@ -37,7 +37,7 @@ const getMonth = (text) => {
     if (textloweCase.includes("diciembre")) return "december"
 }
 
-const getNumberOfMonth = (text) => {
+export const getNumberOfMonth = (text) => {
     if (text === "january") return "01"
     if (text === "february") return "02"
     if (text === "march") return "03"
@@ -58,7 +58,7 @@ const getNumberOfMonth = (text) => {
  * @returns 
  */
 
-const isNullEmptyUndefinerNan = (...values) =>
+export const isNullEmptyUndefinerNan = (...values) =>
     values.some(value => value === undefined || value === null || Object.is(value, NaN) || value === "")
 
 
@@ -66,7 +66,7 @@ const isNullEmptyUndefinerNan = (...values) =>
  * 
  * @param {Array<string>} months 
  */
-const monthsOrdes = (months) => {
+export const monthsOrdes = (months) => {
     const monthOrder = {
         january: 1,
         february: 2,
@@ -90,4 +90,3 @@ const monthsOrdes = (months) => {
     return monthsInOrden.filter(month => !isNullEmptyUndefinerNan(month))
 }
 
-module.exports = { fileExists, getMonth, getNumberOfMonth, monthsOrdes, getPath, isNullEmptyUndefinerNan }
