@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { fileExists, monthsOrdes, isNullEmptyUndefinerNan } = require('../../utils');
 const { constants } = require('../../constants');
+const { clean } = require('./clean');
 
 const getTextFromImage = async () => {
   const townHallsPath = constants.townHalls()
@@ -28,7 +29,7 @@ const getTextFromImage = async () => {
           const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
             errorHandler: (error) => console.log(error)
           })
-          dataText += `${text.data.text}\n`
+          dataText += `${clean(text.data.text)}\n`
         }
         await fs.writeFile(filePath, dataText);
         await new Promise(res => setTimeout(res, 500))
@@ -36,6 +37,5 @@ const getTextFromImage = async () => {
     }
   }
 }
-
 
 module.exports = { getTextFromImage }

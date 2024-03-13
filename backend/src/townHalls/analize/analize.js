@@ -5,6 +5,7 @@ const { excelAnalize } = require("./excel")
 const {generalAnalize} = require("./general")
 const { monthsOrdes, getNumberOfMonth } = require("../../utils")
 const { getDatafixes } = require("./fixes")
+const { aiAnalize } = require("./aiAnalize")
 const fileLinks = path.join(constants.townHalls(),"pdfLinks.json")
 //const links = JSON.parse(await fs.readFile(fileLinks))
 /**
@@ -41,10 +42,12 @@ const analize = async () => {
                     employeesByYear.push(employeesData)
                     continue
                 }
+                
                 const dataText = await fs.readFile(filePath, 'utf8');
-                const [payrollData,employeesData] = generalAnalize({year,month,dataText})
-                payrollsByYear.push(payrollData)
-                employeesByYear.push(employeesData)
+                const result = await aiAnalize(dataText)
+
+                console.log(result)
+                await new Promise(res=>setTimeout(res,20000))
             }
             const payrollFileName = `${year}-payroll.json`
             const employeesFileName = `${year}-employee.json`

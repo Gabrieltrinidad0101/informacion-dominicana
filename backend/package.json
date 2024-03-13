@@ -8,6 +8,7 @@
     "town-halls-build": "node ./src/townHalls/main.js"
   },
   "dependencies": {
+    "chatgpt": "^5.2.5",
     "node-downloader-helper": "^2.1.9",
     "pdf2pic": "^3.1.1",
     "puppeteer": "^22.0.0",
