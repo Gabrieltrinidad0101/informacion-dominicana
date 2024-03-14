@@ -1,4 +1,4 @@
-import {ChatGPTAPIBrowser} from  'chatgpt-browser'
+import { ChatGPTAPIBrowser } from 'chatgpt';
 import {payrollProp} from './props.js'
 
 export const aiAnalize = async (text)=> {

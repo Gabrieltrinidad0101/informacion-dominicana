@@ -1,4 +1,4 @@
-import fs from "fs"
+import {promises as fs} from "fs"
 import path from "path"
 import { constants } from "../../constants.js"
 import { excelAnalize } from "./excel.js"

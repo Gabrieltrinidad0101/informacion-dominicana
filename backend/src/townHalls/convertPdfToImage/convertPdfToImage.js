@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { getMonth, fileExists, isNullEmptyUndefinerNan } from "../../utils.js";
 import { constants } from "../../constants.js";
 import { fixesRotationImages } from "./fixes.js";
-import fs from "fs"
+import {promises as fs} from "fs"
 
 const options = (savePath)=>({
   density: 700,
