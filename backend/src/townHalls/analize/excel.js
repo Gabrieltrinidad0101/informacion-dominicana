@@ -47,7 +47,7 @@ const getSalaryKey = (headers)=>{
     }
 }
 
-const excelAnalize = ({year,month,filePath})=>{
+export const excelAnalize = ({year,month,filePath})=>{
     const data = excelToArrayOfObjects(filePath)
     let employees = 0
     let findSalary = false
@@ -72,8 +72,4 @@ const excelAnalize = ({year,month,filePath})=>{
         value: employees,
         time: `${year}-${month}-01`
     }]
-}
-
-module.exports = {
-    excelAnalize
 }

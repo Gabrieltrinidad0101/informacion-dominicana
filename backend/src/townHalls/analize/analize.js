@@ -13,7 +13,7 @@ import { aiAnalize } from "./aiAnalize.js"
  * @returns 
  */
 
-const analize = async () => {
+export const analize = async () => {
     const townHallsPath = constants.townHalls()
     const townHalls = await fs.readdir(townHallsPath)
     for (const townHall of townHalls) {
@@ -58,5 +58,3 @@ const analize = async () => {
         await fs.writeFile(dataPathEmployee,JSON.stringify(employeesByYear))
     }
 }
-
-module.exports = { analize }
