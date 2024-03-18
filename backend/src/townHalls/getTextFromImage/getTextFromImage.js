@@ -1,5 +1,5 @@
 import Tesseract from 'tesseract.js';
-import fs from 'fs'
+import {promises as fs} from 'fs'
 import path from 'path';
 import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils.js';
 import { constants } from '../../constants.js';
@@ -23,13 +23,14 @@ export const getTextFromImage = async () => {
         const images = await fs.readdir(nominaImages)
         let dataText = ""
         console.log(`converting image to text ${nominaImages}`)
-        for (const image of images) {
+        const imagesWithoutOrden = images.sort((a,b) => a.split(".")[1] - b.split(".")[1])
+        for (const image of imagesWithoutOrden) {
           if (path.extname(image) != ".jpg") continue
           console.log(`   image to text: ${image}`)
           const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
             errorHandler: (error) => console.log(error)
           })
-          dataText += `${clean(text.data.text)}\n`
+          dataText += `${clean(text.data.text)}`
         }
         await fs.writeFile(filePath, dataText);
         await new Promise(res => setTimeout(res, 500))
