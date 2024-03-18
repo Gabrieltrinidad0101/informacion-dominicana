@@ -1,11 +1,10 @@
 import {promises as fs} from "fs"
 import path from "path"
 import { constants } from "../../constants.js"
-import { excelAnalize } from "./excel.js"
-import {generalAnalize} from "./general.js"
+import { excelAnalyze } from "./excel.js"
+import { generalAnalyze} from "./general.js"
 import { monthsOrdes, getNumberOfMonth } from "../../utils.js"
 import { getDatafixes } from "./fixes.js"
-import { aiAnalize } from "./aiAnalize.js"
 
 /**
  * 
@@ -13,7 +12,7 @@ import { aiAnalize } from "./aiAnalize.js"
  * @returns 
  */
 
-export const analize = async () => {
+export const analyze = async () => {
     const townHallsPath = constants.townHalls()
     const townHalls = await fs.readdir(townHallsPath)
     for (const townHall of townHalls) {
@@ -36,15 +35,14 @@ export const analize = async () => {
                 const fileType = path.extname(filePath)
                 const month = getNumberOfMonth(path.parse(payroll).name)
                 if(fileType == ".xlsx"){
-                    const [payrollData,employeesData] = excelAnalize({year,month,filePath})
+                    const [payrollData,employeesData] = excelAnalyze({year,month,filePath})
                     payrollsByYear.push(payrollData)
                     employeesByYear.push(employeesData)
                     continue
                 }
                 
                 const dataText = await fs.readFile(filePath, 'utf8');
-                const result = await aiAnalize(dataText)
-
+                const result = generalAnalyze(dataText)
                 console.log(result)
                 await new Promise(res=>setTimeout(res,20000))
             }

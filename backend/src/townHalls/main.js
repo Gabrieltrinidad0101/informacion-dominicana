@@ -3,13 +3,13 @@ dotenv.config()
 // import { downloadData } from "./downloadData/downloadData.js"
 // import { convertPdfToImage } from "./convertPdfToImage/convertPdfToImage.js"
 import { getTextFromImage } from "./getTextFromImage/getTextFromImage.js"
-// import { analize } from "./analize/analize.js"
+// import { analyze } from "./analyze/analyze.js"
 
 try {
   // await downloadData()
   // await convertPdfToImage()
   await getTextFromImage()
-  // await analize()
+  // await analyze()
 } catch (error) {
   console.log("Error ", error)
 }

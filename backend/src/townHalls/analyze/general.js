@@ -55,7 +55,7 @@ const getPosition = (line) => {
 }
 
 
-export const generalAnalize = ({year,month,dataText})=>{
+export const generalAnalyze = ({year,month,dataText})=>{
     const lines = dataText.split("\n")
     let payroll = 0
     let employee = 0

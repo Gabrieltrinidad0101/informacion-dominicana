@@ -47,7 +47,7 @@ const getSalaryKey = (headers)=>{
     }
 }
 
-export const excelAnalize = ({year,month,filePath})=>{
+export const excelAnalyze = ({year,month,filePath})=>{
     const data = excelToArrayOfObjects(filePath)
     let employees = 0
     let findSalary = false

@@ -5,7 +5,7 @@ import fs from 'fs'
  * 
  * @param {Object} records 
  */
-export const analizeJson = (records)=>{
+export const analyzeJson = (records)=>{
     const dataByConcept = {
         Social: new Map(),
         Medioambiente: new Map(),

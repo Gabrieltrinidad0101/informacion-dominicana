@@ -19,7 +19,7 @@ export const constants = {
     imagesTemp: (townHall,...paths) => townHalls(townHall,"imagestemp",...paths),
     preData: (townHall,...paths) => townHalls(townHall,"preData",...paths),
     dataWorldBank: (...paths) => datas("worldBank",...paths),
-    frontendTownHall: (townHall)=> path.join(frontend,"src/views/Ayuntamientos/",townHall,"topics.js")
+    frontendTownHall: (townHall)=> path.join(frontend,"src/views/TownHalls/",townHall,"topics.js")
 }
 
 
