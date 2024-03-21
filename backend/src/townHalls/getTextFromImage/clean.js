@@ -10,7 +10,7 @@ export const clean = (text)=>{
     for (const i in lines) {
         const line = lines[i]
         if(line.length <= 66 || isNullEmptyUndefinerNan(line) || line.includes("Empleados") || line.includes("Total")) continue
-        const lineWithFilter = line.replace(/[^a-zA-Z0-9"\- ]/g, '').trim() + (i === line.length - 1 ? "" : "\n");
+        const lineWithFilter = line.replace(/[^a-zA-Z0-9"\-\., ]/g, '').trim() + (i === line.length - 1 ? "" : "\n");
         if(lineWithFilter.length <= 66 || isNullEmptyUndefinerNan(lineWithFilter) || lineWithFilter == "\n") continue
         const regex1 = /\d{3}/g;
         const numbers = line.match(regex1);

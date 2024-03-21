@@ -42,8 +42,9 @@ export const analyze = async () => {
                 }
                 
                 const dataText = await fs.readFile(filePath, 'utf8');
-                const result = generalAnalyze(dataText)
-                console.log(result)
+                const [payrollData,employeesData] = generalAnalyze({payrollName: payroll,year,month,dataText})
+                payrollsByYear.push(payrollData)
+                employeesByYear.push(employeesData)
                 await new Promise(res=>setTimeout(res,20000))
             }
             const payrollFileName = `${year}-payroll.json`

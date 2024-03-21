@@ -55,15 +55,20 @@ const getPosition = (line) => {
 }
 
 
-export const generalAnalyze = ({year,month,dataText})=>{
+export const generalAnalyze = ({payrollName,year,month,dataText})=>{
     const lines = dataText.split("\n")
     let payroll = 0
     let employee = 0
     lines.forEach(line => {
-        if (line.length < 20) return
-        if (isNullEmptyUndefinerNan(line) || line.includes("Total:") || line.includes("Carnet")) return
         const data = getData(line)
-        if (isNullEmptyUndefinerNan(data.salary)) return
+
+        if (isNullEmptyUndefinerNan(data.name,data.position,data.salary)){
+            console.log(`year: ${year} payroll: ${payrollName} data: ${JSON.stringify(data)}, line: ${line}`)
+        }
+
+        if (isNullEmptyUndefinerNan(data.salary)) {
+            return
+        }
         payroll += data.salary
         ++employee
     })
