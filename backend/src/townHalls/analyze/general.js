@@ -66,7 +66,7 @@ const getPosition = (line) => {
 
 
 const appendText = (text)=>{
-    fs.appendFile(constants.garbageText,text)
+    fs.appendFile(constants.garbageText,text + "\n")
 }
 
 export const generalAnalyze = ({payrollName,year,month,dataText})=>{
@@ -74,7 +74,7 @@ export const generalAnalyze = ({payrollName,year,month,dataText})=>{
     let payroll = 0
     let employee = 0
     lines.forEach(line => {
-        if(line == "\n"  || isNullEmptyUndefinerNan(line)){
+        if(line == "\n"  || isNullEmptyUndefinerNan(line) || line == " "){
             return
         }
         const data = getData(line)

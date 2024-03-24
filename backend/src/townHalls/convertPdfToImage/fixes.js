@@ -21,6 +21,12 @@ export const fixesRotationImages = (filePath)=>{
     ){
         return 90
     }
+
+    if(
+        (filePath.includes("2023") && filePath.includes("november"))      
+    ){
+        return 360
+    }
     return 0
 }
 
