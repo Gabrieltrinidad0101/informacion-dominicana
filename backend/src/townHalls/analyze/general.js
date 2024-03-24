@@ -8,20 +8,29 @@ const letters = new Set(["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", 
  * @param {string} line 
  * @returns 
  */
-
-// converting the image into text we can fing difference cases
-// (radom text) (some number) (employe name)
-// (some number) (employe name)
-// (random text) (employe name) (rnc)
-
 const getData = (line) => {
     let name = ""
     let findNumber = false
     let findAletter = false
 
     const regex = /(?:\d{1,3},)?\d{1,3}(\.\d{2}|,\d{2})/g;
-    const salary = line.match(regex);
-    if (!salary || salary?.length <= 0) return {}
+    let salary = line.match(regex);
+    if (!salary || salary?.length <= 0) {
+        
+        salary = line.match(/\d+-?\d+-?\d+\s\d+-?\d+-?\d+\s(\d+(\.,)?\d+)/g)
+        if (!salary || salary?.length <= 0) {
+            // RDS285800
+            salary = line.match(/RDS\d+/g)
+            if (!salary || salary?.length <= 0) {
+                return {}
+            }
+            salary = [salary[0].split("RDS")[1].slice(0,-2)]
+            console.log("Thrid: ",salary,"   ",line)
+        }else {
+            salary = [salary[0].split(" ").at(-1).slice(0,-2)]
+            console.log("Second: ",salary,"   ",line)
+        }
+    }
 
     // (radom text) (some number) (employe name)
     // (some number) (employe name)
@@ -60,6 +69,9 @@ export const generalAnalyze = ({payrollName,year,month,dataText})=>{
     let payroll = 0
     let employee = 0
     lines.forEach(line => {
+        if(line == "\n"  || isNullEmptyUndefinerNan(line)){
+            return
+        }
         const data = getData(line)
 
         if (isNullEmptyUndefinerNan(data.name,data.position,data.salary)){
