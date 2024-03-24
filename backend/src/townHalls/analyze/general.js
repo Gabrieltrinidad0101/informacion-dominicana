@@ -1,5 +1,6 @@
+import { constants } from '../../constants.js';
 import { getNumberOfMonth, isNullEmptyUndefinerNan } from '../../utils.js';
-
+import {promises as fs} from "fs"
 const numbers = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
 const letters = new Set(["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ñ", "z", "x", "c", "v", "b", "n", "m", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ", "Z", "X", "C", "V", "B", "N", "M"])
 
@@ -25,10 +26,10 @@ const getData = (line) => {
                 return {}
             }
             salary = [salary[0].split("RDS")[1].slice(0,-2)]
-            console.log("Thrid: ",salary,"   ",line)
+            appendText("Thrid: ",salary,"   ",line)
         }else {
             salary = [salary[0].split(" ").at(-1).slice(0,-2)]
-            console.log("Second: ",salary,"   ",line)
+            appendText("Second: ",salary,"   ",line)
         }
     }
 
@@ -64,6 +65,10 @@ const getPosition = (line) => {
 }
 
 
+const appendText = (text)=>{
+    fs.appendFile(constants.garbageText,text)
+}
+
 export const generalAnalyze = ({payrollName,year,month,dataText})=>{
     const lines = dataText.split("\n")
     let payroll = 0
@@ -75,10 +80,7 @@ export const generalAnalyze = ({payrollName,year,month,dataText})=>{
         const data = getData(line)
 
         if (isNullEmptyUndefinerNan(data.name,data.position,data.salary)){
-            console.log(`year: ${year} payroll: ${payrollName} data: ${JSON.stringify(data)}, line: ${line}`)
-        }
-
-        if (isNullEmptyUndefinerNan(data.salary)) {
+            appendText(`year: ${year} payroll: ${payrollName} line: ${line}`)
             return
         }
         payroll += data.salary
