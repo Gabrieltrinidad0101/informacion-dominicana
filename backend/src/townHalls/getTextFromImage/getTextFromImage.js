@@ -1,4 +1,4 @@
-import Tesseract from 'tesseract.js';
+import Tesseract,{createWorker} from 'tesseract.js';
 import {promises as fs} from 'fs'
 import path from 'path';
 import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils.js';
@@ -28,7 +28,7 @@ export const getTextFromImage = async () => {
           if (path.extname(image) != ".jpg") continue
           console.log(`   image to text: ${image}`)
           const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
-            errorHandler: (error) => console.log(error)
+            errorHandler: (error) => console.log(error),
           })
           dataText += `${clean(text.data.text)}`
         }

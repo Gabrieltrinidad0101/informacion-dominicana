@@ -1,7 +1,8 @@
 import path from "path";
 import { fromPath } from "pdf2pic";
 import sharp from 'sharp';
-import { getMonth, fileExists, isNullEmptyUndefinerNan } from "../../utils.js";
+import { fileExists, isNullEmptyUndefinerNan } from "../../utils.js";
+import Tesseract from 'tesseract.js';
 import { constants } from "../../constants.js";
 import { fixesRotationImages } from "./fixes.js";
 import { promises as fs } from "fs"
@@ -87,9 +88,9 @@ const getImageFromPdf = async ({ townHall, year, month, pdfNomina, getDataFromDo
 const processImage = (file, fileFullpath, folderImages) => new Promise(async (res, rej) => {
   const fileName = path.join(folderImages, file)
   if (fileExists(fileName)) return res()
+  const imageData = await Tesseract.detect(fileFullpath)
   const image = sharp(fileFullpath)
-  const rotate = fixesRotationImages(fileFullpath)
-  if (rotate === 0) {
+  if (imageData.data.orientation_degrees === 0) {
     image.extract({
       left: 200,
       top: 500,
@@ -97,8 +98,9 @@ const processImage = (file, fileFullpath, folderImages) => new Promise(async (re
       height: 1150
     })
   }
+  console.log(`rotate: ${imageData.data.orientation_degrees}`)
   image
-    .rotate(fixesRotationImages(fileFullpath))
+    .rotate(imageData.data.orientation_degrees)
     .toFile(fileName, (err, info) => {
       if (err) {
         rej(err)
