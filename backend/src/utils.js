@@ -4,7 +4,11 @@ import path from "path";
 export const getPath = (...paths) => {
     const pathToReturn = path.join(...paths)
     if (pathToReturn === "") return pathToReturn
-    fs.mkdirSync(pathToReturn, { recursive: true })
+    let pathWithoutFile  = pathToReturn
+    if (path.extname(pathToReturn) != ""){
+        pathWithoutFile = path.dirname(pathToReturn)
+    }
+    fs.mkdirSync(pathWithoutFile, { recursive: true })
     return pathToReturn
 }
 
@@ -52,6 +56,22 @@ export const getNumberOfMonth = (text) => {
     if (text === "december") return "12"
 }
 
+export const getNumberOfMonthEs = (text) => {
+    const textloweCase = text.toLowerCase()
+    if (textloweCase.includes("enero")) return "01"
+    if (textloweCase.includes("febrero") || textloweCase.includes("feb")) return "02"
+    if (textloweCase.includes("marzo")) return "03"
+    if (textloweCase.includes("abril")) return "04"
+    if (textloweCase.includes("mayo")) return "05"
+    if (textloweCase.includes("junio")) return "06"
+    if (textloweCase.includes("julio")) return "07"
+    if (textloweCase.includes("agosto")) return "08"
+    if (textloweCase.includes("septiembre")) return "09"
+    if (textloweCase.includes("octubre")) return "10"
+    if (textloweCase.includes("noviembre") || textloweCase === "11.pdf") return "11"
+    if (textloweCase.includes("diciembre")) return "12"
+}
+
 /**
  * 
  * @param  {...any[]} values 
@@ -90,3 +110,9 @@ export const monthsOrdes = (months) => {
     return monthsInOrden.filter(month => !isNullEmptyUndefinerNan(month))
 }
 
+export const forEachFolder = async (folder,callBack)=>{
+  const townHalls = fs.readdirSync(folder)
+  for (const name of townHalls) {
+    await callBack(name,getPath(folder,name))
+  }
+}

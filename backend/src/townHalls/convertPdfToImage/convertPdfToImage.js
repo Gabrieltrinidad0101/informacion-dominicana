@@ -90,7 +90,13 @@ const processImage = (file, fileFullpath, folderImages) => new Promise(async (re
   if (fileExists(fileName)) return res()
   const imageData = await Tesseract.detect(fileFullpath)
   const image = sharp(fileFullpath)
-  if (imageData.data.orientation_degrees === 0) {
+  let rotate = fixesRotationImages(fileFullpath)
+  
+  if(imageData.data.orientation_degrees <= 50 && imageData.data.orientation_degrees >= -50 && rotate === 0){
+    rotate = imageData.data.orientation_degrees
+  }
+  
+  if (rotate === 0) {
     image.extract({
       left: 200,
       top: 500,
@@ -98,9 +104,13 @@ const processImage = (file, fileFullpath, folderImages) => new Promise(async (re
       height: 1150
     })
   }
-  console.log(`rotate: ${imageData.data.orientation_degrees}`)
+
   image
-    .rotate(imageData.data.orientation_degrees)
+    .resize({
+      width: 1700 * 2,
+      height: 1150 * 2
+    })
+    .rotate(rotate)
     .toFile(fileName, (err, info) => {
       if (err) {
         rej(err)

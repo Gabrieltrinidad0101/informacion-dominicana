@@ -6,4 +6,5 @@ RUN npm i
 COPY . .
 
 RUN apk add graphicsmagick
+RUN apk add tesseract-ocr
 CMD ["yarn","run","ayuntamientos-build"]
