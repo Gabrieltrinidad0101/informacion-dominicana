@@ -3,8 +3,9 @@ import {promises as fs} from 'fs'
 import path from 'path';
 import { fileExists, monthsOrdes, isNullEmptyUndefinerNan } from '../../utils.js';
 import { constants } from '../../constants.js';
-import { clean } from './clean.js';
-
+import { WebScrapingImageToText } from './scraping.js';
+const webScrapingImageToText = new WebScrapingImageToText()
+await webScrapingImageToText.start()
 export const getTextFromImage = async () => {
   const townHallsPath = constants.townHalls()
   const townHalls = await fs.readdir(townHallsPath)
@@ -27,10 +28,13 @@ export const getTextFromImage = async () => {
         for (const image of imagesWithoutOrden) {
           if (path.extname(image) != ".jpg") continue
           console.log(`   image to text: ${image}`)
-          const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
-            errorHandler: (error) => console.log(error),
-          })
-          dataText += `${clean(text.data.text)}`
+          const imagePath = path.join(nominaImages, image)
+          dataText += await webScrapingImageToText.getText(imagePath)
+          console.log(dataText)
+          // const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
+          //   errorHandler: (error) => console.log(error),
+          // })
+          // dataText += `${clean(text.data.text)}`
         }
         await fs.writeFile(filePath, dataText);
         await new Promise(res => setTimeout(res, 500))

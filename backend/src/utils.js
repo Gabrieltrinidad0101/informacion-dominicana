@@ -116,3 +116,6 @@ export const forEachFolder = async (folder,callBack)=>{
     await callBack(name,getPath(folder,name))
   }
 }
+
+
+export const wait = async (time)=> new Promise(res=>setTimeout(res,time))
