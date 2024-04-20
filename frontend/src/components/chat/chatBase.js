@@ -4,10 +4,12 @@ import constants from "../../constants";
 export const ChatBase = async (container, description, topic) => {
 	try {
 		var chartElement = document.createElement('div');
-
+		const superContainer = container.parentElement.parentElement.getBoundingClientRect()
+		const width = window.innerWidth > 1252 ? 450 : superContainer.width
+		const height = window.innerWidth > 1252 ? 350 : superContainer.height
 		var chart = LightweightCharts.createChart(chartElement, {
-			width: 450,
-			height: 250,
+			width: width,
+			height: height - 100,
 			rightPriceScale: {
 				borderVisible: false,
 			},
