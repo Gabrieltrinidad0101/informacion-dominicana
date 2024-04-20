@@ -26,7 +26,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Ayuntamientos',
-      items: ['Jarabacoa',"San Francisco de Macoris"],
+      items: ['Jarabacoa',"San Francisco de Macoris","Santo Domingo Este","Santiago de los Caballeros"],
     },
     'Fuentes'
   ],

@@ -4,15 +4,19 @@ import path from 'path';
 import { forEachFolder, getNumberOfMonthEs } from '../../utils.js';
 import { constants } from '../../constants.js';
 
-export const base = async ({ delimiter, year, salary, month,townHallName, townHallPath,monthCallBack }) => {
+export const base = async ({ delimiter, year, salary, month,townHallName, townHallPath,monthCallBack,yearCallBack }) => {
   const payrolls = {}
   const employees = {}
   await forEachFolder(townHallPath, async (_, payrollPath) => {
     const payrollsData = await csv({ delimiter: delimiter }).fromFile(payrollPath)
     payrollsData.forEach(payroll => {
       if(!payroll[month]) return
-      const monthName = monthCallBack ? monthCallBack(payroll[month]) : payroll[month]
-      const date = `${payroll[year]}-${getNumberOfMonthEs(monthName)}-01`
+      const monthName = monthCallBack ? monthCallBack(payroll,month,year) : getNumberOfMonthEs(payroll[month])
+      const yearNumber = yearCallBack ? yearCallBack(payroll,month,year) : payroll[year]
+      if(yearNumber == undefined || monthName == undefined){
+        console.log(yearNumber == undefined ? "year" : "month", payroll)
+      }
+      const date = `${yearNumber}-${monthName}-01`
       if (!employees[date]) employees[date] = { value: 0 }
       if (!payrolls[date]) payrolls[date] = { value: 0 }
       employees[date] = { time: date, value: employees[date].value + 1 }
@@ -21,6 +25,12 @@ export const base = async ({ delimiter, year, salary, month,townHallName, townHa
     })
   })
   const dataTownHalls = constants.datasTownHalls(townHallName)
-  await fs.writeFile(path.join(dataTownHalls, "employees.json"), JSON.stringify(Object.values(employees)))
-  await fs.writeFile(path.join(dataTownHalls, "payrolls.json"), JSON.stringify(Object.values(payrolls)))
+  const employeeSort = Object.values(employees).sort((a,b)=> 
+    new Date(new Date(a.time).getTime() - new Date(b.time).getTime()) 
+  )
+  const payrollsSort = Object.values(payrolls).sort((a,b)=> 
+    new Date(new Date(a.time).getTime() - new Date(b.time).getTime()) 
+  )
+  await fs.writeFile(path.join(dataTownHalls, "Empleados.json"), JSON.stringify(employeeSort))
+  await fs.writeFile(path.join(dataTownHalls, "Nominas.json"), JSON.stringify(payrollsSort))
 }
