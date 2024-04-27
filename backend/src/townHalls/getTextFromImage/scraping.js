@@ -4,6 +4,7 @@ import { wait } from "../../utils.js"
 export class WebScrapingImageToText{
     #page
     #fileInput
+    #isFirst 
     start = async ()=> {
         const browser = await puppeteer.launch({
           headless: false,
@@ -12,18 +13,28 @@ export class WebScrapingImageToText{
         })
         
         this.#page = await browser.newPage()
-        await this.#page.goto("https://www.prepostseo.com/image-to-text")
-        this.#fileInput = await this.#page.$('input[type=file]');
+        this.#page.setDefaultNavigationTimeout(0)
+        await this.#page.goto("https://www.editpad.org/tool/extract-text-from-image",{waitUntil: 'domcontentloaded'})
     }
     
     getText = async (imagePath) => {
+        if(this.#isFirst){
+            await this.#page.evaluate(() => {
+                document.querySelector("#start__over")?.click()
+            })
+        }
+        await this.#page.waitForSelector('input[type=file]')
+        this.#fileInput = await this.#page.$('input[type=file]');
         await this.#fileInput.uploadFile(imagePath);
         await wait(10000)
-        await this.#page.click("#checkBtn")
-        await wait(20000)
-        await this.#page.waitForSelector('#textt0')
-        const element = await this.#page.$('#textt0')
+        await this.#page.evaluate(() => {
+            extractImage()
+        })
+        await wait(10000)
+        await this.#page.waitForSelector('.response__text')
+        const element = await this.#page.$('.response__text')
         const value = await this.#page.evaluate(el => el.textContent, element)
+        this.#isFirst = true
         return value
     }
 }

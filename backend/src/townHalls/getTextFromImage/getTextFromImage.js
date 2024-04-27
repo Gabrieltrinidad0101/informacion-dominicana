@@ -30,7 +30,6 @@ export const getTextFromImage = async () => {
           console.log(`   image to text: ${image}`)
           const imagePath = path.join(nominaImages, image)
           dataText += await webScrapingImageToText.getText(imagePath)
-          console.log(dataText)
           // const text = await Tesseract.recognize(path.join(nominaImages, image), 'eng', {
           //   errorHandler: (error) => console.log(error),
           // })
