@@ -1,15 +1,20 @@
-import dotenv from "dotenv"
-dotenv.config()
-// import { downloadData } from "./downloadData/downloadData.js"
-import { convertPdfToImage } from "./convertPdfToImage/convertPdfToImage.js"
-import { getTextFromImage } from "./getTextFromImage/getTextFromImage.js"
-import { analyze } from "./analyze/analyze.js"
+import vision from '@google-cloud/vision';
+const client = new vision.ImageAnnotatorClient();
 
-try {
-  // await downloadData()
-  // await convertPdfToImage()
-  await getTextFromImage()
-  await analyze()
-} catch (error) {
-  console.log("Error ", error)
+async function detectText(imagePath) {
+  const [result] = await client.textDetection(imagePath, {
+    imageContext: {
+      textDetectionParams: {
+        enableTextDetectionConfidenceScore: true, 
+        advancedOcrOptions: ['NO_TEXT_RECOGNITION'],
+      },
+      // Specify language hints if needed
+      languageHints: ['en'],
+    },
+  });
+
+  const fullTextAnnotation = result.fullTextAnnotation;
+  console.log(`Full text: ${fullTextAnnotation.text}`);
 }
+
+detectText('/home/gabriel/Desktop/Javascript/informacion-dominicana/dataPreprocessing/townHalls/Jarabacoa/images/2018/october/jarabacoaTownHall.8.jpg');

@@ -2,7 +2,7 @@ import puppeteer from "puppeteer"
 import { DownloaderHelper } from 'node-downloader-helper';
 import fs from "fs"
 import path from "path";
-import { fileExists, getMonth, isNullEmptyUndefinerNan, getPath } from "../../utils.js";
+import { fileExists, getMonth, isNullEmptyUndefinerNan } from "../../utils.js";
 import { constants } from "../../constants.js";
 
 const townHalls = [{

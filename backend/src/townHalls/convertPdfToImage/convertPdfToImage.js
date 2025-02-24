@@ -16,13 +16,6 @@ const options = (savePath) => ({
   height: 2000
 });
 
-// Define the crop coordinates and dimensions
-const cropOptions = {
-  left: 200,
-  top: 500,
-  width: 1700,
-  height: 1150
-};
 
 const getPath = async (...paths) => {
   try {

@@ -1,16 +1,7 @@
-import fs from "fs";
+import fs, { promises as fsPromises } from "fs";
 import path from "path";
+import { constants } from "./constants.js";
 
-export const getPath = (...paths) => {
-    const pathToReturn = path.join(...paths)
-    if (pathToReturn === "") return pathToReturn
-    let pathWithoutFile  = pathToReturn
-    if (path.extname(pathToReturn) != ""){
-        pathWithoutFile = path.dirname(pathToReturn)
-    }
-    fs.mkdirSync(pathWithoutFile, { recursive: true })
-    return pathToReturn
-}
 
 export const fileExists = (filePath) => {
     try {
@@ -115,4 +106,26 @@ export const forEachFolder = async (folder,callBack)=>{
   for (const name of townHalls) {
     await callBack(name,getPath(folder,name))
   }
+}
+
+
+export const forPayroll = async (callBack) => {
+    const townHallsPath = constants.townHalls()
+    const townHalls = await fsPromises.readdir(townHallsPath)
+    for (const townHall of townHalls) {
+        if (path.extname(townHall) !== "") continue
+        const townHallPath = constants.images(townHall)
+        const years = await fsPromises.readdir(townHallPath)
+        for (const year of years) {
+            const months = monthsOrdes(await fsPromises.readdir(path.join(townHallPath,year)))
+            for(const month of months){
+                const payrollPath = constants.images(townHall,year,month)
+                const payrolls = await fsPromises.readdir(payrollPath)
+                for(const payroll of payrolls){
+                    const filePath = path.join(townHallPath,year,month,payroll)
+                    await callBack({townHall,year,month,payroll,filePath })
+                }
+            }
+        }
+    }
 }

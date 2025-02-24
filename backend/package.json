@@ -10,6 +10,8 @@
     "datos-orgs": "node ./src/datosOrgs/main.js"
   },
   "dependencies": {
+    "@google-cloud/vision": "^4.3.2",
+    "axios": "^1.7.9",
     "chatgpt": "^5.2.5",
     "chatgpt-browser": "^5.0.7",
     "csv-parser": "^3.0.0",
@@ -17,6 +19,7 @@
     "csvtojson": "^2.0.10",
     "dotenv": "^16.4.5",
     "node-downloader-helper": "^2.1.9",
+    "node-fetch": "^3.3.2",
     "node-tesseract-ocr": "^2.2.1",
     "pdf2pic": "^3.1.1",
     "puppeteer": "^22.4.1",

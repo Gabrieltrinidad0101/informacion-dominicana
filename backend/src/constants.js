@@ -1,8 +1,9 @@
 import path,{dirname} from "path"
-import {getPath} from "./utils.js"
 import { fileURLToPath } from 'url';
+import { getPath } from "./getPath.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 const dataPreprocessing = getPath(__dirname,"../../dataPreprocessing")
 const datas = (...paths)=> getPath(__dirname,"../../datas",...paths)
