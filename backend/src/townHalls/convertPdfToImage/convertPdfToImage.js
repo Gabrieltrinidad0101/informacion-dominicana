@@ -1,10 +1,7 @@
 import path from "path";
 import { fromPath } from "pdf2pic";
-import sharp from 'sharp';
-import { fileExists, forEachFolder, isNullEmptyUndefinerNan } from "../../utils.js";
-import Tesseract from 'tesseract.js';
+import { forEachFolder, isNullEmptyUndefinerNan } from "../../utils.js";
 import { constants } from "../../constants.js";
-import { fixesRotationImages } from "./fixes.js";
 import { promises as fs } from "fs"
 
 const options = (savePath) => ({
@@ -63,33 +60,9 @@ const getImageFromPdf = async ({ townHall, year, month, pdfNomina, getDataFromDo
   const imagesTemp = await fs.readdir(folderImagesTemp)
 
   if (files.length > 0) return
+  console.log(`Getting image from pdf ${getDataFromDownload}`)
   if (imagesTemp.length <= 0) {
     const convert = fromPath(pdfNomina, options(folderImagesTemp));
     await convert.bulk(-1)
   }
-  console.log(`Getting image from pdf ${getDataFromDownload}`)
-  for (const image of imagesTemp) {
-    await processImage(image, path.join(folderImagesTemp, image), getDataFromDownload)
-  }
 }
-
-const processImage = (file, fileFullpath, folderImages) => new Promise(async (res, rej) => {
-  const fileName = path.join(folderImages, file)
-  if (fileExists(fileName)) return res()
-  const image = sharp(fileFullpath)
-
-  image
-    .resize({
-      width: 1700 * 2,
-      height: 1150 * 2
-    })
-    .toFile(fileName, (err, info) => {
-      if (err) {
-        rej(err)
-        console.error('Error occurred while cropping the image:', err);
-        return;
-      }
-      res()
-      console.log(`       image: ${fileName}`);
-    });
-})
