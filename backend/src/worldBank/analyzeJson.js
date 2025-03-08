@@ -1,4 +1,4 @@
-import getConcept from "./getConcept.js"
+import {getConcept} from "./getConcept.js"
 import fs from 'fs'
 
 /**
