@@ -29,6 +29,7 @@ const join = (...paths) => path.join(...paths)
 
 export const convertPdfToImage = async () => {
   await forEachFolder(constants.townHalls(), async (townHall) => {
+    if(townHall === "pdfLinks.json") return
     const townHallPdf = constants.downloadData(townHall)
     await forEachFolder(townHallPdf, async (year) => {
       await forEachFolder(await getPath(townHallPdf, year), async (payroll) => {

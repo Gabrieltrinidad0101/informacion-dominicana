@@ -1,6 +1,7 @@
 import fs, { promises as fsPromises } from "fs";
 import path from "path";
 import { constants } from "./constants.js";
+import { getPath } from "./getPath.js";
 
 
 export const fileExists = (filePath) => {
@@ -108,6 +109,20 @@ export const forEachFolder = async (folder,callBack)=>{
   }
 }
 
+export const forPreData = async (callBack) => {
+    await forEachFolder(constants.datasTownHalls(),async (townHall,townHallPath)=>{
+        await forEachFolder(constants.preData(townHall),async (year)=>{
+            await forEachFolder(constants.preData(townHall,year),async (month,monthPath)=>{
+                await callBack({
+                    data: fs.readFileSync(monthPath).toString(),
+                    townHallDataPath: constants.townHallData(townHall,year),
+                    month: removeExtension(month)
+                })
+            })
+        })
+    })
+}
+
 
 export const forPayroll = async (callBack) => {
     const townHallsPath = constants.townHalls()
@@ -128,4 +143,10 @@ export const forPayroll = async (callBack) => {
             }
         }
     }
+}
+
+export const removeExtension = (filename) => {
+    const lastDotIndex = filename.lastIndexOf('.');
+    if (lastDotIndex === -1) return filename;
+    return filename.substring(0, lastDotIndex);
 }

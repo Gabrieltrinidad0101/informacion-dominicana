@@ -1,0 +1,3058 @@
+""```json
+[
+  {
+    "name": "ANDRES HERNANDEZ FANA",
+    "ID": "050-0010537-8",
+    "Position": "REGIDOR",
+    "Income": "58,525.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE AGUSTIN HERNANDEZ RAMOS",
+    "ID": "050-0028452-0",
+    "Position": "REGIDOR",
+    "Income": "58,525.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUSTO ANTONIO PICHARDO",
+    "ID": "050-0022792-5",
+    "Position": "REGIDOR",
+    "Income": "58,525.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LIC. JOSE ENRIQUE TAVAREZ S",
+    "ID": "050-0028516-2",
+    "Position": "REGIDOR",
+    "Income": "58,525.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LICDA. MARICELA ALT. GENAO DE JIME",
+    "ID": "050-0006288-4",
+    "Position": "REGIDORA",
+    "Income": "58,525.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LICDA, MARY AYBAR RAMOS",
+    "ID": "050-0035361-4",
+    "Position": "CONTRALORA MUNICIPAL",
+    "Income": "20,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "TANIA DURAN GARCIA",
+    "ID": "050-0016355-9",
+    "Position": "REGIDORA",
+    "Income": "58,525.00",
+    "SEX": "F"
+  },
+  {
+    "name": "WILLIAM DE JS. SEPULVEDA R.",
+    "ID": "050-0028708-5",
+    "Position": "REGIDOR",
+    "Income": "58,525.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "ARQ. KATIA VIRGINIA LAMBIS SANCHEZ",
+    "ID": "72703-2",
+    "Position": "DIRECTORA DE PLANIFICACION Y PROGRAMACCION",
+    "Income": "35,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "DR.CARLOS JOSE SANCHEZ PINEDA",
+    "ID": "050-0005981-5",
+    "Position": "ALCALDE MUNICIPAL",
+    "Income": "115,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EPIFANIO REYES DELGADO",
+    "ID": "50-0029561-7",
+    "Position": "ENC. DEL DEPTO. DE LIMPIEZA Y ORNATO",
+    "Income": "25,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIA EULALIA PAYANO RODRIGUEZ",
+    "ID": "050-0035612-0",
+    "Position": "TECNICO EN COMPRAS",
+    "Income": "25,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LIC. BELGICA ELCIRA CASTELLANOS PUJ",
+    "ID": "G01-1762816-4",
+    "Position": "ENC. DIVISION DE SERVICIOS GENERALES",
+    "Income": "35,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LIC. RAFAEL AGUSTIN ABREU MENDEZ",
+    "ID": "050-0039557-3",
+    "Position": "DIRECTOR DE RECURSOS HUMANOS",
+    "Income": "30,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIA JOSEFINA CUEVAS CESAR",
+    "ID": "050-0006170-4",
+    "Position": "ENC. DPTO. DE PROTOCOLO",
+    "Income": "17,500.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA MARTINA DIAZ DE LA CRUZ",
+    "ID": "050-0041914-2",
+    "Position": "ASISTENTE DE LA ALCALDIA",
+    "Income": "25,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA URANIA ABREU CALDERON",
+    "ID": "050-0000477-9",
+    "Position": "ASISTENTE I",
+    "Income": "15,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MIGUEL ANT. ABREU ABREU",
+    "ID": "050-0015371-7",
+    "Position": "ASESOR ALCALDIA ORNATO Y LIMPIEZA",
+    "Income": "20,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PEDRO ANTONIO MUNOZ",
+    "ID": "050-0000668-3",
+    "Position": "ASISTENTE I",
+    "Income": "15,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+  "name": "EULOGIA AMPARO PUNTIEL",
+  "ID": "050-0036200-3",
+  "Position": "SECRETARIA CONCEJO MUNICIPAL",
+  "Income": "17,500.00",
+  "SEX": "F"
+}
+``````json
+[
+  {
+    "name": "ARQ. KATIA VIRGINIA LAMBIS SANCHEZ",
+    "ID": "72703-2",
+    "Position": "DIRECTORA DE PLANIFICACION Y PROGRAMACION",
+    "Income": "35,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "DR.CARLOS JOSE SANCHEZ PINEDA",
+    "ID": "050-0005981-5",
+    "Position": "ALCALDE MUNICIPAL",
+    "Income": "115,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EPIFANIO REYES DELGADO",
+    "ID": "50-0029561-7",
+    "Position": "ENC. DEL DEPTO. DE LIMPIEZA Y ORNATO",
+    "Income": "25,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIA EULALIA PAYANO RODRIGUEZ",
+    "ID": "050-0035612-0",
+    "Position": "TECNICO EN COMPRAS",
+    "Income": "25,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LIC. BELGICA ELCIRA CASTELLANOS PUJ",
+    "ID": "G01-1762816-4",
+    "Position": "ENC. DIVISION DE SERVICIOS GENERALES",
+    "Income": "35,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LIC. RAFAEL AGUSTIN ABREU MENDEZ",
+    "ID": "050-0039557-3",
+    "Position": "DIRECTOR DE RECURSOS HUMANOS",
+    "Income": "30,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIA JOSEFINA CUEVAS CESAR",
+    "ID": "050-0006170-4",
+    "Position": "ENC. DPTO. DE PROTOCOLO",
+    "Income": "17,500.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA MARTINA DIAZ DE LA CRUZ",
+    "ID": "050-00419142",
+    "Position": "ASISTENTE DE LA ALCALDIA",
+    "Income": "25,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA URANIA ABREU CALDERON",
+    "ID": "050-0000477-9",
+    "Position": "ASISTENTE I",
+    "Income": "15,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MIGUEL ANT. ABREU ABREU",
+    "ID": "050-0015371-7",
+    "Position": "ASESOR ALCALDIA ORNATO Y LIMPIEZA",
+    "Income": "20,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PEDRO ANTONIO MUNOZ",
+    "ID": "050-0000668-3",
+    "Position": "ASISTENTE I",
+    "Income": "15,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+  "name": "EULOGIA AMPARO PUNTIEL",
+  "ID": "050-0036200-3",
+  "Position": "SECRETARIA CONCEJO MUNICIPAL",
+  "Income": "17,500.00",
+  "SEX": "F"
+}
+``````json
+[
+  {
+    "name": "ALBA ESTHER CEBALLOS DIAZ",
+    "ID": "402-2525474-3",
+    "Position": "SEC. GESTION AMBIENTAL",
+    "Income": "7,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANA CELESTE RAMIREZ PEREZ",
+    "ID": "50-0020873-5",
+    "Position": "SECRETARIA CEMENTERIO LA TRINCHERA",
+    "Income": "7,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANGEL ANT. DURAN SANCHEZ",
+    "ID": "0 01 1-5",
+    "Position": "REPRESENTANTE DE LA ALCALDÍA EN BARRIO DISCB OOEI",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ANTONIO BAUTISTA",
+    "ID": "80-0005114-3",
+    "Position": "REPRESENTANTE ALCALDIA EN LA COLONI",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ANTONIO RADHAMES RODRIGUEZ DURAN",
+    "ID": "050-0014440-1",
+    "Position": "REP. DE LA ALCALDIA EN LA RUEDA",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ARTURO BENJAMIN URENA BATISTA",
+    "ID": "050-0038136-7",
+    "Position": "MENSAJERO DE ALCALDÍA",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "BRINIA DEL CARMEN CARRERA ABREU",
+    "ID": "050-0041563-7",
+    "Position": "REP. DE ACCESO A LA INFORMACI?N (RA",
+    "Income": "20,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "CASIMIRO CABA VELOZ",
+    "ID": "050-0005137-4",
+    "Position": "SUPERVISOR MERCADO MUNICIPAL",
+    "Income": "4,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CATALINA TAVAREZ ABREU",
+    "ID": "050-0002108-8",
+    "Position": "REPRESENTANTE DE LA ALCALDESA",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "DEYANIRA PEREZ ORTIZ",
+    "ID": "050-0043782-1",
+    "Position": "ENC. PRESUPUESTO PARTICIPATIVO",
+    "Income": "15,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ELENA ALTAGRACIA SANCHEZ DE ABREU",
+    "ID": "O-0020928-7",
+    "Position": "SECRETARIA DPTO. RELACIONES PUBLICAS",
+    "Income": "7,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ERCILIO HERNANDEZ VALDEZ",
+    "ID": "050-0016005-0",
+    "Position": "REPRESENTANTE ALCALDIA LA PELADA",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EUSEBIO COLLADO PEREZ",
+    "ID": "050-0020603-6",
+    "Position": "ASISTENTE DE RECEPCIONISTA TURISTIC",
+    "Income": "1,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FATIMA GABRIELA BUENO COLON",
+    "ID": "031-0412658-0",
+    "Position": "ANALISTA DE RECURSOS",
+    "Income": "12,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "FIDEL ANDRES DURAN TIBURCIO",
+    "ID": "050-0014174-6",
+    "Position": "ALCALDE PEDREGAL",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FORTIN ANT. LOPEZ RODRIGUEZ",
+    "ID": "050-0005788-4",
+    "Position": "AUXILIAR DE ALMACEN Y SUMINISTRO",
+    "Income": "5,658.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANCISCO ANT. DE JESUS®",
+    "ID": "050-0001714-4",
+    "Position": "ASISTENTE VICE ALCALDIA",
+    "Income": "7,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GENARO ANTONIO SIME",
+    "ID": "050-0004463-5",
+    "Position": "MENSAJERO SALA CAPITULAR",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GERVASIA ESPINAL GRULLON DE TIB.",
+    "ID": "050-0022258-7",
+    "Position": "ASISTENTE DEL ALCALDE",
+    "Income": "12,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ILKANIA DEL CARMEN DOMIGUEZ SUERO",
+    "ID": "050-0039276-0",
+    "Position": "ASESORA JURIDICA",
+    "Income": "15,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "IRMA TERESA ESCARRAMAN BELLO",
+    "ID": "GOREISA3124-6",
+    "Position": "ASISTENTE DE LA ALCALDIA EN RELAC. EXTER",
+    "Income": "12,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "JERSEYS MARIA MALDONADO DURAN",
+    "ID": "402-2553022-5",
+    "Position": "RECEPCIONISTA",
+    "Income": "8,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "JHONNY ALCANTARA TINEO",
+    "ID": "050-0021035-0",
+    "Position": "MENSAJERO EXTERNO",
+    "Income": "4,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOEL RAFAEL DURAN TRINIDAD",
+    "ID": "050-0048905-3",
+    "Position": "TECNICO EN COMUNICACIONES",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOELY ANTONIO DIAZ BATISTA",
+    "ID": "050-0043781-3",
+    "Position": "TECNICO EN COMUNICACIONES",
+    "Income": "5,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "JOSE BONELY VARGAS",
+    "ID": "050-0010961-0",
+    "Position": "ALCALDE PEDANEO EN JUMUNUCO",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE NUÑEZ POLO",
+    "ID": "050-0006354-4",
+    "Position": "REPRESENTANTE ALCALDIA DE LA JOYA",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ORTIZ",
+    "ID": "050-0008882-2",
+    "Position": "ALCALDE PEDANEO EN ESTANCITA",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE RAFAEL PEGUERO GUZMAN",
+    "ID": "050-0047679-5",
+    "Position": "",
+    "Income": "20,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN BAUTISTA BRAVO REYES",
+    "ID": "049-0035608-2",
+    "Position": "RESPONSABLE DE ARTE Y CULTURA",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN RAMON ABREU CRUZ",
+    "ID": "050-0015834-4",
+    "Position": "ALCALDE LA MAJAGUITA Y LOS CALABAZ@",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUANA MARIA ABREU DURAN",
+    "ID": "050-0003386-9",
+    "Position": "ASISTENTE DEL ALCALDE EN LA RUEDA",
+    "Income": "2,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "JUNIOR ANTONIO ORTIZ",
+    "ID": "050-0024835-0",
+    "Position": "COORDINADOR DE PROTOCOLO",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "KARLA FRANCKESCA DIAZ DURAN",
+    "ID": "402-2510359-3",
+    "Position": "TECNICO EN COMPRAS",
+    "Income": "10,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LEONARDO ROSADO BUENO",
+    "ID": "050-0018924-0",
+    "Position": "REP. ALCALDIA PASO BAJITO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS RAFAEL TIBURCIO",
+    "ID": "050-0019319-2",
+    "Position": "ASISTENTE ALCALDIA PASO BAJITO",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUZ LORELY BAUTISTA HERRERA",
+    "ID": "50-0042819-2",
+    "Position": "ASISTENTE DEL ALCALDE EN HATO VIEJO",
+    "Income": "5,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA AUXILIADORA ORTIZ NUÑEZ",
+    "ID": "050-0043770-6",
+    "Position": "TECNICO EN CONTABILIDAD",
+    "Income": "10,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA DEL CARMEN LUNA",
+    "ID": "9512-2",
+    "Position": "SUPERVISORA DE MAYORDOM?A (POLICIA MUNI60F0AL)",
+    "Income": "8,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA ODALISA BUENO SANCHEZ",
+    "ID": "050-0035605-4",
+    "Position": "REPRESENTANTE DE LA ALCALDIA",
+    "Income": "3,174.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA RAMONA AUXILIO ABREU ROSADO",
+    "ID": "050-0000047-0",
+    "Position": "ENC. DPTO DES. SOCIAL Y PART. COM.",
+    "Income": "25,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARINA DURAN MARTE",
+    "ID": "050-0004146-6",
+    "Position": "ASISTENTE VICE-ALCALDESA",
+    "Income": "8,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARTIN CRUZ QUEZADA",
+    "ID": "5.8004100-3",
+    "Position": "REPRESENTANTE DE LA ALCALDIA BARRIO DOND",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL ANTONIO ABREU CALDERON",
+    "ID": "050-0012900-6",
+    "Position": "ALCALDE PEDANEO DE COROCITO",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL RODRIGUEZ AQUINO",
+    "ID": "0-0030571-3",
+    "Position": "REPRESENTANTE ALCALDIA EN PALO BLANG",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL POLO",
+    "ID": "068 BI5/8377-1",
+    "Position": "REP. DE LA ALCALDESA EN LA COMUNIDAD DE L",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL UREÑA MARTE",
+    "ID": "50-0015778-3",
+    "Position": "ALCALDE PEDÁNEO EN PINAR QUEMAD@",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON DEL CARMEN TIBURCIO CORONADO",
+    "ID": "050-0000436-5",
+    "Position": "ENC. DE ALMACEN",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON EMILIO GUTIERREZ",
+    "ID": "050-0000983-6",
+    "Position": "ENC. SECCION DE COMUNICACI?N",
+    "Income": "15,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMONA YRAIDA CALDERON MARTE",
+    "ID": "050-0012961-8",
+    "Position": "ASISTENTE RURAL DE LA ALCALDESA",
+    "Income": "3,500.00",
+    "SEX": "F"
+  }
+]
+``````json
+[
+  {
+    "name": "ROQUE JACINTO GARCIA RODRIGUEZ",
+    "ID": "050-0009452-3",
+    "Position": "REP. ALCALDE PIEDRA BLANCA",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ROSA AROMERY PICHARDO DURAN",
+    "ID": "050-0027531-2",
+    "Position": "SECRETARIA ASEO Y ORNATO",
+    "Income": "8,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ROSA BAUTISTA",
+    "ID": "031-0338590-6",
+    "Position": "ENC. DE SERVICIOS MUNICIPALES",
+    "Income": "11,500.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ROSO CEPEDA BUENO",
+    "ID": "050-0020323-1",
+    "Position": "ALCALDE PEDANEO DE PASO BAJITO",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "SOCRATES CALDERON LOPEZ",
+    "ID": "050-0012957-6",
+    "Position": "REP. DE LA ALCALDIA EN CRISTO REY",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "SONIA ALTAGRACIA ADAMES CANDELARIO",
+    "ID": "50-0046336-3",
+    "Position": "SECRETARIA DIVISION DE GESTION AMBO",
+    "Income": "7,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "STEPHANY MASSIELL VALDEZ BAUTISTA",
+    "ID": "050-0048004-5",
+    "Position": "ENC. SECCIÓN DE CONTABILIDAD",
+    "Income": "20,000.00",
+    "SEX": "F"
+  }
+]
+``````json
+{
+  "name": "Altagracia Diaz Bueno",
+  "ID": "050-0035646-8",
+  "Position": "Ayudante Alcalde Paso Bajito",
+  "Income": "3,000.00",
+  "SEX": "F"
+}
+``````json
+{
+  "name": "JOSE MANUEL CEBALLO RAMOS",
+  "ID": "050-0038865-1",
+  "Position": "AUXILIAR DE ALMACEN Y SUMINISTRO",
+  "Income": "5,000.00",
+  "SEX": "M"
+}
+``````json
+{
+  "name": "ROSALIA MERCEDES ADAMEZ DE COLLADO",
+  "ID": "050-0028626-9",
+  "Position": "AUX. SECRETARIA SALA CAPITULAR",
+  "Income": "7,000.00",
+  "SEX": "F"
+}
+``````json
+[
+  {
+    "name": "ANA ERCILIA ABREU",
+    "ID": "050-0006056-5",
+    "Position": "CONSERJE",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "DORA LUNA GENAO DE CALDERON",
+    "ID": "050-0022309-8",
+    "Position": "CONSERJE PALACIO MUNICIPAL",
+    "Income": "3,174.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LICDA. YANINA GALAN DE LEON",
+    "ID": "050-0040944-0",
+    "Position": "TESORERA MUNICIPAL",
+    "Income": "35,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MIGUELINA ANGELINE MORONTA GEREZ",
+    "ID": "050-0035070-1",
+    "Position": "ENC. COBRO DE DESECHOS SOLIDOS",
+    "Income": "8,000.00",
+    "SEX": "F"
+  }
+]
+``````json
+[
+  {
+    "name": "ALICIA DIAZ BAUTISTA",
+    "ID": "402-2178304-2",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANA ELIZABETH DE LA CRUZ",
+    "ID": "050-0028650-9",
+    "Position": "CONSERJE (POLICIA MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ARELIS ALTAGRACIA DURAN ORTIZ",
+    "ID": "050-0006244-7",
+    "Position": "ENC. DE CONSERJERIA",
+    "Income": "5,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "AUSTRALIA CORONADO CANDELARIO",
+    "ID": "050-0029817-3",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "CECILIA DEL CARMEN SANCHEZ",
+    "ID": "050-0022460-9",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "EIKO FUKUNAGA DUARTE",
+    "ID": "402-2414006-7",
+    "Position": "TECNICO EN CONTABILIDAD",
+    "Income": "10,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "GABRIELA RODRIGUEZ ARIAS",
+    "ID": "02-2554476-2",
+    "Position": "SECRETARIA (DPTO. DES. SOC. Y PART. COA)",
+    "Income": "7,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "GENARO ABREU PICHARDO",
+    "ID": "050-0040130-6",
+    "Position": "INSP. COBRO DE BASURA",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "IRSA MARIA DILONE CARABALLO",
+    "ID": "050-0047743-9",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "JUAN ZOILO LOPEZ",
+    "ID": "050-0026571-9",
+    "Position": "CAPATAZ",
+    "Income": "3,700.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIO CESAR CRUZ GENAO",
+    "ID": "050-0001247-5",
+    "Position": "INSP. COBRO DE IMPUESTOS",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LIDIA ALT. CELESTINO GARCIA",
+    "ID": "050-0009274-1",
+    "Position": "CONSERJE MERCADO",
+    "Income": "3,174.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LUZ BERENICE VICIOSO ACOSTA",
+    "ID": "050-0036101-3",
+    "Position": "TÉCNICO EN CATASTRO",
+    "Income": "12,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA MAGDALENA BONIFACIO PEREZ",
+    "ID": "050-0033530-6",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "6,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA PLACENCIA",
+    "ID": "050-0010602-0",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,200.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARINA MENA DURAN",
+    "ID": "050-0036268-0",
+    "Position": "CONSERJE (PALACIO MUNICIPAL)",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "RAMONA BATISTA",
+    "ID": "050-0015474-9",
+    "Position": "COCINA",
+    "Income": "5,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "TERESA LUNA PAEZ",
+    "ID": "050-0015610-8",
+    "Position": "CONSERJE DPTO. POLICIA MUNICIPAL",
+    "Income": "3,174.00",
+    "SEX": "F"
+  },
+  {
+    "name": "YURY ILICH HAMLET CASTILLO SONE",
+    "ID": "050-0028592-3",
+    "Position": "ENC. DEPTO. GESTION AMBIENTAL",
+    "Income": "20,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+  "name": "LEIRY ANGELINA LIRIANO PLASENCIA",
+  "ID": "050-0051855-4",
+  "Position": "TECNICO EN CONTABILIDAD",
+  "Income": "8,000.00",
+  "SEX": "F"
+}
+``````json
+[
+  {
+    "name": "Amarilis Josefina Abreu Pichardo",
+    "ID": "050-0028178-1",
+    "Position": "Conserje Palacio Municipal",
+    "Income": "4,000.00",
+    "SEX": "F"
+  }
+]
+``````json
+{
+  "name": "LIDIO ANT. NUÑEZ POLO",
+  "ID": "050-0022753-7",
+  "Position": "CAPATAZ",
+  "Income": "5,871.00",
+  "SEX": "M"
+}
+``````json
+[
+  {
+    "name": "CIRILO DELGADO",
+    "ID": "050-0009745-0",
+    "Position": "OBRERO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DANIEL UREÑA",
+    "ID": "001-0609925-2",
+    "Position": "CARRETILLO BRIGADA NO.2",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DOMINGO ANT. SANCHEZ VICTORIANO",
+    "ID": "050-0027420-8",
+    "Position": "OBRERO DE ORNATO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ELSA JOSELYN QUEZADA VICTORIANO",
+    "ID": "050-0014393-2",
+    "Position": "AGENTE DE LIMPIEZA (PARQUE BALAGUEB)",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ENMANUEL DIAZ DOMINGUEZ",
+    "ID": "050-0043880-3",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ENRIQUE DEL CARMEN BAUTISTA MONSANT",
+    "ID": "050-0004609-3",
+    "Position": "OBRERO ORNATO",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE EDUVIGIS ORTEGA",
+    "ID": "847-0001455-0",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ARIEL ORTIZ ROSARIO",
+    "ID": "402-2649589-9",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIA DIAZ QUEZADA",
+    "ID": "050-0007341-0",
+    "Position": "SUPERVISORA DE LIMPIEZA",
+    "Income": "3,700.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARICELA PEÑALO DE LA ROSA",
+    "ID": "050-0029884-3",
+    "Position": "OBRERA DE PARQUE",
+    "Income": "3,659.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARY ESTHER SANTOS VENTURA",
+    "ID": "031-0337972-7",
+    "Position": "AGENTE DE LIMPIEZA (PARQUE INFANTIL)",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MELIDA CABRERA",
+    "ID": "050-0023917-7",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "2,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "PEDRO ROMANO QUIROZ",
+    "ID": "050-0024648-7",
+    "Position": "OBRERO DE ORNATO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PORFIRIO AMADO CRUZ",
+    "ID": "050-0015962-3",
+    "Position": "CARRETILLERO BRIGADA NO. 2",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL ANTONIO ORTIZ QUEZADA",
+    "ID": "050-0026807-7",
+    "Position": "JARDINERO MUNICIPAL",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON ELPIDIO PAEZ",
+    "ID": "650-0023580-3",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON VARGAS",
+    "ID": "050-0010685-5",
+    "Position": "OBRERO MUNICIPAL (ORNATO)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RUFINA REYES",
+    "ID": "050-0021298-4",
+    "Position": "OBRERA PARQUE DUARTE",
+    "Income": "3,300.00",
+    "SEX": "F"
+  },
+  {
+    "name": "SANABIO BATISTA",
+    "ID": "15475-6",
+    "Position": "RESPONSABLE PARQUE EUSEBIO( PINAR QUEMALO)",
+    "Income": "3,968.00",
+    "SEX": "M"
+  },
+  {
+    "name": "TERESA QUIROZ BUENO",
+    "ID": "050-0030551-5",
+    "Position": "OBRERA PARQUE DE LA AV. LA CONFLUENGS",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ZENAIDA ALT. GUZMAN MARTE",
+    "ID": "050-0044538-6",
+    "Position": "BARREDORA BRIGADA NO. 7",
+    "Income": "3,587.00",
+    "SEX": "F"
+  }
+]
+``````json
+{
+  "FormNo": "543",
+  "ApprovedBy": "DIGECOG",
+  "Treasury": "Ayuntamiento Municipal de Jarabacoa",
+  "Date": "15Atras",
+  "PayrollFor": "ORNATO Y SANEAMIENTO DE CALLES, PLAZAS Y PARQUES",
+  "Program": "1200000200",
+  "Classifier": "211206",
+  "Month": "ABRIL DEL 2018",
+  "Currency": "RD$",
+  "Certification": "Certifico que esta nómina de pago consta de 1 hojas, está correcta; que las personas enumerada en la misma han sido legalmente nombradas, y que cada una de ellas, ha rendido los ser -reglamentaciones durante el período mencionado; que dichos servicios han sido ejecutados bajo mi supervigilancia y que ninguna persona cuyo nombre consta en esta nómina es pagada por perio que concede la Ley.",
+  "ApprovedBy": {
+    "Mayor": "ALCALDE MUNICIPAL",
+    "President": "PRESIDENTE AYUNTAMIENTO",
+    "PayrollManager": "ENC. DE NOMINA",
+    "Treasurer": "TESORE",
+    "HRDirector": "DIR. RECURSOS HUMANOS",
+    "Auditor": "CONTRALOR VIS/ Contralor"
+  }
+}
+``````json
+[
+  {
+    "name": "ADELA GALAN",
+    "ID": "050-0014948-3",
+    "Position": "OBRERA BRIGADA NO.1",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "AGUSTINA PERALTA GARCIA",
+    "ID": "050-0019209-5",
+    "Position": "OBRERO BRIGADA NO. 5",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ALFIO ABRAHAM COLLADO PERALTA",
+    "ID": "6040028076-7",
+    "Position": "AGENTE DE LIMPIEZA (PARQUE LA CONFLUE)",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "AMADO GUTIERREZ",
+    "ID": "050-0014962-4",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "AMBROCIO ANT. LUNA VARGAS",
+    "ID": "050-0004793-5",
+    "Position": "OBRERO",
+    "Income": "3,950.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ANA FELICIA ESTEVEZ",
+    "ID": "050-0010177-3",
+    "Position": "OBRERA BRIGADA NO. 5",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANA LUISA BUENO",
+    "ID": "050-0004055-9",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANA MARGARITA VICTORIANO",
+    "ID": "050-0003970-0",
+    "Position": "OBRERO BRIGADA NO.2",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANA SILVIA CLARIBEL SANTIAGO PEÑAL",
+    "ID": "034-0055406-3",
+    "Position": "OBRERO BRIGADA NO.2",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ANASTACIO FIDEL SANCHEZ PAEZ",
+    "ID": "050-0014829-5",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ANDRES VARGAS",
+    "ID": "050-0000812-7",
+    "Position": "OBRERO CAMION",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ANTONIO CASTILLO PEÑA",
+    "ID": "050-0003474-3",
+    "Position": "AGENTE DE LIMPIEZA (PARQUE JAPONE3)",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "BRAULIO DIAZ",
+    "ID": "050-0009344-2",
+    "Position": "OBRERO DE CAMION",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CARLOS ML. DOMINGUEZ",
+    "ID": "050-0009783-1",
+    "Position": "OBRERO MERCADO MUNICIPAL",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CARMEN ROSA BUENO",
+    "ID": "050-0005421-2",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "CATALINA ABREU MEDRANO",
+    "ID": "050-0010077-5",
+    "Position": "OBRERA DEL MERCADO",
+    "Income": "3,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "CLARA LUCIA PEREZ",
+    "ID": "050-0027770-6",
+    "Position": "CAPATAZ BRIGADA NO. 5 LA COLONIA",
+    "Income": "4,167.00",
+    "SEX": "F"
+  },
+  {
+    "name": "CLARINEL YULICE ARIAS VICTORIANO",
+    "ID": "050-0044990-9",
+    "Position": "OBRERA BRIGADA NO. 5",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "EDILIO ENRIQUE HERNANDEZ FRIAS",
+    "ID": "050-0009469-7",
+    "Position": "SUPERVISOR BRIGADA DE LIMPIEZA",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EDUARDO CASTILLO DURAN",
+    "ID": "050-0013590-4",
+    "Position": "SUPERVISOR BRIGADA DE LIMPIEZA",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EMEREGILDO VARGAS",
+    "ID": "050-0014841-0",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EMILIANA DE JESUS LOPEZ",
+    "ID": "050-0011975-9",
+    "Position": "OBRERA BRIGADA NO.1",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "EMILIO CEPEDA ABREU",
+    "ID": "050-0016652-9",
+    "Position": "OBRERO CAMION",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ERNESTO POLANCO URIBE",
+    "ID": "050-0003795-1",
+    "Position": "OBRERO MERCADO",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EUGENIO DURAN SUERO",
+    "ID": "050-0013762-9",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "FAUSTO MANUEL PIÑA NUÑEZ",
+    "ID": "050-0026586-7",
+    "Position": "SUPERVISOR DE LIMPIEZA",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FERNANDITO PEÑALO POLO",
+    "ID": "050-0051200-3",
+    "Position": "OBRERO MUNICIPAL",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FERNANDO ANT. RODRIGUEZ",
+    "ID": "050-0004934-5",
+    "Position": "OBRERO DE LIMPIEZA",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FERNANDO TIBURCIO DELGADO",
+    "ID": "402-2541456-0",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANCISCO ANTONIO PENA PICHARDO",
+    "ID": "050-0027149-3",
+    "Position": "SUPERVISOR BRIGADA NO. 5",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANCISCO ORTIZ",
+    "ID": "050-0010269-8",
+    "Position": "OBRERO BRIGADA NO.4",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANKLIN BERNARDO GALAN CASTILLO",
+    "ID": "050-0039784-3",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GERMANIA PICHARDO",
+    "ID": "050-0023638-9",
+    "Position": "OBRERA BRIGADA NO. 6",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "GERONIMO ESPINAL",
+    "ID": "050-0013028-5",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GLADYS ALT. VELOZ PEÑA",
+    "ID": "050-0014849-3",
+    "Position": "OBRERA BRIGADA NO. 3",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "HEIDI MARGARITA ABREU DELGADO",
+    "ID": "050-0043696-3",
+    "Position": "OBRERA PARQUE DUARTE",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "JOSE ENRIQUE DELGADO",
+    "ID": "050-0021375-0",
+    "Position": "CAPATAZ BRIGADA ORNATO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ISIDRO DILONE SICARD",
+    "ID": "050-0046479-1",
+    "Position": "OBRERO MUNICIPAL",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE LUIS REYES ESPINAL",
+    "ID": "050-0046922-0",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE MIGUEL PERALTA P.",
+    "ID": "050-0004362-9",
+    "Position": "CARRETILLERO BRIGADA NO.5",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN CARLOS CRUZ RODRIGUEZ",
+    "ID": "050-0028866-1",
+    "Position": "OBRERO MUNICIPAL",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN DURAN",
+    "ID": "050-0023982-1",
+    "Position": "CARRETILLERO BRIGADA NO. 1",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN EVANGELISTA ADAMEZ ROSA",
+    "ID": "050-0024361-7",
+    "Position": "Agente de Limpieza Parque Pinar Quemado",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN HERNANDEZ ESPINAL",
+    "ID": "050-0030026-8",
+    "Position": "CARRETILLERO BRIGADA NO. 3",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN SOLARES DURAN",
+    "ID": "650-0023749-4",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO) B-6",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUSTO MIGUEL CONCEPCION",
+    "ID": "050-0000117-1",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LEANDRO JOSUE BUENO BUENO",
+    "ID": "402-2668114-2",
+    "Position": "CARRETILLERO BRIGADA NO. 6",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LENNY DEL CARMEN BUENO GARCIA",
+    "ID": "050-0039461-8",
+    "Position": "CAPATAZ PARQUE DUARTE",
+    "Income": "4,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LEONEL ROSARIO ROSARIO",
+    "ID": "050-0009000-0",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LEONIDO SANTOS UREÑA PERALTA",
+    "ID": "050-0022895-6",
+    "Position": "OBRERO MUNICIPAL",
+    "Income": "4,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "LISANDRO ALMONTE VICIOSO",
+    "ID": "050-0037550-0",
+    "Position": "AYUDA SOCIAL",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LORENZO ROBERTO NUÑEZ BUENO",
+    "ID": "050-0042137-9",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUCIA ALTAGRACIA DURAN ESPINAL",
+    "ID": "B-402-2250002-3",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO)",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "LUIS ANTONIO DURAN",
+    "ID": "050-0004133-4",
+    "Position": "OBRERO DE CAMION",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS MENA ALBERTO",
+    "ID": "048-0039867-1",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUZ MARIA FERNANDEZ",
+    "ID": "050-0010180-7",
+    "Position": "OBRERA BRIGADA NO. 3",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARCELO RAFAEL DURAN ABREU",
+    "ID": "050-0004139-1",
+    "Position": "CARRETILLERO BRIGADA NO.5",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIA ALT. ROSARIO",
+    "ID": "050-0024244-5",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO)",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA ANDREA ORTIZ",
+    "ID": "050-0009881-3",
+    "Position": "OBRERO BRIGADA NO.3",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA DEL C. PICHARDO",
+    "ID": "050-0023645-4",
+    "Position": "OBRERA BRIGADA NO. 6",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA LUISA FERNANDEZ",
+    "ID": "050-0014720-6",
+    "Position": "BARREDORA BRIGADA NO. 3",
+    "Income": "2,962.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA MAGDALENA GILE",
+    "ID": "050-0003602-9",
+    "Position": "OBRERO BRIGADA NO. 5",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA MERCEDES REYES",
+    "ID": "050-0024624-8",
+    "Position": "OBRERA MATADERO",
+    "Income": "3,390.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA SALOME LORA",
+    "ID": "050-0004784-4",
+    "Position": "OBRERO",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIA VIRGEN NUÑEZ POLO",
+    "ID": "050-0013816-3",
+    "Position": "OBRERA PARQUE",
+    "Income": "3,087.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIANA YSABEL GARCIA PAYANO",
+    "ID": "050-0005239-8",
+    "Position": "BARREDORA BRIGADA NO.7",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIANELA DURAN ESPINAL",
+    "ID": "050-0039640-7",
+    "Position": "BARREDORA BRIGADA NO.7",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARTHA AMARILIS RAMOS MORILLO",
+    "ID": "50-0023676-9",
+    "Position": "CAPATAZ LIMPIEZA AVE. LA CONFLUENCIA",
+    "Income": "3,700.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARTHA MARIA GUTIERREZ",
+    "ID": "050-0003607-8",
+    "Position": "OBRERA",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARTINA GARCIA PLASENCIA",
+    "ID": "B020-0004177-1",
+    "Position": "SUPERVISORA DE BRIGADA DE LIMPIEZA",
+    "Income": "3,944.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MELIDO ABEL MARTE RODRIGUEZ",
+    "ID": "050-0033792-2",
+    "Position": "OBRERO BRIGADA",
+    "Income": "3,769.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MERCEDES PERALTA",
+    "ID": "050-0009918-3",
+    "Position": "OBRERO PARQUE DUARTE",
+    "Income": "3,950.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MIGUEL ANGEL COLON A.",
+    "ID": "050-0031356-8",
+    "Position": "OBRERO CAMION",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL ANGEL MARINE",
+    "ID": "050-0037549-2",
+    "Position": "OBRERO DE LIMPIEZA",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL DILONE",
+    "ID": "050-0014689-3",
+    "Position": "OBRERO",
+    "Income": "3,587.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "MIGUEL MORONTA ADAMEZ",
+    "ID": "050-0002832-3",
+    "Position": "CARRETILLERO BRIGADA NO.5",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "NELSON PERALTA",
+    "ID": "050-0024174-4",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PEDRO ANT. DURAN",
+    "ID": "050-0010776-2",
+    "Position": "OBRERO DE LIMPIEZA",
+    "Income": "2,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL CAPELLAN",
+    "ID": "050-0014045-8",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON ANT. AQUINO",
+    "ID": "050-0041428-3",
+    "Position": "CARRETILLERO BRIGADA NO. 3",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON ANT. RODRIGUEZ",
+    "ID": "050-0009946-4",
+    "Position": "OBRERO BRIGADA NO.4",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON ANYOLINO DURAN-DIAZ",
+    "ID": "050-0025681-7",
+    "Position": "CARRETILLERO BRIGADA NO. 7",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON RAMOS JIMENEZ",
+    "ID": "050-0008579-4",
+    "Position": "LAVADOR EQUIPO DEL VERTEDERO",
+    "Income": "4,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMÓN TIBURCIO DURAN",
+    "ID": "050-0025036-4",
+    "Position": "OBRERO DE LIMPIEZA",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "REINALDO ABREU",
+    "ID": "050-0015366-7",
+    "Position": "OPERADOR CAMION - OBRERO",
+    "Income": "4,126.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ROSA MARIA NUÑEZ PAEZ",
+    "ID": "050-0013431-1",
+    "Position": "OBRERO BRIGADA NO.3",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ROSALINDA DURAN",
+    "ID": "050-0013682-9",
+    "Position": "BARREDORA BRIGADA NO.. 6",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "SANTO DE JS. PICHARDO ABREU",
+    "ID": "050-0015286-7",
+    "Position": "GUARDIAN PARQUE I",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VINICIO DURAN DURAN",
+    "ID": "050-0013685-2",
+    "Position": "CARRETILLERO BRIGADA NO. 7",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VIRGILIO JIMENEZ LOPEZ",
+    "ID": "050-0014263-7",
+    "Position": "PLOMERO",
+    "Income": "4,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+  "name": "ELPIDIO JOSE PEREZ",
+  "ID": "050-0034891-1",
+  "Position": "OBRERO DE OBRAS MUNICIPALES",
+  "Income": "5,000.00",
+  "SEX": "M"
+}
+``````json
+[
+  {
+    "name": "AMPARO GUZMAN PERALTA",
+    "ID": "050-0023030-9",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO)",
+    "Income": "3,587.00",
+    "SEX": "F"
+  },
+  {
+    "name": "DANNY YOEL RAMOS",
+    "ID": "402-2669060-6",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ELIGIO BAEZ MARTE",
+    "ID": "050-0015882-3",
+    "Position": "AGENTE DE LIMPIEZA (ASEO URBANO)",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN FRANCISCO TAVAREZ DURAN",
+    "ID": "050-0012853-7",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARCELINO ABREU",
+    "ID": "050-0024978-8",
+    "Position": "AGENTE DE LIMPIEZA (CAMION)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "ANGEL GABRIEL GUILLERMO ADAMES",
+    "ID": "050-0025518-1",
+    "Position": "CHOFER DE CAMION",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CAMILO ANT. RAMIREZ PEREZ",
+    "ID": "050-0020875-0",
+    "Position": "AYUDANTE DE MANTENIMIENTO",
+    "Income": "12,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CRISTOBAL ANTONIO VICTORIANO",
+    "ID": "001-1238645-3",
+    "Position": "CHOFER DE CAMIÓN BRIGADA NO. 3",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DOMINGO MARIA GALAN",
+    "ID": "050-0014949-1",
+    "Position": "CHOFER DE CAMIÓN BRIGADA NO. 6",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ELOY RODRIGUEZ",
+    "ID": "050-0015049-9",
+    "Position": "CHOFER DE CAMION",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ERICK ABREU ABREU",
+    "ID": "2-1414325-3",
+    "Position": "OPERADOR EQUIPOS PESADOS (VERTEDERO)",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FERNANDO MARTE SANCHEZ",
+    "ID": "050-0001883-7",
+    "Position": "CHOFER I",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANCISCO ANT. ABREU CAPELLAN",
+    "ID": "050-0019616-1",
+    "Position": "BULDOCISTA I",
+    "Income": "9,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "HIPOLITO SANCHEZ SOSA",
+    "ID": "048-0051070-5",
+    "Position": "MECANICO AUTOMOTRIZ",
+    "Income": "20,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JONATHAN MIGUEL FABIAN",
+    "ID": "050-0046321-5",
+    "Position": "CHOFER DE CAMION",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ALEXANDER NUNEZ ABREU",
+    "ID": "050-0026572-7",
+    "Position": "CHOFER I",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE LUIS MORENO DELGADO",
+    "ID": "ABQ-0046722-4",
+    "Position": "OPERADOR DE EQUIPOS PESADOS (GREDA)",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSELITO ROSARIO BATISTA",
+    "ID": "050-0009971-2",
+    "Position": "CHOFER DE CAMIÓN BRIGADA NO. 2",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ADAMEZ",
+    "ID": "050-0024362-5",
+    "Position": "CHOFER DE CAMIÓN BRIGADA NO. 4",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN RUBEN COLLADO MARTE",
+    "ID": "035-0014962-4",
+    "Position": "CHOFER DE CAMION",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIO CESAR ABREU RAMOS",
+    "ID": "050-0019622-9",
+    "Position": "CHOFER BRIGADA NO. 13",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARCELINO SANCHEZ",
+    "ID": "050-0025228-7",
+    "Position": "CHOFER CONCEJO MUNICIPAL",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIO DELGADO BUENO",
+    "ID": "050-0029839-7",
+    "Position": "CHOFER I",
+    "Income": "8,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "REYMOND ELOY SAVIÑON",
+    "ID": "002-0141511-4",
+    "Position": "CHOFER | ALCALDE",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "SANABIO BUENO HERRERA",
+    "ID": "050-0009175-0",
+    "Position": "MECANICO AUTOMOTRIZ",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR ANTONIO GUTIERREZ MARTE",
+    "ID": "050-0039299-2",
+    "Position": "CHOFER DE CAMION",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR MANUEL GARCIA CAPELLAN",
+    "ID": "050-0027830-8",
+    "Position": "CHOFER II",
+    "Income": "12,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+"name": "Gabriel",
+"ID": "050-0023817-9",
+"Position": "MUSICIAN",
+"Income": "2,645.00",
+"SEX": "M"
+}
+``````json
+[
+  {
+    "name": "ANGEL SALVADOR SANCHEZ HERNANDEZ",
+    "ID": "402-0049905-2",
+    "Position": "VIGILANTE NOCTURNO DEL PARQUE DUARTE",
+    "Income": "4,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "BERNARDINO GUTIERREZ",
+    "ID": "050-0007358-4",
+    "Position": "VIGILANTE NOCTURNO DEL VERTEDERO",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "BRAULIO MARTE",
+    "ID": "050-0017559-5",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,310.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CARMELO BONIFACIO DOMINGUEZ",
+    "ID": "050-0017397-0",
+    "Position": "RASO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "CLAUDIO DURAN",
+    "ID": "050-0021120-0",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DANILO ORTIZ CAPELLAN",
+    "ID": "402-0003720-9",
+    "Position": "VIGILANTE NOCTURNO DEL PARQUE DUARTE",
+    "Income": "4,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DIOGENES GREGORIO ABREU ABREU",
+    "ID": "050-0016929-1",
+    "Position": "COORDINADOR DE SEGURIDAD Y VIGILANCIA",
+    "Income": "10,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DOMINGO ANT. DIAZ ESTEVEZ",
+    "ID": "050-0027195-6",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "5,353.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DOMINGO DEL CARMEN DURAN",
+    "ID": "402-0010768-9",
+    "Position": "VIGILANTE (CAMPAMENTO CAMIONES NOCTURNO)",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "DOMINGO PEREZ",
+    "ID": "050-0012194-6",
+    "Position": "VIGILANTE (CAMPAMENTO CAMIONES DIURNO)",
+    "Income": "4,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "EDWARD CAMILO MORETA PAULINO",
+    "ID": "012-0074194-8",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FELIX MARIA DURAN DURAN",
+    "ID": "050-0024469-8",
+    "Position": "VIGILANTE PALACIO MUNICIPAL",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "FRANCISCO ANT. ABREU VARGAS",
+    "ID": "050-0036174-0",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GENARO COLON AGOSTA",
+    "ID": "050-0007626-4",
+    "Position": "VIGILANTE DIURNO VERTEDERO",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "HIPOLITO VICIOSO",
+    "ID": "050-0027710-2",
+    "Position": "SERENO DEL MERCADO MUNICIPAL",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOAQUIN REYES VELOZ",
+    "ID": "050-0035842-3",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JORGE RAFAEL RODRIGUEZ",
+    "ID": "050-0005409-7",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE DOLORES MAGARIN",
+    "ID": "050-0024539-8",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ISABEL PEÑALO GRULLON",
+    "ID": "053-0010599-5",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIO CAPELLAN CIPRIAN",
+    "ID": "050-0000882-0",
+    "Position": "VIGILANTE PALACIO MUNICIPAL",
+    "Income": "3,174.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUNIOR ALCADIO ADAMEZ GENAO",
+    "ID": "050-0034555-2",
+    "Position": "RASO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LIBRADO SANTOS",
+    "ID": "402-0011361-2",
+    "Position": "VIGILANTE NOCTURNO DEL PARQUE DUARTE",
+    "Income": "3,639.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL EUGENIO LORA",
+    "ID": "050-0004232-4",
+    "Position": "VIGILANTE DIURNO (PARQUE DUARTE)",
+    "Income": "3,639.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON ANTONIO RAMOS NUNEZ",
+    "ID": "402-3466101-1",
+    "Position": "VIGILANTE DIURNO (VERTEDERO)",
+    "Income": "3,587.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON MARIA PENA DE LEON",
+    "ID": "001-1183474-3",
+    "Position": "ENC. POLICIA MUNICIPAL",
+    "Income": "12,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "ROMAN ANTONIO CABRERA ABREU",
+    "ID": "050-0016635-4",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "M"
+  },
+  {
+    "name": "SERGIO IVAN TIBURCIO",
+    "ID": "050-0023769-2",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,655.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR DANIEL SANCHEZ LEBRON",
+    "ID": "050-0001120-4",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,867.00",
+    "SEX": "M"
+  },
+  {
+    "name": "YUDERKA ALT. RODRIGUEZ DE LA CRUZ",
+    "ID": "053-0004471-5",
+    "Position": "MIEMBRO POLICIA MUNICIPAL",
+    "Income": "4,258.00",
+    "SEX": "F"
+  }
+]
+``````json
+[
+  {
+    "COD": "2010",
+    "NOMBRE": "ALEXANDER DE JS. ROSADO",
+    "TITULO OFICIAL": "COORDINADOR MEDIO AMBIENTAL",
+    "CEDULA": "050-0044026-2",
+    "SUELDO": "8,600.00",
+    "VALORES EN RD$": "8,600.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "8,600.00",
+    "CK. / DEPARTAMENTO": "10052"
+  },
+  {
+    "COD": "4592",
+    "NOMBRE": "ANGEL BARTOLO GIL MINYETTY",
+    "TITULO OFICIAL": "SUPERVISOR AREA VERDES",
+    "CEDULA": "050-0018353-2",
+    "SUELDO": "9,900.00",
+    "VALORES EN RD$": "9,900.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "9,900.00",
+    "CK. / DEPARTAMENTO": "10052"
+  },
+  {
+    "COD": "1660",
+    "NOMBRE": "ANTONIO ABREU ABREU",
+    "TITULO OFICIAL": "OBRERO CEMENTERIO LA TRINCHERA",
+    "CEDULA": "050-0023172-9",
+    "SUELDO": "4,000.00",
+    "VALORES EN RD$": "4,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "4,000.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "4822",
+    "NOMBRE": "ANTONIO DE LA CRUZ PERALTA",
+    "TITULO OFICIAL": "OBRERO DE OBRAS MUNICIPALES",
+    "CEDULA": "050-0002318-3",
+    "SUELDO": "5,000.00",
+    "VALORES EN RD$": "5,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "5,000.00",
+    "CK. / DEPARTAMENTO": "1005C"
+  },
+  {
+    "COD": "4257",
+    "NOMBRE": "ANTONIO DURAN COLLADO",
+    "TITULO OFICIAL": "RESPONSABLE CEMENTERIO LLANO DEL",
+    "CEDULA": "HXSO-0010495-9",
+    "SUELDO": "2,000.00",
+    "VALORES EN RD$": "2,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "2,000.00",
+    "CK. / DEPARTAMENTO": "10050"
+  },
+  {
+    "COD": "8495",
+    "NOMBRE": "ARELIS ALTAGRACIA TIBURCIO DURÁN",
+    "TITULO OFICIAL": "CORDINADOR MEDIO AMBIENTE",
+    "CEDULA": "050-0018547-9",
+    "SUELDO": "7,500.00",
+    "VALORES EN RD$": "7,500.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "7,500.00",
+    "CK. / DEPARTAMENTO": "10050"
+  },
+  {
+    "COD": "4823",
+    "NOMBRE": "ARQ. ERICK EMMANUEL DIAZ GALAN",
+    "TITULO OFICIAL": "ENCARG. DPTO. DE OBRAS MUNICIPALES",
+    "CEDULA": "50-0029116-0",
+    "SUELDO": "20,000.00",
+    "VALORES EN RD$": "20,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "20,000.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "882",
+    "NOMBRE": "ELIAS GARCIA GARCIA",
+    "TITULO OFICIAL": "OBRERO BACHEO",
+    "CEDULA": "050-0009416-8",
+    "SUELDO": "5,000.00",
+    "VALORES EN RD$": "5,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "5,000.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "1648",
+    "NOMBRE": "ELIGIO ANT. MARINE",
+    "TITULO OFICIAL": "ELECTRICISTA",
+    "CEDULA": "050-0014286-8",
+    "SUELDO": "7,000.00",
+    "VALORES EN RD$": "7,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "7,000.00",
+    "CK. / DEPARTAMENTO": "10050"
+  },
+  {
+    "COD": "4844",
+    "NOMBRE": "ELYS ODALYS PAEZ TIBURCIO",
+    "TITULO OFICIAL": "SUPERVISOR DE CEMENTERIO LA PITA",
+    "CEDULA": "050-0019195-6",
+    "SUELDO": "3,000.00",
+    "VALORES EN RD$": "3,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "3,000.00",
+    "CK. / DEPARTAMENTO": "10050"
+  },
+  {
+    "COD": "4843",
+    "NOMBRE": "EMILIO RICARDO ABREU PERALTA",
+    "TITULO OFICIAL": "SUPERV. DE OBRAS E INFRAESTRUCT. MUNICI",
+    "CEDULA": "SAI-1G47677-9",
+    "SUELDO": "10,000.00",
+    "VALORES EN RD$": "10,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "10,000.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "4813",
+    "NOMBRE": "ERIKA ALEXANDRA ABREU ROSARIO",
+    "TITULO OFICIAL": "COORDINADORA MEDIOAMBIENTAL",
+    "CEDULA": "402-2062888-3",
+    "SUELDO": "8,880.00",
+    "VALORES EN RD$": "8,880.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "8,880.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4678",
+    "NOMBRE": "EURY BATISTA DE LA CRUZ",
+    "TITULO OFICIAL": "COORDINADOR MEDIOAMBIENTAL",
+    "CEDULA": "402-2588040-6",
+    "SUELDO": "9,524.00",
+    "VALORES EN RD$": "9,524.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "9,524.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4816",
+    "NOMBRE": "FERMIN RODRIGUEZ",
+    "TITULO OFICIAL": "COORDINADOR MEDIOAMBIENTAL",
+    "CEDULA": "050-0003848-8",
+    "SUELDO": "8,880.00",
+    "VALORES EN RD$": "8,880.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "8,880.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4718",
+    "NOMBRE": "FRANCIS LORENZO REYES DURAN",
+    "TITULO OFICIAL": "PROMOTOR MUNICIPAL",
+    "CEDULA": "050-0033623-9",
+    "SUELDO": "5,000.00",
+    "VALORES EN RD$": "5,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "5,000.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "524",
+    "NOMBRE": "FRANCISCO ANT. ABREU MARTE",
+    "TITULO OFICIAL": "APRESADOR EN JUMUNUCO",
+    "CEDULA": "050-0022935-0",
+    "SUELDO": "4,000.00",
+    "VALORES EN RD$": "4,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "4,000.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4789",
+    "NOMBRE": "FRANKLIN LAMAR RAMOS",
+    "TITULO OFICIAL": "MENSAJERO EXTERNO",
+    "CEDULA": "050-0034548-7",
+    "SUELDO": "6,000.00",
+    "VALORES EN RD$": "6,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "6,000.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "2011",
+    "NOMBRE": "GERONIMO DURAN GUZMAN",
+    "TITULO OFICIAL": "COORDINADOR MEDIOAMBIENTAL",
+    "CEDULA": "050-0023999-5",
+    "SUELDO": "9,800.00",
+    "VALORES EN RD$": "9,800.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "9,800.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "1343",
+    "NOMBRE": "GILBERTO ANTONIO GOMEZ MORA",
+    "TITULO OFICIAL": "SUPERVISOR MERCADO MUNICIPAL",
+    "CEDULA": "050-0019504-9",
+    "SUELDO": "5,000.00",
+    "VALORES EN RD$": "5,000.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "5,000.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4812",
+    "NOMBRE": "HEIDY ELIZABETH REYES ROSARIO",
+    "TITULO OFICIAL": "COORDINADORA MEDIOAMBIENTAL",
+    "CEDULA": "050-0052018-8",
+    "SUELDO": "8,880.00",
+    "VALORES EN RD$": "8,880.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "8,880.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "4826",
+    "NOMBRE": "HELVIN MANUEL GUTIERREZ",
+    "TITULO OFICIAL": "PINTOR",
+    "CEDULA": "050-0036034-6",
+    "SUELDO": "3,967.00",
+    "VALORES EN RD$": "3,967.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "3,967.00",
+    "CK. / DEPARTAMENTO": "10053"
+  },
+  {
+    "COD": "1511",
+    "NOMBRE": "HIPOLITO LAMAR COLLADO",
+    "TITULO OFICIAL": "SUP. MEDIO AMBIENTE",
+    "CEDULA": "050-0011184-8",
+    "SUELDO": "6,500.00",
+    "VALORES EN RD$": "6,500.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+      "Otros": "0.00",
+      "T.Desc.": "0.00"
+    },
+    "TNETO": "6,500.00",
+    "CK. / DEPARTAMENTO": ""
+  },
+  {
+    "COD": "4814",
+    "NOMBRE": "INES MARGARITA TIBURCIO",
+    "TITULO OFICIAL": "COORDINADOR MEDIOAMBIENTAL",
+    "CEDULA": "050-0022487-2",
+    "SUELDO": "8,880.00",
+    "VALORES EN RD$": "8,880.00",
+    "DESCUENTOS": {
+      "Renta": "0.00",
+      "AFP": "0.00",
+      "ARS": "0.00",
+```json
+[
+  {
+    "name": "JOEL MANUEL DE LA ROSA VICTORIANO",
+    "ID": "050-0040033-2",
+    "Position": "COORDINADOR MEDIOAMBIENTAL",
+    "Income": "8,600.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ANT. MARMOL CALMONA",
+    "ID": "050-0031972-2",
+    "Position": "INSPECTOR TICNICO PLANEAT. URBANQ",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE CRISTOBAL TINEO",
+    "ID": "050-0042935-6",
+    "Position": "PINTOR",
+    "Income": "3,967.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE DEL ROSARIO ROSADO DURAN",
+    "ID": "050-0018501-6",
+    "Position": "COORDINADOR MEDIOAMBIENTAL",
+    "Income": "9,125.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE DELIO ABREU",
+    "ID": "050-0000826-7",
+    "Position": "ASISTENTE",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE DOLORES DIAZ",
+    "ID": "050-0018725-1",
+    "Position": "EN. CEMENTERIO DE PASO BAJITO",
+    "Income": "2,858.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE LUIS ALMONTE VICIOSO",
+    "ID": "050-0034552-9",
+    "Position": "HERRERO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE LUIS DURAN GUZMAN",
+    "ID": "050-0048759-4",
+    "Position": "COORDINADOR MEDIOAMBIENTAL",
+    "Income": "9,600.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE MARTIN MORONTA ABREU",
+    "ID": "050-0026806-9",
+    "Position": "MENSAJERO EXTERNO",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE MERCEDES PEÑA ABREU",
+    "ID": "050-0011277-0",
+    "Position": "RESPONSABLE DEL CEMENTERIO",
+    "Income": "1,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE RAMON VICTORIANO DE LA ROSA",
+    "ID": "050-0022515-0",
+    "Position": "OBRERO OBRAS MUNICIPALES",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOVANNY ABREU ADAMES",
+    "ID": "050-0028179-9",
+    "Position": "INSPECTOR T?CNICO PLANEAT. URBAN@",
+    "Income": "8,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ANTONIO DURAN COLLADO",
+    "ID": "050-0001279-8",
+    "Position": "ENC. CEMENTERIO MUNICIPAL",
+    "Income": "3,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN CARLOS BONIFACIO MENA",
+    "ID": "050-0036309-2",
+    "Position": "PINTOR",
+    "Income": "3,967.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN HERNANDEZ LORA",
+    "ID": "050-0045650-8",
+    "Position": "PINTOR",
+    "Income": "3,967.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN JOSE DELGADO",
+    "ID": "050-0015973-0",
+    "Position": "APRESADOR DE BARRIOJUMUNUCO",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUNIOR FRANCISCO BONIFACIO",
+    "ID": "050-0036087-4",
+    "Position": "INSPECTOR MEDIO AMBIENTE",
+    "Income": "6,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUNIOR JOSE TAVERAS CRUCEL",
+    "ID": "050-0002114-6",
+    "Position": "INSPECTOR I",
+    "Income": "2,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "KELVIN MANUEL ABREU DURAN",
+    "ID": "050-0032434-2",
+    "Position": "TÉCNICO EN ELECTRICIDAD",
+    "Income": "8,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARIA VICTORIA DE LA CRUZ TAVERAS",
+    "ID": "050-0026085-0",
+    "Position": "COORDINADORA MEDIOAMBIENTAL",
+    "Income": "10,000.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARIBEL ABREU",
+    "ID": "402-2124230-4",
+    "Position": "COORDINADORA MEDIOAMBIENTAL",
+    "Income": "8,600.00",
+    "SEX": "F"
+  },
+  {
+    "name": "MARINO ALMONTE",
+    "ID": "050-0005092-1",
+    "Position": "PINTOR",
+    "Income": "3,967.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MARTIN CANDELARIO URENA",
+    "ID": "050-0024402-9",
+    "Position": "SUPERVISOR CEMENTERIO LA TRINCHERA",
+    "Income": "7,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL ANGEL SERRATA RAMIREZ",
+    "ID": "050-0038273-8",
+    "Position": "PINTOR",
+    "Income": "3,967.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL ANTONIO AQUINO",
+    "ID": "050-0049065-5",
+    "Position": "COORDINADOR MEDIOAMBIENTAL",
+    "Income": "9,700.00",
+    "SEX": "M"
+  }
+]
+``````json
+[
+  {
+    "name": "MODESTO PICHARDO COLLADO",
+    "ID": "50-0002589-9",
+    "Position": "INSPECTOR I SECCION GESTION AMBIENTA",
+    "Income": "4,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "NICOLE ALEXANDRA SANCHEZ",
+    "ID": "402-2594621-5",
+    "Position": "CORDINADOR MEDIO AMBIENTE",
+    "Income": "7,500.00",
+    "SEX": "F"
+  },
+  {
+    "name": "ODALIS ANTONIO PICHARDO",
+    "ID": "050-0035165-9",
+    "Position": "TECNICO EN GESTION AMBIENTAL",
+    "Income": "4,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PORFIRIO MARINE PAEZ",
+    "ID": "050-0015253-7",
+    "Position": "OBRERO MUNICIPAL",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL ANT. ABREU MARTE",
+    "ID": "050-0022936-8",
+    "Position": "ENC. DEL CEMENTERIO DE CABIRMAS",
+    "Income": "3,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAMON EMILIO COLLADO CESPEDES",
+    "ID": "035-001172-0",
+    "Position": "INSPECTOR I",
+    "Income": "4,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ROSA MARIA ABREU",
+    "ID": "050-0045709-2",
+    "Position": "COORDINADORA MEDIOAMBIENTAL",
+    "Income": "8,600.00",
+    "SEX": "F"
+  },
+  {
+    "name": "SALVADOR DURAN CONTRERAS",
+    "ID": "050-0025950-6",
+    "Position": "ASISTENTE OBRAS MUNICIPALES",
+    "Income": "9,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR ANT. CAPELLAN R.",
+    "ID": "050-0002897-6",
+    "Position": "INSP. DISCO LIGHT",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR MANUEL PERALTA PERALTA",
+    "ID": "050-0050707-8",
+    "Position": "OBRERO CEMENTERIO DE CABIRMA",
+    "Income": "2,858.00",
+    "SEX": "M"
+  },
+  {
+    "name": "ZANDRA YANET RAMIREZ",
+    "ID": "050-0027532-0",
+    "Position": "COORDINADORA MEDIOAMBIENTAL",
+    "Income": "8,880.00",
+    "SEX": "F"
+  }
+]
+``````json
+[
+  {
+    "name": "ANA MERCEDES DE LA ROSA PERALTA",
+    "ID": "050-0000759-0",
+    "Position": "MUSICO",
+    "Income": "2,145.00",
+    "SEX": "F"
+  },
+  {
+    "name": "FRANKLIN APOLINAR PENA",
+    "ID": "050-0004324-9",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "GONZALO CALDERON",
+    "ID": "050-0000519-8",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE PLACENCIA ABREU",
+    "ID": "050-0023817-9",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE AMADO RODRIGUEZ CIPRIAN",
+    "ID": "050-0004427-0",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE CRISTINO MAGARIN CORDERO",
+    "ID": "050-0031017-6",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE LUIS BUENO ORTIZ",
+    "ID": "050-0040392-2",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOSE ODALIS BUENO",
+    "ID": "050-0022171-2",
+    "Position": "MUSICO",
+    "Income": "3,145.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ANT. VARGAS MARTINEZ",
+    "ID": "050-0002162-5",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ARIEL PERALTA REYES",
+    "ID": "050-0047199-4",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JUAN ERNESTO CHECO CORONADO",
+    "ID": "402-2439779-0",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JULIAN DURAN BALDERA",
+    "ID": "050-0006215-7",
+    "Position": "MUSICO",
+    "Income": "3,202.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LEIBNIZ JOSE DOMINGUEZ PERALTA",
+    "ID": "60D027218-6",
+    "Position": "SUB DIRECTOR DE BANDA DE MUSICA MUNICIPAL",
+    "Income": "4,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS GONZALO DURAN ROSA",
+    "ID": "050-0014161-3",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS MANUEL ABREU",
+    "ID": "050-0041609-8",
+    "Position": "MUSICO",
+    "Income": "3,202.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS MIGUEL VELOZ MUÑOZ",
+    "ID": "050-0050220-2",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "MIGUEL ANT. FLORENTINO",
+    "ID": "050-0030589-50",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PAULINO ANT. CEPEDA CALDERON",
+    "ID": "050-0040753-5",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "PORFIRIO CORONADO BUENO",
+    "ID": "050-0009298-0",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "RAFAEL RAMON RAMOS RAMOS",
+    "ID": "115441-3",
+    "Position": "INSTRUCTOR DE LA ACADEMIA DE MUSICA MUNICIPAL",
+    "Income": "8,071.00",
+    "SEX": "M"
+  },
+  {
+    "name": "REYNALDO ANT. ABREU ROBLES",
+    "ID": "0023192-7",
+    "Position": "DIRECTOR DE LA BANDA DE MUSICA MUNICIPAL",
+    "Income": "7,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VICTOR MANUEL CHECO CORONADO",
+    "ID": "402-2427242-3",
+    "Position": "MUSICO",
+    "Income": "2,645.00",
+    "SEX": "M"
+  },
+  {
+    "name": "VINICIO MERCEDES COMPRES DOMINGUEZ",
+    "ID": "050-0004091-4",
+    "Position": "MENSAJERO DE TESORERIA",
+    "Income": "6,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "YSIDRO AGUSTIN PERALTA DILONE",
+    "ID": "050-0001424-0",
+    "Position": "MUSICO",
+    "Income": "2,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+"name": "Gabriel",
+"ID": "050-0023817-9",
+"Position": "MUSICIAN",
+"Income": "2,645.00",
+"SEX": "M"
+}
+``````json
+[
+  {
+    "name": "FELIX MANUEL RAMOS ZAPATA",
+    "ID": "050-0045892-6",
+    "Position": "SUB COORDINADOR DEPORTIVO",
+    "Income": "3,500.00",
+    "SEX": "M"
+  },
+  {
+    "name": "JOHAN LANTIGUA BAEZ",
+    "ID": "050-0037561-7",
+    "Position": "SUB COORDINADOR DEPORTIVO",
+    "Income": "5,000.00",
+    "SEX": "M"
+  },
+  {
+    "name": "LUIS ALBERTO CRUZ MORALES",
+    "ID": "050-0041642-9",
+    "Position": "COORDINADOR DEPORTIVO",
+    "Income": "10,000.00",
+    "SEX": "M"
+  }
+]
+``````json
+{
+  "employees": [
+    {
+      "code": "279",
+      "name": "A D R-FILIAL JARABACOA",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "5,000.00",
+      "netPay": "5,000.00"
+    },
+    {
+      "code": "280",
+      "name": "ASOCIACION DAMAS SALESIANAS",
+      "title": "AYUDA INSTITUCION",
+      "id": "43022454",
+      "salary": "4,700.00",
+      "netPay": "4,700.00"
+    },
+    {
+      "code": "278",
+      "name": "COLEGIO NTRA. SRA. DE LA ALTAGRACI",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "1,000.00",
+      "netPay": "1,000.00"
+    },
+    {
+      "code": "353",
+      "name": "COMISION DE FUTBOL O JOSE M. RODRIG",
+      "title": "AYUDA INSTITUCION (COMISION TECNICA DE F0300.10307-6)",
+      "id": "00000000",
+      "salary": "7,000.00",
+      "netPay": "7,000.00"
+    },
+    {
+      "code": "1751",
+      "name": "DEFENSA CIVIL O JOSE MANUEL JIMENNE",
+      "title": "AYUDA INSTITUCION",
+      "id": "050-0001616-1",
+      "salary": "4,000.00",
+      "netPay": "4,000.00"
+    },
+    {
+      "code": "791",
+      "name": "IGLESIA DE DIOS O PASTOR LUIS NUÑE",
+      "title": "AYUDA INSTITUCION",
+      "id": "NA",
+      "salary": "2,000.00",
+      "netPay": "2,000.00"
+    },
+    {
+      "code": "277",
+      "name": "IGLESIA NUESTRA SRA. DEL CARMEN",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "1,000.00",
+      "netPay": "1,000.00"
+    },
+    {
+      "code": "352",
+      "name": "IGLESIA SANTISIMO SACRAMENTO",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "1,000.00",
+      "netPay": "1,000.00"
+    },
+    {
+      "code": "8468",
+      "name": "LIGA MARCOS PEÑA O DAVID DURAN",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "2,500.00",
+      "netPay": "2,500.00"
+    },
+    {
+      "code": "8467",
+      "name": "LIGA MARCOS PENA O JOSE ANTONIO TR",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "1,500.00",
+      "netPay": "1,500.00"
+    },
+    {
+      "code": "276",
+      "name": "ORATORIO CENTRO JUVENIL DON BOSCO",
+      "title": "AYUDA INSTITUCION",
+      "id": "00000000",
+      "salary": "3,500.00",
+      "netPay": "3,500.00"
+    },
+    {
+      "code": "303",
+      "name": "SUBVENCION BOMBEROS",
+      "title": "BOMBEROS",
+      "id": "0000",
+      "salary": "150,000.00",
+      "netPay": "150,000.00"
+    }
+  ],
+  "totalEmployees": 12,
+  "totalSalary": "183,200.00",
+  "totalNetPay": "183,200.00",
+  "department": "ADM. DE CONTRIBUCIONES ESPECIALES (TRANSF. PRIVADA",
+  "program": "9800000000",
+  "classifier": "241601",
+  "month": "ABRIL DEL 2018"
+}
+``````json
+{
+"name": "Gabriel",
+"ID": "050-0023817-9",
+"Position": "MUSICIAN",
+"Income": "2,645.00",
+"SEX": "M"
+}
+```
