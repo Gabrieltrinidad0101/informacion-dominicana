@@ -107,8 +107,11 @@ To run tests, run the following command
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
-
+Este software se distribuye bajo la AGPLv3 con la siguiente condición adicional:
+- Queda prohibido utilizar este código para crear software que imite la apariencia,
+  nombre o funcionalidad de Información Dominicana con la intención de engañar a los usuarios.
+- Los derivados deben mantener esta misma licencia sin modificaciones.
+- Inducir a error a los usuarios haciéndoles creer que están utilizando el software original Información Dominicana o accediendo a su sitio web oficial.
 
 ## 🚀 Acarca de mi
 Soy simplemente un desarrollador de software que se interesó en conocer más sobre nuestro hermoso país. Al observar el lamentable estado de las páginas oficiales gubernamentales, decidí cambiar esa situación.

@@ -115,8 +115,10 @@ export const forPreData = async (callBack) => {
             await forEachFolder(constants.preData(townHall,year),async (month,monthPath)=>{
                 await callBack({
                     data: fs.readFileSync(monthPath).toString(),
-                    townHallDataPath: constants.townHallData(townHall,year),
-                    month: removeExtension(month)
+                    townHall,
+                    month: removeExtension(month),
+                    monthInt: getNumberOfMonth(removeExtension(month)),
+                    year
                 })
             })
         })
