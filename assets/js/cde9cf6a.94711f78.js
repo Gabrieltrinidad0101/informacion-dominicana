@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkinformacion_dominica=self.webpackChunkinformacion_dominica||[]).push([[245],{7085:a=>{a.exports=JSON.parse('{"name":"docusaurus-theme-search-algolia","id":"default"}')}}]);
