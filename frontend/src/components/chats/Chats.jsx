@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Chat } from '../chat/Chat'
 import ChatCss from './chats.module.css'
-export function Chats({descriptions,topic}) {
+import constants from '../../constants'
+export function Chats({topic}) {
+  const [titles,setTitles] = useState([])
+  useEffect(()=>{
+    fetch(`${constants.urlData}/${topic}/headers.json`).then(async res=>{
+      const data = await res.json()
+      setTitles(data)
+    })
+  },[])
   return (
     <div className={ChatCss.containerCustom}>
       {
-        descriptions.map((chat,index)=><Chat topic={topic} description={chat} key={index}/>)
+        titles.map((chat,index)=><Chat topic={topic} description={chat} key={index}/>)
       }
     </div>
   )

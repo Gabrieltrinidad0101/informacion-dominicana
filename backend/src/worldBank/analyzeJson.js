@@ -18,7 +18,8 @@ export const analyzeJson = (records)=>{
     } 
     let testLimit = Infinity
     for(const record of records){
-        const description = record.field[1]._text.replaceAll("U+00a0"," ")
+        const description = record.field[1]._text.replaceAll("U+00a0"," ").replaceAll(":","-")
+        .replaceAll(">","mayor")
         const time = record.field[2]._text
         const value = record.field[3]._text 
         
@@ -42,7 +43,7 @@ const dataFormat = ({time,value})=>{
 const generateFileDescriptions = (dataByConcept)=>{
     Object.keys(dataByConcept).forEach(concept=>{
         const path = constants.dataWorldBank(`${concept}/headers.json`)
-        console.log({path})
+        console.log()
         const data = JSON.stringify(Array.from(dataByConcept[concept].keys()))
         fs.writeFileSync(path,data)
     })

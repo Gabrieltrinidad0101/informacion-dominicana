@@ -70,14 +70,17 @@ function getLastDayOfMonth(year, month) {
 }
 
 
-const formatJson = ({chuck,year,monthInt})=>{
+const formatJson = ({chuck,year,monthInt,chuckText,townHall,index})=>{
     const jsonString = chuck.replaceAll("`","").replaceAll("json","")
     try {
         const employers = [].concat(JSON.parse(jsonString))
         employers.forEach(employer=> employer.date = getLastDayOfMonth(year,monthInt))
         return employers
     }catch {
-        console.log({chuck,jsonString})
+        console.log('Error in json format') 
+        const errorPath = constants.townHallData(townHall,year,`error-${monthInt}.txt`)
+        const response = {chuck,jsonString,chuckText,index}
+        fs.appendFileSync(errorPath,JSON.stringify(response))
         return {}
     }
 }
@@ -94,8 +97,8 @@ export const analyze = async () => {
         let response = []
         for(let i in chucks){
             const chuck = await callDeepSeekAPI(chucks[i])
-            console.log(`   chunk ${i++} completed`)
-            const json = formatJson({chuck,year,monthInt})
+            console.log(`   chunk ${++i} completed`)
+            const json = formatJson({chuck,year,monthInt,townHall,chuckText: chucks[i],index: i})
             response = response.concat(json)
             fs.writeFileSync(filePath,JSON.stringify(response))
         }
