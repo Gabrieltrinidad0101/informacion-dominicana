@@ -5,14 +5,14 @@ import { constants, CONSTANTS } from "../../constants.js";
 
 const propt = `Convert the given text into a JSON format using the example below as a template. Return only the JSON output without any additional explanations or text.  
 
-**Example JSON Structure:**  
-{
+**Example JSON Structure:**
+[{
     "name": "Gabriel",
     "ID": "050-0023817-9",
     "Position": "MUSICIAN",
     "Income": "2,645.00",
     "SEX": "M"
-}
+}]
 
 Processing Instructions:
     Analyze the input text and extract relevant fields (name, ID, position, income, sex).
@@ -73,28 +73,31 @@ function getLastDayOfMonth(year, month) {
 const formatJson = ({chuck,year,monthInt})=>{
     const jsonString = chuck.replaceAll("`","").replaceAll("json","")
     try {
-        const employers = JSON.parse(jsonString)
+        const employers = [].concat(JSON.parse(jsonString))
         employers.forEach(employer=> employer.date = getLastDayOfMonth(year,monthInt))
-        return JSON.stringify(employers)
+        return employers
     }catch {
-        return chuck
+        console.log({chuck,jsonString})
+        return {}
     }
-    
 }
 
 export const analyze = async () => {
-    let testStop = 1
+    let testStop = 0
     await forPreData(async ({data,townHall,month,monthInt,year})=>{
-        if(testStop > 2) return
+        if(testStop > 20) return
         const filePath = constants.townHallData(townHall,year,`${month}.json`)
         if(fileExists(filePath)) return
         const townHallPath = constants.townHallData(townHall,year)
         const chucks = data.split("------- Chunk -------")
         console.log(`generated ${townHallPath}/${month} - Chunks: ${chucks.length}`)
+        let response = []
         for(let i in chucks){
             const chuck = await callDeepSeekAPI(chucks[i])
             console.log(`   chunk ${i++} completed`)
-            fs.appendFileSync(filePath,formatJson({chuck,year,monthInt}))
+            const json = formatJson({chuck,year,monthInt})
+            response = response.concat(json)
+            fs.writeFileSync(filePath,JSON.stringify(response))
         }
         testStop++
     })

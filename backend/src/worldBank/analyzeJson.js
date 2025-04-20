@@ -1,3 +1,4 @@
+import { constants } from "../constants.js"
 import {getConcept} from "./getConcept.js"
 import fs from 'fs'
 
@@ -40,8 +41,9 @@ const dataFormat = ({time,value})=>{
 
 const generateFileDescriptions = (dataByConcept)=>{
     Object.keys(dataByConcept).forEach(concept=>{
-        const fileDirrection = `../frontend/src/views/${concept}/topics.js`
-        const data = `// NOT EDIT THIS FILE IS AUTO GENERATE\n export const topics = ${JSON.stringify(Array.from(dataByConcept[concept].keys()))}`
-        fs.writeFile(fileDirrection,data,()=> {})
+        const path = constants.dataWorldBank(`${concept}/headers.json`)
+        console.log({path})
+        const data = JSON.stringify(Array.from(dataByConcept[concept].keys()))
+        fs.writeFileSync(path,data)
     })
 }
