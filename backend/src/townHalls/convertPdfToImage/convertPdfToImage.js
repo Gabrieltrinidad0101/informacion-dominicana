@@ -57,7 +57,7 @@ export const convertPdfToImage = async () => {
 }
 
 const getImageFromPdf = async ({ townHall, year, month, pdfNomina, getDataFromDownload, files }) => {
-  const folderImagesTemp = constants.imagesTemp(townHall, year, month)
+  const folderImagesTemp = constants.images(townHall, year, month)
   const imagesTemp = await fs.readdir(folderImagesTemp)
 
   if (files.length > 0) return

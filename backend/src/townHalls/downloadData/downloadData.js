@@ -14,11 +14,11 @@ export const downloadData = async () => {
     let links = []
     const filePath = path.join(constants.townHalls(),"pdfLinks.json")
     if (fileExists(filePath)){
-        links = JSON.parse(fs.readFile(filePath))
+        links = JSON.parse(fs.readFileSync(filePath))
     }
     else{
         links = await getDownloadLinks(filePath)
-        fs.writeFile(filePath,JSON.stringify(links))
+        fs.writeFileSync(filePath,JSON.stringify(links))
     }
     await downloadFiles(links)
 }

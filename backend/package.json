@@ -6,23 +6,15 @@
   "type": "module",
   "scripts": {
     "world-bank-build": "node ./src/worldBank/main.js",
-    "town-halls-build": "node ./src/townHalls/main.js",
-    "datos-orgs": "node ./src/datosOrgs/main.js"
+    "town-halls-build": "node ./src/townHalls/main.js"
   },
   "dependencies": {
     "axios": "^1.7.9",
-    "csv-parser": "^3.0.0",
-    "csv2json": "^2.0.2",
-    "csvtojson": "^2.0.10",
     "dotenv": "^16.4.5",
+    "form-data": "^4.0.2",
     "node-downloader-helper": "^2.1.9",
-    "node-fetch": "^3.3.2",
-    "node-tesseract-ocr": "^2.2.1",
     "pdf2pic": "^3.1.1",
     "puppeteer": "^22.4.1",
-    "sharp": "^0.33.3",
-    "tesseract.js": "^5.0.4",
-    "xlsx": "^0.18.5",
     "xml-js": "^1.6.11"
   }
 }
