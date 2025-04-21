@@ -20,6 +20,7 @@ Processing Instructions:
     Correct inconsistencies (e.g., if "SEX" contradicts the name's typical gender, prioritize explicit data).
     Only add a comment if a field cannot be resolved after inference.
     If no usable data is found, return an empty string "".
+    Replace any " inside a value with ' (e.g., {name: pe"ppe} → {name: pe'ppe}).
 Output Requirements:
     Return strictly valid JSON with no extra text or formatting.
     Omit fields that cannot be extracted or inferred.
