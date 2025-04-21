@@ -125,6 +125,23 @@ export const forPreData = async (callBack) => {
     })
 }
 
+export const forData = async (callBack) => {
+    await forEachFolder(constants.datasTownHalls(),async (townHall,townHallPath)=>{
+        await forEachFolder(constants.townHallData(townHall),async (year)=>{
+            await forEachFolder(constants.townHallData(townHall,year),async (month,monthPath)=>{
+                if(getExtension(monthPath) != ".json") return
+                await callBack({
+                    data: fs.readFileSync(monthPath).toString(),
+                    townHall,
+                    month: removeExtension(month),
+                    monthInt: getNumberOfMonth(removeExtension(month)),
+                    year
+                })
+            })
+        })
+    })
+}
+
 
 export const forPayroll = async (callBack) => {
     const townHallsPath = constants.townHalls()
@@ -151,4 +168,10 @@ export const removeExtension = (filename) => {
     const lastDotIndex = filename.lastIndexOf('.');
     if (lastDotIndex === -1) return filename;
     return filename.substring(0, lastDotIndex);
+}
+
+export const getExtension = (filename) => {
+    const lastDotIndex = filename.lastIndexOf('.');
+    if (lastDotIndex === -1) return filename;
+    return filename.slice(lastDotIndex,filename.length);
 }

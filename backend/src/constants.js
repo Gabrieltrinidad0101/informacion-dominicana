@@ -30,6 +30,7 @@ export const CONSTANTS = {
     PdfToImage: process.env.PDF_TO_IMAGE,
     ImageToText: process.env.IMAGE_TO_TEXT,
     AI: process.env.AI,
+    Analyze: process.env.ANALYZE,
     AIModel: process.env.AI_MODEL,
     ApiAI: process.env.API_AI,
     ApiModel: process.env.API_MODEL,
