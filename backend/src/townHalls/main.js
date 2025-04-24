@@ -12,8 +12,6 @@ try {
   if(CONSTANTS.ImageToText === "1") await getTextFromImage()
   if(CONSTANTS.AI === "1") await Ai()
   if(CONSTANTS.Analyze === "1") await analyze()
-
-    
 } catch (error) {
   console.log("Error ", error)
 }

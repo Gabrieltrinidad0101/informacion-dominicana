@@ -5,7 +5,6 @@ import fs from 'fs';
 import { constants } from '../../constants.js';
 import path from 'path';
 
-
 const url = process.env.API_IMAGE_TO_TEXT;
 const getTextFromImageApi = async ({ imagePath, filename }) => {
     const formData = new FormData();
