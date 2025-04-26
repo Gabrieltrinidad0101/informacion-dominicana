@@ -3,7 +3,6 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import compareData from "./compareData.module.css";
 import { useEffect, useState } from "react";
 const columns = [
-  { field: "id", headerName: "ID", flex: 1, hideable: true },
   { field: "name", headerName: "Nombre", flex: 1 },
   { field: "Position", headerName: "Posición", flex: 1 },
   { field: "Income", headerName: "Sueldo", type: "number", flex: 1 },
@@ -99,6 +98,7 @@ export function CompareData() {
             <DataGrid
               rows={rowsToDisplay}
               columns={columns}
+              getRowId={(row) => row.id}
               initialState={{
                 pagination: {
                   paginationModel: { page: 0, pageSize: 10 },
