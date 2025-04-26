@@ -22,6 +22,7 @@ const sidebars = {
     'Salud',
     'Educación',
     'Medioambiente',
+    'Empleados',
     'Militar',
     {
       type: 'category',

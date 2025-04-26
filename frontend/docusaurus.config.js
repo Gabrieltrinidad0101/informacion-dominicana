@@ -55,7 +55,7 @@ const config = {
         appId: 'ICNHZK7XUE',
         apiKey: '6b8dc9601b27ad028a3761bb96d9474a',
         indexName: 'informacionDominicana',
-        contextualSearch: true
+        contextualSearch: false
       },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {

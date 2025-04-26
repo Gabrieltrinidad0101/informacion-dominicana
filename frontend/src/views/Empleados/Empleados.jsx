@@ -7,20 +7,11 @@ const columns = [
   { field: "name", headerName: "Nombre", flex: 1 },
   { field: "Position", headerName: "Posición", flex: 1 },
   { field: "Income", headerName: "Sueldo", type: "number", flex: 1 },
-  { field: "SEX", headerName: "Género", flex: 1 },
-  {
-    field: "action",
-    headerName: "Acciones",
-    width: 150,
-    renderCell: (params) => (
-      <Button variant="contained" color="primary">
-        Ver
-      </Button>
-    ),
-  },
+  { field: "SEX", headerName: "Género", width: 10 },
+  { field: "deparment", headerName: "Departamento", flex: 1 },
 ];
 let data = [];
-export function CompareData() {
+export function Empleados() {
   const [rowsToDisplay, setRowsToDisplay] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
@@ -31,6 +22,7 @@ export function CompareData() {
       .then((res) => {
         data = res.map((row) => {
           row.id = crypto.randomUUID();
+          row.deparment = "ayuntamiento de jarabacoa"
           return row;
         });
         setRowsToDisplay(data);
@@ -59,6 +51,7 @@ export function CompareData() {
 
   return (
     <>
+      <h6>Por el momento solo tengo los datos de jarabacoa estoy trabajando en agregar mas</h6>
       <Box sx={{ mb: 2 }}>
         <TextField
           fullWidth
@@ -87,14 +80,6 @@ export function CompareData() {
           }}
         />
       </Box>
-      <div className={compareData.comparar}>
-        <embed
-          src="http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/downloadData/2018/april.pdf"
-          width="100%"
-          height="100%"
-          type="application/pdf"
-        />
-        <div>
           <Box sx={{ height: "92%", width: "100%" }}>
             <DataGrid
               rows={rowsToDisplay}
@@ -113,8 +98,6 @@ export function CompareData() {
             </Typography>
             <Typography variant="h6">Empleados: {totalEmployees}</Typography>
           </div>
-        </div>
-      </div>
     </>
   );
 }
