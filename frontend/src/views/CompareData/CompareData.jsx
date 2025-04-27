@@ -51,7 +51,7 @@ export function CompareData() {
     if (text === "") return setRowsToDisplay(data);
     setRowsToDisplay((prevValue) =>
       prevValue.filter((value) =>
-        Object.values(value).some((value) => value.toLowerCase().includes(text.toLowerCase()))
+        Object.values(value).some((value) => value.toString().toLowerCase().includes(text.toString().toLowerCase()))
       )
     );
   };
