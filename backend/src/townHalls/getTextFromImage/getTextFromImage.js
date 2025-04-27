@@ -4,6 +4,7 @@ import { fileExists, forEachFolder, isNullEmptyUndefinerNan, monthsOrdes } from 
 import fs from 'fs';
 import { constants } from '../../constants.js';
 import path from 'path';
+import { fixTextRotation } from './fixRotation.js';
 
 const url = process.env.API_IMAGE_TO_TEXT;
 const getTextFromImageApi = async ({ imagePath, filename }) => {
@@ -22,13 +23,14 @@ const getTextFromImageApi = async ({ imagePath, filename }) => {
             ...formData.getHeaders(),
         },
     })
+
     const result = response.data;
     if (result.IsErroredOnProcessing) {
         console.error('Error:', result.ErrorMessage);
         return;
-    } 
-    const parsedText = result.ParsedResults[0].ParsedText;
-    return parsedText;
+    }
+    const textOverlay = result.ParsedResults[0].TextOverlay.Lines;
+    return textOverlay;
 }
 
 export const getTextFromImage = async () => {
@@ -44,19 +46,19 @@ export const getTextFromImage = async () => {
                 const filePath = path.join(folder, `${month}.txt`)
                 if (fileExists(filePath)) continue
                 const images = fs.readdirSync(nominaImages)
-                let dataText = ""
                 console.log(`converting image to text ${nominaImages}`)
-                const imagesWithoutOrden = images.sort((a, b) => a.split(".")[1] - b.split(".")[1])
-                for (const image of imagesWithoutOrden) {
+                const imagesWithOrden = images.sort((a, b) => a.split(".")[1] - b.split(".")[1])
+                for (const image of imagesWithOrden) {
                     if (path.extname(image) != ".jpg") continue
                     console.log(`   image to text: ${image}`)
                     const text = await getTextFromImageApi({
                         imagePath: path.join(nominaImages, image),
                         filename: image
                     })
-                    dataText += `${text}\n------- Chunk -------\n`
+                    if(!text) continue
+                    const dataText = `${fixTextRotation(text)}\n------- Chunk -------\n`
+                    fs.appendFileSync(filePath, dataText);
                 }
-                fs.writeFileSync(filePath, dataText);
                 await new Promise(res => setTimeout(res, 1000))
             }
         })

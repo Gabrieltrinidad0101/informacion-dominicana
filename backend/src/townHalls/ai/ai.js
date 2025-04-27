@@ -75,7 +75,10 @@ const formatJson = ({chuck,year,monthInt,chuckText,townHall,index})=>{
     const jsonString = chuck.replaceAll("`","").replaceAll("json","")
     try {
         const employers = [].concat(JSON.parse(jsonString))
-        employers.forEach(employer=> employer.date = getLastDayOfMonth(year,monthInt))
+        employers.forEach(employer=> {
+            employer.date = getLastDayOfMonth(year,monthInt)
+            employer.page = index
+        })
         return employers
     }catch {
         console.log('Error in json format') 
