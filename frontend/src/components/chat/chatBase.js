@@ -20,7 +20,6 @@ export const ChatBase = async (container, description, topic,customTheme) => {
 			localization: {
 				priceFormatter: (val) => val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
 			},
-			
 		});
 
 		container.appendChild(chartElement);

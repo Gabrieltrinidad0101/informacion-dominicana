@@ -90,7 +90,7 @@ const formatJson = ({chuck,year,monthInt,chuckText,townHall,index})=>{
     }
 }
 
-export const Ai = async () => {
+export const ai = async () => {
     let testStop = 0
     await forPreData(async ({data,townHall,month,monthInt,year})=>{
         if(testStop > 20) return
