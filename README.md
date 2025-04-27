@@ -112,6 +112,7 @@ Este software se distribuye bajo la AGPLv3 con la siguiente condición adicional
   nombre o funcionalidad de Información Dominicana con la intención de engañar a los usuarios.
 - Los derivados deben mantener esta misma licencia sin modificaciones.
 - Inducir a error a los usuarios haciéndoles creer que están utilizando el software original Información Dominicana o accediendo a su sitio web oficial.
+- Cualquier versión modificada o derivada de este software debe incluir un aviso visible y razonable en su documentación, materiales promocionales, y/o interfaz de usuario, indicando claramente que dicho trabajo se basa en (o está inspirado por) Gabriel Trinidad Bertres el software original Información Dominicana. El aviso debe incluir el nombre del proyecto original y un enlace al sitio web oficial.
 
 ## 🚀 Acarca de mi
 Soy simplemente un desarrollador de software que se interesó en conocer más sobre nuestro hermoso país. Al observar el lamentable estado de las páginas oficiales gubernamentales, decidí cambiar esa situación.
