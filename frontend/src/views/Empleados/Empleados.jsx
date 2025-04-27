@@ -51,7 +51,7 @@ export function Empleados() {
 
   return (
     <>
-      <h6>Por el momento solo tengo los datos de jarabacoa estoy trabajando en agregar mas</h6>
+      <h6>Por el momento, solo tengo los datos de Jarabacoa. Estoy trabajando en agregar más.</h6>
       <Box sx={{ mb: 2 }}>
         <TextField
           fullWidth

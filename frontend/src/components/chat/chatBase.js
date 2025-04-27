@@ -1,7 +1,7 @@
 import * as LightweightCharts from "lightweight-charts"
 import constants from "../../constants";
 
-export const ChatBase = async (container, description, topic) => {
+export const ChatBase = async (container, description, topic,customTheme) => {
 	try {
 		var chartElement = document.createElement('div');
 		const superContainer = container.parentElement.parentElement.getBoundingClientRect()
@@ -26,9 +26,9 @@ export const ChatBase = async (container, description, topic) => {
 		container.appendChild(chartElement);
 
 		var areaSeries = chart.addAreaSeries({
-			topColor: 'rgba(33, 150, 243, 0.56)',
-			bottomColor: 'rgba(33, 150, 243, 0.04)',
-			lineColor: 'rgba(33, 150, 243, 1)',
+			topColor: customTheme?.[description]?.top ?? 'rgba(33, 150, 243, 0.56)',
+			bottomColor: customTheme?.[description]?.bottom ?? 'rgba(33, 150, 243, 0.04)',
+			lineColor: customTheme?.[description]?.line ?? 'rgba(33, 150, 243, 1)',
 			lineWidth: 2,
 		});
 

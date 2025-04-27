@@ -2,12 +2,12 @@ import React, {useRef, useEffect, useState } from 'react'
 import { ChatBase } from './chatBase'
 import "./Chat.css"
 let isLoad = {}
-export function Chat({description,topic}) {
+export function Chat({description,topic,customTheme}) {
   const containerChat = useRef()
   const verifyVisibility =(entry)=>{
     if (isLoad[description] || !entry[0].isIntersecting) return
     isLoad[description] = entry[0].isIntersecting
-    ChatBase(containerChat.current,description,topic)
+    ChatBase(containerChat.current,description,topic,customTheme)
   }
 
   useEffect(()=>{

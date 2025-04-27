@@ -22,13 +22,13 @@ const sidebars = {
     'Salud',
     'Educación',
     'Medioambiente',
-    'Empleados',
     'Militar',
     {
       type: 'category',
       label: 'Ayuntamientos',
       items: ['Jarabacoa',"San Francisco de Macoris","Santo Domingo Este","Santiago de los Caballeros"],
     },
+    'Empleados',
     'Fuentes'
   ],
   
