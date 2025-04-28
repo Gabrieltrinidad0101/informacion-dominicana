@@ -2,6 +2,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import compareData from "./compareData.module.css";
 import { useEffect, useState } from "react";
+import { Pagination } from "@mui/material";
+
 const columns = [
   { field: "name", headerName: "Nombre", flex: 1 },
   { field: "Position", headerName: "Posición", flex: 1 },
@@ -19,8 +21,9 @@ const columns = [
   },
 ];
 let data = [];
+
 export function CompareData() {
-  const [rowsToDisplay, setRowsToDisplay] = useState([]);
+  const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
     fetch(
@@ -32,29 +35,40 @@ export function CompareData() {
           row.id = crypto.randomUUID();
           return row;
         });
-        setRowsToDisplay(data);
+        setRows(data);
       });
   }, []);
 
-  const totalSalary = rowsToDisplay.reduce((acc, row) => {
+  const totalSalary = rows.reduce((acc, row) => {
     const number = parseFloat(
       (row.Income || "0")?.replaceAll("$", "").replaceAll(",", "")
     );
     return acc + number;
   }, 0);
 
-  const totalEmployees = rowsToDisplay.length;
+  const totalEmployees = rows.length;
 
   const onChangeSearch = (e) => {
     const text = e.target.value;
     setSearch(text);
-    if (text === "") return setRowsToDisplay(data);
-    setRowsToDisplay((prevValue) =>
+    if (text === "") return setRows(data);
+    setRows((prevValue) =>
       prevValue.filter((value) =>
-        Object.values(value).some((value) => value.toString().toLowerCase().includes(text.toString().toLowerCase()))
+        Object.values(value).some((value) =>
+          value.toString().toLowerCase().includes(text.toString().toLowerCase())
+        )
       )
     );
   };
+
+  const [page, setPage] = useState(1); // Start at page 1
+  const filteredRows = rows.filter((row) => row.page === page);
+  const totalPages = Math.max(...rows.map((row) => row.page)); // max page number
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const containerHeight = 700;
 
   return (
     <>
@@ -87,25 +101,40 @@ export function CompareData() {
         />
       </Box>
       <div className={compareData.comparar}>
-        <embed
-          src="http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/downloadData/2018/april.pdf"
+        <img
+          src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/2018/april/jarabacoaTownHall.${page}.jpg`}
           width="100%"
           height="100%"
-          type="application/pdf"
         />
-        <div>
+        <div className={compareData.bgWhite}>
           <Box sx={{ height: "92%", width: "100%" }}>
-            <DataGrid
-              rows={rowsToDisplay}
-              columns={columns}
-              getRowId={(row) => row.id}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 10 },
-                },
-              }}
-              pageSizeOptions={[5, 30]}
-            />
+            <div style={{ width: "100%" }}>
+              <div style={{ height: containerHeight, overflow: "auto" }}>
+                <DataGrid
+                  rows={filteredRows}
+                  columns={columns}
+                  pageSize={filteredRows.length} 
+                  rowsPerPageOptions={[filteredRows.length]} 
+                  disableSelectionOnClick
+                  hideFooterPagination
+                  hideFooter
+                  sx={{
+                    backgroundColor: "white",
+                    borderRadius: 2,
+                    boxShadow: 2,
+                  }}
+                />
+              </div>
+
+              <Pagination
+                count={totalPages}
+                page={page}
+                onChange={handlePageChange}
+                color="primary"
+                shape="rounded"
+                sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+              />
+            </div>
           </Box>
           <div className={compareData.footerTable}>
             <Typography variant="h6">
