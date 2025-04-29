@@ -1,5 +1,14 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import compareData from "./compareData.module.css";
 import { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
@@ -22,12 +31,42 @@ const columns = [
 ];
 let data = [];
 
+const months = {
+  "01": "january",
+  "02": "february",
+  "03": "march",
+  "04": "april",
+  "05": "may",
+  "06": "june",
+  "07": "july",
+  "08": "august",
+  "09": "september",
+  10: "october",
+  11: "november",
+  12: "december",
+};
+
 export function CompareData() {
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
+  const [dates, setDates] = useState([]);
+  const [currentDate, setCurrentDate] = useState("");
+  const [page, setPage] = useState(1); // Start at page 1
+
   useEffect(() => {
+    fetch("http://127.0.0.1:5500/datas/townHalls/Jarabacoa/Nomina.json")
+      .then((response) => response.json())
+      .then((res) => {
+        setCurrentDate(res[0].time);
+        setDates(res);
+      });
+  }, []);
+
+  useEffect(() => {
+    if ((currentDate?.length ?? 0) <= 0) return;
+    const [year, month] = currentDate.split("-");
     fetch(
-      "http://127.0.0.1:5500/dataPreprocessing/townHalls/Jarabacoa/data/2018/april.json"
+      `http://127.0.0.1:5500/dataPreprocessing/townHalls/Jarabacoa/data/${year}/${months[month]}.json`
     )
       .then((response) => response.json())
       .then((res) => {
@@ -37,7 +76,7 @@ export function CompareData() {
         });
         setRows(data);
       });
-  }, []);
+  }, [currentDate]);
 
   const totalSalary = rows.reduce((acc, row) => {
     const number = parseFloat(
@@ -61,48 +100,76 @@ export function CompareData() {
     );
   };
 
-  const [page, setPage] = useState(1); // Start at page 1
   const filteredRows = rows.filter((row) => row.page === page);
-  const totalPages = Math.max(...rows.map((row) => row.page)); // max page number
+  const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0; // max page number
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
   const containerHeight = 700;
 
+  const lightTheme = {
+    mb: 2,
+    backgroundColor: "white",
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      "& fieldset": {
+        borderColor: "#ccc",
+      },
+      "&:hover fieldset": {
+        borderColor: "#007bff",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#007bff",
+      },
+    },
+    "& .MuiInputBase-input": {
+      color: "#333",
+    },
+  };
+
+  const handleDate = (event) => {
+    console.log(event.target.value);
+    setCurrentDate(event.target.value);
+  };
+
   return (
     <>
-      <Box sx={{ mb: 2 }}>
+      <Box sx={{ mb: 2 }} className={compareData.inputs}>
         <TextField
           fullWidth
           label="Buscar"
           variant="filled"
           value={search}
           onChange={onChangeSearch}
-          sx={{
-            mb: 2,
-            backgroundColor: "white",
-            "& .MuiOutlinedInput-root": {
-              backgroundColor: "white",
-              "& fieldset": {
-                borderColor: "#ccc",
-              },
-              "&:hover fieldset": {
-                borderColor: "#007bff",
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "#007bff",
-              },
-            },
-            "& .MuiInputBase-input": {
-              color: "#333",
-            },
-          }}
+          sx={lightTheme}
         />
+        <FormControl variant="filled" sx={lightTheme}>
+          <InputLabel id="demo-simple-select-filled-label">Fecha</InputLabel>
+          <Select
+            value={currentDate}
+            onChange={handleDate}
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+          >
+            {dates.map((header, index) => {
+              const [year, month, day] = header.time.split("-");
+              return (
+                <MenuItem key={index} value={header.time}>
+                  {year} - {month} - {day}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
       </Box>
       <div className={compareData.comparar}>
         <img
-          src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/2018/april/jarabacoaTownHall.${page}.jpg`}
+          src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
+            currentDate?.split("-")?.[0]
+          }/${
+            months[currentDate?.split("-")?.[1]]
+          }/jarabacoaTownHall.${page}.jpg`}
           width="100%"
           height="100%"
         />
@@ -113,8 +180,8 @@ export function CompareData() {
                 <DataGrid
                   rows={filteredRows}
                   columns={columns}
-                  pageSize={filteredRows.length} 
-                  rowsPerPageOptions={[filteredRows.length]} 
+                  pageSize={filteredRows.length}
+                  rowsPerPageOptions={[filteredRows.length]}
                   disableSelectionOnClick
                   hideFooterPagination
                   hideFooter

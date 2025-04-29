@@ -51,12 +51,12 @@ export const getTextFromImage = async () => {
                 for (const image of imagesWithOrden) {
                     if (path.extname(image) != ".jpg") continue
                     console.log(`   image to text: ${image}`)
-                    const text = await getTextFromImageApi({
+                    const textOverlay = await getTextFromImageApi({
                         imagePath: path.join(nominaImages, image),
                         filename: image
                     })
-                    if(!text) continue
-                    const dataText = `${fixTextRotation(text)}\n------- Chunk -------\n`
+                    if(!textOverlay) continue
+                    const dataText = `${fixTextRotation(textOverlay)}\n------- Chunk -------\n`
                     fs.appendFileSync(filePath, dataText);
                 }
                 await new Promise(res => setTimeout(res, 1000))

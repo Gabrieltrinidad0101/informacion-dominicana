@@ -8,7 +8,7 @@ const propt = `Convert the given text into a JSON format using the example below
 **Example JSON Structure:**
 [{
     "name": "Gabriel",
-    "document": "050-0023817-9",
+    "document": "050-9999999-9",
     "position": "MUSICIAN",
     "income": "2645",
     "sex": "M"
@@ -93,7 +93,7 @@ const formatJson = ({chuck,year,monthInt,chuckText,townHall,index})=>{
 export const ai = async () => {
     let testStop = 0
     await forPreData(async ({data,townHall,month,monthInt,year})=>{
-        if(testStop > 20) return
+        if(testStop > 1) return
         const filePath = constants.townHallData(townHall,year,`${month}.json`)
         if(fileExists(filePath)) return
         const townHallPath = constants.townHallData(townHall,year)

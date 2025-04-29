@@ -8,6 +8,12 @@
   gap: 10px;
 }
 
+.inputs {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  gap: 10px;
+}
+
 .footerTable {
   display: flex;
   flex-direction: row;
