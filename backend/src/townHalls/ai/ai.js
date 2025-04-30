@@ -2,6 +2,7 @@ import { fileExists, forPreData } from "../../utils.js"
 import axios from "axios";
 import fs from "fs"
 import { constants, CONSTANTS } from "../../constants.js";
+import {encrypt} from "./encrypt.js"
 
 const propt = `Convert the given text into a JSON format using the example below as a template. Return only the JSON output without any additional explanations or text.  
 
@@ -65,49 +66,72 @@ async function callDeepSeekAPI(data) {
 function getLastDayOfMonth(year, month) {
     const lastDay = new Date(year, month, 0);
     const yyyy = lastDay.getFullYear();
-    const mm = String(lastDay.getMonth() + 1).padStart(2, '0'); 
+    const mm = String(lastDay.getMonth() + 1).padStart(2, '0');
     const dd = String(lastDay.getDate()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd}`;
 }
 
 
-const formatJson = ({chuck,year,monthInt,chuckText,townHall,index})=>{
-    const jsonString = chuck.replaceAll("`","").replaceAll("json","")
+const formatJson = ({ chuck, year, monthInt, chuckText, townHall, page }) => {
+    const jsonString = chuck.replaceAll("`", "").replaceAll("json", "")
     try {
-        const employers = [].concat(JSON.parse(jsonString))
-        employers.forEach(employer=> {
-            employer.date = getLastDayOfMonth(year,monthInt)
-            employer.page = index
-            employer.id
+        const employees = [].concat(JSON.parse(jsonString))
+        employees.forEach(employee => {
+            employee.date = getLastDayOfMonth(year, monthInt)
+            employee.page = page
+            employee.deparment = townHall
         })
-        return employers
-    }catch {
-        console.log('Error in json format') 
-        const errorPath = constants.townHallData(townHall,year,`error-${monthInt}.txt`)
-        const response = {chuck,jsonString,chuckText,index}
-        fs.appendFileSync(errorPath,JSON.stringify(response))
+        return employees
+    } catch(e) {
+        console.log('Error in json format')
+        console.log(e)
+        const errorPath = constants.townHallData(townHall, year, `error-${monthInt}.txt`)
+        const response = { chuck, jsonString, chuckText, page }
+        fs.appendFileSync(errorPath, JSON.stringify(response))
         return {}
     }
 }
 
+const setPositionToEmployee = (employees, data) => {
+    employees.forEach(employee => {
+        const lines = data.filter(data => {
+            if(!employee.document) {
+                return data.text.includes(employee.name)
+            }
+            return data.text.includes(employee.document)
+        })
+        if(lines.length > 1 || lines.length <= 0) {
+            fs.appendFileSync("test-error.txt", `\n\n\n${JSON.stringify({lines,employee,data})}\n\n\n`)
+            return
+        }
+        employee.x = lines[0].x
+        employee.y = lines[0].y 
+        employee.width = lines[0].width
+        employee.height = lines[0].height
+        if(employee.document) employee.document = encrypt(employee.document)
+    })
+}
+
 export const ai = async () => {
     let testStop = 0
-    await forPreData(async ({data,townHall,month,monthInt,year})=>{
-        if(testStop > 1) return
-        const filePath = constants.townHallData(townHall,year,`${month}.json`)
-        if(fileExists(filePath)) return
-        const townHallPath = constants.townHallData(townHall,year)
-        const chucks = data.split("------- Chunk -------")
-        console.log(`generated ${townHallPath}/${month} - Chunks: ${chucks.length}`)
-        let response = []
-        for(let i in chucks){
-            const chuck = await callDeepSeekAPI(chucks[i])
-            console.log(`   chunk ${++i} completed`)
-            const json = formatJson({chuck,year,monthInt,townHall,chuckText: chucks[i],index: i})
-            if(Object.keys(json).length == 0) continue
-            response = response.concat(json)
-            fs.writeFileSync(filePath,JSON.stringify(response))
-        }
+    await forPreData(async ({ pages, townHall, month, monthInt, year }) => {
+        if (testStop > 1) return
         testStop++
+        const filePath = constants.townHallData(townHall, year, `${month}.json`)
+        if (fileExists(filePath)) return
+        const townHallPath = constants.townHallData(townHall, year)
+        const pageskeys = Object.keys(pages)
+        console.log(`generated ${townHallPath}/${month} - pages: ${pageskeys.length}`)
+        let response = []
+        for (let page of pageskeys) {
+            const text = pages[page].map(data => data.text).join("\n")
+            const chuck = await callDeepSeekAPI(text)
+            console.log(`   chunk ${page} completed`)
+            const employees = formatJson({ chuck, year, monthInt, townHall, chuckText: text, page })
+            if (Object.keys(employees).length == 0) continue
+            setPositionToEmployee(employees, pages[page])
+            response = response.concat(employees)
+            fs.writeFileSync(filePath, JSON.stringify(response))
+        }
     })
 }

@@ -52,6 +52,27 @@ function groupWordsIntoLines(words, tolerance = 20) {
     return lines;
 }
 
+const getLinePosition = (words) => {
+    const linesPosition = []
+    for (const word of words) {
+        const linePosition = { xMin: Infinity, yMin: Infinity, yMax: -Infinity, xMax: -Infinity }
+        const line = word.map(w => {
+            linePosition.xMin = Math.min(linePosition.xMin, w.Left)
+            linePosition.yMin = Math.min(linePosition.yMin, w.Top)
+            linePosition.yMax = Math.max(linePosition.yMax, w.Top)
+            linePosition.xMax = Math.max(linePosition.xMax, w.Left)
+            return w.WordText
+        }).join(' ')
+        linesPosition.push({
+            text: line,
+            x: linePosition.xMin,
+            y: linePosition.yMin,
+            width: linePosition.xMax - linePosition.xMin,
+            height: linePosition.yMax - linePosition.yMin,
+        })
+    };
+    return linesPosition;
+}
 
 function rebuildVerticalTextFromWords(rawData) {
     const allWords = [];
@@ -63,12 +84,7 @@ function rebuildVerticalTextFromWords(rawData) {
     }
 
     const columns = groupWordsIntoColumns(allWords);
-
-    const finalText = columns.map(column =>
-        column.map(w => w.WordText).join(' ')
-    ).join('\n');
-
-    return finalText;
+    return getLinePosition(columns);
 }
 
 function isVertical(words) {
@@ -91,23 +107,22 @@ function rebuildHorizontalTextFromWords(rawData) {
     }
 
     const lines = groupWordsIntoLines(allWords);
-
-    return lines.map(line => line.map(w => w.WordText).join(' ')).join('\n');
+    return getLinePosition(lines);
 }
 
 
-export const fixTextRotation = (rawData) => {
+export const getTextPosition = (rawData) => {
     const allWords = [];
     for (const block of rawData) {
         for (const word of block.Words) {
             allWords.push(word);
         }
     }
-    
+
     if (isVertical(allWords)) {
         const text = rebuildVerticalTextFromWords(rawData);
         return text;
-    } 
+    }
     const text = rebuildHorizontalTextFromWords(rawData);
     return text;
 }

@@ -4,7 +4,7 @@ import { fileExists, forEachFolder, isNullEmptyUndefinerNan, monthsOrdes } from 
 import fs from 'fs';
 import { constants } from '../../constants.js';
 import path from 'path';
-import { fixTextRotation } from './fixRotation.js';
+import { getTextPosition } from './getTextPosition.js';
 
 const url = process.env.API_IMAGE_TO_TEXT;
 const getTextFromImageApi = async ({ imagePath, filename }) => {
@@ -43,23 +43,26 @@ export const getTextFromImage = async () => {
             for (const month of months) {
                 const nominaImages = path.join(monthsPath, month)
                 const folder = constants.preData(townHall, year)
-                const filePath = path.join(folder, `${month}.txt`)
+                const filePath = path.join(folder, `${month}.json`)
                 if (fileExists(filePath)) continue
                 const images = fs.readdirSync(nominaImages)
                 console.log(`converting image to text ${nominaImages}`)
                 const imagesWithOrden = images.sort((a, b) => a.split(".")[1] - b.split(".")[1])
-                for (const image of imagesWithOrden) {
+                let pages = {}
+                for (const i in imagesWithOrden) {
+                    const image = imagesWithOrden[i]
                     if (path.extname(image) != ".jpg") continue
                     console.log(`   image to text: ${image}`)
                     const textOverlay = await getTextFromImageApi({
                         imagePath: path.join(nominaImages, image),
                         filename: image
                     })
-                    if(!textOverlay) continue
-                    const dataText = `${fixTextRotation(textOverlay)}\n------- Chunk -------\n`
-                    fs.appendFileSync(filePath, dataText);
+                    if (!textOverlay) continue
+                    const data = getTextPosition(textOverlay)
+                    pages[i] = data
+                    await new Promise(res => setTimeout(res, 1000))
+                    fs.writeFileSync(filePath, JSON.stringify(pages));
                 }
-                await new Promise(res => setTimeout(res, 1000))
             }
         })
     })
