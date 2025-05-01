@@ -10,25 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import compareData from "./compareData.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 
-const columns = [
-  { field: "name", headerName: "Nombre", flex: 1 },
-  { field: "Position", headerName: "Posición", flex: 1 },
-  { field: "Income", headerName: "Sueldo", type: "number", flex: 1 },
-  { field: "SEX", headerName: "Género", flex: 1 },
-  {
-    field: "action",
-    headerName: "Acciones",
-    width: 150,
-    renderCell: (params) => (
-      <Button variant="contained" color="primary">
-        Ver
-      </Button>
-    ),
-  },
-];
 let data = [];
 
 const months = {
@@ -51,7 +35,46 @@ export function CompareData() {
   const [search, setSearch] = useState("");
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const [page, setPage] = useState(1); // Start at page 1
+  const [page, setPage] = useState(0); // Start at page 1
+  const selectEmployee = useRef(null);
+  const imageRef = useRef(null);
+  const handleClick = (row) => {
+    const element = selectEmployee.current
+    const image = imageRef.current.getBoundingClientRect()
+    
+    const porX = (row.x/2000) * 100  
+    const porY = (row.y/2000) * 100 
+    const porHeight = (row.height/2000) * 100  
+    const porWidth = (row.width/2000) * 100
+
+    const positionX = image.width*(porX/100)
+    const positionY = image.height*(porY/100)
+    const width = image.width*(porWidth/100)
+    const height = image.height*(porHeight/100)
+
+
+    element.style.left = `${image.x + positionX}px`;
+    element.style.top = `${image.y + positionY}px`;
+    element.style.width = `${width}px`;
+    element.style.height = `${height}px`;
+  };
+
+  const columns = [
+    { field: "name", headerName: "Nombre", flex: 1 },
+    { field: "position", headerName: "Posición", flex: 1 },
+    { field: "income", headerName: "Sueldo", type: "number", flex: 1 },
+    { field: "sex", headerName: "Género", flex: 1 },
+    {
+      field: "action",
+      headerName: "Acciones",
+      width: 150,
+      renderCell: (params) => (
+        <Button variant="contained" color="primary" onClick={()=>handleClick(params.row)}>
+          Ver
+        </Button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     fetch("http://127.0.0.1:5500/datas/townHalls/Jarabacoa/Nomina.json")
@@ -100,7 +123,7 @@ export function CompareData() {
     );
   };
 
-  const filteredRows = rows.filter((row) => row.page === page);
+  const filteredRows = rows.filter((row) => row.page == page);
   const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0; // max page number
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -165,11 +188,12 @@ export function CompareData() {
       </Box>
       <div className={compareData.comparar}>
         <img
+          ref={imageRef}
           src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
             currentDate?.split("-")?.[0]
           }/${
             months[currentDate?.split("-")?.[1]]
-          }/jarabacoaTownHall.${page}.jpg`}
+          }/jarabacoaTownHall.${page+1}.jpg`}
           width="100%"
           height="100%"
         />
@@ -211,6 +235,7 @@ export function CompareData() {
           </div>
         </div>
       </div>
+      <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
     </>
   );
 }

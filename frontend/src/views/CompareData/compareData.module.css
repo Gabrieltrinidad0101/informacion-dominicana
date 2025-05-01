@@ -24,3 +24,8 @@
 .bgWhite {
   background: white;
 }
+
+.selecteEmployee {
+  position: fixed;
+  background: red;
+}
