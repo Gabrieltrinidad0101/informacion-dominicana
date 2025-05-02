@@ -14,7 +14,6 @@ import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 
 let data = [];
-
 const months = {
   "01": "january",
   "02": "february",
@@ -35,16 +34,17 @@ export function CompareData() {
   const [search, setSearch] = useState("");
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const [page, setPage] = useState(0); // Start at page 1
+  const [page, setPage] = useState(1);
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
+
   const handleClick = (row) => {
     const element = selectEmployee.current
     const image = imageRef.current.getBoundingClientRect()
     
-    const porX = (row.x/2000) * 100  
-    const porY = (row.y/2000) * 100 
-    const porHeight = (row.height/2000) * 100  
+    const porX = (row.x/2000) * 100
+    const porY = (row.y/2000) * 100
+    const porHeight = (row.height/2000) * 100
     const porWidth = (row.width/2000) * 100
 
     const positionX = image.width*(porX/100)
@@ -52,11 +52,11 @@ export function CompareData() {
     const width = image.width*(porWidth/100)
     const height = image.height*(porHeight/100)
 
-
     element.style.left = `${image.x + positionX}px`;
     element.style.top = `${image.y + positionY}px`;
     element.style.width = `${width}px`;
     element.style.height = `${height}px`;
+    element.classList.add(compareData.selecteEmployee);
   };
 
   const columns = [
@@ -101,6 +101,10 @@ export function CompareData() {
       });
   }, [currentDate]);
 
+  useEffect(() => {
+    selectEmployee.current.classList.remove(compareData.selecteEmployee);
+  }, [page]);
+
   const totalSalary = rows.reduce((acc, row) => {
     const number = parseFloat(
       (row.Income || "0")?.replaceAll("$", "").replaceAll(",", "")
@@ -124,7 +128,8 @@ export function CompareData() {
   };
 
   const filteredRows = rows.filter((row) => row.page == page);
-  const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0; // max page number
+  filteredRows.sort((a, b) => b.x - a.x);
+  const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
@@ -193,7 +198,7 @@ export function CompareData() {
             currentDate?.split("-")?.[0]
           }/${
             months[currentDate?.split("-")?.[1]]
-          }/jarabacoaTownHall.${page+1}.jpg`}
+          }/jarabacoaTownHall.${page}.jpg`}
           width="100%"
           height="100%"
         />

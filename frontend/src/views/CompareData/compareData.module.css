@@ -27,5 +27,19 @@
 
 .selecteEmployee {
   position: fixed;
-  background: red;
+  background: rgba(255, 0, 0, 0.521);
+}
+
+
+.selecteEmployeeAnimation {
+  animation: fadeIn 2.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
