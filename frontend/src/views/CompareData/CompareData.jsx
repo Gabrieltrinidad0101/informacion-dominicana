@@ -24,9 +24,9 @@ const months = {
   "07": "july",
   "08": "august",
   "09": "september",
-  10: "october",
-  11: "november",
-  12: "december",
+  "10": "october",
+  "11": "november",
+  "12": "december",
 };
 
 export function CompareData() {
@@ -157,7 +157,6 @@ export function CompareData() {
   };
 
   const handleDate = (event) => {
-    console.log(event.target.value);
     setCurrentDate(event.target.value);
   };
 

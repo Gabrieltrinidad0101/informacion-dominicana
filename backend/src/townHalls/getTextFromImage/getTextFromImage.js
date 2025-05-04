@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import FormData from 'form-data';
 import { fileExists, forEachFolder, isNullEmptyUndefinerNan, monthsOrdes } from "../../utils.js";
@@ -49,7 +50,7 @@ export const getTextFromImage = async () => {
                 console.log(`converting image to text ${nominaImages}`)
                 const imagesWithOrden = images.sort((a, b) => a.split(".")[1] - b.split(".")[1])
                 let pages = {}
-                for (const i in imagesWithOrden) {
+                for (let i = 0; i < imagesWithOrden.length; i++) {
                     const image = imagesWithOrden[i]
                     if (path.extname(image) != ".jpg") continue
                     console.log(`   image to text: ${image}`)
@@ -59,7 +60,7 @@ export const getTextFromImage = async () => {
                     })
                     if (!textOverlay) continue
                     const data = getTextPosition(textOverlay)
-                    pages[i] = data
+                    pages[i + 1] = data
                     await new Promise(res => setTimeout(res, 1000))
                     fs.writeFileSync(filePath, JSON.stringify(pages));
                 }

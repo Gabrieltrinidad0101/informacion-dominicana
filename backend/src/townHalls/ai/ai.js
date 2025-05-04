@@ -86,8 +86,8 @@ const formatJson = ({ chuck, year, monthInt, chuckText, townHall, page }) => {
         console.log('Error in json format')
         console.log(e)
         const errorPath = constants.townHallData(townHall, year, `error-${monthInt}.txt`)
-        const response = { chuck, jsonString, chuckText, page }
-        fs.appendFileSync(errorPath, JSON.stringify(response))
+        const response = { chuck, jsonString, chuckText, page,e: JSON.stringify(e) }
+        fs.appendFileSync(errorPath, `${JSON.stringify(response)}\n\n\n`)
         return {}
     }
 }
@@ -128,8 +128,9 @@ export const ai = async () => {
             const chuck = await callDeepSeekAPI(text)
             console.log(`   chunk ${page} completed`)
             const employees = formatJson({ chuck, year, monthInt, townHall, chuckText: text, page })
-            if (Object.keys(employees).length == 0) continue
-            setPositionToEmployee(employees, pages[page])
+            if (Object.keys(employees).length > 0) {
+                setPositionToEmployee(employees, pages[page])
+            }
             response = response.concat(employees)
             fs.writeFileSync(filePath, JSON.stringify(response))
         }

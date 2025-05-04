@@ -1,55 +1,45 @@
-function groupWordsIntoColumns(words, tolerance = 20) {
-    words.sort((a, b) => a.Left - b.Left);
+function detectDominantAngle(rawData) {
+    let textDirrection = 0;
+    let textRotationBottom = 0;
+    for (const { Words: words } of rawData) {
+        if (words.length < 2) {
+            continue
+        };
+        const width = words.reduce((acc, current) => current.Width + acc, 0);
+        const height = words.reduce((acc, current) => current.Height + acc, 0);
 
-    const columns = [];
-
-    for (const word of words) {
-        let added = false;
-        for (const column of columns) {
-            const avgLeft = column.reduce((sum, w) => sum + w.Left, 0) / column.length;
-            if (Math.abs(word.Left - avgLeft) <= tolerance) {
-                column.push(word);
-                added = true;
-                break;
-            }
+        let left = 0;
+        for (let index = 0; index < words.length - 1; index += 2) {
+            left += words[index + 1].Left - words[index].Left;
         }
-        if (!added) {
-            columns.push([word]);
+        let top = 0;
+        for (let index = 0; index < words.length - 1; index += 2) {
+            top += words[index].Top - words[index + 1].Top;
         }
+        textDirrection += width > height ? 1 : -1;
+        textRotationBottom += left > top ? 1 : -1;
     }
-
-    for (const column of columns) {
-        column.sort((a, b) => a.Top - b.Top);
+    if (textDirrection > 0 && textRotationBottom > 0) {
+        return 0
     }
-
-    return columns;
+    if (textDirrection < 0 && textRotationBottom > 0) {
+        return 90
+    }
+    if (textDirrection > 0 && textRotationBottom < 0) {
+        return 180
+    }
+    if (textDirrection < 0 && textRotationBottom < 0) {
+        return 270
+    }
 }
 
-function groupWordsIntoLines(words, tolerance = 20) {
-    words.sort((a, b) => a.Top - b.Top);
-
-    const lines = [];
-
-    for (const word of words) {
-        let added = false;
-        for (const line of lines) {
-            const avgTop = line.reduce((sum, w) => sum + w.Top, 0) / line.length;
-            if (Math.abs(word.Top - avgTop) <= tolerance) {
-                line.push(word);
-                added = true;
-                break;
-            }
-        }
-        if (!added) {
-            lines.push([word]);
-        }
-    }
-
-    for (const line of lines) {
-        line.sort((a, b) => a.Left - b.Left);
-    }
-
-    return lines;
+function rotateWord(word, angle, W, H) {
+    const { Left: x, Top: y, Width: w, Height: h } = word;
+    if (angle === 0) return { x, y };
+    if (angle === 90) return { x: y, y: W - x - w };
+    if (angle === 180) return { x: W - x - w, y: H - y - h };
+    if (angle === 270) return { x: H - y - h, y: x };
+    throw new Error('Invalid angle');
 }
 
 const getLinePosition = (words) => {
@@ -74,56 +64,46 @@ const getLinePosition = (words) => {
     return linesPosition;
 }
 
-function rebuildVerticalTextFromWords(rawData) {
-    const allWords = [];
+function groupLinesWithAngle(json, angle) {
+    const tolerance = 5;
+    const rotatedWords = [];
 
-    for (const block of rawData) {
-        for (const word of block.Words) {
-            allWords.push(word);
+    for (const line of json) {
+        for (const word of line.Words) {
+            const { x, y } = rotateWord(word, angle);
+            rotatedWords.push({ text: word.WordText, x, y });
         }
     }
 
-    const columns = groupWordsIntoColumns(allWords);
-    return getLinePosition(columns);
-}
+    rotatedWords.sort((a, b) => a.y - b.y);
+    const lines = [];
 
-function isVertical(words) {
-    const lefts = words.map(w => w.Left);
-    const tops = words.map(w => w.Top);
-
-    const leftRange = Math.max(...lefts) - Math.min(...lefts);
-    const topRange = Math.max(...tops) - Math.min(...tops);
-
-    return leftRange < topRange;
-}
-
-function rebuildHorizontalTextFromWords(rawData) {
-    const allWords = [];
-
-    for (const block of rawData) {
-        for (const word of block.Words) {
-            allWords.push(word);
+    for (const word of rotatedWords) {
+        let found = false;
+        for (const line of lines) {
+            if (Math.abs(line.y - word.y) <= tolerance) {
+                line.words.push(word);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            lines.push({ y: word.y, words: [word] });
         }
     }
 
-    const lines = groupWordsIntoLines(allWords);
-    return getLinePosition(lines);
+    for (const line of lines) {
+        line.words.sort((a, b) => a.x - b.x);
+    }
+
+    return {
+        angle,
+        lines: lines.map(line => getLinePosition(line.words).join(' '))
+    };
 }
 
 
-export const getTextPosition = (rawData) => {
-    const allWords = [];
-    for (const block of rawData) {
-        for (const word of block.Words) {
-            allWords.push(word);
-        }
-    }
 
-    if (isVertical(allWords)) {
-        const text = rebuildVerticalTextFromWords(rawData);
-        return text;
-    }
-    const text = rebuildHorizontalTextFromWords(rawData);
-    return text;
-}
-
+// --------- MAIN ----------
+const angle = detectDominantAngle(rawData);
+const result = groupLinesWithAngle(rawData, angle);
