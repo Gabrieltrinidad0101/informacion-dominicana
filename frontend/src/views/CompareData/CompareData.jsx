@@ -24,10 +24,16 @@ const months = {
   "07": "july",
   "08": "august",
   "09": "september",
-  "10": "october",
-  "11": "november",
-  "12": "december",
+  10: "october",
+  11: "november",
+  12: "december",
 };
+
+const formatted = (number) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(number);
 
 export function CompareData() {
   const [rows, setRows] = useState([]);
@@ -38,38 +44,52 @@ export function CompareData() {
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
 
+
   const handleClick = (row) => {
-    const element = selectEmployee.current
-    const image = imageRef.current.getBoundingClientRect()
-    
-    const porX = (row.x/2000) * 100
-    const porY = (row.y/2000) * 100
-    const porHeight = (row.height/2000) * 100
-    const porWidth = (row.width/2000) * 100
+    const element = selectEmployee.current;
+    const image = imageRef.current.getBoundingClientRect();
 
-    const positionX = image.width*(porX/100)
-    const positionY = image.height*(porY/100)
-    const width = image.width*(porWidth/100)
-    const height = image.height*(porHeight/100)
+    const porX = (row.x / 2000) * 100;
+    const porY = (row.y / 2000) * 100;
+    const porHeight = (row.height / 2000) * 100;
+    const porWidth = (row.width / 2000) * 100;
 
-    element.style.left = `${image.x + positionX}px`;
-    element.style.top = `${image.y + positionY}px`;
+    const positionX = image.width * (porX / 100);
+    const positionY = image.height * (porY / 100);
+    const width = image.width * (porWidth / 100);
+    const height = image.height * (porHeight / 100);
+
+    element.style.left = `${positionX}px`;
+    element.style.top = `${positionY}px`;
     element.style.width = `${width}px`;
     element.style.height = `${height}px`;
+    selectEmployee.current.classList.remove(compareData.selecteEmployeeOpacity);
     element.classList.add(compareData.selecteEmployee);
   };
 
   const columns = [
     { field: "name", headerName: "Nombre", flex: 1 },
     { field: "position", headerName: "Posición", flex: 1 },
-    { field: "income", headerName: "Sueldo", type: "number", flex: 1 },
+    {
+      field: "income",
+      headerName: "Sueldo",
+      type: "number",
+      flex: 1,
+      renderCell: ({ row }) => {
+        return row.income ? formatted(row.income) : "";
+      },
+    },
     { field: "sex", headerName: "Género", flex: 1 },
     {
       field: "action",
       headerName: "Acciones",
       width: 150,
       renderCell: (params) => (
-        <Button variant="contained" color="primary" onClick={()=>handleClick(params.row)}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClick(params.row)}
+        >
           Ver
         </Button>
       ),
@@ -86,6 +106,7 @@ export function CompareData() {
   }, []);
 
   useEffect(() => {
+    const employees = {};
     if ((currentDate?.length ?? 0) <= 0) return;
     const [year, month] = currentDate.split("-");
     fetch(
@@ -94,16 +115,22 @@ export function CompareData() {
       .then((response) => response.json())
       .then((res) => {
         data = res.map((row) => {
+          employees[row.document] ??= [];
+          employees[row.document].push(row);
           row.id = crypto.randomUUID();
           return row;
         });
         setRows(data);
       });
+      const rows = Object.keys(employees).filter((key) => {
+        employees[key].length > 1;
+      });
+      console.log(rows);
   }, [currentDate]);
 
   useEffect(() => {
-    selectEmployee.current.classList.remove(compareData.selecteEmployee);
-  }, [page]);
+    selectEmployee.current.classList.add(compareData.selecteEmployeeOpacity);
+  }, [page,currentDate]);
 
   const totalSalary = rows.reduce((acc, row) => {
     const number = parseFloat(
@@ -128,7 +155,24 @@ export function CompareData() {
   };
 
   const filteredRows = rows.filter((row) => row.page == page);
-  filteredRows.sort((a, b) => b.x - a.x);
+  const pageAngle = filteredRows?.[0]?.pageAngle;
+  if(pageAngle === 0) {
+    filteredRows.sort((a, b) => a.y - b.y);
+  };
+
+  if(pageAngle === 90) {
+    filteredRows.sort((a, b) => (b.x ?? 0) - (a.x ?? 0));
+    console.log(filteredRows.map((row) => row.x));
+  };
+
+  if(pageAngle === 180) {
+    filteredRows.sort((a, b) => a.x - b.x);
+  };
+
+  if(pageAngle === 270) {
+    filteredRows.sort((a, b) => a.x - b.x);
+  };
+
   const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -191,16 +235,19 @@ export function CompareData() {
         </FormControl>
       </Box>
       <div className={compareData.comparar}>
-        <img
-          ref={imageRef}
-          src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
-            currentDate?.split("-")?.[0]
-          }/${
-            months[currentDate?.split("-")?.[1]]
-          }/jarabacoaTownHall.${page}.jpg`}
-          width="100%"
-          height="100%"
-        />
+        <div className={`${filteredRows?.[0]?.pageAngle ? compareData["deg_" + filteredRows[0].pageAngle] : ""}`}>
+          <img
+            ref={imageRef}
+            src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
+              currentDate?.split("-")?.[0]
+            }/${
+              months[currentDate?.split("-")?.[1]]
+            }/jarabacoaTownHall.${page}.jpg`}
+            width="100%"
+            height="100%"
+          />
+        <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
+        </div>
         <div className={compareData.bgWhite}>
           <Box sx={{ height: "92%", width: "100%" }}>
             <div style={{ width: "100%" }}>
@@ -239,7 +286,6 @@ export function CompareData() {
           </div>
         </div>
       </div>
-      <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
     </>
   );
 }

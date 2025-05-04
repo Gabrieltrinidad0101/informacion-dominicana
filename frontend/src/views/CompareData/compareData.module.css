@@ -26,20 +26,24 @@
 }
 
 .selecteEmployee {
-  position: fixed;
+  position: absolute;
   background: rgba(255, 0, 0, 0.521);
 }
 
 
-.selecteEmployeeAnimation {
-  animation: fadeIn 2.5s;
+.selecteEmployeeOpacity {
+  opacity: 0;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.deg_90 {
+  position: relative; /* Asegura que los elementos dentro de .padre se posicionen respecto a él */
+  transform: rotate(calc(270deg));
+}
+
+.deg_180 {
+  transform: rotate(calc(180deg - 360deg));
+}
+
+.deg_270 {
+  transform: rotate(90deg);
 }

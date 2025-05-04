@@ -5,7 +5,7 @@ import { fileExists, forEachFolder, isNullEmptyUndefinerNan, monthsOrdes } from 
 import fs from 'fs';
 import { constants } from '../../constants.js';
 import path from 'path';
-import { getTextPosition } from './getTextPosition.js';
+import { groupLines } from './groupLines.js';
 
 const url = process.env.API_IMAGE_TO_TEXT;
 const getTextFromImageApi = async ({ imagePath, filename }) => {
@@ -54,15 +54,21 @@ export const getTextFromImage = async () => {
                     const image = imagesWithOrden[i]
                     if (path.extname(image) != ".jpg") continue
                     console.log(`   image to text: ${image}`)
-                    const textOverlay = await getTextFromImageApi({
+                    const fileTextOverlayPath = constants.preData(townHall, `${year}/${month}/${i}_textOverlay.json`)
+                    const fileTextOverlay = fs.existsSync(fileTextOverlayPath)
+                    const textOverlay = fileTextOverlay ? JSON.parse(fs.readFileSync(fileTextOverlayPath).toString()) : await getTextFromImageApi({
                         imagePath: path.join(nominaImages, image),
                         filename: image
                     })
-                    if (!textOverlay) continue
-                    const data = getTextPosition(textOverlay)
+                    if (!textOverlay) {
+                        pages[i + 1] = []
+                        continue
+                    }
+                    const data = groupLines(textOverlay)
                     pages[i + 1] = data
                     await new Promise(res => setTimeout(res, 1000))
                     fs.writeFileSync(filePath, JSON.stringify(pages));
+                    if (!fileTextOverlay) fs.writeFileSync(fileTextOverlayPath, JSON.stringify(textOverlay));
                 }
             }
         })

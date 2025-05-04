@@ -113,6 +113,7 @@ export const forPreData = async (callBack) => {
     await forEachFolder(constants.datasTownHalls(),async (townHall,townHallPath)=>{
         await forEachFolder(constants.preData(townHall),async (year)=>{
             await forEachFolder(constants.preData(townHall,year),async (month,monthPath)=>{
+                if(getExtension(monthPath) != ".json") return
                 await callBack({
                     pages: JSON.parse(fs.readFileSync(monthPath).toString()),
                     townHall,

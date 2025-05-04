@@ -92,7 +92,7 @@ const formatJson = ({ chuck, year, monthInt, chuckText, townHall, page }) => {
     }
 }
 
-const setPositionToEmployee = (employees, data) => {
+const setPositionToEmployee = (employees, data,angle) => {
     employees.forEach(employee => {
         const lines = data.filter(data => {
             if(!employee.document) {
@@ -108,15 +108,13 @@ const setPositionToEmployee = (employees, data) => {
         employee.y = lines[0].y 
         employee.width = lines[0].width
         employee.height = lines[0].height
+        employee.pageAngle = angle
         if(employee.document) employee.document = encrypt(employee.document)
     })
 }
 
 export const ai = async () => {
-    let testStop = 0
     await forPreData(async ({ pages, townHall, month, monthInt, year }) => {
-        if (testStop > 1) return
-        testStop++
         const filePath = constants.townHallData(townHall, year, `${month}.json`)
         if (fileExists(filePath)) return
         const townHallPath = constants.townHallData(townHall, year)
@@ -124,12 +122,12 @@ export const ai = async () => {
         console.log(`generated ${townHallPath}/${month} - pages: ${pageskeys.length}`)
         let response = []
         for (let page of pageskeys) {
-            const text = pages[page].map(data => data.text).join("\n")
+            const text = pages[page].lines.map(data => data.text).join("\n")
             const chuck = await callDeepSeekAPI(text)
             console.log(`   chunk ${page} completed`)
             const employees = formatJson({ chuck, year, monthInt, townHall, chuckText: text, page })
             if (Object.keys(employees).length > 0) {
-                setPositionToEmployee(employees, pages[page])
+                setPositionToEmployee(employees, pages[page].lines,pages[page].angle)
             }
             response = response.concat(employees)
             fs.writeFileSync(filePath, JSON.stringify(response))
