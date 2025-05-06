@@ -44,7 +44,6 @@ export function CompareData() {
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
 
-
   const handleClick = (row) => {
     const element = selectEmployee.current;
     const image = imageRef.current.getBoundingClientRect();
@@ -122,24 +121,15 @@ export function CompareData() {
         });
         setRows(data);
       });
-      const rows = Object.keys(employees).filter((key) => {
-        employees[key].length > 1;
-      });
-      console.log(rows);
+    const rows = Object.keys(employees).filter((key) => {
+      employees[key].length > 1;
+    });
+    console.log(rows);
   }, [currentDate]);
 
   useEffect(() => {
     selectEmployee.current.classList.add(compareData.selecteEmployeeOpacity);
-  }, [page,currentDate]);
-
-  const totalSalary = rows.reduce((acc, row) => {
-    const number = parseFloat(
-      (row.Income || "0")?.replaceAll("$", "").replaceAll(",", "")
-    );
-    return acc + number;
-  }, 0);
-
-  const totalEmployees = rows.length;
+  }, [page, currentDate]);
 
   const onChangeSearch = (e) => {
     const text = e.target.value;
@@ -155,30 +145,27 @@ export function CompareData() {
   };
 
   const filteredRows = rows.filter((row) => row.page == page);
-  const pageAngle = filteredRows?.[0]?.pageAngle;
-  if(pageAngle === 0) {
-    filteredRows.sort((a, b) => a.y - b.y);
-  };
-
-  if(pageAngle === 90) {
-    filteredRows.sort((a, b) => (b.x ?? 0) - (a.x ?? 0));
-    console.log(filteredRows.map((row) => row.x));
-  };
-
-  if(pageAngle === 180) {
-    filteredRows.sort((a, b) => a.x - b.x);
-  };
-
-  if(pageAngle === 270) {
-    filteredRows.sort((a, b) => a.x - b.x);
-  };
-
+  filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
   const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
+
+  const sum = (arr) =>
+    arr.reduce(
+      (acc, row) =>
+        acc +
+        parseFloat(
+          (row.income || "0")?.replaceAll("$", "").replaceAll(",", "")
+        ),
+      0
+    );
+
+  const totalPayroll = sum(rows);
+  const totalPayrollByPage = sum(filteredRows);
+  const totalEmployees = rows.length;
+  const totalEmployeesByPage = filteredRows.length;
+
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-
-  const containerHeight = 700;
 
   const lightTheme = {
     mb: 2,
@@ -235,23 +222,28 @@ export function CompareData() {
         </FormControl>
       </Box>
       <div className={compareData.comparar}>
-        <div className={`${filteredRows?.[0]?.pageAngle ? compareData["deg_" + filteredRows[0].pageAngle] : ""}`}>
-          <img
-            ref={imageRef}
-            src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
-              currentDate?.split("-")?.[0]
-            }/${
-              months[currentDate?.split("-")?.[1]]
-            }/jarabacoaTownHall.${page}.jpg`}
-            width="100%"
-            height="100%"
-          />
-        <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
+        <div className={compareData.overflowImage}>
+          <div>
+            <img
+              style={{
+                transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
+              }}
+              ref={imageRef}
+              src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
+                currentDate?.split("-")?.[0]
+              }/${
+                months[currentDate?.split("-")?.[1]]
+              }/jarabacoaTownHall.${page}.jpg`}
+              width="100%"
+              height="100%"
+            />
+          </div>
         </div>
+        <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
         <div className={compareData.bgWhite}>
           <Box sx={{ height: "92%", width: "100%" }}>
             <div style={{ width: "100%" }}>
-              <div style={{ height: containerHeight, overflow: "auto" }}>
+              <div style={{ height: 700, overflow: "auto" }}>
                 <DataGrid
                   rows={filteredRows}
                   columns={columns}
@@ -280,9 +272,15 @@ export function CompareData() {
           </Box>
           <div className={compareData.footerTable}>
             <Typography variant="h6">
-              Sueldo Total: ${totalSalary.toLocaleString()}
+              Nomina Total: {formatted(totalPayroll)}
             </Typography>
             <Typography variant="h6">Empleados: {totalEmployees}</Typography>
+            <Typography variant="h6">
+              Nomina de la pagina: {formatted(totalPayrollByPage)}
+            </Typography>
+            <Typography variant="h6">
+              Empleados de la pagina: {totalEmployeesByPage}
+            </Typography>
           </div>
         </div>
       </div>

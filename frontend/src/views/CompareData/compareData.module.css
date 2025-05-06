@@ -15,10 +15,10 @@
 }
 
 .footerTable {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
-  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: #000;
+  margin-left: 10px;
 }
 
 .bgWhite {
@@ -35,15 +35,8 @@
   opacity: 0;
 }
 
-.deg_90 {
-  position: relative; /* Asegura que los elementos dentro de .padre se posicionen respecto a él */
-  transform: rotate(calc(270deg));
-}
-
-.deg_180 {
-  transform: rotate(calc(180deg - 360deg));
-}
-
-.deg_270 {
-  transform: rotate(90deg);
+.overflowImage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }

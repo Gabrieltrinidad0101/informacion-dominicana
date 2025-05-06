@@ -5,18 +5,16 @@ import fs from 'fs'
 const formatJSON = (object) => {
     return Object.keys(object)
       .sort((a, b) => {
-        // Convert each key to a Date and handle invalid keys (undefined, null, or invalid date)
         const dateA = new Date(a);
         const dateB = new Date(b);
+        
+        if (isNaN(dateA)) return 1; 
+        if (isNaN(dateB)) return -1; 
   
-        // Handle invalid dates by treating them as the largest or smallest value
-        if (isNaN(dateA)) return 1; // Treat invalid date as the latest (move to the end)
-        if (isNaN(dateB)) return -1; // Treat invalid date as the latest (move to the end)
-  
-        return dateA - dateB; // Compare valid dates
+        return dateA - dateB; 
       })
-      .filter(key => key !== "undefined")  // Filter out "undefined" keys
-      .map(key => ({ time: key, value: object[key] })); // Map to desired format
+      .filter(key => key !== "undefined")  
+      .map(key => ({ time: key, value: object[key] })); 
   }
   
 

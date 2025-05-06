@@ -1,37 +1,45 @@
 
 import axios from 'axios';
-import FormData from 'form-data';
 import { fileExists, forEachFolder, isNullEmptyUndefinerNan, monthsOrdes } from "../../utils.js";
 import fs from 'fs';
 import { constants } from '../../constants.js';
 import path from 'path';
 import { groupLines } from './groupLines.js';
 
-const url = process.env.API_IMAGE_TO_TEXT;
-const getTextFromImageApi = async ({ imagePath, filename }) => {
-    const formData = new FormData();
-    formData.append('apikey', process.env.API_KEY);
-    formData.append('language', 'auto');
-    formData.append('isOverlayRequired', 'true');
-    formData.append('filetype', 'jpg');
-    formData.append('OCREngine', '2');
-    formData.append('file', fs.createReadStream(imagePath), {
-        filename,
-        contentType: 'image/jpg',
-    });
-    const response = await axios.post(url, formData, {
+const apiKey = process.env.API_KEY_IMAGE_TO_TEXT;
+const apiUrl = process.env.API_URL_IMAGE_TO_TEXT;
+const getTextFromImageApi = async ({ imagePath }) => {
+    const imageData = fs.readFileSync(imagePath);
+    const response = await axios.post(apiUrl, imageData, {
         headers: {
-            ...formData.getHeaders(),
+            'Ocp-Apim-Subscription-Key': apiKey,
+            'Content-Type': 'image/jpeg',
         },
-    })
-
-    const result = response.data;
-    if (result.IsErroredOnProcessing) {
-        console.error('Error:', result.ErrorMessage);
-        return;
+        responseType: 'json',
+    });
+    const operationLocation = response.headers['operation-location'];
+    let result;
+    for (let i = 0; i < 10; i++) {
+        const resultResponse = await axios.get(operationLocation, {
+            headers: {
+                'Ocp-Apim-Subscription-Key': apiKey,
+            },
+        });
+        if (resultResponse.data.status === 'succeeded') {
+            result = resultResponse.data.analyzeResult;
+            break;
+        } else if (resultResponse.data.status === 'failed') {
+            console.error(resultResponse)
+            return
+        }
     }
-    const textOverlay = result.ParsedResults[0].TextOverlay.Lines;
-    return textOverlay;
+    if (!result) {
+        console.error('Timed out waiting for result.')
+        return
+    }
+
+
+    return result;
 }
 
 export const getTextFromImage = async () => {
@@ -66,7 +74,7 @@ export const getTextFromImage = async () => {
                     }
                     const data = groupLines(textOverlay)
                     pages[i + 1] = data
-                    await new Promise(res => setTimeout(res, 1000))
+                    if(!fileTextOverlay) await new Promise(res => setTimeout(res, 30_000))
                     fs.writeFileSync(filePath, JSON.stringify(pages));
                     if (!fileTextOverlay) fs.writeFileSync(fileTextOverlayPath, JSON.stringify(textOverlay));
                 }

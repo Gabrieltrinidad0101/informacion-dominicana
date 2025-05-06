@@ -15,24 +15,27 @@ const propt = `Convert the given text into a JSON format using the example below
     "sex": "M"
 }]
 
+**Special Case Example (Institutional Entry):**
+[{
+    "name": "SUBVENCION BOMBEROS",
+    "position": "BOMBEROS",
+    "income": "150000"
+}]
+
 Processing Instructions:
     Analyze the input text and extract relevant fields (name, document, position, income, sex).
-    Infer missing fields when possible (e.g., assume gender based on the name if not explicitly stated).
-    Correct inconsistencies (e.g., if "sex" contradicts the name's typical gender, prioritize explicit data).
-    Only add a comment if a field cannot be resolved after inference.
-    If no usable data is found, return an empty string "".
+    For institutional entries (e.g., names containing "SUBVENCION", "SUBSIDIO", or similar terms):
+        - Omit \`document\` and \`sex\` fields entirely.
+        - Retain \`name\`, \`position\`, and \`income\` if available.
+    For individual entries:
+        - Infer missing fields (e.g., assume gender based on name if not stated).
+        - Correct inconsistencies (prioritize explicit data over inferred).
     Replace any " inside a value with ' (e.g., {name: pe"ppe} → {name: pe'ppe}).
+    Only include fields that can be extracted or inferred. Omit all others.
+
 Output Requirements:
     Return strictly valid JSON with no extra text or formatting.
-    Omit fields that cannot be extracted or inferred.
-    Ensure numeric/date formats match the example (e.g., "2645").
-
-
-### Key Improvements:  
-1. **Clearer Structure**: Separated example, instructions, and output requirements.  
-2. **Better Readability**: Used bullet points and bold headers for emphasis.  
-3. **More Specific Rules**: Explicitly stated how to handle missing fields, inconsistencies, and edge cases.  
-4. **Stricter Output**: Emphasized "no extra text" and valid JSON formatting. 
+    Ensure numeric/date formats match the examples (e.g., "2645", "150000").
 `
 
 

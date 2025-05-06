@@ -1,0 +1,809 @@
+{
+  "1": [
+    {
+      "text": "3 11 24 39 59 60 61 67 68 94 112 115 116 148 150 151 156 158 173 194 276 277 278 279 05/09/2018,",
+      "x": 331,
+      "y": 602,
+      "width": 9,
+      "height": 1081
+    },
+    { "text": "Carnet", "x": 349, "y": 567, "width": 0, "height": 0 },
+    { "text": "09.01", "x": 399, "y": 1683, "width": 0, "height": 0 },
+    {
+      "text": "Empleado JOSE JOSE JOSE MIGUEL MARIA JULIAN REYNALDO PORFIRIO JUAN FRANKLIN JOSE ANA RAFAEL MARTHA AMBROCIO MELIDO REINALDO AMADO MIGUEL JUSTO DOMINGO ORATORIO IGLESIA COLEGIO A",
+      "x": 410,
+      "y": 567,
+      "width": 9,
+      "height": 1005
+    },
+    { "text": "D AM", "x": 430, "y": 1572, "width": 1, "height": 111 },
+    {
+      "text": "MERCEDES R-FILIAL",
+      "x": 446,
+      "y": 1047,
+      "width": 9,
+      "height": 525
+    },
+    {
+      "text": "PLACENCIA AMADO CRISTINO SALOME DURAN ANT. ANT. MIGUEL",
+      "x": 464,
+      "y": 602,
+      "width": 15,
+      "height": 770
+    },
+    {
+      "text": "DILONE RAMON MARIA ABEL GUTIERREZ ANGEL NUESTRA",
+      "x": 482,
+      "y": 724,
+      "width": 8,
+      "height": 767
+    },
+    {
+      "text": "ANT. CORONADO VARGAS APOLINAR SANCHEZ ANT. ABREU MARIA CENTRO NTRA.",
+      "x": 496,
+      "y": 846,
+      "width": 18,
+      "height": 686
+    },
+    { "text": "JARABACOA", "x": 519, "y": 1572, "width": 0, "height": 0 },
+    {
+      "text": "RODRIGUEZ MAGARIN LORA BALDERA RAMOS GUTIERREZ LUNA MARTE COLON CONCEPCION SRA.",
+      "x": 531,
+      "y": 642,
+      "width": 23,
+      "height": 890
+    },
+    { "text": "ABREU DE GALAN", "x": 556, "y": 846, "width": 4, "height": 567 },
+    { "text": "ABREU SRA.", "x": 569, "y": 602, "width": 0, "height": 889 },
+    {
+      "text": "MARTINEZ LA JUVENIL",
+      "x": 580,
+      "y": 924,
+      "width": 1,
+      "height": 527
+    },
+    {
+      "text": "BUENO PENA VARGAS RODRIGUEZ DE",
+      "x": 592,
+      "y": 886,
+      "width": 12,
+      "height": 646
+    },
+    {
+      "text": "ROBLES ROSA RAMOS A. DEL LA",
+      "x": 607,
+      "y": 846,
+      "width": 16,
+      "height": 686
+    },
+    {
+      "text": "CIPRIAN CORDERO CARMEN ALTAGRACIA",
+      "x": 633,
+      "y": 642,
+      "width": 14,
+      "height": 890
+    },
+    { "text": "PERALTA DON", "x": 657, "y": 1047, "width": 2, "height": 404 },
+    { "text": "BOSCO", "x": 696, "y": 1451, "width": 0, "height": 0 },
+    {
+      "text": "Ayuntamiento 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00",
+      "x": 750,
+      "y": 358,
+      "width": 6,
+      "height": 1054
+    },
+    {
+      "text": "Dirección Fecha Ingreso",
+      "x": 773,
+      "y": 398,
+      "width": 9,
+      "height": 172
+    },
+    { "text": "Listado", "x": 820, "y": 442, "width": 0, "height": 0 },
+    { "text": "050-0000117-1", "x": 840, "y": 1372, "width": 0, "height": 0 },
+    {
+      "text": "050-0023817-9 050-0004427-0 050-0031017-6 050-0014689-3 050-0004784-4 050-0006215-7 050-0023192-7 050-0009298-0 050-0002162-5 050-0004324-9 050-0000407-6 050-0000759-0 047-0115441-3 050-0003607-8 050-0004793-5 050-0033792-2 050-0015366-7 050-0014962-4 050-0031356-8 050-0014949-1 00000000 00000000 00000000",
+      "x": 854,
+      "y": 602,
+      "width": 5,
+      "height": 970
+    },
+    { "text": "Cédula", "x": 881, "y": 567, "width": 0, "height": 0 },
+    { "text": "de de", "x": 906, "y": 398, "width": 1, "height": 44 },
+    {
+      "text": "Municipal Empleados",
+      "x": 930,
+      "y": 358,
+      "width": 5,
+      "height": 84
+    },
+    { "text": "Recursos", "x": 943, "y": 398, "width": 0, "height": 0 },
+    { "text": "Salario", "x": 997, "y": 567, "width": 0, "height": 0 },
+    {
+      "text": "2,645.00 2,645.00 2,645.00 3,587.00 3,587.00 3,202.00 7,500.00 2,645.00 2.645.00 2.645.00 5,000.00 2,145.00 8,071.00 3,587.00 3,950.00 3,769.00 4,126.00 5,000.00 5,000.00 5,000.00 7,000.00 3,500.00 1,000.00 1,000.00 5,000.00",
+      "x": 1015,
+      "y": 602,
+      "width": 5,
+      "height": 970
+    },
+    {
+      "text": "de Humanos Activos",
+      "x": 1057,
+      "y": 358,
+      "width": 10,
+      "height": 84
+    },
+    {
+      "text": "Jarabacoa MUSICO MUSICO MUSICO OBRERO OBRERO MUSICO COORDINADOR MUSICO MUSICO MUSICO FOTOGRAFO MUSICO INSTRUCTOR OBRERA OBRERO OBRERO OPERADOR AGENTE OBRERO AGENTE CHOFER AYUDA AYUDA AYUDA",
+      "x": 1090,
+      "y": 358,
+      "width": 5,
+      "height": 1214
+    },
+    {
+      "text": "DE CAMION DE DE INSTITUCION INSTITUCION INSTITUCION",
+      "x": 1154,
+      "y": 1290,
+      "width": 16,
+      "height": 282
+    },
+    { "text": "BRIGADA", "x": 1173, "y": 1210, "width": 0, "height": 0 },
+    {
+      "text": "Posición CAMION LIMPIEZA LIMPIEZA CAMIÃ\"N",
+      "x": 1193,
+      "y": 569,
+      "width": 5,
+      "height": 840
+    },
+    { "text": "DE", "x": 1207, "y": 1087, "width": 0, "height": 0 },
+    { "text": "DE", "x": 1224, "y": 846, "width": 0, "height": 0 },
+    { "text": "LA", "x": 1236, "y": 1087, "width": 0, "height": 0 },
+    {
+      "text": "BANDA ACDEMIA I -",
+      "x": 1253,
+      "y": 846,
+      "width": 11,
+      "height": 404
+    },
+    {
+      "text": "OBRERO (CAMION) (CAMION) BRIGADA",
+      "x": 1272,
+      "y": 1250,
+      "width": 3,
+      "height": 159
+    },
+    { "text": "DE", "x": 1313, "y": 846, "width": 0, "height": 0 },
+    { "text": "MASSICA DE", "x": 1339, "y": 846, "width": 0, "height": 241 },
+    { "text": "NO.", "x": 1351, "y": 1409, "width": 0, "height": 0 },
+    { "text": "MUSICA", "x": 1365, "y": 1087, "width": 0, "height": 0 },
+    { "text": "6", "x": 1387, "y": 1409, "width": 0, "height": 0 },
+    { "text": "Departamento", "x": 1491, "y": 569, "width": 0, "height": 0 },
+    { "text": "Powered", "x": 1567, "y": 1703, "width": 0, "height": 0 },
+    { "text": "Página", "x": 1593, "y": 1686, "width": 0, "height": 0 },
+    { "text": "by", "x": 1615, "y": 1703, "width": 0, "height": 0 },
+    { "text": "1 Municipia", "x": 1628, "y": 1686, "width": 4, "height": 17 },
+    { "text": "de", "x": 1641, "y": 1686, "width": 0, "height": 0 },
+    { "text": "15", "x": 1656, "y": 1686, "width": 0, "height": 0 }
+  ],
+  "2": [
+    {
+      "text": "280 295 303 308 322 339 352 353 372 376 381 382 394 396 406 419 420 421 185 460 465 491 05/09/2018,",
+      "x": 333,
+      "y": 593,
+      "width": 7,
+      "height": 1081
+    },
+    { "text": "Carnet", "x": 349, "y": 558, "width": 0, "height": 0 },
+    { "text": "09:01", "x": 401, "y": 1674, "width": 0, "height": 0 },
+    {
+      "text": "Empleado ASOCIACION VICTOR SUBVENCION JOSE LIDIO MIGUELINA IGLESIA COMISION MARIA WILLIAM MARINO LIC. ANTONIO GUMERCINDO JULIO EDITA DORA ANA CAMILO EPIFANIO GENARO JUAN GERMANIA MARCELINO JOSE",
+      "x": 413,
+      "y": 558,
+      "width": 6,
+      "height": 1006
+    },
+    { "text": "AM", "x": 430, "y": 1674, "width": 0, "height": 0 },
+    {
+      "text": "ODALIS ANT. JOSE CAPELLAN DE LUNA ERCILIA ZOILO DOLORES",
+      "x": 454,
+      "y": 712,
+      "width": 16,
+      "height": 852
+    },
+    {
+      "text": "DANIEL SANTISIMO DEL DE ALMONTE ANT. COLON",
+      "x": 475,
+      "y": 631,
+      "width": 19,
+      "height": 773
+    },
+    {
+      "text": "NUNEZ DE ENRIQUE BAUTISTA JS. REYES PICHARDO",
+      "x": 498,
+      "y": 753,
+      "width": 12,
+      "height": 730
+    },
+    {
+      "text": "ANGELINE CARMEN JS. ABREU GENAO ABREU LOPEZ SANCHEZ",
+      "x": 514,
+      "y": 794,
+      "width": 12,
+      "height": 729
+    },
+    {
+      "text": "DAMAS BOMBEROS BUENO FUTBOL JIMENEZ RAMIREZ",
+      "x": 531,
+      "y": 591,
+      "width": 8,
+      "height": 729
+    },
+    {
+      "text": "SANCHEZ SEPULVEDA CIPRIAN DELGADO ACOSTA DIAZ",
+      "x": 547,
+      "y": 631,
+      "width": 15,
+      "height": 933
+    },
+    {
+      "text": "POLO SACRAMENTO PUNTIER TAVAREZ DE",
+      "x": 573,
+      "y": 753,
+      "width": 17,
+      "height": 486
+    },
+    {
+      "text": "SALESIANAS MORONTA O CALDERON PEREZ",
+      "x": 599,
+      "y": 590,
+      "width": 14,
+      "height": 730
+    },
+    { "text": "JOSE", "x": 622, "y": 875, "width": 0, "height": 0 },
+    { "text": "LEBRON", "x": 635, "y": 631, "width": 0, "height": 0 },
+    { "text": "M. DE R. S", "x": 653, "y": 875, "width": 17, "height": 163 },
+    {
+      "text": "GEREZ RODRIGUEZ RODRIGOER-00-00",
+      "x": 693,
+      "y": 794,
+      "width": 2,
+      "height": 121
+    },
+    {
+      "text": "Ayuntamiento 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00",
+      "x": 750,
+      "y": 349,
+      "width": 9,
+      "height": 1215
+    },
+    {
+      "text": "Dirección Fecha Ingreso",
+      "x": 773,
+      "y": 390,
+      "width": 12,
+      "height": 168
+    },
+    { "text": "Listado", "x": 823, "y": 433, "width": 0, "height": 0 },
+    {
+      "text": "43022454 050-0001120-4 0000 050-0022171-2 050-0022753-7 050-0035070-1 00000000 050-0010307-6 050-0021245-5 050-0028708-5 050-0005092-1 050-0028516-2 050-0005114-3 050-0002448-8 050-0000882-0 050-0022128-2 050-0022309-8 050-0006056-5 050-0020875-0 050-0029561-7 050-0007626-4 050-0026571-9 050-0023638-9 050-0025228-7 050-0018725-1",
+      "x": 852,
+      "y": 593,
+      "width": 11,
+      "height": 971
+    },
+    { "text": "Cédula", "x": 884, "y": 558, "width": 0, "height": 0 },
+    { "text": "de de", "x": 907, "y": 390, "width": 3, "height": 43 },
+    {
+      "text": "Municipal Empleados",
+      "x": 931,
+      "y": 349,
+      "width": 8,
+      "height": 84
+    },
+    { "text": "Recursos", "x": 946, "y": 390, "width": 0, "height": 0 },
+    {
+      "text": "Salario 4,700.00 4,867.00 150,000.00 3,145.00 5,871.00 8,000.00 1,000.00 7,000.00 17,500.00 58,525.00 3,967.00 58,525.00 3,174.00 3,587.00 3,174.00 3,650.00 3,174.00 4,000.00 12,000.00 25,000.00 3,587.00 3,700.00 3,587.00 7,000.00 2,858.00",
+      "x": 1000,
+      "y": 558,
+      "width": 23,
+      "height": 1006
+    },
+    {
+      "text": "de Humanos Activos",
+      "x": 1060,
+      "y": 349,
+      "width": 11,
+      "height": 84
+    },
+    {
+      "text": "Jarabacoa AYUDA MIEMBRO BOMBEROS MUSICO CAPATAZ CAJERO AYUDA AYUDA SECRETARIA REGIDOR PINTOR REGIDOR REPRESENTANTE OBRERO VIGILANTE OBRERA CONSERJE CONSERJE AYUDANTE ENC. VIGILANTE CAPATAZ OBRERA CHOFER SUPERVISOR",
+      "x": 1091,
+      "y": 349,
+      "width": 6,
+      "height": 1215
+    },
+    { "text": "DEL", "x": 1141, "y": 1360, "width": 0, "height": 0 },
+    {
+      "text": "INSTITUCION INSTITUCION INSTITUCION PARQUE DEL BRIGADA CONCEJO",
+      "x": 1157,
+      "y": 593,
+      "width": 16,
+      "height": 930
+    },
+    {
+      "text": "POLICIA PALACIO PALACIO DE DEPTO. DIURNO",
+      "x": 1177,
+      "y": 631,
+      "width": 14,
+      "height": 770
+    },
+    {
+      "text": "Posición CONCEJO PARQUE MANTENIMIENTO CEMENTERIO",
+      "x": 1201,
+      "y": 558,
+      "width": 14,
+      "height": 1006
+    },
+    {
+      "text": "MUNICIPAL ALCALDIA II DE VERTEDERO NO. MUNICIPAL",
+      "x": 1244,
+      "y": 631,
+      "width": 12,
+      "height": 892
+    },
+    {
+      "text": "(COMISION MUNICIPAL MUNICIPAL LIMPIEZA",
+      "x": 1261,
+      "y": 878,
+      "width": 7,
+      "height": 482
+    },
+    { "text": "DUARTE 6", "x": 1281, "y": 1201, "width": 1, "height": 282 },
+    { "text": "MUNICIPAL", "x": 1292, "y": 915, "width": 0, "height": 0 },
+    { "text": "EN PASO", "x": 1322, "y": 1078, "width": 8, "height": 486 },
+    {
+      "text": "TECNICA LA Y ORNAT",
+      "x": 1349,
+      "y": 878,
+      "width": 15,
+      "height": 482
+    },
+    {
+      "text": "COLONI BAJITO",
+      "x": 1373,
+      "y": 1078,
+      "width": 9,
+      "height": 486
+    },
+    { "text": "Departamento", "x": 1494, "y": 557, "width": 0, "height": 0 },
+    { "text": "Powered", "x": 1570, "y": 1692, "width": 0, "height": 0 },
+    { "text": "Página", "x": 1593, "y": 1674, "width": 0, "height": 0 },
+    { "text": "by", "x": 1618, "y": 1692, "width": 0, "height": 0 },
+    {
+      "text": "2 de Municipia",
+      "x": 1632,
+      "y": 1674,
+      "width": 12,
+      "height": 18
+    },
+    { "text": "15", "x": 1660, "y": 1674, "width": 0, "height": 0 }
+  ],
+  "3": [
+    {
+      "text": "508 514 518 523 524 533 534 543 544 547 551 555 567 580 590 601 603 622 629 632 633 638 641 661 704 05/09/2018,",
+      "x": 334,
+      "y": 610,
+      "width": 6,
+      "height": 1082
+    },
+    { "text": "Carnet", "x": 349, "y": 576, "width": 0, "height": 0 },
+    { "text": "09:01", "x": 401, "y": 1692, "width": 0, "height": 0 },
+    {
+      "text": "Empleado MIGUEL SANTO MARIA JESUS FRANCISCO GLADYS LIDIA MARIA ANA JOSE AGUSTINA RAMON MIGUEL ANASTACIO EUGENIO ANGEL FIDEL JOSE MIGUEL FERNANDO FRANCISCO JORGE ERNESTO MARIA JOSE",
+      "x": 413,
+      "y": 576,
+      "width": 6,
+      "height": 1005
+    },
+    { "text": "AM", "x": 432, "y": 1692, "width": 0, "height": 0 },
+    {
+      "text": "ALT. FELICIA MIGUEL ANDRES NUNEZ DEL DELIO",
+      "x": 455,
+      "y": 852,
+      "width": 18,
+      "height": 729
+    },
+    {
+      "text": "ANT. DE VIRGEN MARIA ALT. ANT. MORONTA ANT. RODRIGUEZ RAFAEL",
+      "x": 475,
+      "y": 608,
+      "width": 13,
+      "height": 852
+    },
+    {
+      "text": "JS. ALT. CELESTINO PERALTA DURAN POLANCO",
+      "x": 491,
+      "y": 648,
+      "width": 17,
+      "height": 852
+    },
+    {
+      "text": "ANT. ROSARIO ESTEVEZ RODRIGUEZ FIDEL DURAN POLO MARTE ANT. C. ABREU",
+      "x": 512,
+      "y": 771,
+      "width": 15,
+      "height": 810
+    },
+    {
+      "text": "ABREU PICHARDO PEÑA VELOZ PERALTA PICHARDO",
+      "x": 530,
+      "y": 608,
+      "width": 6,
+      "height": 932
+    },
+    {
+      "text": "NUÑEZ DURAN RODRIGUEZ",
+      "x": 545,
+      "y": 686,
+      "width": 3,
+      "height": 773
+    },
+    {
+      "text": "ABREU ADAMEZ SANCHEZ SUERO ABREU",
+      "x": 561,
+      "y": 771,
+      "width": 13,
+      "height": 651
+    },
+    {
+      "text": "ABREU NUNEZ PENA GARCIA SANCHEZ AQUINO SANCHEZ URIBE",
+      "x": 578,
+      "y": 608,
+      "width": 13,
+      "height": 892
+    },
+    {
+      "text": "POLO GARCIA P. TIBURCIO",
+      "x": 601,
+      "y": 686,
+      "width": 13,
+      "height": 570
+    },
+    {
+      "text": "ABREU MARTE CAPELLAN",
+      "x": 624,
+      "y": 648,
+      "width": 5,
+      "height": 774
+    },
+    { "text": "PAEZ", "x": 654, "y": 1134, "width": 0, "height": 0 },
+    {
+      "text": "Ayuntamiento 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00",
+      "x": 750,
+      "y": 366,
+      "width": 6,
+      "height": 1215
+    },
+    {
+      "text": "Dirección Fecha Ingreso",
+      "x": 773,
+      "y": 407,
+      "width": 9,
+      "height": 169
+    },
+    { "text": "Listado", "x": 823, "y": 447, "width": 0, "height": 0 },
+    {
+      "text": "050-0015371-7 050-0015286-7 050-0013816-3 050-0004846-1 050-0022935-0 050-0014849-3 050-0009274-1 050-0024244-5 050-0010177-3 050-0004362-9 050-0019209-5 050-0009946-4 050-0002832-3 050-0014829-5 050-0013762-9 050-0014711-5 050-0014174-6 050-0006354-4 050-0030571-3 050-0001883-7 050-0019616-1 050-0005409-7 050-0003795-1 050-0023645-4 050-0000826-7",
+      "x": 849,
+      "y": 607,
+      "width": 9,
+      "height": 974
+    },
+    { "text": "Cédula", "x": 881, "y": 575, "width": 0, "height": 0 },
+    { "text": "de de", "x": 908, "y": 407, "width": 0, "height": 40 },
+    {
+      "text": "Municipal Recursos Empleados",
+      "x": 928,
+      "y": 366,
+      "width": 15,
+      "height": 81
+    },
+    { "text": "Salario", "x": 1000, "y": 576, "width": 0, "height": 0 },
+    {
+      "text": "20,000.00 3,587.00 3,587.00 2,858.00 4,000.00 3,587.00 3,174.00 3,587.00 3,587.00 3,587.00 3,587.00 3,587.00 3,587.00 5,000.00 5,000.00 3,174.00 3,174.00 3,174.00 3,174.00 7,000.00 9,000.00 4,258.00 3,587.00 3,587.00 2,000.00",
+      "x": 1012,
+      "y": 608,
+      "width": 8,
+      "height": 973
+    },
+    {
+      "text": "de Humanos Activos",
+      "x": 1057,
+      "y": 366,
+      "width": 12,
+      "height": 81
+    },
+    {
+      "text": "Jarabacoa ASESOR GUARDIAN OBRERA OBRERO APRESADOR OBRERA CONSERJE AGENTE OBRERA CARRETILLERO OBRERO OBRERO CARRETILLERO AGENTE AGENTE REPRESENTANTE ALCALDE REPRESENTANTE REPRESENTANTE CHOFER BULDOCISTA MIEMBRO OBRERO OBRERA ASISTENTE",
+      "x": 1092,
+      "y": 366,
+      "width": 3,
+      "height": 1215
+    },
+    {
+      "text": "ALCALDIA PARQUE CEMENTERIO BRIGADA DE BRIGADA BRIGADA BRIGADA DE DE PEDREGAL I POLICIA MERCADO BRIGADA",
+      "x": 1169,
+      "y": 608,
+      "width": 9,
+      "height": 932
+    },
+    {
+      "text": "Posición PARQUE MERCADO LIMPIEZA LIMPIEZA LIMPIEZA",
+      "x": 1189,
+      "y": 575,
+      "width": 11,
+      "height": 599
+    },
+    { "text": "EN |", "x": 1204, "y": 771, "width": 0, "height": 648 },
+    {
+      "text": "JUMUNUCO BRIGADA BRIGADA",
+      "x": 1226,
+      "y": 770,
+      "width": 6,
+      "height": 323
+    },
+    {
+      "text": "ORNATO I NO. NO. NO. NO.4 DE ALCALDIA ALCALDIA MUNICIPAL NO.",
+      "x": 1244,
+      "y": 608,
+      "width": 10,
+      "height": 932
+    },
+    { "text": "I", "x": 1261, "y": 648, "width": 0, "height": 0 },
+    {
+      "text": "LA 3 (ASEO 5 5 (CAMION) (CAMION) LA 6",
+      "x": 1274,
+      "y": 729,
+      "width": 14,
+      "height": 811
+    },
+    {
+      "text": "TRINCHERA NO.5 NO.5 ALCALDÃ-A",
+      "x": 1301,
+      "y": 729,
+      "width": 11,
+      "height": 483
+    },
+    {
+      "text": "Y URBANO) DE EN",
+      "x": 1329,
+      "y": 608,
+      "width": 1,
+      "height": 729
+    },
+    { "text": "LIMPIEZA", "x": 1344, "y": 608, "width": 0, "height": 0 },
+    { "text": "LA PALO", "x": 1356, "y": 1297, "width": 0, "height": 40 },
+    { "text": "JOYA", "x": 1382, "y": 1297, "width": 0, "height": 0 },
+    { "text": "EN BLAN", "x": 1400, "y": 1212, "width": 5, "height": 125 },
+    { "text": "B", "x": 1426, "y": 1212, "width": 0, "height": 0 },
+    { "text": "Departamento", "x": 1491, "y": 575, "width": 0, "height": 0 },
+    { "text": "Powered", "x": 1570, "y": 1709, "width": 0, "height": 0 },
+    { "text": "Página", "x": 1599, "y": 1689, "width": 0, "height": 0 },
+    { "text": "by", "x": 1618, "y": 1710, "width": 0, "height": 0 },
+    { "text": "3 Municipia", "x": 1634, "y": 1689, "width": 1, "height": 20 },
+    { "text": "de", "x": 1646, "y": 1689, "width": 0, "height": 0 },
+    { "text": "15", "x": 1659, "y": 1689, "width": 0, "height": 0 }
+  ],
+  "4": [
+    {
+      "text": "716 721 730 757 771 779 791 803 814 842 846 872 873 882 895 896 899 906 920 938 954 965 975 978 980 05/09/2018,",
+      "x": 337,
+      "y": 599,
+      "width": 6,
+      "height": 1078
+    },
+    { "text": "Carnet", "x": 349, "y": 564, "width": 0, "height": 0 },
+    { "text": "09:01", "x": 405, "y": 1678, "width": 0, "height": 0 },
+    {
+      "text": "Empleado FRANCISCO LICDA. LICDA, ROSA JOSE BRAULIO IGLESIA JHONNY CASIMIRO LIBRADO PORFIRIO LUIS LICDA. ELIAS RAFAEL VINICIO FRANKLIN ELENA DOMINGO SERGIO GERONIMO MARIA LEONIDO ANTONIO JUAN",
+      "x": 416,
+      "y": 564,
+      "width": 6,
+      "height": 1003
+    },
+    { "text": "AM", "x": 435, "y": 1677, "width": 0, "height": 0 },
+    {
+      "text": "MARIA RAMON GONZALO GARCIA ANTONIO",
+      "x": 460,
+      "y": 716,
+      "width": 11,
+      "height": 851
+    },
+    {
+      "text": "YANINA MARICELA DE MARY CAPELLAN MERCEDES ALTAGRACIA IVAN MAGDALENA",
+      "x": 478,
+      "y": 636,
+      "width": 12,
+      "height": 811
+    },
+    {
+      "text": "MARTE ALCANTARA CABA SANTOS AMADO BERNARDO ANT. SANTOS CASTILLO",
+      "x": 493,
+      "y": 799,
+      "width": 15,
+      "height": 727
+    },
+    {
+      "text": "ANT. NUÑEZ VICTORIANO DIOS AYBAR TIBURCIO ESPINAL",
+      "x": 516,
+      "y": 593,
+      "width": 17,
+      "height": 814
+    },
+    {
+      "text": "GALAN VELOZ DURAN GARCIA DIAZ DURAN",
+      "x": 541,
+      "y": 636,
+      "width": 14,
+      "height": 931
+    },
+    {
+      "text": "ABREU ALT. O CRUZ URENA",
+      "x": 562,
+      "y": 593,
+      "width": 10,
+      "height": 892
+    },
+    {
+      "text": "PAEZ PASTOR RAMOS COMPRES SANCHÉZ ESTEVEZ GIL PENA",
+      "x": 579,
+      "y": 715,
+      "width": 12,
+      "height": 811
+    },
+    {
+      "text": "DE GENAO TINEO ROSA GALAN COLLADO",
+      "x": 597,
+      "y": 636,
+      "width": 15,
+      "height": 931
+    },
+    {
+      "text": "VARGAS LEON E.",
+      "x": 617,
+      "y": 593,
+      "width": 13,
+      "height": 854
+    },
+    { "text": "DE PERALTA", "x": 635, "y": 756, "width": 7, "height": 729 },
+    { "text": "LUIS", "x": 651, "y": 837, "width": 0, "height": 0 },
+    {
+      "text": "DE LA DOMINGUEX000-00-00 CASTILLO DE",
+      "x": 666,
+      "y": 674,
+      "width": 10,
+      "height": 605
+    },
+    {
+      "text": "JIMENEX000-00-00 ROSA NUÑEZ ABREU",
+      "x": 694,
+      "y": 674,
+      "width": 8,
+      "height": 605
+    },
+    {
+      "text": "Ayuntamiento 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00 0000-00-00",
+      "x": 750,
+      "y": 349,
+      "width": 11,
+      "height": 1218
+    },
+    {
+      "text": "Dirección Fecha Ingreso",
+      "x": 773,
+      "y": 390,
+      "width": 9,
+      "height": 171
+    },
+    { "text": "Listado", "x": 820, "y": 433, "width": 0, "height": 0 },
+    {
+      "text": "050-0036174-0 050-0040944-0 050-0006288-4 050-0013431-1 050-0022515-0 050-0017559-5 NA 050-0021035-0 050-0005137-4 050-0011361-2 050-0015962-3 050-0014161-3 050-0035361-4 050-0009416-8 050-0014045-8 050-0004091-4 050-0039784-3 050-0020928-7 050-0027195-6 050-0023769-2 050-0013028-5 050-0003602-9 050-0022895-6 050-0003474-3 050-0001279-8",
+      "x": 852,
+      "y": 593,
+      "width": 8,
+      "height": 970
+    },
+    { "text": "Cédula", "x": 881, "y": 561, "width": 0, "height": 0 },
+    { "text": "de de", "x": 906, "y": 390, "width": 1, "height": 43 },
+    {
+      "text": "Municipal Recursos Empleados",
+      "x": 930,
+      "y": 349,
+      "width": 13,
+      "height": 84
+    },
+    { "text": "Salario", "x": 997, "y": 558, "width": 0, "height": 0 },
+    {
+      "text": "4,258.00 35,000.00 58,525.00 3,587.00 6,000.00 4,310.00 2,000.00 4,000.00 4,500.00 5,000.00 3,587.00 2,645.00 20.000.00 5,000.00 5,000.00 6,500.00 5,000.00 7,000.00 5,353.00 4,655.00 5,000.00 3,587.00 4,000.00 3,587.00 3,000.00",
+      "x": 1009,
+      "y": 590,
+      "width": 11,
+      "height": 971
+    },
+    {
+      "text": "de Humanos Activos",
+      "x": 1057,
+      "y": 349,
+      "width": 10,
+      "height": 84
+    },
+    {
+      "text": "Jarabacoa MIEMBRO TESORERA REGIDORA OBRERO OBRERO MIEMBRO AYUDA MENSAJERO SUPERVISOR VIGILANTE CARRETILLERO MUSICO CONTRALORA OBRERO AGENTE MENSAJERO AGENTE SECRETARIA MIEMBRO MIEMBRO AGENTE OBRERO OBRERO AGENTE SUPERVISOR",
+      "x": 1091,
+      "y": 349,
+      "width": 6,
+      "height": 1212
+    },
+    { "text": "INSTITUCION", "x": 1158, "y": 833, "width": 0, "height": 0 },
+    {
+      "text": "POLICIA BRIGADA OBRAS POLICIA BACHEO DE DE POLICIA POLICIA DE BRIGADA MUNICIPAL DE",
+      "x": 1169,
+      "y": 591,
+      "width": 12,
+      "height": 930
+    },
+    {
+      "text": "Posición MUNICIPAL EXTERNO NOCTURNO LIMPIEZA DE LIMPIEZA LIMPIEZA LIMPIEZA",
+      "x": 1186,
+      "y": 558,
+      "width": 18,
+      "height": 963
+    },
+    {
+      "text": "MERCADO MUNICIPAL SECCIÃ\"N CEMENTERIO",
+      "x": 1209,
+      "y": 915,
+      "width": 6,
+      "height": 646
+    },
+    {
+      "text": "MUNICIPALES BRIGADA TESORERIA",
+      "x": 1229,
+      "y": 753,
+      "width": 6,
+      "height": 444
+    },
+    {
+      "text": "MUNICIPAL NO.3 MUNICIPAL MUNICIPAL MUNICIPAL NO.",
+      "x": 1249,
+      "y": 590,
+      "width": 3,
+      "height": 852
+    },
+    {
+      "text": "DEL (CAMION) (CAMION) COMUNICACIONES (CAMION) 5 (PARQUE",
+      "x": 1278,
+      "y": 956,
+      "width": 13,
+      "height": 565
+    },
+    { "text": "MUNICIPAL NO.", "x": 1299, "y": 915, "width": 8, "height": 79 },
+    {
+      "text": "PARQUE MUNICIPAL",
+      "x": 1324,
+      "y": 956,
+      "width": 0,
+      "height": 605
+    },
+    { "text": "2", "x": 1341, "y": 994, "width": 0, "height": 0 },
+    { "text": "JAPONES)", "x": 1357, "y": 1520, "width": 0, "height": 0 },
+    { "text": "DUART", "x": 1399, "y": 956, "width": 0, "height": 0 },
+    { "text": "Departamento", "x": 1491, "y": 555, "width": 0, "height": 0 },
+    { "text": "Powered", "x": 1581, "y": 1689, "width": 0, "height": 0 },
+    { "text": "Página", "x": 1602, "y": 1669, "width": 0, "height": 0 },
+    { "text": "by", "x": 1622, "y": 1689, "width": 0, "height": 0 },
+    { "text": "4 Municipia", "x": 1635, "y": 1669, "width": 4, "height": 20 },
+    { "text": "de", "x": 1649, "y": 1669, "width": 0, "height": 0 },
+    { "text": "15", "x": 1662, "y": 1669, "width": 0, "height": 0 }
+  ]
+}

@@ -1,0 +1,7099 @@
+{
+  "version": "3.2.0",
+  "modelVersion": "2022-04-30",
+  "readResults": [
+    {
+      "page": 1,
+      "angle": 89.7838,
+      "width": 813,
+      "height": 848,
+      "unit": "pixel",
+      "lines": [
+        {
+          "boundingBox": [
+            777,
+            271,
+            778,
+            536,
+            759,
+            536,
+            758,
+            271
+          ],
+          "text": "Ayuntamiento Municipal de Jarabacoa",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                776,
+                272,
+                778,
+                366,
+                759,
+                366,
+                758,
+                272
+              ],
+              "text": "Ayuntamiento",
+              "confidence": 0.981
+            },
+            {
+              "boundingBox": [
+                778,
+                370,
+                778,
+                438,
+                760,
+                438,
+                759,
+                370
+              ],
+              "text": "Municipal",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                778,
+                441,
+                778,
+                458,
+                760,
+                458,
+                760,
+                441
+              ],
+              "text": "de",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                778,
+                462,
+                778,
+                536,
+                759,
+                536,
+                760,
+                462
+              ],
+              "text": "Jarabacoa",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            759,
+            285,
+            759,
+            519,
+            743,
+            518,
+            743,
+            285
+          ],
+          "text": "Dirección de Recursos Humanos",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                759,
+                288,
+                759,
+                356,
+                743,
+                356,
+                744,
+                288
+              ],
+              "text": "Dirección",
+              "confidence": 0.218
+            },
+            {
+              "boundingBox": [
+                759,
+                359,
+                759,
+                376,
+                743,
+                377,
+                743,
+                359
+              ],
+              "text": "de",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                759,
+                379,
+                759,
+                446,
+                743,
+                447,
+                743,
+                380
+              ],
+              "text": "Recursos",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                759,
+                450,
+                760,
+                516,
+                743,
+                517,
+                743,
+                450
+              ],
+              "text": "Humanos",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            735,
+            315,
+            736,
+            495,
+            720,
+            495,
+            718,
+            315
+          ],
+          "text": "Listado de Empleados Activos",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                735,
+                315,
+                735,
+                355,
+                719,
+                357,
+                719,
+                317
+              ],
+              "text": "Listado",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                735,
+                359,
+                735,
+                374,
+                719,
+                375,
+                719,
+                360
+              ],
+              "text": "de",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                735,
+                377,
+                736,
+                444,
+                720,
+                445,
+                719,
+                378
+              ],
+              "text": "Empleados",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                736,
+                447,
+                737,
+                494,
+                720,
+                495,
+                720,
+                448
+              ],
+              "text": "Activos",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            679,
+            316,
+            677,
+            346,
+            666,
+            345,
+            666,
+            316
+          ],
+          "text": "Fecha",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                679,
+                317,
+                678,
+                345,
+                666,
+                345,
+                666,
+                316
+              ],
+              "text": "Fecha",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            678,
+            541,
+            678,
+            574,
+            668,
+            574,
+            668,
+            541
+          ],
+          "text": "Cuenta",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                679,
+                541,
+                679,
+                572,
+                669,
+                573,
+                669,
+                542
+              ],
+              "text": "Cuenta",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            664,
+            46,
+            664,
+            80,
+            651,
+            81,
+            652,
+            47
+          ],
+          "text": "Carnet",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                665,
+                46,
+                664,
+                80,
+                651,
+                80,
+                652,
+                46
+              ],
+              "text": "Carnet",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            665,
+            85,
+            664,
+            137,
+            651,
+            137,
+            652,
+            85
+          ],
+          "text": "Empleado",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                666,
+                88,
+                665,
+                135,
+                652,
+                136,
+                652,
+                88
+              ],
+              "text": "Empleado",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            662,
+            313,
+            661,
+            349,
+            651,
+            349,
+            651,
+            313
+          ],
+          "text": "Ingreso",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                662,
+                314,
+                662,
+                348,
+                651,
+                347,
+                652,
+                314
+              ],
+              "text": "Ingreso",
+              "confidence": 0.958
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            664,
+            459,
+            664,
+            494,
+            652,
+            494,
+            652,
+            459
+          ],
+          "text": "Salario",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                664,
+                460,
+                664,
+                493,
+                653,
+                493,
+                653,
+                460
+              ],
+              "text": "Salario",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            664,
+            536,
+            664,
+            577,
+            654,
+            577,
+            653,
+            536
+          ],
+          "text": "Bancaria",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                664,
+                537,
+                665,
+                576,
+                654,
+                576,
+                653,
+                538
+              ],
+              "text": "Bancaria",
+              "confidence": 0.955
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            668,
+            667,
+            667,
+            709,
+            656,
+            708,
+            656,
+            667
+          ],
+          "text": "Posición",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                668,
+                667,
+                668,
+                706,
+                656,
+                706,
+                657,
+                667
+              ],
+              "text": "Posición",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            668,
+            776,
+            667,
+            795,
+            656,
+            795,
+            656,
+            776
+          ],
+          "text": "Est.",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                669,
+                777,
+                668,
+                794,
+                656,
+                794,
+                657,
+                776
+              ],
+              "text": "Est.",
+              "confidence": 0.61
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            646,
+            39,
+            645,
+            61,
+            632,
+            61,
+            633,
+            39
+          ],
+          "text": "4721",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                646,
+                39,
+                645,
+                61,
+                632,
+                60,
+                633,
+                39
+              ],
+              "text": "4721",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            646,
+            88,
+            646,
+            158,
+            631,
+            158,
+            631,
+            89
+          ],
+          "text": "ADELA GALAN",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                646,
+                89,
+                646,
+                118,
+                632,
+                119,
+                631,
+                90
+              ],
+              "text": "ADELA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                646,
+                121,
+                647,
+                155,
+                632,
+                156,
+                632,
+                122
+              ],
+              "text": "GALAN",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            645,
+            296,
+            644,
+            346,
+            632,
+            346,
+            632,
+            296
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                645,
+                297,
+                644,
+                346,
+                632,
+                346,
+                632,
+                297
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            646,
+            472,
+            649,
+            712,
+            636,
+            713,
+            633,
+            472
+          ],
+          "text": "4,000.00 200019603429096 OBRERA BRIGADA NO.1",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                646,
+                473,
+                646,
+                510,
+                634,
+                511,
+                633,
+                473
+              ],
+              "text": "4,000.00",
+              "confidence": 0.829
+            },
+            {
+              "boundingBox": [
+                646,
+                514,
+                648,
+                593,
+                635,
+                593,
+                634,
+                514
+              ],
+              "text": "200019603429096",
+              "confidence": 0.958
+            },
+            {
+              "boundingBox": [
+                648,
+                601,
+                648,
+                639,
+                635,
+                639,
+                635,
+                601
+              ],
+              "text": "OBRERA",
+              "confidence": 0.967
+            },
+            {
+              "boundingBox": [
+                648,
+                642,
+                649,
+                684,
+                636,
+                684,
+                635,
+                642
+              ],
+              "text": "BRIGADA",
+              "confidence": 0.889
+            },
+            {
+              "boundingBox": [
+                649,
+                687,
+                649,
+                711,
+                636,
+                711,
+                636,
+                686
+              ],
+              "text": "NO.1",
+              "confidence": 0.981
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            647,
+            779,
+            647,
+            793,
+            639,
+            792,
+            639,
+            779
+          ],
+          "text": "A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.815
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                647,
+                784,
+                647,
+                790,
+                639,
+                790,
+                639,
+                784
+              ],
+              "text": "A",
+              "confidence": 0.885
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            622,
+            38,
+            622,
+            60,
+            609,
+            61,
+            609,
+            40
+          ],
+          "text": "8573",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                622,
+                38,
+                622,
+                61,
+                609,
+                61,
+                609,
+                38
+              ],
+              "text": "8573",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            624,
+            88,
+            623,
+            202,
+            608,
+            202,
+            609,
+            88
+          ],
+          "text": "ADRIAN ULLOA TORRES",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                624,
+                89,
+                624,
+                123,
+                610,
+                124,
+                610,
+                90
+              ],
+              "text": "ADRIAN",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                624,
+                126,
+                624,
+                157,
+                610,
+                158,
+                610,
+                127
+              ],
+              "text": "ULLOA",
+              "confidence": 0.986
+            },
+            {
+              "boundingBox": [
+                624,
+                160,
+                622,
+                201,
+                609,
+                202,
+                609,
+                161
+              ],
+              "text": "TORRES",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            622,
+            295,
+            621,
+            346,
+            609,
+            346,
+            609,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                622,
+                295,
+                621,
+                345,
+                609,
+                346,
+                609,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            624,
+            470,
+            628,
+            747,
+            613,
+            747,
+            609,
+            470
+          ],
+          "text": "58,525.00 200019603429050 REGIDOR CONCEJO MUNICIPAL",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                624,
+                470,
+                624,
+                511,
+                610,
+                511,
+                609,
+                471
+              ],
+              "text": "58,525.00",
+              "confidence": 0.98
+            },
+            {
+              "boundingBox": [
+                624,
+                514,
+                625,
+                594,
+                612,
+                594,
+                610,
+                514
+              ],
+              "text": "200019603429050",
+              "confidence": 0.99
+            },
+            {
+              "boundingBox": [
+                625,
+                601,
+                626,
+                644,
+                613,
+                644,
+                612,
+                601
+              ],
+              "text": "REGIDOR",
+              "confidence": 0.956
+            },
+            {
+              "boundingBox": [
+                626,
+                646,
+                627,
+                692,
+                614,
+                692,
+                613,
+                647
+              ],
+              "text": "CONCEJO",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                627,
+                694,
+                627,
+                747,
+                615,
+                747,
+                614,
+                695
+              ],
+              "text": "MUNICIPAL",
+              "confidence": 0.988
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            624,
+            780,
+            624,
+            792,
+            615,
+            791,
+            616,
+            779
+          ],
+          "text": "A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.901
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                624,
+                782,
+                624,
+                787,
+                615,
+                787,
+                615,
+                781
+              ],
+              "text": "A",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            599,
+            34,
+            598,
+            53,
+            587,
+            55,
+            587,
+            36
+          ],
+          "text": "551",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                600,
+                37,
+                599,
+                55,
+                587,
+                54,
+                588,
+                37
+              ],
+              "text": "551",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            599,
+            88,
+            599,
+            185,
+            586,
+            185,
+            586,
+            88
+          ],
+          "text": "AGUSTINA PERALTA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                600,
+                88,
+                600,
+                136,
+                587,
+                137,
+                586,
+                89
+              ],
+              "text": "AGUSTINA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                600,
+                138,
+                599,
+                183,
+                587,
+                184,
+                587,
+                139
+              ],
+              "text": "PERALTA",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            599,
+            295,
+            599,
+            345,
+            586,
+            345,
+            586,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                599,
+                295,
+                599,
+                345,
+                587,
+                345,
+                587,
+                297
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            601,
+            473,
+            604,
+            714,
+            590,
+            714,
+            587,
+            473
+          ],
+          "text": "4,000.00 200019603429081 OBRERO BRIGADA NO. 5",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                601,
+                474,
+                601,
+                510,
+                588,
+                511,
+                588,
+                475
+              ],
+              "text": "4,000.00",
+              "confidence": 0.982
+            },
+            {
+              "boundingBox": [
+                601,
+                514,
+                602,
+                594,
+                589,
+                594,
+                588,
+                515
+              ],
+              "text": "200019603429081",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                602,
+                600,
+                603,
+                640,
+                590,
+                641,
+                589,
+                601
+              ],
+              "text": "OBRERO",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                603,
+                643,
+                603,
+                684,
+                591,
+                685,
+                590,
+                643
+              ],
+              "text": "BRIGADA",
+              "confidence": 0.944
+            },
+            {
+              "boundingBox": [
+                604,
+                687,
+                604,
+                704,
+                591,
+                704,
+                591,
+                687
+              ],
+              "text": "NO.",
+              "confidence": 0.958
+            },
+            {
+              "boundingBox": [
+                604,
+                707,
+                604,
+                714,
+                591,
+                714,
+                591,
+                707
+              ],
+              "text": "5",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            602,
+            779,
+            602,
+            791,
+            593,
+            790,
+            593,
+            779
+          ],
+          "text": "A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.769
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                602,
+                785,
+                602,
+                791,
+                593,
+                791,
+                593,
+                785
+              ],
+              "text": "A",
+              "confidence": 0.989
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            575,
+            37,
+            575,
+            59,
+            563,
+            60,
+            563,
+            38
+          ],
+          "text": "8569",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                575,
+                37,
+                575,
+                59,
+                563,
+                59,
+                563,
+                37
+              ],
+              "text": "8569",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            577,
+            87,
+            576,
+            250,
+            562,
+            250,
+            563,
+            87
+          ],
+          "text": "ALEXANDER CANELA VICTORIANO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                577,
+                88,
+                577,
+                145,
+                564,
+                145,
+                563,
+                88
+              ],
+              "text": "ALEXANDER",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                577,
+                147,
+                577,
+                185,
+                564,
+                186,
+                564,
+                148
+              ],
+              "text": "CANELA",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                577,
+                188,
+                576,
+                248,
+                562,
+                249,
+                564,
+                188
+              ],
+              "text": "VICTORIANO",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            575,
+            295,
+            575,
+            346,
+            563,
+            346,
+            563,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                576,
+                295,
+                575,
+                345,
+                564,
+                345,
+                564,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            577,
+            468,
+            582,
+            793,
+            568,
+            794,
+            563,
+            468
+          ],
+          "text": "20,000.00 200010510361901 ENC. DEPTO DE OBRAS PUBLICAS MUNICI",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                577,
+                468,
+                578,
+                510,
+                564,
+                511,
+                563,
+                469
+              ],
+              "text": "20,000.00",
+              "confidence": 0.958
+            },
+            {
+              "boundingBox": [
+                578,
+                513,
+                579,
+                594,
+                566,
+                595,
+                564,
+                514
+              ],
+              "text": "200010510361901",
+              "confidence": 0.967
+            },
+            {
+              "boundingBox": [
+                579,
+                599,
+                579,
+                622,
+                566,
+                623,
+                566,
+                600
+              ],
+              "text": "ENC.",
+              "confidence": 0.982
+            },
+            {
+              "boundingBox": [
+                579,
+                624,
+                580,
+                657,
+                567,
+                657,
+                566,
+                625
+              ],
+              "text": "DEPTO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                580,
+                659,
+                580,
+                672,
+                567,
+                673,
+                567,
+                660
+              ],
+              "text": "DE",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                580,
+                675,
+                581,
+                707,
+                567,
+                707,
+                567,
+                675
+              ],
+              "text": "OBRAS",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                581,
+                709,
+                582,
+                755,
+                568,
+                756,
+                567,
+                710
+              ],
+              "text": "PUBLICAS",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                582,
+                758,
+                583,
+                793,
+                568,
+                794,
+                568,
+                758
+              ],
+              "text": "MUNICI",
+              "confidence": 0.8
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            553,
+            36,
+            552,
+            59,
+            540,
+            59,
+            540,
+            36
+          ],
+          "text": "4717",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                554,
+                37,
+                553,
+                59,
+                540,
+                58,
+                541,
+                36
+              ],
+              "text": "4717",
+              "confidence": 0.987
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            553,
+            87,
+            553,
+            195,
+            540,
+            195,
+            540,
+            87
+          ],
+          "text": "ALICIA DIAZ BAUTISTA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                554,
+                87,
+                554,
+                116,
+                540,
+                117,
+                540,
+                88
+              ],
+              "text": "ALICIA",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                554,
+                118,
+                554,
+                140,
+                541,
+                141,
+                540,
+                119
+              ],
+              "text": "DIAZ",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                554,
+                143,
+                553,
+                192,
+                540,
+                193,
+                541,
+                144
+              ],
+              "text": "BAUTISTA",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            552,
+            295,
+            553,
+            346,
+            541,
+            347,
+            540,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                553,
+                296,
+                553,
+                344,
+                541,
+                345,
+                541,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            555,
+            473,
+            558,
+            755,
+            544,
+            756,
+            541,
+            473
+          ],
+          "text": "7,000.00 200019603429032 CONSERJE (PALACIO MUNICIPAL)",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                556,
+                473,
+                556,
+                510,
+                541,
+                511,
+                541,
+                474
+              ],
+              "text": "7,000.00",
+              "confidence": 0.839
+            },
+            {
+              "boundingBox": [
+                556,
+                513,
+                556,
+                593,
+                542,
+                594,
+                541,
+                514
+              ],
+              "text": "200019603429032",
+              "confidence": 0.983
+            },
+            {
+              "boundingBox": [
+                556,
+                599,
+                557,
+                650,
+                543,
+                650,
+                542,
+                600
+              ],
+              "text": "CONSERJE",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                557,
+                653,
+                558,
+                695,
+                543,
+                695,
+                543,
+                653
+              ],
+              "text": "(PALACIO",
+              "confidence": 0.992
+            },
+            {
+              "boundingBox": [
+                558,
+                698,
+                559,
+                756,
+                544,
+                755,
+                544,
+                698
+              ],
+              "text": "MUNICIPAL)",
+              "confidence": 0.955
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            529,
+            35,
+            529,
+            53,
+            517,
+            55,
+            517,
+            36
+          ],
+          "text": "156",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                529,
+                37,
+                529,
+                55,
+                517,
+                55,
+                517,
+                37
+              ],
+              "text": "156",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            530,
+            87,
+            530,
+            183,
+            516,
+            183,
+            516,
+            87
+          ],
+          "text": "AMADO GUTIERREZ",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                531,
+                88,
+                531,
+                122,
+                517,
+                122,
+                517,
+                88
+              ],
+              "text": "AMADO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                531,
+                124,
+                530,
+                182,
+                517,
+                182,
+                517,
+                125
+              ],
+              "text": "GUTIERREZ",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            530,
+            295,
+            530,
+            344,
+            518,
+            344,
+            518,
+            296
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                530,
+                296,
+                530,
+                344,
+                519,
+                345,
+                518,
+                297
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            532,
+            471,
+            535,
+            748,
+            521,
+            748,
+            518,
+            471
+          ],
+          "text": "5,000.00 200019603429079 AGENTE DE LIMPIEZA (CAMION)",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                532,
+                472,
+                533,
+                510,
+                519,
+                511,
+                518,
+                473
+              ],
+              "text": "5,000.00",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                533,
+                512,
+                534,
+                593,
+                520,
+                593,
+                519,
+                513
+              ],
+              "text": "200019603429079",
+              "confidence": 0.98
+            },
+            {
+              "boundingBox": [
+                534,
+                599,
+                534,
+                638,
+                520,
+                638,
+                520,
+                600
+              ],
+              "text": "AGENTE",
+              "confidence": 0.951
+            },
+            {
+              "boundingBox": [
+                534,
+                640,
+                534,
+                653,
+                521,
+                653,
+                520,
+                641
+              ],
+              "text": "DE",
+              "confidence": 0.974
+            },
+            {
+              "boundingBox": [
+                534,
+                656,
+                535,
+                698,
+                521,
+                698,
+                521,
+                656
+              ],
+              "text": "LIMPIEZA",
+              "confidence": 0.886
+            },
+            {
+              "boundingBox": [
+                535,
+                701,
+                536,
+                749,
+                521,
+                748,
+                521,
+                701
+              ],
+              "text": "(CAMION)",
+              "confidence": 0.917
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            525,
+            782,
+            535,
+            782,
+            535,
+            789,
+            524,
+            789
+          ],
+          "text": "20",
+          "appearance": {
+            "style": {
+              "name": "handwriting",
+              "confidence": 1
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                527,
+                782,
+                534,
+                782,
+                534,
+                789,
+                527,
+                789
+              ],
+              "text": "20",
+              "confidence": 0.46
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            505,
+            36,
+            505,
+            58,
+            494,
+            59,
+            494,
+            36
+          ],
+          "text": "8509",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                505,
+                37,
+                505,
+                59,
+                494,
+                59,
+                494,
+                37
+              ],
+              "text": "8509",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            508,
+            86,
+            509,
+            270,
+            494,
+            270,
+            493,
+            86
+          ],
+          "text": "AMARILIS JOSEFINA ABREU PICHARDO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                508,
+                87,
+                508,
+                130,
+                495,
+                131,
+                494,
+                88
+              ],
+              "text": "AMARILIS",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                508,
+                133,
+                509,
+                179,
+                495,
+                180,
+                495,
+                133
+              ],
+              "text": "JOSEFINA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                509,
+                182,
+                509,
+                215,
+                495,
+                215,
+                495,
+                183
+              ],
+              "text": "ABREU",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                509,
+                217,
+                508,
+                268,
+                494,
+                269,
+                495,
+                218
+              ],
+              "text": "PICHARDO",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            507,
+            294,
+            507,
+            345,
+            495,
+            345,
+            495,
+            294
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                508,
+                295,
+                507,
+                344,
+                496,
+                345,
+                496,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            509,
+            472,
+            513,
+            748,
+            499,
+            748,
+            496,
+            472
+          ],
+          "text": "4,500.00 200019603429144 CONSERJE PALACIO MUNICIPAL",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                510,
+                473,
+                510,
+                510,
+                497,
+                511,
+                496,
+                473
+              ],
+              "text": "4,500.00",
+              "confidence": 0.905
+            },
+            {
+              "boundingBox": [
+                510,
+                513,
+                511,
+                593,
+                498,
+                594,
+                497,
+                513
+              ],
+              "text": "200019603429144",
+              "confidence": 0.963
+            },
+            {
+              "boundingBox": [
+                511,
+                599,
+                512,
+                650,
+                498,
+                651,
+                498,
+                600
+              ],
+              "text": "CONSERJE",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                512,
+                653,
+                512,
+                693,
+                499,
+                693,
+                498,
+                653
+              ],
+              "text": "PALACIO",
+              "confidence": 0.981
+            },
+            {
+              "boundingBox": [
+                512,
+                695,
+                513,
+                748,
+                500,
+                749,
+                499,
+                696
+              ],
+              "text": "MUNICIPAL",
+              "confidence": 0.972
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            482,
+            35,
+            481,
+            57,
+            469,
+            58,
+            470,
+            36
+          ],
+          "text": "8501",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                482,
+                36,
+                481,
+                57,
+                469,
+                57,
+                470,
+                35
+              ],
+              "text": "8501",
+              "confidence": 0.971
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            484,
+            86,
+            485,
+            226,
+            471,
+            226,
+            469,
+            87
+          ],
+          "text": "AMPARO GUZMAN DE LAMAR",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                485,
+                87,
+                485,
+                127,
+                471,
+                128,
+                470,
+                87
+              ],
+              "text": "AMPARO",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                485,
+                130,
+                485,
+                171,
+                471,
+                172,
+                471,
+                130
+              ],
+              "text": "GUZMAN",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                485,
+                174,
+                485,
+                187,
+                472,
+                187,
+                471,
+                174
+              ],
+              "text": "DE",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                485,
+                189,
+                485,
+                223,
+                472,
+                224,
+                472,
+                190
+              ],
+              "text": "LAMAR",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            484,
+            295,
+            485,
+            345,
+            472,
+            345,
+            472,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                485,
+                295,
+                485,
+                344,
+                473,
+                345,
+                472,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            487,
+            473,
+            491,
+            786,
+            476,
+            787,
+            473,
+            473
+          ],
+          "text": "4,000.00 200019603429083 AGENTE DE LIMPIEZA (ASEO URBANO) A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                487,
+                474,
+                487,
+                510,
+                474,
+                511,
+                473,
+                475
+              ],
+              "text": "4,000.00",
+              "confidence": 0.957
+            },
+            {
+              "boundingBox": [
+                487,
+                513,
+                488,
+                593,
+                474,
+                593,
+                474,
+                514
+              ],
+              "text": "200019603429083",
+              "confidence": 0.981
+            },
+            {
+              "boundingBox": [
+                488,
+                598,
+                489,
+                637,
+                475,
+                637,
+                475,
+                599
+              ],
+              "text": "AGENTE",
+              "confidence": 0.963
+            },
+            {
+              "boundingBox": [
+                489,
+                639,
+                489,
+                652,
+                475,
+                652,
+                475,
+                640
+              ],
+              "text": "DE",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                489,
+                654,
+                490,
+                697,
+                476,
+                698,
+                475,
+                655
+              ],
+              "text": "LIMPIEZA",
+              "confidence": 0.932
+            },
+            {
+              "boundingBox": [
+                490,
+                700,
+                490,
+                728,
+                476,
+                729,
+                476,
+                701
+              ],
+              "text": "(ASEO",
+              "confidence": 0.955
+            },
+            {
+              "boundingBox": [
+                490,
+                731,
+                491,
+                775,
+                476,
+                775,
+                476,
+                731
+              ],
+              "text": "URBANO)",
+              "confidence": 0.942
+            },
+            {
+              "boundingBox": [
+                491,
+                778,
+                492,
+                786,
+                476,
+                786,
+                476,
+                778
+              ],
+              "text": "A",
+              "confidence": 0.958
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            459,
+            37,
+            459,
+            57,
+            447,
+            58,
+            447,
+            37
+          ],
+          "text": "8450",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                459,
+                37,
+                459,
+                58,
+                447,
+                58,
+                447,
+                37
+              ],
+              "text": "8450",
+              "confidence": 0.981
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            462,
+            85,
+            462,
+            235,
+            448,
+            235,
+            448,
+            86
+          ],
+          "text": "ANA CELESTE RAMIREZ PEREZ",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                462,
+                86,
+                462,
+                104,
+                448,
+                105,
+                448,
+                87
+              ],
+              "text": "ANA",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                462,
+                107,
+                463,
+                151,
+                449,
+                152,
+                449,
+                108
+              ],
+              "text": "CELESTE",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                463,
+                154,
+                463,
+                196,
+                449,
+                197,
+                449,
+                154
+              ],
+              "text": "RAMIREZ",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                463,
+                199,
+                462,
+                233,
+                449,
+                234,
+                449,
+                200
+              ],
+              "text": "PEREZ",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            462,
+            295,
+            462,
+            344,
+            450,
+            344,
+            450,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                462,
+                295,
+                462,
+                344,
+                451,
+                345,
+                451,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            465,
+            467,
+            469,
+            795,
+            454,
+            795,
+            451,
+            467
+          ],
+          "text": "15,000.00 200019601910330 ENC. DPTO DE SERVICIOS PUBLICOS MUAN",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                465,
+                467,
+                465,
+                509,
+                452,
+                510,
+                452,
+                469
+              ],
+              "text": "15,000.00",
+              "confidence": 0.964
+            },
+            {
+              "boundingBox": [
+                465,
+                512,
+                466,
+                592,
+                452,
+                593,
+                452,
+                513
+              ],
+              "text": "200019601910330",
+              "confidence": 0.971
+            },
+            {
+              "boundingBox": [
+                466,
+                598,
+                466,
+                621,
+                453,
+                622,
+                453,
+                600
+              ],
+              "text": "ENC.",
+              "confidence": 0.958
+            },
+            {
+              "boundingBox": [
+                466,
+                623,
+                466,
+                649,
+                453,
+                651,
+                453,
+                625
+              ],
+              "text": "DPTO",
+              "confidence": 0.982
+            },
+            {
+              "boundingBox": [
+                466,
+                652,
+                467,
+                665,
+                453,
+                666,
+                453,
+                653
+              ],
+              "text": "DE",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                467,
+                667,
+                467,
+                717,
+                454,
+                718,
+                453,
+                668
+              ],
+              "text": "SERVICIOS",
+              "confidence": 0.949
+            },
+            {
+              "boundingBox": [
+                468,
+                720,
+                468,
+                767,
+                454,
+                768,
+                454,
+                721
+              ],
+              "text": "PUBLICOS",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                469,
+                770,
+                469,
+                793,
+                454,
+                794,
+                454,
+                771
+              ],
+              "text": "MUAN",
+              "confidence": 0.489
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            437,
+            34,
+            436,
+            54,
+            424,
+            53,
+            425,
+            34
+          ],
+          "text": "421",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                437,
+                35,
+                436,
+                54,
+                424,
+                53,
+                425,
+                35
+              ],
+              "text": "421",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            438,
+            86,
+            439,
+            183,
+            425,
+            183,
+            424,
+            86
+          ],
+          "text": "ANA ERCILIA ABREU",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                439,
+                87,
+                439,
+                105,
+                425,
+                105,
+                424,
+                87
+              ],
+              "text": "ANA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                439,
+                107,
+                439,
+                144,
+                425,
+                145,
+                425,
+                108
+              ],
+              "text": "ERCILIA",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                439,
+                147,
+                439,
+                181,
+                426,
+                182,
+                425,
+                148
+              ],
+              "text": "ABREU",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            439,
+            295,
+            439,
+            344,
+            428,
+            344,
+            428,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                440,
+                296,
+                439,
+                343,
+                428,
+                344,
+                428,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            441,
+            470,
+            444,
+            654,
+            430,
+            654,
+            428,
+            471
+          ],
+          "text": "4,000.00 200010510245425 CONSERJE",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                442,
+                471,
+                442,
+                510,
+                429,
+                510,
+                428,
+                472
+              ],
+              "text": "4,000.00",
+              "confidence": 0.67
+            },
+            {
+              "boundingBox": [
+                442,
+                512,
+                443,
+                591,
+                431,
+                592,
+                429,
+                513
+              ],
+              "text": "200010510245425",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                443,
+                599,
+                444,
+                651,
+                431,
+                652,
+                431,
+                600
+              ],
+              "text": "CONSERJE",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            413,
+            34,
+            413,
+            53,
+            401,
+            53,
+            401,
+            33
+          ],
+          "text": "544",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                413,
+                34,
+                413,
+                53,
+                401,
+                53,
+                401,
+                34
+              ],
+              "text": "544",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            415,
+            84,
+            415,
+            194,
+            402,
+            194,
+            402,
+            85
+          ],
+          "text": "ANA FELICIA ESTEVEZ",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                415,
+                85,
+                416,
+                104,
+                402,
+                105,
+                402,
+                86
+              ],
+              "text": "ANA",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                416,
+                107,
+                416,
+                143,
+                402,
+                144,
+                402,
+                107
+              ],
+              "text": "FELICIA",
+              "confidence": 0.955
+            },
+            {
+              "boundingBox": [
+                416,
+                146,
+                416,
+                192,
+                403,
+                192,
+                402,
+                146
+              ],
+              "text": "ESTEVEZ",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            417,
+            296,
+            417,
+            343,
+            404,
+            343,
+            404,
+            296
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                417,
+                296,
+                417,
+                343,
+                406,
+                344,
+                405,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.891
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            419,
+            472,
+            421,
+            714,
+            407,
+            714,
+            406,
+            472
+          ],
+          "text": "3,587.00 200010510245742 OBRERA BRIGADA NO. 5",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                419,
+                472,
+                420,
+                509,
+                406,
+                510,
+                406,
+                473
+              ],
+              "text": "3,587.00",
+              "confidence": 0.886
+            },
+            {
+              "boundingBox": [
+                420,
+                512,
+                421,
+                593,
+                407,
+                593,
+                406,
+                513
+              ],
+              "text": "200010510245742",
+              "confidence": 0.974
+            },
+            {
+              "boundingBox": [
+                421,
+                598,
+                421,
+                638,
+                407,
+                638,
+                407,
+                599
+              ],
+              "text": "OBRERA",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                421,
+                640,
+                421,
+                682,
+                407,
+                683,
+                407,
+                641
+              ],
+              "text": "BRIGADA",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                421,
+                685,
+                421,
+                701,
+                407,
+                702,
+                407,
+                686
+              ],
+              "text": "NO.",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                421,
+                704,
+                421,
+                712,
+                408,
+                712,
+                408,
+                704
+              ],
+              "text": "5",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            389,
+            34,
+            389,
+            56,
+            376,
+            57,
+            376,
+            34
+          ],
+          "text": "4244",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                389,
+                35,
+                389,
+                57,
+                376,
+                57,
+                376,
+                35
+              ],
+              "text": "4244",
+              "confidence": 0.987
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            391,
+            85,
+            393,
+            229,
+            379,
+            229,
+            377,
+            85
+          ],
+          "text": "ANA MARGARITA VICTORIANO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                391,
+                85,
+                392,
+                104,
+                378,
+                104,
+                377,
+                85
+              ],
+              "text": "ANA",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                392,
+                107,
+                392,
+                164,
+                380,
+                164,
+                378,
+                107
+              ],
+              "text": "MARGARITA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                392,
+                166,
+                393,
+                226,
+                380,
+                227,
+                380,
+                167
+              ],
+              "text": "VICTORIANO",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            393,
+            295,
+            393,
+            344,
+            382,
+            344,
+            382,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                393,
+                295,
+                393,
+                343,
+                382,
+                344,
+                382,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            396,
+            471,
+            398,
+            711,
+            385,
+            711,
+            383,
+            471
+          ],
+          "text": "3,587.00 200019603429057 OBRERO BRIGADA NO.2",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                396,
+                472,
+                397,
+                509,
+                384,
+                511,
+                384,
+                473
+              ],
+              "text": "3,587.00",
+              "confidence": 0.931
+            },
+            {
+              "boundingBox": [
+                397,
+                512,
+                397,
+                592,
+                384,
+                592,
+                384,
+                513
+              ],
+              "text": "200019603429057",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                397,
+                599,
+                398,
+                639,
+                385,
+                639,
+                385,
+                599
+              ],
+              "text": "OBRERO",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                398,
+                641,
+                398,
+                683,
+                385,
+                684,
+                385,
+                642
+              ],
+              "text": "BRIGADA",
+              "confidence": 0.976
+            },
+            {
+              "boundingBox": [
+                398,
+                686,
+                399,
+                710,
+                385,
+                711,
+                385,
+                686
+              ],
+              "text": "NO.2",
+              "confidence": 0.987
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            365,
+            34,
+            365,
+            53,
+            354,
+            54,
+            354,
+            34
+          ],
+          "text": "112",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                365,
+                35,
+                365,
+                53,
+                354,
+                53,
+                354,
+                35
+              ],
+              "text": "112",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            368,
+            86,
+            371,
+            270,
+            357,
+            270,
+            354,
+            86
+          ],
+          "text": "ANA MERCEDES DE LA ROSA PERALTA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                368,
+                86,
+                369,
+                104,
+                354,
+                105,
+                354,
+                87
+              ],
+              "text": "ANA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                369,
+                106,
+                370,
+                160,
+                356,
+                161,
+                355,
+                107
+              ],
+              "text": "MERCEDES",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                370,
+                163,
+                370,
+                176,
+                356,
+                177,
+                356,
+                164
+              ],
+              "text": "DE",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                370,
+                178,
+                370,
+                190,
+                357,
+                191,
+                356,
+                179
+              ],
+              "text": "LA",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                370,
+                193,
+                371,
+                220,
+                357,
+                221,
+                357,
+                194
+              ],
+              "text": "ROSA",
+              "confidence": 0.986
+            },
+            {
+              "boundingBox": [
+                371,
+                222,
+                371,
+                268,
+                358,
+                269,
+                357,
+                223
+              ],
+              "text": "PERALTA",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            370,
+            295,
+            370,
+            343,
+            358,
+            343,
+            358,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                370,
+                295,
+                371,
+                343,
+                359,
+                343,
+                359,
+                296
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.992
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            373,
+            471,
+            374,
+            640,
+            361,
+            640,
+            360,
+            471
+          ],
+          "text": "2,145.00 200019603714769 MUSICO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                373,
+                472,
+                374,
+                509,
+                360,
+                510,
+                360,
+                473
+              ],
+              "text": "2,145.00",
+              "confidence": 0.971
+            },
+            {
+              "boundingBox": [
+                374,
+                512,
+                374,
+                592,
+                361,
+                593,
+                360,
+                513
+              ],
+              "text": "200019603714769",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                374,
+                599,
+                374,
+                636,
+                363,
+                637,
+                362,
+                600
+              ],
+              "text": "MUSICO",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            342,
+            36,
+            342,
+            56,
+            330,
+            56,
+            330,
+            36
+          ],
+          "text": "4723",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                342,
+                36,
+                342,
+                56,
+                330,
+                56,
+                330,
+                36
+              ],
+              "text": "4723",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            345,
+            85,
+            349,
+            280,
+            334,
+            281,
+            330,
+            85
+          ],
+          "text": "ANA SILVIA CLARIBEL SANTIAGO PEÑALO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                345,
+                86,
+                345,
+                103,
+                330,
+                104,
+                330,
+                86
+              ],
+              "text": "ANA",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                345,
+                106,
+                346,
+                136,
+                332,
+                136,
+                331,
+                107
+              ],
+              "text": "SILVIA",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                346,
+                139,
+                347,
+                184,
+                333,
+                185,
+                332,
+                139
+              ],
+              "text": "CLARIBEL",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                347,
+                187,
+                348,
+                236,
+                334,
+                236,
+                333,
+                188
+              ],
+              "text": "SANTIAGO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                348,
+                238,
+                349,
+                278,
+                334,
+                279,
+                334,
+                239
+              ],
+              "text": "PEÑALO",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            347,
+            293,
+            347,
+            344,
+            335,
+            344,
+            335,
+            293
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                348,
+                294,
+                348,
+                343,
+                336,
+                343,
+                335,
+                294
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            350,
+            471,
+            351,
+            510,
+            338,
+            510,
+            338,
+            471
+          ],
+          "text": "4,500.00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                351,
+                472,
+                351,
+                508,
+                339,
+                509,
+                338,
+                473
+              ],
+              "text": "4,500.00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            352,
+            600,
+            354,
+            768,
+            340,
+            769,
+            338,
+            601
+          ],
+          "text": "SUPERVISOR BRIGADA DE LIMPIEZA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                352,
+                601,
+                352,
+                659,
+                339,
+                660,
+                339,
+                602
+              ],
+              "text": "SUPERVISOR",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                352,
+                661,
+                353,
+                703,
+                339,
+                704,
+                339,
+                662
+              ],
+              "text": "BRIGADA",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                353,
+                705,
+                353,
+                719,
+                339,
+                720,
+                339,
+                706
+              ],
+              "text": "DE",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                353,
+                721,
+                354,
+                767,
+                340,
+                768,
+                339,
+                722
+              ],
+              "text": "LIMPIEZA",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            319,
+            33,
+            320,
+            53,
+            308,
+            53,
+            308,
+            33
+          ],
+          "text": "580",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                320,
+                34,
+                320,
+                52,
+                308,
+                53,
+                308,
+                34
+              ],
+              "text": "580",
+              "confidence": 0.965
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            321,
+            84,
+            324,
+            248,
+            310,
+            248,
+            308,
+            84
+          ],
+          "text": "ANASTACIO FIDEL SANCHEZ PAEZ",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                322,
+                84,
+                322,
+                139,
+                309,
+                140,
+                308,
+                85
+              ],
+              "text": "ANASTACIO",
+              "confidence": 0.992
+            },
+            {
+              "boundingBox": [
+                322,
+                142,
+                323,
+                168,
+                310,
+                169,
+                309,
+                143
+              ],
+              "text": "FIDEL",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                323,
+                171,
+                324,
+                218,
+                311,
+                219,
+                310,
+                172
+              ],
+              "text": "SANCHEZ",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                324,
+                221,
+                324,
+                246,
+                311,
+                247,
+                311,
+                222
+              ],
+              "text": "PAEZ",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            325,
+            294,
+            324,
+            343,
+            312,
+            343,
+            312,
+            294
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                325,
+                294,
+                325,
+                342,
+                313,
+                343,
+                313,
+                295
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            328,
+            470,
+            331,
+            746,
+            316,
+            746,
+            314,
+            470
+          ],
+          "text": "5,000.00 200010510246013 AGENTE DE LIMPIEZA (CAMION)",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                327,
+                471,
+                328,
+                509,
+                314,
+                509,
+                314,
+                471
+              ],
+              "text": "5,000.00",
+              "confidence": 0.97
+            },
+            {
+              "boundingBox": [
+                328,
+                512,
+                328,
+                592,
+                315,
+                592,
+                314,
+                512
+              ],
+              "text": "200010510246013",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                329,
+                598,
+                329,
+                636,
+                315,
+                637,
+                315,
+                599
+              ],
+              "text": "AGENTE",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                329,
+                639,
+                329,
+                652,
+                315,
+                652,
+                315,
+                640
+              ],
+              "text": "DE",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                329,
+                655,
+                330,
+                697,
+                316,
+                698,
+                315,
+                655
+              ],
+              "text": "LIMPIEZA",
+              "confidence": 0.951
+            },
+            {
+              "boundingBox": [
+                330,
+                700,
+                331,
+                746,
+                316,
+                746,
+                316,
+                701
+              ],
+              "text": "(CAMION)",
+              "confidence": 0.979
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            296,
+            34,
+            295,
+            56,
+            283,
+            56,
+            284,
+            34
+          ],
+          "text": "1435",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                296,
+                35,
+                295,
+                56,
+                283,
+                55,
+                284,
+                34
+              ],
+              "text": "1435",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            298,
+            85,
+            299,
+            168,
+            285,
+            169,
+            283,
+            85
+          ],
+          "text": "ANDRES VARGAS",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                298,
+                85,
+                299,
+                123,
+                285,
+                124,
+                284,
+                86
+              ],
+              "text": "ANDRES",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                299,
+                126,
+                299,
+                168,
+                286,
+                169,
+                285,
+                127
+              ],
+              "text": "VARGAS",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            301,
+            293,
+            301,
+            343,
+            289,
+            343,
+            289,
+            293
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                301,
+                294,
+                301,
+                342,
+                289,
+                343,
+                289,
+                294
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            304,
+            470,
+            306,
+            684,
+            293,
+            684,
+            292,
+            470
+          ],
+          "text": "6,160.00 200019603429124 OBRERO CAMION",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                305,
+                471,
+                305,
+                508,
+                292,
+                509,
+                292,
+                472
+              ],
+              "text": "6,160.00",
+              "confidence": 0.84
+            },
+            {
+              "boundingBox": [
+                305,
+                512,
+                306,
+                592,
+                293,
+                592,
+                292,
+                512
+              ],
+              "text": "200019603429124",
+              "confidence": 0.952
+            },
+            {
+              "boundingBox": [
+                306,
+                599,
+                306,
+                639,
+                293,
+                639,
+                293,
+                599
+              ],
+              "text": "OBRERO",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                306,
+                642,
+                306,
+                680,
+                293,
+                680,
+                293,
+                641
+              ],
+              "text": "CAMION",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            273,
+            32,
+            273,
+            52,
+            261,
+            52,
+            262,
+            32
+          ],
+          "text": "601",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                274,
+                33,
+                273,
+                52,
+                261,
+                52,
+                262,
+                33
+              ],
+              "text": "601",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            274,
+            84,
+            277,
+            228,
+            263,
+            229,
+            260,
+            84
+          ],
+          "text": "ANGEL ANT. DURAN SANCHEZ",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                275,
+                84,
+                275,
+                115,
+                261,
+                116,
+                260,
+                85
+              ],
+              "text": "ANGEL",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                275,
+                118,
+                276,
+                140,
+                262,
+                141,
+                261,
+                119
+              ],
+              "text": "ANT.",
+              "confidence": 0.985
+            },
+            {
+              "boundingBox": [
+                276,
+                143,
+                277,
+                176,
+                263,
+                177,
+                262,
+                144
+              ],
+              "text": "DURAN",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                277,
+                179,
+                277,
+                227,
+                263,
+                228,
+                263,
+                180
+              ],
+              "text": "SANCHEZ",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            277,
+            292,
+            278,
+            341,
+            266,
+            341,
+            266,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                278,
+                292,
+                278,
+                341,
+                267,
+                342,
+                266,
+                293
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            283,
+            470,
+            286,
+            795,
+            271,
+            795,
+            269,
+            470
+          ],
+          "text": "3,174.00 200010510246000 REPRESENTANTE DE LA ALCALDÃ·A ENAB",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                282,
+                471,
+                282,
+                508,
+                269,
+                509,
+                269,
+                472
+              ],
+              "text": "3,174.00",
+              "confidence": 0.87
+            },
+            {
+              "boundingBox": [
+                282,
+                511,
+                283,
+                591,
+                270,
+                592,
+                269,
+                512
+              ],
+              "text": "200010510246000",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                283,
+                598,
+                284,
+                681,
+                271,
+                682,
+                270,
+                599
+              ],
+              "text": "REPRESENTANTE",
+              "confidence": 0.945
+            },
+            {
+              "boundingBox": [
+                284,
+                684,
+                284,
+                695,
+                271,
+                696,
+                271,
+                685
+              ],
+              "text": "DE",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                284,
+                698,
+                285,
+                709,
+                271,
+                710,
+                271,
+                699
+              ],
+              "text": "LA",
+              "confidence": 0.987
+            },
+            {
+              "boundingBox": [
+                285,
+                712,
+                286,
+                763,
+                271,
+                764,
+                271,
+                713
+              ],
+              "text": "ALCALDÃ·A",
+              "confidence": 0.668
+            },
+            {
+              "boundingBox": [
+                286,
+                765,
+                286,
+                793,
+                271,
+                794,
+                271,
+                766
+              ],
+              "text": "ENAB",
+              "confidence": 0.989
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            249,
+            36,
+            249,
+            55,
+            237,
+            55,
+            237,
+            36
+          ],
+          "text": "4786",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                249,
+                36,
+                249,
+                54,
+                237,
+                54,
+                237,
+                36
+              ],
+              "text": "4786",
+              "confidence": 0.955
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            251,
+            84,
+            256,
+            264,
+            241,
+            264,
+            237,
+            84
+          ],
+          "text": "ANGEL GABRIEL GUILLERMO ADAMES",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                251,
+                84,
+                252,
+                115,
+                238,
+                116,
+                237,
+                85
+              ],
+              "text": "ANGEL",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                252,
+                118,
+                253,
+                159,
+                239,
+                160,
+                238,
+                119
+              ],
+              "text": "GABRIEL",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                253,
+                162,
+                255,
+                217,
+                241,
+                218,
+                239,
+                163
+              ],
+              "text": "GUILLERMO",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                255,
+                220,
+                256,
+                263,
+                241,
+                264,
+                241,
+                221
+              ],
+              "text": "ADAMES",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            255,
+            292,
+            255,
+            343,
+            243,
+            343,
+            243,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                256,
+                293,
+                255,
+                342,
+                244,
+                342,
+                243,
+                293
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            258,
+            470,
+            257,
+            509,
+            246,
+            508,
+            246,
+            470
+          ],
+          "text": "7,000.00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                259,
+                471,
+                258,
+                508,
+                246,
+                508,
+                246,
+                471
+              ],
+              "text": "7,000.00",
+              "confidence": 0.932
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            259,
+            598,
+            261,
+            698,
+            248,
+            699,
+            246,
+            599
+          ],
+          "text": "CHOFER DE CAMION",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                259,
+                599,
+                260,
+                638,
+                248,
+                639,
+                247,
+                600
+              ],
+              "text": "CHOFER",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                261,
+                642,
+                261,
+                656,
+                248,
+                657,
+                248,
+                643
+              ],
+              "text": "DE",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                261,
+                658,
+                262,
+                696,
+                249,
+                697,
+                248,
+                659
+              ],
+              "text": "CAMION",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            225,
+            33,
+            226,
+            56,
+            215,
+            56,
+            214,
+            33
+          ],
+          "text": "8.532",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                225,
+                33,
+                226,
+                55,
+                215,
+                56,
+                214,
+                33
+              ],
+              "text": "8.532",
+              "confidence": 0.658
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            227,
+            84,
+            229,
+            169,
+            215,
+            169,
+            213,
+            84
+          ],
+          "text": "ANTHONY ABREU",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                228,
+                84,
+                228,
+                129,
+                216,
+                130,
+                214,
+                85
+              ],
+              "text": "ANTHONY",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                228,
+                132,
+                229,
+                166,
+                216,
+                167,
+                216,
+                133
+              ],
+              "text": "ABREU",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            231,
+            295,
+            232,
+            341,
+            219,
+            341,
+            219,
+            295
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                231,
+                295,
+                232,
+                341,
+                220,
+                341,
+                219,
+                295
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.913
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            236,
+            471,
+            238,
+            646,
+            224,
+            646,
+            222,
+            471
+          ],
+          "text": "7,000.00 200019603429034 CHOFERI",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                236,
+                471,
+                236,
+                508,
+                223,
+                509,
+                223,
+                472
+              ],
+              "text": "7,000.00",
+              "confidence": 0.971
+            },
+            {
+              "boundingBox": [
+                236,
+                511,
+                237,
+                592,
+                224,
+                592,
+                223,
+                512
+              ],
+              "text": "200019603429034",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                237,
+                598,
+                238,
+                646,
+                226,
+                646,
+                224,
+                598
+              ],
+              "text": "CHOFERI",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            201,
+            33,
+            201,
+            55,
+            189,
+            56,
+            189,
+            34
+          ],
+          "text": "1660",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                201,
+                34,
+                201,
+                55,
+                189,
+                55,
+                189,
+                34
+              ],
+              "text": "1660",
+              "confidence": 0.988
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            204,
+            84,
+            207,
+            200,
+            193,
+            201,
+            190,
+            84
+          ],
+          "text": "ANTONIO ABREU ABREU",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                205,
+                84,
+                205,
+                127,
+                192,
+                127,
+                191,
+                85
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                205,
+                129,
+                206,
+                163,
+                193,
+                163,
+                192,
+                130
+              ],
+              "text": "ABREU",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                206,
+                165,
+                207,
+                198,
+                194,
+                199,
+                193,
+                166
+              ],
+              "text": "ABREU",
+              "confidence": 0.996
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            209,
+            292,
+            208,
+            343,
+            197,
+            342,
+            197,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                209,
+                292,
+                209,
+                341,
+                197,
+                342,
+                198,
+                293
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.955
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            213,
+            470,
+            217,
+            785,
+            203,
+            785,
+            198,
+            470
+          ],
+          "text": "5,000.00 200019603429066 OBRERO CEMENTERIO LA TRINCHERA A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                213,
+                470,
+                213,
+                508,
+                199,
+                509,
+                199,
+                471
+              ],
+              "text": "5,000.00",
+              "confidence": 0.849
+            },
+            {
+              "boundingBox": [
+                213,
+                511,
+                214,
+                592,
+                201,
+                592,
+                199,
+                511
+              ],
+              "text": "200019603429066",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                214,
+                597,
+                215,
+                638,
+                202,
+                638,
+                201,
+                598
+              ],
+              "text": "OBRERO",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                215,
+                641,
+                216,
+                703,
+                202,
+                703,
+                202,
+                641
+              ],
+              "text": "CEMENTERIO",
+              "confidence": 0.941
+            },
+            {
+              "boundingBox": [
+                216,
+                706,
+                216,
+                717,
+                202,
+                718,
+                202,
+                706
+              ],
+              "text": "LA",
+              "confidence": 0.955
+            },
+            {
+              "boundingBox": [
+                216,
+                720,
+                218,
+                774,
+                203,
+                775,
+                202,
+                721
+              ],
+              "text": "TRINCHERA",
+              "confidence": 0.942
+            },
+            {
+              "boundingBox": [
+                218,
+                777,
+                218,
+                785,
+                203,
+                785,
+                203,
+                777
+              ],
+              "text": "A",
+              "confidence": 0.941
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            178,
+            30,
+            178,
+            50,
+            167,
+            51,
+            166,
+            32
+          ],
+          "text": "394",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                178,
+                33,
+                179,
+                50,
+                167,
+                51,
+                166,
+                33
+              ],
+              "text": "394",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            181,
+            83,
+            183,
+            179,
+            169,
+            179,
+            167,
+            83
+          ],
+          "text": "ANTONIO BAUTISTA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                182,
+                84,
+                182,
+                125,
+                168,
+                126,
+                167,
+                84
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                182,
+                128,
+                184,
+                178,
+                169,
+                178,
+                168,
+                129
+              ],
+              "text": "BAUTISTA",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            185,
+            292,
+            185,
+            343,
+            173,
+            343,
+            173,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                185,
+                292,
+                186,
+                342,
+                174,
+                343,
+                173,
+                293
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            189,
+            470,
+            194,
+            800,
+            180,
+            800,
+            175,
+            470
+          ],
+          "text": "3,174.00 200019603429140 REPRESENTANTE ALCALDIA EN LA COLONI",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                190,
+                471,
+                190,
+                508,
+                176,
+                509,
+                176,
+                472
+              ],
+              "text": "3,174.00",
+              "confidence": 0.93
+            },
+            {
+              "boundingBox": [
+                190,
+                510,
+                191,
+                590,
+                178,
+                591,
+                176,
+                511
+              ],
+              "text": "200019603429140",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                191,
+                597,
+                192,
+                679,
+                179,
+                680,
+                178,
+                598
+              ],
+              "text": "REPRESENTANTE",
+              "confidence": 0.957
+            },
+            {
+              "boundingBox": [
+                192,
+                682,
+                193,
+                727,
+                180,
+                728,
+                179,
+                683
+              ],
+              "text": "ALCALDIA",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                193,
+                729,
+                194,
+                742,
+                180,
+                743,
+                180,
+                730
+              ],
+              "text": "EN",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                194,
+                745,
+                194,
+                756,
+                180,
+                758,
+                180,
+                746
+              ],
+              "text": "LA",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                194,
+                759,
+                195,
+                799,
+                181,
+                800,
+                180,
+                760
+              ],
+              "text": "COLONI",
+              "confidence": 0.667
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            157,
+            84,
+            161,
+            206,
+            147,
+            206,
+            144,
+            84
+          ],
+          "text": "ANTONIO CASTILLO PEÑA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                157,
+                84,
+                158,
+                126,
+                145,
+                127,
+                144,
+                85
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                158,
+                129,
+                160,
+                174,
+                146,
+                175,
+                145,
+                130
+              ],
+              "text": "CASTILLO",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                160,
+                176,
+                161,
+                205,
+                148,
+                206,
+                147,
+                177
+              ],
+              "text": "PEÑA",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            167,
+            471,
+            165,
+            508,
+            153,
+            508,
+            154,
+            471
+          ],
+          "text": "4,000.00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                166,
+                471,
+                165,
+                507,
+                153,
+                508,
+                154,
+                472
+              ],
+              "text": "4,000.00",
+              "confidence": 0.72
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            168,
+            598,
+            170,
+            791,
+            156,
+            791,
+            154,
+            599
+          ],
+          "text": "AGENTE DE LIMPIEZA (PARQUE JAPONES)",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                168,
+                599,
+                169,
+                636,
+                155,
+                637,
+                154,
+                600
+              ],
+              "text": "AGENTE",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                169,
+                639,
+                169,
+                652,
+                156,
+                652,
+                155,
+                639
+              ],
+              "text": "DE",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                169,
+                654,
+                169,
+                697,
+                157,
+                697,
+                156,
+                655
+              ],
+              "text": "LIMPIEZA",
+              "confidence": 0.981
+            },
+            {
+              "boundingBox": [
+                170,
+                699,
+                170,
+                741,
+                157,
+                741,
+                157,
+                700
+              ],
+              "text": "(PARQUE",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                170,
+                743,
+                170,
+                790,
+                157,
+                791,
+                157,
+                744
+              ],
+              "text": "JAPONES)",
+              "confidence": 0.67
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            154,
+            32,
+            155,
+            50,
+            144,
+            50,
+            143,
+            32
+          ],
+          "text": "978",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                154,
+                32,
+                155,
+                49,
+                144,
+                50,
+                143,
+                33
+              ],
+              "text": "978",
+              "confidence": 0.998
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            132,
+            33,
+            130,
+            54,
+            118,
+            55,
+            119,
+            34
+          ],
+          "text": "4822",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                133,
+                33,
+                131,
+                55,
+                118,
+                54,
+                120,
+                33
+              ],
+              "text": "4822",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            134,
+            83,
+            138,
+            236,
+            124,
+            236,
+            120,
+            83
+          ],
+          "text": "ANTONIO DE LA CRUZ PERALTA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                134,
+                83,
+                135,
+                125,
+                122,
+                126,
+                121,
+                84
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                135,
+                127,
+                136,
+                141,
+                122,
+                142,
+                122,
+                128
+              ],
+              "text": "DE",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                136,
+                143,
+                136,
+                156,
+                122,
+                157,
+                122,
+                144
+              ],
+              "text": "LA",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                136,
+                158,
+                137,
+                185,
+                123,
+                186,
+                123,
+                159
+              ],
+              "text": "CRUZ",
+              "confidence": 0.983
+            },
+            {
+              "boundingBox": [
+                137,
+                187,
+                138,
+                232,
+                125,
+                233,
+                123,
+                188
+              ],
+              "text": "PERALTA",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            137,
+            292,
+            138,
+            341,
+            127,
+            341,
+            127,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                138,
+                292,
+                138,
+                341,
+                128,
+                341,
+                127,
+                293
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.952
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            142,
+            468,
+            143,
+            508,
+            131,
+            509,
+            130,
+            469
+          ],
+          "text": "5,000.00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                142,
+                469,
+                144,
+                507,
+                132,
+                508,
+                130,
+                470
+              ],
+              "text": "5,000.00",
+              "confidence": 0.77
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            145,
+            598,
+            148,
+            759,
+            134,
+            759,
+            131,
+            598
+          ],
+          "text": "OBRERO DE OBRAS MUNICIPALES",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                145,
+                599,
+                146,
+                638,
+                132,
+                639,
+                131,
+                600
+              ],
+              "text": "OBRERO",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                146,
+                640,
+                146,
+                654,
+                132,
+                655,
+                132,
+                641
+              ],
+              "text": "DE",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                146,
+                656,
+                146,
+                688,
+                133,
+                689,
+                132,
+                657
+              ],
+              "text": "OBRAS",
+              "confidence": 0.995
+            },
+            {
+              "boundingBox": [
+                146,
+                690,
+                148,
+                756,
+                135,
+                757,
+                133,
+                691
+              ],
+              "text": "MUNICIPALES",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            146,
+            778,
+            146,
+            790,
+            135,
+            788,
+            135,
+            777
+          ],
+          "text": "A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                146,
+                780,
+                146,
+                786,
+                135,
+                786,
+                135,
+                780
+              ],
+              "text": "A",
+              "confidence": 0.995
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            107,
+            32,
+            107,
+            53,
+            95,
+            55,
+            95,
+            33
+          ],
+          "text": "8598",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                107,
+                32,
+                107,
+                54,
+                95,
+                54,
+                95,
+                32
+              ],
+              "text": "8598",
+              "confidence": 0.988
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            110,
+            82,
+            113,
+            204,
+            100,
+            205,
+            97,
+            83
+          ],
+          "text": "ANTONIO DILONE DURAN",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                110,
+                83,
+                111,
+                125,
+                98,
+                126,
+                97,
+                84
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                111,
+                127,
+                112,
+                163,
+                99,
+                165,
+                98,
+                128
+              ],
+              "text": "DILONE",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                112,
+                166,
+                114,
+                201,
+                101,
+                202,
+                99,
+                167
+              ],
+              "text": "DURAN",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            114,
+            291,
+            115,
+            341,
+            104,
+            341,
+            104,
+            291
+          ],
+          "text": "2021-07-01",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                114,
+                292,
+                115,
+                340,
+                105,
+                341,
+                104,
+                293
+              ],
+              "text": "2021-07-01",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            119,
+            469,
+            119,
+            520,
+            107,
+            520,
+            107,
+            469
+          ],
+          "text": "2,500.00 0",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                120,
+                470,
+                120,
+                507,
+                107,
+                508,
+                107,
+                470
+              ],
+              "text": "2,500.00",
+              "confidence": 0.902
+            },
+            {
+              "boundingBox": [
+                120,
+                510,
+                120,
+                517,
+                107,
+                517,
+                107,
+                510
+              ],
+              "text": "0",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            121,
+            600,
+            124,
+            744,
+            110,
+            744,
+            107,
+            600
+          ],
+          "text": "Ayudante del Alcalde en la Lomita",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                122,
+                600,
+                122,
+                638,
+                109,
+                638,
+                108,
+                601
+              ],
+              "text": "Ayudante",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                122,
+                641,
+                123,
+                653,
+                109,
+                653,
+                109,
+                641
+              ],
+              "text": "del",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                123,
+                656,
+                123,
+                686,
+                110,
+                687,
+                109,
+                656
+              ],
+              "text": "Alcalde",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                123,
+                689,
+                123,
+                699,
+                110,
+                699,
+                110,
+                689
+              ],
+              "text": "en",
+              "confidence": 0.996
+            },
+            {
+              "boundingBox": [
+                123,
+                701,
+                123,
+                708,
+                110,
+                708,
+                110,
+                701
+              ],
+              "text": "la",
+              "confidence": 0.993
+            },
+            {
+              "boundingBox": [
+                123,
+                711,
+                124,
+                743,
+                111,
+                743,
+                110,
+                711
+              ],
+              "text": "Lomita",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            122,
+            777,
+            123,
+            790,
+            113,
+            790,
+            112,
+            777
+          ],
+          "text": "A",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.769
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                122,
+                782,
+                123,
+                788,
+                113,
+                789,
+                112,
+                782
+              ],
+              "text": "A",
+              "confidence": 0.994
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            105,
+            553,
+            16,
+            593,
+            9,
+            582,
+            103,
+            533
+          ],
+          "text": "ORKAGACOA",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                90,
+                563,
+                14,
+                593,
+                13,
+                582,
+                89,
+                547
+              ],
+              "text": "ORKAGACOA",
+              "confidence": 0.531
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            100,
+            470,
+            97,
+            563,
+            77,
+            562,
+            81,
+            469
+          ],
+          "text": "2,000.00 0 10 DE]",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                97,
+                470,
+                99,
+                507,
+                83,
+                506,
+                83,
+                470
+              ],
+              "text": "2,000.00",
+              "confidence": 0.852
+            },
+            {
+              "boundingBox": [
+                99,
+                511,
+                99,
+                517,
+                82,
+                516,
+                83,
+                510
+              ],
+              "text": "0",
+              "confidence": 0.899
+            },
+            {
+              "boundingBox": [
+                99,
+                520,
+                98,
+                533,
+                81,
+                532,
+                82,
+                519
+              ],
+              "text": "10",
+              "confidence": 0.334
+            },
+            {
+              "boundingBox": [
+                98,
+                537,
+                96,
+                563,
+                77,
+                560,
+                81,
+                535
+              ],
+              "text": "DE]",
+              "confidence": 0.062
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            101,
+            601,
+            105,
+            800,
+            90,
+            800,
+            87,
+            602
+          ],
+          "text": "SUPERVISOR CEMENTERIO LLANO DEL NIG",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                102,
+                602,
+                102,
+                659,
+                88,
+                660,
+                87,
+                602
+              ],
+              "text": "SUPERVISOR",
+              "confidence": 0.991
+            },
+            {
+              "boundingBox": [
+                102,
+                662,
+                103,
+                723,
+                89,
+                724,
+                88,
+                663
+              ],
+              "text": "CEMENTERIO",
+              "confidence": 0.944
+            },
+            {
+              "boundingBox": [
+                103,
+                726,
+                104,
+                756,
+                90,
+                757,
+                89,
+                727
+              ],
+              "text": "LLANO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                104,
+                759,
+                104,
+                777,
+                90,
+                778,
+                90,
+                760
+              ],
+              "text": "DEL",
+              "confidence": 0.998
+            },
+            {
+              "boundingBox": [
+                104,
+                779,
+                105,
+                799,
+                91,
+                800,
+                90,
+                781
+              ],
+              "text": "NIG",
+              "confidence": 0.62
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            85,
+            32,
+            86,
+            53,
+            74,
+            53,
+            73,
+            31
+          ],
+          "text": "4257",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                85,
+                31,
+                86,
+                52,
+                74,
+                53,
+                73,
+                32
+              ],
+              "text": "4257",
+              "confidence": 0.993
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            88,
+            81,
+            92,
+            211,
+            78,
+            212,
+            74,
+            81
+          ],
+          "text": "ANTONIO DURAN COLLADO",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                88,
+                82,
+                90,
+                124,
+                76,
+                125,
+                74,
+                82
+              ],
+              "text": "ANTONIO",
+              "confidence": 0.994
+            },
+            {
+              "boundingBox": [
+                90,
+                127,
+                91,
+                161,
+                77,
+                162,
+                76,
+                128
+              ],
+              "text": "DURAN",
+              "confidence": 0.997
+            },
+            {
+              "boundingBox": [
+                91,
+                164,
+                91,
+                210,
+                79,
+                211,
+                77,
+                165
+              ],
+              "text": "COLLADO",
+              "confidence": 0.997
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            93,
+            291,
+            94,
+            340,
+            82,
+            341,
+            81,
+            292
+          ],
+          "text": "0000-00-00",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                93,
+                292,
+                94,
+                340,
+                83,
+                341,
+                81,
+                292
+              ],
+              "text": "0000-00-00",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            47,
+            473,
+            72,
+            492,
+            65,
+            500,
+            41,
+            481
+          ],
+          "text": "UNK",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.815
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                52,
+                477,
+                69,
+                491,
+                60,
+                497,
+                44,
+                483
+              ],
+              "text": "UNK",
+              "confidence": 0.327
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            38,
+            744,
+            39,
+            787,
+            29,
+            787,
+            29,
+            744
+          ],
+          "text": "Pagina 1 de 12",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                38,
+                745,
+                38,
+                763,
+                29,
+                763,
+                30,
+                745
+              ],
+              "text": "Pagina",
+              "confidence": 0.603
+            },
+            {
+              "boundingBox": [
+                38,
+                765,
+                38,
+                767,
+                29,
+                767,
+                29,
+                765
+              ],
+              "text": "1",
+              "confidence": 0.847
+            },
+            {
+              "boundingBox": [
+                38,
+                769,
+                38,
+                777,
+                30,
+                777,
+                29,
+                769
+              ],
+              "text": "de",
+              "confidence": 0.928
+            },
+            {
+              "boundingBox": [
+                39,
+                778,
+                39,
+                786,
+                30,
+                787,
+                30,
+                779
+              ],
+              "text": "12",
+              "confidence": 0.991
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            21,
+            27,
+            23,
+            93,
+            13,
+            94,
+            11,
+            27
+          ],
+          "text": "05/11/2021. 10:07 AM",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                21,
+                27,
+                22,
+                61,
+                12,
+                62,
+                11,
+                29
+              ],
+              "text": "05/11/2021.",
+              "confidence": 0.663
+            },
+            {
+              "boundingBox": [
+                22,
+                63,
+                23,
+                79,
+                13,
+                80,
+                12,
+                64
+              ],
+              "text": "10:07",
+              "confidence": 0.943
+            },
+            {
+              "boundingBox": [
+                23,
+                81,
+                23,
+                92,
+                14,
+                92,
+                13,
+                82
+              ],
+              "text": "AM",
+              "confidence": 0.833
+            }
+          ]
+        },
+        {
+          "boundingBox": [
+            26,
+            732,
+            27,
+            795,
+            18,
+            795,
+            17,
+            732
+          ],
+          "text": "Powered by Municipia",
+          "appearance": {
+            "style": {
+              "name": "other",
+              "confidence": 0.972
+            }
+          },
+          "words": [
+            {
+              "boundingBox": [
+                26,
+                732,
+                26,
+                756,
+                18,
+                756,
+                18,
+                732
+              ],
+              "text": "Powered",
+              "confidence": 0.545
+            },
+            {
+              "boundingBox": [
+                26,
+                758,
+                26,
+                764,
+                18,
+                764,
+                18,
+                758
+              ],
+              "text": "by",
+              "confidence": 0.902
+            },
+            {
+              "boundingBox": [
+                26,
+                766,
+                27,
+                795,
+                19,
+                795,
+                18,
+                766
+              ],
+              "text": "Municipia",
+              "confidence": 0.614
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
