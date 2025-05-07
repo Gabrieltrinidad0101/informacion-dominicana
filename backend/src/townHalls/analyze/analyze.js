@@ -38,9 +38,6 @@ export const analyze = async ()=>{
             employeersTotal[employeer.date] += 1
             const income = parseFloat(employeer.income?.replaceAll(',',''))
             payroll[employeer.date] += !Object.is(parseFloat(income),NaN) ? parseFloat(income) : 0
-            if(employeer.date === "2018-12-31"){
-                console.log(employeer.income," ",employeer.page)
-            }
             positionBySalary[employeer.date][employeer.position].push({name: employeer.name, income: income || 'N/A'})
         });
     })

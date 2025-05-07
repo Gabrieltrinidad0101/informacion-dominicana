@@ -1,17 +1,14 @@
 function rotatePointBackwards(xp, yp, anguloGrados, cx = 1000, cy = 1000) {
-    const theta = (Math.PI / 180) * anguloGrados; // Convertir a radianes
+    const theta = (Math.PI / 180) * anguloGrados;
     const cos = Math.cos(theta);
     const sin = Math.sin(theta);
   
-    // 1. Trasladar al origen
     const xRel = xp - cx;
     const yRel = yp - cy;
   
-    // 2. Rotación inversa (ángulo negativo)
     const xRot = xRel * cos + yRel * sin;
     const yRot = -xRel * sin + yRel * cos;
   
-    // 3. Volver a trasladar al sistema original
     const x = xRot + cx;
     const y = yRot + cy;
   
@@ -114,6 +111,6 @@ function groupLinesWithAngle(rawData, angle, imageWidth, imageHeight) {
 }
 
 
-export const groupLines = (rawData)=>{
+export const groupLinesAzure = (rawData)=>{
   return groupLinesWithAngle(rawData.readResults[0].lines, rawData.readResults[0].angle, 2000, 2000);
 }
