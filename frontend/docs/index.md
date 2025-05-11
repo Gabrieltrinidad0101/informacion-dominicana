@@ -2,46 +2,27 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Informática Dominicana - Beta
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Es un sitio web no oficial de la Republica Dominicana que tiene como objetivo mostrar los datos del país de manera más accesible y organizada.
 
-## Getting Started
+## Aviso
 
-Get started by **creating a new site**.
+Actualmente este sitio web está en desarrollo y se encuentra en la fase de pruebas. Por lo tanto, no se recomienda utilizar este sitio para obtener información de manera permanente.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Breve Historia
 
-### What you'll need
+1. Este proyecto nació del interés de un joven de 18 años por acceder a información clave del país, como nóminas de empleados, salarios, PIB, salud, educación, entre otros datos relevantes. Sin embargo, al encontrarse con miles de archivos en formato PDF, resultaba prácticamente imposible analizarlos de forma efectiva. Por ello, decidió desarrollar una aplicación web que permitiera visualizar y organizar estos datos de manera más accesible y comprensible.
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+# ¿Cómo se obtienen los datos?
 
-## Generate a new site
+1. Se descargan los archivos PDF desde las páginas oficiales.
+2. Se extraen las imágenes contenidas en cada PDF.
+3. Se realiza reconocimiento de texto (OCR) en cada imagen utilizando las APIs de Azure o OCR.Space.
+4. Los textos extraídos se agrupan y se guardan en un archivo JSON.
+5. Se procesan los textos con una API basada en un modelo de lenguaje (LLM) para obtener información relevante.
+6. Los datos procesados se almacenan en un nuevo archivo JSON.
+7. Se analizan los datos generados por el LLM.
+8. Se generan las migraciones de datos correspondientes.
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+En la aplicación web, los datos se visualizan directamente consumiendo los archivos JSON y la API.

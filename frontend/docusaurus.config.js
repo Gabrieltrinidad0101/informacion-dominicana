@@ -59,7 +59,7 @@ const config = {
       },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Informacion Dominicana',
+        title: 'Información Dominicana',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.png',
