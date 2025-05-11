@@ -36,7 +36,7 @@ export const PositionAndSalary = ({ position, employees,showImage }) => {
                     <Typography>{getSalaryFormat(position)}</Typography>
                 </Box>
                 <Box ml={3}>
-                    {open ? <i>⬇️</i> : <i>⬆️</i>}
+                    {open ? <i>⬆️</i> : <i>⬇️</i>}
                 </Box>
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>

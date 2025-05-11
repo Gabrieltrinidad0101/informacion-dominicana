@@ -4,9 +4,9 @@ import { forEachFolder, isNullEmptyUndefinerNan } from "../../utils.js";
 import { constants } from "../../constants.js";
 import { promises as fs } from "fs"
 
-const options = (savePath) => ({
+const options = (townHall,savePath) => ({
   density: 700,
-  saveFilename: "jarabacoaTownHall",
+  saveFilename: `${townHall}TownHall`,
   savePath,
   format: "jpg",
   width: 2000,
@@ -63,7 +63,7 @@ const getImageFromPdf = async ({ townHall, year, month, pdfNomina, getDataFromDo
   if (files.length > 0) return
   console.log(`Getting image from pdf ${getDataFromDownload}`)
   if (imagesTemp.length <= 0) {
-    const convert = fromPath(pdfNomina, options(folderImagesTemp));
+    const convert = fromPath(pdfNomina, options(townHall,folderImagesTemp));
     await convert.bulk(-1)
   }
 }

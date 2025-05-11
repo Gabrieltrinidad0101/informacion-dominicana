@@ -6,13 +6,18 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   Typography,
 } from "@mui/material";
 import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 import { formatted } from "../../utils/format";
+import { payroll, requestJson } from "../../utils/request";
+import { positionSelect } from "../../utils/positionSelect";
+import positionSelectCss from "../../utils/positionSelect.module.css";
+import { InputText } from "../../components/inputs/inputText";
+import { SimpleSelect } from "../../components/inputs/simpleSelects";
+import { lightTheme } from "../../themes/light";
 
 let data = [];
 const months = {
@@ -30,6 +35,8 @@ const months = {
   12: "december",
 };
 
+const townHalls = ["Jarabacoa", "Moca"];
+
 export function CompareData() {
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
@@ -38,27 +45,10 @@ export function CompareData() {
   const [page, setPage] = useState(1);
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
+  const [townHall, setTownHall] = useState(townHalls[0]);
 
-  const handleClick = (row) => {
-    const element = selectEmployee.current;
-    const image = imageRef.current.getBoundingClientRect();
-
-    const porX = (row.x / 2000) * 100;
-    const porY = (row.y / 2000) * 100;
-    const porHeight = (row.height / 2000) * 100;
-    const porWidth = (row.width / 2000) * 100;
-
-    const positionX = image.width * (porX / 100);
-    const positionY = image.height * (porY / 100);
-    const width = image.width * (porWidth / 100);
-    const height = image.height * (porHeight / 100);
-
-    element.style.left = `${positionX}px`;
-    element.style.top = `${positionY}px`;
-    element.style.width = `${width}px`;
-    element.style.height = `${height}px`;
-    selectEmployee.current.classList.remove(compareData.selecteEmployeeOpacity);
-    element.classList.add(compareData.selecteEmployee);
+  const handleClick = (employee) => {
+    positionSelect(selectEmployee, imageRef, employee);
   };
 
   const columns = [
@@ -91,38 +81,36 @@ export function CompareData() {
   ];
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5500/datas/townHalls/Jarabacoa/Nomina.json")
-      .then((response) => response.json())
-      .then((res) => {
-        setCurrentDate(res[0].time);
-        setDates(res);
-      });
-  }, []);
+    payroll(townHall).then((res) => {
+      setCurrentDate(res[0].time);
+      setDates(res);
+    });
+  }, [townHall]);
 
   useEffect(() => {
     const employees = {};
     if ((currentDate?.length ?? 0) <= 0) return;
     const [year, month] = currentDate.split("-");
-    fetch(
-      `http://127.0.0.1:5500/dataPreprocessing/townHalls/Jarabacoa/data/${year}/${months[month]}.json`
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        data = res.map((row) => {
-          employees[row.document] ??= [];
-          employees[row.document].push(row);
-          row.id = crypto.randomUUID();
-          return row;
-        });
-        setRows(data);
+    requestJson(
+      `/dataPreprocessing/townHalls/${townHall}/data/${year}/${months[month]}`
+    ).then((res) => {
+      data = res.map((row) => {
+        employees[row.document] ??= [];
+        employees[row.document].push(row);
+        row.id = crypto.randomUUID();
+        return row;
       });
-    const rows = Object.keys(employees).filter((key) => {
-      employees[key].length > 1;
+      setRows(data);
+      const rows = Object.keys(employees).filter((key) => {
+        employees[key].length > 1;
+      });
     });
   }, [currentDate]);
 
   useEffect(() => {
-    selectEmployee.current.classList.add(compareData.selecteEmployeeOpacity);
+    selectEmployee.current.classList.add(
+      positionSelectCss.selecteEmployeeOpacity
+    );
   }, [page, currentDate]);
 
   const onChangeSearch = (e) => {
@@ -161,41 +149,24 @@ export function CompareData() {
     setPage(newPage);
   };
 
-  const lightTheme = {
-    mb: 2,
-    backgroundColor: "white",
-    "& .MuiOutlinedInput-root": {
-      backgroundColor: "white",
-      "& fieldset": {
-        borderColor: "#ccc",
-      },
-      "&:hover fieldset": {
-        borderColor: "#007bff",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#007bff",
-      },
-    },
-    "& .MuiInputBase-input": {
-      color: "#333",
-    },
-  };
-
   const handleDate = (event) => {
     setCurrentDate(event.target.value);
+  };
+
+  const handleTownHall = (event) => {
+    setTownHall(event.target.value);
+    setPage(1);
   };
 
   return (
     <>
       <Box sx={{ mb: 2 }} className={compareData.inputs}>
-        <TextField
-          fullWidth
+        <InputText
           label="Buscar"
-          variant="filled"
-          value={search}
-          onChange={onChangeSearch}
-          sx={lightTheme}
+          search={search}
+          onChangeSearch={onChangeSearch}
         />
+        <SimpleSelect name="Ayuntamientos" datas={townHalls} onChange={handleTownHall} value={townHall} />
         <FormControl variant="filled" sx={lightTheme}>
           <InputLabel id="demo-simple-select-filled-label">Fecha</InputLabel>
           <Select
@@ -223,7 +194,7 @@ export function CompareData() {
                 transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
               }}
               ref={imageRef}
-              src={`http://localhost:5500/dataPreprocessing/townHalls/Jarabacoa/images/${
+              src={`http://localhost:5500/dataPreprocessing/townHalls/${townHall}/images/${
                 currentDate?.split("-")?.[0]
               }/${
                 months[currentDate?.split("-")?.[1]]

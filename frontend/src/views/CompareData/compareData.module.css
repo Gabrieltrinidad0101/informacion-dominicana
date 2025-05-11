@@ -10,7 +10,7 @@
 
 .inputs {
   display: grid;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 60% 20% 20%;
   gap: 10px;
 }
 
@@ -28,11 +28,6 @@
 .selecteEmployee {
   position: absolute;
   background: rgba(255, 0, 0, 0.521);
-}
-
-
-.selecteEmployeeOpacity {
-  opacity: 0;
 }
 
 .overflowImage {
