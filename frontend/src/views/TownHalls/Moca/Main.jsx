@@ -24,11 +24,11 @@ export function Main() {
   return (
     <div>
       <Chats
-        topic="townHalls/Jarabacoa"
+        topic="townHalls/Moca"
         headers={headers}
         customTheme={customTheme}
       />
-      <ListGroup title={"Posición por salario"} topic={"Jarabacoa"} />
+      <ListGroup title={"Posición por salario"} topic={"Moca"} />
     </div>
   );
 }

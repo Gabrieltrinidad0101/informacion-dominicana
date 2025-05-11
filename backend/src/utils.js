@@ -110,7 +110,7 @@ export const forEachFolder = async (folder,callBack)=>{
 }
 
 export const forPreData = async (callBack) => {
-    await forEachFolder(constants.datasTownHalls(),async (townHall,townHallPath)=>{
+    await forEachFolder(constants.townHalls(),async (townHall,townHallPath)=>{
         await forEachFolder(constants.preData(townHall),async (year)=>{
             await forEachFolder(constants.preData(townHall,year),async (month,monthPath)=>{
                 if(getExtension(monthPath) != ".json") return
@@ -127,7 +127,8 @@ export const forPreData = async (callBack) => {
 }
 
 export const forData = async (callBack) => {
-    await forEachFolder(constants.datasTownHalls(),async (townHall,townHallPath)=>{
+    await forEachFolder(constants.townHalls(),async (townHall,townHallPath)=>{
+        if(getExtension(townHall) == ".json") return
         await forEachFolder(constants.townHallData(townHall),async (year)=>{
             await forEachFolder(constants.townHallData(townHall,year),async (month,monthPath)=>{
                 if(getExtension(monthPath) != ".json") return

@@ -26,7 +26,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Ayuntamientos',
-      items: ['Jarabacoa'],
+      items: ['Jarabacoa','Moca'],
     },
     'Empleados',
     'Fuentes'

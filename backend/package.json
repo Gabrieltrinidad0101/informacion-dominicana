@@ -9,6 +9,7 @@
     "town-halls-build": "node ./src/townHalls/main.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "axios": "^1.7.9",
     "dotenv": "^16.4.5",
     "form-data": "^4.0.2",

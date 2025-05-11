@@ -6,6 +6,7 @@ import { getTextFromImageApiAzure } from "./apis/azure/azure.js";
 import { getTextFromImageApiOcrSpace } from "./apis/ocrSpace/ocrSpace.js";
 import { groupLinesOcrSpace } from "./apis/ocrSpace/groupLine.js";
 import { groupLinesAzure } from "./apis/azure/groupLines.js";
+import { text } from "stream/consumers";
 
 
 const useAzureApi = [
@@ -17,6 +18,7 @@ const useAzureApi = [
 export const getTextFromImage = async () => {
     await forEachFolder(constants.townHalls(), async (townHall) => {
         if (!isNullEmptyUndefinerNan(path.extname(townHall))) return
+        if(townHall == "Jarabacoa") return
         const yearsPath = constants.images(townHall)
         await forEachFolder(yearsPath, async (year) => {
             const monthsPath = path.join(yearsPath, year)
@@ -48,6 +50,9 @@ export const getTextFromImage = async () => {
                         imagePath: path.join(nominaImages, image),
                         filename: image
                     })
+
+                    if (fileTextOverlay) 
+                        textOverlay = JSON.parse(fs.readFileSync(fileTextOverlayPath).toString())
 
                     if (!textOverlay) {
                         pages[i + 1] = []

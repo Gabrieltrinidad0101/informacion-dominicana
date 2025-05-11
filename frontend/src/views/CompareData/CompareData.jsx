@@ -12,6 +12,7 @@ import {
 import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
+import { formatted } from "../../utils/format";
 
 let data = [];
 const months = {
@@ -28,12 +29,6 @@ const months = {
   11: "november",
   12: "december",
 };
-
-const formatted = (number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(number);
 
 export function CompareData() {
   const [rows, setRows] = useState([]);
@@ -124,7 +119,6 @@ export function CompareData() {
     const rows = Object.keys(employees).filter((key) => {
       employees[key].length > 1;
     });
-    console.log(rows);
   }, [currentDate]);
 
   useEffect(() => {
