@@ -111,6 +111,7 @@ export const forEachFolder = async (folder,callBack)=>{
 
 export const forPreData = async (callBack) => {
     await forEachFolder(constants.townHalls(),async (townHall,townHallPath)=>{
+        if(getExtension(townHall) == ".json") return
         await forEachFolder(constants.preData(townHall),async (year)=>{
             await forEachFolder(constants.preData(townHall,year),async (month,monthPath)=>{
                 if(getExtension(monthPath) != ".json") return

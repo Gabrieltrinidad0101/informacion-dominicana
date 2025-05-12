@@ -13,12 +13,12 @@ const useAzureApi = [
     { department: "Jarabacoa", year: 2019, month: 'january' },
     { department: "Jarabacoa", year: 2019, month: 9 },
     { department: "Jarabacoa", year: 2018, month: 12 },
+    { department: "Jarabacoa", year: 2019, month: 'april'  },
 ]
 
 export const getTextFromImage = async () => {
     await forEachFolder(constants.townHalls(), async (townHall) => {
         if (!isNullEmptyUndefinerNan(path.extname(townHall))) return
-        if(townHall == "Jarabacoa") return
         const yearsPath = constants.images(townHall)
         await forEachFolder(yearsPath, async (year) => {
             const monthsPath = path.join(yearsPath, year)

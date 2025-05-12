@@ -135,8 +135,8 @@ export function CompareData() {
       (acc, row) =>
         acc +
         parseFloat(
-          (row.income || "0")?.replaceAll("$", "").replaceAll(",", "")
-        ),
+          (row.income || "0")
+        ) || 0,
       0
     );
 
@@ -166,7 +166,12 @@ export function CompareData() {
           search={search}
           onChangeSearch={onChangeSearch}
         />
-        <SimpleSelect name="Ayuntamientos" datas={townHalls} onChange={handleTownHall} value={townHall} />
+        <SimpleSelect
+          name="Ayuntamientos"
+          datas={townHalls}
+          onChange={handleTownHall}
+          value={townHall}
+        />
         <FormControl variant="filled" sx={lightTheme}>
           <InputLabel id="demo-simple-select-filled-label">Fecha</InputLabel>
           <Select

@@ -4,17 +4,27 @@
 
 .inputs {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 85% 10%;
   gap: 10px;
 }
 
 
 .datePicker {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50px;
+    opacity: 0;
 }
 
 .scrollbar {
     overflow-y: auto;
     height: 800px;
+}
+
+.icon{
+  font-size: 200%;
+  position: relative;
+}
+
+.icon > div {
+  position: absolute;
 }

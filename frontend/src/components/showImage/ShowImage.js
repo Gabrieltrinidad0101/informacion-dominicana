@@ -7,7 +7,7 @@ export function ShowImage({ employee, url }) {
     const imageRef = useRef(null);
 
     useEffect(() => {
-        if (lastUrl !== "") selectEmployee.current.classList.add(showImageCss.selecteEmployeeOpacity);
+        if (lastUrl !== "") selectEmployee.current.classList.add(positionSelect.selecteEmployeeOpacity);
         lastUrl = url
     }, [url])
 
@@ -42,7 +42,7 @@ export function ShowImage({ employee, url }) {
                 </div>
             </div>
 
-            <div className={showImageCss.selecteEmployee} ref={selectEmployee}></div>
+            <div className={positionSelect.selecteEmployee} ref={selectEmployee}></div>
         </>
     )
 }

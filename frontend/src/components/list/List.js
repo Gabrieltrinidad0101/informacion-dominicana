@@ -2,7 +2,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import Collapse from '@mui/material/Collapse';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Button, Fade, Modal, TextField, Typography } from '@mui/material';
 import { formatToLastDayOfMonth, payroll, requestJson } from '../../utils/request';
 import DatePicker from 'react-datepicker';
@@ -24,9 +24,9 @@ const getSalaryFormat = (position) => {
 const monthNames = [
     "january", "february", "march", "april", "may", "june",
     "july", "august", "september", "october", "november", "december"
-  ];
+];
 
-export const PositionAndSalary = ({ position, employees,showImage }) => {
+export const PositionAndSalary = ({ position, employees, showImage }) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -46,7 +46,7 @@ export const PositionAndSalary = ({ position, employees,showImage }) => {
                             <Box display="flex" justifyContent="space-between" width="100%">
                                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{name}</Typography>
                                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formatted(income)}</Typography>
-                                <Button variant="text" onClick={()=>showImage(employees[index])} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
+                                <Button variant="text" onClick={() => showImage(employees[index])} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
                             </Box>
                         </ListItemButton>
                     ))}
@@ -153,7 +153,7 @@ export const ListGroup = ({ title, topic }) => {
                     </Box>
                 </Fade>
             </Modal>
-            <h1>{title}</h1>
+            <h1>{title} - {currentDate.getFullYear?.()}/{currentDate.getMonth?.() + 1}</h1>
             <div className={ListCss.inputs}>
                 <TextField
                     fullWidth
@@ -163,13 +163,20 @@ export const ListGroup = ({ title, topic }) => {
                     onChange={onChangeSearch}
                     sx={lightTheme}
                 />
-                <DatePicker
-                    selected={currentDate}
-                    onChange={handleDate}
-                    dateFormat="yyyy-MM"
-                    showMonthYearPicker
-                    className={ListCss.datePicker}
-                />
+                <div className={ListCss.icon}>
+                    <div>
+                        🗓️
+                    </div>
+                    <div>
+                        <DatePicker
+                            selected={currentDate}
+                            onChange={handleDate}
+                            dateFormat="yyyy-MM"
+                            showMonthYearPicker
+                            className={ListCss.datePicker}
+                        />
+                    </div>
+                </div>
             </div>
             <List
                 className={ListCss.list}

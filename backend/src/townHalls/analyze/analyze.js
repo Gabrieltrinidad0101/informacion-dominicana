@@ -43,8 +43,8 @@ export const analyze = async () => {
       if (employeer.sex === "M") employeersM[townHall][employeer.date] += 1
       else if (employeer.sex === "F") employeersF[townHall][employeer.date] += 1
       employeersTotal[townHall][employeer.date] += 1
-      const income = parseFloat(employeer.income?.replaceAll(',', ''))
-      payroll[townHall][employeer.date] += !Object.is(parseFloat(income), NaN) ? parseFloat(income) : 0
+      const income = parseFloat(employeer.income || '0') || 0
+      payroll[townHall][employeer.date] += income
       positionBySalary[townHall][employeer.date][employeer.position].push({
         name: employeer.name,
         x: employeer.x,
