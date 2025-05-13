@@ -5,4 +5,4 @@ RUN npm i
 
 COPY . .
 
-CMD ["yarn","run","ayuntamientos-build"]
+CMD ["npm","run","ayuntamientos-build"]
