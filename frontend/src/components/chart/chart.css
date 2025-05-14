@@ -18,10 +18,16 @@
 .custom-chart-card-title{
     justify-self: center;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: calc(100% - 80px) 80px;
     align-items: center;    
 }
+
+.custom-chart-card-title > div {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .custom-chart-card-body{
     width: 100%;

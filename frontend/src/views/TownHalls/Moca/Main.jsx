@@ -1,5 +1,5 @@
 import React from "react";
-import { Chats } from "../../../components/chats/Chats";
+import { Charts} from "../../../components/charts/Charts";
 import { ListGroup } from "../../../components/list/List";
 
 export function Main() {
@@ -23,7 +23,7 @@ export function Main() {
   };
   return (
     <div>
-      <Chats
+      <Charts
         topic="townHalls/Moca"
         headers={headers}
         customTheme={customTheme}

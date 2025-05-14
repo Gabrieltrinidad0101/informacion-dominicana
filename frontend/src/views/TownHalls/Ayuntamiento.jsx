@@ -1,10 +1,10 @@
 import React from 'react'
-import { Chats } from '../../components/chats/Chats'
+import { Charts } from '../../components/charts/Charts'
 export function Ayuntamiento({name}) {
   console.log(name)
   return (
     <div>
-      <Chats topic={`townHalls/${name}`} />
+      <Charts topic={`townHalls/${name}`} />
     </div>
   )
 }

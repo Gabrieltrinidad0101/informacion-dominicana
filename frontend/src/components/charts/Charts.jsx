@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Chat } from '../chat/Chat'
-import ChatCss from './chats.module.css'
+import { Chart } from '../chart/Chart'
+import chartCss from './charts.module.css'
 import constants from '../../constants'
-export function Chats({topic,headers,customTheme}) {
+
+export function Charts({topic,headers,customTheme}) {
   const [titles,setTitles] = useState([])
   useEffect(()=>{
     if(headers) return setTitles(headers)
@@ -12,9 +13,9 @@ export function Chats({topic,headers,customTheme}) {
     })
   },[])
   return (
-    <div className={ChatCss.containerCustom}>
+    <div className={chartCss.containerCustom}>
       {
-        titles.map((chat,index)=><Chat topic={topic} description={chat} key={index} customTheme={customTheme}/>)
+        titles.map((chart,index)=><Chart topic={topic} description={chart} key={index} customTheme={customTheme}/>)
       }
     </div>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Chats } from '../../components/chats/Chats'
+import { Charts } from '../../components/charts/Charts'
 export function Educacion() {
   return (
     <div>
-      <Chats topic="worldBank/Educacion" />
+      <Charts topic="worldBank/Educacion" />
     </div>
   )
 }

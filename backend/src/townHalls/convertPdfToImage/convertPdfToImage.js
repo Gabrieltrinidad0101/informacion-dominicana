@@ -50,8 +50,8 @@ export const convertPdfToImage = async () => {
           getDataFromDownload,
           files
         })
+        await new Promise(res => setTimeout(res, 10000))
       })
-      await new Promise(res => setTimeout(res, 2000))
     })
   })
 }
