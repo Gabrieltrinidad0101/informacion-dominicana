@@ -48,6 +48,24 @@ const config = {
     ],
   ],
 
+  plugins: [
+    // ... other plugins
+    async function myPlugin(context, options) {
+      return {
+        name: 'my-plugin',
+        configureWebpack(config, isServer, utils) {
+          return {
+            resolve: {
+              alias: {
+                '@theme/Layout': require.resolve('./src/Layout'),
+              },
+            },
+          };
+        },
+      };
+    },
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({

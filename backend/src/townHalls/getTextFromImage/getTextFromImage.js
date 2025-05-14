@@ -14,6 +14,7 @@ const useAzureApi = [
     { department: "Jarabacoa", year: 2019, month: 9 },
     { department: "Jarabacoa", year: 2018, month: 12 },
     { department: "Jarabacoa", year: 2019, month: 'april'  },
+    { department: "Jarabacoa", year: 2020, month: 'april'  },
 ]
 
 export const getTextFromImage = async () => {
