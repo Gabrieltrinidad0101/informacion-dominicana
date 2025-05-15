@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useMemo } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -9,16 +9,15 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Checkbox from "@mui/material/Checkbox";
+import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
-import { useCompareModal } from "../../context/context";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "50%",
   bgcolor: "#121212",
   color: "#ffffff",
   border: "1px solid #333",
@@ -28,56 +27,68 @@ const style = {
 };
 
 const dummyData = [
-  "Apple",
-  "Banana",
-  "Orange",
-  "Grapes",
-  "Pineapple",
-  "Strawberry",
-  "Watermelon",
-  "Kiwi",
-  "Mango",
-  "Peach",
-  "Lemon",
-  "Lime",
-  "Blueberry",
-  "Cherry",
-  "Papaya",
-  "Guava",
-  "Raspberry",
+  { text: "Nomina - Ayuntamiento de Moca", url: "datas/townHalls/Moca/Nomina" },
+  {
+    text: "Cantidad Total de Empleados - Ayuntamiento de Moca ",
+    url: "datas/townHalls/Moca/Cantidad Total de Empleados",
+  },
+  {
+    text: "Cantidad Total de Empleados Masculinos - Ayuntamiento de Moca ",
+    url: "datas/townHalls/Moca/Cantidad Total de Empleados Masculinos",
+  },
+  {
+    text: "Cantidad Total de Empleados Femeninos - Ayuntamiento de Moca ",
+    url: "datas/townHalls/Moca/Cantidad Total de Empleados Femeninos",
+  },
+  {
+    text: "Cantidad Total de Empleados - Ayuntamiento de Jarabacoa ",
+    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados",
+  },
+  {
+    text: "Cantidad Total de Empleados Masculinos - Ayuntamiento de Jarabacoa ",
+    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados Masculinos",
+  },
+  {
+    text: "Cantidad Total de Empleados Femeninos - Ayuntamiento de Jarabacoa ",
+    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados Femeninos",
+  },
+  {
+    text: "Nomina - Ayuntamiento de Jarabacoa ",
+    url: "datas/townHalls/Jarabacoa/Nomina",
+  },
 ];
 
-export function CompareCharts() {
-  const { isCompareModalOpen, closeCompareModal } = useCompareModal();
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [checkedItems, setCheckedItems] = React.useState([]);
+export function CompareCharts({
+  open,
+  setOpen,
+  selectedItems,
+  setSelectedItems,
+  addNewChart
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredData = React.useMemo(() => {
+  const filteredData = useMemo(() => {
     return dummyData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.text.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
 
-  const handleToggle = (item) => {
-    setCheckedItems((prev) =>
-      prev.includes(item)
-        ? prev.filter((i) => i !== item)
-        : [...prev, item]
-    );
+  const handleSelect = (item) => {
+    setSelectedItems(item);
   };
 
   const handleCompare = () => {
-    console.log("Comparing items:", checkedItems);
+    addNewChart();
   };
 
   return (
     <div>
-      {isCompareModalOpen && (
+      {open && (
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
-          open={isCompareModalOpen}
-          onClose={closeCompareModal}
+          open={open}
+          onClose={() => setOpen(false)}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{
@@ -86,18 +97,18 @@ export function CompareCharts() {
             },
           }}
         >
-          <Fade in={isCompareModalOpen}>
+          <Fade in={open}>
             <Box sx={style}>
               <Typography
                 id="transition-modal-title"
                 variant="h6"
                 component="h2"
               >
-                Compare Charts
+                Comparar Gráficas
               </Typography>
               <TextField
                 fullWidth
-                label="Search"
+                label="Buscar"
                 variant="outlined"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -126,24 +137,24 @@ export function CompareCharts() {
                   bgcolor: "#121212",
                   border: "1px solid #333",
                   borderRadius: 1,
+                  p: 0,
                 }}
               >
                 {filteredData.map((item) => (
                   <ListItem
-                    key={item}
+                    key={item.text}
                     button
-                    onClick={() => handleToggle(item)}
+                    onClick={() => handleSelect(item)}
                     sx={{
                       color: "#fff",
+                      py: 1,
                       "&:hover": { backgroundColor: "#1e1e1e" },
                     }}
                   >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={checkedItems.includes(item)}
-                        tabIndex={-1}
-                        disableRipple
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <Radio
+                        checked={selectedItems?.text === item.text}
+                        value={item.text}
                         sx={{
                           color: "#bbb",
                           "&.Mui-checked": {
@@ -152,7 +163,7 @@ export function CompareCharts() {
                         }}
                       />
                     </ListItemIcon>
-                    <ListItemText primary={item} />
+                    <ListItemText primary={item.text} />
                   </ListItem>
                 ))}
                 {filteredData.length === 0 && (
@@ -169,9 +180,9 @@ export function CompareCharts() {
                 fullWidth
                 sx={{ mt: 2, bgcolor: "#333", "&:hover": { bgcolor: "#555" } }}
                 onClick={handleCompare}
-                disabled={checkedItems.length === 0}
+                disabled={!selectedItems}
               >
-                Compare Selected
+                Listo
               </Button>
             </Box>
           </Fade>

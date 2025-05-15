@@ -26,6 +26,7 @@ export function Main() {
       <Charts
         topic="townHalls/Jarabacoa"
         headers={headers}
+        deparment="Ayuntamiento de Jarabacoa"
         customTheme={customTheme}
       />
       <ListGroup title={"Posición por salario"} topic={"Jarabacoa"} />

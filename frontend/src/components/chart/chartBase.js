@@ -1,7 +1,7 @@
 import * as LightweightCharts from "lightweight-charts"
-import constants from "../../constants";
+import { requestJson } from "../../utils/request";
 
-export const chartBase = async (container, description, topic,customTheme) => {
+export const chartBase = async (container, description, topic, customTheme) => {
 	try {
 		const chartElement = document.createElement('div');
 		const superContainer = container.parentElement.parentElement.getBoundingClientRect()
@@ -57,9 +57,9 @@ export const chartBase = async (container, description, topic,customTheme) => {
 			},
 		};
 		chart.applyOptions(darkTheme.chart);
-		const res = await fetch(`${constants.urlData}/${topic}/${description.replaceAll("%", "%25")}.json`)
-		const data = await res.json()
-		areaSeries.setData(data);
+		const data1 = await requestJson(`datas/${topic}/${description.replaceAll("%", "%25")}`)
+		areaSeries.setData(data1);
+		return chart
 	} catch (error) {
 		console.log(description, "   ", error)
 	}
