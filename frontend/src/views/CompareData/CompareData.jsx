@@ -43,12 +43,14 @@ export function CompareData() {
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
   const [page, setPage] = useState(1);
+  const [imagePage, setImagePage] = useState(1);
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
   const [townHall, setTownHall] = useState(townHalls[0]);
 
   const handleClick = (employee) => {
     positionSelect(selectEmployee, imageRef, employee);
+    setImagePage(employee.page);
   };
 
   const columns = [
@@ -64,6 +66,7 @@ export function CompareData() {
       },
     },
     { field: "sex", headerName: "Género", flex: 1 },
+    { field: "page", headerName: "Página", flex: 1, hide: true },
     {
       field: "action",
       headerName: "Acciones",
@@ -88,22 +91,16 @@ export function CompareData() {
   }, [townHall]);
 
   useEffect(() => {
-    const employees = {};
     if ((currentDate?.length ?? 0) <= 0) return;
     const [year, month] = currentDate.split("-");
     requestJson(
       `/dataPreprocessing/townHalls/${townHall}/data/${year}/${months[month]}`
     ).then((res) => {
       data = res.map((row) => {
-        employees[row.document] ??= [];
-        employees[row.document].push(row);
         row.id = crypto.randomUUID();
         return row;
       });
       setRows(data);
-      const rows = Object.keys(employees).filter((key) => {
-        employees[key].length > 1;
-      });
     });
   }, [currentDate]);
 
@@ -126,19 +123,15 @@ export function CompareData() {
     );
   };
 
-  const filteredRows = rows.filter((row) => row.page == page);
-  filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
-  const totalPages = Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
-
+  const filteredRows =
+    search !== "" ? [...rows] : rows.filter((row) => row.page == page);
+  if(search === "") filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
+  const totalPages =
+    search !== ""
+      ? Math.floor(filteredRows.length / 15)
+      : Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
   const sum = (arr) =>
-    arr.reduce(
-      (acc, row) =>
-        acc +
-        parseFloat(
-          (row.income || "0")
-        ) || 0,
-      0
-    );
+    arr.reduce((acc, row) => acc + parseFloat(row.income || "0") || 0, 0);
 
   const totalPayroll = sum(rows);
   const totalPayrollByPage = sum(filteredRows);
@@ -147,6 +140,8 @@ export function CompareData() {
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
+    if(search !== "") return;
+    setImagePage(newPage);
   };
 
   const handleDate = (event) => {
@@ -156,6 +151,7 @@ export function CompareData() {
   const handleTownHall = (event) => {
     setTownHall(event.target.value);
     setPage(1);
+    setImagePage(1);
   };
 
   return (
@@ -203,7 +199,7 @@ export function CompareData() {
                 currentDate?.split("-")?.[0]
               }/${
                 months[currentDate?.split("-")?.[1]]
-              }/jarabacoaTownHall.${page}.jpg`}
+              }/jarabacoaTownHall.${imagePage}.jpg`}
               width="100%"
               height="100%"
             />
@@ -219,6 +215,9 @@ export function CompareData() {
                   columns={columns}
                   pageSize={filteredRows.length}
                   rowsPerPageOptions={[filteredRows.length]}
+                  columnVisibilityModel={{
+                    page: search !== "",
+                  }}
                   disableSelectionOnClick
                   hideFooterPagination
                   hideFooter

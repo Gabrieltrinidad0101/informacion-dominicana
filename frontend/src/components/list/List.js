@@ -2,15 +2,18 @@ import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import Collapse from '@mui/material/Collapse';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, Fade, Modal, TextField, Typography } from '@mui/material';
 import { formatToLastDayOfMonth, payroll, requestJson } from '../../utils/request';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ListCss from './List.module.css';
 import { formatted } from '../../utils/format';
 import Backdrop from '@mui/material/Backdrop';
 import { ShowImage } from '../showImage/ShowImage';
+import es from 'date-fns/locale/es';
+
+registerLocale('es', es);
 
 let positionBySalary = {}
 
@@ -22,8 +25,8 @@ const getSalaryFormat = (position) => {
 }
 
 const monthNames = [
-    "january", "february", "march", "april", "may", "june",
-    "july", "august", "september", "october", "november", "december"
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
 ];
 
 export const PositionAndSalary = ({ position, employees, showImage }) => {
@@ -88,10 +91,8 @@ const style = {
     boxShadow: 24,
 };
 
-
-
 export const ListGroup = ({ title, topic }) => {
-    const [dates, setDates] = useState(new Date());
+    const [dates, setDates] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date())
     const [search, setSearch] = useState("")
     const [employee, setEmployee] = useState({})
@@ -174,6 +175,8 @@ export const ListGroup = ({ title, topic }) => {
                             dateFormat="yyyy-MM"
                             showMonthYearPicker
                             className={ListCss.datePicker}
+                            includeDates={dates.map(date => new Date(date.time))} // Enable only specific dates
+                            locale="es" // Set locale to Spanish
                         />
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 import React, {useRef, useEffect, useState } from 'react'
 import { chartBase } from './chartBase'
 import "./chart.css"
+import { useCompareModal } from '../../context/context'
 let isLoad = {}
 export function Chart({description,topic,customTheme}) {
+  const {openCompareModal} = useCompareModal()
   const containerChart = useRef()
   const verifyVisibility =(entry)=>{
     if (isLoad[description] || !entry[0].isIntersecting) return
@@ -22,7 +24,7 @@ export function Chart({description,topic,customTheme}) {
           <h3>{description}</h3>
           <div>
             <a href="#">Fuentes</a>
-            <a href="#">Comparar</a>
+            <a href="#" onClick={openCompareModal}>Comparar</a>
           </div>
         </div>
         <div>
