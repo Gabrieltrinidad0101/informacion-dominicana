@@ -61,11 +61,10 @@ const dummyData = [
 export function CompareCharts({
   open,
   setOpen,
-  selectedItems,
-  setSelectedItems,
   addNewChart
 }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const filteredData = useMemo(() => {
     return dummyData.filter((item) =>
@@ -78,7 +77,7 @@ export function CompareCharts({
   };
 
   const handleCompare = () => {
-    addNewChart();
+    addNewChart(selectedItems.url);
   };
 
   return (

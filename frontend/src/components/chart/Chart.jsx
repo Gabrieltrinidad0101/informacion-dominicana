@@ -6,7 +6,6 @@ import { requestJson } from "../../utils/request";
 let isLoad = {};
 export function Chart({ description, topic, customTheme }) {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
   const [chart, setChart] = useState(null);
   const [areaSeries, setAreaSeries] = useState(null);
   const containerChart = useRef();
@@ -23,9 +22,9 @@ export function Chart({ description, topic, customTheme }) {
     observer.observe(containerChart.current);
   }, []);
 
-  const addNewChart = async () => {
+  const addNewChart = async (url) => {
     if(areaSeries) chart.removeSeries(areaSeries);
-    const data2 = await requestJson(selectedItems.url);
+    const data2 = await requestJson(url);
     const newAreaSeries = chart.addAreaSeries({
       topColor: "#092e32",
       bottomColor: "rgba(5, 27, 29, .5)",
@@ -42,8 +41,6 @@ export function Chart({ description, topic, customTheme }) {
         <CompareCharts
           open={openModal}
           setOpen={setOpenModal}
-          selectedItems={selectedItems}
-          setSelectedItems={setSelectedItems}
           addNewChart={addNewChart}
         />
       )}
