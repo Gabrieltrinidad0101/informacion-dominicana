@@ -6,8 +6,6 @@ import { getTextFromImageApiAzure } from "./apis/azure/azure.js";
 import { getTextFromImageApiOcrSpace } from "./apis/ocrSpace/ocrSpace.js";
 import { groupLinesOcrSpace } from "./apis/ocrSpace/groupLine.js";
 import { groupLinesAzure } from "./apis/azure/groupLines.js";
-import { text } from "stream/consumers";
-
 
 const useAzureApi = [
     { department: "Jarabacoa", year: 2019, month: 'january' },
