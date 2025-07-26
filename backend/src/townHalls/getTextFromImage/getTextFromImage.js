@@ -30,7 +30,9 @@ export const getTextFromImage = async () => {
                 const images = fs.readdirSync(nominaImages)
                 const isAzure = useAzureApi.find(d => d.department === townHall && d.year == year && d.month == month)
                 console.log(`${isAzure ? 'azure' : 'ocrSpace'} converting image to text ${nominaImages}`)
-                const imagesWithOrden = images.sort((a, b) => a.split(".")[1] - b.split(".")[1])
+                const imagesWithOrden = images.sort((a, b) => {
+                     return parseInt(a.replace("_","").split(".")[0]) - parseInt(b.replace("_","").split(".")[0])
+                })
                 let pages = {}
                 for (let i = 0; i < imagesWithOrden.length; i++) {
                     const image = imagesWithOrden[i]

@@ -1,15 +1,17 @@
-const payrolls = {}
 export const payroll = async (department) => {
-    if (payrolls[department]) return payrolls[department];
     const res = requestJson(`datas/townHalls/${department}/Nomina`)
-    payrolls[department] = res;
     return res;
 }
 
+const requests = {}
 
 export const requestJson = async (url) => {
-    const res = await fetch(`http://127.0.0.1:5500/${url.replaceAll("%", "%25")}.json`)
-    return await res.json()
+    if(requests[url]) return requests[url]
+    const fullUrl = `http://127.0.0.1:5500/${url}.json`
+    const encodeURL = encodeURI(fullUrl)
+    const res = await fetch(encodeURL)
+    requests[url] = await res.json()
+    return requests[url]
 }
 
 export const formatToLastDayOfMonth = (date) => {

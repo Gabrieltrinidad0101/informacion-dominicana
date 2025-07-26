@@ -199,7 +199,7 @@ export function CompareData() {
                 currentDate?.split("-")?.[0]
               }/${
                 months[currentDate?.split("-")?.[1]]
-              }/jarabacoaTownHall.${imagePage}.jpg`}
+              }/_${imagePage}.jpg`}
               width="100%"
               height="100%"
             />

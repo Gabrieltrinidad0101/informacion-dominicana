@@ -116,6 +116,11 @@ const setPositionToEmployee = (employees, data,angle) => {
     })
 }
 
+const chuckData = ({townHall,year,month,chuck,page})=>{
+    const filePath = constants.townHallData(townHall, year, `chuncks/${month}/${page}.txt`)
+    fs.writeFileSync(filePath, chuck)
+}
+
 export const ai = async () => {
     await forPreData(async ({ pages, townHall, month, monthInt, year }) => {
         const filePath = constants.townHallData(townHall, year, `${month}.json`)
@@ -126,7 +131,20 @@ export const ai = async () => {
         let response = []
         for (let page of pageskeys) {
             const text = pages[page].lines.map(data => data.text).join("\n")
-            const chuck = await callDeepSeekAPI(text)
+            const fileChuckPath = constants.townHallData(townHall, year, `chuncks/${month}/${page}.txt`)
+            let chuck = ""
+            const chuckFileExist = fileExists(fileChuckPath)
+            if(chuckFileExist) chuck = fs.readFileSync(fileChuckPath).toString()
+            else {
+                chuck = await callDeepSeekAPI(text)
+                chuckData({
+                    page,
+                    chuck,
+                    year,
+                    month,
+                    townHall
+                })
+            }
             console.log(`   chunk ${page} completed`)
             const employees = formatJson({ chuck, year, monthInt, townHall, chuckText: text, page })
             if (Object.keys(employees).length > 0) {

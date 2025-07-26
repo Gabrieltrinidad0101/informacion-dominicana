@@ -27,6 +27,6 @@ export const getTextFromImageApiOcrSpace = async ({ imagePath, filename }) => {
         return;
     }
     const textOverlay = result.ParsedResults[0].TextOverlay.Lines;
-    await new Promise(res => setTimeout(res, 3_000))
+    await new Promise(res => setTimeout(res, 30_000))
     return textOverlay;
 }

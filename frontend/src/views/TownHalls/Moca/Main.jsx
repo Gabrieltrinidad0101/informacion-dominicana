@@ -27,6 +27,8 @@ export function Main() {
         topic="townHalls/Moca"
         headers={headers}
         customTheme={customTheme}
+        compare={true}
+        deparment="Ayuntamiento de Moca"
       />
       <ListGroup title={"Posición por salario"} topic={"Moca"} />
     </div>

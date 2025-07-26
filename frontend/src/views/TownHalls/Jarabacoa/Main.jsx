@@ -28,6 +28,7 @@ export function Main() {
         headers={headers}
         deparment="Ayuntamiento de Jarabacoa"
         customTheme={customTheme}
+        compare={true}
       />
       <ListGroup title={"Posición por salario"} topic={"Jarabacoa"} />
     </div>

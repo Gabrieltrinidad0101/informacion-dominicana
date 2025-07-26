@@ -57,7 +57,7 @@ export const chartBase = async (container, description, topic, customTheme) => {
 			},
 		};
 		chart.applyOptions(darkTheme.chart);
-		const data1 = await requestJson(`datas/${topic}/${description.replaceAll("%", "%25")}`)
+		const data1 = await requestJson(`datas/${topic}/${description}`)
 		areaSeries.setData(data1);
 		return chart
 	} catch (error) {

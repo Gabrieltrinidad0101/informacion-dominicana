@@ -18,7 +18,7 @@ export const analyzeJson = (records)=>{
     } 
     let testLimit = Infinity
     for(const record of records){
-        const description = record.field[1]._text.replaceAll("U+00a0"," ").replaceAll(":","-")
+        const description = record.field[1]._text.replaceAll("U+00a0"," ").replaceAll(":","-").replaceAll(",","")
         .replaceAll(">","mayor")
         const time = record.field[2]._text
         const value = record.field[3]._text 

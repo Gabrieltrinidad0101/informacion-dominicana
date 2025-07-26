@@ -29,6 +29,22 @@ const monthNames = [
     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
 ];
 
+export const getMonth = (text) => {
+    const textloweCase = text.toLowerCase()
+    if (textloweCase.includes("enero")) return "january"
+    if (textloweCase.includes("febrero") || textloweCase.includes("feb")) return "february"
+    if (textloweCase.includes("marzo")) return "march"
+    if (textloweCase.includes("abril")) return "april"
+    if (textloweCase.includes("mayo")) return "may"
+    if (textloweCase.includes("junio")) return "june"
+    if (textloweCase.includes("julio")) return "july"
+    if (textloweCase.includes("agosto")) return "august"
+    if (textloweCase.includes("septiembre")) return "september"
+    if (textloweCase.includes("octubre")) return "october"
+    if (textloweCase.includes("noviembre") || textloweCase === "11.pdf") return "november"
+    if (textloweCase.includes("diciembre")) return "december"
+}
+
 export const PositionAndSalary = ({ position, employees, showImage }) => {
     const [open, setOpen] = useState(false);
     return (
@@ -37,6 +53,7 @@ export const PositionAndSalary = ({ position, employees, showImage }) => {
                 <Box display="flex" justifyContent="space-between" width="100%">
                     <Typography>{position}</Typography>
                     <Typography>{getSalaryFormat(position)}</Typography>
+                    <Typography>{employees.length}</Typography>
                 </Box>
                 <Box ml={3}>
                     {open ? <i>⬆️</i> : <i>⬇️</i>}
@@ -84,8 +101,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '50%',
-    height: '80%',
+    width: '100%',
+    maxWidth: '1000px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -148,7 +165,7 @@ export const ListGroup = ({ title, topic }) => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <ShowImage
-                            url={`http://localhost:5500/dataPreprocessing/townHalls/${topic}/images/${currentDate.getFullYear?.()}/${monthName}/jarabacoaTownHall.${employee.page}.jpg`}
+                            url={`http://localhost:5500/dataPreprocessing/townHalls/${topic}/images/${currentDate.getFullYear?.()}/${getMonth(monthName)}/_${employee.page}.jpg`}
                             employee={employee}
                         />
                     </Box>
@@ -196,6 +213,7 @@ export const ListGroup = ({ title, topic }) => {
                         <Box display="flex" justifyContent="space-between" width="calc(100% - 48px)">
                             <Typography>Posición</Typography>
                             <Typography>Salario</Typography>
+                            <Typography>Cantidad</Typography>
                         </Box>
                     </ListSubheader>
                 }

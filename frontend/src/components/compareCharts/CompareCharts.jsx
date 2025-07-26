@@ -13,11 +13,12 @@ import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
 
 const style = {
-  position: "absolute",
+  position: "fixed",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "50%",
+  width: "90%",
+  maxWidth: "1000px",
   bgcolor: "#121212",
   color: "#ffffff",
   border: "1px solid #333",
@@ -26,7 +27,7 @@ const style = {
   borderRadius: 2,
 };
 
-const dummyData = [
+const dummyDataTemporalTest = [
   { text: "Nomina - Ayuntamiento de Moca", url: "datas/townHalls/Moca/Nomina" },
   {
     text: "Cantidad Total de Empleados - Ayuntamiento de Moca ",
@@ -61,8 +62,12 @@ const dummyData = [
 export function CompareCharts({
   open,
   setOpen,
-  addNewChart
+  addNewChart,
+  include,
+  notInclude,
 }) {
+  console.log({includes: include,notInclude})
+  const [dummyData] = useState(dummyDataTemporalTest.filter(data => data.text.includes(include) && !data.text.includes(notInclude))) 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -78,15 +83,17 @@ export function CompareCharts({
 
   const handleCompare = () => {
     addNewChart(selectedItems.url);
+    setOpen(false)
   };
 
   return (
-    <div>
+    <>
       {open && (
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           open={open}
+          style={{position: "fixed"}}
           onClose={() => setOpen(false)}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
@@ -187,6 +194,6 @@ export function CompareCharts({
           </Fade>
         </Modal>
       )}
-    </div>
+    </>
   );
 }

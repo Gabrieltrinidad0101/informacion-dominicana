@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { chartBase } from "./chartBase";
 import "./chart.css";
 import { CompareCharts } from "../compareCharts/CompareCharts";
 import { requestJson } from "../../utils/request";
-let isLoad = {};
-export function Chart({ description, topic, customTheme }) {
+
+let isLoad = {}
+export function Chart({ description, topic, customTheme,compare,deparment }) {
   const [openModal, setOpenModal] = useState(false);
   const [chart, setChart] = useState(null);
   const [areaSeries, setAreaSeries] = useState(null);
@@ -17,7 +18,7 @@ export function Chart({ description, topic, customTheme }) {
   };
 
   useEffect(() => {
-    if (Object.keys(isLoad) <= 0) isLoad = {};
+    isLoad = {}
     const observer = new IntersectionObserver(verifyVisibility);
     observer.observe(containerChart.current);
   }, []);
@@ -39,6 +40,8 @@ export function Chart({ description, topic, customTheme }) {
     <>
       {openModal && (
         <CompareCharts
+          include={description}
+          notInclude={deparment}
           open={openModal}
           setOpen={setOpenModal}
           addNewChart={addNewChart}
@@ -49,9 +52,9 @@ export function Chart({ description, topic, customTheme }) {
           <h3>{description}</h3>
           <div>
             <a href="#">Fuentes</a>
-            <a href="#" onClick={() => setOpenModal(true)}>
+            {compare && <a href="#" onClick={() => setOpenModal(true)}>
               Comparar
-            </a>
+            </a>}
           </div>
         </div>
         <div>
