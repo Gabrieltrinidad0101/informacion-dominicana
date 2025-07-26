@@ -1,6 +1,6 @@
 class EventListener {
     constructor(eventBus,eventRepository) {
-        this.eventBus = eventBu
+        this.eventBus = eventBus
         this.eventRepository = eventRepository
         this.eventBus.on('downloadLink', saveEvent)
         this.eventBus.on('getTextFromImage', saveEvent)
