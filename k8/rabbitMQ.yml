@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-hub-0
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mq-hub-0
+  template:
+    metadata:
+      labels:
+        app: mq-hub-0
+    spec:
+      containers:
+        - name: mq-hub-0
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "user"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mq-hub-0
+  namespace: default
+spec:
+  selector:
+    app: mq-hub-0
+  type: NodePort
+  ports:
+    - port: 5672
+      targetPort: 5672
+      nodePort: 31672
+      name: amqp
+    - port: 15672
+      targetPort: 15672
+      nodePort: 31567
+      name: management

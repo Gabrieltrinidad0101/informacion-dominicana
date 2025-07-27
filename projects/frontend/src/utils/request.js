@@ -1,5 +1,5 @@
-export const payroll = async (department) => {
-    const res = requestJson(`datas/townHalls/${department}/Nomina`)
+export const payroll = async (instituction) => {
+    const res = requestJson(`datas/townHalls/${instituction}/Nomina`)
     return res;
 }
 

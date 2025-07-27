@@ -1,0 +1,16 @@
+{
+  "name": "informacion-dominicana",
+  "version": "1.0.0",
+  "description": "![Logo](https://github.com/Gabrieltrinidad0101/informacion-dominicana/blob/main/frontend/static/img/logo.png)",
+  "main": "index.js",
+  "workspaces": [
+    "projects/*"
+  ],
+  "scripts": {
+    "getDownloadLinks": "node projects/getDownloadLinks/main.js",
+    "download": "node projects/download/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

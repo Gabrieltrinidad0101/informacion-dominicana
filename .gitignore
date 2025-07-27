@@ -3,6 +3,7 @@ node_modules
 dataPreprocessing
 processedData
 datas
+data
 
 # Production
 build

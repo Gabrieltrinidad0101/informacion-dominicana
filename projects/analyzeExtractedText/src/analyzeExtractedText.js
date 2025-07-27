@@ -7,8 +7,8 @@ export class AnalyzeExtractedText {
         this.fileManager = fileManager;
     }
 
-    analyzeExtractedText = async ({ type, index, month, year, department }) => {
-        const textOverlay = await this.fileManager.getFilePayroll(department, 'extractedText', year, month, `${index}.json`);
+    analyzeExtractedText = async ({ type, index, month, year, instituction }) => {
+        const textOverlay = await this.fileManager.getFilePayroll(instituction, 'extractedText', year, month, `${index}.json`);
         const rawData = JSON.parse(textOverlay);
         let data;
         if (type === 'azure') {
@@ -17,7 +17,7 @@ export class AnalyzeExtractedText {
         if (type === 'ocrSpace') {
             data = groupLinesOcrSpace(rawData);
         }
-        this.fileManager.saveFilePayroll(department, 'analyzeExtractedText', year, month, `${index}.json`, data);
-        this.eventBus.emit('analyzeExtractedText', { index, month, year, department });
+        this.fileManager.saveFilePayroll(instituction, 'analyzeExtractedText', year, month, `${index}.json`, data);
+        this.eventBus.emit('analyzeExtractedText', { index, month, year, instituction });
     }
 }

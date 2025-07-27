@@ -1,16 +1,30 @@
 import fs from 'fs';
-import { dirname } from 'path';
+import { dirname,join } from 'path';
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const getFile = (path)=>{
-    return fs.readFileSync(path).toString()
-}
+export class FileManager {
+    getFile = (path) => {
+        return fs.readFileSync(path).toString()
+    }
 
-export const makePath = (deparment,type,year,month,name)=>{
-    return `${__dirname}/../${deparment}/${type}/${year}/${month}/${name}`
-}
+    makePath = (...paths) => {
+        const path_ = `${__dirname}/../../data/${join(...paths)}`
+        fs.mkdirSync(path_, { recursive: true })
+        return path_
+    }
 
-export const saveFilePayroll = (deparment,type,year,month,name,data)=>{
-    fs.writeFileSync(`${__dirname}/../${deparment}/${type}/${year}/${month}/${name}`,data)
+    saveFile = (instituction, type, year, month, name, data) => {
+        const path = this.makePath(instituction, type, year, month)
+        fs.writeFileSync(`${path}/${name}`, data)
+    }
+
+    fileExists = (filePath) => {
+        try {
+            return fs.existsSync(filePath)
+        } catch {
+            return false
+        }
+    }
 }

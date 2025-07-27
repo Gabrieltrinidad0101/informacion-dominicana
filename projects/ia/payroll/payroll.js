@@ -7,11 +7,11 @@ export class Payroll {
         this.api = api;
     }
 
-    payroll = async ({ fileAccess, index, month, year, department }) => {
+    payroll = async ({ fileAccess, index, month, year, instituction }) => {
         const text = await this.fileManager.getFilePayroll(fileAccess);
         const propt = propt(text);
         const response = await this.api(propt);
-        const fileAccess = this.fileManager.saveFilePayroll(department, 'ai_payroll', year, month, `${index}.txt`, JSON.stringify(response));
-        this.eventBus.emit('ai_payroll', { fileAccess,index, month, year, department });
+        const fileAccess = this.fileManager.saveFilePayroll(instituction, 'ai_payroll', year, month, `${index}.txt`, JSON.stringify(response));
+        this.eventBus.emit('ai_payroll', { fileAccess,index, month, year, instituction });
     }
 }

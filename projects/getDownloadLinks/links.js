@@ -1,7 +1,7 @@
 export const links = [
     {
-        link: "https:ayuntamientojarabacoa.gob.do",
-        name: "Ayuntamiento de Jarabacoa",
-        department: "ayuntamiento",
+        link: "https:ayuntamientojarabacoa.gob.do/transparencia/documentos/nomina/",
+        instituctionName: "Ayuntamiento de Jarabacoa",
+        instituctionType: "ayuntamiento",
     }
 ]
