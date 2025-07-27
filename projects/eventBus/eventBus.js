@@ -1,10 +1,10 @@
 import amqplib from "amqplib"
 
-const connection = await amqplib.connect("amqp://user:password@192.168.49.2:31672/")
+const connection = await amqplib.connect("amqp://user:password@192.168.49.2:32672/")
 const channel = await connection.createChannel()
 
 export class EventBus {
-    constructor({ queueName, exchangeName }) {
+    constructor({ queueName, exchangeName } = {}) {
         if(!queueName || !exchangeName) return
         channel.assertQueue(queueName, { durable: true })
         channel.assertExchange(exchangeName, "fanout", { durable: true })
@@ -12,7 +12,7 @@ export class EventBus {
         this.queueName = queueName
         this.exchangeName = exchangeName
 
-        //retry
+        // retry
         channel.assertQueue(`${queueName}_try`, {
             durable: true,
             arguments: {
@@ -24,12 +24,14 @@ export class EventBus {
         channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
-    bindQueue(queueName, exchangeName, routingKey) {
+    bindQueue(queueName, exchangeName) {
         channel.assertQueue(queueName, { durable: true })
-        channel.bindQueue(queueName, exchangeName, routingKey)
+        channel.assertExchange(exchangeName, "fanout", { durable: true })
+        channel.bindQueue(queueName, exchangeName, "")
     }
 
     on(queueName, callback) {
+        channel.assertQueue(queueName, { durable: true })
         channel.consume(queueName, async (message) => {
             try {
                 const content = JSON.parse(message.content.toString())
