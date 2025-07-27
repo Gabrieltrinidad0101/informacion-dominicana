@@ -7,7 +7,7 @@ export class ReExecuteEvents {
     reExecuteEvents = async (data) => {
         const events = await this.getEvents(data)
         events.forEach(event => {
-            this.eventBus.emitCustomExchange(event.exChange,event)
+            this.eventBus.emitCustomExchange(event.exchange,event)
         })
     }
 

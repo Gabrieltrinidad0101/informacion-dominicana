@@ -9,9 +9,11 @@
   "scripts": {
     "getDownloadLinks": "node projects/getDownloadLinks/main.js",
     "download": "node projects/download/main.js",
-    "events": "node projects/events/main.js"
+    "events": "node projects/events/main.js",
+    "frontend": "npm run start --prefix projects/frontend",
+    "postDownload": "node projects/postDownload/main.js"
   },
-  "keywords": [],
+  "keywords": [], 
   "author": "",
   "license": "ISC"
 }

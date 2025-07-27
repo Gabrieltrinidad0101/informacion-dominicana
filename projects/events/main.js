@@ -13,6 +13,8 @@ const eventBus = new EventBus()
 eventBus.bindQueue('readDownloadLink', 'downloadLinks')
 eventBus.bindQueue('readGetTextFromImage', 'getTextFromImages')
 eventBus.bindQueue('readExtractedText', 'extractedTexts')
+eventBus.bindQueue('readDownload', 'downloads')
+
 
 const eventsRepository = new EventsRepository()
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
@@ -20,12 +22,12 @@ new EventListener(eventBus, eventsRepository)
 
 app.get('/find', async (req, res) => {
     const events = await eventsRepository.find(req.query)
-    res.send(events)
+    res.json(events)
 })
 
 app.post('/reExecuteEvents', async (req, res) => {
     const events = await reExecuteEvents.reExecuteEvents(req.body)
-    res.send(events)
+    res.json(events)
 })
 
 app.listen(3000, () => {

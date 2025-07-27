@@ -1,5 +1,5 @@
 import React from 'react'
-import { Chartttts } from '../../components/charts/Charts'
+import { Charts } from '../../components/charts/Charts'
 export function Salud() {
   return (
     <div>

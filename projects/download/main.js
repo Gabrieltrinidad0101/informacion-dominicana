@@ -4,7 +4,7 @@ import { Download } from "./download.js"
 
 const eventBus = new EventBus({
     queueName: "download",
-    exchangeName: "download"
+    exchangeName: "downloads"
 })
 
 const fileManager = new FileManager()

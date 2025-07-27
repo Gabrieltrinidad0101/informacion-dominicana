@@ -80,7 +80,6 @@ function detectDominantAngle(rawData) {
       let addedToLine = false;
   
       for (const line of lines) {
-        // Si la diferencia en Y es pequeña, lo agregamos a esa línea
         if (Math.abs(line.avgY - word.y) <= yTolerance) {
           line.words.push(word);
           line.avgY = (line.avgY * (line.words.length - 1) + word.y) / line.words.length;

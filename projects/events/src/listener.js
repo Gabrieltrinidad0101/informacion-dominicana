@@ -1,13 +1,14 @@
 export class EventListener {
-    constructor(eventBus,eventRepository) {
+    constructor(eventBus, eventRepository) {
         this.eventBus = eventBus
         this.eventRepository = eventRepository
-        this.eventBus.on('downloadLink', this.saveEvent)
-        this.eventBus.on('getTextFromImage', this.saveEvent)
-        this.eventBus.on('extractedText', this.saveEvent)
+        this.eventBus.on('readDownloadLink', this.saveEvent)
+        this.eventBus.on('readGetTextFromImage', this.saveEvent)
+        this.eventBus.on('readExtractedText', this.saveEvent)
+        this.eventBus.on('readDownload', this.saveEvent)
     }
 
     saveEvent = async (event) => {
-        await this.eventRepository.create(event)
+        await this.eventRepository.save(event);
     }
 }

@@ -28,7 +28,8 @@ const sidebars = {
       label: 'Ayuntamientos',
       items: ['Jarabacoa','Moca'],
     },
-    'Fuentes'
+    'Fuentes',
+    'Eventos',
   ],
   
 };

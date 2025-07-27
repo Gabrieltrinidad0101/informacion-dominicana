@@ -12,7 +12,18 @@ export class EventsRepository {
         return await EventsModel.find(data)
     }
 
-    async create(data) {
-        return await EventsModel.create(data)
+    async save(data) {
+        if(!data._id){
+            console.log(data)
+            return await EventsModel.create(data)
+        }
+        await EventsModel.findByIdAndUpdate(
+            data._id,
+            data,
+            {
+                upsert: true,
+                new: true,
+            }
+        );
     }
 }

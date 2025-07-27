@@ -9,7 +9,7 @@ import { promises as fs } from "fs"
  * @returns 
  */
 
-const options = (saveFilename,savePath) => ({
+const options = (saveFilename, savePath) => ({
   density: 700,
   savePath,
   saveFilename,
@@ -19,59 +19,23 @@ const options = (saveFilename,savePath) => ({
 });
 
 
-const join = (...paths) => path.join(...paths)
-
-export const convertPdfToImage = async () => {
-  await forEachFolder(constants.townHalls(), async (townHall) => {
-    if(townHall === "pdfLinks.json") return
-    const townHallPdf = constants.downloadData(townHall)
-    await forEachFolder(townHallPdf, async (year) => {
-      await forEachFolder(await getPath(townHallPdf, year), async (payroll) => {
-        const pdfNomina = join(townHallPdf, year, payroll)
-        const month = path.parse(pdfNomina).name
-        if (isNullEmptyUndefinerNan(month)) {
-          console.log(`Error getting month in ${pdfNomina}`)
-          return
-        }
-        const getDataFromDownload = constants.images(townHall, year, month)
-        const files = await fs.readdir(getDataFromDownload)
-        if (files.length > 0 && !path.extname(files[0])) return
-        const wait = await getImageFromPdf({
-          townHall,
-          year,
-          month,
-          pdfNomina,
-          getDataFromDownload,
-          files
-        })
-        if(wait) await new Promise(res => setTimeout(res, 1000))
-      })
-    })
-  })
-}
-
-const getImageFromPdf = async ({ townHall, year, month, pdfNomina, getDataFromDownload, files }) => {
-  const folderImagesTemp = constants.images(townHall, year, month)
-  const imagesTemp = await fs.readdir(folderImagesTemp)
-
-  if (files.length > 0) return
-  console.log(`Getting image from pdf ${getDataFromDownload}`)
-  if (imagesTemp.length <= 0) {
-    const convert = fromPath(pdfNomina, options("_",folderImagesTemp));
-    await convert.bulk(-1)
-  }
-  return true
-}
-
-
 export class PdfToImage {
   constructor(eventBus, fileManager) {
     this.eventBus = eventBus
     this.fileManager = fileManager
-    this.eventBus.on('downloadLink', this.getTextFromImage)
+    this.eventBus.on('download', this.getTextFromImage)
   }
 
   getTextFromImage = async (data) => {
-    console.log(data)
+    const saveImages = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'images', data.year, data.month)
+    const convert = fromPath(data.fileAccess, options("_", saveImages));
+    await convert.bulk(-1)
+    const files = fs.readdirSync(saveImages);
+    for (const file of files) {
+      this.eventBus.emit({
+        ...data,
+        fileAccess: path.join(saveImages, file)
+      })
+    }
   }
 }

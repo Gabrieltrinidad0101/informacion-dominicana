@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer"
+import { months } from "./months.js"
 
 export class DownloadTownHallData {
     constructor(eventBus, fileManager) {
@@ -28,16 +29,26 @@ export class DownloadTownHallData {
 
         for (const data of datas) {
             const link = data.link
+            const regex = /\d{4}/
+            const year = regex.exec(data.year)?.[0]
             await page.goto(link)
             const downloadsLink = await page.$$(".btn.btn-descargar.pull-right")
             for (const i in downloadsLink) {
+                const monthText = await page.$$eval('.name', (elements, index) => {
+                    return elements[index]?.textContent.trim();
+                }, i)
+                const month = months.find(month => monthText.toLocaleLowerCase().trim().includes(month.toLocaleLowerCase()))
                 const link = await page.evaluate(el => el.href, downloadsLink[i])
                 this.eventBus.emit({
                     instituctionType,
-                    typeOfData: 'payroll',
+                    typeOfData: 'nomina',
                     link,
+                    year,
+                    month,
                     instituctionName
                 })
+                browser.close()
+                return 
             }
         }
         browser.close()

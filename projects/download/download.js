@@ -15,10 +15,14 @@ export class Download {
         return path.basename(url.pathname);
     }
 
-    download = async ({ link, typeOfData, instituctionName }) => {
-        const downloadPath = this.fileManager.makePath(instituctionName, typeOfData, 'downloadData')
-        if (this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(link)}`)) return
-        await this.downloadFile(link, downloadPath)
+    download = async (data) => {
+        const downloadPath = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'downloadData')
+        if (this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)) return
+        await this.downloadFile(data.link, downloadPath)
+        this.eventBus.emit({
+            ...data,
+            fileAccess: `${downloadPath}/${this.getFileNameFromUrl(data.link)}`
+        })
     }
 
     downloadFile = (link, folderPath) => new Promise(async (res, rej) => {

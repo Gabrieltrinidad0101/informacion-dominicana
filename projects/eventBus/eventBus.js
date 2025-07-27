@@ -1,4 +1,5 @@
 import amqplib from "amqplib"
+import crypto from "crypto"
 
 const connection = await amqplib.connect("amqp://user:password@192.168.49.2:32672/")
 const channel = await connection.createChannel()
@@ -12,7 +13,6 @@ export class EventBus {
         this.queueName = queueName
         this.exchangeName = exchangeName
 
-        // retry
         channel.assertQueue(`${queueName}_try`, {
             durable: true,
             arguments: {
@@ -37,7 +37,7 @@ export class EventBus {
                 const content = JSON.parse(message.content.toString())
                 await callback(content)
             } catch (error) {
-                console.log(error)
+                console.log({error})
                 const retryCount = (message.properties.headers?.["x-retry-count"] || 0) + 1;
                 if (retryCount >= 5) {
                     console.log("⚠️ Max retries reached, send to DLQ or log permanently.");
@@ -56,10 +56,15 @@ export class EventBus {
     }
 
     emit(data) {
+        if (!data.traceId) data.traceId = crypto.randomUUID()
+        delete data._id
+        data.exchange = this.exchangeName
         channel.publish(this.exchangeName, '', Buffer.from(JSON.stringify(data)))
     }
 
     emitCustomExchange(exchangeName,data) {
+        if (!data.traceId) data.traceId = crypto.randomUUID()
+        data.exchange = exchangeName
         channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)))
     }
 }
