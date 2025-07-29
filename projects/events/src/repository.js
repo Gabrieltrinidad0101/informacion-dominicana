@@ -14,7 +14,6 @@ export class EventsRepository {
 
     async save(data) {
         if(!data._id){
-            console.log(data)
             return await EventsModel.create(data)
         }
         await EventsModel.findByIdAndUpdate(
