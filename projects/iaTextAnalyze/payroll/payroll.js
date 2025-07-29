@@ -1,5 +1,3 @@
-import { propt } from "./propt";
-
 export class Payroll {
     constructor(eventBus, api, fileManager) {
         this.eventBus = eventBus;

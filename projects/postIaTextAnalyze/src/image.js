@@ -14,25 +14,6 @@ class Image {
         this.mergeData(iaTextAnalyzeFile, analyzeExtractedTextFile, isPayroll)
     }
 
-    mergeData = (iaTextAnalyzeFile, analyzeExtractedTextFile) => {
-        iaTextAnalyzeFile.forEach(dataIa => {
-            const lines = analyzeExtractedTextFile.filter(data => {
-                if (!employee.document) {
-                    return data.text.includes(employee.name)
-                }
-                return data.text.includes(employee.document)
-            })
-            if (lines.length > 1 || lines.length <= 0) {
-                return
-            }
-            dataIa.x = lines[0].x
-            dataIa.y = lines[0].y
-            dataIa.width = lines[0].width
-            dataIa.height = lines[0].height
-            dataIa.pageAngle = analyzeExtractedTextFile.angle
-            if (isPayroll && dataIa.document) dataIa.document = encrypt(dataIa.document)
-        })
-    }
 
 
 }
