@@ -15,30 +15,26 @@ export class ImageToText {
         this.fileManager = fileManager
     }
 
-    getTextFromImage = async ({ fileAccess, index, month, year, instituction }) => {
-        const isAzure = useAzureApi.find(d => d.instituction === instituction && d.year == year && d.month == month)
+    getTextFromImage = async (data) => {
+        const isAzure = useAzureApi.find(d => d.instituction === data.instituction && d.year == data.year && d.month == data.month)
 
         let textOverlay = ""
         if (isAzure) textOverlay = await getTextFromImageApiAzure({
-            imagePath: fileAccess,
-            filename: instituction
+            imagePath: data.fileAccess,
+            filename: data.instituction
         })
 
         if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
-            imagePath: fileAccess,
+            imagePath: data.fileAccess,
             filename: instituction
         })
 
-        const fileAccess = this.fileManager.makePath(instituction,'extractedText',year,month,`${index}.json`)
-        this.fileManager.saveFilePayroll(fileAccess,textOverlay)
+        const fileAccess = this.fileManager.saveFile(instituction,'extractedText',year,month,`${index}.json`, textOverlay)
 
         this.eventBus.emit('extractedText',{
-            index,
-            month,
-            fileAccess,
-            year,
+            ...data,
             type: isAzure ? 'azure' : 'ocrSpace',
-            instituction,
+            fileAccess
         });
     }
 }

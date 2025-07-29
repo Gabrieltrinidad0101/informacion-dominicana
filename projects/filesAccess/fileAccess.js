@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export class FileManager {
     getFile = (path) => {
-        return fs.readFileSync(path).toString()
+        return JSON.parse(fs.readFileSync(path).toString())
     }
 
     makePath = (...paths) => {
@@ -18,6 +18,7 @@ export class FileManager {
     saveFile = (instituction, type, year, month, name, data) => {
         const path = this.makePath(instituction, type, year, month)
         fs.writeFileSync(`${path}/${name}`, data)
+        return `${path}/${name}`
     }
 
     fileExists = (filePath) => {

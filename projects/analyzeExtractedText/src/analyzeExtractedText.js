@@ -7,9 +7,8 @@ export class AnalyzeExtractedText {
         this.fileManager = fileManager;
     }
 
-    analyzeExtractedText = async ({ type, index, month, year, instituction }) => {
-        const textOverlay = await this.fileManager.getFilePayroll(instituction, 'extractedText', year, month, `${index}.json`);
-        const rawData = JSON.parse(textOverlay);
+    analyzeExtractedText = async ({ type, index, month, year,fileAccess, instituction }) => {
+        const rawData = await this.fileManager.getFile(fileAccess);
         let data;
         if (type === 'azure') {
             data  = groupLinesAzure(rawData);
