@@ -26,10 +26,10 @@ export class ImageToText {
 
         if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
             imagePath: data.fileAccess,
-            filename: instituction
+            filename: data.instituction
         })
 
-        const fileAccess = this.fileManager.saveFile(instituction,'extractedText',year,month,`${index}.json`, textOverlay)
+        const fileAccess = this.fileManager.saveFile(data.instituction,data.typeOfData,'extractedText',data.year,data.month,`${index}.json`, textOverlay)
 
         this.eventBus.emit('extractedText',{
             ...data,

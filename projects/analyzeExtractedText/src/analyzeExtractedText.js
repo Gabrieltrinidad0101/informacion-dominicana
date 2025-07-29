@@ -7,16 +7,16 @@ export class AnalyzeExtractedText {
         this.fileManager = fileManager;
     }
 
-    analyzeExtractedText = async ({ type, index, month, year,fileAccess, instituction }) => {
-        const rawData = await this.fileManager.getFile(fileAccess);
-        let data;
+    analyzeExtractedText = async (data) => {
+        const rawData = await this.fileManager.getFile(data.fileAccess);
+        let textOfImage;
         if (type === 'azure') {
-            data  = groupLinesAzure(rawData);
+            textOfImage  = groupLinesAzure(rawData);
         }
         if (type === 'ocrSpace') {
-            data = groupLinesOcrSpace(rawData);
+            textOfImage = groupLinesOcrSpace(rawData);
         }
-        this.fileManager.saveFilePayroll(instituction, 'analyzeExtractedText', year, month, `${index}.json`, data);
-        this.eventBus.emit('analyzeExtractedText', { index, month, year, instituction });
+        const fileAccess = this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, textOfImage);
+        this.eventBus.emit('analyzeExtractedText', { ...data, fileAccess });
     }
 }
