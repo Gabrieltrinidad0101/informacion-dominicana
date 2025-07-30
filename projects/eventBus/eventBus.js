@@ -37,7 +37,6 @@ export class EventBus {
                 const content = JSON.parse(message.content.toString())
                 await callback(content)
             } catch (error) {
-                console.log({error})
                 const retryCount = (message.properties.headers?.["x-retry-count"] || 0) + 1;
                 if (retryCount >= 5) {
                     console.log("⚠️ Max retries reached, send to DLQ or log permanently.");

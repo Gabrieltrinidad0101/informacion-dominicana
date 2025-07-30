@@ -17,12 +17,12 @@ export class Download {
 
     download = async (data) => {
         const downloadPath = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'downloadData')
-        if (this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)) return
-        await this.downloadFile(data.link, downloadPath)
         this.eventBus.emit({
             ...data,
             fileAccess: `${downloadPath}/${this.getFileNameFromUrl(data.link)}`
         })
+        if (this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)) return
+        await this.downloadFile(data.link, downloadPath)
     }
 
     downloadFile = (link, folderPath) => new Promise(async (res, rej) => {

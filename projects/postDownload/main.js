@@ -4,7 +4,7 @@ import { PdfToImage } from "./image/convertPdfToImage.js"
 
 const eventBus = new EventBus({
     queueName: "postDownload",
-    exchangeName: "postDownload"
+    exchangeName: "postDownloads"
 })
 
 const fileManager = new FileManager()

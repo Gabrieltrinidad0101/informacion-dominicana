@@ -9,7 +9,7 @@ const EventsModel = mongoose.model('Events', dynamicSchema);
 
 export class EventsRepository {
     async find(data) {
-        return await EventsModel.find(data)
+        return await EventsModel.find({...data})
     }
 
     async save(data) {

@@ -9,14 +9,19 @@ export class FileManager {
         return JSON.parse(fs.readFileSync(path).toString())
     }
 
+    getPath = (...paths) => {
+        const path_ = `${__dirname}/../../data/${join(...paths)}`
+        return path_
+    }
+    
     makePath = (...paths) => {
         const path_ = `${__dirname}/../../data/${join(...paths)}`
         fs.mkdirSync(path_, { recursive: true })
         return path_
     }
 
-    saveFile = (instituction, type, year, month, name, data) => {
-        const path = this.makePath(instituction, type, year, month)
+    saveFile = (instituction, type,process, year, month, name, data) => {
+        const path = this.makePath(instituction, type,process, year, month)
         fs.writeFileSync(`${path}/${name}`, data)
         return `${path}/${name}`
     }

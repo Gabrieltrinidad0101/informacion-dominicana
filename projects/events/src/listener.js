@@ -3,9 +3,9 @@ export class EventListener {
         this.eventBus = eventBus
         this.eventRepository = eventRepository
         this.eventBus.on('readDownloadLink', this.saveEvent)
-        this.eventBus.on('readGetTextFromImage', this.saveEvent)
-        this.eventBus.on('readExtractedText', this.saveEvent)
         this.eventBus.on('readDownload', this.saveEvent)
+        this.eventBus.on('readGetPostDownloads', this.saveEvent)
+        this.eventBus.on('readExtractedText', this.saveEvent)
     }
 
     saveEvent = async (event) => {

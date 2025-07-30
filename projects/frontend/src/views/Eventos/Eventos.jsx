@@ -6,7 +6,7 @@ export function Eventos() {
     <div className={EventosCss.eventos} >
       <Evento exchange="downloadLinks"/>
       <Evento exchange="downloads"/>
-      <Evento exchange="getTextFromImages"/>
+      <Evento exchange="postDownloads"/>
       <Evento exchange="extractedTexts"/>
     </div>
   );

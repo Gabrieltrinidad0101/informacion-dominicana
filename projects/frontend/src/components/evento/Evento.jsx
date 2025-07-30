@@ -17,6 +17,7 @@ export function Evento({exchange}) {
         : `http://127.0.0.1:3000/find?exchange=${exchange}`
     );
     const json = await data.json();
+    if(!json || json.length === 0) return;
     const columns_ = Object.keys(json[0])
       .map((key) => {
         if (key === "__v") return;
@@ -38,11 +39,14 @@ export function Evento({exchange}) {
         exchange: exchange
       }),
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   };
 
-  useEffect(async () => {
-    await searchData();
+  useEffect(() => {
+    searchData();
   }, []);
 
   const onChangeValue = (e) => {

@@ -10,9 +10,9 @@ export class ReExecuteEvents {
             this.eventBus.emitCustomExchange(event.exchange,event)
         })
     }
-
+    
     getEvents = async (data) => {
-        const events = this.eventsRepository.find(data)
-        return events
+        const events = await this.eventsRepository.find(data)
+        return events ?? {}
     }
 }
