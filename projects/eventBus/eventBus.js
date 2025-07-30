@@ -24,15 +24,28 @@ export class EventBus {
         channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
-    bindQueue(queueName, exchangeName) {
-        channel.assertQueue(queueName, { durable: true })
-        channel.assertExchange(exchangeName, "fanout", { durable: true })
-        channel.bindQueue(queueName, exchangeName, "")
+
+    async bindQueue(queueName, exchangeName) {
+        await channel.assertQueue(queueName, { durable: true })
+        await channel.assertExchange(exchangeName, "fanout", { durable: true })
+        await channel.bindQueue(queueName, exchangeName, "")
     }
 
-    on(queueName, callback) {
-        channel.assertQueue(queueName, { durable: true })
-        channel.consume(queueName, async (message) => {
+    async tryQueue(queueName, exchangeName) {
+        await channel.assertQueue(`${queueName}_try`, {
+            durable: true,
+            arguments: {
+                'x-message-ttl': 5000,
+                'x-dead-letter-exchange': exchangeName
+            }
+        })
+        await channel.assertExchange(`${exchangeName}_try`, "fanout", { durable: true })
+        await channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
+    }
+
+    async on(queueName,exchangeName, callback) {
+        await this.bindQueue(queueName, exchangeName)
+        await channel.consume(queueName, async (message) => {
             try {
                 const content = JSON.parse(message.content.toString())
                 await callback(content)
@@ -42,6 +55,7 @@ export class EventBus {
                     console.log("⚠️ Max retries reached, send to DLQ or log permanently.");
                     return;
                 }
+                await this.tryQueue(queueName,exchangeName)
                 channel.publish(`${queueName}s_try`,'', Buffer.from(message.content), {
                     headers: {
                         "x-retry-count": retryCount
@@ -54,11 +68,11 @@ export class EventBus {
 
     }
 
-    emit(data) {
+    emit(exchangeName, data) {
         if (!data.traceId) data.traceId = crypto.randomUUID()
         delete data._id
-        data.exchange = this.exchangeName
-        channel.publish(this.exchangeName, '', Buffer.from(JSON.stringify(data)))
+        data.exchange = exchangeName
+        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)))
     }
 
     emitCustomExchange(exchangeName,data) {

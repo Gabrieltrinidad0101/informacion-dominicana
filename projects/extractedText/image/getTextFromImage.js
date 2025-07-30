@@ -13,6 +13,7 @@ export class ImageToText {
     constructor(eventBus,fileManager) {
         this.eventBus = eventBus
         this.fileManager = fileManager
+        this.eventBus.on('extractedText', this.getTextFromImage)
     }
 
     getTextFromImage = async (data) => {
@@ -31,7 +32,7 @@ export class ImageToText {
 
         const fileAccess = this.fileManager.saveFile(data.instituction,data.typeOfData,'extractedText',data.year,data.month,`${index}.json`, textOverlay)
 
-        this.eventBus.emit('extractedText',{
+        this.eventBus.emit('extractedTexts',{
             ...data,
             type: isAzure ? 'azure' : 'ocrSpace',
             fileAccess

@@ -13,6 +13,6 @@ export class Payroll {
         const propt = propt(text);
         const response = await this.api(propt);
         const fileAccess = this.fileManager.saveFile(data.instituction, data.typeOfData, 'iaTextAnalyze', data.year, data.month, `${data.index}.txt`, JSON.stringify(response));
-        this.eventBus.emit('iaTextAnalyze', { ...data, fileAccess });
+        this.eventBus.emit('iaTextAnalyzes', { ...data, fileAccess });
     }
 }

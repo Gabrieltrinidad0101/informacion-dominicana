@@ -5,7 +5,7 @@ import { InputText } from "../inputs/inputText";
 import EventsCss from "./Evento.module.css";
 import { Button } from "@mui/material";
 
-export function Evento({exchange}) {
+export function Evento({exchangeName}) {
   const [downloadLinks, setDownloadLinks] = React.useState([]);
   const [columns, setColumns] = React.useState([]);
   const [search, setSearch] = React.useState({});
@@ -13,8 +13,8 @@ export function Evento({exchange}) {
   const searchData = async () => {
     const data = await fetch(
       search.key
-        ? `http://127.0.0.1:3000/find?exchange=${exchange}&${search.key}=${search.value}`
-        : `http://127.0.0.1:3000/find?exchange=${exchange}`
+        ? `http://127.0.0.1:3000/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
+        : `http://127.0.0.1:3000/find?exchangeName=${exchangeName}`
     );
     const json = await data.json();
     if(!json || json.length === 0) return;
@@ -36,7 +36,7 @@ export function Evento({exchange}) {
     await fetch(`http://127.0.0.1:3000/reExecuteEvents`, {
       body: JSON.stringify({
         [search.key]: search.value,
-        exchange: exchange
+        exchangeName: exchangeName
       }),
       method: "POST",
       headers: {
@@ -65,7 +65,7 @@ export function Evento({exchange}) {
 
   return (
     <div>
-      <h2>{exchange}</h2>
+      <h2>{exchangeName}</h2>
       <div className={EventsCss.inputs}>
         <SimpleSelect
           name="Instituciones"

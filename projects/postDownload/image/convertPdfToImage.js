@@ -23,7 +23,7 @@ export class PdfToImage {
   constructor(eventBus, fileManager) {
     this.eventBus = eventBus
     this.fileManager = fileManager
-    this.eventBus.on('download', this.getTextFromImage)
+    this.eventBus.on('postDownload', 'postDownloads', this.getTextFromImage)
   }
 
   #getNumbersOfPages = async (pdfPath) => {
@@ -39,7 +39,9 @@ export class PdfToImage {
     for (let i = 1; i <= numberOfPages; i++) {
       if(this.fileManager.fileExists(`${saveImages}/_${i}.jpg`)) continue
       await convert.bulk(i)
-      this.eventBus.emit({
+      this.eventBus.emit(
+        'extractedTexts',
+        {
         ...data,
         index: i,
         fileAccess: `${saveImages}/${i}.jpg`

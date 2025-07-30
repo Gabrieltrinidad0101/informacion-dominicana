@@ -2,10 +2,7 @@ import { EventBus } from "../eventBus/eventBus.js"
 import { FileManager } from "../filesAccess/fileAccess.js"
 import { PdfToImage } from "./image/convertPdfToImage.js"
 
-const eventBus = new EventBus({
-    queueName: "postDownload",
-    exchangeName: "postDownloads"
-})
+const eventBus = new EventBus()
 
 const fileManager = new FileManager()
 

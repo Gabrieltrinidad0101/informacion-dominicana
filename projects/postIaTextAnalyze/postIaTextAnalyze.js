@@ -7,7 +7,7 @@ class PostIaTextAnalyze {
     postIaTextAnalyze = async (data) => {
         const fileAccess = this.fileManager.getFile(data.fileAccess)
         const response = await this.fileManager.getFile(fileAccess)
-        this.eventBus.emit('postIaTextAnalyze', { ...data, response })
+        this.eventBus.emit('postIaTextAnalyzes', { ...data, response })
     }
 
 }

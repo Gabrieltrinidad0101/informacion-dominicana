@@ -5,6 +5,7 @@ export class DownloadTownHallData {
     constructor(eventBus, fileManager) {
         this.eventBus = eventBus
         this.fileManager = fileManager
+        this.eventBus.on('downloadLink', 'downloadLinks', this.getDownloadLinks)
     }
 
     getDownloadLinks = async ({
@@ -39,16 +40,18 @@ export class DownloadTownHallData {
                 }, i)
                 const month = months.find(month => monthText.toLocaleLowerCase().trim().includes(month.toLocaleLowerCase()))
                 const link = await page.evaluate(el => el.href, downloadsLink[i])
-                this.eventBus.emit({
-                    instituctionType,
-                    typeOfData: 'nomina',
-                    link,
-                    year,
-                    month,
-                    instituctionName
-                })
+                this.eventBus.emit(
+                    'downloads',
+                    {
+                        instituctionType,
+                        typeOfData: 'nomina',
+                        link,
+                        year,
+                        month,
+                        instituctionName
+                    })
                 browser.close()
-                return 
+                return
             }
         }
         browser.close()

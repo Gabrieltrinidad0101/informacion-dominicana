@@ -1,4 +1,3 @@
-import { exists } from 'fs';
 import { DownloaderHelper } from 'node-downloader-helper';
 import path from 'path';
 import { URL } from 'url';
@@ -7,7 +6,7 @@ export class Download {
     constructor(eventBus, fileManager) {
         this.eventBus = eventBus
         this.fileManager = fileManager
-        this.eventBus.on('downloadLink', (data) => this.download(data))
+        this.eventBus.on('download', 'downloads', (data) => this.download(data))
     }
 
     getFileNameFromUrl(urlString) {
@@ -17,10 +16,12 @@ export class Download {
 
     download = async (data) => {
         const downloadPath = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'downloadData')
-        this.eventBus.emit({
-            ...data,
-            fileAccess: `${downloadPath}/${this.getFileNameFromUrl(data.link)}`
-        })
+        this.eventBus.emit(
+            'postDownloads',
+            {
+                ...data,
+                fileAccess: `${downloadPath}/${this.getFileNameFromUrl(data.link)}`
+            })
         if (this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)) return
         await this.downloadFile(data.link, downloadPath)
     }
