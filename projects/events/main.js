@@ -10,18 +10,13 @@ app.use(express.json())
 app.use(cors())
 
 const eventBus = new EventBus()
-eventBus.bindQueue('readDownloadLink', 'downloadLinks')
-eventBus.bindQueue('readGetPostDownloads', 'postDownloads')
-eventBus.bindQueue('readExtractedText', 'extractedTexts')
-eventBus.bindQueue('readDownload', 'downloads')
-
 
 const eventsRepository = new EventsRepository()
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
 
 app.get('/find', async (req, res) => {
-    const events = await reExecuteEvents.getEvents(req.query)
+    const events = await reExecuteEvents.getEvents(JSON.parse(JSON.stringify(req.query)))
     res.json(events)
 })
 

@@ -4,19 +4,20 @@ await mongoose.connect('mongodb://user:password@192.168.49.2:32017/informacion-d
       useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
-const EventsModel = mongoose.model('Events', dynamicSchema);
 
 export class EventsRepository {
     async find(data) {
-        return await EventsModel.find({...data})
+        console.log(data)
+        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        return await Model.find({...data})
     }
-
+    
     async save(data) {
-        if(!data._id){
-            return await EventsModel.create(data)
-        }
-        await EventsModel.findByIdAndUpdate(
+        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        await Model.findByIdAndUpdate(
             data._id,
             data,
             {

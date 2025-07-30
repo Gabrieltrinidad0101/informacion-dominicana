@@ -2,10 +2,10 @@ export class EventListener {
     constructor(eventBus, eventRepository) {
         this.eventBus = eventBus
         this.eventRepository = eventRepository
-        this.eventBus.on('readDownloadLink', this.saveEvent)
-        this.eventBus.on('readDownload', this.saveEvent)
-        this.eventBus.on('readGetPostDownloads', this.saveEvent)
-        this.eventBus.on('readExtractedText', this.saveEvent)
+        this.eventBus.on('readDownloadLink', 'downloadLinks', this.saveEvent)
+        this.eventBus.on('readGetPostDownloads', 'postDownloads', this.saveEvent)
+        this.eventBus.on('readExtractedText', 'extractedTexts', this.saveEvent)
+        this.eventBus.on('readDownload', 'downloads', this.saveEvent)
     }
 
     saveEvent = async (event) => {

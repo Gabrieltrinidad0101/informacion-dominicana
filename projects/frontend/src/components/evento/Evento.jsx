@@ -11,38 +11,46 @@ export function Evento({exchangeName}) {
   const [search, setSearch] = React.useState({});
 
   const searchData = async () => {
-    const data = await fetch(
-      search.key
-        ? `http://127.0.0.1:3000/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
-        : `http://127.0.0.1:3000/find?exchangeName=${exchangeName}`
-    );
-    const json = await data.json();
-    if(!json || json.length === 0) return;
-    const columns_ = Object.keys(json[0])
-      .map((key) => {
-        if (key === "__v") return;
-        return {
-          field: key,
-          headerName: key,
-          flex: 1,
-        };
-      })
-      .filter((column) => column);
-    setColumns(columns_);
-    setDownloadLinks(json);
+    try {
+      const data = await fetch(
+        search.key
+          ? `http://127.0.0.1:3000/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
+          : `http://127.0.0.1:3000/find?exchangeName=${exchangeName}`
+      );
+      const json = await data.json();
+      if(!json || json.length === 0) return;
+      const columns_ = Object.keys(json[0])
+        .map((key) => {
+          if (key === "__v") return;
+          return {
+            field: key,
+            headerName: key,
+            flex: 1,
+          };
+        })
+        .filter((column) => column);
+      setColumns(columns_);
+      setDownloadLinks(json);
+    }catch {
+
+    }
   };
 
   const execute = async () => {
-    await fetch(`http://127.0.0.1:3000/reExecuteEvents`, {
-      body: JSON.stringify({
-        [search.key]: search.value,
-        exchangeName: exchangeName
-      }),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      await fetch(`http://127.0.0.1:3000/reExecuteEvents`, {
+        body: JSON.stringify({
+          [search.key]: search.value,
+          exchangeName: exchangeName
+        }),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch {
+      
+    }
   };
 
   useEffect(() => {
