@@ -14,8 +14,8 @@ export function Evento({exchangeName}) {
     try {
       const data = await fetch(
         search.key
-          ? `http://127.0.0.1:3000/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
-          : `http://127.0.0.1:3000/find?exchangeName=${exchangeName}`
+          ? `http://127.0.0.1:3001/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
+          : `http://127.0.0.1:3001/find?exchangeName=${exchangeName}`
       );
       const json = await data.json();
       if(!json || json.length === 0) return;
@@ -38,7 +38,7 @@ export function Evento({exchangeName}) {
 
   const execute = async () => {
     try {
-      await fetch(`http://127.0.0.1:3000/reExecuteEvents`, {
+      await fetch(`http://127.0.0.1:3001/reExecuteEvents`, {
         body: JSON.stringify({
           [search.key]: search.value,
           exchangeName: exchangeName

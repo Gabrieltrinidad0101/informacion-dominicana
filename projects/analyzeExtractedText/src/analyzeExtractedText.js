@@ -11,7 +11,7 @@ export class AnalyzeExtractedText {
         const rawData = await this.fileManager.getFile(data.fileAccess);
         let textOfImage;
         if (type === 'azure') {
-            textOfImage  = groupLinesAzure(rawData);
+            textOfImage = groupLinesAzure(rawData);
         }
         if (type === 'ocrSpace') {
             textOfImage = groupLinesOcrSpace(rawData);

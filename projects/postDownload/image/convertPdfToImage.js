@@ -1,6 +1,7 @@
 import { fromPath } from "pdf2pic";
 import fs from "fs"
 import pdf from "pdf-parse/lib/pdf-parse.js";
+import path from "path";
 
 /**
  * 
@@ -37,14 +38,16 @@ export class PdfToImage {
     const numberOfPages = await this.#getNumbersOfPages(data.fileAccess)
     const convert = fromPath(data.fileAccess, options("_", saveImages));
     for (let i = 1; i <= numberOfPages; i++) {
-      if(this.fileManager.fileExists(`${saveImages}/_${i}.jpg`)) continue
-      await convert.bulk(i)
+      const fileAccess = path.join(saveImages,`_.${i}.jpg`)
+      if(!this.fileManager.fileExists(fileAccess)) {
+        await convert.bulk(i)
+      }
       this.eventBus.emit(
         'extractedTexts',
         {
         ...data,
         index: i,
-        fileAccess: `${saveImages}/${i}.jpg`
+        fileAccess: fileAccess
       })
     }
   }

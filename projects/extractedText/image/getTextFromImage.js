@@ -2,37 +2,38 @@ import { getTextFromImageApiAzure } from "./apis/azure/azure.js";
 import { getTextFromImageApiOcrSpace } from "./apis/ocrSpace/ocrSpace.js";
 
 const useAzureApi = [
-    { instituction: "Jarabacoa", year: 2019, month: 'january' },
-    { instituction: "Jarabacoa", year: 2019, month: 9 },
-    { instituction: "Jarabacoa", year: 2018, month: 12 },
-    { instituction: "Jarabacoa", year: 2019, month: 'april' },
-    { instituction: "Jarabacoa", year: 2020, month: 'april' },
+    { instituctionName: "Jarabacoa", year: 2019, month: 'january' },
+    { instituctionName: "Jarabacoa", year: 2019, month: 9 },
+    { instituctionName: "Jarabacoa", year: 2018, month: 12 },
+    { instituctionName: "Jarabacoa", year: 2019, month: 'april' },
+    { instituctionName: "Jarabacoa", year: 2020, month: 'april' },
 ]
 
 export class ImageToText {
     constructor(eventBus,fileManager) {
         this.eventBus = eventBus
         this.fileManager = fileManager
-        this.eventBus.on('extractedText', this.getTextFromImage)
+        this.eventBus.on('extractedText','extractedTexts', (data)=> this.getTextFromImage(data))
     }
 
     getTextFromImage = async (data) => {
-        const isAzure = useAzureApi.find(d => d.instituction === data.instituction && d.year == data.year && d.month == data.month)
-
+        const isAzure = useAzureApi.find(d => d.instituctionName === data.instituctionName && d.year == data.year && d.month == data.month)
+        const file = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'extractedText', data.year, data.month, `${data.index}.json`)
+        if(this.fileManager.fileExists(file)) return
         let textOverlay = ""
         if (isAzure) textOverlay = await getTextFromImageApiAzure({
             imagePath: data.fileAccess,
-            filename: data.instituction
+            filename: data.instituctionName
         })
 
         if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
             imagePath: data.fileAccess,
-            filename: data.instituction
+            filename: data.instituctionName
         })
 
-        const fileAccess = this.fileManager.saveFile(data.instituction,data.typeOfData,'extractedText',data.year,data.month,`${index}.json`, textOverlay)
+        const fileAccess = this.fileManager.saveFile(data.instituctionName,data.typeOfData,'extractedText',data.year,data.month,`${data.index}.json`, JSON.stringify(textOverlay))
 
-        this.eventBus.emit('extractedTexts',{
+        this.eventBus.emit('iaTextAnalyzes',{
             ...data,
             type: isAzure ? 'azure' : 'ocrSpace',
             fileAccess

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { dirname,join } from 'path';
+import path, { dirname,join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -10,7 +10,7 @@ export class FileManager {
     }
 
     getPath = (...paths) => {
-        const path_ = `${__dirname}/../../data/${join(...paths)}`
+        const path_ = `${__dirname}/../../data/${join(...paths.map(path => path.toString()))}`
         return path_
     }
     
@@ -28,7 +28,7 @@ export class FileManager {
 
     fileExists = (filePath) => {
         try {
-            return fs.existsSync(filePath)
+            return fs.existsSync(filePath.replace(/ /g, '\\ '))
         } catch {
             return false
         }

@@ -2,6 +2,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'fs';
+import path from 'path';
 
 const url = process.env.API_IMAGE_TO_TEXT;
 export const getTextFromImageApiOcrSpace = async ({ imagePath, filename }) => {
@@ -11,7 +12,7 @@ export const getTextFromImageApiOcrSpace = async ({ imagePath, filename }) => {
     formData.append('isOverlayRequired', 'true');
     formData.append('filetype', 'jpg');
     formData.append('OCREngine', '2');
-    formData.append('file', fs.createReadStream(imagePath), {
+    formData.append('file', fs.createReadStream(path.resolve(imagePath)), {
         filename,
         contentType: 'image/jpg',
     });

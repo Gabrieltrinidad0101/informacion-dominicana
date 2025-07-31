@@ -17,6 +17,7 @@ export class EventsRepository {
     
     async save(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        if(!data._id) data._id = new mongoose.Types.ObjectId()
         await Model.findByIdAndUpdate(
             data._id,
             data,

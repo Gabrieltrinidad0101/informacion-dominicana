@@ -7,13 +7,18 @@
     "projects/*"
   ],
   "scripts": {
-    "downloadLinks": "node projects/downloadLinks/main.js",
-    "download": "node projects/download/main.js",
-    "events": "node projects/events/main.js",
+    "downloadLinks": "nodemon projects/downloadLinks/main.js",
+    "download": "nodemon projects/download/main.js",
+    "events": "nodemon projects/events/main.js",
     "frontend": "npm run start --prefix projects/frontend",
-    "postDownload": "node projects/postDownload/main.js"
+    "postDownload": "nodemon projects/postDownload/main.js",
+    "extractedText": "nodemon projects/extractedText/main.js"
   },
-  "keywords": [], 
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "nodemon": "^3.1.10"
+  }
 }

@@ -6,6 +6,7 @@ export class EventListener {
         this.eventBus.on('readGetPostDownloads', 'postDownloads', this.saveEvent)
         this.eventBus.on('readExtractedText', 'extractedTexts', this.saveEvent)
         this.eventBus.on('readDownload', 'downloads', this.saveEvent)
+        this.eventBus.on('readIaTextAnalyze', 'iaTextAnalyzes', this.saveEvent)
     }
 
     saveEvent = async (event) => {

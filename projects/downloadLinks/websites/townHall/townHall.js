@@ -13,6 +13,7 @@ export class DownloadTownHallData {
         instituctionType,
         instituctionName
     }) => {
+        console.log(link)
         const browser = await puppeteer.launch({
             headless: false
         })
