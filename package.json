@@ -12,7 +12,9 @@
     "events": "nodemon projects/events/main.js",
     "frontend": "npm run start --prefix projects/frontend",
     "postDownload": "nodemon projects/postDownload/main.js",
-    "extractedText": "nodemon projects/extractedText/main.js"
+    "extractedText": "nodemon projects/extractedText/main.js",
+    "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js",
+    "aiTextAnalyze": "nodemon projects/aiTextAnalyze/main.js"
   },
   "keywords": [],
   "author": "",

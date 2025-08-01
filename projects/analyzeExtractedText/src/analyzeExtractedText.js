@@ -5,6 +5,7 @@ export class AnalyzeExtractedText {
     constructor(eventBus, fileManager) {
         this.eventBus = eventBus;
         this.fileManager = fileManager;
+        this.eventBus.on('analyzeExtractedText', 'analyzeExtractedTexts', (data) => this.analyzeExtractedText(data))
     }
 
     analyzeExtractedText = async (data) => {
@@ -17,6 +18,6 @@ export class AnalyzeExtractedText {
             textOfImage = groupLinesOcrSpace(rawData);
         }
         const fileAccess = this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, textOfImage);
-        this.eventBus.emit('analyzeExtractedText', { ...data, fileAccess });
+        this.eventBus.emit('iaTextAnalyzes', { ...data, fileAccess });
     }
 }
