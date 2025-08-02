@@ -10,8 +10,8 @@ export class DownloadTownHallData {
 
     getDownloadLinks = async ({
         link,
-        instituctionType,
-        instituctionName
+        institutionType,
+        institutionName
     }) => {
         console.log(link)
         const browser = await puppeteer.launch({
@@ -44,12 +44,12 @@ export class DownloadTownHallData {
                 this.eventBus.emit(
                     'downloads',
                     {
-                        instituctionType,
+                        institutionType,
                         typeOfData: 'nomina',
                         link,
                         year,
                         month,
-                        instituctionName
+                        institutionName
                     })
                 browser.close()
                 return

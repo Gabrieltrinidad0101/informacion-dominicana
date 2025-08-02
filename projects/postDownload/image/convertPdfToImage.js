@@ -34,9 +34,10 @@ export class PdfToImage {
   }
 
   getTextFromImage = async (data) => {
-    const saveImages = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'postDownloads', data.year, data.month)
+    const saveImages = this.fileManager.makePath(data.institutionName, data.typeOfData, 'postDownloads', data.year, data.month)
     const numberOfPages = await this.#getNumbersOfPages(data.fileAccess)
     const convert = fromPath(data.fileAccess, options("_", saveImages));
+    delete data._id
     for (let i = 1; i <= numberOfPages; i++) {
       const fileAccess = path.join(saveImages,`_.${i}.jpg`)
       if(!this.fileManager.fileExists(fileAccess)) {

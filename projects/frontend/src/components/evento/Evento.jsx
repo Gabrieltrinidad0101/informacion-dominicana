@@ -53,6 +53,25 @@ export function Evento({exchangeName}) {
     }
   };
 
+  const deleteEvents = async () => {
+    try {
+      await fetch(`http://127.0.0.1:3001/deleteEvents`, {
+        body: JSON.stringify({
+          [search.key]: search.value,
+          exchangeName: exchangeName
+        }),
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      await searchData();
+    } catch {
+      
+    }
+  };
+
   useEffect(() => {
     searchData();
   }, []);
@@ -83,6 +102,7 @@ export function Evento({exchangeName}) {
         <InputText onChangeSearch={onChangeValue} />
         <Button onClick={searchData}>Buscar</Button>
         <Button onClick={execute} >Ejecutar</Button>
+        <Button onClick={deleteEvents} >Eliminar</Button>
       </div>
       <DataGrid
         rows={downloadLinks}

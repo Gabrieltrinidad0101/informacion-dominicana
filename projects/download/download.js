@@ -15,7 +15,7 @@ export class Download {
     }
 
     download = async (data) => {
-        const downloadPath = this.fileManager.makePath(data.instituctionName, data.typeOfData, 'downloadData')
+        const downloadPath = this.fileManager.makePath(data.institutionName, data.typeOfData, 'downloadData')
         if (!this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)){
             await this.downloadFile(data.link, downloadPath)
         }

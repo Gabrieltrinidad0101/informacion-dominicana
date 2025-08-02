@@ -20,8 +20,8 @@ export class FileManager {
         return path_
     }
 
-    saveFile = (instituction, type,process, year, month, name, data) => {
-        const path = this.makePath(instituction, type,process, year, month)
+    saveFile = (institution, type,process, year, month, name, data) => {
+        const path = this.makePath(institution, type,process, year, month)
         fs.writeFileSync(`${path}/${name}`, data)
         return `${path}/${name}`
     }

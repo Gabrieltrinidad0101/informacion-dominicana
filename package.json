@@ -7,14 +7,14 @@
     "projects/*"
   ],
   "scripts": {
-    "downloadLinks": "nodemon projects/downloadLinks/main.js",
-    "download": "nodemon projects/download/main.js",
-    "events": "nodemon projects/events/main.js",
+    "downloadLinks": "nodemon projects/downloadLinks/main.js --watch projects/downloadLinks",
+    "download": "nodemon projects/download/main.js --watch projects/download",
+    "events": "nodemon projects/events/main.js --watch projects/events",
     "frontend": "npm run start --prefix projects/frontend",
-    "postDownload": "nodemon projects/postDownload/main.js",
-    "extractedText": "nodemon projects/extractedText/main.js",
-    "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js",
-    "aiTextAnalyze": "nodemon projects/aiTextAnalyze/main.js"
+    "postDownload": "nodemon projects/postDownload/main.js --watch projects/postDownload",
+    "extractedText": "nodemon projects/extractedText/main.js --watch projects/extractedText",
+    "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js --watch projects/analyzeExtractedText",
+    "aiTextAnalyze": "nodemon projects/aiTextAnalyze/main.js --watch projects/aiTextAnalyze"
   },
   "keywords": [],
   "author": "",

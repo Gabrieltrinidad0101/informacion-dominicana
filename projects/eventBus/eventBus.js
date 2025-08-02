@@ -50,8 +50,6 @@ export class EventBus {
                 const content = JSON.parse(message.content.toString())
                 await callback(content)
             } catch (error) {
-                console.log(error)
-                return 
                 const content = JSON.parse(message.content.toString())
                 content.retryCount = (content.retryCount || 0) + 1;
                 if (content.retryCount >= 3) {
@@ -73,7 +71,6 @@ export class EventBus {
 
     emit(exchangeName, data) {
         if (!data.traceId) data.traceId = crypto.randomUUID()
-        if (data.retryCount === 0 || !data.retryCount ) delete data._id 
         data.exchangeName = exchangeName
         channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)))
     }

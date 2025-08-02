@@ -6,13 +6,13 @@ class Payroll {
     }
 
     payroll = async (data) => {
-        const payroll = await this.payrollRepository.payroll(data.instituctionName);
-        const employeersM = await this.payrollRepository.payrollMale(data.instituctionName);
-        const employeersF = await this.payrollRepository.payrollFemale(data.instituctionName);
-        const employeersTotal = await this.payrollRepository.employeersTotal(data.instituctionName);
-        const employeersByPosition = await this.payrollRepository.employeersByPosition(data.instituctionName);
-        const wageGrowth = await this.payrollRepository.wageGrowth(data.instituctionName);
-        const wageGrowthMale = await this.payrollRepository.wageGrowthMale(data.instituctionName);
-        const wageGrowthFemale = await this.payrollRepository.wageGrowthFemale(data.instituctionName);
+        const payroll = await this.payrollRepository.payroll(data.institutionName);
+        const employeersM = await this.payrollRepository.payrollMale(data.institutionName);
+        const employeersF = await this.payrollRepository.payrollFemale(data.institutionName);
+        const employeersTotal = await this.payrollRepository.employeersTotal(data.institutionName);
+        const employeersByPosition = await this.payrollRepository.employeersByPosition(data.institutionName);
+        const wageGrowth = await this.payrollRepository.wageGrowth(data.institutionName);
+        const wageGrowthMale = await this.payrollRepository.wageGrowthMale(data.institutionName);
+        const wageGrowthFemale = await this.payrollRepository.wageGrowthFemale(data.institutionName);
     }
 }

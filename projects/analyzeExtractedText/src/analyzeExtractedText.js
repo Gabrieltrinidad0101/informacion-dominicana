@@ -10,7 +10,7 @@ export class AnalyzeExtractedText {
 
     analyzeExtractedText = async (data) => {
         const rawData = await this.fileManager.getFile(data.fileAccess);
-        const fileAccess = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`)
+        const fileAccess = this.fileManager.getPath(data.institutionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`)
         let textOfImage;
         if (!this.fileManager.fileExists(fileAccess)) {
             if (data.type === 'azure') {
@@ -19,7 +19,7 @@ export class AnalyzeExtractedText {
             if (data.type === 'ocrSpace') {
                 textOfImage = groupLinesOcrSpace(rawData);
             }
-            this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, JSON.stringify(textOfImage));
+            this.fileManager.saveFile(data.institutionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, JSON.stringify(textOfImage));
         } else {
             textOfImage = await this.fileManager.getFile(fileAccess);
         }
