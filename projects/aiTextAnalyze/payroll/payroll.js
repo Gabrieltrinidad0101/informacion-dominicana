@@ -15,7 +15,7 @@ export class Payroll {
         const response = await this.api(propt_);
         const fileAccess = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.txt`)
         if(!this.fileManager.fileExists(fileAccess)) {
-            this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.txt`, JSON.stringify(response));
+            this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`, response);
         }
         this.eventBus.emit('insertData', { ...data, fileAccess });
     }
