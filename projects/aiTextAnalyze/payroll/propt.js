@@ -1,35 +1,39 @@
-export const propt = (data)=> `Convert the given text into a JSON format using the example below as a template. Return only the JSON output without any additional explanations or text.  
+export const propt = (data)=> `Convert the given OCR-extracted text into a JSON array following this structure:
 
-**Example JSON Structure:**
-[{
-    "name": "Gabriel",
-    "document": "050-9999999-9",
-    "position": "MUSICIAN",
-    "income": "2645",
-    "sex": "M"
-}]
+Example Entry:
+{
+  "name": "Gabriel",
+  "document": "050-9999999-9",
+  "position": "MUSICIAN",
+  "income": "2645",
+  "sex": "M",
+  "x": 10,
+  "y": 10,
+  "width": 1000,
+  "height": 43
+}
 
-**Special Case Example (Institutional Entry):**
-[{
-    "name": "SUBVENCION BOMBEROS",
-    "position": "BOMBEROS",
-    "income": "150000"
-}]
+Special Institutional Entry:
+{
+  "name": "SUBVENCION BOMBEROS",
+  "position": "BOMBEROS",
+  "income": "150000"
+}
 
-Processing Instructions:
-    Analyze the input text and extract relevant fields (name, document, position, income, sex).
-    For institutional entries (e.g., names containing "SUBVENCION", "SUBSIDIO", or similar terms):
-        - Omit \`document\` and \`sex\` fields entirely.
-        - Retain \`name\`, \`position\`, and \`income\` if available.
-    For individual entries:
-        - Infer missing fields (e.g., assume gender based on name if not stated).
-        - Correct inconsistencies (prioritize explicit data over inferred).
-    Replace any " inside a value with ' (e.g., {name: pe"ppe} → {name: pe'ppe}).
-    Only include fields that can be extracted or inferred. Omit all others.
+Extraction Rules:
+- Each object represents either an individual or an institutional entry.
+- For individuals:
+  - Include \`name\`, \`position\`, \`income\`, and \`sex\` (M/F) where available.
+  - Omit \`document\` and \`sex\` if unavailable.
+  - Include bounding box: \`x\`, \`y\`, \`width\`, \`height\` of the line containing the main record.
+- For institutional entries (e.g., lines containing words like SUBVENCION, SUBSIDIO, AYUDA):
+  - Include only \`name\`, \`position\`, and \`income\`.
+  - Do not include \`document\`, \`sex\`, or bounding box.
+- Combine multi-line text blocks if a single logical entry spans several lines.
+- Remove or replace any internal \`"\` characters inside values with \`'\`.
+- Output should be **strictly valid JSON**, as a list of objects, with no explanations.
 
-Output Requirements:
-    Return strictly valid JSON with no extra text or formatting.
-    Ensure numeric/date formats match the examples (e.g., "2645", "150000").
+Return only the resulting JSON.
 
 ${data}
 `

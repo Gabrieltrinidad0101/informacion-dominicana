@@ -28,7 +28,7 @@ export class FileManager {
 
     fileExists = (filePath) => {
         try {
-            return fs.existsSync(filePath.replace(/ /g, '\\ '))
+            return fs.existsSync(filePath)
         } catch {
             return false
         }

@@ -9,7 +9,7 @@ export function Eventos() {
       <Evento exchangeName="postDownloads"/>
       <Evento exchangeName="extractedTexts"/>
       <Evento exchangeName="analyzeExtractedTexts"/>
-      <Evento exchangeName="iaTextAnalyzes" />
+      <Evento exchangeName="textAnalysisAIs" />
     </div>
   );
 }

@@ -18,25 +18,26 @@ export class ImageToText {
 
     getTextFromImage = async (data) => {
         const isAzure = useAzureApi.find(d => d.instituctionName === data.instituctionName && d.year == data.year && d.month == data.month)
-        const file = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'extractedText', data.year, data.month, `${data.index}.json`)
-        if(this.fileManager.fileExists(file)) return
+        const fileAccess = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`)
         let textOverlay = ""
-        if (isAzure) textOverlay = await getTextFromImageApiAzure({
-            imagePath: data.fileAccess,
-            filename: data.instituctionName
-        })
+        if(!this.fileManager.fileExists(fileAccess)){
+            if (isAzure) textOverlay = await getTextFromImageApiAzure({
+                imagePath: data.fileAccess,
+                filename: data.instituctionName
+            })
+    
+            if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
+                imagePath: data.fileAccess,
+                filename: data.instituctionName
+            })
+            this.fileManager.saveFile(data.instituctionName,data.typeOfData,'analyzeExtractedText',data.year,data.month,`${data.index}.json`, JSON.stringify(textOverlay))
+        }
 
-        if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
-            imagePath: data.fileAccess,
-            filename: data.instituctionName
-        })
 
-        const fileAccess = this.fileManager.saveFile(data.instituctionName,data.typeOfData,'extractedText',data.year,data.month,`${data.index}.json`, JSON.stringify(textOverlay))
-
-        this.eventBus.emit('iaTextAnalyzes',{
+        this.eventBus.emit('analyzeExtractedTexts',{
             ...data,
+            fileAccess,
             type: isAzure ? 'azure' : 'ocrSpace',
-            fileAccess
         });
     }
 }

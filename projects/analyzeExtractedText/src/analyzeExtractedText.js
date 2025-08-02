@@ -1,5 +1,5 @@
-import { groupLinesOcrSpace } from "./groupLineOcr";
-import { groupLinesAzure } from "./groupLinesAzure";
+import { groupLinesOcrSpace } from "./groupLineOcr.js";
+import { groupLinesAzure } from "./groupLinesAzure.js";
 
 export class AnalyzeExtractedText {
     constructor(eventBus, fileManager) {
@@ -10,14 +10,19 @@ export class AnalyzeExtractedText {
 
     analyzeExtractedText = async (data) => {
         const rawData = await this.fileManager.getFile(data.fileAccess);
+        const fileAccess = this.fileManager.getPath(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`)
         let textOfImage;
-        if (type === 'azure') {
-            textOfImage = groupLinesAzure(rawData);
+        if (!this.fileManager.fileExists(fileAccess)) {
+            if (data.type === 'azure') {
+                textOfImage = groupLinesAzure(rawData);
+            }
+            if (data.type === 'ocrSpace') {
+                textOfImage = groupLinesOcrSpace(rawData);
+            }
+            this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, JSON.stringify(textOfImage));
+        } else {
+            textOfImage = await this.fileManager.getFile(fileAccess);
         }
-        if (type === 'ocrSpace') {
-            textOfImage = groupLinesOcrSpace(rawData);
-        }
-        const fileAccess = this.fileManager.saveFile(data.instituctionName, data.typeOfData, 'analyzeExtractedText', data.year, data.month, `${data.index}.json`, textOfImage);
-        this.eventBus.emit('iaTextAnalyzes', { ...data, fileAccess });
+        this.eventBus.emit('textAnalysisAIs', { ...data, fileAccess });
     }
 }
