@@ -1,4 +1,4 @@
-export class EventListener {
+export class InsertData {
     constructor(eventBus,fileAccess, eventRepository) {
         this.eventBus = eventBus
         this.eventRepository = eventRepository
@@ -9,10 +9,11 @@ export class EventListener {
     saveEvent = async (data) => {
         const file = this.fileAccess.getFile(data.fileAccess)
         const payrolls = file.map(payroll => {
-            payroll.institution = data.instituctionName
+            payroll.institution = data.institutionName
             payroll.year = data.year
             payroll.month = data.month
             payroll.downloadLink = data.link
+            payroll.traceId = data.traceId
             return payroll
         })
         await this.eventRepository.save(payrolls)

@@ -10,12 +10,22 @@ export class Payroll {
     }
 
     payroll = async (data) => {
-        const dataText = await this.fileManager.getFile(data.fileAccess);
-        const propt_ = propt(JSON.stringify(dataText.lines));
-        const response = await this.api(propt_);
-        const fileAccess = this.fileManager.getPath(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.txt`)
+        const fileAccess = this.fileManager.getPath(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`)
         if(!this.fileManager.fileExists(fileAccess)) {
+            const dataText = await this.fileManager.getFile(data.fileAccess);
+            const propt_ = propt(JSON.stringify(dataText.lines));
+            const response = await this.api(propt_);
+            for(const payroll of response) {
+                payroll.isDocumentValid = await this.validateIdNumberApi.validateIdNumber(payroll.document)
+                payroll.document = this.encrypt(payroll.document)
+            }
             this.fileManager.saveFile(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`, response);
         }
+
+
+        this.eventBus.emit("insertDatas",{
+            ...data,
+            fileAccess,
+        })
     }
 }

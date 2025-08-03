@@ -50,6 +50,7 @@ export class EventBus {
                 const content = JSON.parse(message.content.toString())
                 await callback(content)
             } catch (error) {
+                console.log(error)
                 const content = JSON.parse(message.content.toString())
                 content.retryCount = (content.retryCount || 0) + 1;
                 if (content.retryCount >= 3) {

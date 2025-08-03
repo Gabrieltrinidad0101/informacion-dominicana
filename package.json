@@ -14,7 +14,8 @@
     "postDownload": "nodemon projects/postDownload/main.js --watch projects/postDownload",
     "extractedText": "nodemon projects/extractedText/main.js --watch projects/extractedText",
     "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js --watch projects/analyzeExtractedText",
-    "aiTextAnalyze": "nodemon projects/aiTextAnalyze/main.js --watch projects/aiTextAnalyze"
+    "textAnalysisAI": "nodemon projects/aiTextAnalyze/main.js --watch projects/aiTextAnalyze",
+    "insertData": "nodemon projects/insertData/main.js --watch projects/insertData"
   },
   "keywords": [],
   "author": "",

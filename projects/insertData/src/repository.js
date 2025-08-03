@@ -1,34 +1,17 @@
 import mongoose from 'mongoose';
 
-await mongoose.connect('mongodb://user:password@192.168.49.2:32017/informacion-dominicana?authSource=admin',{
-      useNewUrlParser: true,
-  useUnifiedTopology: true,
+await mongoose.connect('mongodb://user:password@192.168.49.2:32017/informacion-dominicana?authSource=admin', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
-const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
+const Payroll = mongoose.models.payroll ?? mongoose.model("payroll", dynamicSchema);
 
-export class EventsRepository {
-    async find(data) {
-        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        return await Model.find({...data})
-    }
-    
+export class Repository {
+
     async save(data) {
-        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        if(!data._id) data._id = new mongoose.Types.ObjectId()
-        await Model.findByIdAndUpdate(
-            data._id,
-            data,
-            {
-                upsert: true,
-                new: true,
-            }
-        );
+        await Payroll.insertMany(data, { ordered: false });
     }
 
-    async deleteEvents(data) {
-        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        return await Model.deleteMany({...data})
-    }
 }
