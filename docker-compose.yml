@@ -1,0 +1,90 @@
+services:
+  downloadLinks:
+    build: ./projects/downloadLinks
+    container_name: downloadLinks
+    volumes:
+      - ./projects/downloadLinks:/app
+    networks:
+      - dev
+  download:
+    build: ./projects/download
+    container_name: download
+    volumes:
+      - ./projects/download:/app
+    networks:
+      - dev
+  events:
+    build: ./projects/events
+    container_name: events
+    volumes:
+      - ./projects/events:/app
+    networks:
+      - dev
+  frontend:
+    build: ./projects/frontend
+    container_name: frontend
+    volumes:
+      - ./projects/frontend:/app
+    networks:
+      - dev
+  postDownload:
+    build: ./projects/postDownload
+    container_name: postDownload
+    volumes:
+      - ./projects/postDownload:/app
+    networks:
+      - dev
+  extractedText:
+    build: ./projects/extractedText
+    container_name: extractedText
+    volumes:
+      - ./projects/extractedText:/app
+    networks:
+      - dev
+  analyzeExtractedText:
+    build: ./projects/analyzeExtractedText
+    container_name: analyzeExtractedText
+    volumes:
+      - ./projects/analyzeExtractedText:/app
+    networks:
+      - dev
+  textAnalysisAI:
+    build: ./projects/aiTextAnalyze
+    container_name: textAnalysisAI
+    volumes:
+      - ./projects/aiTextAnalyze:/app
+    networks:
+      - dev
+  insertData:
+    build: ./projects/insertData
+    container_name: insertData
+    volumes:
+      - ./projects/insertData:/app
+    networks:
+      - dev
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./volumes/rabbitmq/data:/var/lib/rabbitmq
+      - ./volumes/rabbitmq/logs:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin  
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./volumes/mongo/data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root  
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+networks:
+  dev:
+    driver: bridge
