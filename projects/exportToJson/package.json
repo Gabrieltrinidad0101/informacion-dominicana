@@ -1,19 +1,16 @@
 {
-  "name": "getdownloadlinks",
+  "name": "exporttojson",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "payroll.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon main.js"
+    "dev": "nodemon payroll.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "puppeteer": "^24.15.0"
-  },
-  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
