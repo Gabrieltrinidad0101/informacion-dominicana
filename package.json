@@ -15,7 +15,8 @@
     "extractedText": "nodemon projects/extractedText/main.js --watch projects/extractedText",
     "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js --watch projects/analyzeExtractedText",
     "textAnalysisAI": "nodemon projects/aiTextAnalyze/main.js --watch projects/aiTextAnalyze",
-    "insertData": "nodemon projects/insertData/main.js --watch projects/insertData"
+    "insertData": "nodemon projects/insertData/main.js --watch projects/insertData",
+    "exportToJson": "nodemon projects/exportToJson/main.js --watch projects/exportToJson"
   },
   "keywords": [],
   "author": "",

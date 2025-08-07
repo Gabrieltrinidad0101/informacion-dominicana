@@ -10,6 +10,8 @@ export function Eventos() {
       <Evento exchangeName="extractedTexts"/>
       <Evento exchangeName="analyzeExtractedTexts"/>
       <Evento exchangeName="textAnalysisAIs" />
+      <Evento exchangeName="insertDatas" />
+      <Evento exchangeName="payrollExportToJsons" />
     </div>
   );
 }

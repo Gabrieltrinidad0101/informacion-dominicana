@@ -11,6 +11,7 @@ const dynamicSchema = new mongoose.Schema({}, { strict: false });
 export class EventsRepository {
     async find(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        delete data.exchangeName
         return await Model.find({...data})
     }
     

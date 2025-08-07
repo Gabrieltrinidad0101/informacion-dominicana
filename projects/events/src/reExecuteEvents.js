@@ -9,12 +9,12 @@ export class ReExecuteEvents {
         events.forEach(event => {
             event.retryCount = event.retryCount ?? 0
             event.retryCount++
-            this.eventBus.emitCustomExchange(event.exchangeName,event)
+            this.eventBus.emitCustomExchange(data.exchangeName	,event)
         })
     }
     
     getEvents = async (data) => {
-        const events = await this.eventsRepository.find(data)
+        const events = await this.eventsRepository.find({...data})
         return events ?? {}
     }
 }

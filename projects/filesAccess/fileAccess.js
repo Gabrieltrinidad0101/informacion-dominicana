@@ -26,6 +26,11 @@ export class FileManager {
         return `${path}/${name}`
     }
 
+    saveFileToPath = (path, name, data) => {
+        fs.writeFileSync(join(path, name), data)
+        return `${path}/${name}`
+    }
+
     fileExists = (filePath) => {
         try {
             return fs.existsSync(filePath)

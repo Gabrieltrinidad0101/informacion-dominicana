@@ -9,7 +9,7 @@ export class InsertData {
     saveEvent = async (data) => {
         const file = this.fileAccess.getFile(data.fileAccess)
         const payrolls = file.map(payroll => {
-            payroll.institution = data.institutionName
+            payroll.institutionName = data.institutionName
             payroll.year = data.year
             payroll.month = data.month
             payroll.downloadLink = data.link
