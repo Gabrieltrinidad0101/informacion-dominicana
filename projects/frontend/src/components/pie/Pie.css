@@ -1,0 +1,42 @@
+.tv-lightweight-charts > table[cellspacing="0"]{
+    height: auto !important;
+    width: auto !important;
+}
+
+.tv-lightweight-charts * {
+    border: none !important;
+}
+
+.custom-chart-card{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    height: 350px;
+    width: 450px;
+}
+
+.custom-chart-card-title{
+    justify-self: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: calc(100% - 80px) 80px;
+    align-items: center;    
+}
+
+.custom-chart-card-title > div {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.custom-chart-card-body{
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 1252px) {
+    .custom-chart-card{
+        height: 30vh;
+        width: 100%;
+    }
+}

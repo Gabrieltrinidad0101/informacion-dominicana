@@ -4,7 +4,7 @@
 
 .inputs {
   display: grid;
-  grid-template-columns: 85% 10%;
+  grid-template-columns: 75% 22%;
   gap: 10px;
 }
 

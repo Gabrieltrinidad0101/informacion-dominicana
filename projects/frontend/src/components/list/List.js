@@ -3,17 +3,15 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import Collapse from '@mui/material/Collapse';
 import { useEffect, useState } from 'react';
-import { Box, Button, Fade, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, createTheme, Fade, Modal, TextField, ThemeProvider, Typography } from '@mui/material';
 import { formatToLastDayOfMonth, payroll, requestJson } from '../../utils/request';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import ListCss from './List.module.css';
 import { formatted } from '../../utils/format';
 import Backdrop from '@mui/material/Backdrop';
 import { ShowImage } from '../showImage/ShowImage';
-import es from 'date-fns/locale/es';
-
-registerLocale('es', es);
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 let positionBySalary = {}
 
@@ -128,6 +126,12 @@ export const ListGroup = ({ title, topic }) => {
         });
     }, [])
 
+    const darkTheme = createTheme({
+        palette: {
+            mode: 'dark',
+        },
+    });
+
     const onChangeSearch = (e) => {
         const text = e.target.value;
         setSearch(text);
@@ -145,6 +149,10 @@ export const ListGroup = ({ title, topic }) => {
         setEmployee(employee)
         setOpen(true)
     }
+
+    const shouldDisableMonth = (month) => {
+        return month.month() === 0 || month.month() === 11;
+    };
 
     const monthName = monthNames[currentDate.getMonth?.()];
     return (
@@ -171,7 +179,7 @@ export const ListGroup = ({ title, topic }) => {
                     </Box>
                 </Fade>
             </Modal>
-            <h1>{title} - {currentDate.getFullYear?.()}/{currentDate.getMonth?.() + 1}</h1>
+            <h1>{title}</h1>
             <div className={ListCss.inputs}>
                 <TextField
                     fullWidth
@@ -182,27 +190,19 @@ export const ListGroup = ({ title, topic }) => {
                     sx={lightTheme}
                 />
                 <div className={ListCss.icon}>
-                    <div>
-                        🗓️
-                    </div>
-                    <div>
-                        <DatePicker
-                            selected={currentDate}
-                            onChange={handleDate}
-                            dateFormat="yyyy-MM"
-                            showMonthYearPicker
-                            className={ListCss.datePicker}
-                            includeDates={dates.map(date => new Date(date.time))} // Enable only specific dates
-                            locale="es" // Set locale to Spanish
-                        />
-                    </div>
+                    <ThemeProvider theme={darkTheme}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker shouldDisableMonth={shouldDisableMonth} views={['month', 'year']} />
+                        </LocalizationProvider>
+                    </ThemeProvider>
+
                 </div>
             </div>
             <List
                 className={ListCss.list}
                 sx={{
-                    bgcolor: '#fff',       // black background
-                    color: '#000',         // white text
+                    bgcolor: '#fff',
+                    color: '#000',
                     borderRadius: 2,
                     p: 1,
                 }}

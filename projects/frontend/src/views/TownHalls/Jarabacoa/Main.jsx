@@ -1,6 +1,8 @@
 import React from "react";
 import { Charts } from "../../../components/charts/Charts";
 import { ListGroup } from "../../../components/list/List";
+import { Pie } from "../../../components/pie/Pie";
+import MainCss from  "./Main.module.css";
 
 export function Main() {
   const headers = [
@@ -31,6 +33,10 @@ export function Main() {
         compare={true}
       />
       <ListGroup title={"Posición por salario"} topic={"Jarabacoa"} />
+      <div className={MainCss.display}>
+        <Pie description="Porcentaje de gasto por puesto" compare={true} />
+        <Pie description="Cantidad de empleados por posición" compare={true} />
+      </div>
     </div>
   );
 }
