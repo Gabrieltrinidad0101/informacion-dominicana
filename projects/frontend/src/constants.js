@@ -1,3 +1,4 @@
 export default {
-    urlData: "http://127.0.0.1:5500/datas"  
+    urlData: "http://127.0.0.1:5500/datas",
+    urlDataV2: "http://127.0.0.1:5500/data",
 }

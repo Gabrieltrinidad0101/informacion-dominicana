@@ -27,16 +27,58 @@ export class Repository {
         }
     }
 
-    async payroll(institutionName) {
-        return Payroll.find({ institutionName });
+    async payroll(institutionName,sex) {
+        const match = {
+            date: { $type: "date" },
+        }
+        if(institutionName) match.institutionName = institutionName
+        if(sex) match.sex = sex
+        return await Payroll.aggregate([
+            {
+                $match: match
+            },
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$date" },
+                        month: { $month: "$date" }
+                    },
+                    value: { $sum: { $toDouble: { $ifNull: ["$income", "0"] } } }
+                }
+            },
+            {
+                $sort: { "_id.year": 1, "_id.month": 1 }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    time: {
+                        $concat: [
+                            { $toString: "$_id.year" },
+                            "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.month", 10] },
+                                    { $concat: ["0", { $toString: "$_id.month" }] },
+                                    { $toString: "$_id.month" }
+                                ]
+                            }
+                        ]
+                    },
+                    value: 1
+                }
+            }
+        ]);
+
+
     }
 
     async payrollMale(institutionName) {
-        return Payroll.find({ institutionName, sex: "M" });
+        return await this.payroll(institutionName,"M")
     }
 
     async payrollFemale(institutionName) {
-        return Payroll.find({ institutionName, sex: "F" });
+        return await this.payroll(institutionName,"F")
     }
 
     async employeersTotal(institutionName) {
@@ -104,57 +146,57 @@ export class Repository {
 
 
     async wageGrowth(institutionName) {
-    const result = await Payroll.aggregate([
-        {
-            $project: {
-                yearMonth: { $concat: ["$year", "-", "$month"] },
-                income: { $toDouble: "$income" } // Changed from $toInt to $toDouble
-            }
-        },
-        {
-            $group: {
-                _id: "$yearMonth",
-                totalIncome: { $sum: "$income" }
-            }
-        },
-        {
-            $sort: { _id: 1 }
-        },
-        {
-            $setWindowFields: {
-                sortBy: { _id: 1 },
-                output: {
-                    prevIncome: {
-                        $shift: {
-                            output: "$totalIncome",
-                            by: -1
+        const result = await Payroll.aggregate([
+            {
+                $project: {
+                    yearMonth: { $concat: ["$year", "-", "$month"] },
+                    income: { $toDouble: "$income" } // Changed from $toInt to $toDouble
+                }
+            },
+            {
+                $group: {
+                    _id: "$yearMonth",
+                    totalIncome: { $sum: "$income" }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            },
+            {
+                $setWindowFields: {
+                    sortBy: { _id: 1 },
+                    output: {
+                        prevIncome: {
+                            $shift: {
+                                output: "$totalIncome",
+                                by: -1
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    yearMonth: "$_id",
+                    totalIncome: 1,
+                    wageGrowth: {
+                        $cond: {
+                            if: { $eq: ["$prevIncome", null] },
+                            then: null,
+                            else: {
+                                $divide: [
+                                    { $subtract: ["$totalIncome", "$prevIncome"] },
+                                    "$prevIncome"
+                                ]
+                            }
                         }
                     }
                 }
             }
-        },
-        {
-            $project: {
-                _id: 0,
-                yearMonth: "$_id",
-                totalIncome: 1,
-                wageGrowth: {
-                    $cond: {
-                        if: { $eq: ["$prevIncome", null] },
-                        then: null,
-                        else: {
-                            $divide: [
-                                { $subtract: ["$totalIncome", "$prevIncome"] },
-                                "$prevIncome"
-                            ]
-                        }
-                    }
-                }
-            }
-        }
-    ]);
-    return result;
-}
+        ]);
+        return result;
+    }
 
     async wageGrowthMale(institutionName) {
         const result = await Payroll.aggregate([

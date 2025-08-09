@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "![Logo](https://github.com/Gabrieltrinidad0101/informacion-dominicana/blob/main/frontend/static/img/logo.png)",
   "main": "index.js",
+  "type": "module",
   "workspaces": [
     "projects/*"
   ],
