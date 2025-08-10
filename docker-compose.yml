@@ -4,13 +4,16 @@ services:
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app
+      - ./projects/downloadLinks/node_modules:/app/node_modules
     networks:
       - dev
   download:
-    build: ./projects/download
+    build:
+      context: .
+      dockerfile: ./projects/download/dockerfile
     container_name: download
     volumes:
-      - ./projects/download:/app
+      - /app/node_modules
     networks:
       - dev
   events:
@@ -20,13 +23,18 @@ services:
       - ./projects/events:/app
     networks:
       - dev
+    ports:
+      - 3001:3001
   frontend:
     build: ./projects/frontend
     container_name: frontend
     volumes:
       - ./projects/frontend:/app
+      - ./projects/frontend/node_modules:/app/node_modules
     networks:
       - dev
+    ports:
+      - 3000:3000
   postDownload:
     build: ./projects/postDownload
     container_name: postDownload
