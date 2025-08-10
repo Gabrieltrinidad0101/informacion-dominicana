@@ -28,7 +28,6 @@ export class DownloadTownHallData {
                 year: await page.evaluate(el => el.textContent, nominationsByYear[i])
             })
         }
-
         for (const data of datas) {
             const link = data.link
             const regex = /\d{4}/

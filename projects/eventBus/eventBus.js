@@ -48,9 +48,11 @@ export class EventBus {
         await channel.consume(queueName, async (message) => {
             try {
                 const content = JSON.parse(message.content.toString())
+                console.log(`${exchangeName} - ${content?.fileAccess ?? ''}` )
                 await callback(content)
             } catch (error) {
                 console.log(error)
+                return;
                 const content = JSON.parse(message.content.toString())
                 content.retryCount = (content.retryCount || 0) + 1;
                 if (content.retryCount >= 3) {

@@ -27,12 +27,12 @@ export class Repository {
         }
     }
 
-    async payroll(institutionName,sex) {
+    async payroll(institutionName, sex) {
         const match = {
             date: { $type: "date" },
         }
-        if(institutionName) match.institutionName = institutionName
-        if(sex) match.sex = sex
+        if (institutionName) match.institutionName = institutionName
+        if (sex) match.sex = sex
         return await Payroll.aggregate([
             {
                 $match: match
@@ -74,128 +74,195 @@ export class Repository {
     }
 
     async payrollMale(institutionName) {
-        return await this.payroll(institutionName,"M")
+        return await this.payroll(institutionName, "M")
     }
 
     async payrollFemale(institutionName) {
-        return await this.payroll(institutionName,"F")
+        return await this.payroll(institutionName, "F")
     }
 
     async employeersTotal(institutionName) {
         return Payroll.countDocuments({ institutionName });
     }
 
-    async employeersByMonthAndPosition(institutionName) {
-        const pipeline = [
+    async percentageOfSpendingByPosition(institutionName) {
+        const employeesByMonthAndPosition = await Payroll.aggregate([
+            {
+                $match: {
+                    date: { $type: "date" },
+                    name: { $exists: true, $ne: "" },
+                    position: { $exists: true, $ne: "" },
+                    income: { $exists: true, $ne: "" }
+                }
+            },
+            {
+                $addFields: {
+                    incomeNum: { $toDouble: "$income" }
+                }
+            },
+            // 1️⃣ Agrupar por mes y posición
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$date" },
+                        month: { $month: "$date" },
+                        position: "$position"
+                    },
+                    employees: { $addToSet: "$name" },
+                    positionIncome: { $sum: "$incomeNum" }
+                }
+            },
+            {
+                $project: {
+                    year: "$_id.year",
+                    month: "$_id.month",
+                    position: "$_id.position",
+                    employeeCount: { $size: "$employees" },
+                    positionIncome: 1,
+                    _id: 0
+                }
+            },
+            // 2️⃣ Agrupar por mes para obtener total de ingresos
+            {
+                $group: {
+                    _id: { year: "$year", month: "$month" },
+                    positions: {
+                        $push: {
+                            position: "$position",
+                            employeeCount: "$employeeCount",
+                            positionIncome: "$positionIncome"
+                        }
+                    },
+                    totalIncome: { $sum: "$positionIncome" }
+                }
+            },
+            // 3️⃣ Calcular porcentaje y salario promedio
             {
                 $project: {
                     _id: 0,
-                    yearMonth: { $concat: ["$year", "-", "$month"] },
-                    position: "$position",
-                    user: {
-                        name: "$name",
-                        income: "$income",
-                        sex: "$sex",
-                        x: "$x",
-                        y: "$y",
-                        width: "$width",
-                        height: "$height",
-                        institution: "$institution",
-                        downloadLink: "$downloadLink"
+                    time: {
+                        $concat: [
+                            { $toString: "$_id.year" },
+                            "-",
+                            { $toString: "$_id.month" }
+                        ]
+                    },
+                    positions: {
+                        $map: {
+                            input: "$positions",
+                            as: "p",
+                            in: {
+                                position: "$$p.position",
+                                employeeCount: "$$p.employeeCount",
+                                percentage: {
+                                    $cond: [
+                                        { $eq: ["$totalIncome", 0] },
+                                        0,
+                                        {
+                                            $round: [
+                                                { $multiply: [{ $divide: ["$$p.positionIncome", "$totalIncome"] }, 100] },
+                                                2
+                                            ]
+                                        }
+                                    ]
+                                },
+                                averageSalary: {
+                                    $cond: [
+                                        { $eq: ["$$p.employeeCount", 0] },
+                                        0,
+                                        { $round: [{ $divide: ["$$p.positionIncome", "$$p.employeeCount"] }, 2] }
+                                    ]
+                                }
+                            }
+                        }
                     }
+                }
+            },
+            { $unwind: "$positions" },
+            {
+                $project: {
+                    _id: 0,
+                    time: 1,
+                    position: "$positions.position",
+                    employeeCount: "$positions.employeeCount",
+                    percentage: "$positions.percentage",
+                    averageSalary: "$positions.averageSalary"
+                }
+            },
+            { $sort: { time: 1, position: 1 } }
+        ]);
+
+
+        return employeesByMonthAndPosition;
+    }
+
+    async wageGrowth(institutionName) {
+        const wageGrowth = await Payroll.aggregate([
+            {
+                $match: {
+                    date: { $type: "date" },
+                    income: { $exists: true, $ne: "" }
+                }
+            },
+            {
+                $addFields: {
+                    incomeNum: { $toDouble: "$income" }
                 }
             },
             {
                 $group: {
                     _id: {
-                        yearMonth: "$yearMonth",
-                        position: "$position"
+                        year: { $year: "$date" },
+                        month: { $month: "$date" }
                     },
-                    users: { $push: "$user" }
+                    totalIncome: { $sum: "$incomeNum" }
                 }
             },
             {
+                $sort: { "_id.year": 1, "_id.month": 1 }
+            },
+            {
                 $group: {
-                    _id: "$_id.yearMonth",
-                    positions: {
+                    _id: null,
+                    months: {
                         $push: {
-                            k: "$_id.position",
-                            v: "$users"
-                        }
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    yearMonth: "$_id",
-                    value: { $arrayToObject: "$positions" }
-                }
-            },
-            {
-                $replaceRoot: {
-                    newRoot: { $arrayToObject: [[{ k: "$yearMonth", v: "$value" }]] }
-                }
-            }
-        ]
-        const results = await Payroll.aggregate(pipeline);
-
-        return results;
-
-    }
-
-
-    async wageGrowth(institutionName) {
-        const result = await Payroll.aggregate([
-            {
-                $project: {
-                    yearMonth: { $concat: ["$year", "-", "$month"] },
-                    income: { $toDouble: "$income" } // Changed from $toInt to $toDouble
-                }
-            },
-            {
-                $group: {
-                    _id: "$yearMonth",
-                    totalIncome: { $sum: "$income" }
-                }
-            },
-            {
-                $sort: { _id: 1 }
-            },
-            {
-                $setWindowFields: {
-                    sortBy: { _id: 1 },
-                    output: {
-                        prevIncome: {
-                            $shift: {
-                                output: "$totalIncome",
-                                by: -1
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    yearMonth: "$_id",
-                    totalIncome: 1,
-                    wageGrowth: {
-                        $cond: {
-                            if: { $eq: ["$prevIncome", null] },
-                            then: null,
-                            else: {
-                                $divide: [
-                                    { $subtract: ["$totalIncome", "$prevIncome"] },
-                                    "$prevIncome"
+                            time: {
+                                $concat: [
+                                    { $toString: { $ifNull: ["$_id.year", ""] } },
+                                    "-",
+                                    { $toString: { $ifNull: ["$_id.month", ""] } }
                                 ]
+                            },
+                            value: "$totalIncome"
+                        }
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    growth: {
+                        $map: {
+                            input: { $range: [1, { $size: "$months" }] },
+                            as: "i",
+                            in: {
+                                time: { $arrayElemAt: ["$months.time", "$$i"] },
+                                value: {
+                                    $subtract: [
+                                        { $arrayElemAt: ["$months.value", "$$i"] },
+                                        { $arrayElemAt: ["$months.value", { $subtract: ["$$i", 1] }] }
+                                    ]
+                                }
                             }
                         }
                     }
                 }
-            }
+            },
+            { $unwind: "$growth" },
+            { $replaceRoot: { newRoot: "$growth" } }
         ]);
-        return result;
+
+        return wageGrowth;
     }
 
     async wageGrowthMale(institutionName) {
@@ -225,55 +292,74 @@ export class Repository {
     }
 
 
-    async percentageOfSpendingByPosition(institutionName) {
-        const pipeline = [
-            {
-                $match: { institutionName }
-            },
-            {
-                $addFields: {
-                    numericIncome: { $toDouble: "$income" }
-                }
-            },
-            {
-                $group: {
-                    _id: "$position",
-                    totalByPosition: { $sum: "$numericIncome" }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    positions: {
-                        $push: {
-                            position: "$_id",
-                            totalByPosition: "$totalByPosition"
-                        }
-                    },
-                    institutionTotal: { $sum: "$totalByPosition" }
-                }
-            },
-            {
-                $unwind: "$positions"
-            },
-            {
-                $project: {
-                    _id: 0,
-                    position: "$positions.position",
-                    percentage: {
-                        $multiply: [
-                            { $divide: ["$positions.totalByPosition", "$institutionTotal"] },
-                            100
-                        ]
-                    }
-                }
-            },
-            {
-                $sort: { percentage: -1 }
-            }
-        ];
+    async employeersByMonthAndPosition(institutionName) {
+        const payrollByMonthAndPosition = await Payroll.aggregate([
+  {
+    $match: {
+      date: { $type: "date" },
+      name: { $exists: true, $ne: "" },
+      position: { $exists: true, $ne: "" }
+    }
+  },
+  {
+    $group: {
+      _id: {
+        year: { $year: "$date" },
+        month: { $month: "$date" },
+        position: "$position"
+      },
+      employees: {
+        $push: {
+          name: "$name",
+          income: "$income",
+          sex: "$sex",
+          x: "$x",
+          y: "$y",
+          width: "$width",
+          height: "$height",
+          downloadLink: "$downloadLink",
+          traceId: "$traceId"
+        }
+      }
+    }
+  },
+  {
+    $group: {
+      _id: { year: "$_id.year", month: "$_id.month" },
+      positions: {
+        $push: {
+          position: "$_id.position",
+          employees: "$employees"
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      time: {
+        $concat: [
+          { $toString: "$_id.year" },
+          "-",
+          { $cond: [{ $lt: ["$_id.month", 10] }, { $concat: ["0", { $toString: "$_id.month" }] }, { $toString: "$_id.month" }] }
+        ]
+      },
+      positions: 1
+    }
+  }
+]);
 
-        return Payroll.aggregate(pipeline);
+// Convertir a objeto con claves YYYY-MM
+const result = payrollByMonthAndPosition.reduce((acc, curr) => {
+  acc[curr.time] = {};
+  curr.positions.forEach(pos => {
+    acc[curr.time][pos.position] = pos.employees;
+  });
+  return acc;
+}, {});
+
+return result
+
     }
 
     async countByPosition(institutionName) {

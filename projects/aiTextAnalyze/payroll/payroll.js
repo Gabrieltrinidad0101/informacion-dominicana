@@ -17,13 +17,13 @@ export class Payroll {
         if(!this.fileManager.fileExists(fileAccess)) {
             const dataText = await this.fileManager.getFile(data.fileAccess);
             const propt_ = propt(JSON.stringify(dataText.lines));
-            const response = await this.apiLLMClient(propt_);
-            for (let payroll_ of JSON.parse(response)) {
+            const response = JSON.parse(await this.apiLLMClient(propt_));
+            for (let payroll_ of response) {
                 if(payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
                 if(payroll_.document) payroll_.document = this.encrypt(payroll_.document)
                 payroll_._id = this.getId()
             }
-            this.fileManager.saveFile(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`, response);
+            this.fileManager.saveFile(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`,  JSON.stringify(response));
         }
 
         this.eventBus.emit("insertDatas",{

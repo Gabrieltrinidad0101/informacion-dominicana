@@ -1,4 +1,18 @@
 export class InsertData {
+    monthMap = {
+        enero: 0,
+        febrero: 1,
+        marzo: 2,
+        abril: 3,
+        mayo: 4,
+        junio: 5,
+        julio: 6,
+        agosto: 7,
+        septiembre: 8,
+        octubre: 9,
+        noviembre: 10,
+        diciembre: 11
+    };
     constructor(eventBus, fileAccess, eventRepository) {
         this.eventBus = eventBus
         this.eventRepository = eventRepository
@@ -7,7 +21,7 @@ export class InsertData {
     }
 
     formatLastDayOfMonth(year, month) {
-        return new Date(year, month, 0);
+        return new Date(year,  this.monthMap[month], 0);
     }
 
     saveEvent = async (data) => {

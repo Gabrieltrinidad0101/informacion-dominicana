@@ -11,7 +11,15 @@ const Payroll = mongoose.models.payroll ?? mongoose.model("payroll", dynamicSche
 export class Repository {
 
     async save(data) {
-        await Payroll.insertMany(data, { ordered: false });
+        const bulkOps = data.map(doc => ({
+            updateOne: {
+                filter: { _id: doc._id }, 
+                update: { $set: doc },
+                upsert: true
+            }
+        }));
+
+        await Payroll.bulkWrite(bulkOps, { ordered: false });
     }
 
 }
