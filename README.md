@@ -105,7 +105,7 @@ To run tests, run the following command
 ```
 
 ## 🚀 Acarca de mi
-Soy simplemente un desarrollador de software que se interesó en conocer más sobre nuestro hermoso país. Al observar el lamentable estado de las páginas oficiales gubernamentales, decidí cambiar esa situación.
+Soy un desarrollador de software que se interesó en conocer más sobre nuestro hermoso país. Al observar el lamentable estado de las páginas oficiales gubernamentales, decidí contribuir para cambiar esa situación.
 
 
 ## Feedback
