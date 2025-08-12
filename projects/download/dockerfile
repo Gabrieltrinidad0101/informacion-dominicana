@@ -11,6 +11,6 @@ RUN npm install
 RUN touch main.js
 COPY projects/filesAccess ./projects/filesAccess
 COPY projects/eventBus ./projects/eventBus
-COPY projects/download ./projects/donwload
+COPY projects/download ./projects/download
 
 CMD ["npm", "run", "download"]

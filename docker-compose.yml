@@ -1,6 +1,8 @@
 services:
   downloadLinks:
-    build: ./projects/downloadLinks
+    build: 
+      context: .  
+      dockerfile: ./projects/downloadLinks/dockerfile
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app
@@ -17,7 +19,9 @@ services:
     networks:
       - dev
   events:
-    build: ./projects/events
+    build:
+      context: .
+      dockerfile: ./projects/events/dockerfile
     container_name: events
     volumes:
       - ./projects/events:/app
@@ -36,35 +40,45 @@ services:
     ports:
       - 3000:3000
   postDownload:
-    build: ./projects/postDownload
+    build: 
+      context: .
+      dockerfile: ./projects/postDownload/dockerfile
     container_name: postDownload
     volumes:
       - ./projects/postDownload:/app
     networks:
       - dev
   extractedText:
-    build: ./projects/extractedText
+    build:
+      context: .
+      dockerfile: ./projects/extractedText/dockerfile
     container_name: extractedText
     volumes:
       - ./projects/extractedText:/app
     networks:
       - dev
   analyzeExtractedText:
-    build: ./projects/analyzeExtractedText
+    build:
+      context: .
+      dockerfile: ./projects/analyzeExtractedText/dockerfile
     container_name: analyzeExtractedText
     volumes:
       - ./projects/analyzeExtractedText:/app
     networks:
       - dev
   textAnalysisAI:
-    build: ./projects/aiTextAnalyze
+    build:
+      context: .
+      dockerfile: ./projects/aiTextAnalyze/dockerfile
     container_name: textAnalysisAI
     volumes:
       - ./projects/aiTextAnalyze:/app
     networks:
       - dev
   insertData:
-    build: ./projects/insertData
+    build: 
+      context: .
+      dockerfile: ./projects/insertData/dockerfile
     container_name: insertData
     volumes:
       - ./projects/insertData:/app

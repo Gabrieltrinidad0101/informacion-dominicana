@@ -13,8 +13,8 @@ export class Payroll {
     }
 
     payroll = async (data) => {
-        const fileAccess = this.fileManager.getPath(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`)
-        if(!this.fileManager.fileExists(fileAccess)) {
+        const fileAccess = this.fileManager.generatePayrollPath(data,'textAnalysisAI', `${data.index}.json`)
+        if(!await this.fileManager.fileExists(fileAccess)) {
             const dataText = await this.fileManager.getFile(data.fileAccess);
             const propt_ = propt(JSON.stringify(dataText.lines));
             const response = JSON.parse(await this.apiLLMClient(propt_));
@@ -23,7 +23,7 @@ export class Payroll {
                 if(payroll_.document) payroll_.document = this.encrypt(payroll_.document)
                 payroll_._id = this.getId()
             }
-            this.fileManager.saveFile(data.institutionName, data.typeOfData, 'textAnalysisAI', data.year, data.month, `${data.index}.json`,  JSON.stringify(response));
+            await this.fileManager.createTextFile(fileAccess,  JSON.stringify(response));
         }
 
         this.eventBus.emit("insertDatas",{
