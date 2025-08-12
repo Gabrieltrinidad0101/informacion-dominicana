@@ -13,7 +13,7 @@ export class Payroll {
     }
 
     payroll = async (data) => {
-        const fileAccess = this.fileManager.generatePayrollPath(data,'textAnalysisAI', `${data.index}.json`)
+        const fileAccess = this.fileManager.generatePath(data,'textAnalysisAI', `${data.index}.json`)
         if(!await this.fileManager.fileExists(fileAccess)) {
             const dataText = await this.fileManager.getFile(data.fileAccess);
             const propt_ = propt(JSON.stringify(dataText.lines));

@@ -32,7 +32,7 @@ export class FileManager {
         return res.data
     }
 
-    generatePayrollPath = (data, microService, fileName) => {
+    generatePath = (data, microService, fileName) => {
         return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`
     }
 
