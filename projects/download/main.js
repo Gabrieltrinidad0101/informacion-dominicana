@@ -1,9 +1,9 @@
 import { Download } from "./download.js"
 import { EventBus } from "../eventBus/eventBus.js"
-import { FileManager } from "../filesAccess/fileAccess.js"
+import { FileManagerClient } from "../fileManagerClient/main.js"
 
 const eventBus = new EventBus()
 
-const fileManager = new FileManager()
+const fileManagerClient = new FileManagerClient()
 
-new Download(eventBus, fileManager)
+new Download(eventBus, fileManagerClient)

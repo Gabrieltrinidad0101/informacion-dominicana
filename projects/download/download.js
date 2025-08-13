@@ -1,6 +1,8 @@
-import { DownloaderHelper } from 'node-downloader-helper';
 import path from 'path';
 import { URL } from 'url';
+
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 export class Download {
     constructor(eventBus, fileManager) {
@@ -15,22 +17,15 @@ export class Download {
     }
 
     download = async (data) => {
-        const downloadPath = this.fileManager.makePath(data.institutionName, data.typeOfData, 'downloadData')
-        if (!this.fileManager.fileExists(`${downloadPath}/${this.getFileNameFromUrl(data.link)}`)){
-            await this.downloadFile(data.link, downloadPath)
+        const downloadUrl = path.join(data.institutionName, data.typeOfData, 'downloadData',this.getFileNameFromUrl(data.link))
+        if (!this.fileManager.fileExists(downloadUrl)){
+            await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
         this.eventBus.emit(
             'postDownloads',
             {
                 ...data,
-                fileAccess: `${downloadPath}/${this.getFileNameFromUrl(data.link)}`
+                urlDownload: downloadUrl
             })
     }
-
-    downloadFile = (link, folderPath) => new Promise(async (res, rej) => {
-        const dl = new DownloaderHelper(link, folderPath);
-        dl.on('end', res);
-        dl.on('error', rej);
-        dl.start().catch(rej);
-    })
 }

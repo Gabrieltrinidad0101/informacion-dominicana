@@ -21,9 +21,9 @@ const options = (saveFilename, savePath) => ({
 
 
 export class PdfToImage {
-  constructor(eventBus, fileManager) {
+  constructor(eventBus, fileManagerClient) {
     this.eventBus = eventBus
-    this.fileManager = fileManager
+    this.fileManagerClient = fileManagerClient
     this.eventBus.on('postDownload', 'postDownloads', this.getTextFromImage)
   }
 
@@ -34,21 +34,24 @@ export class PdfToImage {
   }
 
   getTextFromImage = async (data) => {
-    const saveImages = this.fileManager.makePath(data.institutionName, data.typeOfData, 'postDownloads', data.year, data.month)
-    const numberOfPages = await this.#getNumbersOfPages(data.fileAccess)
-    const convert = fromPath(data.fileAccess, options("_", saveImages));
+    await this.fileManagerClient.downloadFile(data.urlDownload)
+    const numberOfPages = await this.#getNumbersOfPages(data.urlDownload)
+    const convert = fromPath(data.urlDownload, options("_", saveImages));
     delete data._id
     for (let i = 1; i <= numberOfPages; i++) {
-      const fileAccess = path.join(saveImages,`_.${i}.jpg`)
-      if(!this.fileManager.fileExists(fileAccess)) {
+      const fileName = `_.${i}.jpg`
+      const imagePath = path.join('./temp/images',fileName)
+      const imageUrl = this.fileManagerClient.generatePath(data, 'postDownloads', fileName)
+      if(!this.fileManagerClient.fileExists(imagePath)) {
         await convert.bulk(i)
+        await this.fileManagerClient.uploadFile(imagePath,imageUrl)
       }
       this.eventBus.emit(
         'extractedTexts',
         {
         ...data,
         index: i,
-        fileAccess: fileAccess
+        imageUrl
       })
     }
   }
