@@ -1,5 +1,5 @@
 import { EventBus } from "../eventBus/eventBus.js"
-import { FileManager } from "../filesAccess/fileAccess.js"
+import { FileManager } from "../fileManagerClient/main.js"
 import { PdfToImage } from "./image/convertPdfToImage.js"
 
 const eventBus = new EventBus()

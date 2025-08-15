@@ -1,6 +1,12 @@
 all:
 	docker compose up -d
 
+projects:
+	docker compose up --no-deps rabbitmq mongo
+
+downProjects:
+	docker compose down --no-deps rabbitmq mongo
+
 down:
 	docker compose down
 
@@ -17,7 +23,7 @@ download:
 	docker compose up download -d --build
 
 downloadLinks:
-	docker compose up downloadLinks -d --build
+	docker compose up download_links -d --build
 
 events:
 	docker compose up events -d --build

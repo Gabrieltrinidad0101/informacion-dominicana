@@ -1,7 +1,7 @@
 import amqplib from "amqplib"
 import crypto from "crypto"
 
-const connection = await amqplib.connect("amqp://admin:admin@localhost:5672/")
+const connection = await amqplib.connect("amqp://admin:admin@rabbitmq:5672")
 const channel = await connection.createChannel()
 
 export class EventBus {

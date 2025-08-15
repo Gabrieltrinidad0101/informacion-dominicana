@@ -3,14 +3,14 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json .
-
-RUN ls
+COPY projects/postDownload/package.json ./projects/postDownload/package.json    
+COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
+COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
 RUN npm install
 
-RUN touch main.js
-COPY projects/filesAccess ./projects/filesAccess
 COPY projects/eventBus ./projects/eventBus
 COPY projects/postDownload ./projects/postDownload
+COPY projects/fileManagerClient ./projects/fileManagerClient
 
 CMD ["npm", "run", "postDownload"]

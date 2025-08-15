@@ -2,9 +2,8 @@ import puppeteer from "puppeteer"
 import { months } from "./months.js"
 
 export class DownloadTownHallData {
-    constructor(eventBus, fileManager) {
+    constructor(eventBus) {
         this.eventBus = eventBus
-        this.fileManager = fileManager
         this.eventBus.on('downloadLink', 'downloadLinks', this.getDownloadLinks)
     }
 
@@ -15,10 +14,18 @@ export class DownloadTownHallData {
     }) => {
         console.log(link)
         const browser = await puppeteer.launch({
-            headless: false
+            executablePath:'/usr/bin/chromium',
+            headless: "new",
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
         })
+        console.log("1")
         const page = await browser.newPage()
+        await page.setUserAgent(
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+);
         await page.goto(link)
+        await page.screenshot({ path: "./projects/downloadLinks/screenshot.png", fullPage: true });
         const nominationsByYearLink = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6 > a")
         const nominationsByYear = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6")
         const datas = []
@@ -28,6 +35,7 @@ export class DownloadTownHallData {
                 year: await page.evaluate(el => el.textContent, nominationsByYear[i])
             })
         }
+        console.log({datas})
         for (const data of datas) {
             const link = data.link
             const regex = /\d{4}/
@@ -50,6 +58,7 @@ export class DownloadTownHallData {
                         month,
                         institutionName
                     })
+                console.log(link)
                 browser.close()
                 return
             }
