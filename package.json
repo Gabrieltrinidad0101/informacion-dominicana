@@ -8,16 +8,17 @@
     "projects/*"
   ],
   "scripts": {
-    "downloadLinks": "nodemon projects/downloadLinks/main.js --watch projects/downloadLinks",
-    "download": "nodemon projects/download/main.js --watch projects/download",
-    "events": "nodemon projects/events/main.js --watch projects/events",
-    "frontend": "npm run start --prefix projects/frontend",
-    "postDownload": "nodemon projects/postDownload/main.js --watch projects/postDownload",
-    "extractedText": "nodemon projects/extractedText/main.js --watch projects/extractedText",
-    "analyzeExtractedText": "nodemon projects/analyzeExtractedText/main.js --watch projects/analyzeExtractedText",
-    "textAnalysisAI": "nodemon projects/aiTextAnalyze/main.js --watch projects/aiTextAnalyze",
-    "insertData": "nodemon projects/insertData/main.js --watch projects/insertData",
-    "exportToJson": "nodemon projects/exportToJson/main.js --watch projects/exportToJson"
+    "downloadLinks": "nodemon --legacy-watch ./projects/downloadLinks/main.js --watch projects/downloadLinks",
+    "download": "nodemon  --legacy-watch  ./projects/download/main.js --watch ./projects/download",
+    "events": "nodemon  --legacy-watch  ./projects/events/main.js --watch ./projects/events",
+    "frontend": "npm run start --prefix ./projects/frontend",
+    "postDownload": "nodemon  --legacy-watch  ./projects/postDownload/main.js --watch ./projects/postDownload",
+    "extractedText": "nodemon  --legacy-watch  ./projects/extractedText/main.js --watch ./projects/extractedText",
+    "analyzeExtractedText": "nodemon  --legacy-watch  ./projects/analyzeExtractedText/main.js --watch ./projects/analyzeExtractedText",
+    "textAnalysisAI": "nodemon  --legacy-watch  ./projects/aiTextAnalyze/main.js --watch ./projects/aiTextAnalyze",
+    "insertData": "nodemon  --legacy-watch  ./projects/insertData/main.js --watch ./projects/insertData",
+    "exportToJson": "nodemon  --legacy-watch  ./projects/exportToJson/main.js --watch ./projects/exportToJson",
+    "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager"
   },
   "keywords": [],
   "author": "",

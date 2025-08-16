@@ -66,7 +66,6 @@ export function CompareCharts({
   include,
   notInclude,
 }) {
-  console.log({includes: include,notInclude})
   const [dummyData] = useState(dummyDataTemporalTest.filter(data => data.text.includes(include) && !data.text.includes(notInclude))) 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);

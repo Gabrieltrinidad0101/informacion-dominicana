@@ -1,13 +1,10 @@
 import path from 'path';
 import { URL } from 'url';
 
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
 export class Download {
-    constructor(eventBus, fileManager) {
+    constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus
-        this.fileManager = fileManager
+        this.fileManagerClient = fileManagerClient
         this.eventBus.on('download', 'downloads', (data) => this.download(data))
     }
 
@@ -18,7 +15,7 @@ export class Download {
 
     download = async (data) => {
         const downloadUrl = path.join(data.institutionName, data.typeOfData, 'downloadData',this.getFileNameFromUrl(data.link))
-        if (!this.fileManager.fileExists(downloadUrl)){
+        if (!await this.fileManagerClient.fileExists(downloadUrl)){
             await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
         this.eventBus.emit(

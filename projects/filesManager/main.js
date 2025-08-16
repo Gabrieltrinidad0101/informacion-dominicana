@@ -1,12 +1,17 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
+import path, { dirname } from "path"
 import fs from 'fs';
+import { DownloaderHelper } from 'node-downloader-helper';
+import { fileURLToPath } from 'url';
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const generetedPath = (folderPath) => path.join(__dirname, '../../data', path.dirname(folderPath))
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../../data")));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -16,12 +21,12 @@ const storage = multer.diskStorage({
       return cb(new Error('No folderPath provided'), null);
     }
 
-    fs.mkdirSync(folderPath, { recursive: true });
+    fs.mkdirSync(generetedPath(folderPath), { recursive: true });
 
-    cb(null, folderPath);
+    cb(null, generetedPath(folderPath));
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, file.originalname);
   }
 });
 
@@ -42,9 +47,10 @@ app.get('/file-exists', (req, res) => {
     return res.status(400).json({ error: 'filePath query parameter is required' });
   }
 
-  const fullPath = path.resolve(filePath);
+  const fullPath = generetedPath(filePath);
+  const fileName = path.basename(filePath);
 
-  if (fs.existsSync(fullPath)) {
+  if (fs.existsSync(path.join(fullPath, fileName))) {
     return res.json({ exists: true });
   } else {
     return res.json({ exists: false });
@@ -56,11 +62,14 @@ app.post('/upload-file-from-url', async (req, res) => {
   if (!url || !folderPath) {
     return res.status(400).json({ error: 'url and folderPath are required' });
   }
-  const fileName = path.basename(url);
-  const fullPath = path.join(folderPath, fileName);
-  fs.writeFileSync(fullPath, fs.readFileSync(url));
-  await new Promise((resolve,reject) => {
-    const dl = new DownloaderHelper(url, folderPath);
+
+  if (fs.existsSync(generetedPath(folderPath))) {
+    return res.json({ response: 'ok' });
+  }
+  
+  await new Promise((resolve, reject) => {
+    fs.mkdirSync(generetedPath(folderPath), { recursive: true })
+    const dl = new DownloaderHelper(url, generetedPath(folderPath));
     dl.on('end', resolve);
     dl.on('error', reject);
     dl.start().catch(reject);

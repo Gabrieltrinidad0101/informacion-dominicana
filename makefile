@@ -32,19 +32,25 @@ frontend:
 	docker compose up frontend -d --build
 
 postDownload:
-	docker compose up postDownload -d --build
+	docker compose up post_download -d --build
 
 extractedText:
-	docker compose up extractedText -d --build
+	docker compose up extracted_text -d --build
 
 analyzeExtractedText:
-	docker compose up analyzeExtractedText -d --build
+	docker compose up analyze_extracted_text -d --build
 
 textAnalysisAI:
-	docker compose up textAnalysisAI -d --build
+	docker compose up text_analysis_ai -d --build
 
 insertData:
-	docker compose up insertData -d --build
+	docker compose up insert_data -d --build
 
 exportToJson:
-	docker compose up exportToJson -d --build
+	docker compose up export_to_json -d --build
+	
+filesManager:
+	docker compose up files_manager -d --build
+
+removeDownload:
+	docker compose down download

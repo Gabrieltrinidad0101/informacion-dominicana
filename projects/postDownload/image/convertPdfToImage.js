@@ -34,15 +34,18 @@ export class PdfToImage {
   }
 
   getTextFromImage = async (data) => {
+    if(!data.urlDownload.includes('pdf')) return
+    const saveImages = "./images/"
+    fs.mkdirSync(saveImages, { recursive: true });
     await this.fileManagerClient.downloadFile(data.urlDownload)
-    const numberOfPages = await this.#getNumbersOfPages(data.urlDownload)
-    const convert = fromPath(data.urlDownload, options("_", saveImages));
+    const numberOfPages = await this.#getNumbersOfPages(`downloads/${data.urlDownload}`)
+    const convert = fromPath(`downloads/${data.urlDownload}`, options("_", saveImages));
     delete data._id
     for (let i = 1; i <= numberOfPages; i++) {
       const fileName = `_.${i}.jpg`
-      const imagePath = path.join('./temp/images',fileName)
+      const imagePath = path.join(saveImages,fileName)
       const imageUrl = this.fileManagerClient.generatePath(data, 'postDownloads', fileName)
-      if(!this.fileManagerClient.fileExists(imagePath)) {
+      if(!await this.fileManagerClient.fileExists(imageUrl)) {
         await convert.bulk(i)
         await this.fileManagerClient.uploadFile(imagePath,imageUrl)
       }

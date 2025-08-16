@@ -3,14 +3,10 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json .
-
-RUN ls
+COPY projects/filesManager/package.json ./projects/filesManager/package.json
 
 RUN npm install
 
-RUN touch main.js
-COPY projects/filesAccess ./projects/filesAccess
-COPY projects/eventBus ./projects/eventBus
-COPY projects/exportToJson ./projects/exportToJson
+COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "exportToJson"]
+CMD ["npm", "run", "filesManager"]

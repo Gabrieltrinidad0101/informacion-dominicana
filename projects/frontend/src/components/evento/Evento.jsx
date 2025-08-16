@@ -104,18 +104,21 @@ export function Evento({exchangeName}) {
         <Button onClick={execute} >Ejecutar</Button>
         <Button onClick={deleteEvents} >Eliminar</Button>
       </div>
-      <DataGrid
-        rows={downloadLinks}
-        pageSizeOptions={[10]}
-        density="compact"
-        initialState={{
-          pagination: {
-            paginationModel: { pageSize: 10, page: 0 },
-          },
-        }}
-        columns={columns}
-        getRowId={(row) => row._id}
-      ></DataGrid>
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={downloadLinks}
+          pageSizeOptions={[10]}
+          className={EventsCss.dataGrid}
+          density="compact"
+          initialState={{
+            pagination: {
+              paginationModel: { pageSize: 10, page: 0 },
+            },
+          }}
+          columns={columns}
+          getRowId={(row) => row._id}
+        ></DataGrid>
+      </div>
     </div>
   );
 }

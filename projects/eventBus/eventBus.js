@@ -48,7 +48,7 @@ export class EventBus {
         await channel.consume(queueName, async (message) => {
             try {
                 const content = JSON.parse(message.content.toString())
-                console.log(`${exchangeName} - ${content?.fileAccess ?? ''}` )
+                console.log(`${exchangeName} - ${content?.urlDownload ?? content?.link}` )
                 await callback(content)
             } catch (error) {
                 console.log(error)
