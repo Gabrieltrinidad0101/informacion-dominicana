@@ -29,7 +29,6 @@ export class InsertData {
         const payrolls = file.map(payroll => {
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
-            payroll.downloadLink = data.link
             payroll.traceId = data.traceId
             return payroll
         })

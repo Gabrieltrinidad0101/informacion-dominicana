@@ -45,6 +45,18 @@ export class FileManagerClient {
         return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`
     }
 
+    getFileBuffer = async (fileUrl) => {
+        try{
+            const imageResponse = await axios.get(`http://filesManager:4000/data/${fileUrl}`, {
+                responseType: "arraybuffer",
+            });
+            return imageResponse.data;
+        }catch {
+            return null
+        }
+    }
+
+
     downloadFile = async (url) => {
         const filePath = path.join("downloads", url);
         const dirPath = path.dirname(filePath);

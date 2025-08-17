@@ -87,10 +87,8 @@ app.post('/create-file', (req, res) => {
     });
   }
 
-  fs.mkdirSync(folderPath, { recursive: true });
-
-  const fileName = path.basename(folderPath);
-  const fullPath = path.join(folderPath, fileName);
+  fs.mkdirSync(generetedPath(folderPath), { recursive: true });
+  const fullPath = path.join(generetedPath(folderPath), path.basename(folderPath));
   fs.writeFileSync(fullPath, fileText, 'utf8');
 
   const fileUrl = `http://localhost:${PORT}/${fullPath}`;

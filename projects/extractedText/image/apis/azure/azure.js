@@ -4,9 +4,8 @@ import fs from 'fs';
 
 const apiKey = process.env.API_KEY_IMAGE_TO_TEXT;
 const apiUrl = process.env.API_URL_IMAGE_TO_TEXT;
-export const getTextFromImageApiAzure = async ({ imagePath }) => {
-    const imageData = fs.readFileSync(imagePath);
-    const response = await axios.post(apiUrl, imageData, {
+export const getTextFromImageApiAzure = async ({ bufferImage }) => {
+    const response = await axios.post(apiUrl, bufferImage, {
         headers: {
             'Ocp-Apim-Subscription-Key': apiKey,
             'Content-Type': 'image/jpeg',

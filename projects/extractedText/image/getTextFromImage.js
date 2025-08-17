@@ -17,31 +17,25 @@ export class ImageToText {
     }
 
     getTextFromImage = async (data) => {
-        console.log(data)
-        return;
         const isAzure = useAzureApi.find(d => d.institutionName === data.institutionName && d.year == data.year && d.month == data.month)
-        const fileAccess = this.fileManager.getPath(data.institutionName, data.typeOfData, 'extractedText', data.year, data.month, `${data.index}.json`)
         let textOverlay = ""
         
-        await new Promise(resolve => setTimeout(resolve, 5000))
-        
-        if(!this.fileManager.fileExists(fileAccess)){
+        const extractedTextUrl = this.fileManager.generatePath(data,'extractedText',`${data.index}.json`)
+        const bufferImage = await this.fileManager.getFileBuffer(data.imageUrl)
+        if(!await this.fileManager.fileExists(extractedTextUrl)){
             if (isAzure) textOverlay = await getTextFromImageApiAzure({
-                imagePath: data.fileAccess,
-                filename: data.institutionName
+                bufferImage
             })
-    
+
             if (!isAzure) textOverlay = await getTextFromImageApiOcrSpace({
-                imagePath: data.fileAccess,
-                filename: data.institutionName
+                bufferImage
             })
-            this.fileManager.saveFile(data.institutionName,data.typeOfData,'extractedText',data.year,data.month,`${data.index}.json`, JSON.stringify(textOverlay))
+            await this.fileManager.createTextFile(extractedTextUrl, JSON.stringify(textOverlay))
         }
-        
 
         this.eventBus.emit('analyzeExtractedTexts',{
             ...data,
-            fileAccess,
+            extractedTextUrl: extractedTextUrl,
             type: isAzure ? 'azure' : 'ocrSpace',
         });
     }
