@@ -9,6 +9,11 @@ services:
       - /app/node_modules
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
+
   download:
     build:
       context: .
@@ -19,6 +24,10 @@ services:
       - /app/node_modules
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
   events:
     build:
       context: .
@@ -55,6 +64,11 @@ services:
       -  /node_modules
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
+
   extracted_text:
     build:
       context: .
@@ -64,6 +78,10 @@ services:
       - ./projects/extractedText:/app/projects/extractedText
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
   analyze_extracted_text:
     build:
       context: .
@@ -73,15 +91,23 @@ services:
       - ./projects/analyzeExtractedText:/app/projects/analyzeExtractedText
     networks:
       - dev
-  textAnalysisAI:
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
+  ai_text_analyze:
     build:
       context: .
       dockerfile: ./projects/aiTextAnalyze/dockerfile
-    container_name: textAnalysisAI
+    container_name: aiTextAnalyze
     volumes:
-      - ./projects/aiTextAnalyze:/app
+      - ./projects/aiTextAnalyze:/app/projects/aiTextAnalyze
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
   insert_data:
     build: 
       context: .
@@ -91,6 +117,10 @@ services:
       - ./projects/insertData:/app/projects/insertData
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
   files_manager:
     build: 
       context: .

@@ -44,7 +44,7 @@ export class PdfToImage {
     for (let i = 1; i <= numberOfPages; i++) {
       const fileName = `_.${i}.jpg`
       const imagePath = path.join(saveImages,fileName)
-      const imageUrl = this.fileManagerClient.generatePath(data, 'postDownloads', fileName)
+      const imageUrl = this.fileManagerClient.generateUrl(data, 'postDownloads', fileName)
       if(!await this.fileManagerClient.fileExists(imageUrl)) {
         await convert.bulk(i)
         await this.fileManagerClient.uploadFile(imagePath,imageUrl)

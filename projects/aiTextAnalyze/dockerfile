@@ -2,15 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json .
+RUN npm install -g nodemon
 
-RUN ls
+COPY package.json .
+COPY projects/aiTextAnalyze/package.json ./projects/aiTextAnalyze/package.json    
+COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
+COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
 RUN npm install
 
-RUN touch main.js
-COPY projects/filesAccess ./projects/filesAccess
 COPY projects/eventBus ./projects/eventBus
 COPY projects/aiTextAnalyze ./projects/aiTextAnalyze
+COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "aiTextAnalyze"]
+CMD ["nodemon", "run", "./projects/aiTextAnalyze"]

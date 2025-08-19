@@ -41,7 +41,7 @@ export class FileManagerClient {
         return res.data
     }
 
-    generatePath = (data, microService, fileName) => {
+    generateUrl = (data, microService, fileName) => {
         return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`
     }
 

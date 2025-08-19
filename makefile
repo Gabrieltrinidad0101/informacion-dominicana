@@ -40,8 +40,8 @@ extractedText:
 analyzeExtractedText:
 	docker compose up analyze_extracted_text -d --build
 
-textAnalysisAI:
-	docker compose up text_analysis_ai -d --build
+aiTextAnalyze:
+	docker compose up ai_text_analyze -d --build
 
 insertData:
 	docker compose up insert_data -d --build

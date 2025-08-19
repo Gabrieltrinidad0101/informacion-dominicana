@@ -25,7 +25,7 @@ export class InsertData {
     }
 
     saveEvent = async (data) => {
-        const file = this.fileAccess.getFile(data.fileAccess)
+        const file = await this.fileAccess.getFile(data.insertDataUrl)
         const payrolls = file.map(payroll => {
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
