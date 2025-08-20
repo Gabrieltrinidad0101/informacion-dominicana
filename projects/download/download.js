@@ -5,7 +5,7 @@ export class Download {
     constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus
         this.fileManagerClient = fileManagerClient
-        this.eventBus.on('download', 'downloads', (data) => this.download(data))
+        this.eventBus.on('download', 'downloads', async (data) => await this.download(data))
     }
 
     getFileNameFromUrl(urlString) {

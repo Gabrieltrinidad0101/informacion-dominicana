@@ -35,7 +35,7 @@ export class PdfToImage {
 
   getTextFromImage = async (data) => {
     if(!data.urlDownload.includes('pdf')) return
-    const saveImages = "./images/"
+    const saveImages =  this.fileManagerClient.generateUrl(data, 'postDownloads', '')
     fs.mkdirSync(saveImages, { recursive: true });
     await this.fileManagerClient.downloadFile(data.urlDownload)
     const numberOfPages = await this.#getNumbersOfPages(`downloads/${data.urlDownload}`)
@@ -56,6 +56,7 @@ export class PdfToImage {
         index: i,
         imageUrl
       })
+      fs.rmdirSync(saveImages, { recursive: true });
     }
   }
 }

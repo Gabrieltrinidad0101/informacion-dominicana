@@ -13,7 +13,7 @@ export class ImageToText {
     constructor(eventBus,fileManager) {
         this.eventBus = eventBus
         this.fileManager = fileManager
-        this.eventBus.on('extractedText','extractedTexts', (data)=> this.getTextFromImage(data))
+        this.eventBus.on('extractedText','extractedTexts', async (data)=> await this.getTextFromImage(data))
     }
 
     getTextFromImage = async (data) => {

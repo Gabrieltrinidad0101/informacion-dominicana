@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 
-await mongoose.connect('mongodb://user:password@192.168.49.2:32017/informacion-dominicana?authSource=admin', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
 
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 const Payroll = mongoose.models.payroll ?? mongoose.model("payroll", dynamicSchema);

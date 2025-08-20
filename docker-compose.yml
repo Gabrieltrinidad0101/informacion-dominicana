@@ -133,6 +133,20 @@ services:
       - dev
     ports:  
       - 4000:4000
+  export_to_json:
+    build: 
+      context: .
+      dockerfile: ./projects/exportToJson/dockerfile
+    container_name: exportToJson
+    volumes:
+      - ./projects/exportToJson:/app/projects/exportToJson
+      -  /app/exportToJson/node_modules
+    networks:
+      - dev
+    depends_on:
+      - files_manager
+      - mongo
+      - rabbitmq
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq

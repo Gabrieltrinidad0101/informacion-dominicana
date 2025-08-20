@@ -9,14 +9,13 @@ export class Payroll {
         this.encrypt = encrypt;
         this.getId = getId;
 
-        this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', (data) => this.payroll(data))
+        this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', async (data) => await this.payroll(data))
     }
 
     payroll = async (data) => {
-        const fileAccess = this.fileManagerClient.generateUrl(data,'aiTextAnalyze', `${data.index}.json`)
-        if(!await this.fileManagerClient.fileExists(fileAccess)) {
+        const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data,'aiTextAnalyze', `${data.index}.json`)
+        if(!await this.fileManagerClient.fileExists(aiTextAnalyzeUrl)) {
             const dataText = await this.fileManagerClient.getFile(data.analyzeExtractedTextUrl);
-            console.log("start")
             const propt_ = propt(JSON.stringify(dataText.lines));
             console.log(propt_)
             const response = JSON.parse(await this.apiLLMClient(propt_));
@@ -25,12 +24,11 @@ export class Payroll {
                 if(payroll_.document) payroll_.document = this.encrypt(payroll_.document)
                 payroll_._id = this.getId()
             }
-            await this.fileManagerClient.createTextFile(fileAccess,  JSON.stringify(response));
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl,  JSON.stringify(response));
         }
-
         this.eventBus.emit("insertDatas",{
             ...data,
-            fileAccess,
+            aiTextAnalyzeUrl,
         })
     }
 }

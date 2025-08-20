@@ -21,7 +21,7 @@
     "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager"
   },
   "keywords": [],
-  "author": "",
+  "author": "", 
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.1",

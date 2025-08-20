@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 
-await mongoose.connect('mongodb://user:password@192.168.49.2:32017/informacion-dominicana?authSource=admin', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
 
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 const Payroll = mongoose.models.payroll ?? mongoose.model("payroll", dynamicSchema);
@@ -28,50 +25,59 @@ export class Repository {
     }
 
     async payroll(institutionName, sex) {
-        const match = {
-            date: { $type: "date" },
-        }
-        if (institutionName) match.institutionName = institutionName
-        if (sex) match.sex = sex
-        return await Payroll.aggregate([
-            {
-                $match: match
-            },
-            {
-                $group: {
-                    _id: {
-                        year: { $year: "$date" },
-                        month: { $month: "$date" }
-                    },
-                    value: { $sum: { $toDouble: { $ifNull: ["$income", "0"] } } }
-                }
-            },
-            {
-                $sort: { "_id.year": 1, "_id.month": 1 }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    time: {
-                        $concat: [
-                            { $toString: "$_id.year" },
-                            "-",
-                            {
-                                $cond: [
-                                    { $lt: ["$_id.month", 10] },
-                                    { $concat: ["0", { $toString: "$_id.month" }] },
-                                    { $toString: "$_id.month" }
-                                ]
-                            }
-                        ]
-                    },
-                    value: 1
+    const match = {
+        date: { $type: "date" },
+    }
+    if (institutionName) match.institutionName = institutionName
+    if (sex) match.sex = sex
+
+    return await Payroll.aggregate([
+        {
+            $match: match
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$date" },
+                    month: { $month: "$date" }
+                },
+                value: {
+                    $sum: {
+                        $convert: {
+                            input: "$income", // puede ser string, vacío o número
+                            to: "double",
+                            onError: 0,       // si falla (ej: ""), cuenta como 0
+                            onNull: 0         // si es null, también 0
+                        }
+                    }
                 }
             }
-        ]);
+        },
+        {
+            $sort: { "_id.year": 1, "_id.month": 1 }
+        },
+        {
+            $project: {
+                _id: 0,
+                time: {
+                    $concat: [
+                        { $toString: "$_id.year" },
+                        "-",
+                        {
+                            $cond: [
+                                { $lt: ["$_id.month", 10] },
+                                { $concat: ["0", { $toString: "$_id.month" }] },
+                                { $toString: "$_id.month" }
+                            ]
+                        }
+                    ]
+                },
+                value: 1
+            }
+        }
+    ]);
+}
 
-
-    }
 
     async payrollMale(institutionName) {
         return await this.payroll(institutionName, "M")
@@ -206,7 +212,14 @@ export class Repository {
             },
             {
                 $addFields: {
-                    incomeNum: { $toDouble: "$income" }
+                    incomeNum: {
+                        $convert: {
+                            input: "$income",
+                            to: "double",
+                            onError: 0,
+                            onNull: 0
+                        }
+                    }
                 }
             },
             {
@@ -294,71 +307,71 @@ export class Repository {
 
     async employeersByMonthAndPosition(institutionName) {
         const payrollByMonthAndPosition = await Payroll.aggregate([
-  {
-    $match: {
-      date: { $type: "date" },
-      name: { $exists: true, $ne: "" },
-      position: { $exists: true, $ne: "" }
-    }
-  },
-  {
-    $group: {
-      _id: {
-        year: { $year: "$date" },
-        month: { $month: "$date" },
-        position: "$position"
-      },
-      employees: {
-        $push: {
-          name: "$name",
-          income: "$income",
-          sex: "$sex",
-          x: "$x",
-          y: "$y",
-          width: "$width",
-          height: "$height",
-          downloadLink: "$downloadLink",
-          traceId: "$traceId"
-        }
-      }
-    }
-  },
-  {
-    $group: {
-      _id: { year: "$_id.year", month: "$_id.month" },
-      positions: {
-        $push: {
-          position: "$_id.position",
-          employees: "$employees"
-        }
-      }
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      time: {
-        $concat: [
-          { $toString: "$_id.year" },
-          "-",
-          { $cond: [{ $lt: ["$_id.month", 10] }, { $concat: ["0", { $toString: "$_id.month" }] }, { $toString: "$_id.month" }] }
-        ]
-      },
-      positions: 1
-    }
-  }
-]);
+            {
+                $match: {
+                    date: { $type: "date" },
+                    name: { $exists: true, $ne: "" },
+                    position: { $exists: true, $ne: "" }
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$date" },
+                        month: { $month: "$date" },
+                        position: "$position"
+                    },
+                    employees: {
+                        $push: {
+                            name: "$name",
+                            income: "$income",
+                            sex: "$sex",
+                            x: "$x",
+                            y: "$y",
+                            width: "$width",
+                            height: "$height",
+                            downloadLink: "$downloadLink",
+                            traceId: "$traceId"
+                        }
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { year: "$_id.year", month: "$_id.month" },
+                    positions: {
+                        $push: {
+                            position: "$_id.position",
+                            employees: "$employees"
+                        }
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    time: {
+                        $concat: [
+                            { $toString: "$_id.year" },
+                            "-",
+                            { $cond: [{ $lt: ["$_id.month", 10] }, { $concat: ["0", { $toString: "$_id.month" }] }, { $toString: "$_id.month" }] }
+                        ]
+                    },
+                    positions: 1
+                }
+            }
+        ]);
 
-// Convertir a objeto con claves YYYY-MM
-const result = payrollByMonthAndPosition.reduce((acc, curr) => {
-  acc[curr.time] = {};
-  curr.positions.forEach(pos => {
-    acc[curr.time][pos.position] = pos.employees;
-  });
-  return acc;
-}, {});
+        // Convertir a objeto con claves YYYY-MM
+        const result = payrollByMonthAndPosition.reduce((acc, curr) => {
+            acc[curr.time] = {};
+            curr.positions.forEach(pos => {
+                acc[curr.time][pos.position] = pos.employees;
+            });
+            return acc;
+        }, {});
 
-return result
+        return result
 
     }
 
