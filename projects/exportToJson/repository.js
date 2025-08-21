@@ -25,58 +25,58 @@ export class Repository {
     }
 
     async payroll(institutionName, sex) {
-    const match = {
-        date: { $type: "date" },
-    }
-    if (institutionName) match.institutionName = institutionName
-    if (sex) match.sex = sex
+        const match = {
+            date: { $type: "date" },
+        }
+        if (institutionName) match.institutionName = institutionName
+        if (sex) match.sex = sex
 
-    return await Payroll.aggregate([
-        {
-            $match: match
-        },
-        {
-            $group: {
-                _id: {
-                    year: { $year: "$date" },
-                    month: { $month: "$date" }
-                },
-                value: {
-                    $sum: {
-                        $convert: {
-                            input: "$income", // puede ser string, vacío o número
-                            to: "double",
-                            onError: 0,       // si falla (ej: ""), cuenta como 0
-                            onNull: 0         // si es null, también 0
+        return await Payroll.aggregate([
+            {
+                $match: match
+            },
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$date" },
+                        month: { $month: "$date" }
+                    },
+                    value: {
+                        $sum: {
+                            $convert: {
+                                input: "$income", // puede ser string, vacío o número
+                                to: "double",
+                                onError: 0,       // si falla (ej: ""), cuenta como 0
+                                onNull: 0         // si es null, también 0
+                            }
                         }
                     }
                 }
+            },
+            {
+                $sort: { "_id.year": 1, "_id.month": 1 }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    time: {
+                        $concat: [
+                            { $toString: "$_id.year" },
+                            "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.month", 10] },
+                                    { $concat: ["0", { $toString: "$_id.month" }] },
+                                    { $toString: "$_id.month" }
+                                ]
+                            }
+                        ]
+                    },
+                    value: 1
+                }
             }
-        },
-        {
-            $sort: { "_id.year": 1, "_id.month": 1 }
-        },
-        {
-            $project: {
-                _id: 0,
-                time: {
-                    $concat: [
-                        { $toString: "$_id.year" },
-                        "-",
-                        {
-                            $cond: [
-                                { $lt: ["$_id.month", 10] },
-                                { $concat: ["0", { $toString: "$_id.month" }] },
-                                { $toString: "$_id.month" }
-                            ]
-                        }
-                    ]
-                },
-                value: 1
-            }
-        }
-    ]);
-}
+        ]);
+    }
 
 
     async payrollMale(institutionName) {
@@ -98,7 +98,8 @@ export class Repository {
                     date: { $type: "date" },
                     name: { $exists: true, $ne: "" },
                     position: { $exists: true, $ne: "" },
-                    income: { $exists: true, $ne: "" }
+                    income: { $exists: true, $ne: "" },
+                    ...(institutionName ? { institutionName } : {}) // 👈 filtro dinámico
                 }
             },
             {
@@ -198,9 +199,19 @@ export class Repository {
             { $sort: { time: 1, position: 1 } }
         ]);
 
-
-        return employeesByMonthAndPosition;
+        // 4️⃣ Convertir array en objeto con clave por "year-month"
+        return employeesByMonthAndPosition.reduce((acc, curr) => {
+            if (!acc[curr.time]) acc[curr.time] = [];
+            acc[curr.time].push({
+                position: curr.position,
+                employeeCount: curr.employeeCount,
+                percentage: curr.percentage,
+                averageSalary: curr.averageSalary
+            });
+            return acc;
+        }, {});
     }
+
 
     async wageGrowth(institutionName) {
         const wageGrowth = await Payroll.aggregate([

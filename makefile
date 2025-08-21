@@ -2,10 +2,10 @@ all:
 	docker compose up -d
 
 projects:
-	docker compose up --no-deps rabbitmq mongo
+	docker compose up --no-deps grafana promtail loki
 
 downProjects:
-	docker compose down --no-deps rabbitmq mongo
+	docker compose down  --no-deps grafana promtail loki
 
 down:
 	docker compose down

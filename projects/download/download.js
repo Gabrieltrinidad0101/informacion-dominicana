@@ -15,7 +15,8 @@ export class Download {
 
     download = async (data) => {
         const downloadUrl = path.join(data.institutionName, data.typeOfData, 'downloadData',this.getFileNameFromUrl(data.link))
-        if (!await this.fileManagerClient.fileExists(downloadUrl)){
+        const fileExists = await this.fileManagerClient.fileExists(downloadUrl)
+        if (!fileExists){
             await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
         this.eventBus.emit(

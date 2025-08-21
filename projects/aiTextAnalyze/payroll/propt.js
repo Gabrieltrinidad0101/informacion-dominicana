@@ -1,4 +1,4 @@
-export const propt = (data)=> `Convert the given OCR-extracted text into a JSON array following this structure:
+export const propt = (data)=> `"""Convert the given OCR-extracted text into a JSON array following this structure:
 
 Example Entry:
 {
@@ -31,9 +31,19 @@ Extraction Rules:
   - Do not include \`document\`, \`sex\`, or bounding box.
 - Combine multi-line text blocks if a single logical entry spans several lines.
 - Remove or replace any internal \`"\` characters inside values with \`'\`.
+
+**CRITICAL: POSITION NORMALIZATION & TEXT CLEANING**
+- Before creating the JSON, normalize all \`position\` values and correct encoding errors in the text.
+- **Encoding/Typo Correction:** Fix common OCR/encoding errors (e.g., \`TÃ% CNICO\` -> \`TÉCNICO\`, \`ALCALDÃ•A\` -> \`ALCALDÍA\`, \`Ã‘\` -> \`Ñ\`).
+- **Position Normalization Rules:**
+  - Convert all variants of a position to a single, standardized term.
+  - **Gendered Terms:** Standardize to the masculine singular form (e.g., \`regidora\`/\`regidores\` -> \`regidor\`, \`abogada\` -> \`abogado\`, \`presidenta\` -> \`presidente\`).
+  - **Group/Department Names:** Apply the same normalization to the role within a group name (e.g., \`cuerpo de bomberas\` -> \`cuerpo de bombero\`). The final \`position\` value for the entry should be the normalized role (e.g., \`bombero\`).
+
 - Output should be **strictly valid JSON**, as a list of objects, with no explanations.
 
 Return only the resulting JSON.
+"""
 
 ${data}
 `

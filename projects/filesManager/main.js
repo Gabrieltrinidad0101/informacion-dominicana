@@ -10,6 +10,7 @@ const PORT = 4000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const generetedPath = (folderPath) => path.join(__dirname, '../../data', path.dirname(folderPath))
+const generetedFilePath = (filePath) => path.join(__dirname, '../../data', filePath)
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../../data")));
 
@@ -63,9 +64,11 @@ app.post('/upload-file-from-url', async (req, res) => {
     return res.status(400).json({ error: 'url and folderPath are required' });
   }
 
-  if (fs.existsSync(generetedPath(folderPath))) {
+  if (fs.existsSync(generetedFilePath(folderPath))) {
     return res.json({ response: 'ok' });
   }
+  
+
   
   await new Promise((resolve, reject) => {
     fs.mkdirSync(generetedPath(folderPath), { recursive: true })
@@ -74,6 +77,7 @@ app.post('/upload-file-from-url', async (req, res) => {
     dl.on('error', reject);
     dl.start().catch(reject);
   });
+  console.log('done');
   res.json({ response: 'ok' });
 })
 

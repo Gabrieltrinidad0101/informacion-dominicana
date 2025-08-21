@@ -18,7 +18,10 @@ export function Evento({exchangeName}) {
           : `http://127.0.0.1:3001/find?exchangeName=${exchangeName}`
       );
       const json = await data.json();
-      if(!json || json.length === 0) return;
+      if(!json || json.length === 0) {
+        setDownloadLinks([]);
+        return;
+      };
       const columns_ = Object.keys(json[0])
         .map((key) => {
           if (key === "__v") return;
