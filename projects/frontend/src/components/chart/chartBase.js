@@ -1,7 +1,7 @@
 import * as LightweightCharts from "lightweight-charts"
 import { requestJson } from "../../utils/request";
 
-export const chartBase = async (container, description, topic, customTheme) => {
+export const chartBase = async (container, data, customTheme) => {
 	try {
 		const chartElement = document.createElement('div');
 		const superContainer = container.parentElement.parentElement.getBoundingClientRect()
@@ -25,9 +25,9 @@ export const chartBase = async (container, description, topic, customTheme) => {
 		container.appendChild(chartElement);
 
 		const areaSeries = chart.addAreaSeries({
-			topColor: customTheme?.[description]?.top ?? 'rgba(33, 150, 243, 0.56)',
-			bottomColor: customTheme?.[description]?.bottom ?? 'rgba(33, 150, 243, 0.04)',
-			lineColor: customTheme?.[description]?.line ?? 'rgba(33, 150, 243, 1)',
+			topColor: customTheme?.[data.title]?.top ?? 'rgba(33, 150, 243, 0.56)',
+			bottomColor: customTheme?.[data.title]?.bottom ?? 'rgba(33, 150, 243, 0.04)',
+			lineColor: customTheme?.[data.title]?.line ?? 'rgba(33, 150, 243, 1)',
 			lineWidth: 2,
 		});
 
@@ -57,10 +57,10 @@ export const chartBase = async (container, description, topic, customTheme) => {
 			},
 		};
 		chart.applyOptions(darkTheme.chart);
-		const data1 = await requestJson(`datas/${topic}/${description}`)
+		const data1 = await requestJson(data.url)
 		areaSeries.setData(data1);
 		return chart
 	} catch (error) {
-		console.log(description, "   ", error)
+		console.log(data, "   ", error)
 	}
 }

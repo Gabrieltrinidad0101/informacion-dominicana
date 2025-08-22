@@ -5,11 +5,11 @@ import { Pie } from "../../../components/pie/Pie";
 import MainCss from  "./Main.module.css";
 
 export function Main() {
-  const headers = [
-    "Nomina",
-    "Cantidad Total de Empleados",
-    "Cantidad Total de Empleados Masculinos",
-    "Cantidad Total de Empleados Femeninos",
+  const data = [
+    {"title": "Nomina", 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/payroll'},
+    {"title": "Empleados", 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/employeersTotal'},
+    {'title': 'Cantidad Total de Empleados Masculinos', 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/employeersM'},
+    {"title": "Cantidad Total de Empleados Femeninos", 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/employeersF'},
   ];
   const customTheme = {
     "Cantidad Total de Empleados Femeninos": {
@@ -26,13 +26,12 @@ export function Main() {
   return (
     <div>
       <Charts
-        topic="townHalls/Jarabacoa"
-        headers={headers}
+        data={data}
         deparment="Ayuntamiento de Jarabacoa"
         customTheme={customTheme}
         compare={true}
       />
-      <ListGroup title={"Posición por salario"} topic={"Jarabacoa"} />
+      <ListGroup title={"Posición por salario"} url={"Ayuntamiento de Jarabacoa/nomina/exportToJson/"} />
       <div className={MainCss.display}>
         <Pie description="Porcentaje de gasto por puesto" compare={true} />
         <Pie description="Cantidad de empleados por posición" compare={true} />

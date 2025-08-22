@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = 4000;
-
+app.use(express.json({ limit: '10mb' }));
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const generetedPath = (folderPath) => path.join(__dirname, '../../data', path.dirname(folderPath))
 const generetedFilePath = (filePath) => path.join(__dirname, '../../data', filePath)

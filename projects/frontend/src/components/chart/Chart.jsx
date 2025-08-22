@@ -5,16 +5,16 @@ import { CompareCharts } from "../compareCharts/CompareCharts";
 import { requestJson } from "../../utils/request";
 
 let isLoad = {}
-export function Chart({ description, topic, customTheme,compare,deparment }) {
+export function Chart({ data, customTheme,compare,deparment }) {
   const [openModal, setOpenModal] = useState(false);
   const [chart, setChart] = useState(null);
   const [areaSeries, setAreaSeries] = useState(null);
   const containerChart = useRef();
 
   const verifyVisibility = async (entry) => {
-    if (isLoad[description] || !entry[0].isIntersecting) return;
-    isLoad[description] = entry[0].isIntersecting;
-    setChart(await chartBase(containerChart.current, description, topic, customTheme));
+    if (isLoad[data.title] || !entry[0].isIntersecting) return;
+    isLoad[data.title] = entry[0].isIntersecting;
+    setChart(await chartBase(containerChart.current, data, customTheme));
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function Chart({ description, topic, customTheme,compare,deparment }) {
     <>
       {openModal && (
         <CompareCharts
-          include={description}
+          include={data.title}
           notInclude={deparment}
           open={openModal}
           setOpen={setOpenModal}
@@ -49,7 +49,7 @@ export function Chart({ description, topic, customTheme,compare,deparment }) {
       )}
       <div className="custom-chart-card">
         <div className="custom-chart-card-title">
-          <h3>{description}</h3>
+          <h3>{data.title}</h3>
           <div>
             <a href="#">Fuentes</a>
             {compare && <a href="#" onClick={() => setOpenModal(true)}>

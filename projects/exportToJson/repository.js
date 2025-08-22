@@ -39,7 +39,8 @@ export class Repository {
                 $group: {
                     _id: {
                         year: { $year: "$date" },
-                        month: { $month: "$date" }
+                        month: { $month: "$date" },
+                        day: { $dayOfMonth: "$date" }
                     },
                     value: {
                         $sum: {
@@ -54,7 +55,7 @@ export class Repository {
                 }
             },
             {
-                $sort: { "_id.year": 1, "_id.month": 1 }
+                $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 }
             },
             {
                 $project: {
@@ -69,6 +70,14 @@ export class Repository {
                                     { $concat: ["0", { $toString: "$_id.month" }] },
                                     { $toString: "$_id.month" }
                                 ]
+                            },
+                            "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.day", 10] },
+                                    { $concat: ["0", { $toString: "$_id.day" }] },
+                                    { $toString: "$_id.day" }
+                                ]
                             }
                         ]
                     },
@@ -77,6 +86,7 @@ export class Repository {
             }
         ]);
     }
+
 
 
     async payrollMale(institutionName) {
@@ -386,25 +396,50 @@ export class Repository {
 
     }
 
-    async countByPosition(institutionName) {
-        return Payroll.aggregate([
-            { $match: { institutionName } },
+    async payrollTotal(institutionName, sex) {
+        const match = { date: { $type: "date" } }
+        if (institutionName) match.institutionName = institutionName
+        if (sex) match.sex = sex
+
+        return await Payroll.aggregate([
+            { $match: match },
             {
                 $group: {
-                    _id: "$position",
-                    count: { $sum: 1 }
+                    _id: {
+                        year: { $year: "$date" },
+                        month: { $month: "$date" },
+                        day: { $dayOfMonth: "$date" }
+                    },
+                    value: { $sum: 1 } // count of employees
                 }
             },
+            { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } },
             {
                 $project: {
                     _id: 0,
-                    position: "$_id",
-                    count: 1
+                    time: {
+                        $concat: [
+                            { $toString: "$_id.year" }, "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.month", 10] },
+                                    { $concat: ["0", { $toString: "$_id.month" }] },
+                                    { $toString: "$_id.month" }
+                                ]
+                            }, "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.day", 10] },
+                                    { $concat: ["0", { $toString: "$_id.day" }] },
+                                    { $toString: "$_id.day" }
+                                ]
+                            }
+                        ]
+                    },
+                    value: 1
                 }
-            },
-            {
-                $sort: { count: -1 }
             }
         ]);
     }
+
 }

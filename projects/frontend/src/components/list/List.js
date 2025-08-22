@@ -4,7 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Collapse from '@mui/material/Collapse';
 import { useEffect, useState } from 'react';
 import { Box, Button, createTheme, Fade, Modal, TextField, ThemeProvider, Typography } from '@mui/material';
-import { formatToLastDayOfMonth, payroll, requestJson } from '../../utils/request';
+import { formatYYMM, payroll, requestJson } from '../../utils/request';
 import ListCss from './List.module.css';
 import { formatted } from '../../utils/format';
 import Backdrop from '@mui/material/Backdrop';
@@ -106,7 +106,7 @@ const style = {
     boxShadow: 24,
 };
 
-export const ListGroup = ({ title, topic }) => {
+export const ListGroup = ({ title, url }) => {
     const [dates, setDates] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date())
     const [search, setSearch] = useState("")
@@ -114,16 +114,13 @@ export const ListGroup = ({ title, topic }) => {
     const [positions, setPositions] = useState([])
     const handleDate = async (date) => {
         setCurrentDate(new Date(date));
-        const data = await requestJson(`datas/townHalls/${topic}/positionBySalary - ${formatToLastDayOfMonth(date)}`)
+        const data = await requestJson(`${url}/employeersByPosition${formatYYMM(date)}`)
         positionBySalary = data;
         setPositions(Object.keys(positionBySalary))
     };
 
     useEffect(() => {
-        payroll(topic).then((res) => {
-            setDates(res);
-            handleDate(res[0].time)
-        });
+        handleDate(new Date('2020-08-31'))
     }, [])
 
     const darkTheme = createTheme({
@@ -173,7 +170,7 @@ export const ListGroup = ({ title, topic }) => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <ShowImage
-                            url={`http://localhost:5500/dataPreprocessing/townHalls/${topic}/images/${currentDate.getFullYear?.()}/${getMonth(monthName)}/_${employee.page}.jpg`}
+                            url={`http://localhost:5500/data/${url}/images/${currentDate.getFullYear?.()}/${getMonth(monthName)}/_${employee.page}.jpg`}
                             employee={employee}
                         />
                     </Box>

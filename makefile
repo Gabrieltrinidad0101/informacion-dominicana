@@ -7,6 +7,9 @@ projects:
 downProjects:
 	docker compose down  --no-deps grafana promtail loki
 
+reStartProjects:
+	docker compose restart  download download_links events frontend post_download extracted_text analyze_extracted_text ai_text_analyze insert_data export_to_json files_manager
+
 down:
 	docker compose down
 

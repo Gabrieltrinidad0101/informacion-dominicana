@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { Chart } from '../chart/Chart'
-import chartCss from './charts.module.css'
-import constants from '../../constants'
+import React, { useEffect, useState } from "react";
+import { Chart } from "../chart/Chart";
+import chartCss from "./charts.module.css";
+import constants from "../../constants";
+import { requestJson } from "../../utils/request";
 
-export function Charts({topic,headers,deparment, customTheme,compare}) {
-  const [titles,setTitles] = useState([])
-  useEffect(()=>{
-    if(headers) return setTitles(headers)
-    fetch(`${constants.urlData}/${topic}/headers.json`).then(async res=>{
-      const data = await res.json()
-      setTitles(data)
-    })
-  },[])
+export function Charts({ data, deparment, customTheme, compare }) {
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    if (data) return setDatas(data);
+    const data_ = requestJson(`${urls}/headers.json`).then(async (res) => {
+      setDatas(data_);
+    });
+  }, []);
   return (
     <div className={chartCss.containerCustom}>
-      {
-        titles.map((chart,index)=><Chart compare={compare} topic={topic} deparment={deparment} description={chart} key={index} customTheme={customTheme}/>)
-      }
+      {datas.map((data, index) => (
+        <Chart
+          compare={compare}
+          deparment={deparment}
+          data={data}
+          key={index}
+          customTheme={customTheme}
+        />
+      ))}
     </div>
-  )
+  );
 }
