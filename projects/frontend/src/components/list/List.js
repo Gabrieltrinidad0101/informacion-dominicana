@@ -107,7 +107,6 @@ const style = {
 };
 
 export const ListGroup = ({ title, url }) => {
-    const [dates, setDates] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date())
     const [search, setSearch] = useState("")
     const [employee, setEmployee] = useState({})
