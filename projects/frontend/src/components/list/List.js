@@ -25,21 +25,6 @@ const monthNames = [
   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
 ];
 
-export const getMonth = (text) => {
-  const textLower = text.toLowerCase();
-  if (textLower.includes("enero")) return "january";
-  if (textLower.includes("febrero") || textLower.includes("feb")) return "february";
-  if (textLower.includes("marzo")) return "march";
-  if (textLower.includes("abril")) return "april";
-  if (textLower.includes("mayo")) return "may";
-  if (textLower.includes("junio")) return "june";
-  if (textLower.includes("julio")) return "july";
-  if (textLower.includes("agosto")) return "august";
-  if (textLower.includes("septiembre")) return "september";
-  if (textLower.includes("octubre")) return "october";
-  if (textLower.includes("noviembre") || textLower === "11.pdf") return "november";
-  if (textLower.includes("diciembre")) return "december";
-};
 
 // Component for each position
 export const PositionAndSalary = ({ position, employees, showImage }) => {
@@ -57,12 +42,12 @@ export const PositionAndSalary = ({ position, employees, showImage }) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {employees.map(({ name, income, index }, i) => (
+          {employees.map((employee, i) => (
             <ListItemButton key={i}>
               <Box display="flex" justifyContent="space-between" width="100%">
-                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{name}</Typography>
-                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formatted(income)}</Typography>
-                <Button variant="text" onClick={() => showImage({ name, income, index })} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
+                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{employee.name}</Typography>
+                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formatted(employee.income)}</Typography>
+                <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
               </Box>
             </ListItemButton>
           ))}
@@ -96,24 +81,32 @@ const style = {
   boxShadow: 24,
 };
 
-export const ListGroup = ({ title, url }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
   const [search, setSearch] = useState("");
   const [employee, setEmployee] = useState({});
   const [positions, setPositions] = useState([]);
   const [open, setOpen] = useState(false);
+  const [allowedMonths, setAllowedMonths] = useState(new Set());
 
   const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
   const handleDate = async (date) => {
     setCurrentDate(date);
-    const data = await requestJson(`${url}/employeersByPosition${formatYYMM(date)}`);
+    const data = await requestJson(`${url}exportToJson/employeersByPosition${formatYYMM(date)}`);
     positionBySalary = data;
     setPositions(Object.keys(positionBySalary));
   };
 
   useEffect(() => {
-    handleDate(new Date('2020-08-31'));
+    requestJson(`${url}exportToJson/header`).then((data) => {
+      const dates = new Set(
+        data.map(v => v.replace(/[^0-9-]/g, ""))
+      );
+      setAllowedMonths(dates);
+      console.log(data.at(-1))
+      const [year,month] = data.at(-1).split("-")
+      handleDate(new Date(year, month, 0));
+    })
   }, []);
 
   const onChangeSearch = (e) => {
@@ -134,7 +127,10 @@ export const ListGroup = ({ title, url }) => {
 
   const handleClose = () => setOpen(false);
 
-  const shouldDisableMonth = (month) => month.month() === 0 || month.month() === 11;
+  const shouldDisableMonth = (month) => {
+    const key = month.format("YYYY-MM");
+    return !allowedMonths.has(key);
+  };
 
   const monthName = monthNames[currentDate.getMonth()];
 
@@ -150,7 +146,7 @@ export const ListGroup = ({ title, url }) => {
         <Fade in={open}>
           <Box sx={style}>
             <ShowImage
-              url={`http://localhost:5500/data/${url}/postDownloads/${currentDate.getFullYear()}/${getMonth(monthName)}/_.${(employee).index}.jpg`}
+              url={`http://localhost:5500/data/${url}postDownloads/${currentDate.getFullYear()}/${monthName}/_.${(employee).index}.jpg`}
               employee={employee}
             />
           </Box>
@@ -158,8 +154,6 @@ export const ListGroup = ({ title, url }) => {
       </Modal>
 
       <h1>{title}</h1>
-
-      {JSON.stringify(employee)}
 
       <div className={ListCss.inputs}>
         <TextField

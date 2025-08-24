@@ -17,7 +17,6 @@ export class Payroll {
         if(!await this.fileManagerClient.fileExists(aiTextAnalyzeUrl)) {
             const dataText = await this.fileManagerClient.getFile(data.analyzeExtractedTextUrl);
             const propt_ = propt(JSON.stringify(dataText.lines));
-            console.log(propt_)
             const response = JSON.parse(await this.apiLLMClient(propt_));
             for (let payroll_ of response) {
                 if(payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)

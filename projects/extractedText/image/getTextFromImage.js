@@ -19,6 +19,8 @@ export class ImageToText {
     getTextFromImage = async (data) => {
         const isAzure = useAzureApi.find(d => d.institutionName === data.institutionName && d.year == data.year && d.month == data.month)
         let textOverlay = ""
+
+        await new Promise(resolve => setTimeout(resolve, 1000 * parseInt(data.index)));
         
         const extractedTextUrl = this.fileManager.generateUrl(data,'extractedText',`${data.index}.json`)
         const bufferImage = await this.fileManager.getFileBuffer(data.imageUrl)

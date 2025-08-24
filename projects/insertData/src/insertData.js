@@ -1,17 +1,17 @@
 export class InsertData {
     monthMap = {
-        enero: 0,
-        febrero: 1,
-        marzo: 2,
-        abril: 3,
-        mayo: 4,
-        junio: 5,
-        julio: 6,
-        agosto: 7,
-        septiembre: 8,
-        octubre: 9,
-        noviembre: 10,
-        diciembre: 11
+        enero: 1,
+        febrero: 2,
+        marzo: 3,
+        abril: 4,
+        mayo: 5,
+        junio: 6,
+        julio: 7,
+        agosto: 8,
+        septiembre: 9,
+        octubre: 10,
+        noviembre: 11,
+        diciembre: 12
     };
     constructor(eventBus, fileAccess, eventRepository) {
         this.eventBus = eventBus
@@ -30,6 +30,8 @@ export class InsertData {
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId
+            payroll.index = data.index
+            payroll.urlDownload = data.urlDownload
             return payroll
         })
         await this.eventRepository.save(payrolls)

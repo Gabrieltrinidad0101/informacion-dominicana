@@ -46,6 +46,9 @@ export class PdfToImage {
 
     delete data._id;
 
+    await new Promise((resolve) => setTimeout(resolve, 1000 * Math.floor(Math.random() * 10)));
+
+
     for (let i = 1; i <= numberOfPages; i++) {
       const fileName = `_.${i}.jpg`;
       const imagePath = path.resolve(saveImages, fileName);
@@ -54,19 +57,20 @@ export class PdfToImage {
         "postDownloads",
         fileName
       );
-
+      
       if (!(await this.fileManagerClient.fileExists(imageUrl))) {
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
       }
 
+      
       this.eventBus.emit("extractedTexts", {
         ...data,
         index: i,
         imageUrl,
       });
     }
-
+    
     // Clean up folder AFTER all pages processed
     fs.rmdirSync(saveImages, { recursive: true });
   };

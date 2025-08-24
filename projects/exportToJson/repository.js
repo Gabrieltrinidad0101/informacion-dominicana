@@ -19,22 +19,28 @@ export class Repository {
                 },
                 { upsert: true }
             );
-        } catch {
 
+            await PayrollExportToJson.updateOne(
+                { _id: new mongoose.Types.ObjectId("688fa9e6c1e5bf7298db4b9a") },
+                {
+                    $set: {
+                        institutionName: "Ayuntamiento de Moca"
+                    }
+                },
+                { upsert: true }
+            );
+        } catch {
+            // manejar errores si quieres
         }
     }
 
     async payroll(institutionName, sex) {
-        const match = {
-            date: { $type: "date" },
-        }
+        const match = { date: { $type: "date" } }
         if (institutionName) match.institutionName = institutionName
         if (sex) match.sex = sex
 
         return await Payroll.aggregate([
-            {
-                $match: match
-            },
+            { $match: match },
             {
                 $group: {
                     _id: {
@@ -45,33 +51,29 @@ export class Repository {
                     value: {
                         $sum: {
                             $convert: {
-                                input: "$income", // puede ser string, vacío o número
+                                input: "$income",
                                 to: "double",
-                                onError: 0,       // si falla (ej: ""), cuenta como 0
-                                onNull: 0         // si es null, también 0
+                                onError: 0,
+                                onNull: 0
                             }
                         }
                     }
                 }
             },
-            {
-                $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 }
-            },
+            { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } },
             {
                 $project: {
                     _id: 0,
                     time: {
                         $concat: [
-                            { $toString: "$_id.year" },
-                            "-",
+                            { $toString: "$_id.year" }, "-",
                             {
                                 $cond: [
                                     { $lt: ["$_id.month", 10] },
                                     { $concat: ["0", { $toString: "$_id.month" }] },
                                     { $toString: "$_id.month" }
                                 ]
-                            },
-                            "-",
+                            }, "-",
                             {
                                 $cond: [
                                     { $lt: ["$_id.day", 10] },
@@ -86,8 +88,6 @@ export class Repository {
             }
         ]);
     }
-
-
 
     async payrollMale(institutionName) {
         return await this.payroll(institutionName, "M")
@@ -109,15 +109,21 @@ export class Repository {
                     name: { $exists: true, $ne: "" },
                     position: { $exists: true, $ne: "" },
                     income: { $exists: true, $ne: "" },
-                    ...(institutionName ? { institutionName } : {}) // 👈 filtro dinámico
+                    ...(institutionName ? { institutionName } : {})
                 }
             },
             {
                 $addFields: {
-                    incomeNum: { $toDouble: "$income" }
+                    incomeNum: {
+                        $convert: {
+                            input: "$income",
+                            to: "double",
+                            onError: 0,
+                            onNull: 0
+                        }
+                    }
                 }
             },
-            // 1️⃣ Agrupar por mes y posición
             {
                 $group: {
                     _id: {
@@ -139,7 +145,6 @@ export class Repository {
                     _id: 0
                 }
             },
-            // 2️⃣ Agrupar por mes para obtener total de ingresos
             {
                 $group: {
                     _id: { year: "$year", month: "$month" },
@@ -153,14 +158,12 @@ export class Repository {
                     totalIncome: { $sum: "$positionIncome" }
                 }
             },
-            // 3️⃣ Calcular porcentaje y salario promedio
             {
                 $project: {
                     _id: 0,
                     time: {
                         $concat: [
-                            { $toString: "$_id.year" },
-                            "-",
+                            { $toString: "$_id.year" }, "-",
                             { $toString: "$_id.month" }
                         ]
                     },
@@ -177,7 +180,12 @@ export class Repository {
                                         0,
                                         {
                                             $round: [
-                                                { $multiply: [{ $divide: ["$$p.positionIncome", "$totalIncome"] }, 100] },
+                                                {
+                                                    $multiply: [
+                                                        { $divide: ["$$p.positionIncome", "$totalIncome"] },
+                                                        100
+                                                    ]
+                                                },
                                                 2
                                             ]
                                         }
@@ -187,7 +195,12 @@ export class Repository {
                                     $cond: [
                                         { $eq: ["$$p.employeeCount", 0] },
                                         0,
-                                        { $round: [{ $divide: ["$$p.positionIncome", "$$p.employeeCount"] }, 2] }
+                                        {
+                                            $round: [
+                                                { $divide: ["$$p.positionIncome", "$$p.employeeCount"] },
+                                                2
+                                            ]
+                                        }
                                     ]
                                 }
                             }
@@ -209,7 +222,6 @@ export class Repository {
             { $sort: { time: 1, position: 1 } }
         ]);
 
-        // 4️⃣ Convertir array en objeto con clave por "year-month"
         return employeesByMonthAndPosition.reduce((acc, curr) => {
             if (!acc[curr.time]) acc[curr.time] = [];
             acc[curr.time].push({
@@ -221,7 +233,6 @@ export class Repository {
             return acc;
         }, {});
     }
-
 
     async wageGrowth(institutionName) {
         const wageGrowth = await Payroll.aggregate([
@@ -252,9 +263,7 @@ export class Repository {
                     totalIncome: { $sum: "$incomeNum" }
                 }
             },
-            {
-                $sort: { "_id.year": 1, "_id.month": 1 }
-            },
+            { $sort: { "_id.year": 1, "_id.month": 1 } },
             {
                 $group: {
                     _id: null,
@@ -305,7 +314,16 @@ export class Repository {
             {
                 $group: {
                     _id: null,
-                    averageIncome: { $avg: { $toDouble: "$income" } }
+                    averageIncome: {
+                        $avg: {
+                            $convert: {
+                                input: "$income",
+                                to: "double",
+                                onError: 0,
+                                onNull: 0
+                            }
+                        }
+                    }
                 }
             }
         ]);
@@ -318,13 +336,21 @@ export class Repository {
             {
                 $group: {
                     _id: null,
-                    averageIncome: { $avg: { $toDouble: "$income" } }
+                    averageIncome: {
+                        $avg: {
+                            $convert: {
+                                input: "$income",
+                                to: "double",
+                                onError: 0,
+                                onNull: 0
+                            }
+                        }
+                    }
                 }
             }
         ]);
         return result[0]?.averageIncome ?? 0;
     }
-
 
     async employeersByMonthAndPosition(institutionName) {
         const payrollByMonthAndPosition = await Payroll.aggregate([
@@ -351,7 +377,8 @@ export class Repository {
                             y: "$y",
                             width: "$width",
                             height: "$height",
-                            downloadLink: "$downloadLink",
+                            index: "$index",
+                            urlDownload: "$urlDownload",
                             traceId: "$traceId"
                         }
                     }
@@ -373,9 +400,14 @@ export class Repository {
                     _id: 0,
                     time: {
                         $concat: [
-                            { $toString: "$_id.year" },
-                            "-",
-                            { $cond: [{ $lt: ["$_id.month", 10] }, { $concat: ["0", { $toString: "$_id.month" }] }, { $toString: "$_id.month" }] }
+                            { $toString: "$_id.year" }, "-",
+                            {
+                                $cond: [
+                                    { $lt: ["$_id.month", 10] },
+                                    { $concat: ["0", { $toString: "$_id.month" }] },
+                                    { $toString: "$_id.month" }
+                                ]
+                            }
                         ]
                     },
                     positions: 1
@@ -383,17 +415,13 @@ export class Repository {
             }
         ]);
 
-        // Convertir a objeto con claves YYYY-MM
-        const result = payrollByMonthAndPosition.reduce((acc, curr) => {
+        return payrollByMonthAndPosition.reduce((acc, curr) => {
             acc[curr.time] = {};
             curr.positions.forEach(pos => {
                 acc[curr.time][pos.position] = pos.employees;
             });
             return acc;
         }, {});
-
-        return result
-
     }
 
     async payrollTotal(institutionName, sex) {
@@ -410,7 +438,7 @@ export class Repository {
                         month: { $month: "$date" },
                         day: { $dayOfMonth: "$date" }
                     },
-                    value: { $sum: 1 } // count of employees
+                    value: { $sum: 1 }
                 }
             },
             { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } },

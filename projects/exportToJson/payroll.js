@@ -24,19 +24,18 @@ export class Payroll {
         // const wageGrowthFemale = await this.payrollRepository.wageGrowthFemale(data.institutionName);
         // const countByPosition = await this.payrollRepository.countByPosition(data.institutionName);
 
-        const header = ['payroll.json', 'employeersM.json', 'employeersF.json'];
+        const header = [];
         await this.save(data, "payroll.json", payroll);
         await this.save(data, "employeersM.json", employeersM);
         await this.save(data, "employeersF.json", employeersF);
         await this.save(data, "employeersTotal.json", employeersTotal);
         for(const key of Object.keys(employeersByPosition) ){
             await this.save(data, `employeersByPosition${key}.json`, employeersByPosition[key]);
-            header.push(`employeersByPosition${key}.json`);
+            header.push(key);
         }
         
         for(const key of Object.keys(percentageOfSpendingByPosition) ){
             await this.save(data, `percentageOfSpendingByPosition${key}.json`, percentageOfSpendingByPosition[key]);
-            header.push(`percentageOfSpendingByPosition${key}.json`);
         }
 
         await this.save(data, `header.json`, header);

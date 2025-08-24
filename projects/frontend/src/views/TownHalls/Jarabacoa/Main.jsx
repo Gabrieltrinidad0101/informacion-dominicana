@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Charts } from "../../../components/charts/Charts";
 import { ListGroup } from "../../../components/list/List";
 import { PieChartComponent } from "../../../components/pie/Pie";
 import MainCss from  "./Main.module.css";
 
 export function Main() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  
   const data = [
     {"title": "Nomina", 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/payroll'},
     {"title": "Empleados", 'url': 'Ayuntamiento de Jarabacoa/nomina/exportToJson/employeersTotal'},
@@ -31,10 +33,10 @@ export function Main() {
         customTheme={customTheme}
         compare={true}
       />
-      <ListGroup title={"Posición por salario"} url={"Ayuntamiento de Jarabacoa/nomina/exportToJson/"} />
+      <ListGroup currentDate={currentDate} setCurrentDate={setCurrentDate} title={"Posición por salario"} url={"Ayuntamiento de Jarabacoa/nomina/"} />
       <div className={MainCss.display}>
-        <PieChartComponent description="Porcentaje de gasto por puesto" url="Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition2019-8" compare={true} />
-        <PieChartComponent description="Cantidad de empleados por posición" url="Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition2019-8" compare={true} />
+        <PieChartComponent description="Porcentaje de gasto por puesto" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
+        <PieChartComponent description="Cantidad de empleados por posición" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
       </div>
     </div>
   );
