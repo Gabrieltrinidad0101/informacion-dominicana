@@ -29,20 +29,20 @@ const months = {
   "06": "june",
   "07": "july",
   "08": "august",
-  "09": "september",
+  "09": "septiembre",
   10: "october",
   11: "november",
   12: "december",
 };
 
-const townHalls = ["Jarabacoa", "Moca"];
+const townHalls = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"];
 
 export function CompareData() {
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-  const [page, setPage] = useState(1);
+  const [index, setIndex] = useState(1);
   const [imagePage, setImagePage] = useState(1);
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
@@ -84,7 +84,7 @@ export function CompareData() {
   ];
 
   useEffect(() => {
-    payroll(townHall).then((res) => {
+    requestJson(`${townHall}/nomina/exportToJson/payroll`).then((res) => {
       setCurrentDate(res[0].time);
       setDates(res);
     });
@@ -94,7 +94,7 @@ export function CompareData() {
     if ((currentDate?.length ?? 0) <= 0) return;
     const [year, month] = currentDate.split("-");
     requestJson(
-      `/dataPreprocessing/townHalls/${townHall}/data/${year}/${months[month]}`
+      `${townHall}/nomina/aiTextAnalyze/${year}/${months[month]}/${1}`
     ).then((res) => {
       data = res.map((row) => {
         row.id = crypto.randomUUID();
@@ -108,7 +108,7 @@ export function CompareData() {
     selectEmployee.current.classList.add(
       positionSelectCss.selecteEmployeeOpacity
     );
-  }, [page, currentDate]);
+  }, [index, currentDate]);
 
   const onChangeSearch = (e) => {
     const text = e.target.value;
@@ -124,7 +124,7 @@ export function CompareData() {
   };
 
   const filteredRows =
-    search !== "" ? [...rows] : rows.filter((row) => row.page == page);
+    search !== "" ? [...rows] : rows.filter((row) => row.page == index);
   if(search === "") filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
   const totalPages =
     search !== ""
@@ -139,7 +139,7 @@ export function CompareData() {
   const totalEmployeesByPage = filteredRows.length;
 
   const handlePageChange = (event, newPage) => {
-    setPage(newPage);
+    setIndex(newPage);
     if(search !== "") return;
     setImagePage(newPage);
   };
@@ -150,12 +150,13 @@ export function CompareData() {
 
   const handleTownHall = (event) => {
     setTownHall(event.target.value);
-    setPage(1);
+    setIndex(1);
     setImagePage(1);
   };
 
   return (
     <>
+    {JSON.stringify(filteredRows)}
       <Box sx={{ mb: 2 }} className={compareData.inputs}>
         <InputText
           label="Buscar"
@@ -190,19 +191,19 @@ export function CompareData() {
       <div className={compareData.comparar}>
         <div className={compareData.overflowImage}>
           <div>
-            <img
+            {currentDate && <img
               style={{
                 transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
               }}
               ref={imageRef}
-              src={`http://localhost:5500/dataPreprocessing/townHalls/${townHall}/images/${
+              src={`http://localhost:5500/data/${townHall}/nomina/postDownloads/${
                 currentDate?.split("-")?.[0]
               }/${
                 months[currentDate?.split("-")?.[1]]
-              }/_${imagePage}.jpg`}
+              }/_.${imagePage}.jpg`}
               width="100%"
               height="100%"
-            />
+            />}
           </div>
         </div>
         <div className={compareData.selecteEmployee} ref={selectEmployee}></div>
@@ -231,7 +232,7 @@ export function CompareData() {
 
               <Pagination
                 count={totalPages}
-                page={page}
+                page={index}
                 onChange={handlePageChange}
                 color="primary"
                 shape="rounded"
