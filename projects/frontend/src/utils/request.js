@@ -22,3 +22,12 @@ export const formatYYMM = (date) => {
     const formattedMonth = String(month + 1).padStart(2, '0');
     return `${year}-${formattedMonth}`
 }
+
+
+export const getLastDayOfMonth = (date) => {
+    const lastDay = new Date(date.getYear, date.getMonth, 0);
+    const yyyy = lastDay.getFullYear();
+    const mm = String(lastDay.getMonth() + 1).padStart(2, '0');
+    const dd = String(lastDay.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+}

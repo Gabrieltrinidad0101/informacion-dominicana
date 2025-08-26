@@ -20,10 +20,6 @@ const getSalary = (position) =>
 
 const getSalaryFormat = (position) => formattedMoney(getSalary(position));
 
-const monthNames = [
-  "enero", "febrero", "marzo", "abril", "mayo", "junio",
-  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
-];
 
 
 // Component for each position
@@ -81,7 +77,7 @@ const style = {
   boxShadow: 24,
 };
 
-export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
+export const ListGroup = ({ title,instituction,currentDate,setCurrentDate, url }) => {
   const [search, setSearch] = useState("");
   const [employee, setEmployee] = useState({});
   const [positions, setPositions] = useState([]);
@@ -131,7 +127,6 @@ export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
     return !allowedMonths.has(key);
   };
 
-  const monthName = monthNames[currentDate?.getMonth() ?? ""];
 
   return (
     <>
@@ -145,7 +140,8 @@ export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
         <Fade in={open}>
           <Box sx={style}>
             <ShowImage
-              url={`http://localhost:5500/data/${url}postDownloads/${currentDate.getFullYear()}/${monthName}/_.${(employee).index}.jpg`}
+              instituction={instituction}
+              currentDate={currentDate}
               employee={employee}
             />
           </Box>

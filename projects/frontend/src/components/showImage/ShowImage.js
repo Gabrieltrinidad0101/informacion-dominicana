@@ -2,9 +2,17 @@ import { useEffect, useRef } from 'react';
 import showImageCss from './ShowImage.module.css'
 import { positionSelect } from '../../utils/positionSelect';
 let lastUrl = ""
-export function ShowImage({ employee, url }) {
+
+const monthNames = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+];
+
+export function ShowImage({ employee, instituction, currentDate }) {
     const selectEmployee = useRef(null);
     const imageRef = useRef(null);
+    const monthName = monthNames[currentDate?.getMonth() ?? ""];
+    const url = `http://localhost:5500/data/${instituction}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
 
     useEffect(() => {
         if (lastUrl !== "") selectEmployee.current.classList.add(positionSelect.selecteEmployeeOpacity);
@@ -30,6 +38,7 @@ export function ShowImage({ employee, url }) {
             window.removeEventListener("resize", handleSelectPosition)
         }
     }, [])
+
 
 
     return (

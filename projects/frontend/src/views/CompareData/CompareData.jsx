@@ -12,28 +12,13 @@ import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 import { formattedMoney } from "../../utils/format";
-import { formatYYMM, requestJson } from "../../utils/request";
-import { positionSelect } from "../../utils/positionSelect";
-import positionSelectCss from "../../utils/positionSelect.module.css";
+import { formatYYMM, getLastDayOfMonth, requestJson } from "../../utils/request";
 import { InputText } from "../../components/inputs/inputText";
 import { SimpleSelect } from "../../components/inputs/simpleSelects";
 import { lightTheme } from "../../themes/light";
+import { ShowImage } from "../../components/showImage/ShowImage";
 
 let data = [];
-const months = {
-  "01": "january",
-  "02": "february",
-  "03": "march",
-  "04": "april",
-  "05": "may",
-  "06": "june",
-  "07": "july",
-  "08": "august",
-  "09": "septiembre",
-  10: "october",
-  11: "november",
-  12: "december",
-};
 
 const townHalls = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"];
 
@@ -41,16 +26,14 @@ export function CompareData() {
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
   const [dates, setDates] = useState([]);
-  const [currentDate, setCurrentDate] = useState("");
+  const [currentDate, setCurrentDate] = useState();
   const [index, setIndex] = useState(1);
-  const [imagePage, setImagePage] = useState(1);
+  const [employee, setEmployee] = useState({index: 1});
   const selectEmployee = useRef(null);
-  const imageRef = useRef(null);
   const [townHall, setTownHall] = useState(townHalls[0]);
 
   const handleClick = (employee) => {
-    positionSelect(selectEmployee, imageRef, employee);
-    setImagePage(employee.page);
+    setEmployee(employee);
   };
 
   const columns = [
@@ -102,12 +85,6 @@ export function CompareData() {
     });
   }, [currentDate]);
 
-  useEffect(() => {
-    selectEmployee.current.classList.add(
-      positionSelectCss.selecteEmployeeOpacity
-    );
-  }, [index, currentDate]);
-
   const onChangeSearch = (e) => {
     const text = e.target.value;
     setSearch(text);
@@ -139,7 +116,7 @@ export function CompareData() {
   const handlePageChange = (event, newPage) => {
     setIndex(newPage);
     if (search !== "") return;
-    setImagePage(newPage);
+    setEmployee({index: newPage});
   };
 
   const handleDate = (event) => {
@@ -149,7 +126,7 @@ export function CompareData() {
   const handleTownHall = (event) => {
     setTownHall(event.target.value);
     setIndex(1);
-    setImagePage(1);
+    setEmployee({index: 1});
   };
 
   return (
@@ -168,7 +145,7 @@ export function CompareData() {
         />
         <FormControl variant="filled" sx={lightTheme}>
           <InputLabel id="demo-simple-select-filled-label">Fecha</InputLabel>
-          <Select
+          {currentDate && <Select
             value={currentDate}
             onChange={handleDate}
             labelId="demo-simple-select-filled-label"
@@ -182,23 +159,17 @@ export function CompareData() {
                 </MenuItem>
               );
             })}
-          </Select>
+          </Select>}
         </FormControl>
       </Box>
       <div className={compareData.comparar}>
         <div className={compareData.overflowImage}>
           <div>
-            {currentDate && (
-              <img
-                style={{
-                  transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
-                }}
-                ref={imageRef}
-                src={`http://localhost:5500/data/${townHall}/nomina/postDownloads/${
-                  currentDate?.split("-")?.[0]
-                }/${months[currentDate?.split("-")?.[1]]}/_.${imagePage}.jpg`}
-                width="100%"
-                height="100%"
+            {currentDate && employee && (
+              <ShowImage
+                instituction={townHall}
+                currentDate={new Date(currentDate)}
+                employee={employee}
               />
             )}
           </div>
