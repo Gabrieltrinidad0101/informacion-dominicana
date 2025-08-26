@@ -358,7 +358,8 @@ export class Repository {
                 $match: {
                     date: { $type: "date" },
                     name: { $exists: true, $ne: "" },
-                    position: { $exists: true, $ne: "" }
+                    position: { $exists: true, $ne: "" },
+                    institutionName: { "$eq": institutionName }
                 }
             },
             {

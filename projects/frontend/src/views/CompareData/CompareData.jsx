@@ -11,8 +11,8 @@ import {
 import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
-import { formatted } from "../../utils/format";
-import { payroll, requestJson } from "../../utils/request";
+import { formattedMoney } from "../../utils/format";
+import { requestJson } from "../../utils/request";
 import { positionSelect } from "../../utils/positionSelect";
 import positionSelectCss from "../../utils/positionSelect.module.css";
 import { InputText } from "../../components/inputs/inputText";
@@ -62,7 +62,7 @@ export function CompareData() {
       type: "number",
       flex: 1,
       renderCell: ({ row }) => {
-        return row.income ? formatted(row.income) : "";
+        return row.income ? formattedMoney(row.income) : "";
       },
     },
     { field: "sex", headerName: "Género", flex: 1 },
@@ -242,11 +242,11 @@ export function CompareData() {
           </Box>
           <div className={compareData.footerTable}>
             <Typography variant="h6">
-              Nomina Total: {formatted(totalPayroll)}
+              Nomina Total: {formattedMoney(totalPayroll)}
             </Typography>
             <Typography variant="h6">Empleados: {totalEmployees}</Typography>
             <Typography variant="h6">
-              Nomina de la pagina: {formatted(totalPayrollByPage)}
+              Nomina de la pagina: {formattedMoney(totalPayrollByPage)}
             </Typography>
             <Typography variant="h6">
               Empleados de la pagina: {totalEmployeesByPage}

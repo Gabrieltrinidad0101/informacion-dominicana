@@ -35,8 +35,8 @@ export function Main() {
       />
       <ListGroup currentDate={currentDate} setCurrentDate={setCurrentDate} title={"Posición por salario"} url={"Ayuntamiento de Jarabacoa/nomina/"} />
       <div className={MainCss.display}>
-        <PieChartComponent description="Porcentaje de gasto por puesto" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
-        <PieChartComponent description="Cantidad de empleados por posición" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
+        <PieChartComponent type="percentage" simbol="%" description="Porcentaje de gasto por puesto" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
+        <PieChartComponent type="employeeCount" description="Cantidad de empleados por posición" url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()}`} compare={false} />
       </div>
     </div>
   );

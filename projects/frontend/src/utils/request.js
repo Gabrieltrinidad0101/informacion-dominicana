@@ -17,9 +17,8 @@ export const requestJson = async (url) => {
 }
 
 export const formatYYMM = (date) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = d.getMonth(); 
+    const year = date.getFullYear();
+    const month = date.getMonth(); 
     const formattedMonth = String(month + 1).padStart(2, '0');
     return `${year}-${formattedMonth}`
 }

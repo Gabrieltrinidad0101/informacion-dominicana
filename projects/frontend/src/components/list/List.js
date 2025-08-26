@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Box, Button, createTheme, Fade, Modal, TextField, ThemeProvider, Typography, Backdrop } from '@mui/material';
 import { formatYYMM, requestJson } from '../../utils/request';
 import ListCss from './List.module.css';
-import { formatted } from '../../utils/format';
+import { formattedMoney } from '../../utils/format';
 import { ShowImage } from '../showImage/ShowImage';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -18,7 +18,7 @@ let positionBySalary = {};
 const getSalary = (position) =>
   positionBySalary[position]?.reduce((acc, row) => acc + parseInt(row.income), 0) / (positionBySalary[position]?.length ?? 1);
 
-const getSalaryFormat = (position) => formatted(getSalary(position));
+const getSalaryFormat = (position) => formattedMoney(getSalary(position));
 
 const monthNames = [
   "enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -46,7 +46,7 @@ export const PositionAndSalary = ({ position, employees, showImage }) => {
             <ListItemButton key={i}>
               <Box display="flex" justifyContent="space-between" width="100%">
                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{employee.name}</Typography>
-                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formatted(employee.income)}</Typography>
+                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formattedMoney(employee.income)}</Typography>
                 <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
               </Box>
             </ListItemButton>
@@ -103,7 +103,6 @@ export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
         data.map(v => v.replace(/[^0-9-]/g, ""))
       );
       setAllowedMonths(dates);
-      console.log(data.at(-1))
       const [year,month] = data.at(-1).split("-")
       handleDate(new Date(year, month, 0));
     })
@@ -132,11 +131,11 @@ export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
     return !allowedMonths.has(key);
   };
 
-  const monthName = monthNames[currentDate.getMonth()];
+  const monthName = monthNames[currentDate?.getMonth() ?? ""];
 
   return (
     <>
-      <Modal
+     {currentDate && <Modal
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -151,7 +150,7 @@ export const ListGroup = ({ title,currentDate,setCurrentDate, url }) => {
             />
           </Box>
         </Fade>
-      </Modal>
+      </Modal>}
 
       <h1>{title}</h1>
 
