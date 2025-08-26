@@ -27,37 +27,26 @@ const style = {
   borderRadius: 2,
 };
 
-const dummyDataTemporalTest = [
-  { text: "Nomina - Ayuntamiento de Moca", url: "datas/townHalls/Moca/Nomina" },
-  {
-    text: "Cantidad Total de Empleados - Ayuntamiento de Moca ",
-    url: "datas/townHalls/Moca/Cantidad Total de Empleados",
-  },
-  {
-    text: "Cantidad Total de Empleados Masculinos - Ayuntamiento de Moca ",
-    url: "datas/townHalls/Moca/Cantidad Total de Empleados Masculinos",
-  },
-  {
-    text: "Cantidad Total de Empleados Femeninos - Ayuntamiento de Moca ",
-    url: "datas/townHalls/Moca/Cantidad Total de Empleados Femeninos",
-  },
-  {
-    text: "Cantidad Total de Empleados - Ayuntamiento de Jarabacoa ",
-    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados",
-  },
-  {
-    text: "Cantidad Total de Empleados Masculinos - Ayuntamiento de Jarabacoa ",
-    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados Masculinos",
-  },
-  {
-    text: "Cantidad Total de Empleados Femeninos - Ayuntamiento de Jarabacoa ",
-    url: "datas/townHalls/Jarabacoa/Cantidad Total de Empleados Femeninos",
-  },
-  {
-    text: "Nomina - Ayuntamiento de Jarabacoa ",
-    url: "datas/townHalls/Jarabacoa/Nomina",
-  },
-];
+const compareCharts = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"].map(
+  (institution) => [
+    {
+      text: `Nomina - ${institution}`,
+      url: `${institution}/nomina/exportToJson/payroll`,
+    },
+    {
+      text: `Cantidad Total de Empleados - ${institution}`,
+      url: `${institution}/nomina/exportToJson/employeersTotal`,
+    },
+    {
+      text: `Cantidad Total de Empleados Masculinos - ${institution}`,
+      url: `${institution}/nomina/exportToJson/employeersF`,
+    },
+    {
+      text: `Cantidad Total de Empleados Femeninos - ${institution}`,
+      url: `${institution}/nomina/exportToJson/employeersF`,
+    },
+  ]
+).flat();
 
 export function CompareCharts({
   open,
@@ -66,7 +55,11 @@ export function CompareCharts({
   include,
   notInclude,
 }) {
-  const [dummyData] = useState(dummyDataTemporalTest.filter(data => data.text.includes(include) && !data.text.includes(notInclude))) 
+  const [dummyData] = useState(
+    compareCharts.filter(
+      (data) => data.text.includes(include) && !data.text.includes(notInclude)
+    )
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -82,7 +75,7 @@ export function CompareCharts({
 
   const handleCompare = () => {
     addNewChart(selectedItems.url);
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
@@ -92,7 +85,7 @@ export function CompareCharts({
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           open={open}
-          style={{position: "fixed"}}
+          style={{ position: "fixed" }}
           onClose={() => setOpen(false)}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}

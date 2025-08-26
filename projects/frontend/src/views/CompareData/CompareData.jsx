@@ -12,7 +12,7 @@ import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 import { formattedMoney } from "../../utils/format";
-import { requestJson } from "../../utils/request";
+import { formatYYMM, requestJson } from "../../utils/request";
 import { positionSelect } from "../../utils/positionSelect";
 import positionSelectCss from "../../utils/positionSelect.module.css";
 import { InputText } from "../../components/inputs/inputText";
@@ -92,14 +92,12 @@ export function CompareData() {
 
   useEffect(() => {
     if ((currentDate?.length ?? 0) <= 0) return;
-    const [year, month] = currentDate.split("-");
     requestJson(
-      `${townHall}/nomina/aiTextAnalyze/${year}/${months[month]}/${1}`
+      `${townHall}/nomina/exportToJson/employeersByPosition${formatYYMM(
+        new Date(currentDate)
+      )}`
     ).then((res) => {
-      data = res.map((row) => {
-        row.id = crypto.randomUUID();
-        return row;
-      });
+      data = Object.values(res).flat();
       setRows(data);
     });
   }, [currentDate]);
@@ -124,12 +122,12 @@ export function CompareData() {
   };
 
   const filteredRows =
-    search !== "" ? [...rows] : rows.filter((row) => row.page == index);
-  if(search === "") filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
+    search !== "" ? [...rows] : rows.filter((row) => row.index == index);
+  if (search === "") filteredRows.sort((a, b) => (a.y ?? 0) - (b.y ?? 0));
   const totalPages =
     search !== ""
       ? Math.floor(filteredRows.length / 15)
-      : Math.max(...rows.map((row) => row.page ?? 0)) ?? 0;
+      : Math.max(...rows.map((row) => row.index ?? 0)) ?? 0;
   const sum = (arr) =>
     arr.reduce((acc, row) => acc + parseFloat(row.income || "0") || 0, 0);
 
@@ -140,7 +138,7 @@ export function CompareData() {
 
   const handlePageChange = (event, newPage) => {
     setIndex(newPage);
-    if(search !== "") return;
+    if (search !== "") return;
     setImagePage(newPage);
   };
 
@@ -156,7 +154,6 @@ export function CompareData() {
 
   return (
     <>
-    {JSON.stringify(filteredRows)}
       <Box sx={{ mb: 2 }} className={compareData.inputs}>
         <InputText
           label="Buscar"
@@ -191,19 +188,19 @@ export function CompareData() {
       <div className={compareData.comparar}>
         <div className={compareData.overflowImage}>
           <div>
-            {currentDate && <img
-              style={{
-                transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
-              }}
-              ref={imageRef}
-              src={`http://localhost:5500/data/${townHall}/nomina/postDownloads/${
-                currentDate?.split("-")?.[0]
-              }/${
-                months[currentDate?.split("-")?.[1]]
-              }/_.${imagePage}.jpg`}
-              width="100%"
-              height="100%"
-            />}
+            {currentDate && (
+              <img
+                style={{
+                  transform: `rotate(-${filteredRows?.[0]?.pageAngle ?? 0}deg)`,
+                }}
+                ref={imageRef}
+                src={`http://localhost:5500/data/${townHall}/nomina/postDownloads/${
+                  currentDate?.split("-")?.[0]
+                }/${months[currentDate?.split("-")?.[1]]}/_.${imagePage}.jpg`}
+                width="100%"
+                height="100%"
+              />
+            )}
           </div>
         </div>
         <div className={compareData.selecteEmployee} ref={selectEmployee}></div>

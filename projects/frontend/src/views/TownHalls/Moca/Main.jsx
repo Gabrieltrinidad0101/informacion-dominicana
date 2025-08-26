@@ -53,21 +53,26 @@ export function Main() {
       />
       <div className={MainCss.display}>
         {currentDate && (
-            <PieChartComponent
-              type="percentage"
-              simbol="%"
-              description="Porcentaje de gasto por puesto"
-              url={`Ayuntamiento de Moca/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`}
-              compare={false}
-            />
-          ) && (
-            <PieChartComponent
-              type="employeeCount"
-              description="Cantidad de empleados por posición"
-              url={`Ayuntamiento de Moca/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${currentDate.getMonth()  + 1}`}
-              compare={false}
-            />
-          )}
+          <PieChartComponent
+            type="percentage"
+            simbol="%"
+            description="Porcentaje de gasto por puesto"
+            url={`Ayuntamiento de Moca/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${
+              currentDate.getMonth() + 1
+            }`}
+            compare={false}
+          />
+        )}
+        {currentDate && (
+          <PieChartComponent
+            type="employeeCount"
+            description="Cantidad de empleados por posición"
+            url={`Ayuntamiento de Moca/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${
+              currentDate.getMonth() + 1
+            }`}
+            compare={false}
+          />
+        )}
       </div>
     </div>
   );

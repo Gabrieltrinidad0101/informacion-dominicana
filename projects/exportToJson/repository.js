@@ -380,7 +380,8 @@ export class Repository {
                             height: "$height",
                             index: "$index",
                             urlDownload: "$urlDownload",
-                            traceId: "$traceId"
+                            traceId: "$traceId",
+                            id: "$_id"
                         }
                     }
                 }
