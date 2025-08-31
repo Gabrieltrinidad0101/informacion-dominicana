@@ -1,4 +1,4 @@
-export const propt = (data)=> `"""Convert the given OCR-extracted text into a JSON array following this structure:
+export const propt = (data) => `"""Convert the given OCR-extracted text into a JSON array following this structure:
 
 Example Entry:
 {
@@ -31,7 +31,16 @@ Extraction Rules:
   - Do not include \`document\`, \`sex\`, or bounding box.
 - Combine multi-line text blocks if a single logical entry spans several lines.
 - Remove or replace any internal \`"\` characters inside values with \`'\`.
-
+- Fix numbers and clean OCR artifacts:
+  - Remove extra trailing zeros after the decimal or comma. Examples:
+      12,00000 → 12,000
+      120,00000 → 120,000
+  - Remove redundant decimals or commas and unify formatting:
+      10,000.00 → 10000
+      10,00000 → 10,000
+      12,000.00 → 12,000
+  - Correct OCR misreads of symbols within numbers (like £, ¥, or spaces) and interpret as intended numeric value:
+      3,7£3.60 → 3104.60
 **CRITICAL: POSITION NORMALIZATION & TEXT CLEANING**
 - Before creating the JSON, normalize all \`position\` values and correct encoding errors in the text.
 - **Encoding/Typo Correction:** Fix common OCR/encoding errors (e.g., \`TÃ% CNICO\` -> \`TÉCNICO\`, \`ALCALDÃ•A\` -> \`ALCALDÍA\`, \`Ã‘\` -> \`Ñ\`).

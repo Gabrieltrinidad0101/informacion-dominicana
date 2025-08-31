@@ -12,6 +12,7 @@ export function Eventos() {
       <Evento exchangeName="aiTextAnalyzers" />
       <Evento exchangeName="insertDatas" />
       <Evento exchangeName="payrollExportToJsons" />
+      <Evento exchangeName="payrolls" />
     </div>
   );
 }

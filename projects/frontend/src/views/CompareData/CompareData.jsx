@@ -12,25 +12,31 @@ import compareData from "./compareData.module.css";
 import { useEffect, useRef, useState } from "react";
 import { Pagination } from "@mui/material";
 import { formattedMoney } from "../../utils/format";
-import { formatYYMM, getLastDayOfMonth, requestJson } from "../../utils/request";
+import { formatYYMM, requestJson } from "../../utils/request";
 import { InputText } from "../../components/inputs/inputText";
 import { SimpleSelect } from "../../components/inputs/simpleSelects";
 import { lightTheme } from "../../themes/light";
 import { ShowImage } from "../../components/showImage/ShowImage";
-
+import { useLocation, useHistory } from "react-router-dom";
 let data = [];
 
-const townHalls = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"];
+const instituctions = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"];
 
 export function CompareData() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const history = useHistory();
+
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
   const [dates, setDates] = useState([]);
-  const [currentDate, setCurrentDate] = useState();
+  const [currentDate, setCurrentDate] = useState(queryParams.get("date") ?? '');
   const [index, setIndex] = useState(1);
-  const [employee, setEmployee] = useState({index: 1});
+  const [employee, setEmployee] = useState({ index: 1 });
   const selectEmployee = useRef(null);
-  const [townHall, setTownHall] = useState(townHalls[0]);
+  const [instituction, setInstituction] = useState(
+    queryParams.get("instituction") ?? instituctions[0]
+  );
 
   const handleClick = (employee) => {
     setEmployee(employee);
@@ -67,16 +73,18 @@ export function CompareData() {
   ];
 
   useEffect(() => {
-    requestJson(`${townHall}/nomina/exportToJson/payroll`).then((res) => {
+    requestJson(`${instituction}/nomina/exportToJson/payroll`).then((res) => {
       setCurrentDate(res[0].time);
+      queryParams.set("date", res[0].time);
+      history.push({ search: queryParams.toString() });
       setDates(res);
     });
-  }, [townHall]);
+  }, [instituction]);
 
   useEffect(() => {
     if ((currentDate?.length ?? 0) <= 0) return;
     requestJson(
-      `${townHall}/nomina/exportToJson/employeersByPosition${formatYYMM(
+      `${instituction}/nomina/exportToJson/employeersByPosition${formatYYMM(
         new Date(currentDate)
       )}`
     ).then((res) => {
@@ -116,17 +124,21 @@ export function CompareData() {
   const handlePageChange = (event, newPage) => {
     setIndex(newPage);
     if (search !== "") return;
-    setEmployee({index: newPage});
+    setEmployee({ index: newPage });
   };
 
   const handleDate = (event) => {
     setCurrentDate(event.target.value);
+    queryParams.set("date", event.target.value);
+    history.push({ search: queryParams.toString() });
   };
 
   const handleTownHall = (event) => {
-    setTownHall(event.target.value);
+    queryParams.set("instituction", event.target.value);
+    history.push({ search: queryParams.toString() });
+    setInstituction(event.target.value);
     setIndex(1);
-    setEmployee({index: 1});
+    setEmployee({ index: 1 });
   };
 
   return (
@@ -139,27 +151,29 @@ export function CompareData() {
         />
         <SimpleSelect
           name="Ayuntamientos"
-          datas={townHalls}
+          datas={instituctions}
           onChange={handleTownHall}
-          value={townHall}
+          value={instituction}
         />
         <FormControl variant="filled" sx={lightTheme}>
           <InputLabel id="demo-simple-select-filled-label">Fecha</InputLabel>
-          {currentDate && <Select
-            value={currentDate}
-            onChange={handleDate}
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-          >
-            {dates.map((header, index) => {
-              const [year, month, day] = header.time.split("-");
-              return (
-                <MenuItem key={index} value={header.time}>
-                  {year} - {month} - {day}
-                </MenuItem>
-              );
-            })}
-          </Select>}
+          {currentDate && (
+            <Select
+              value={currentDate}
+              onChange={handleDate}
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+            >
+              {dates.map((header, index) => {
+                const [year, month, day] = header.time.split("-");
+                return (
+                  <MenuItem key={index} value={header.time}>
+                    {year} - {month} - {day}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          )}
         </FormControl>
       </Box>
       <div className={compareData.comparar}>
@@ -167,7 +181,7 @@ export function CompareData() {
           <div>
             {currentDate && employee && (
               <ShowImage
-                instituction={townHall}
+                instituction={instituction}
                 currentDate={new Date(currentDate)}
                 employee={employee}
               />

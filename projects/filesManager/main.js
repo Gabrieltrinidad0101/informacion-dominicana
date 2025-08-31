@@ -95,8 +95,7 @@ app.post('/create-file', (req, res) => {
   const fullPath = path.join(generetedPath(folderPath), path.basename(folderPath));
   fs.writeFileSync(fullPath, fileText, 'utf8');
 
-  const fileUrl = `http://localhost:${PORT}/${fullPath}`;
-  res.json({ url: fileUrl });
+  res.json({ response: 'ok' });
 });
 
 app.use(express.static('.'));
