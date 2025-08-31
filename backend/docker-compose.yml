@@ -1,8 +1,0 @@
-services:
-  analyze:
-    build: .
-    container_name: websAnalyze
-    volumes:
-      - .:/app
-      - ./node_modules    
-    
