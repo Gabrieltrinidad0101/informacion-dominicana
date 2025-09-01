@@ -19,4 +19,7 @@ export class Repository {
         await Payroll.bulkWrite(bulkOps, { ordered: false });
     }
 
+    async delete({date, institutionName,index,traceId,urlDownload}) {
+        await Payroll.deleteMany({date, institutionName,index,traceId,urlDownload});
+    }
 }

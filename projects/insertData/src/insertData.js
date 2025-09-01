@@ -34,6 +34,7 @@ export class InsertData {
             payroll.urlDownload = data.urlDownload
             return payroll
         })
+        await this.eventRepository.delete({...data,date: this.formatLastDayOfMonth(data.year, data.month)})
         await this.eventRepository.save(payrolls)
     }
 }

@@ -63,7 +63,7 @@ function detectDominantAngle(rawData) {
   };
   
   function groupLinesWithAngle(json, angle, imageWidth, imageHeight) {
-    const yTolerance = 10; // para diferencias pequeñas en Y
+    const yTolerance = 10;
     const rotatedWords = [];
   
     for (const line of json) {

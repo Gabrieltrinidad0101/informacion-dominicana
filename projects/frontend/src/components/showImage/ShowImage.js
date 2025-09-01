@@ -8,11 +8,11 @@ const monthNames = [
     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
 ];
 
-export function ShowImage({ employee, instituction, currentDate }) {
+export function ShowImage({ employee, institution, currentDate }) {
     const selectEmployee = useRef(null);
     const imageRef = useRef(null);
     const monthName = monthNames[currentDate?.getMonth() ?? ""];
-    const url = `http://localhost:5500/data/${instituction}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
+    const url = `http://localhost:5500/data/${institution}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
 
     useEffect(() => {
         if (lastUrl !== "") selectEmployee.current.classList.add(positionSelect.selecteEmployeeOpacity);

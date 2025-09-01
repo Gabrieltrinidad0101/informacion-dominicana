@@ -77,7 +77,7 @@ const style = {
   boxShadow: 24,
 };
 
-export const ListGroup = ({ title,instituction,currentDate,setCurrentDate, url }) => {
+export const ListGroup = ({ title,institution,currentDate,setCurrentDate, url }) => {
   const [search, setSearch] = useState("");
   const [employee, setEmployee] = useState({});
   const [positions, setPositions] = useState([]);
@@ -140,7 +140,7 @@ export const ListGroup = ({ title,instituction,currentDate,setCurrentDate, url }
         <Fade in={open}>
           <Box sx={style}>
             <ShowImage
-              instituction={instituction}
+              institution={institution}
               currentDate={currentDate}
               employee={employee}
             />

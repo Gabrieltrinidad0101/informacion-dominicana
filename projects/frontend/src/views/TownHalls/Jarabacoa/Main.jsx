@@ -49,7 +49,7 @@ export function Main() {
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}
         title={"Posición por salario"}
-        instituction="Ayuntamiento de Jarabacoa"
+        institution="Ayuntamiento de Jarabacoa"
         url={"Ayuntamiento de Jarabacoa/nomina/"}
       />
       <div className={MainCss.display}>
