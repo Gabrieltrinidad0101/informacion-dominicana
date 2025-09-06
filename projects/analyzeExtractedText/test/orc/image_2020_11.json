@@ -1,0 +1,3145 @@
+[
+    {
+        "LineText": "Jarabacoa",
+        "Words": [
+            {
+                "WordText": "Jarabacoa",
+                "Left": 1084,
+                "Top": 506,
+                "Height": 26,
+                "Width": 183
+            }
+        ],
+        "MaxHeight": 26,
+        "MinTop": 506
+    },
+    {
+        "LineText": "Recursos",
+        "Words": [
+            {
+                "WordText": "Recursos",
+                "Left": 904,
+                "Top": 529,
+                "Height": 17,
+                "Width": 148
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 529
+    },
+    {
+        "LineText": "Listado de Empleados Activos",
+        "Words": [
+            {
+                "WordText": "Listado",
+                "Left": 730,
+                "Top": 558,
+                "Height": 27,
+                "Width": 112
+            },
+            {
+                "WordText": "de",
+                "Left": 845,
+                "Top": 558,
+                "Height": 26,
+                "Width": 36
+            },
+            {
+                "WordText": "Empleados",
+                "Left": 884,
+                "Top": 558,
+                "Height": 26,
+                "Width": 165
+            },
+            {
+                "WordText": "Activos",
+                "Left": 1052,
+                "Top": 558,
+                "Height": 27,
+                "Width": 122
+            }
+        ],
+        "MaxHeight": 27,
+        "MinTop": 558
+    },
+    {
+        "LineText": "Carnet",
+        "Words": [
+            {
+                "WordText": "Carnet",
+                "Left": 90,
+                "Top": 654,
+                "Height": 17,
+                "Width": 81
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 654
+    },
+    {
+        "LineText": "Empleado",
+        "Words": [
+            {
+                "WordText": "Empleado",
+                "Left": 195,
+                "Top": 654,
+                "Height": 21,
+                "Width": 113
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 654
+    },
+    {
+        "LineText": "Fecha",
+        "Words": [
+            {
+                "WordText": "Fecha",
+                "Left": 741,
+                "Top": 631,
+                "Height": 17,
+                "Width": 70
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 631
+    },
+    {
+        "LineText": "Ingreso",
+        "Words": [
+            {
+                "WordText": "Ingreso",
+                "Left": 733,
+                "Top": 654,
+                "Height": 18,
+                "Width": 87
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 654
+    },
+    {
+        "LineText": "Cédula",
+        "Words": [
+            {
+                "WordText": "Cédula",
+                "Left": 913,
+                "Top": 648,
+                "Height": 21,
+                "Width": 79
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 648
+    },
+    {
+        "LineText": "Cuenta",
+        "Words": [
+            {
+                "WordText": "Cuenta",
+                "Left": 1282,
+                "Top": 627,
+                "Height": 22,
+                "Width": 76
+            }
+        ],
+        "MaxHeight": 22,
+        "MinTop": 627
+    },
+    {
+        "LineText": "Salario",
+        "Words": [
+            {
+                "WordText": "Salario",
+                "Left": 1087,
+                "Top": 651,
+                "Height": 17,
+                "Width": 78
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 651
+    },
+    {
+        "LineText": "Bancaria",
+        "Words": [
+            {
+                "WordText": "Bancaria",
+                "Left": 1270,
+                "Top": 648,
+                "Height": 22,
+                "Width": 96
+            }
+        ],
+        "MaxHeight": 22,
+        "MinTop": 648
+    },
+    {
+        "LineText": "Posición",
+        "Words": [
+            {
+                "WordText": "Posición",
+                "Left": 1587,
+                "Top": 648,
+                "Height": 15,
+                "Width": 99
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 648
+    },
+    {
+        "LineText": "Est.",
+        "Words": [
+            {
+                "WordText": "Est.",
+                "Left": 1855,
+                "Top": 642,
+                "Height": 20,
+                "Width": 49
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 642
+    },
+    {
+        "LineText": "4833",
+        "Words": [
+            {
+                "WordText": "4833",
+                "Left": 73,
+                "Top": 680,
+                "Height": 15,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 680
+    },
+    {
+        "LineText": "RAFAEL ANTONIO ORTIZ QUEZADA",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 195,
+                "Top": 677,
+                "Height": 18,
+                "Width": 93
+            },
+            {
+                "WordText": "ANTONIO",
+                "Left": 290,
+                "Top": 678,
+                "Height": 17,
+                "Width": 108
+            },
+            {
+                "WordText": "ORTIZ",
+                "Left": 399,
+                "Top": 678,
+                "Height": 17,
+                "Width": 73
+            },
+            {
+                "WordText": "QUEZADA",
+                "Left": 474,
+                "Top": 677,
+                "Height": 18,
+                "Width": 113
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 677
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 692,
+                "Top": 677,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 677
+    },
+    {
+        "LineText": "17,500.00 200010510414188",
+        "Words": [
+            {
+                "WordText": "17,500.00",
+                "Left": 1108,
+                "Top": 672,
+                "Height": 20,
+                "Width": 107
+            },
+            {
+                "WordText": "200010510414188",
+                "Left": 1217,
+                "Top": 672,
+                "Height": 20,
+                "Width": 192
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 672
+    },
+    {
+        "LineText": "JARDINERO MUNICIPAL",
+        "Words": [
+            {
+                "WordText": "JARDINERO",
+                "Left": 1430,
+                "Top": 672,
+                "Height": 20,
+                "Width": 131
+            },
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 1564,
+                "Top": 672,
+                "Height": 20,
+                "Width": 128
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 672
+    },
+    {
+        "LineText": "8545",
+        "Words": [
+            {
+                "WordText": "8545",
+                "Left": 76,
+                "Top": 709,
+                "Height": 17,
+                "Width": 52
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 709
+    },
+    {
+        "LineText": "RAFAEL BONIFACIO.",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 706,
+                "Height": 21,
+                "Width": 90
+            },
+            {
+                "WordText": "BONIFACIO.",
+                "Left": 290,
+                "Top": 706,
+                "Height": 21,
+                "Width": 143
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 706
+    },
+    {
+        "LineText": "2018-09-03",
+        "Words": [
+            {
+                "WordText": "2018-09-03",
+                "Left": 692,
+                "Top": 706,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 706
+    },
+    {
+        "LineText": "7,000.00",
+        "Words": [
+            {
+                "WordText": "7,000.00",
+                "Left": 1119,
+                "Top": 703,
+                "Height": 18,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 703
+    },
+    {
+        "LineText": "SUPERVISOR CEMENTERIO LA TRINCHERA",
+        "Words": [
+            {
+                "WordText": "SUPERVISOR",
+                "Left": 1430,
+                "Top": 697,
+                "Height": 21,
+                "Width": 149
+            },
+            {
+                "WordText": "CEMENTERIO",
+                "Left": 1582,
+                "Top": 697,
+                "Height": 21,
+                "Width": 155
+            },
+            {
+                "WordText": "LA",
+                "Left": 1740,
+                "Top": 697,
+                "Height": 21,
+                "Width": 31
+            },
+            {
+                "WordText": "TRINCHERA",
+                "Left": 1773,
+                "Top": 697,
+                "Height": 21,
+                "Width": 137
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 697
+    },
+    {
+        "LineText": "895",
+        "Words": [
+            {
+                "WordText": "895",
+                "Left": 73,
+                "Top": 738,
+                "Height": 17,
+                "Width": 44
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 738
+    },
+    {
+        "LineText": "RAFAEL CAPELLAN",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 738,
+                "Height": 17,
+                "Width": 90
+            },
+            {
+                "WordText": "CAPELLAN",
+                "Left": 290,
+                "Top": 738,
+                "Height": 17,
+                "Width": 123
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 738
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 692,
+                "Top": 735,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 735
+    },
+    {
+        "LineText": "5,500.00",
+        "Words": [
+            {
+                "WordText": "5,500.00",
+                "Left": 1122,
+                "Top": 732,
+                "Height": 19,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 19,
+        "MinTop": 732
+    },
+    {
+        "LineText": "200010510245959",
+        "Words": [
+            {
+                "WordText": "200010510245959",
+                "Left": 1221,
+                "Top": 733,
+                "Height": 17,
+                "Width": 189
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 733
+    },
+    {
+        "LineText": "AGENTE DE LIMPIEZA (CAMION)",
+        "Words": [
+            {
+                "WordText": "AGENTE",
+                "Left": 1433,
+                "Top": 729,
+                "Height": 21,
+                "Width": 93
+            },
+            {
+                "WordText": "DE",
+                "Left": 1529,
+                "Top": 729,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LIMPIEZA",
+                "Left": 1565,
+                "Top": 729,
+                "Height": 21,
+                "Width": 108
+            },
+            {
+                "WordText": "(CAMION)",
+                "Left": 1676,
+                "Top": 729,
+                "Height": 21,
+                "Width": 112
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 729
+    },
+    {
+        "LineText": "A",
+        "Words": [
+            {
+                "WordText": "A",
+                "Left": 1866,
+                "Top": 727,
+                "Height": 20,
+                "Width": 23
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 727
+    },
+    {
+        "LineText": "4820",
+        "Words": [
+            {
+                "WordText": "4820",
+                "Left": 73,
+                "Top": 770,
+                "Height": 15,
+                "Width": 58
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 770
+    },
+    {
+        "LineText": "RAFAEL EUGENIO LORA",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 767,
+                "Height": 21,
+                "Width": 90
+            },
+            {
+                "WordText": "EUGENIO",
+                "Left": 290,
+                "Top": 767,
+                "Height": 21,
+                "Width": 108
+            },
+            {
+                "WordText": "LORA",
+                "Left": 401,
+                "Top": 767,
+                "Height": 21,
+                "Width": 64
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 767
+    },
+    {
+        "LineText": "3.639.00",
+        "Words": [
+            {
+                "WordText": "3.639.00",
+                "Left": 1122,
+                "Top": 765,
+                "Height": 15,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 765
+    },
+    {
+        "LineText": "VIGILANTE DIURNO (PARQUE DUARTE) A",
+        "Words": [
+            {
+                "WordText": "VIGILANTE",
+                "Left": 1433,
+                "Top": 759,
+                "Height": 20,
+                "Width": 120
+            },
+            {
+                "WordText": "DIURNO",
+                "Left": 1555,
+                "Top": 759,
+                "Height": 19,
+                "Width": 93
+            },
+            {
+                "WordText": "(PARQUE",
+                "Left": 1650,
+                "Top": 759,
+                "Height": 19,
+                "Width": 105
+            },
+            {
+                "WordText": "DUARTE)",
+                "Left": 1758,
+                "Top": 759,
+                "Height": 19,
+                "Width": 110
+            },
+            {
+                "WordText": "A",
+                "Left": 1870,
+                "Top": 759,
+                "Height": 20,
+                "Width": 20
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 759
+    },
+    {
+        "LineText": "4676",
+        "Words": [
+            {
+                "WordText": "4676",
+                "Left": 73,
+                "Top": 799,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 799
+    },
+    {
+        "LineText": "RAFAEL POLO",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 799,
+                "Height": 18,
+                "Width": 90
+            },
+            {
+                "WordText": "POLO",
+                "Left": 290,
+                "Top": 799,
+                "Height": 18,
+                "Width": 68
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 799
+    },
+    {
+        "LineText": "2,000.00 0",
+        "Words": [
+            {
+                "WordText": "2,000.00",
+                "Left": 1122,
+                "Top": 794,
+                "Height": 17,
+                "Width": 94
+            },
+            {
+                "WordText": "0",
+                "Left": 1218,
+                "Top": 794,
+                "Height": 17,
+                "Width": 20
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 794
+    },
+    {
+        "LineText": "REP. DE LA ALCALDESA EN LA COMUNIDA",
+        "Words": [
+            {
+                "WordText": "REP.",
+                "Left": 1433,
+                "Top": 788,
+                "Height": 21,
+                "Width": 55
+            },
+            {
+                "WordText": "DE",
+                "Left": 1490,
+                "Top": 788,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LA",
+                "Left": 1526,
+                "Top": 788,
+                "Height": 21,
+                "Width": 31
+            },
+            {
+                "WordText": "ALCALDESA",
+                "Left": 1560,
+                "Top": 788,
+                "Height": 21,
+                "Width": 137
+            },
+            {
+                "WordText": "EN",
+                "Left": 1699,
+                "Top": 788,
+                "Height": 21,
+                "Width": 36
+            },
+            {
+                "WordText": "LA",
+                "Left": 1738,
+                "Top": 788,
+                "Height": 21,
+                "Width": 31
+            },
+            {
+                "WordText": "COMUNIDA",
+                "Left": 1772,
+                "Top": 788,
+                "Height": 21,
+                "Width": 127
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 788
+    },
+    {
+        "LineText": "115",
+        "Words": [
+            {
+                "WordText": "115",
+                "Left": 76,
+                "Top": 828,
+                "Height": 17,
+                "Width": 41
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 828
+    },
+    {
+        "LineText": "RAFAEL RAMON RAMOS RAMOS",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 828,
+                "Height": 18,
+                "Width": 91
+            },
+            {
+                "WordText": "RAMON",
+                "Left": 291,
+                "Top": 828,
+                "Height": 18,
+                "Width": 87
+            },
+            {
+                "WordText": "RAMOS",
+                "Left": 381,
+                "Top": 828,
+                "Height": 18,
+                "Width": 87
+            },
+            {
+                "WordText": "RAMOS",
+                "Left": 470,
+                "Top": 828,
+                "Height": 18,
+                "Width": 85
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 828
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 692,
+                "Top": 826,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 826
+    },
+    {
+        "LineText": "8,571.00 200010510244691",
+        "Words": [
+            {
+                "WordText": "8,571.00",
+                "Left": 1122,
+                "Top": 820,
+                "Height": 21,
+                "Width": 98
+            },
+            {
+                "WordText": "200010510244691",
+                "Left": 1222,
+                "Top": 820,
+                "Height": 21,
+                "Width": 191
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 820
+    },
+    {
+        "LineText": "INSTRUCTOR DE LA ACDEMIA DE MUSIOR",
+        "Words": [
+            {
+                "WordText": "INSTRUCTOR",
+                "Left": 1433,
+                "Top": 817,
+                "Height": 21,
+                "Width": 150
+            },
+            {
+                "WordText": "DE",
+                "Left": 1586,
+                "Top": 817,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LA",
+                "Left": 1622,
+                "Top": 817,
+                "Height": 21,
+                "Width": 31
+            },
+            {
+                "WordText": "ACDEMIA",
+                "Left": 1655,
+                "Top": 817,
+                "Height": 21,
+                "Width": 108
+            },
+            {
+                "WordText": "DE",
+                "Left": 1766,
+                "Top": 817,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "MUSIOR",
+                "Left": 1802,
+                "Top": 817,
+                "Height": 21,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 817
+    },
+    {
+        "LineText": "8451",
+        "Words": [
+            {
+                "WordText": "8451",
+                "Left": 73,
+                "Top": 860,
+                "Height": 15,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 860
+    },
+    {
+        "LineText": "RAFAEL UREÑA MARTE",
+        "Words": [
+            {
+                "WordText": "RAFAEL",
+                "Left": 198,
+                "Top": 858,
+                "Height": 17,
+                "Width": 90
+            },
+            {
+                "WordText": "UREÑA",
+                "Left": 290,
+                "Top": 858,
+                "Height": 17,
+                "Width": 86
+            },
+            {
+                "WordText": "MARTE",
+                "Left": 378,
+                "Top": 858,
+                "Height": 17,
+                "Width": 81
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 858
+    },
+    {
+        "LineText": "3.174.00",
+        "Words": [
+            {
+                "WordText": "3.174.00",
+                "Left": 1122,
+                "Top": 851,
+                "Height": 22,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 22,
+        "MinTop": 851
+    },
+    {
+        "LineText": "ALCALDE PEDÃ•NEO EN PINAR QUEMADO",
+        "Words": [
+            {
+                "WordText": "ALCALDE",
+                "Left": 1436,
+                "Top": 849,
+                "Height": 21,
+                "Width": 103
+            },
+            {
+                "WordText": "PEDÃ•NEO",
+                "Left": 1541,
+                "Top": 848,
+                "Height": 21,
+                "Width": 122
+            },
+            {
+                "WordText": "EN",
+                "Left": 1665,
+                "Top": 848,
+                "Height": 20,
+                "Width": 34
+            },
+            {
+                "WordText": "PINAR",
+                "Left": 1701,
+                "Top": 847,
+                "Height": 20,
+                "Width": 73
+            },
+            {
+                "WordText": "QUEMADO",
+                "Left": 1777,
+                "Top": 846,
+                "Height": 21,
+                "Width": 121
+            }
+        ],
+        "MaxHeight": 24,
+        "MinTop": 846
+    },
+    {
+        "LineText": "555",
+        "Words": [
+            {
+                "WordText": "555",
+                "Left": 76,
+                "Top": 890,
+                "Height": 17,
+                "Width": 41
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 890
+    },
+    {
+        "LineText": "RAMON ANT. RODRIGUEZ",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 886,
+                "Height": 21,
+                "Width": 87
+            },
+            {
+                "WordText": "ANT.",
+                "Left": 288,
+                "Top": 886,
+                "Height": 21,
+                "Width": 57
+            },
+            {
+                "WordText": "RODRIGUEZ",
+                "Left": 347,
+                "Top": 886,
+                "Height": 21,
+                "Width": 139
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 886
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 884,
+                "Height": 20,
+                "Width": 116
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 884
+    },
+    {
+        "LineText": "3.587.00 200010510245739",
+        "Words": [
+            {
+                "WordText": "3.587.00",
+                "Left": 1122,
+                "Top": 881,
+                "Height": 18,
+                "Width": 98
+            },
+            {
+                "WordText": "200010510245739",
+                "Left": 1223,
+                "Top": 881,
+                "Height": 18,
+                "Width": 190
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 881
+    },
+    {
+        "LineText": "OBRERO BRIGADA NO.4",
+        "Words": [
+            {
+                "WordText": "OBRERO",
+                "Left": 1436,
+                "Top": 878,
+                "Height": 20,
+                "Width": 100
+            },
+            {
+                "WordText": "BRIGADA",
+                "Left": 1538,
+                "Top": 878,
+                "Height": 19,
+                "Width": 105
+            },
+            {
+                "WordText": "NO.4",
+                "Left": 1645,
+                "Top": 878,
+                "Height": 20,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 878
+    },
+    {
+        "LineText": "85471",
+        "Words": [
+            {
+                "WordText": "85471",
+                "Left": 73,
+                "Top": 922,
+                "Height": 15,
+                "Width": 58
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 922
+    },
+    {
+        "LineText": "RAMON ANTONIO ESPINAL",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 919,
+                "Height": 17,
+                "Width": 88
+            },
+            {
+                "WordText": "ANTONIO",
+                "Left": 288,
+                "Top": 919,
+                "Height": 17,
+                "Width": 108
+            },
+            {
+                "WordText": "ESPINAL",
+                "Left": 397,
+                "Top": 919,
+                "Height": 17,
+                "Width": 100
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 919
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 916,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 916
+    },
+    {
+        "LineText": "2,648.00",
+        "Words": [
+            {
+                "WordText": "2,648.00",
+                "Left": 1125,
+                "Top": 913,
+                "Height": 18,
+                "Width": 87
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 913
+    },
+    {
+        "LineText": "AGENTE DE LIMPIEZA (ASEO URBANO) A",
+        "Words": [
+            {
+                "WordText": "AGENTE",
+                "Left": 1436,
+                "Top": 907,
+                "Height": 21,
+                "Width": 95
+            },
+            {
+                "WordText": "DE",
+                "Left": 1534,
+                "Top": 907,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LIMPIEZA",
+                "Left": 1570,
+                "Top": 907,
+                "Height": 21,
+                "Width": 106
+            },
+            {
+                "WordText": "(ASEO",
+                "Left": 1678,
+                "Top": 907,
+                "Height": 21,
+                "Width": 72
+            },
+            {
+                "WordText": "URBANO)",
+                "Left": 1753,
+                "Top": 907,
+                "Height": 21,
+                "Width": 116
+            },
+            {
+                "WordText": "A",
+                "Left": 1872,
+                "Top": 907,
+                "Height": 21,
+                "Width": 21
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 907
+    },
+    {
+        "LineText": "4879",
+        "Words": [
+            {
+                "WordText": "4879",
+                "Left": 73,
+                "Top": 951,
+                "Height": 18,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 951
+    },
+    {
+        "LineText": "RAMON ELPIDIO PAEZ",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 947,
+                "Height": 18,
+                "Width": 87
+            },
+            {
+                "WordText": "ELPIDIO",
+                "Left": 287,
+                "Top": 947,
+                "Height": 18,
+                "Width": 94
+            },
+            {
+                "WordText": "PAEZ",
+                "Left": 383,
+                "Top": 947,
+                "Height": 18,
+                "Width": 65
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 947
+    },
+    {
+        "LineText": "3,587.00",
+        "Words": [
+            {
+                "WordText": "3,587.00",
+                "Left": 1125,
+                "Top": 942,
+                "Height": 18,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 942
+    },
+    {
+        "LineText": "AGENTE DE LIMPIEZA (ASEO URBANO) BA",
+        "Words": [
+            {
+                "WordText": "AGENTE",
+                "Left": 1436,
+                "Top": 936,
+                "Height": 21,
+                "Width": 95
+            },
+            {
+                "WordText": "DE",
+                "Left": 1534,
+                "Top": 936,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LIMPIEZA",
+                "Left": 1570,
+                "Top": 936,
+                "Height": 21,
+                "Width": 106
+            },
+            {
+                "WordText": "(ASEO",
+                "Left": 1678,
+                "Top": 936,
+                "Height": 21,
+                "Width": 75
+            },
+            {
+                "WordText": "URBANO)",
+                "Left": 1756,
+                "Top": 936,
+                "Height": 21,
+                "Width": 108
+            },
+            {
+                "WordText": "BA",
+                "Left": 1867,
+                "Top": 936,
+                "Height": 21,
+                "Width": 29
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 936
+    },
+    {
+        "LineText": "1673",
+        "Words": [
+            {
+                "WordText": "1673",
+                "Left": 76,
+                "Top": 979,
+                "Height": 18,
+                "Width": 52
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 979
+    },
+    {
+        "LineText": "RAMON EMILIO COLLADO CESPEDES",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 977,
+                "Height": 20,
+                "Width": 87
+            },
+            {
+                "WordText": "EMILIO",
+                "Left": 287,
+                "Top": 977,
+                "Height": 19,
+                "Width": 80
+            },
+            {
+                "WordText": "COLLADO",
+                "Left": 370,
+                "Top": 977,
+                "Height": 19,
+                "Width": 112
+            },
+            {
+                "WordText": "CESPEDES",
+                "Left": 485,
+                "Top": 977,
+                "Height": 20,
+                "Width": 126
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 977
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 974,
+                "Height": 17,
+                "Width": 116
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 974
+    },
+    {
+        "LineText": "4.500.00",
+        "Words": [
+            {
+                "WordText": "4.500.00",
+                "Left": 1125,
+                "Top": 974,
+                "Height": 15,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 974
+    },
+    {
+        "LineText": "200010510414366",
+        "Words": [
+            {
+                "WordText": "200010510414366",
+                "Left": 1227,
+                "Top": 968,
+                "Height": 20,
+                "Width": 189
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 968
+    },
+    {
+        "LineText": "INSPECTOR I",
+        "Words": [
+            {
+                "WordText": "INSPECTOR",
+                "Left": 1433,
+                "Top": 968,
+                "Height": 21,
+                "Width": 137
+            },
+            {
+                "WordText": "I",
+                "Left": 1573,
+                "Top": 968,
+                "Height": 21,
+                "Width": 11
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 968
+    },
+    {
+        "LineText": "4837",
+        "Words": [
+            {
+                "WordText": "4837",
+                "Left": 73,
+                "Top": 1009,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1009
+    },
+    {
+        "LineText": "RAMON EMILIO GUTIERREZ",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 1009,
+                "Height": 18,
+                "Width": 88
+            },
+            {
+                "WordText": "EMILIO",
+                "Left": 288,
+                "Top": 1009,
+                "Height": 17,
+                "Width": 82
+            },
+            {
+                "WordText": "GUTIERREZ",
+                "Left": 371,
+                "Top": 1009,
+                "Height": 18,
+                "Width": 134
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1009
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 1006,
+                "Height": 17,
+                "Width": 116
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1006
+    },
+    {
+        "LineText": "15,000.00",
+        "Words": [
+            {
+                "WordText": "15,000.00",
+                "Left": 1113,
+                "Top": 1003,
+                "Height": 17,
+                "Width": 102
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1003
+    },
+    {
+        "LineText": "ABOGADO DE REGISTRO CIVIL",
+        "Words": [
+            {
+                "WordText": "ABOGADO",
+                "Left": 1439,
+                "Top": 997,
+                "Height": 21,
+                "Width": 116
+            },
+            {
+                "WordText": "DE",
+                "Left": 1558,
+                "Top": 997,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "REGISTRO",
+                "Left": 1594,
+                "Top": 997,
+                "Height": 21,
+                "Width": 121
+            },
+            {
+                "WordText": "CIVIL",
+                "Left": 1718,
+                "Top": 997,
+                "Height": 21,
+                "Width": 61
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 997
+    },
+    {
+        "LineText": "4836",
+        "Words": [
+            {
+                "WordText": "4836",
+                "Left": 73,
+                "Top": 1041,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1041
+    },
+    {
+        "LineText": "RAMON MARIA PENA DE LEON",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 1038,
+                "Height": 17,
+                "Width": 88
+            },
+            {
+                "WordText": "MARIA",
+                "Left": 288,
+                "Top": 1038,
+                "Height": 17,
+                "Width": 75
+            },
+            {
+                "WordText": "PENA",
+                "Left": 365,
+                "Top": 1038,
+                "Height": 17,
+                "Width": 67
+            },
+            {
+                "WordText": "DE",
+                "Left": 434,
+                "Top": 1038,
+                "Height": 17,
+                "Width": 34
+            },
+            {
+                "WordText": "LEON",
+                "Left": 470,
+                "Top": 1038,
+                "Height": 17,
+                "Width": 65
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1038
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 1035,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1035
+    },
+    {
+        "LineText": "13,000.00",
+        "Words": [
+            {
+                "WordText": "13,000.00",
+                "Left": 1113,
+                "Top": 1032,
+                "Height": 17,
+                "Width": 102
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1032
+    },
+    {
+        "LineText": "200010510414256",
+        "Words": [
+            {
+                "WordText": "200010510414256",
+                "Left": 1227,
+                "Top": 1032,
+                "Height": 17,
+                "Width": 192
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1032
+    },
+    {
+        "LineText": "ENC. POLICIA MUNICIPAL",
+        "Words": [
+            {
+                "WordText": "ENC.",
+                "Left": 1439,
+                "Top": 1029,
+                "Height": 18,
+                "Width": 55
+            },
+            {
+                "WordText": "POLICIA",
+                "Left": 1497,
+                "Top": 1029,
+                "Height": 18,
+                "Width": 92
+            },
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 1591,
+                "Top": 1029,
+                "Height": 18,
+                "Width": 127
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1029
+    },
+    {
+        "LineText": "4809",
+        "Words": [
+            {
+                "WordText": "4809",
+                "Left": 73,
+                "Top": 1073,
+                "Height": 15,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1073
+    },
+    {
+        "LineText": "RAMON RAMOS JIMENEZ",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 1067,
+                "Height": 21,
+                "Width": 87
+            },
+            {
+                "WordText": "RAMOS",
+                "Left": 288,
+                "Top": 1067,
+                "Height": 21,
+                "Width": 88
+            },
+            {
+                "WordText": "JIMENEZ",
+                "Left": 378,
+                "Top": 1067,
+                "Height": 21,
+                "Width": 99
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1067
+    },
+    {
+        "LineText": "4,500.00",
+        "Words": [
+            {
+                "WordText": "4,500.00",
+                "Left": 1125,
+                "Top": 1064,
+                "Height": 17,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1064
+    },
+    {
+        "LineText": "LAVADOR EQUIPO DEL VERTEDERO",
+        "Words": [
+            {
+                "WordText": "LAVADOR",
+                "Left": 1439,
+                "Top": 1058,
+                "Height": 20,
+                "Width": 110
+            },
+            {
+                "WordText": "EQUIPO",
+                "Left": 1551,
+                "Top": 1058,
+                "Height": 19,
+                "Width": 90
+            },
+            {
+                "WordText": "DEL",
+                "Left": 1644,
+                "Top": 1058,
+                "Height": 19,
+                "Width": 49
+            },
+            {
+                "WordText": "VERTEDERO",
+                "Left": 1695,
+                "Top": 1058,
+                "Height": 20,
+                "Width": 154
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1058
+    },
+    {
+        "LineText": "4841",
+        "Words": [
+            {
+                "WordText": "4841",
+                "Left": 73,
+                "Top": 1102,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1102
+    },
+    {
+        "LineText": "RAMON VARGAS",
+        "Words": [
+            {
+                "WordText": "RAMON",
+                "Left": 198,
+                "Top": 1099,
+                "Height": 18,
+                "Width": 88
+            },
+            {
+                "WordText": "VARGAS",
+                "Left": 288,
+                "Top": 1099,
+                "Height": 18,
+                "Width": 99
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1099
+    },
+    {
+        "LineText": "5,000.00",
+        "Words": [
+            {
+                "WordText": "5,000.00",
+                "Left": 1125,
+                "Top": 1093,
+                "Height": 18,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1093
+    },
+    {
+        "LineText": "OBRERO MUNICIPAL (ORNATO)",
+        "Words": [
+            {
+                "WordText": "OBRERO",
+                "Left": 1442,
+                "Top": 1087,
+                "Height": 21,
+                "Width": 98
+            },
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 1542,
+                "Top": 1087,
+                "Height": 21,
+                "Width": 126
+            },
+            {
+                "WordText": "(ORNATO)",
+                "Left": 1671,
+                "Top": 1087,
+                "Height": 21,
+                "Width": 120
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1087
+    },
+    {
+        "LineText": "1489",
+        "Words": [
+            {
+                "WordText": "1489",
+                "Left": 76,
+                "Top": 1131,
+                "Height": 17,
+                "Width": 52
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1131
+    },
+    {
+        "LineText": "RAMONA BATISTA",
+        "Words": [
+            {
+                "WordText": "RAMONA",
+                "Left": 198,
+                "Top": 1131,
+                "Height": 18,
+                "Width": 103
+            },
+            {
+                "WordText": "BATISTA",
+                "Left": 303,
+                "Top": 1131,
+                "Height": 18,
+                "Width": 99
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1131
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 1128,
+                "Height": 15,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1128
+    },
+    {
+        "LineText": "6,000.00",
+        "Words": [
+            {
+                "WordText": "6,000.00",
+                "Left": 1125,
+                "Top": 1121,
+                "Height": 19,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 19,
+        "MinTop": 1121
+    },
+    {
+        "LineText": "200010510415226",
+        "Words": [
+            {
+                "WordText": "200010510415226",
+                "Left": 1230,
+                "Top": 1119,
+                "Height": 20,
+                "Width": 189
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1119
+    },
+    {
+        "LineText": "COCINA",
+        "Words": [
+            {
+                "WordText": "COCINA",
+                "Left": 1439,
+                "Top": 1119,
+                "Height": 18,
+                "Width": 93
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1119
+    },
+    {
+        "LineText": "1699",
+        "Words": [
+            {
+                "WordText": "1699",
+                "Left": 73,
+                "Top": 1163,
+                "Height": 15,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1163
+    },
+    {
+        "LineText": "RAMONA YRAIDA CALDERON MARTE",
+        "Words": [
+            {
+                "WordText": "RAMONA",
+                "Left": 198,
+                "Top": 1157,
+                "Height": 21,
+                "Width": 103
+            },
+            {
+                "WordText": "YRAIDA",
+                "Left": 303,
+                "Top": 1157,
+                "Height": 21,
+                "Width": 88
+            },
+            {
+                "WordText": "CALDERON",
+                "Left": 393,
+                "Top": 1157,
+                "Height": 21,
+                "Width": 129
+            },
+            {
+                "WordText": "MARTE",
+                "Left": 525,
+                "Top": 1157,
+                "Height": 21,
+                "Width": 83
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1157
+    },
+    {
+        "LineText": "3,500.00",
+        "Words": [
+            {
+                "WordText": "3,500.00",
+                "Left": 1128,
+                "Top": 1154,
+                "Height": 17,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1154
+    },
+    {
+        "LineText": "200010510309947",
+        "Words": [
+            {
+                "WordText": "200010510309947",
+                "Left": 1230,
+                "Top": 1151,
+                "Height": 20,
+                "Width": 189
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1151
+    },
+    {
+        "LineText": "ASISTENTE RURAL DE LA ALCALDESA A",
+        "Words": [
+            {
+                "WordText": "ASISTENTE",
+                "Left": 1439,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 129
+            },
+            {
+                "WordText": "RURAL",
+                "Left": 1571,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 80
+            },
+            {
+                "WordText": "DE",
+                "Left": 1653,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "LA",
+                "Left": 1690,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "ALCALDESA",
+                "Left": 1726,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 150
+            },
+            {
+                "WordText": "A",
+                "Left": 1878,
+                "Top": 1148,
+                "Height": 21,
+                "Width": 23
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1148
+    },
+    {
+        "LineText": "151",
+        "Words": [
+            {
+                "WordText": "151",
+                "Left": 73,
+                "Top": 1192,
+                "Height": 17,
+                "Width": 41
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1192
+    },
+    {
+        "LineText": "REINALDO ANTONIO DE LEON ABREU",
+        "Words": [
+            {
+                "WordText": "REINALDO",
+                "Left": 198,
+                "Top": 1189,
+                "Height": 21,
+                "Width": 120
+            },
+            {
+                "WordText": "ANTONIO",
+                "Left": 319,
+                "Top": 1188,
+                "Height": 21,
+                "Width": 107
+            },
+            {
+                "WordText": "DE",
+                "Left": 429,
+                "Top": 1187,
+                "Height": 20,
+                "Width": 34
+            },
+            {
+                "WordText": "LEON",
+                "Left": 466,
+                "Top": 1187,
+                "Height": 20,
+                "Width": 66
+            },
+            {
+                "WordText": "ABREU",
+                "Left": 534,
+                "Top": 1186,
+                "Height": 20,
+                "Width": 83
+            }
+        ],
+        "MaxHeight": 24,
+        "MinTop": 1186
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 1186,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1186
+    },
+    {
+        "LineText": "4.126.00",
+        "Words": [
+            {
+                "WordText": "4.126.00",
+                "Left": 1128,
+                "Top": 1183,
+                "Height": 17,
+                "Width": 102
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1183
+    },
+    {
+        "LineText": "200010510246123",
+        "Words": [
+            {
+                "WordText": "200010510246123",
+                "Left": 1227,
+                "Top": 1180,
+                "Height": 20,
+                "Width": 192
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1180
+    },
+    {
+        "LineText": "OPERADOR CAMION - OBRERO",
+        "Words": [
+            {
+                "WordText": "OPERADOR",
+                "Left": 1442,
+                "Top": 1177,
+                "Height": 20,
+                "Width": 131
+            },
+            {
+                "WordText": "CAMION",
+                "Left": 1576,
+                "Top": 1178,
+                "Height": 19,
+                "Width": 95
+            },
+            {
+                "WordText": "-",
+                "Left": 1673,
+                "Top": 1178,
+                "Height": 19,
+                "Width": 10
+            },
+            {
+                "WordText": "OBRERO",
+                "Left": 1685,
+                "Top": 1177,
+                "Height": 20,
+                "Width": 103
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1177
+    },
+    {
+        "LineText": "60",
+        "Words": [
+            {
+                "WordText": "60",
+                "Left": 73,
+                "Top": 1224,
+                "Height": 17,
+                "Width": 29
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1224
+    },
+    {
+        "LineText": "REYNALDO ANT. ABREU ROBLES",
+        "Words": [
+            {
+                "WordText": "REYNALDO",
+                "Left": 198,
+                "Top": 1218,
+                "Height": 21,
+                "Width": 129
+            },
+            {
+                "WordText": "ANT.",
+                "Left": 329,
+                "Top": 1218,
+                "Height": 21,
+                "Width": 59
+            },
+            {
+                "WordText": "ABREU",
+                "Left": 391,
+                "Top": 1218,
+                "Height": 21,
+                "Width": 85
+            },
+            {
+                "WordText": "ROBLES",
+                "Left": 478,
+                "Top": 1218,
+                "Height": 21,
+                "Width": 97
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1218
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 695,
+                "Top": 1218,
+                "Height": 17,
+                "Width": 122
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1218
+    },
+    {
+        "LineText": "8.000.00 200010510414670",
+        "Words": [
+            {
+                "WordText": "8.000.00",
+                "Left": 1128,
+                "Top": 1212,
+                "Height": 17,
+                "Width": 97
+            },
+            {
+                "WordText": "200010510414670",
+                "Left": 1227,
+                "Top": 1212,
+                "Height": 17,
+                "Width": 194
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1212
+    },
+    {
+        "LineText": "COORDINADOR DE BANDA DE MASSICA A",
+        "Words": [
+            {
+                "WordText": "COORDINADOR",
+                "Left": 1442,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 175
+            },
+            {
+                "WordText": "DE",
+                "Left": 1620,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "BANDA",
+                "Left": 1656,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 83
+            },
+            {
+                "WordText": "DE",
+                "Left": 1741,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "MASSICA",
+                "Left": 1777,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 103
+            },
+            {
+                "WordText": "A",
+                "Left": 1883,
+                "Top": 1206,
+                "Height": 21,
+                "Width": 18
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1206
+    },
+    {
+        "LineText": "4777",
+        "Words": [
+            {
+                "WordText": "4777",
+                "Left": 73,
+                "Top": 1253,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1253
+    },
+    {
+        "LineText": "REYNALDO MARIA CONCEPCION",
+        "Words": [
+            {
+                "WordText": "REYNALDO",
+                "Left": 198,
+                "Top": 1247,
+                "Height": 21,
+                "Width": 129
+            },
+            {
+                "WordText": "MARIA",
+                "Left": 329,
+                "Top": 1247,
+                "Height": 21,
+                "Width": 75
+            },
+            {
+                "WordText": "CONCEPCION",
+                "Left": 406,
+                "Top": 1247,
+                "Height": 21,
+                "Width": 158
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1247
+    },
+    {
+        "LineText": "15,000.00",
+        "Words": [
+            {
+                "WordText": "15,000.00",
+                "Left": 1116,
+                "Top": 1244,
+                "Height": 17,
+                "Width": 102
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1244
+    },
+    {
+        "LineText": "SUPERVISOR GENERAL",
+        "Words": [
+            {
+                "WordText": "SUPERVISOR",
+                "Left": 1445,
+                "Top": 1239,
+                "Height": 20,
+                "Width": 149
+            },
+            {
+                "WordText": "GENERAL",
+                "Left": 1595,
+                "Top": 1238,
+                "Height": 18,
+                "Width": 111
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1238
+    },
+    {
+        "LineText": "A",
+        "Words": [
+            {
+                "WordText": "A",
+                "Left": 1881,
+                "Top": 1238,
+                "Height": 20,
+                "Width": 23
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1238
+    },
+    {
+        "LineText": "8578",
+        "Words": [
+            {
+                "WordText": "8578",
+                "Left": 73,
+                "Top": 1285,
+                "Height": 18,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1285
+    },
+    {
+        "LineText": "RICARDO JOSE ROSA UREÑA.",
+        "Words": [
+            {
+                "WordText": "RICARDO",
+                "Left": 198,
+                "Top": 1276,
+                "Height": 23,
+                "Width": 109
+            },
+            {
+                "WordText": "JOSE",
+                "Left": 309,
+                "Top": 1276,
+                "Height": 23,
+                "Width": 60
+            },
+            {
+                "WordText": "ROSA",
+                "Left": 372,
+                "Top": 1276,
+                "Height": 23,
+                "Width": 69
+            },
+            {
+                "WordText": "UREÑA.",
+                "Left": 444,
+                "Top": 1276,
+                "Height": 23,
+                "Width": 100
+            }
+        ],
+        "MaxHeight": 23,
+        "MinTop": 1276
+    },
+    {
+        "LineText": "2020-05-01",
+        "Words": [
+            {
+                "WordText": "2020-05-01",
+                "Left": 698,
+                "Top": 1276,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1276
+    },
+    {
+        "LineText": "25.000.00 0",
+        "Words": [
+            {
+                "WordText": "25.000.00",
+                "Left": 1116,
+                "Top": 1273,
+                "Height": 18,
+                "Width": 109
+            },
+            {
+                "WordText": "0",
+                "Left": 1228,
+                "Top": 1273,
+                "Height": 18,
+                "Width": 19
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1273
+    },
+    {
+        "LineText": "ENC. DPTO. DE PLANEAMIENTO URBANO",
+        "Words": [
+            {
+                "WordText": "ENC.",
+                "Left": 1445,
+                "Top": 1267,
+                "Height": 21,
+                "Width": 54
+            },
+            {
+                "WordText": "DPTO.",
+                "Left": 1502,
+                "Top": 1267,
+                "Height": 21,
+                "Width": 75
+            },
+            {
+                "WordText": "DE",
+                "Left": 1579,
+                "Top": 1267,
+                "Height": 21,
+                "Width": 34
+            },
+            {
+                "WordText": "PLANEAMIENTO",
+                "Left": 1615,
+                "Top": 1267,
+                "Height": 21,
+                "Width": 181
+            },
+            {
+                "WordText": "URBANO",
+                "Left": 1798,
+                "Top": 1267,
+                "Height": 21,
+                "Width": 106
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1267
+    },
+    {
+        "LineText": "8572",
+        "Words": [
+            {
+                "WordText": "8572",
+                "Left": 73,
+                "Top": 1314,
+                "Height": 17,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1314
+    },
+    {
+        "LineText": "ROBERTO URENA",
+        "Words": [
+            {
+                "WordText": "ROBERTO",
+                "Left": 198,
+                "Top": 1311,
+                "Height": 21,
+                "Width": 116
+            },
+            {
+                "WordText": "URENA",
+                "Left": 316,
+                "Top": 1311,
+                "Height": 21,
+                "Width": 85
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1311
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 698,
+                "Top": 1308,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1308
+    },
+    {
+        "LineText": "58.525.00 0",
+        "Words": [
+            {
+                "WordText": "58.525.00",
+                "Left": 1116,
+                "Top": 1302,
+                "Height": 20,
+                "Width": 109
+            },
+            {
+                "WordText": "0",
+                "Left": 1228,
+                "Top": 1302,
+                "Height": 20,
+                "Width": 19
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1302
+    },
+    {
+        "LineText": "REGIDOR CONCEJO MUNICIPAL",
+        "Words": [
+            {
+                "WordText": "REGIDOR",
+                "Left": 1445,
+                "Top": 1299,
+                "Height": 21,
+                "Width": 109
+            },
+            {
+                "WordText": "CONCEJO",
+                "Left": 1556,
+                "Top": 1299,
+                "Height": 21,
+                "Width": 114
+            },
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 1672,
+                "Top": 1299,
+                "Height": 21,
+                "Width": 142
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1299
+    },
+    {
+        "LineText": "A",
+        "Words": [
+            {
+                "WordText": "A",
+                "Left": 1884,
+                "Top": 1299,
+                "Height": 17,
+                "Width": 23
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1299
+    },
+    {
+        "LineText": "4797",
+        "Words": [
+            {
+                "WordText": "4797",
+                "Left": 73,
+                "Top": 1345,
+                "Height": 18,
+                "Width": 56
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1345
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 698,
+                "Top": 1337,
+                "Height": 17,
+                "Width": 119
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1337
+    },
+    {
+        "LineText": "10,000.00",
+        "Words": [
+            {
+                "WordText": "10,000.00",
+                "Left": 1116,
+                "Top": 1334,
+                "Height": 17,
+                "Width": 105
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1334
+    },
+    {
+        "LineText": "SECRETARIA ASEO Y ORNATO",
+        "Words": [
+            {
+                "WordText": "SECRETARIA",
+                "Left": 1442,
+                "Top": 1326,
+                "Height": 29,
+                "Width": 150
+            },
+            {
+                "WordText": "ASEO",
+                "Left": 1596,
+                "Top": 1326,
+                "Height": 29,
+                "Width": 65
+            },
+            {
+                "WordText": "Y",
+                "Left": 1664,
+                "Top": 1326,
+                "Height": 29,
+                "Width": 18
+            },
+            {
+                "WordText": "ORNATO",
+                "Left": 1685,
+                "Top": 1326,
+                "Height": 29,
+                "Width": 103
+            }
+        ],
+        "MaxHeight": 29,
+        "MinTop": 1326
+    },
+    {
+        "LineText": "757",
+        "Words": [
+            {
+                "WordText": "757",
+                "Left": 73,
+                "Top": 1375,
+                "Height": 17,
+                "Width": 41
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1375
+    },
+    {
+        "LineText": "ROSA MARIA NUNEZ PARZIAE",
+        "Words": [
+            {
+                "WordText": "ROSA",
+                "Left": 195,
+                "Top": 1358,
+                "Height": 35,
+                "Width": 69
+            },
+            {
+                "WordText": "MARIA",
+                "Left": 268,
+                "Top": 1358,
+                "Height": 34,
+                "Width": 73
+            },
+            {
+                "WordText": "NUNEZ",
+                "Left": 345,
+                "Top": 1358,
+                "Height": 34,
+                "Width": 82
+            },
+            {
+                "WordText": "PARZIAE",
+                "Left": 431,
+                "Top": 1358,
+                "Height": 35,
+                "Width": 103
+            }
+        ],
+        "MaxHeight": 35,
+        "MinTop": 1358
+    },
+    {
+        "LineText": "ROSA AROMERY PICHARDO DURASE LARAR pa00-00-00",
+        "Words": [
+            {
+                "WordText": "ROSA",
+                "Left": 201,
+                "Top": 1340,
+                "Height": 82,
+                "Width": 62
+            },
+            {
+                "WordText": "AROMERY",
+                "Left": 266,
+                "Top": 1341,
+                "Height": 81,
+                "Width": 115
+            },
+            {
+                "WordText": "PICHARDO",
+                "Left": 386,
+                "Top": 1341,
+                "Height": 81,
+                "Width": 119
+            },
+            {
+                "WordText": "DURASE",
+                "Left": 509,
+                "Top": 1341,
+                "Height": 81,
+                "Width": 86
+            },
+            {
+                "WordText": "LARAR",
+                "Left": 599,
+                "Top": 1341,
+                "Height": 81,
+                "Width": 95
+            },
+            {
+                "WordText": "pa00-00-00",
+                "Left": 698,
+                "Top": 1340,
+                "Height": 82,
+                "Width": 116
+            }
+        ],
+        "MaxHeight": 82,
+        "MinTop": 1340
+    },
+    {
+        "LineText": "ROSA AROMERY PICHARDO DUPSDE LARAR 0000-00-00",
+        "Words": [
+            {
+                "WordText": "ROSA",
+                "Left": 198,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 64
+            },
+            {
+                "WordText": "AROMERY",
+                "Left": 266,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 113
+            },
+            {
+                "WordText": "PICHARDO",
+                "Left": 383,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 117
+            },
+            {
+                "WordText": "DUPSDE",
+                "Left": 505,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 89
+            },
+            {
+                "WordText": "LARAR",
+                "Left": 598,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 89
+            },
+            {
+                "WordText": "0000-00-00",
+                "Left": 691,
+                "Top": 1343,
+                "Height": 79,
+                "Width": 123
+            }
+        ],
+        "MaxHeight": 79,
+        "MinTop": 1343
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 697,
+                "Top": 1368,
+                "Height": 18,
+                "Width": 120
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1368
+    },
+    {
+        "LineText": "3,587.00 200010510245946",
+        "Words": [
+            {
+                "WordText": "3,587.00",
+                "Left": 1128,
+                "Top": 1363,
+                "Height": 17,
+                "Width": 99
+            },
+            {
+                "WordText": "200010510245946",
+                "Left": 1230,
+                "Top": 1363,
+                "Height": 17,
+                "Width": 195
+            }
+        ],
+        "MaxHeight": 17,
+        "MinTop": 1363
+    },
+    {
+        "LineText": "OBRERO BRIGADA NO.3",
+        "Words": [
+            {
+                "WordText": "OBRERO",
+                "Left": 1442,
+                "Top": 1358,
+                "Height": 27,
+                "Width": 105
+            },
+            {
+                "WordText": "BRIGADA",
+                "Left": 1550,
+                "Top": 1358,
+                "Height": 26,
+                "Width": 106
+            },
+            {
+                "WordText": "NO.3",
+                "Left": 1659,
+                "Top": 1358,
+                "Height": 27,
+                "Width": 56
+            }
+        ],
+        "MaxHeight": 27,
+        "MinTop": 1358
+    },
+    {
+        "LineText": "4766",
+        "Words": [
+            {
+                "WordText": "4766",
+                "Left": 73,
+                "Top": 1407,
+                "Height": 15,
+                "Width": 55
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1407
+    },
+    {
+        "LineText": "ROSALINDA DURAN",
+        "Words": [
+            {
+                "WordText": "ROSALINDA",
+                "Left": 198,
+                "Top": 1401,
+                "Height": 21,
+                "Width": 134
+            },
+            {
+                "WordText": "DURAN",
+                "Left": 334,
+                "Top": 1401,
+                "Height": 21,
+                "Width": 85
+            }
+        ],
+        "MaxHeight": 21,
+        "MinTop": 1401
+    },
+    {
+        "LineText": "3,587.00",
+        "Words": [
+            {
+                "WordText": "3,587.00",
+                "Left": 1131,
+                "Top": 1395,
+                "Height": 19,
+                "Width": 90
+            }
+        ],
+        "MaxHeight": 19,
+        "MinTop": 1395
+    },
+    {
+        "LineText": "BARREDORA BRIGADA NO. 6",
+        "Words": [
+            {
+                "WordText": "BARREDORA",
+                "Left": 1448,
+                "Top": 1390,
+                "Height": 20,
+                "Width": 146
+            },
+            {
+                "WordText": "BRIGADA",
+                "Left": 1596,
+                "Top": 1390,
+                "Height": 19,
+                "Width": 107
+            },
+            {
+                "WordText": "NO.",
+                "Left": 1706,
+                "Top": 1390,
+                "Height": 19,
+                "Width": 44
+            },
+            {
+                "WordText": "6",
+                "Left": 1752,
+                "Top": 1390,
+                "Height": 20,
+                "Width": 16
+            }
+        ],
+        "MaxHeight": 20,
+        "MinTop": 1390
+    },
+    {
+        "LineText": "07/10/2020, 01/36 PM",
+        "Words": [
+            {
+                "WordText": "07/10/2020,",
+                "Left": 70,
+                "Top": 1488,
+                "Height": 15,
+                "Width": 86
+            },
+            {
+                "WordText": "01/36",
+                "Left": 158,
+                "Top": 1489,
+                "Height": 15,
+                "Width": 41
+            },
+            {
+                "WordText": "PM",
+                "Left": 200,
+                "Top": 1488,
+                "Height": 15,
+                "Width": 26
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1488
+    },
+    {
+        "LineText": "觉絲",
+        "Words": [
+            {
+                "WordText": "觉",
+                "Left": 523,
+                "Top": 1419,
+                "Height": 47,
+                "Width": 58
+            },
+            {
+                "WordText": "絲",
+                "Left": 582,
+                "Top": 1419,
+                "Height": 47,
+                "Width": 37
+            }
+        ],
+        "MaxHeight": 47,
+        "MinTop": 1419
+    },
+    {
+        "LineText": "CONTRALOR (A)",
+        "Words": [
+            {
+                "WordText": "CONTRALOR",
+                "Left": 480,
+                "Top": 1485,
+                "Height": 18,
+                "Width": 153
+            },
+            {
+                "WordText": "(A)",
+                "Left": 635,
+                "Top": 1485,
+                "Height": 18,
+                "Width": 30
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1485
+    },
+    {
+        "LineText": "Pigina 12 de 14",
+        "Words": [
+            {
+                "WordText": "Pigina",
+                "Left": 1794,
+                "Top": 1471,
+                "Height": 18,
+                "Width": 54
+            },
+            {
+                "WordText": "12",
+                "Left": 1849,
+                "Top": 1471,
+                "Height": 17,
+                "Width": 17
+            },
+            {
+                "WordText": "de",
+                "Left": 1869,
+                "Top": 1471,
+                "Height": 17,
+                "Width": 19
+            },
+            {
+                "WordText": "14",
+                "Left": 1890,
+                "Top": 1471,
+                "Height": 18,
+                "Width": 22
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1471
+    },
+    {
+        "LineText": "Powerad by Municipe",
+        "Words": [
+            {
+                "WordText": "Powerad",
+                "Left": 1773,
+                "Top": 1485,
+                "Height": 18,
+                "Width": 59
+            },
+            {
+                "WordText": "by",
+                "Left": 1835,
+                "Top": 1485,
+                "Height": 18,
+                "Width": 16
+            },
+            {
+                "WordText": "Municipe",
+                "Left": 1853,
+                "Top": 1485,
+                "Height": 18,
+                "Width": 62
+            }
+        ],
+        "MaxHeight": 18,
+        "MinTop": 1485
+    },
+    {
+        "LineText": "MUNICIPAL",
+        "Words": [
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 503,
+                "Top": 1503,
+                "Height": 15,
+                "Width": 140
+            }
+        ],
+        "MaxHeight": 15,
+        "MinTop": 1503
+    }
+]

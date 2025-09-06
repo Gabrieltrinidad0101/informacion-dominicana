@@ -80,16 +80,15 @@ function detectDominantAngle(rawData) {
       let addedToLine = false;
   
       for (const line of lines) {
-        if (Math.abs(line.avgY - word.y) <= yTolerance) {
+        if (Math.abs(line.words.at(-1).y - word.y) <= (line.words.at(-1).height / 2)) {
           line.words.push(word);
-          line.avgY = (line.avgY * (line.words.length - 1) + word.y) / line.words.length;
           addedToLine = true;
           break;
         }
       }
   
       if (!addedToLine) {
-        lines.push({ words: [word], avgY: word.y });
+        lines.push({ words: [word] });
       }
     }
   

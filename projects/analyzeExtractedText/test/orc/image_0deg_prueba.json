@@ -1,0 +1,331 @@
+[
+    {
+        "LineText": "Carnet",
+        "Words": [
+            {
+                "WordText": "Carnet",
+                "Left": 20,
+                "Top": 240,
+                "Height": 12,
+                "Width": 38
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 240
+    },
+    {
+        "LineText": "Empleado",
+        "Words": [
+            {
+                "WordText": "Empleado",
+                "Left": 64,
+                "Top": 242,
+                "Height": 12,
+                "Width": 54
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 242
+    },
+    {
+        "LineText": "Fecha",
+        "Words": [
+            {
+                "WordText": "Fecha",
+                "Left": 304,
+                "Top": 234,
+                "Height": 10,
+                "Width": 32
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 234
+    },
+    {
+        "LineText": "Ingreso",
+        "Words": [
+            {
+                "WordText": "Ingreso",
+                "Left": 302,
+                "Top": 242,
+                "Height": 12,
+                "Width": 38
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 242
+    },
+    {
+        "LineText": "Salario",
+        "Words": [
+            {
+                "WordText": "Salario",
+                "Left": 453,
+                "Top": 244,
+                "Height": 12,
+                "Width": 34
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 244
+    },
+    {
+        "LineText": "Cuenta",
+        "Words": [
+            {
+                "WordText": "Cuenta",
+                "Left": 535,
+                "Top": 236,
+                "Height": 10,
+                "Width": 34
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 236
+    },
+    {
+        "LineText": "Bancaria",
+        "Words": [
+            {
+                "WordText": "Bancaria",
+                "Left": 531,
+                "Top": 246,
+                "Height": 10,
+                "Width": 42
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 246
+    },
+    {
+        "LineText": "Posición",
+        "Words": [
+            {
+                "WordText": "Posición",
+                "Left": 665,
+                "Top": 246,
+                "Height": 10,
+                "Width": 42
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 246
+    },
+    {
+        "LineText": "Est.",
+        "Words": [
+            {
+                "WordText": "Est.",
+                "Left": 777,
+                "Top": 244,
+                "Height": 12,
+                "Width": 22
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 244
+    },
+    {
+        "LineText": "4721",
+        "Words": [
+            {
+                "WordText": "4721",
+                "Left": 12,
+                "Top": 252,
+                "Height": 10,
+                "Width": 28
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 252
+    },
+    {
+        "LineText": "ADELA GALAN",
+        "Words": [
+            {
+                "WordText": "ADELA",
+                "Left": 68,
+                "Top": 252,
+                "Height": 14,
+                "Width": 35
+            },
+            {
+                "WordText": "GALAN",
+                "Left": 105,
+                "Top": 252,
+                "Height": 14,
+                "Width": 35
+            }
+        ],
+        "MaxHeight": 14,
+        "MinTop": 252
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 284,
+                "Top": 256,
+                "Height": 10,
+                "Width": 54
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 256
+    },
+    {
+        "LineText": "4.000.00 200019603420096",
+        "Words": [
+            {
+                "WordText": "4.000.00",
+                "Left": 465,
+                "Top": 256,
+                "Height": 12,
+                "Width": 42
+            },
+            {
+                "WordText": "200019603420096",
+                "Left": 509,
+                "Top": 256,
+                "Height": 12,
+                "Width": 82
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 256
+    },
+    {
+        "LineText": "OBRERA BRIGADA NO.1",
+        "Words": [
+            {
+                "WordText": "OBRERA",
+                "Left": 597,
+                "Top": 258,
+                "Height": 10,
+                "Width": 44
+            },
+            {
+                "WordText": "BRIGADA",
+                "Left": 642,
+                "Top": 258,
+                "Height": 10,
+                "Width": 44
+            },
+            {
+                "WordText": "NO.1",
+                "Left": 687,
+                "Top": 258,
+                "Height": 10,
+                "Width": 24
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 258
+    },
+    {
+        "LineText": "8573",
+        "Words": [
+            {
+                "WordText": "8573",
+                "Left": 14,
+                "Top": 268,
+                "Height": 10,
+                "Width": 28
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 268
+    },
+    {
+        "LineText": "ADRIAN ULLOA TORRES",
+        "Words": [
+            {
+                "WordText": "ADRIAN",
+                "Left": 68,
+                "Top": 268,
+                "Height": 12,
+                "Width": 40
+            },
+            {
+                "WordText": "ULLOA",
+                "Left": 110,
+                "Top": 268,
+                "Height": 12,
+                "Width": 33
+            },
+            {
+                "WordText": "TORRES",
+                "Left": 144,
+                "Top": 268,
+                "Height": 12,
+                "Width": 43
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 268
+    },
+    {
+        "LineText": "0000-00-00",
+        "Words": [
+            {
+                "WordText": "0000-00-00",
+                "Left": 283,
+                "Top": 269,
+                "Height": 14,
+                "Width": 54
+            }
+        ],
+        "MaxHeight": 14,
+        "MinTop": 269
+    },
+    {
+        "LineText": "58,525.00 200019603429050",
+        "Words": [
+            {
+                "WordText": "58,525.00",
+                "Left": 461,
+                "Top": 270,
+                "Height": 12,
+                "Width": 46
+            },
+            {
+                "WordText": "200019603429050",
+                "Left": 509,
+                "Top": 270,
+                "Height": 12,
+                "Width": 82
+            }
+        ],
+        "MaxHeight": 12,
+        "MinTop": 270
+    },
+    {
+        "LineText": "REGIDOR CONCEJO MUNICIPAL",
+        "Words": [
+            {
+                "WordText": "REGIDOR",
+                "Left": 597,
+                "Top": 272,
+                "Height": 10,
+                "Width": 47
+            },
+            {
+                "WordText": "CONCEJO",
+                "Left": 646,
+                "Top": 272,
+                "Height": 10,
+                "Width": 47
+            },
+            {
+                "WordText": "MUNICIPAL",
+                "Left": 695,
+                "Top": 272,
+                "Height": 10,
+                "Width": 52
+            }
+        ],
+        "MaxHeight": 10,
+        "MinTop": 272
+    }
+]
