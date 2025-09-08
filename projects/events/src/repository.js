@@ -7,22 +7,28 @@ const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
 export class EventsRepository {
     async find(data_) {
-        const data = {...data_}
+        const data = { ...data_ }
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName
-        return await Model.find({...data})
+        const query = {};
+        for (const key in data) {
+            if (data[key] !== undefined && data[key] !== null) {
+                query[key] = { $regex: data[key], $options: "i" }; // "i" = case-insensitive
+            }
+        }
+        return await Model.find({ ...query })
     }
 
     async findOne(data_) {
-        const data = {...data_}
+        const data = { ...data_ }
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName
-        return await Model.findOne({...data})
+        return await Model.findOne({ ...data })
     }
-    
+
     async save(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        if(!data._id) data._id = new mongoose.Types.ObjectId()
+        if (!data._id) data._id = new mongoose.Types.ObjectId()
         await Model.findByIdAndUpdate(
             data._id,
             data,
@@ -35,6 +41,6 @@ export class EventsRepository {
 
     async deleteEvents(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        return await Model.deleteMany({...data})
+        return await Model.deleteMany({ ...data })
     }
 }

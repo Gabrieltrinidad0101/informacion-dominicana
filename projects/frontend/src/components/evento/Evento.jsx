@@ -3,14 +3,15 @@ import React, { useEffect } from "react";
 import { SimpleSelect } from "../inputs/simpleSelects";
 import { InputText } from "../inputs/inputText";
 import EventsCss from "./Evento.module.css";
-import { Button, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { Button, Dialog, DialogTitle, DialogContent, Box } from "@mui/material";
+import constants from "../../constants";
 
 
 function JsonPreview({ file }) {
   const [data, setData] = React.useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5500/data/${file}`)
+    fetch(`${constants.urlData}/${file}`)
       .then((res) => res.json())
       .then((json) => setData(json))
       .catch(() => setData({ error: "Failed to load JSON" }));
@@ -40,15 +41,15 @@ export function Evento({ exchangeName }) {
   const [downloadLinks, setDownloadLinks] = React.useState([]);
   const [columns, setColumns] = React.useState([]);
   const [search, setSearch] = React.useState({});
-  const [open, setOpen] = React.useState(false); // modal control
-  const [cellData, setCellData] = React.useState(null); // clicked cell value
+  const [open, setOpen] = React.useState(false);
+  const [cellData, setCellData] = React.useState(null);
 
   const searchData = async () => {
     try {
       const data = await fetch(
-        search.key
-          ? `http://127.0.0.1:3001/find?exchangeName=${exchangeName}&${search.key}=${search.value}`
-          : `http://127.0.0.1:3001/find?exchangeName=${exchangeName}`
+        Object.keys(search).length > 0
+          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}${Object.keys(search).map((key)=> `&${key}=${search[key]}`).join('')}`
+          : `${constants.apiEvents}/find?exchangeName=${exchangeName}`
       );
       const json = await data.json();
       if (!json || json.length === 0) {
@@ -68,12 +69,12 @@ export function Evento({ exchangeName }) {
         .filter((column) => column);
       setColumns(columns_);
       setDownloadLinks(json);
-    } catch {}
+    } catch { }
   };
 
   const execute = async () => {
     try {
-      await fetch(`http://127.0.0.1:3001/reExecuteEvents`, {
+      await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
           [search.key]: search.value,
           exchangeName: exchangeName,
@@ -83,12 +84,12 @@ export function Evento({ exchangeName }) {
           "Content-Type": "application/json",
         },
       });
-    } catch {}
+    } catch { }
   };
 
   const deleteEvents = async () => {
     try {
-      await fetch(`http://127.0.0.1:3001/deleteEvents`, {
+      await fetch(`${constants.apiEvents}/deleteEvents`, {
         body: JSON.stringify({
           [search.key]: search.value,
           exchangeName: exchangeName,
@@ -100,80 +101,94 @@ export function Evento({ exchangeName }) {
       });
 
       await searchData();
-    } catch {}
+    } catch { }
   };
 
   useEffect(() => {
     searchData();
   }, []);
 
-  const onChangeValue = (e) => {
+  const onChangeValue = (key,value) => {
     setSearch((prev) => ({
       ...prev,
-      value: e.target.value,
+      [key]: value,
     }));
   };
 
   const onChangeKey = (e) => {
     setSearch((prev) => ({
       ...prev,
-      key: e.target.value,
+      [e.target.value]: '',
     }));
   };
 
-  // helper: detect type
+  const onRemoveKey = (key) => {
+    setSearch((prev) => {
+      delete prev[key];
+      return { ...prev };
+    });
+  };
+
   const renderCellContent = () => {
-  if (!cellData?.value) return null;
+    if (!cellData?.value) return null;
 
-  const value = String(cellData.value).trim();
+    const value = String(cellData.value).trim();
 
-  // Images
-  if (value.match(/\.(jpeg|jpg|png|gif|webp)$/i)) {
-    return (
-      <img
-        src={`http://localhost:5500/data/${value}`}
-        alt="cell content"
-        style={{ maxWidth: "100%", maxHeight: "500px" }}
-      />
-    );
-  }
+    if (value.match(/\.(jpeg|jpg|png|gif|webp)$/i)) {
+      return (
+        <img
+          src={`${constants.urlData}/${value}`}
+          alt="cell content"
+          style={{ maxWidth: "100%", maxHeight: "500px" }}
+        />
+      );
+    }
 
-  // PDFs
-  if (value.match(/\.pdf$/i)) {
-    return (
-      <iframe
-        src={value.includes('http') ? value : `http://localhost:5500/data/${value}`}
-        width="100%"
-        height="500px"
-        style={{ border: "none" }}
-        title="PDF Viewer"
-      />
-    );
-  }
+    // PDFs
+    if (value.match(/\.pdf$/i)) {
+      return (
+        <iframe
+          src={value.includes('http') ? value : `${constants.urlData}/${value}`}
+          width="100%"
+          height="500px"
+          style={{ border: "none" }}
+          title="PDF Viewer"
+        />
+      );
+    }
 
-  // JSON files
-  if (value.match(/\.json$/i)) {
-    return <JsonPreview file={value} />;
-  }
-
-  // fallback: text
-  return <p>{value}</p>;
-};
+    if (value.match(/\.json$/i)) {
+      return <JsonPreview file={value} />;
+    }
+  };
 
 
   return (
     <div>
       <h2>{exchangeName}</h2>
+      <SimpleSelect
+        name="Instituciones"
+        datas={columns.map((columns) => columns.field)}
+        onChange={(e) => onChangeKey(e)}
+      />
       <div className={EventsCss.inputs}>
-        <SimpleSelect
-          name="Instituciones"
-          datas={columns.map((columns) => columns.field)}
-          onChange={(e) => onChangeKey(e)}
-        />
-        <InputText onChangeSearch={onChangeValue} />
-        <Button onClick={searchData}>Buscar</Button>
-        <Button onClick={execute}>Ejecutar</Button>
-        <Button onClick={deleteEvents}>Eliminar</Button>
+        <div className={EventsCss.filters}>
+          {
+            Object.keys(search).map((key, index) =>
+              <div>
+                <InputText label={key} key={index} onChangeSearch={(e)=>onChangeValue(key,e.target.value)} name={key} value={search[key]} />
+                <Button sx={{
+                  height: 55
+                }} variant="contained" color="error" height="10px" onClick={() => onRemoveKey(key)}>Eliminar</Button>
+              </div>
+            )
+          }
+        </div>
+        <div className={EventsCss.buttons}>
+          <Button onClick={searchData}>Buscar</Button>
+          <Button onClick={execute}>Ejecutar</Button>
+          <Button onClick={deleteEvents}>Eliminar</Button>
+        </div>
       </div>
 
       <div style={{ height: 500, width: "100%" }}>

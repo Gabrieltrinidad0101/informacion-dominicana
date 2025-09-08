@@ -7,3 +7,4 @@ const eventBus = new EventBus()
 const fileManagerClient = new FileManagerClient()
 
 new Download(eventBus, fileManagerClient)
+console.log("Download started")

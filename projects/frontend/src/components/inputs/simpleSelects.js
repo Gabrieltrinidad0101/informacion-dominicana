@@ -9,6 +9,9 @@ export function SimpleSelect({ name, datas, onChange, value }) {
                 {name}
             </InputLabel>
             <Select
+                sx={
+                    {minWidth: 200}
+                }
                 value={value}
                 onChange={onChange}
                 labelId="demo-simple-select-filled-label"

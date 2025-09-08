@@ -1,7 +1,7 @@
 services:
   download_links:
     build: 
-      context: .  
+      context: .
       dockerfile: ./projects/downloadLinks/dockerfile
     container_name: downloadLinks
     volumes:
@@ -28,6 +28,7 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+      
   events:
     build:
       context: .
@@ -43,6 +44,7 @@ services:
     depends_on: 
       - mongo
       - rabbitmq
+
   frontend:
     build: ./projects/frontend
     container_name: frontend
@@ -82,6 +84,7 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+
   analyze_extracted_text:
     build:
       context: .
@@ -95,6 +98,7 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+
   ai_text_analyze:
     build:
       context: .
@@ -108,6 +112,7 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+
   insert_data:
     build: 
       context: .
@@ -121,6 +126,7 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+
   files_manager:
     build: 
       context: .
@@ -133,6 +139,7 @@ services:
       - dev
     ports:  
       - 4000:4000
+
   export_to_json:
     build: 
       context: .
@@ -161,6 +168,7 @@ services:
       RABBITMQ_DEFAULT_PASS: admin  
     networks:
       - dev
+
   mongo:
     image: mongo:latest
     container_name: mongo
@@ -179,6 +187,8 @@ services:
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
     networks:
       - dev
 
@@ -187,7 +197,7 @@ services:
     container_name: promtail
     volumes:
       - /var/log:/var/log
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro   # Use the Docker socket
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
     networks:
       - dev

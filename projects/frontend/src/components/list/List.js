@@ -16,7 +16,13 @@ import dayjs from 'dayjs';
 let positionBySalary = {};
 
 const getSalary = (position) =>
-  positionBySalary[position]?.reduce((acc, row) => acc + parseInt(row.income), 0) / (positionBySalary[position]?.length ?? 1);
+  positionBySalary[position]?.reduce(
+    (acc, row) =>
+      acc +
+      (Number.isNaN(parseInt(row.income)) ? 0 : parseInt(row.income)),
+    0
+  ) / (positionBySalary[position]?.length ?? 1);
+
 
 const getSalaryFormat = (position) => formattedMoney(getSalary(position));
 
@@ -77,7 +83,7 @@ const style = {
   boxShadow: 24,
 };
 
-export const ListGroup = ({ title,institution,currentDate,setCurrentDate, url }) => {
+export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url }) => {
   const [search, setSearch] = useState("");
   const [employee, setEmployee] = useState({});
   const [positions, setPositions] = useState([]);
@@ -99,7 +105,7 @@ export const ListGroup = ({ title,institution,currentDate,setCurrentDate, url })
         data.map(v => v.replace(/[^0-9-]/g, ""))
       );
       setAllowedMonths(dates);
-      const [year,month] = data.at(-1).split("-")
+      const [year, month] = data.at(-1).split("-")
       handleDate(new Date(year, month, 0));
     })
   }, []);
@@ -130,7 +136,7 @@ export const ListGroup = ({ title,institution,currentDate,setCurrentDate, url })
 
   return (
     <>
-     {currentDate && <Modal
+      {currentDate && <Modal
         open={open}
         onClose={handleClose}
         closeAfterTransition
