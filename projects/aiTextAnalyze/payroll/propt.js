@@ -17,13 +17,19 @@ Special Institutional Entry:
 {
   "name": "SUBVENCION BOMBEROS",
   "position": "BOMBEROS",
-  "income": "150000"
+  "income": "150000",
+  "x": 10,
+  "y": 10,
+  "width": 1000,
+  "height": 43
 }
 
 Extraction Rules:
+- Based on the text position, group the text line by line.
 - Each object represents either an individual or an institutional entry.
 - For individuals:
   - Include \`name\`, \`position\`, \`income\`, and \`sex\` (M/F) where available.
+  - income can be \`Honorífico\`.
   - Omit \`document\` and \`sex\` if unavailable.
   - Include bounding box: \`x\`, \`y\`, \`width\`, \`height\` of the line containing the main record.
 - For institutional entries (e.g., lines containing words like SUBVENCION, SUBSIDIO, AYUDA):

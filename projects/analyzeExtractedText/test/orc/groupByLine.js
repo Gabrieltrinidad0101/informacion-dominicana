@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { groupLinesOcrSpace } from '../../src/groupLineOcr.js';
 
-const rawData = JSON.parse(fs.readFileSync(`/home/gabriel-trinidad/Desktop/javascript/informacion-dominicana/data/Ayuntamiento de Jarabacoa/nomina/extractedText/2020/marzo/14.json`).toString());
+const rawData = JSON.parse(fs.readFileSync(`/home/gabriel/Desktop/Javascript/informacion-dominicana/data/Ayuntamiento de Jarabacoa/nomina/extractedText/2020/marzo/5.json`).toString());
 
 
 const result = groupLinesOcrSpace(rawData);
