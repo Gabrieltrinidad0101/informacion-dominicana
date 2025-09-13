@@ -76,7 +76,7 @@ export function Evento({ exchangeName }) {
     try {
       await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
-          [search.key]: search.value,
+          ...search,
           exchangeName: exchangeName,
         }),
         method: "POST",

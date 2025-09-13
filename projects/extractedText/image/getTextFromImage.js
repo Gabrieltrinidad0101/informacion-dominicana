@@ -23,8 +23,8 @@ export class ImageToText {
         await new Promise(resolve => setTimeout(resolve, 1000 * parseInt(data.index)));
         
         const extractedTextUrl = this.fileManager.generateUrl(data,'extractedText',`${data.index}.json`)
-        const bufferImage = await this.fileManager.getFileBuffer(data.imageUrl)
         if(!await this.fileManager.fileExists(extractedTextUrl)){
+            const bufferImage = await this.fileManager.getFileBuffer(data.imageUrl)
             if (isAzure) textOverlay = await getTextFromImageApiAzure({
                 bufferImage
             })

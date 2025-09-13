@@ -24,7 +24,7 @@ export class Payroll {
                 if(payroll_.document) payroll_.document = this.encrypt(payroll_.document)
                 payroll_._id = this.getId()
             }
-            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl,  JSON.stringify(response));
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl,  JSON.stringify({lines: response, angle: dataText.angle}));
         }
         this.eventBus.emit("insertDatas",{
             ...data,

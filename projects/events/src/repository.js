@@ -12,7 +12,9 @@ export class EventsRepository {
         delete data.exchangeName
         const query = {};
         for (const key in data) {
-            if (data[key] !== undefined && data[key] !== null) {
+            if(key === '_id'){
+                query[key] = data[key]
+            } else if (data[key] !== undefined && data[key] !== null) {
                 query[key] = { $regex: data[key], $options: "i" }; // "i" = case-insensitive
             }
         }
