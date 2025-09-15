@@ -1,0 +1,935 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dey2oplvkvfggc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Logs",
+              "url": "http://localhost:5000/explore?schemaVersion=1&panes={\"1lh\":{\"datasource\":\"dey2oplvkvfggc\",\"queries\":[{\"refId\":\"A\",\"expr\":\"count_over_time({container_name=\\\"insertData\\\"} |= \\\"eventBusInternalLog\\\" != \\\"eventBusInternalRetryError\\\" != \\\"eventBusMaxInternalRetryError\\\" [1m])\",\"queryType\":\"range\",\"datasource\":{\"type\":\"loki\",\"uid\":\"dey2oplvkvfggc\"},\"editorMode\":\"code\",\"direction\":\"backward\"}],\"range\":{\"from\":\"now-1h\",\"to\":\"now\"}}}&orgId=1\n"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"postDownload\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "count_over_time({container_name=\"postDownload\"} |= `eventBusInternalLog` |= `eventBusInternalRetryError` [1m])",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"postDownload\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Post download",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dey2oplvkvfggc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Logs",
+              "url": "http://localhost:5000/explore?schemaVersion=1&panes={\"1lh\":{\"datasource\":\"dey2oplvkvfggc\",\"queries\":[{\"refId\":\"A\",\"expr\":\"count_over_time({container_name=\\\"insertData\\\"} |= \\\"eventBusInternalLog\\\" != \\\"eventBusInternalRetryError\\\" != \\\"eventBusMaxInternalRetryError\\\" [1m])\",\"queryType\":\"range\",\"datasource\":{\"type\":\"loki\",\"uid\":\"dey2oplvkvfggc\"},\"editorMode\":\"code\",\"direction\":\"backward\"}],\"range\":{\"from\":\"now-1h\",\"to\":\"now\"}}}&orgId=1\n"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"extractedText\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time({container_name=\"extractedText\"} |= `eventBusInternalLog` |= `eventBusInternalRetryError` [1m])",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"extractedText\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Extracted Text",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dey2oplvkvfggc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Logs",
+              "url": "http://localhost:5000/explore?schemaVersion=1&panes={\"1lh\":{\"datasource\":\"dey2oplvkvfggc\",\"queries\":[{\"refId\":\"A\",\"expr\":\"count_over_time({container_name=\\\"insertData\\\"} |= \\\"eventBusInternalLog\\\" != \\\"eventBusInternalRetryError\\\" != \\\"eventBusMaxInternalRetryError\\\" [1m])\",\"queryType\":\"range\",\"datasource\":{\"type\":\"loki\",\"uid\":\"dey2oplvkvfggc\"},\"editorMode\":\"code\",\"direction\":\"backward\"}],\"range\":{\"from\":\"now-1h\",\"to\":\"now\"}}}&orgId=1\n"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusInternalRetryError\"\n  [1m]\n)",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Analyze Extracted Texts",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dey2oplvkvfggc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Logs",
+              "url": "http://localhost:5000/explore?schemaVersion=1&panes={\"1lh\":{\"datasource\":\"dey2oplvkvfggc\",\"queries\":[{\"refId\":\"A\",\"expr\":\"count_over_time({container_name=\\\"insertData\\\"} |= \\\"eventBusInternalLog\\\" != \\\"eventBusInternalRetryError\\\" != \\\"eventBusMaxInternalRetryError\\\" [1m])\",\"queryType\":\"range\",\"datasource\":{\"type\":\"loki\",\"uid\":\"dey2oplvkvfggc\"},\"editorMode\":\"code\",\"direction\":\"backward\"}],\"range\":{\"from\":\"now-1h\",\"to\":\"now\"}}}&orgId=1\n"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"events\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time({container_name=\"events\"} |= `eventBusInternalLog` |= `eventBusInternalRetryError` [1m])",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"events\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Events",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "dey2oplvkvfggc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "Logs",
+              "url": "http://localhost:5000/explore?schemaVersion=1&panes={\"1lh\":{\"datasource\":\"dey2oplvkvfggc\",\"queries\":[{\"refId\":\"A\",\"expr\":\"count_over_time({container_name=\\\"insertData\\\"} |= \\\"eventBusInternalLog\\\" != \\\"eventBusInternalRetryError\\\" != \\\"eventBusMaxInternalRetryError\\\" [1m])\",\"queryType\":\"range\",\"datasource\":{\"type\":\"loki\",\"uid\":\"dey2oplvkvfggc\"},\"editorMode\":\"code\",\"direction\":\"backward\"}],\"range\":{\"from\":\"now-1h\",\"to\":\"now\"}}}&orgId=1\n"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"insertData\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  != \"eventBusInternalError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"insertData\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusInternalError\"\n  [1m]\n)",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "dey2oplvkvfggc"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "count_over_time(\n  {container_name=\"insertData\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "C"
+        }
+      ],
+      "title": "Insert Data",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": [
+            "aiTextAnalyze"
+          ],
+          "value": [
+            "aiTextAnalyze"
+          ]
+        },
+        "definition": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "label": "container_name",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Informacion Dominicana",
+  "uid": "832108a5-2c98-4c9f-8336-fb0c5c4f9865",
+  "version": 21
+}

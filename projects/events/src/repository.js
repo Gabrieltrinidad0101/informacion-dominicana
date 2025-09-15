@@ -15,7 +15,7 @@ export class EventsRepository {
             if(key === '_id'){
                 query[key] = data[key]
             } else if (data[key] !== undefined && data[key] !== null) {
-                query[key] = { $regex: data[key], $options: "i" }; // "i" = case-insensitive
+                query[key] = { $regex: data[key], $options: "i" };
             }
         }
         return await Model.find({ ...query })

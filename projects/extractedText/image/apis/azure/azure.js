@@ -1,6 +1,5 @@
 
 import axios from 'axios';
-import fs from 'fs';
 
 const apiKey = process.env.API_KEY_IMAGE_TO_TEXT;
 const apiUrl = process.env.API_URL_IMAGE_TO_TEXT;

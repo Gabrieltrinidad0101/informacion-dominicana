@@ -14,7 +14,7 @@ export function Chart({ data, customTheme,compare,deparment }) {
   const verifyVisibility = async (entry) => {
     if (isLoad[data.title] || !entry[0].isIntersecting) return;
     isLoad[data.title] = entry[0].isIntersecting;
-    setChart(await chartBase(containerChart.current, data, customTheme));
+    setChart(await chartBase(containerChart.current, data, customTheme,deparment));
   };
 
   useEffect(() => {

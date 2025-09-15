@@ -21,7 +21,6 @@ export class Payroll {
             const response = JSON.parse(await this.apiLLMClient(propt_));
             for (let payroll_ of response) {
                 if(payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
-                if(payroll_.document) payroll_.document = this.encrypt(payroll_.document)
                 payroll_._id = this.getId()
             }
             await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl,  JSON.stringify({lines: response, angle: dataText.angle}));

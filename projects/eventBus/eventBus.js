@@ -50,35 +50,39 @@ export class EventBus {
             if (!message) return
             try {
                 const content = JSON.parse(message.content.toString())
-                console.log(`${exchangeName} - ${content?.aiTextAnalyzerUrl ?? content?.analyzeExtractedTextUrl ?? content?.imageUrl ?? content?.urlDownload ?? content?.link}`)
-
-                await callback(content) // wait until done
-                channel.ack(message)    // ack only after success
+                await callback(content)
+                channel.ack(message)
+                console.log(JSON.stringify({ eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName } }))
             } catch (error) {
-                console.error("Consumer error:", error)
-
-                // retry logic
                 try {
                     const content = JSON.parse(message.content.toString())
                     content.retryCount = (content.retryCount || 0) + 1
                     if (content.retryCount >= 3) {
-                        console.log("⚠️ Max retries reached, send to DLQ or log permanently.")
-                        channel.ack(message) // we ack to avoid infinite redelivery
+                        console.error(JSON.stringify({
+                            eventBusMaxInternalRetryError: error.message,
+                            eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
+                        }))
+                        channel.ack(message)
                         return
                     }
                     await this.tryQueue(queueName, exchangeName)
                     channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
                         headers: { "x-retry-count": content.retryCount }
                     })
+                    console.error(JSON.stringify({
+                        eventBusInternalError: error,
+                        eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
+                    }))
                 } catch (parseError) {
-                    console.error("Message parse error:", parseError)
+                    const content = JSON.parse(message.content.toString())
+                    console.error(JSON.stringify({
+                        eventBusInternalRetryError: error.message,
+                        eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
+                    }))
                 }
-
-                channel.ack(message) // ack the original message to avoid redelivery
+                channel.ack(message)
             }
         })
-
-
     }
 
     emit(exchangeName, data) {

@@ -26,7 +26,7 @@ export class InsertData {
 
     saveEvent = async (data) => {
         const file = await this.fileAccess.getFile(data.aiTextAnalyzeUrl)
-        const payrolls = file.map(payroll => {
+        const payrolls = (file?.lines ?? file).map(payroll => {
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId

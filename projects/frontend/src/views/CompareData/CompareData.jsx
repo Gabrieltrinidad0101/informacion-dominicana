@@ -29,6 +29,7 @@ export function CompareData() {
 
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState("");
+  const [firstLoad, setFirstLoad] = useState(true);
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState(queryParams.get("date") ?? '');
   const [index, setIndex] = useState(1);
@@ -74,10 +75,12 @@ export function CompareData() {
 
   useEffect(() => {
     requestJson(`${institution}/nomina/exportToJson/payroll`).then((res) => {
+      setDates(res);
+      setFirstLoad(false)
+      if(firstLoad && currentDate) return
       setCurrentDate(res[0].time);
       queryParams.set("date", res[0].time);
       history.push({ search: queryParams.toString() });
-      setDates(res);
     });
   }, [institution]);
 

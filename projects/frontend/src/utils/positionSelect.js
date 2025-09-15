@@ -14,8 +14,6 @@ export const positionSelect = (selectEmployee, imageRef, employee) => {
     const width = imageDimentions.width * (porWidth / 100);
     const height = imageDimentions.height * (porHeight / 100);
 
-    console.log({selectEmployee, imageRef, employee,positionX, positionY, width, height})
-
     element.style.left = `${positionX}px`;
     element.style.top = `${positionY}px`;
     element.style.width = `${width}px`;
