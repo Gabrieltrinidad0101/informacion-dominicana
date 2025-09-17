@@ -43,6 +43,7 @@ export class EventsRepository {
 
     async deleteEvents(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        delete data.exchangeName
         return await Model.deleteMany({ ...data })
     }
 }

@@ -31,7 +31,7 @@ export class InsertData {
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId
             payroll.index = data.index
-            payroll.urlDownload = data.urlDownload
+            payroll.link = data.link
             if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })

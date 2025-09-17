@@ -95,12 +95,10 @@ export const chartBase = async (container, data, customTheme,deparment) => {
 				toolTip.style.display = 'none';
 			} else {
 				dateStr = param.time;
-				console.log(param)
 				toolTip.style.display = 'block';
 				const data_ = param.seriesData.get(areaSeries);
 				const price = data_.value !== undefined ? data_.value : data_.close;
 				const coordinate = areaSeries.priceToCoordinate(price);
-				const containerPosition = chartElement.getBoundingClientRect();
 				toolTip.innerHTML = `<div>
             fecha: ${dateStr}
 			<br/>
@@ -108,17 +106,6 @@ export const chartBase = async (container, data, customTheme,deparment) => {
 			<br/>
 			<a href="https://www.google.com/search?q=${dateStr}" id="${data.url}" target="_blank">Ver fuente</a>
             </div>`;
-
-				const coordinateY =
-					coordinate - toolTipHeight - toolTipMargin > 0
-						? coordinate - toolTipHeight - toolTipMargin
-						: Math.max(
-							0,
-							Math.min(
-								container.clientHeight - toolTipHeight - toolTipMargin,
-								coordinate + toolTipMargin
-							)
-						);
 				toolTip.style.left = (param.sourceEvent.pageX  - toolTipWidth / 2) + 'px';
 				toolTip.style.top = (param.sourceEvent.pageY - 60) + 'px';
 			}

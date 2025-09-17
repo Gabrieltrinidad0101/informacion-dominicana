@@ -44,11 +44,9 @@ export function ShowImage({ employee, institution, currentDate }) {
     return (
         <>
             <div className={showImageCss.overflowImage}>
-                <div>
-                    <img ref={imageRef} src={url} width="100%" height="100%" style={{
-                        transform: `rotate(-${employee?.pageAngle ?? 0}deg)`,
-                    }} />
-                </div>
+                <img ref={imageRef} className={showImageCss.image} src={url} width="90%" height="90%" style={{
+                    transform: `rotate(-${employee?.pageAngle ?? 0}deg)`,
+                }} />
             </div>
 
             <div className={positionSelect.selecteEmployee} ref={selectEmployee}></div>

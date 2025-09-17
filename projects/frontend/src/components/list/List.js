@@ -29,15 +29,15 @@ const getSalaryFormat = (position) => formattedMoney(getSalary(position));
 
 
 // Component for each position
-export const PositionAndSalary = ({ position, employees, showImage }) => {
+export const PositionAndSalary = ({ position, employees, showImage, search }) => {
   const [open, setOpen] = useState(false);
-
-  return (
+  const salary = getSalaryFormat(position);
+  return (  
     <>
       <ListItemButton onClick={() => setOpen(prev => !prev)}>
         <Box display="flex" justifyContent="space-between" width="100%">
           <Typography>{position}</Typography>
-          <Typography>{getSalaryFormat(position)}</Typography>
+          <Typography>{salary}</Typography>
           <Typography>{employees.length}</Typography>
         </Box>
         <Box ml={3}>{open ? <i>⬆️</i> : <i>⬇️</i>}</Box>
@@ -45,11 +45,22 @@ export const PositionAndSalary = ({ position, employees, showImage }) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {employees.map((employee, i) => (
+            (employee.name.toLowerCase().includes(search.toLowerCase()) ||
+              employee.income.toString().includes(search.toLowerCase()) ||
+              salary.toString().toLowerCase().includes(search.toLowerCase())
+            ) &&
             <ListItemButton key={i}>
-              <Box display="flex" justifyContent="space-between" width="100%">
+              <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{employee.name}</Typography>
                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formattedMoney(employee.income)}</Typography>
-                <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: 0, p: 0 }}>Ver fuente</Button>
+                <div>
+                  <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: '10px', p: 0 }}>Ver fuente</Button>
+                  <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
+                    <a href={employee.link} target="_blank" rel="noreferrer">
+                      Ir al documento original
+                    </a>
+                  </Button>
+                </div>
               </Box>
             </ListItemButton>
           ))}
@@ -116,7 +127,9 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
     if (!text) return setPositions(Object.keys(positionBySalary));
     setPositions(prev =>
       prev.filter(value =>
-        value.toLowerCase().includes(text.toLowerCase())
+        value.toLowerCase().includes(text.toLowerCase()) ||
+        positionBySalary[value].find(v => v.name.toLowerCase().includes(text.toLowerCase()) || v.income.toString().includes(text.toLowerCase()))  ||
+        getSalaryFormat(value).toString().toLowerCase().includes(text.toLowerCase())
       )
     );
   };
@@ -206,6 +219,7 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
               position={position}
               employees={positionBySalary[position]}
               showImage={showImage}
+              search={search}
             />
           ))}
         </div>

@@ -56,7 +56,7 @@ export function CompareData() {
       },
     },
     { field: "sex", headerName: "Género", flex: 1 },
-    { field: "page", headerName: "Página", flex: 1, hide: true },
+    { field: "index", headerName: "Página", flex: 1, hide: true },
     {
       field: "action",
       headerName: "Acciones",

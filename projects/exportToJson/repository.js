@@ -35,9 +35,17 @@ export class Repository {
     }
 
     async payroll(institutionName, sex) {
-        const match = { date: { $type: "date" } }
-        if (institutionName) match.institutionName = institutionName
-        if (sex) match.sex = sex
+        const match = {
+            date: {
+                $not: {
+                    $gte: new Date("2018-12-01T00:00:00.000Z"),
+                    $lt: new Date("2019-01-01T00:00:00.000Z")
+                }
+            }
+        };
+
+        if (institutionName) match.institutionName = institutionName;
+        if (sex) match.sex = sex;
 
         return await Payroll.aggregate([
             { $match: match },
@@ -379,7 +387,7 @@ export class Repository {
                             width: "$width",
                             height: "$height",
                             index: "$index",
-                            urlDownload: "$urlDownload",
+                            link: "$link",
                             traceId: "$traceId",
                             id: "$_id"
                         }
