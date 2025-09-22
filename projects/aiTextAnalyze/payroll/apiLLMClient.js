@@ -4,7 +4,7 @@ export async function apiLLMClient(content) {
     const response = await axios.post(
         "https://api.deepseek.com/v1/chat/completions",
         {
-            model: "deepseek-chat",
+            model: "deepseek-reasoner",
             messages: [
                 { role: "user", content }
             ],

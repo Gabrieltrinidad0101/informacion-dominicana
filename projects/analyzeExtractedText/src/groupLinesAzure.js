@@ -80,30 +80,6 @@ function groupLinesWithAngle(rawData, angle, imageWidth, imageHeight) {
         }
     }
 
-    rotatedWords.sort((a, b) => a.y - b.y);
-    const lines = [];
-
-    for (const word of rotatedWords) {
-        let addedToLine = false;
-
-        for (const line of lines) {
-            if (Math.abs(line.avgY - word.y) <= word.height / 2) {
-                line.words.push(word);
-                line.avgY = (line.avgY * (line.words.length - 1) + word.y) / line.words.length;
-                addedToLine = true;
-                break;
-            }
-        }
-
-        if (!addedToLine) {
-            lines.push({ words: [word], avgY: word.y });
-        }
-    }
-
-    for (const line of lines) {
-        line.words.sort((a, b) => a.x - b.x);
-    }
-
     return {
         angle,
         lines: lines.map(line => getLinePosition(line.words))

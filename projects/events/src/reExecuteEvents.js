@@ -5,11 +5,15 @@ export class ReExecuteEvents {
     }
     
     reExecuteEvents = async (data) => {
-        const events = await this.getEvents(data)
+        const search = data.event
+        const events = await this.getEvents(search)
         events.forEach(event => {
             event.retryCount = event.retryCount ?? 0
             event.retryCount++
-            this.eventBus.emitCustomExchange(data.exchangeName	,event)
+            this.eventBus.emitCustomExchange(search.exchangeName,event,{
+                force: data.force,
+                typeOfExecute: data.typeOfExecute,
+            })
         })
     }
     

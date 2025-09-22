@@ -1,14 +1,13 @@
 import { DataGrid } from "@mui/x-data-grid";
-import React, { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { SimpleSelect } from "../inputs/simpleSelects";
 import { InputText } from "../inputs/inputText";
 import EventsCss from "./Evento.module.css";
-import { Button, Dialog, DialogTitle, DialogContent, Box } from "@mui/material";
+import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlLabel, RadioGroup, Radio } from "@mui/material";
 import constants from "../../constants";
 
-
 function JsonPreview({ file }) {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     fetch(`${constants.urlData}/${file}`)
@@ -38,17 +37,20 @@ function JsonPreview({ file }) {
 
 
 export function Evento({ exchangeName }) {
-  const [downloadLinks, setDownloadLinks] = React.useState([]);
-  const [columns, setColumns] = React.useState([]);
-  const [search, setSearch] = React.useState({});
-  const [open, setOpen] = React.useState(false);
-  const [cellData, setCellData] = React.useState(null);
+  const [downloadLinks, setDownloadLinks] = useState([]);
+  const [columns, setColumns] = useState([]);
+  const [search, setSearch] = useState({});
+  const [open, setOpen] = useState(false);
+  const [cellData, setCellData] = useState(null);
+  const [openExecuteModal, setOpenExecuteModal] = useState(false);
+  const [force, setForce] = useState(false);
+  const [typeOfExecute, setTypeOfExecute] = useState('completeExecution');
 
   const searchData = async () => {
     try {
       const data = await fetch(
         Object.keys(search).length > 0
-          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}${Object.keys(search).map((key)=> `&${key}=${search[key]}`).join('')}`
+          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}${Object.keys(search).map((key) => `&${key}=${search[key]}`).join('')}`
           : `${constants.apiEvents}/find?exchangeName=${exchangeName}`
       );
       const json = await data.json();
@@ -76,8 +78,9 @@ export function Evento({ exchangeName }) {
     try {
       await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
-          ...search,
-          exchangeName: exchangeName,
+          event: {...search,exchangeName},
+          force: force,
+          typeOfExecute: typeOfExecute,
         }),
         method: "POST",
         headers: {
@@ -108,7 +111,7 @@ export function Evento({ exchangeName }) {
     searchData();
   }, []);
 
-  const onChangeValue = (key,value) => {
+  const onChangeValue = (key, value) => {
     setSearch((prev) => ({
       ...prev,
       [key]: value,
@@ -176,7 +179,7 @@ export function Evento({ exchangeName }) {
           {
             Object.keys(search).map((key, index) =>
               <div>
-                <InputText label={key} key={index} onChangeSearch={(e)=>onChangeValue(key,e.target.value)} name={key} value={search[key]} />
+                <InputText label={key} key={index} onChangeSearch={(e) => onChangeValue(key, e.target.value)} name={key} value={search[key]} />
                 <Button sx={{
                   height: 55
                 }} variant="contained" color="error" height="10px" onClick={() => onRemoveKey(key)}>Eliminar</Button>
@@ -186,7 +189,7 @@ export function Evento({ exchangeName }) {
         </div>
         <div className={EventsCss.buttons}>
           <Button onClick={searchData}>Buscar</Button>
-          <Button onClick={execute}>Ejecutar</Button>
+          <Button onClick={()=>setOpenExecuteModal(true)}>Ejecutar</Button>
           <Button onClick={deleteEvents}>Eliminar</Button>
         </div>
       </div>
@@ -215,7 +218,6 @@ export function Evento({ exchangeName }) {
         />
       </div>
 
-      {/* Modal */}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -234,6 +236,33 @@ export function Evento({ exchangeName }) {
             {JSON.stringify(cellData?.row, null, 2)}
           </pre>
           {renderCellContent()}
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={openExecuteModal}
+        onClose={() => setOpenExecuteModal(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>Type of execute</DialogTitle>
+        <DialogContent>
+          <Box display="flex">
+            <FormControlLabel control={<Checkbox checked={force} onChange={(e) => setForce(e.target.checked)} />} label="Force" />
+            <RadioGroup
+              defaultValue="completeExecution"
+              row
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+            >
+              <FormControlLabel value="onlyOne" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />}  label="Only one" />
+              <FormControlLabel value="onlyOneAndNext" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />} label="Only one and next" />
+              <FormControlLabel value="completeExecution" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />} label="Complete execution" />
+            </RadioGroup>
+          </Box>
+          <Box display="flex" justifyContent="flex-end">
+            <Button variant="contained"onClick={execute} >Execute</Button>
+          </Box>
+
         </DialogContent>
       </Dialog>
     </div>

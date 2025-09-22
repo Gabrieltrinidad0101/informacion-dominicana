@@ -8,11 +8,11 @@ export class Payroll {
 
     async save(metadata, fileName, data) {
         const fileUrl = `${metadata.institutionName}/nomina/exportToJson/${fileName}`
-        await this.fileAccess.createTextFile(fileUrl, JSON.stringify(data)
-        );
+        await this.fileAccess.createTextFile(fileUrl, JSON.stringify(data));
     }
 
     payroll = async (data) => {
+        console.log("data")
         const payroll = await this.payrollRepository.payroll(data.institutionName);
         const employeersTotal = await this.payrollRepository.payrollTotal(data.institutionName);
         const employeersM = await this.payrollRepository.payrollTotal(data.institutionName, "M");

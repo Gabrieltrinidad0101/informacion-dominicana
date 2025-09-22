@@ -5,13 +5,14 @@ export class AnalyzeExtractedText {
     constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus;
         this.fileManagerClient = fileManagerClient;
-        this.eventBus.on('analyzeExtractedText', 'analyzeExtractedTexts', (data) => this.analyzeExtractedText(data))
+        this.eventBus.on('analyzeExtractedText', 'analyzeExtractedTexts', (data,metadata) => this.analyzeExtractedText(data,metadata))
     }
 
-    analyzeExtractedText = async (data) => {
+    analyzeExtractedText = async (data,metadata) => {
         const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${data.index}.json`)
         let textOfImage;
-        if (!await this.fileManagerClient.fileExists(fileUrl)) {
+        if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
+            console.log({"data": data})
             const rawData = await this.fileManagerClient.getFile(data.extractedTextUrl);
             if (data.type === 'azure') {
                 textOfImage = groupLinesAzure(rawData);
@@ -21,6 +22,6 @@ export class AnalyzeExtractedText {
             }
             await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify(textOfImage));
         }
-        this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl });
+        this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
     }
 }

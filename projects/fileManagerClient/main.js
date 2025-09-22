@@ -32,6 +32,7 @@ export class FileManagerClient {
     }
 
     fileExists = async (filePath) => {
+        console.log(`${'http://filesManager:4000'}/file-exists?filePath=${filePath}`)
         const res = await axios.get(`${'http://filesManager:4000'}/file-exists?filePath=${filePath}`);
         return res.data.exists;
     }

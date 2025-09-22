@@ -9,13 +9,13 @@ export class Payroll {
         this.encrypt = encrypt;
         this.getId = getId;
 
-        this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', async (data) => await this.payroll(data))
+        this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', async (data,metadata) => await this.payroll(data,metadata))
     }
 
-    payroll = async (data) => {
+    payroll = async (data,metadata) => {
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data,'aiTextAnalyze', `${data.index}.json`)
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
-        if (!fileExists) {
+        if (metadata?.force || !fileExists) {
             const dataText = await this.fileManagerClient.getFile(data.analyzeExtractedTextUrl);
             const propt_ = propt(JSON.stringify(dataText.lines));
             const response = JSON.parse(await this.apiLLMClient(propt_));
@@ -28,6 +28,6 @@ export class Payroll {
         this.eventBus.emit("insertDatas",{
             ...data,
             aiTextAnalyzeUrl,
-        })
+        },metadata)
     }
 }

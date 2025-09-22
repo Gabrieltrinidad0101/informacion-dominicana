@@ -94,7 +94,6 @@ app.post('/create-file', (req, res) => {
   fs.mkdirSync(generetedPath(folderPath), { recursive: true });
   const fullPath = path.join(generetedPath(folderPath), path.basename(folderPath));
   fs.writeFileSync(fullPath, fileText, 'utf8');
-
   res.json({ response: 'ok' });
 });
 

@@ -50,7 +50,9 @@ export class EventBus {
             if (!message) return
             try {
                 const content = JSON.parse(message.content.toString())
-                await callback(content)
+                const force = message.properties.headers['force']
+                const typeOfExecute = message.properties.headers['typeOfExecute']
+                await callback(content,{force,typeOfExecute})
                 channel.ack(message)
                 console.log(JSON.stringify({ eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName } }))
             } catch (error) {
@@ -85,15 +87,21 @@ export class EventBus {
         })
     }
 
-    emit(exchangeName, data) {
+    emit(exchangeName, data,metadata) {
         if (!data.traceId) data.traceId = crypto.randomUUID()
         data.exchangeName = exchangeName
-        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)))
+        if (metadata?.typeOfExecute === "onlyOne") return;
+        if (metadata?.typeOfExecute === "onlyOneAndNext") metadata.typeOfExecute = "onlyOne"
+        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)),{
+            headers: metadata
+        })
     }
 
-    emitCustomExchange(exchangeName, data) {
-        if (!data.traceId) data.traceId = crypto.randomUUID()
-        data.exchangeName = exchangeName
-        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)))
+    emitCustomExchange(exchangeName, event,metadata) {
+        if (!event.traceId) event.traceId = crypto.randomUUID()
+        event.exchangeName = exchangeName
+        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)),{
+            headers: metadata
+        })
     }
 }
