@@ -6,18 +6,26 @@ const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
 export class EventsRepository {
+
+    dataToQuery = (data) => {
+        const query = {};
+        for (const key in data) {
+            if (key === '_id') {
+                query[key] = data[key]
+            } else if (key == 'index') {
+                query[key] = parseInt(data[key]);
+            } else if (data[key] !== undefined && data[key] !== null) {
+                query[key] = { $regex: data[key].toString(), $options: "i" };
+            }
+        }
+        return query
+    }
+
     async find(data_) {
         const data = { ...data_ }
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName
-        const query = {};
-        for (const key in data) {
-            if(key === '_id'){
-                query[key] = data[key]
-            } else if (data[key] !== undefined && data[key] !== null) {
-                query[key] = { $regex: data[key], $options: "i" };
-            }
-        }
+        const query = this.dataToQuery(data)
         return await Model.find({ ...query })
     }
 
@@ -44,6 +52,7 @@ export class EventsRepository {
     async deleteEvents(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName
-        return await Model.deleteMany({ ...data })
+        const query = this.dataToQuery(data)
+        return await Model.deleteMany({ ...query })
     }
 }

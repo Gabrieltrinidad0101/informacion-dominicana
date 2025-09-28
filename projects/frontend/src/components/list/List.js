@@ -28,11 +28,10 @@ const getSalaryFormat = (position) => formattedMoney(getSalary(position));
 
 
 
-// Component for each position
 export const PositionAndSalary = ({ position, employees, showImage, search }) => {
   const [open, setOpen] = useState(false);
   const salary = getSalaryFormat(position);
-  return (  
+  return (
     <>
       <ListItemButton onClick={() => setOpen(prev => !prev)}>
         <Box display="flex" justifyContent="space-between" width="100%">
@@ -55,11 +54,6 @@ export const PositionAndSalary = ({ position, employees, showImage, search }) =>
                 <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formattedMoney(employee.income)}</Typography>
                 <div>
                   <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: '10px', p: 0 }}>Ver fuente</Button>
-                  <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
-                    <a href={employee.link} target="_blank" rel="noreferrer">
-                      Ir al documento original
-                    </a>
-                  </Button>
                 </div>
               </Box>
             </ListItemButton>
@@ -128,7 +122,7 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
     setPositions(prev =>
       prev.filter(value =>
         value.toLowerCase().includes(text.toLowerCase()) ||
-        positionBySalary[value].find(v => v.name.toLowerCase().includes(text.toLowerCase()) || v.income.toString().includes(text.toLowerCase()))  ||
+        positionBySalary[value].find(v => v.name.toLowerCase().includes(text.toLowerCase()) || v.income.toString().includes(text.toLowerCase())) ||
         getSalaryFormat(value).toString().toLowerCase().includes(text.toLowerCase())
       )
     );
@@ -145,7 +139,6 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
     const key = month.format("YYYY-MM");
     return !allowedMonths.has(key);
   };
-
 
   return (
     <>
@@ -196,6 +189,12 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
           </ThemeProvider>
         </div>
       </div>
+
+      <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
+        <a href={Object.values(positionBySalary)?.[0]?.[0]?.link ?? ''} target="_blank" rel="noopener noreferrer">
+          Ir al documento original
+        </a>
+      </Button>
 
       <List
         className={ListCss.list}

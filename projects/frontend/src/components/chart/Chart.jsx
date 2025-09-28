@@ -5,16 +5,17 @@ import { CompareCharts } from "../compareCharts/CompareCharts";
 import { requestJson } from "../../utils/request";
 
 let isLoad = {}
-export function Chart({ data, customTheme,compare,deparment }) {
+export function Chart({ data, customTheme,compare,deparment,onClickSources }) {
   const [openModal, setOpenModal] = useState(false);
   const [chart, setChart] = useState(null);
   const [areaSeries, setAreaSeries] = useState(null);
   const containerChart = useRef();
 
+
   const verifyVisibility = async (entry) => {
     if (isLoad[data.title] || !entry[0].isIntersecting) return;
     isLoad[data.title] = entry[0].isIntersecting;
-    setChart(await chartBase(containerChart.current, data, customTheme,deparment));
+    setChart(await chartBase({container: containerChart.current, data, customTheme,deparment,onClickSources}));
   };
 
   useEffect(() => {

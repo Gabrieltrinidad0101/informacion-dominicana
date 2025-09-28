@@ -1,7 +1,7 @@
 import * as LightweightCharts from "lightweight-charts"
 import { requestJson } from "../../utils/request";
 
-export const chartBase = async (container, data, customTheme,deparment) => {
+export const chartBase = async ({container, data, customTheme,deparment,onClickSources}) => {
 	try {
 		const chartElement = document.createElement('div');
 		const superContainer = container.parentElement.parentElement.getBoundingClientRect()
@@ -61,8 +61,6 @@ export const chartBase = async (container, data, customTheme,deparment) => {
 		areaSeries.setData(data1);
 
 		const toolTipWidth = 80;
-		const toolTipHeight = 80;
-		const toolTipMargin = 15;
 
 		const toolTip = document.createElement('div');
 		toolTip.style = `width: 150px; height: 80px; position: absolute; display: none; padding: 8px; box-sizing: border-box; font-size: 12px; text-align: left; z-index: 1000; top: 12px; left: 12px; pointer-events: none; border: 1px solid; border-radius: 2px;font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;`;
@@ -76,8 +74,7 @@ export const chartBase = async (container, data, customTheme,deparment) => {
 			const rect = document.getElementById(data.url)?.getBoundingClientRect()
 			if(!rect) return
 			if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-				window.open(`comparar datos?date=${dateStr}&institution=${deparment}`, '_blank')
-				console.log(`comparar datos?date=${dateStr}&institution=${deparment}`)
+				onClickSources?.()
 			}
 		})
 
@@ -98,7 +95,6 @@ export const chartBase = async (container, data, customTheme,deparment) => {
 				toolTip.style.display = 'block';
 				const data_ = param.seriesData.get(areaSeries);
 				const price = data_.value !== undefined ? data_.value : data_.close;
-				const coordinate = areaSeries.priceToCoordinate(price);
 				toolTip.innerHTML = `<div>
             fecha: ${dateStr}
 			<br/>

@@ -1,10 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { SimpleSelect } from "../inputs/simpleSelects";
 import { InputText } from "../inputs/inputText";
 import EventsCss from "./Evento.module.css";
 import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlLabel, RadioGroup, Radio } from "@mui/material";
 import constants from "../../constants";
+import { useHistory } from "react-router";
 
 function JsonPreview({ file }) {
   const [data, setData] = useState(null);
@@ -36,15 +37,18 @@ function JsonPreview({ file }) {
 }
 
 
-export function Evento({ exchangeName }) {
+export function Evento({ exchangeName,queryParams }) {
   const [downloadLinks, setDownloadLinks] = useState([]);
   const [columns, setColumns] = useState([]);
-  const [search, setSearch] = useState({});
+  const [search, setSearch] = useState(JSON.parse(queryParams.get(exchangeName)) ?? {});
+  console.log(search)
   const [open, setOpen] = useState(false);
   const [cellData, setCellData] = useState(null);
   const [openExecuteModal, setOpenExecuteModal] = useState(false);
   const [force, setForce] = useState(false);
   const [typeOfExecute, setTypeOfExecute] = useState('completeExecution');
+
+  const history = useHistory();
 
   const searchData = async () => {
     try {
@@ -53,6 +57,19 @@ export function Evento({ exchangeName }) {
           ? `${constants.apiEvents}/find?exchangeName=${exchangeName}${Object.keys(search).map((key) => `&${key}=${search[key]}`).join('')}`
           : `${constants.apiEvents}/find?exchangeName=${exchangeName}`
       );
+
+      if(JSON.stringify(search) === '{}'){
+        queryParams.delete(exchangeName);
+      }
+
+      if(JSON.stringify(search) !== '{}'){
+        queryParams.set(exchangeName, JSON.stringify(search));
+        history.push({
+          pathname: history.location.pathname,
+          search: queryParams.toString(),
+        });
+      }
+
       const json = await data.json();
       if (!json || json.length === 0) {
         setDownloadLinks([]);
@@ -78,7 +95,7 @@ export function Evento({ exchangeName }) {
     try {
       await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
-          event: {...search,exchangeName},
+          event: { ...search, exchangeName },
           force: force,
           typeOfExecute: typeOfExecute,
         }),
@@ -94,7 +111,7 @@ export function Evento({ exchangeName }) {
     try {
       await fetch(`${constants.apiEvents}/deleteEvents`, {
         body: JSON.stringify({
-          [search.key]: search.value,
+          ...search,
           exchangeName: exchangeName,
         }),
         method: "DELETE",
@@ -116,7 +133,7 @@ export function Evento({ exchangeName }) {
       ...prev,
       [key]: value,
     }));
-  };
+  };  
 
   const onChangeKey = (e) => {
     setSearch((prev) => ({
@@ -189,7 +206,7 @@ export function Evento({ exchangeName }) {
         </div>
         <div className={EventsCss.buttons}>
           <Button onClick={searchData}>Buscar</Button>
-          <Button onClick={()=>setOpenExecuteModal(true)}>Ejecutar</Button>
+          <Button onClick={() => setOpenExecuteModal(true)}>Ejecutar</Button>
           <Button onClick={deleteEvents}>Eliminar</Button>
         </div>
       </div>
@@ -254,13 +271,13 @@ export function Evento({ exchangeName }) {
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
             >
-              <FormControlLabel value="onlyOne" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />}  label="Only one" />
+              <FormControlLabel value="onlyOne" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />} label="Only one" />
               <FormControlLabel value="onlyOneAndNext" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />} label="Only one and next" />
               <FormControlLabel value="completeExecution" control={<Radio onChange={(e) => setTypeOfExecute(e.target.value)} />} label="Complete execution" />
             </RadioGroup>
           </Box>
           <Box display="flex" justifyContent="flex-end">
-            <Button variant="contained"onClick={execute} >Execute</Button>
+            <Button variant="contained" onClick={execute} >Execute</Button>
           </Box>
 
         </DialogContent>
