@@ -1,0 +1,1 @@
+select date time,count(*) value from payrolls group by date

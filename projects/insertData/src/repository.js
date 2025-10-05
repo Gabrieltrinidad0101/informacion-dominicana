@@ -1,25 +1,17 @@
-import mongoose from 'mongoose';
+import pgPromise from 'pg-promise';
+import fs from 'fs';
+import path from 'path';
 
-await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
+const pgp = pgPromise();
+const db = pgp('postgresql://myuser:mypassword@postgres:5432/informacion-dominicana');
 
-const dynamicSchema = new mongoose.Schema({}, { strict: false });
-const Payroll = mongoose.models.payroll ?? mongoose.model("payroll", dynamicSchema);
 
-export class Repository {
-
-    async save(data) {
-        const bulkOps = data.map(doc => ({
-            updateOne: {
-                filter: { _id: doc._id }, 
-                update: { $set: doc },
-                upsert: true
-            }
-        }));
-
-        await Payroll.bulkWrite(bulkOps, { ordered: false });
-    }
-
-    async delete({date, institutionName,index,traceId,urlDownload}) {
-        await Payroll.deleteMany({date, institutionName,index,traceId,urlDownload});
+export const insertData = async (payroll)=>{
+    try {
+      const sqlPath = path.resolve('scripts/insert_payroll.sql');
+      const sql = fs.readFileSync(sqlPath, 'utf8');
+      await db.one(sql, payroll);
+    } catch (err) {
+      console.error('Error insertando:', err);
     }
 }

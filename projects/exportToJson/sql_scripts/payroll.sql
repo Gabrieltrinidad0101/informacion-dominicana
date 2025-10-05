@@ -1,0 +1,1 @@
+select date time,sum(income) value from payrolls group by date

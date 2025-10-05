@@ -32,6 +32,7 @@ export class InsertData {
             payroll.traceId = data.traceId
             payroll.index = data.index
             payroll.link = data.link
+            payroll.income ??= 0
             if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
