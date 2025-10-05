@@ -41,7 +41,6 @@ export function Evento({ exchangeName,queryParams }) {
   const [downloadLinks, setDownloadLinks] = useState([]);
   const [columns, setColumns] = useState([]);
   const [search, setSearch] = useState(JSON.parse(queryParams.get(exchangeName)) ?? {});
-  console.log(search)
   const [open, setOpen] = useState(false);
   const [cellData, setCellData] = useState(null);
   const [openExecuteModal, setOpenExecuteModal] = useState(false);
@@ -58,12 +57,13 @@ export function Evento({ exchangeName,queryParams }) {
           : `${constants.apiEvents}/find?exchangeName=${exchangeName}`
       );
 
-      if(JSON.stringify(search) === '{}'){
+      const searchString = JSON.stringify(search);
+      if(searchString === '{}'){
         queryParams.delete(exchangeName);
       }
 
-      if(JSON.stringify(search) !== '{}'){
-        queryParams.set(exchangeName, JSON.stringify(search));
+      if(queryParams.get(exchangeName) !== searchString){
+        queryParams.set(exchangeName, searchString);
         history.push({
           pathname: history.location.pathname,
           search: queryParams.toString(),

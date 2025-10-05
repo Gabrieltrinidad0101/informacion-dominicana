@@ -6,17 +6,20 @@ import EventosCss from "./Eventos.module.css";
 export function Eventos() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const exchangeNames = ["downloadLinks","downloads","postDownloads","extractedTexts","analyzeExtractedTexts","aiTextAnalyzers","insertDatas","payrollExportToJsons","payrolls"]
+  const allData = queryParams.get("allData");
+  if(allData){
+    for(let exchangeName of exchangeNames){
+      queryParams.set(exchangeName, allData);
+    }
+    queryParams.delete("allData");
+  }
+  
   return (
     <div className={EventosCss.eventos} >
-      <Evento exchangeName="downloadLinks" queryParams={queryParams} />
-      <Evento exchangeName="downloads" queryParams={queryParams}  />
-      <Evento exchangeName="postDownloads" queryParams={queryParams} />
-      <Evento exchangeName="extractedTexts" queryParams={queryParams} />
-      <Evento exchangeName="analyzeExtractedTexts" queryParams={queryParams} />
-      <Evento exchangeName="aiTextAnalyzers" queryParams={queryParams}  />
-      <Evento exchangeName="insertDatas" queryParams={queryParams}  />
-      <Evento exchangeName="payrollExportToJsons" queryParams={queryParams}  />
-      <Evento exchangeName="payrolls" queryParams={queryParams}  />
+      {exchangeNames.map((exchangeName) => (
+        <Evento exchangeName={exchangeName} queryParams={queryParams} />
+      ))}
     </div>
   );
 }

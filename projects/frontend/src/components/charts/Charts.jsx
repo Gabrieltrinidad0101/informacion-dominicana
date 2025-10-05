@@ -4,7 +4,7 @@ import chartCss from "./charts.module.css";
 import constants from "../../constants";
 import { requestJson } from "../../utils/request";
 
-export function Charts({ data, deparment, customTheme, compare }) {
+export function Charts({ data, deparment, customTheme, compare,onClickSources }) {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
     if (data) return setDatas(data);
@@ -16,6 +16,7 @@ export function Charts({ data, deparment, customTheme, compare }) {
     <div className={chartCss.containerCustom}>
       {datas.map((data, index) => (
         <Chart
+          onClickSources={onClickSources}
           compare={compare}
           deparment={deparment}
           data={data}

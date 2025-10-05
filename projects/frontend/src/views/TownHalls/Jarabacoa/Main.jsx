@@ -44,6 +44,7 @@ export function Main() {
         deparment="Ayuntamiento de Jarabacoa"
         customTheme={customTheme}
         compare={true}
+        onClickSources={(date)=> setCurrentDate(date)}
       />
       <ListGroup
         currentDate={currentDate}

@@ -71,10 +71,12 @@ export const chartBase = async ({container, data, customTheme,deparment,onClickS
 
 		let dateStr = ""
 		window.addEventListener('click', (e) => {
-			const rect = document.getElementById(data.url)?.getBoundingClientRect()
+			const element = document.getElementById(data.url)
+			const rect = element?.getBoundingClientRect()
 			if(!rect) return
 			if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-				onClickSources?.()
+				element.click()
+				onClickSources?.(new Date(dateStr))
 			}
 		})
 
@@ -100,7 +102,7 @@ export const chartBase = async ({container, data, customTheme,deparment,onClickS
 			<br/>
 			valor: ${price}
 			<br/>
-			<a href="https://www.google.com/search?q=${dateStr}" id="${data.url}" target="_blank">Ver fuente</a>
+			<a href="#list" id="${data.url}">Ver fuente</a>
             </div>`;
 				toolTip.style.left = (param.sourceEvent.pageX  - toolTipWidth / 2) + 'px';
 				toolTip.style.top = (param.sourceEvent.pageY - 60) + 'px';

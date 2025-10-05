@@ -142,87 +142,98 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
 
   return (
     <>
-      {currentDate && <Modal
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{ backdrop: { timeout: 500 } }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <ShowImage
-              institution={institution}
-              currentDate={currentDate}
-              employee={employee}
-            />
-          </Box>
-        </Fade>
-      </Modal>}
-
-      <h1>{title}</h1>
-
-      <div className={ListCss.inputs}>
-        <TextField
-          fullWidth
-          label="Buscar"
-          variant="filled"
-          value={search}
-          onChange={onChangeSearch}
-          sx={lightTheme}
-        />
-
-        <div className={ListCss.icon}>
-          <ThemeProvider theme={darkTheme}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                views={['month', 'year']}
-                value={dayjs(currentDate)}
-                onChange={(newValue) => {
-                  if (!newValue) return;
-                  const jsDate = newValue.toDate();
-                  handleDate(jsDate);
-                }}
-                shouldDisableMonth={shouldDisableMonth}
+      <div id="list">
+        {currentDate && <Modal
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{ backdrop: { timeout: 500 } }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <ShowImage
+                institution={institution}
+                currentDate={currentDate}
+                employee={employee}
               />
-            </LocalizationProvider>
-          </ThemeProvider>
-        </div>
-      </div>
-
-      <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
-        <a href={Object.values(positionBySalary)?.[0]?.[0]?.link ?? ''} target="_blank" rel="noopener noreferrer">
-          Ir al documento original
-        </a>
-      </Button>
-
-      <List
-        className={ListCss.list}
-        sx={{ bgcolor: '#fff', color: '#000', borderRadius: 2, p: 1 }}
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            <Box display="flex" justifyContent="space-between" width="calc(100% - 48px)">
-              <Typography>Posición</Typography>
-              <Typography>Salario</Typography>
-              <Typography>Cantidad</Typography>
             </Box>
-          </ListSubheader>
-        }
-      >
-        <div className={ListCss.scrollbar}>
-          {positions.sort((a, b) => getSalary(b) - getSalary(a)).map((position, index) => (
-            <PositionAndSalary
-              key={index}
-              position={position}
-              employees={positionBySalary[position]}
-              showImage={showImage}
-              search={search}
-            />
-          ))}
+          </Fade>
+        </Modal>}
+
+        <h1>{title}</h1>
+
+        <div className={ListCss.inputs}>
+          <TextField
+            fullWidth
+            label="Buscar"
+            variant="filled"
+            value={search}
+            onChange={onChangeSearch}
+            sx={lightTheme}
+          />
+
+          <div className={ListCss.icon}>
+            <ThemeProvider theme={darkTheme}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  views={['month', 'year']}
+                  value={dayjs(currentDate)}
+                  onChange={(newValue) => {
+                    if (!newValue) return;
+                    const jsDate = newValue.toDate();
+                    handleDate(jsDate);
+                  }}
+                  shouldDisableMonth={shouldDisableMonth}
+                />
+              </LocalizationProvider>
+            </ThemeProvider>
+          </div>
         </div>
-      </List>
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
+            <a href={Object.values(positionBySalary)?.[0]?.[0]?.link ?? ''} target="_blank" rel="noopener noreferrer">
+              Ir al documento original
+            </a>
+          </Button>
+
+          <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
+            <a href={`Eventos?allData=${JSON.stringify({traceId: Object.values(positionBySalary)?.[0]?.[0]?.traceId ?? ''})}`} target="_blank" rel="noopener noreferrer">
+              DEBBUG
+            </a>
+          </Button>
+        </Box>
+
+
+        <List
+          className={ListCss.list}
+          sx={{ bgcolor: '#fff', color: '#000', borderRadius: 2, p: 1 }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader">
+              <Box display="flex" justifyContent="space-between" width="calc(100% - 48px)">
+                <Typography>Posición</Typography>
+                <Typography>Salario</Typography>
+                <Typography>Cantidad</Typography>
+              </Box>
+            </ListSubheader>
+          }
+        >
+          <div className={ListCss.scrollbar}>
+            {positions.sort((a, b) => getSalary(b) - getSalary(a)).map((position, index) => (
+              <PositionAndSalary
+                key={index}
+                position={position}
+                employees={positionBySalary[position]}
+                showImage={showImage}
+                search={search}
+              />
+            ))}
+          </div>
+        </List>
+      </div>
     </>
   );
 };
