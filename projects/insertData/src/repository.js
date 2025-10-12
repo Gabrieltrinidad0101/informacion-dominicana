@@ -1,17 +1,34 @@
-import pgPromise from 'pg-promise';
-import fs from 'fs';
-import path from 'path';
+import Knex from 'knex';
 
-const pgp = pgPromise();
-const db = pgp('postgresql://myuser:mypassword@postgres:5432/informacion-dominicana');
+const knex = Knex({
+  client: 'pg',
+  connection: 'postgresql://myuser:mypassword@postgres:5432/informacion-dominicana',
+});
 
-
-export const insertData = async (payroll)=>{
+export class Repository {
+  async save(payrolls) {
     try {
-      const sqlPath = path.resolve('scripts/insert_payroll.sql');
-      const sql = fs.readFileSync(sqlPath, 'utf8');
-      await db.one(sql, payroll);
+      await knex('payrolls').insert(payrolls);
     } catch (err) {
-      console.error('Error insertando:', err);
+      throw err;
     }
+  }
+
+  async delete({ date, institutionName, index, traceId, link }) {
+    try {
+      const deletedCount = await knex('payrolls')
+        .where({
+          date,
+          institutionName,
+          index,
+          traceId,
+          link,
+        })
+        .del();
+      return deletedCount;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
+

@@ -56,12 +56,10 @@ export function Main() {
       <div className={MainCss.display}>
         {currentDate && (
           <PieChartComponent
-            type="percentage"
+            type="averageSalaryPercentage"
             simbol="%"
             description="Porcentaje de gasto por puesto"
-            url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${
-              currentDate.getMonth() + 1
-            }`}
+            url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.toISOString().slice(0, 7)}`}
             compare={false}
           />
         )}
@@ -69,9 +67,7 @@ export function Main() {
           <PieChartComponent
             type="employeeCount"
             description="Cantidad de empleados por posición"
-            url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.getFullYear()}-${
-              currentDate.getMonth() + 1
-            }`}
+            url={`Ayuntamiento de Jarabacoa/nomina/exportToJson/percentageOfSpendingByPosition${currentDate.toISOString().slice(0, 7)}`}
             compare={false}
           />
         )}

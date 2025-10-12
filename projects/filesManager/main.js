@@ -77,7 +77,6 @@ app.post('/upload-file-from-url', async (req, res) => {
     dl.on('error', reject);
     dl.start().catch(reject);
   });
-  console.log('done');
   res.json({ response: 'ok' });
 })
 

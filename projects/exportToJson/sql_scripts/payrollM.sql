@@ -1,1 +1,0 @@
-select date time,sum(income) value from payrolls where sex="M" group by date 

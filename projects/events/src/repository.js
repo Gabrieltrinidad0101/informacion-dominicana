@@ -7,6 +7,32 @@ const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
 export class EventsRepository {
 
+    async insertDefaultValues() {
+        try {
+            await PayrollExportToJson.updateOne(
+                { _id: new mongoose.Types.ObjectId("688fa9e6c1e5bf7298db4b9b") },
+                {
+                    $set: {
+                        institutionName: "Ayuntamiento de Jarabacoa"
+                    }
+                },
+                { upsert: true }
+            );
+
+            await PayrollExportToJson.updateOne(
+                { _id: new mongoose.Types.ObjectId("688fa9e6c1e5bf7298db4b9a") },
+                {
+                    $set: {
+                        institutionName: "Ayuntamiento de Moca"
+                    }
+                },
+                { upsert: true }
+            );
+        } catch {
+            // manejar errores si quieres
+        }
+    }
+
     dataToQuery = (data) => {
         const query = {};
         for (const key in data) {

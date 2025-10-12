@@ -12,17 +12,12 @@ export class Payroll {
     }
 
     payroll = async (data) => {
-        console.log("data")
         const payroll = await this.payrollRepository.payroll(data.institutionName);
         const employeersTotal = await this.payrollRepository.payrollTotal(data.institutionName);
-        const employeersM = await this.payrollRepository.payrollTotal(data.institutionName, "M");
-        const employeersF = await this.payrollRepository.payrollTotal(data.institutionName, "F");
+        const employeersM = await this.payrollRepository.payrollBySex(data.institutionName, "M");
+        const employeersF = await this.payrollRepository.payrollBySex(data.institutionName, "F");
         const employeersByPosition = await this.payrollRepository.employeersByMonthAndPosition(data.institutionName);
         const percentageOfSpendingByPosition = await this.payrollRepository.percentageOfSpendingByPosition(data.institutionName);
-        // const wageGrowth = await this.payrollRepository.wageGrowth(data.institutionName);
-        // const wageGrowthMale = await this.payrollRepository.wageGrowthMale(data.institutionName);
-        // const wageGrowthFemale = await this.payrollRepository.wageGrowthFemale(data.institutionName);
-        // const countByPosition = await this.payrollRepository.countByPosition(data.institutionName);
 
         const header = [];
         await this.save(data, "payroll.json", payroll);

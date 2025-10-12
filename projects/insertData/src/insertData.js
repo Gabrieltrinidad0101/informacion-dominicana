@@ -33,6 +33,8 @@ export class InsertData {
             payroll.index = data.index
             payroll.link = data.link
             payroll.income ??= 0
+            payroll.document = data.document ?? null
+            payroll.isDocumentValid = data.isDocumentValid ?? null
             if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })

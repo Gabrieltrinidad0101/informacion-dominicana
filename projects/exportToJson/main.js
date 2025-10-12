@@ -7,4 +7,3 @@ const eventBus = new EventBus();
 const fileAccess = new FileManagerClient();
 const repository = new Repository();
 const payroll = new Payroll(repository,eventBus,fileAccess);
-repository.insertDefaultValues();

@@ -1,0 +1,1 @@
+select date time,sum(income) value from payrolls where sex=${sex} group by date
