@@ -12,14 +12,10 @@ const options = (saveFilename, savePath) => ({
   height: 2000,
 });
 
-export class PdfToImage {
-  constructor(eventBus, fileManagerClient) {
+export class PdfToImages {
+  constructor(fileManagerClient, eventBus) {
     this.eventBus = eventBus;
     this.fileManagerClient = fileManagerClient;
-
-    this.eventBus.on("postDownload", "postDownloads", async (data,metadata) => {
-      await this.getTextFromImage(data,metadata);
-    });
   }
 
   #getNumbersOfPages = async (pdfPath) => {
@@ -28,7 +24,7 @@ export class PdfToImage {
     return pdfData.numpages;
   };
 
-  getTextFromImage = async (data,metadata) => {
+  convertPdfToImages = async (data,metadata) => {
     if (!data.urlDownload.includes("pdf")) return;
 
     // Directory where images will be saved

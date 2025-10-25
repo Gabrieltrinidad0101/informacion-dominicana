@@ -6,34 +6,35 @@ const knex = Knex({
 });
 
 export class Repository {
-  async payroll() {
+  async payroll(institutionName) {
     const result = await knex('payrolls')
       .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
       .select(knex.raw('SUM(income)::FLOAT AS value'))
-      .groupBy('time')
-      .orderBy('time', 'asc');
-    return result;
-  }
-
-  async payrollTotal(institutionName) {
-    const result = await knex('payrolls')
-      .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
-      .select(knex.raw('COUNT(income)::FLOAT AS value')) 
       .where('institutionName', institutionName)
       .groupBy('time')
       .orderBy('time', 'asc');
+      
     return result;
+  }
+
+  async payrollTotal(institutionName) { 
+    const result = await knex('payrolls') 
+      .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`)) 
+      .select(knex.raw('COUNT(income)::FLOAT AS value')) 
+      .where('institutionName', institutionName) 
+      .groupBy('time') 
+      .orderBy('time', 'asc'); 
+    return result; 
   }
 
   async payrollBySex(institutionName, sex) {
     const result = await knex('payrolls')
       .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
-      .select(knex.raw('SUM(income)::FLOAT AS value'))
+      .select(knex.raw('COUNT(income)::FLOAT AS value'))
       .where('sex', sex)
       .where('institutionName', institutionName)
       .groupBy('time')
       .orderBy('time', 'asc');
-    console.log(result[0])
     return result;
   }
 
@@ -50,7 +51,7 @@ export class Repository {
     const grouped = {};
 
     rows.forEach(row => {
-      const dateKey = row.date_key; // directly from PostgreSQL
+      const dateKey = row.date_key;
       grouped[dateKey] ??= {};
       grouped[dateKey][row.position] ??= [];
       delete row.date_key
@@ -62,8 +63,7 @@ export class Repository {
 
 
   async percentageOfSpendingByPosition(institutionName) {
-    const rows = await knex('payrolls')
-  .select(
+    const rows = await knex('payrolls').select(
     knex.raw(`TO_CHAR("date", 'YYYY-MM') AS date_key`),
     'position',
     knex.raw('COUNT(*) AS "employeeCount"'),
@@ -99,12 +99,6 @@ export class Repository {
         averageSalaryPercentage: Number(row.averageSalaryPercentage),
       };
     });
-
     return nested;
   }
-
-
 }
-
-
-

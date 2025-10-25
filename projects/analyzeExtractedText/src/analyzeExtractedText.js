@@ -22,6 +22,6 @@ export class AnalyzeExtractedText {
             }
             await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify(textOfImage));
         }
-        this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
+        await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
     }
 }

@@ -1,13 +1,7 @@
 import { getTextFromImageApiAzure } from "./apis/azure/azure.js";
 import { getTextFromImageApiOcrSpace } from "./apis/ocrSpace/ocrSpace.js";
 
-const useAzureApi = [
-    { institutionName: "Jarabacoa", year: 2019, month: 'january' },
-    { institutionName: "Jarabacoa", year: 2019, month: 9 },
-    { institutionName: "Jarabacoa", year: 2018, month: 12 },
-    { institutionName: "Jarabacoa", year: 2019, month: 'april' },
-    { institutionName: "Jarabacoa", year: 2020, month: 'april' },
-]
+
 
 export class ImageToText {
     constructor(eventBus,fileManager) {
@@ -17,7 +11,7 @@ export class ImageToText {
     }
 
     getTextFromImage = async (data,metadata) => {
-        const isAzure = useAzureApi.find(d => d.institutionName === data.institutionName && d.year == data.year && d.month == data.month)
+        const isAzure = false // todo: remove azure logic
         let textOverlay = ""
 
         const extractedTextUrl = this.fileManager.generateUrl(data,'extractedText',`${data.index}.json`)

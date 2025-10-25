@@ -238,7 +238,7 @@ export function Evento({ exchangeName,queryParams }) {
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        maxWidth="md"
+        maxWidth="lg"
         fullWidth
       >
         <DialogTitle>Cell Content</DialogTitle>

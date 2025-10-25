@@ -1,9 +1,10 @@
 import amqplib from "amqplib"
 import crypto from "crypto"
+import { logs } from "./logs"
 
 const connection = await amqplib.connect("amqp://admin:admin@rabbitmq:5672")
 const channel = await connection.createChannel()
-await channel.prefetch(1)
+await channel.prefetch(4)
 
 export class EventBus {
     constructor({ queueName, exchangeName } = {}) {
@@ -54,11 +55,13 @@ export class EventBus {
                 const typeOfExecute = message.properties.headers['typeOfExecute']
                 await callback(content,{force,typeOfExecute})
                 channel.ack(message)
-                console.log(JSON.stringify({ eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName } }))
+                logs.info(content)
             } catch (error) {
                 try {
                     const content = JSON.parse(message.content.toString())
                     content.retryCount = (content.retryCount || 0) + 1
+                    content.errors ??= []
+                    content.errors.push(error.message)
                     if (content.retryCount >= 3) {
                         console.error(JSON.stringify({
                             eventBusMaxInternalRetryError: error.message,
@@ -71,10 +74,7 @@ export class EventBus {
                     channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
                         headers: { "x-retry-count": content.retryCount }
                     })
-                    console.error(JSON.stringify({
-                        eventBusInternalError: error,
-                        eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
-                    }))
+                    logs.error(content)
                 } catch (parseError) {
                     const content = JSON.parse(message.content.toString())
                     console.error(JSON.stringify({

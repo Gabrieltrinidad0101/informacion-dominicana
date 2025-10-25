@@ -6,7 +6,6 @@ export const validateIdNumberApi = async (idNumber) => {
     const response = await axios.get(url);
     return response.data?.['valid'] ? "Valid" : "Invalid";
   } catch (error) {
-    console.log(error)
     return "None";
   }
 }

@@ -8,7 +8,7 @@ export async function apiLLMClient(content) {
             messages: [
                 { role: "user", content }
             ],
-            temperature: 0.7,
+            temperature: 0.1,
         },
         {
             headers: {

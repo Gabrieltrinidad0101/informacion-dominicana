@@ -42,6 +42,11 @@ export class FileManagerClient {
         return res.data
     }
 
+    getFileUint8Array = async (fileUrl) => {
+        const res = await axios.get(`${'http://filesManager:4000'}/${fileUrl}`);
+        return new Uint8Array(res.data)
+    }
+
     generateUrl = (data, microService, fileName) => {
         return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`
     }

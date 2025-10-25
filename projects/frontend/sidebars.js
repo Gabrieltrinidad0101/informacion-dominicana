@@ -26,7 +26,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Ayuntamientos',
-      items: ['Jarabacoa','Moca'],
+      items: ['Jarabacoa','Moca','Cotuí'],
     },
     'Fuentes',
     'Eventos',

@@ -1,4 +1,3 @@
-import {links} from "./links.js"
 import { DownloadTownHallData } from "./websites/townHall/townHall.js"
 import { EventBus } from "../eventBus/eventBus.js"
 
