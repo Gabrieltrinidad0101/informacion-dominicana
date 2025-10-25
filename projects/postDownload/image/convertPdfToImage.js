@@ -17,8 +17,8 @@ export class PdfToImage {
     this.eventBus = eventBus;
     this.fileManagerClient = fileManagerClient;
 
-    this.eventBus.on("postDownload", "postDownloads", async (data) => {
-      await this.getTextFromImage(data);
+    this.eventBus.on("postDownload", "postDownloads", async (data,metadata) => {
+      await this.getTextFromImage(data,metadata);
     });
   }
 
@@ -28,7 +28,7 @@ export class PdfToImage {
     return pdfData.numpages;
   };
 
-  getTextFromImage = async (data) => {
+  getTextFromImage = async (data,metadata) => {
     if (!data.urlDownload.includes("pdf")) return;
 
     // Directory where images will be saved
@@ -58,17 +58,16 @@ export class PdfToImage {
         fileName
       );
       
-      if (!(await this.fileManagerClient.fileExists(imageUrl))) {
+      if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
       }
-
       
       this.eventBus.emit("extractedTexts", {
         ...data,
         index: i,
         imageUrl,
-      });
+      }, metadata);
     }
     
     // Clean up folder AFTER all pages processed

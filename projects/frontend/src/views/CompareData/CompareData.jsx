@@ -212,6 +212,7 @@ export function CompareData() {
                     borderRadius: 2,
                     boxShadow: 2,
                   }}
+                  getRowId={(row) => row._id}
                 />
               </div>
 
