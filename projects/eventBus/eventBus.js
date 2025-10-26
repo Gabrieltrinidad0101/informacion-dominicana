@@ -1,6 +1,6 @@
 import amqplib from "amqplib"
 import crypto from "crypto"
-import { logs } from "./logs"
+import { logs } from "./logs.js"
 
 const connection = await amqplib.connect("amqp://admin:admin@rabbitmq:5672")
 const channel = await connection.createChannel()

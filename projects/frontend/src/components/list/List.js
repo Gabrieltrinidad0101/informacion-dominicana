@@ -82,7 +82,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '100%',
-  maxWidth: '1000px',
+  maxWidth: '1200px',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,

@@ -1,5 +1,6 @@
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
-
+import path from 'path';
+import fs from 'fs';
 
 export class PdfToText {
     constructor(eventBus, fileManagerClient) {
@@ -7,14 +8,19 @@ export class PdfToText {
         this.fileManagerClient = fileManagerClient;
     }
 
-    extractTextWithPositionFromPdf = async (data) => {
-        const data = fileManagerClient.getFileUint8Array(data.urlDownload)
-        const pdf = await pdfjsLib.getDocument({ data }).promise;
+    extractTextWithPositionFromPdf = async (data,metadata) => {
+        await this.fileManagerClient.downloadFile(data.urlDownload);
+        const pdfPath = path.resolve(`downloads/${data.urlDownload}`);
+        const pdfData = new Uint8Array(fs.readFileSync(pdfPath));
+        const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+        delete  data._id;
         let hasText = false;
         for (let i = 1; i <= pdf.numPages; i++) {
             const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${i}.json`)
             const pageText = []
-            if (metadata?.force || !await this.fileManagerClient.fileExists(fileUrl)) {
+            const fileExists = await this.fileManagerClient.fileExists(fileUrl)
+            if(fileExists) hasText = true
+            if (metadata?.force || !hasText) {
                 const page = await pdf.getPage(i);
                 const content = await page.getTextContent();
     
@@ -28,12 +34,12 @@ export class PdfToText {
                         height: item.height
                     });
                 }
+                if(!hasText) hasText = pageText.length > 0;
+                await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
             }
-            if(!hasText) hasText = pageText.length > 0;
-            await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify(pageText));
-            await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
+            await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
         }
-
+        fs.unlinkSync(pdfPath);
         return hasText;
     }
 }

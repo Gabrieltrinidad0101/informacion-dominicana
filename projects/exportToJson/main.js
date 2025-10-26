@@ -6,4 +6,4 @@ import { FileManagerClient } from "../fileManagerClient/main.js"
 const eventBus = new EventBus();
 const fileAccess = new FileManagerClient();
 const repository = new Repository();
-const payroll = new Payroll(repository,eventBus,fileAccess);
+new Payroll(repository,eventBus,fileAccess);

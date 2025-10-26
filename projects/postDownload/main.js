@@ -1,7 +1,7 @@
 import { EventBus } from "../eventBus/eventBus.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 import { PostDownload } from "./postDownload.js"
-import { PdfToText } from "./pdfText/pdfText.js"
+import { PdfToText } from "./pdfText/pdfToText.js"
 import { PdfToImages } from "./image/pdfToImages.js"
 const eventBus = new EventBus()
 

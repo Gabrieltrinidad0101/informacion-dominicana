@@ -68,5 +68,6 @@ export class PdfToImages {
     
     // Clean up folder AFTER all pages processed
     fs.rmdirSync(saveImages, { recursive: true });
+    fs.unlink(pdfPath);
   };
 }

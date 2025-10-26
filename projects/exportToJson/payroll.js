@@ -34,10 +34,5 @@ export class Payroll {
         }
 
         await this.save(data, `header.json`, header);
-
-        // this.save(data,"wageGrowth.json",wageGrowth);
-        // this.save(data,"wageGrowthMale.json",wageGrowthMale);
-        // this.save(data,"wageGrowthFemale.json",wageGrowthFemale);   
-        // this.save(data,"countByPosition.json",countByPosition);
     }
 }

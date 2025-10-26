@@ -1,1 +1,0 @@
-select * from payrolls where institution_name=${institutionName}
