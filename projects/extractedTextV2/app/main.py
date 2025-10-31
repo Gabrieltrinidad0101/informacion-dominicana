@@ -2,12 +2,12 @@ from io import BytesIO
 import requests
 from PIL import Image
 from paddleocr import PaddleOCR
-from eventBus import EventBus, logs
-import os
+from eventBus import EventBus
 from fileManagerClient import FileManagerClient
+import json
 
 fileManagerClient = FileManagerClient()
-bus = EventBus(queue_name="my_queue", exchange_name="my_exchange")
+bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
 ocr = PaddleOCR(
     use_doc_orientation_classify=False, 
     use_doc_unwarping=False, 
@@ -32,13 +32,10 @@ def callback(data, metadata):
                 "confidence": confidence,
                 "box": box
             })
-        fileManagerClient.
-        resp = requests.post(TARGET_SERVER_URL, json=output_data, timeout=10)
-        resp.raise_for_status()
-
+    fileManagerClient.createTextFile(extractedTextUrl, json.dumps(output_data))
     bus.emit('analyzeExtractedTexts',{
         **data,
         extractedTextUrl: extractedTextUrl,
     },metadata)
 
-bus.on("my_queue", "my_exchange", callback)
+bus.on("extractedText", "extractedTexts", callback)

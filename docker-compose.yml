@@ -13,6 +13,19 @@ services:
       - files_manager
       - mongo
       - rabbitmq
+  
+  extracted_text_v2:
+    build: 
+      context: .
+      dockerfile: ./projects/extractedTextV2/dockerfile
+    container_name: extracted_text_v2
+    volumes:
+      - ./projects/extractedTextV2:/app/projects/extractedTextV2
+    networks:
+      - dev
+    depends_on:
+      - files_manager
+      - rabbitmq
 
   download:
     build:

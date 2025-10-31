@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
-COPY requirements.txt .
+COPY projects/extractedTextV2/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application files
-COPY app/ .
+COPY projects/extractedTextV2/app/ .
 
 CMD ["python", "main.py"]

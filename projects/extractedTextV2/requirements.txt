@@ -3,3 +3,4 @@ paddlepaddle
 opencv-python
 matplotlib
 pillow
+pika

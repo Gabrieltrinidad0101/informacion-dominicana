@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  paddleocr:
-    build: .
-    container_name: paddleocr_app
-    volumes:
-      - ./app:/app
-    working_dir: /app

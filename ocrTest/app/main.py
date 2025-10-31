@@ -2,7 +2,7 @@ from paddleocr import PaddleOCR
 import sys
 
 ocr = PaddleOCR(
-    use_doc_orientation_classify=False, 
+    use_doc_orientation_classify=True, 
     use_doc_unwarping=False, 
     use_textline_orientation=False) # text detection + text recognition
 # ocr = PaddleOCR(use_doc_orientation_classify=True, use_doc_unwarping=True) # text image preprocessing + text detection + textline orientation classification + text recognition
@@ -13,7 +13,7 @@ ocr = PaddleOCR(
 #     use_doc_orientation_classify=False,
 #     use_doc_unwarping=False,
 #     use_textline_orientation=False) # Switch to PP-OCRv5_mobile models
-result = ocr.predict("./example.jpg")
+result = ocr.predict("./_.3.jpg")
 for res in result:
     res.save_to_json("output")
 

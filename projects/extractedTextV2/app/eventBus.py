@@ -1,7 +1,6 @@
 import pika
 import json
 import uuid
-import time
 import logging
 
 logging.basicConfig(level=logging.INFO)
