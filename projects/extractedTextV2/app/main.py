@@ -58,7 +58,7 @@ def callback(data, metadata):
         fileManagerClient.create_text_file(extractedTextUrl, json.dumps({"lines": text_regions, "angle": angle}))
         os.remove(filename)
 
-    bus.emit('analyzeExtractedTexts',{
+    bus.emit('aiTextAnalyzers',{
         **data,
         "extractedTextUrl": extractedTextUrl,
     },metadata)

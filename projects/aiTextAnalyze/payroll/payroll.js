@@ -16,7 +16,7 @@ export class Payroll {
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data,'aiTextAnalyze', `${data.index}.json`)
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
         if (metadata?.force || !fileExists) {
-            const dataText = await this.fileManagerClient.getFile(data.analyzeExtractedTextUrl);
+            const dataText = await this.fileManagerClient.getFile(data.extractedTextUrl);
             const propt_ = propt(JSON.stringify(dataText.lines));
             const response = JSON.parse(await this.apiLLMClient(propt_));
             for (let payroll_ of response) {
