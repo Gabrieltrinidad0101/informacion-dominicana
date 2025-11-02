@@ -193,7 +193,7 @@ services:
     image: staticfloat/nginx-certbot
     ports:
         - 80:80/tcp
-        - 443:443/tcp
+        - 443:443/tcp 
     volumes:
       - ./projects/apigetway/nginx.conf:/etc/nginx/nginx.conf
       - ./letsencrypt:/etc/letsencrypt
