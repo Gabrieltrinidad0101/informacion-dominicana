@@ -201,7 +201,7 @@ services:
     environment:
         CERTBOT_EMAIL: gabrielqwes123@gmail.com
         ENVSUBST_VARS: FQDN
-        FQDN: ${CERTBOT_DOMAIN}
+        FQDN: apis.informacion.dominicana
 
 
   loki:
