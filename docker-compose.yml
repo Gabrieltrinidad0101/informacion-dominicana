@@ -70,6 +70,7 @@ services:
       - dev
     ports:
       - 3000:3000
+      
   post_download:
     build: 
       context: .
