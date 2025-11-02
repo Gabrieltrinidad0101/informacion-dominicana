@@ -14,11 +14,11 @@ services:
       - mongo
       - rabbitmq
   
-  extracted_text_v2:
+  extracted_text:
     build: 
       context: .
       dockerfile: ./projects/extractedTextV2/dockerfile
-    container_name: extracted_text_v2
+    container_name: extractedText
     volumes:
       - ./projects/extractedTextV2:/app/projects/extractedTextV2
     networks:
@@ -84,19 +84,19 @@ services:
       - mongo
       - rabbitmq
 
-  extracted_text:
-    build:
-      context: .
-      dockerfile: ./projects/extractedText/dockerfile
-    container_name: extractedText
-    volumes:
-      - ./projects/extractedText:/app/projects/extractedText
-    networks:
-      - dev
-    depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+  # extracted_text:
+  #   build:
+  #     context: .
+  #     dockerfile: ./projects/extractedText/dockerfile
+  #   container_name: extractedText
+  #   volumes:
+  #     - ./projects/extractedText:/app/projects/extractedText
+  #   networks:
+  #     - dev
+  #   depends_on:
+  #     - files_manager
+  #     - mongo
+  #     - rabbitmq
 
   analyze_extracted_text:
     build:

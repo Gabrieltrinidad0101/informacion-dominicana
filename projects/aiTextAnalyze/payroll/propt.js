@@ -10,11 +10,13 @@ Example Output:
   "x": 10,
   "y": 10,
   "width": 1000,
-  "height": 43
+  "height": 43,
+  "scores": [0.9, 0.8, 0.7,0.95]
 }
 
 Extraction Rules:
   - Based on the text position, group the text line by line.
+  - Get all the score values for each word and set into scores array.
   - Each object represents either an individual or an institutional entry.
   - For individuals:
     - Include \`name\`, \`position\`, \`income\`, and \`sex\` (M/F) where available.

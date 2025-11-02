@@ -8,7 +8,7 @@ export class Payroll {
         this.validateIdNumberApi = validateIdNumberApi;
         this.encrypt = encrypt;
         this.getId = getId;
-
+        
         this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', async (data,metadata) => await this.payroll(data,metadata))
     }
 

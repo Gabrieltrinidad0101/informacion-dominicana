@@ -17,37 +17,13 @@ ocr = PaddleOCR(
 )
 
 def callback(data, metadata):
-    logging.info(json.dumps({
-        "1": 1
-    }))
     extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',str(data.get('index')) + '.json' )
-    logging.info(json.dumps({
-        "2": 2
-    }))
     if metadata.get('force') or not fileManagerClient.file_exists(extractedTextUrl):
-        logging.info(json.dumps({
-            "3": 3
-        }))
         image_url = data.get("imageUrl")
-        logging.info(json.dumps({
-            "4": 4
-        }))
         response = fileManagerClient.get_file(image_url)
-        logging.info(json.dumps({
-            "5": 5
-        }))
         img = Image.open(BytesIO(response.content))
-        logging.info(json.dumps({
-            "6": 6
-        }))
         filename = f"./{uuid.uuid4()}.png"  
-        logging.info(json.dumps({
-            "7": 7
-        }))
         img.save(filename)
-        logging.info(json.dumps({
-            "8": 8
-        }))
         result_json = ocr.predict(filename)
 
         ocr_data = result_json.get('res', {})
@@ -55,6 +31,10 @@ def callback(data, metadata):
         rec_texts = ocr_data.get('rec_texts', [])
         rec_scores = ocr_data.get('rec_scores', [])
         rec_boxes = ocr_data.get('rec_boxes', [])
+        angle = ocr_data.get('doc_preprocessor_res', {}).get('angle', 0)
+
+        if angle == -1:
+            angle = 0
 
         text_regions = []
 
@@ -75,7 +55,7 @@ def callback(data, metadata):
                     "confidence": round(float(score), 3)
                 })
 
-        fileManagerClient.create_text_file(extractedTextUrl, json.dumps(text_regions))
+        fileManagerClient.create_text_file(extractedTextUrl, json.dumps({"lines": text_regions, "angle": angle}))
         os.remove(filename)
 
     bus.emit('analyzeExtractedTexts',{
