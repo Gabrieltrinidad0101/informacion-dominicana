@@ -1,0 +1,22 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Install Docker
+        continue-on-error: true
+        run: |
+          echo ${{secrets.SSH_SERVER_PASSWORD}} | sudo -S snap install docker
+
+      - name: Run Containers
+        run: |
+          echo ${{secrets.SSH_SERVER_PASSWORD}} | sudo -S docker compose up -d
