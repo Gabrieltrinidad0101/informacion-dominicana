@@ -2,11 +2,11 @@ FROM node:lts
 
 WORKDIR /app
 
-COPY package.json .
+COPY package.json ./
 COPY projects/frontend/package.json ./projects/frontend/package.json
 
 RUN npm install
 
 COPY projects/frontend ./projects/frontend
 
-CMD ["npm", "run", "frontend"]
+CMD ["npm", "run", "start", "--prefix", "./projects/frontend"]
