@@ -59,6 +59,7 @@ class EventBus:
                 ch.basic_ack(delivery_tag=method.delivery_tag)
                 logs.info(message)
             except Exception as e:
+                print(e)
                 try:
                     message = json.loads(body)
                     message['retryCount'] = message.get('retryCount', 0) + 1
@@ -82,8 +83,9 @@ class EventBus:
                         body=json.dumps(message),
                         properties=pika.BasicProperties(headers={"x-retry-count": message['retryCount']})
                     )
-                    logs.error(message)
+                    logs.error(message,str(e))
                 except Exception as parse_error:
+                    print(parse_error)
                     logging.error(json.dumps({
                         "eventBusInternalRetryError": str(parse_error),
                         "eventBusInternalLog": {
@@ -135,9 +137,9 @@ class Logs:
             }
         }))
 
-    def error(self, data):
+    def error(self, data,error):
         logging.error(json.dumps({
-            "eventBusInternalError": "Error occurred",
+            "eventBusInternalError": error,
             "eventBusInternalLog": {
                 "traceId": data.get('traceId'),
                 "_id": data.get('_id'),

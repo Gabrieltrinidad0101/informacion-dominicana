@@ -6,7 +6,7 @@ services:
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app/projects/downloadLinks
-      - /app/node_modules
+      - /app/nod  e_modules
     networks:
       - dev
     depends_on:

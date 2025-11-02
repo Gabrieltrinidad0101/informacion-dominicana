@@ -13,6 +13,10 @@ class FileManagerClient:
         response.raise_for_status()
         return response.json()
 
+    def generate_url(self,data, micro_service, file_name):
+        return f"{data['institutionName']}/{data['typeOfData']}/{micro_service}/{data['year']}/{data['month']}/{file_name}"
+
+
     def upload_file_from_url(self, url, folder_path):
         payload = {"url": url, "folderPath": folder_path}
         headers = {"Content-Type": "application/json"}
@@ -35,7 +39,7 @@ class FileManagerClient:
     def get_file(self, file_url):
         response = requests.get(f"{self.base_url}/{file_url}")
         response.raise_for_status()
-        return response.content
+        return response
 
     def get_file_bytes(self, file_url):
         response = requests.get(f"{self.base_url}/{file_url}", stream=True)
