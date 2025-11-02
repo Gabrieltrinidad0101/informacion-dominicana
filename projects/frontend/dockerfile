@@ -2,10 +2,11 @@ FROM node:lts
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json .
+COPY projects/frontend/package.json ./projects/frontend/package.json
 
 RUN npm install
 
-COPY . .        
+COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm","run", "start"]
+CMD ["npm", "run", "frontend"]
