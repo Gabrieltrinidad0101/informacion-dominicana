@@ -204,7 +204,7 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "9000:80"
+      - "80:80"
     networks:
       - dev
     volumes:
