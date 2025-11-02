@@ -15,6 +15,7 @@ jobs:
       - name: Set up environment
         run: |
           SERVER_URL="https://apis.informacion.dominicana/events"
+          CERTBOT_DOMAIN="apis.informacion.dominicana"
 
       - name: Run Containers
         run: |
