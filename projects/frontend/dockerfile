@@ -7,6 +7,6 @@ COPY projects/frontend/package.json ./projects/frontend/package.json
 
 RUN npm install
 
-COPY projects/fileManagerClient ./projects/fileManagerClient
+COPY projects/frontend ./projects/frontend
 
 CMD ["npm", "run", "frontend"]

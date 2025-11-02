@@ -16,4 +16,5 @@ RUN pip install --no-cache-dir watchdog
 COPY projects/extractedTextV2/app/ .
 
 ENV PATH="/usr/local/bin:${PATH}"
-CMD ["sleep", "infinity"]
+
+CMD ["python", "main.py"]
