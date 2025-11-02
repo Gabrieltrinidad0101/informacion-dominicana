@@ -12,6 +12,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       
+      - name: Set up environment
+        run: |
+          SERVER_URL="https://apis.informacion.dominicana/events"
+
       - name: Run Containers
         run: |
           docker compose up -d --build

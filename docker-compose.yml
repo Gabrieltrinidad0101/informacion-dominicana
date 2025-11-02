@@ -68,6 +68,8 @@ services:
       - ./projects/frontend/node_modules:/app/projects/node_modules
     networks:
       - dev
+    environment:
+      - SERVER_URL=${SERVER_URL}
     ports:
       - 3000:3000
       
