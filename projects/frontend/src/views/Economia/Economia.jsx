@@ -3,7 +3,9 @@ import { Charts } from '../../components/charts/Charts'
 export function Economia() {
   return (
     <div>
-      <Charts topic="worldBank/Economia" />
+      <Charts url="worldBank/Economia" />
     </div>
   )
 }
+
+

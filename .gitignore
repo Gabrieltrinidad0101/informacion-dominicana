@@ -11,7 +11,7 @@ build
 # Generated files
 .docusaurus
 .cache-loader
-
+.wrangler
 # Misc
 .DS_Store
 .env.local

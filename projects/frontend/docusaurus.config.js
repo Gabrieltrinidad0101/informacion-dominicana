@@ -48,6 +48,9 @@ const config = {
     ],
   ],
 
+   plugins: [
+    './plugins/custom-plugin',
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

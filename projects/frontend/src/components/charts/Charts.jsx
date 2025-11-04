@@ -4,12 +4,19 @@ import chartCss from "./charts.module.css";
 import constants from "../../constants";
 import { requestJson } from "../../utils/request";
 
-export function Charts({ data, deparment, customTheme, compare,onClickSources }) {
+export function Charts({ data,url, deparment, customTheme, compare,onClickSources }) {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
     if (data) return setDatas(data);
-    const data_ = requestJson(`${urls}/headers.json`).then(async (res) => {
-      setDatas(data_);
+    requestJson(`${url}/headers`).then(async (res) => {
+      const urls = []
+      res.forEach((item) => {
+        urls.push({
+          title: `${url}/${item}`,
+          url: `${url}/${item}`,
+        });
+      });
+      setDatas(urls);
     });
   }, []);
   return (

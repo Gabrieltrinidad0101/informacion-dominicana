@@ -3,7 +3,7 @@ import { Charts } from '../../components/charts/Charts'
 export function Medioambiente() {
   return (
     <div>
-      <Charts topic="worldBank/Medioambiente" />
+      <Charts url="worldBank/Medioambiente" />
     </div>
   )
 }

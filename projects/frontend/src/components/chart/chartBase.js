@@ -16,7 +16,6 @@ export const chartBase = async ({container, data, customTheme,deparment,onClickS
 			timeScale: {
 				borderVisible: false,
 			},
-
 			localization: {
 				priceFormatter: (val) => val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
 			},

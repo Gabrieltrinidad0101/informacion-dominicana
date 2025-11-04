@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 import showImageCss from './ShowImage.module.css';
 import { positionSelect } from '../../utils/positionSelect';
 import positionSelectCss from '../../utils/positionSelect.module.css';
@@ -6,6 +7,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import constants from '../../constants';
 
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 let lastUrl = '';
 
@@ -18,25 +20,10 @@ export function ShowImage({ employee, institution, currentDate }) {
   const selectEmployee = useRef(null);
   const imageRef = useRef(null);
   const [numPages, setNumPages] = useState(null);
-  const [PdfComponents, setPdfComponents] = useState(null);
-
-  useEffect(() => {
-  const ReactPdf = eval('require("react-pdf")'); 
-  setPdfComponents(ReactPdf);
-}, []);
-
-if (!PdfComponents) return <div>Cargando PDF...</div>;
-
-const { Document, Page, pdfjs } = PdfComponents;
-
-
-pdfjs.GlobalWorkerOptions.workerSrc = 
-  `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
   const monthName = monthNames[currentDate?.getMonth() ?? 0];
   const url = `http://localhost:5500/data/${institution}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
 
-  // Apply opacity to previous selection
   useEffect(() => {
     if (lastUrl !== '') selectEmployee.current?.classList.add(positionSelectCss.selecteEmployeeOpacity);
     lastUrl = url;
@@ -46,7 +33,6 @@ pdfjs.GlobalWorkerOptions.workerSrc =
     positionSelect(selectEmployee, imageRef, employee);
   };
 
-  // Wait for image to load
   useEffect(() => {
     const interval = setInterval(() => {
       const image = imageRef.current;
@@ -58,7 +44,6 @@ pdfjs.GlobalWorkerOptions.workerSrc =
     return () => clearInterval(interval);
   }, [employee]);
 
-  // Recalculate position on window resize
   useEffect(() => {
     window.addEventListener('resize', handleSelectPosition);
     return () => {

@@ -3,7 +3,7 @@ import { Charts } from '../../components/charts/Charts'
 export function Social() {
   return (
     <div>
-      <Charts topic="worldBank/Social" />
+      <Charts url="worldBank/Social" />
     </div>
   )
 }

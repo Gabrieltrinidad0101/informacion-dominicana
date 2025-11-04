@@ -3,7 +3,7 @@ import { Charts } from '../../components/charts/Charts'
 export function Salud() {
   return (
     <div>
-      <Charts topic="worldBank/Salud" />
+      <Charts url="worldBank/Salud" />
     </div>
   )
 }

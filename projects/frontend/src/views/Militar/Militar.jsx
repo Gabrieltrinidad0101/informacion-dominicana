@@ -3,7 +3,7 @@ import { Charts } from '../../components/charts/Charts'
 export function Militar() {
   return (
     <div>
-      <Charts topic="worldBank/Militar" />
+      <Charts url="worldBank/Militar" />
     </div>
   )
 }
