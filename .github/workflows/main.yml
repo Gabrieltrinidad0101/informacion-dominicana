@@ -15,3 +15,7 @@ jobs:
       - name: Run Containers
         run: |
           docker compose up -d --build
+
+      - name: Run Containers 2
+        run: |
+          docker compose restart download download_links events frontend post_download extracted_text analyze_extracted_text ai_text_analyze insert_data export_to_json files_manager
