@@ -55,6 +55,11 @@ services:
     depends_on: 
       - mongo
       - rabbitmq
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/"]
+      interval: 5s
+      timeout: 3s
+      retries: 8
 
   frontend:
     container_name: frontend
@@ -199,11 +204,13 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - dev
-    command: sleep 10
     environment:
         CERTBOT_EMAIL: gabrielqwes123@gmail.com
         ENVSUBST_VARS: FQDN
         FQDN: api.informacion-dominicana.com
+    depends_on:
+      events:
+        condition: service_healthy
 
 
   loki:
