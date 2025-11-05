@@ -57,11 +57,6 @@ services:
       - rabbitmq
     ports:
       - 3001:3001
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/"]
-      interval: 5s
-      timeout: 3s
-      retries: 8
 
   frontend:
     container_name: frontend
@@ -211,8 +206,12 @@ services:
         ENVSUBST_VARS: FQDN
         FQDN: api.informacion-dominicana.com
     depends_on:
-      events:
-        condition: service_healthy
+      - events
+      - grafana
+      - promtail
+      - loki
+      - postgres
+      - mongo
 
 
   loki:
