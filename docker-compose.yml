@@ -55,6 +55,8 @@ services:
     depends_on: 
       - mongo
       - rabbitmq
+    ports:
+      - 3001:3001
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/"]
       interval: 5s
