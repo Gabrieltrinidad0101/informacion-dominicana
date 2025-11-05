@@ -197,7 +197,7 @@ services:
         - 80:80/tcp
         - 443:443/tcp 
     volumes:
-      - ./projects/apigetway/nginx.conf:/etc/nginx/nginx.conf
+      - ./projects/apigetway:/etc/nginx/user.conf.d:ro
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - dev
