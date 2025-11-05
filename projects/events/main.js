@@ -16,6 +16,8 @@ eventsRepository.insertDefaultValues()
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
 
+app.get("/", (req, res) => res.send("OK"));
+
 app.get('/find', async (req, res) => {
     const events = await reExecuteEvents.getEvents(JSON.parse(JSON.stringify(req.query)))
     res.json(events)
