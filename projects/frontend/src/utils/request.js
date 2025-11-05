@@ -9,11 +9,17 @@ const requests = {}
 
 export const requestJson = async (url) => {
     if(requests[url]) return requests[url]
-    const fullUrl = `${constants.urlData}/${url}.json`
+    const fullUrl = sanitizeFilename(`${constants.urlData}/${url}.json`)
     const encodeURL = encodeURI(fullUrl)
     const res = await fetch(encodeURL)
     requests[url] = await res.json()
     return requests[url]
+}
+
+function sanitizeFilename(filename) {
+  filename = filename.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  filename = filename.replace(/[^A-Za-z0-9._-]/g, "_");
+  return filename;
 }
 
 export const formatYYMM = (date) => {
