@@ -13,4 +13,6 @@ COPY projects/eventBus ./projects/eventBus
 COPY projects/events ./projects/events
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
+RUN sleep 5
+
 CMD ["npm", "run", "events"]
