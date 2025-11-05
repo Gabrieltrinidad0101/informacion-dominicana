@@ -4,7 +4,6 @@ import cors from "cors"
 import { EventListener } from "./src/listener.js"
 import { EventsRepository } from "./src/repository.js"
 import { ReExecuteEvents } from "./src/reExecuteEvents.js"
-import e from "express"
 
 const app = express()
 app.use(express.json())
