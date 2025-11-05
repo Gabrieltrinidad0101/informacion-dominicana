@@ -199,6 +199,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - dev
+    command: sleep 10
     environment:
         CERTBOT_EMAIL: gabrielqwes123@gmail.com
         ENVSUBST_VARS: FQDN
