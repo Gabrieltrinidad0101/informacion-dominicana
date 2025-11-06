@@ -9,7 +9,7 @@ const requests = {}
 
 export const requestJson = async (url) => {
     if(requests[url]) return requests[url]
-    const fullUrl = sanitizeFilename(`${constants.urlData}/${url}.json`)
+    const fullUrl = `${constants.urlData}/${sanitizeFilename(url)}.json`
     const encodeURL = encodeURI(fullUrl)
     const res = await fetch(encodeURL)
     requests[url] = await res.json()
