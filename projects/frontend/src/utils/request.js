@@ -6,21 +6,32 @@ export const payroll = async (institution) => {
 }
 
 const requests = {}
+export const requestJson = async (path) => {
+  if (requests[path]) return requests[path];
 
-export const requestJson = async (url) => {
-    if(requests[url]) return requests[url]
-    const fullUrl = `${constants.urlData}/${sanitizeFilename(url)}.json`
-    const encodeURL = encodeURI(fullUrl)
-    const res = await fetch(encodeURL)
-    requests[url] = await res.json()
-    return requests[url]
-}
+  // Split the path and sanitize only the last segment (the filename)
+  const parts = path.split("/");
+  const last = parts.pop();                    // filename
+  const sanitized = sanitizeFilename(last);    // sanitize only filename
+  parts.push(sanitized);                       // put back sanitized filename
+
+  const finalPath = parts.join("/");
+  const fullUrl = `${constants.urlData}/${finalPath}.json`;
+
+  const encodedURL = encodeURI(fullUrl);
+  const res = await fetch(encodedURL);
+
+  requests[path] = await res.json();
+  return requests[path];
+};
 
 function sanitizeFilename(filename) {
-  filename = filename.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  filename = filename.replace(/[^A-Za-z0-9._-]/g, "_");
-  return filename;
+  return filename
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove accents
+    .replace(/[^A-Za-z0-9._-]/g, "_");                // replace invalid chars
 }
+
+
 
 export const formatYYMM = (date) => {
     const year = date.getFullYear();
