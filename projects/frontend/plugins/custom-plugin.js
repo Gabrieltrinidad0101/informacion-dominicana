@@ -14,6 +14,7 @@ export default function customWebpackPlugin() {
           }),
           new webpack.DefinePlugin({
             'process.env.REACT_APP_SERVER_URL': JSON.stringify(process.env.REACT_APP_SERVER_URL || 'http://localhost:5500/data'),
+            'process.env.REACT_APP_API_URL': JSON.stringify(process.env.REACT_APP_API_URL || 'http://127.0.0.1:3001'),
         }),
         ],
         resolve: {

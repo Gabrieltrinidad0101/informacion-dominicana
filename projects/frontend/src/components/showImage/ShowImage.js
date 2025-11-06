@@ -22,7 +22,7 @@ export function ShowImage({ employee, institution, currentDate }) {
   const [numPages, setNumPages] = useState(null);
 
   const monthName = monthNames[currentDate?.getMonth() ?? 0];
-  const url = `http://localhost:5500/data/${institution}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
+  const url = `${constants.urlData}/${institution}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
 
   useEffect(() => {
     if (lastUrl !== '') selectEmployee.current?.classList.add(positionSelectCss.selecteEmployeeOpacity);
