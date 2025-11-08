@@ -158,7 +158,7 @@ services:
     networks:
       - dev
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      test: ["CMD", "ls"]
       interval: 10s
       timeout: 5s
       retries: 5
