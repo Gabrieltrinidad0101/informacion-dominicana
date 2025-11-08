@@ -6,7 +6,7 @@ services:
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app/projects/downloadLinks
-      - /app/node_modules
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -35,7 +35,7 @@ services:
     container_name: download
     volumes:
       - ./projects/download:/app/projects/download
-      - /app/node_modules
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -50,15 +50,19 @@ services:
     container_name: events
     volumes:
       - ./projects/events:/app/projects/events
-      -  /app/events/node_modules
+      - /app/projects/node_modules
     networks:
       - dev
-    depends_on: 
-      - mongo
-      - rabbitmq
-      - files_manager
+    depends_on:
+      mongo:
+        condition: service_started
+      files_manager:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
     ports:
-      - 3001:3001
+      - "3001:3001"
+
 
   frontend:
     container_name: frontend
@@ -67,7 +71,7 @@ services:
       dockerfile: ./projects/frontend/dockerfile
     volumes:
       - ./projects/frontend:/app/projects/frontend
-      - ./projects/frontend/node_modules:/app/projects/node_modules
+      -  /app/projects/node_modules
     networks:
       - dev
 
@@ -79,8 +83,7 @@ services:
     container_name: postDownload
     volumes:
       - ./projects/postDownload:/app/projects/postDownload
-      -  /app/postDownload/node_modules
-      -  /node_modules
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -95,6 +98,7 @@ services:
     container_name: analyzeExtractedText
     volumes:
       - ./projects/analyzeExtractedText:/app/projects/analyzeExtractedText
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -109,6 +113,7 @@ services:
     container_name: aiTextAnalyze
     volumes:
       - ./projects/aiTextAnalyze:/app/projects/aiTextAnalyze
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -123,6 +128,7 @@ services:
     container_name: insertData
     volumes:
       - ./projects/insertData:/app/projects/insertData
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -138,6 +144,7 @@ services:
     volumes:
       - ./projects/filesManager:/app/projects/filesManager
       - ./data:/app/data
+      -  /app/projects/node_modules
     networks:
       - dev
 
@@ -149,6 +156,7 @@ services:
     volumes:
       - ./projects/exportToJson:/app/projects/exportToJson
       -  /app/exportToJson/node_modules
+      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -166,6 +174,12 @@ services:
       RABBITMQ_DEFAULT_PASS: admin  
     networks:
       - dev
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   mongo:
     image: mongo:latest
@@ -218,6 +232,11 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   pgdata:
