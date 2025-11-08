@@ -57,6 +57,9 @@ export function ShowImage({ employee, institution, currentDate }) {
         <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
           VER FUENTE ORIGINAL
         </a>
+        <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
+          Pagina {employee.index}
+        </a>
         <BrowserOnly>
           {() => (
             <div ref={imageRef}>
