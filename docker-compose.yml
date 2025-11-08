@@ -6,7 +6,7 @@ services:
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app/projects/downloadLinks
-      - /app/nod  e_modules
+      - /app/node_modules
     networks:
       - dev
     depends_on:
@@ -26,6 +26,7 @@ services:
     depends_on:
       - files_manager
       - rabbitmq
+      - mongo
 
   download:
     build:
@@ -55,6 +56,7 @@ services:
     depends_on: 
       - mongo
       - rabbitmq
+      - files_manager
     ports:
       - 3001:3001
 
@@ -85,20 +87,6 @@ services:
       - files_manager
       - mongo
       - rabbitmq
-
-  # extracted_text:
-  #   build:
-  #     context: .
-  #     dockerfile: ./projects/extractedText/dockerfile
-  #   container_name: extractedText
-  #   volumes:
-  #     - ./projects/extractedText:/app/projects/extractedText
-  #   networks:
-  #     - dev
-  #   depends_on:
-  #     - files_manager
-  #     - mongo
-  #     - rabbitmq
 
   analyze_extracted_text:
     build:
@@ -189,29 +177,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
       - dev
-  
-  nginx:
-    restart: unless-stopped
-    image: staticfloat/nginx-certbot
-    ports:
-        - 80:80/tcp
-        - 443:443/tcp 
-    volumes:
-      - ./projects/apigetway:/etc/nginx/user.conf.d:ro
-      - ./letsencrypt:/etc/letsencrypt
-    networks:
-      - dev
-    environment:
-        CERTBOT_EMAIL: gabrielqwes123@gmail.com
-        ENVSUBST_VARS: FQDN
-        FQDN: api.informacion-dominicana.com
-    depends_on:
-      - events
-      - grafana
-      - promtail
-      - loki
-      - postgres
-      - mongo
 
   loki:
     image: grafana/loki:2.9.0
@@ -235,13 +200,14 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    ports:
+      - "5000:3000"
     networks:
       - dev
 
   postgres:
     image: postgres:15
     container_name: postgres_db
-    restart: always
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword

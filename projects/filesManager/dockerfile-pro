@@ -1,0 +1,12 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json .
+COPY projects/filesManager/package.json ./projects/filesManager/package.json
+
+RUN npm install --omit=dev
+
+COPY projects/fileManagerClient ./projects/fileManagerClient
+
+CMD ["npm", "run", "filesManager-pro"]

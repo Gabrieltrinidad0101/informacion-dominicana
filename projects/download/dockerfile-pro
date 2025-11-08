@@ -1,18 +1,17 @@
 FROM node:20-alpine
 
-RUN npm install -g nodemon
 
 WORKDIR /app
 
 COPY package.json .
-COPY projects/exportToJson/package.json ./projects/exportToJson/package.json    
+COPY projects/download/package.json ./projects/download/package.json    
 COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
-RUN npm install
+RUN npm install --omit=dev
 
 COPY projects/eventBus ./projects/eventBus
-COPY projects/exportToJson ./projects/exportToJson
+COPY projects/download ./projects/download
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "exportToJson"]
+CMD ["npm", "run", "download-pro"]

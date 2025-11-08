@@ -2,7 +2,6 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-RUN npm install -g nodemon
 
 COPY package.json .
 COPY projects/aiTextAnalyze/package.json ./projects/aiTextAnalyze/package.json    
@@ -15,4 +14,4 @@ COPY projects/eventBus ./projects/eventBus
 COPY projects/aiTextAnalyze ./projects/aiTextAnalyze
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["nodemon", "run", "./projects/aiTextAnalyze"]
+CMD ["npm", "run", "textAnalysisAI"]

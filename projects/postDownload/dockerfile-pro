@@ -9,7 +9,6 @@ RUN apk add --no-cache \
     bash \
     curl
 
-
 WORKDIR /app
 
 COPY package.json .
@@ -23,4 +22,4 @@ COPY projects/eventBus ./projects/eventBus
 COPY projects/postDownload ./projects/postDownload
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "postDownload"]
+CMD ["npm", "run", "postDownload-pro"]

@@ -9,7 +9,6 @@ const requests = {}
 export const requestJson = async (path) => {
   if (requests[path]) return requests[path];
 
-  // Split the path and sanitize only the last segment (the filename)
   const parts = path.split("/");
   const last = parts.pop();                    // filename
   const sanitized = sanitizeFilename(last);    // sanitize only filename

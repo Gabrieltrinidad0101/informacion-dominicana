@@ -18,7 +18,19 @@
     "textAnalysisAI": "nodemon  --legacy-watch  ./projects/aiTextAnalyze/main.js --watch ./projects/aiTextAnalyze",
     "insertData": "nodemon  --legacy-watch  ./projects/insertData/main.js --watch ./projects/insertData",
     "exportToJson": "nodemon  --legacy-watch  ./projects/exportToJson/main.js --watch ./projects/exportToJson",
-    "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager"
+    "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager",
+
+
+    "downloadLinks-pro": "node projects/downloadLinks/main.js",
+    "download-pro": "node ./projects/download/main.js",
+    "events-pro": "node ./projects/events/main.js",
+    "postDownload-pro": "node ./projects/postDownload/main.js",
+    "extractedText-pro": "node ./projects/extractedText/main.js",
+    "analyzeExtractedText-pro": "node ./projects/analyzeExtractedText/main.js",
+    "textAnalysisAI-pro": "node ./projects/aiTextAnalyze/main.js",
+    "insertData-pro": "node ./projects/insertData/main.js",
+    "exportToJson-pro": "node ./projects/exportToJson/main.js",
+    "filesManager-pro": "node ./projects/filesManager/main.js "
   },
   "keywords": [],
   "author": "", 
