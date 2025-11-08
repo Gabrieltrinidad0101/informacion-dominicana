@@ -8,10 +8,12 @@ services:
     networks:
       - dev    
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-  
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy  
   extracted_text:
     restart: always
     build: 
@@ -33,10 +35,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-      
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy      
   events:
     restart: always
     build:
@@ -58,10 +62,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
   analyze_extracted_text:
     restart: always
     build:
@@ -71,10 +77,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
   ai_text_analyze:
     restart: always
     build:
@@ -84,10 +92,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
   insert_data:
     restart: always
     build: 
@@ -97,10 +107,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
   files_manager:
     restart: always
     build: 
@@ -119,10 +131,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
@@ -135,6 +149,13 @@ services:
       RABBITMQ_DEFAULT_PASS: admin  
     networks:
       - dev
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
 
   mongo:
     restart: always

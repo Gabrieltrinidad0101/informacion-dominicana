@@ -1,21 +1,23 @@
 services:
   download_links:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/downloadLinks/dockerfile
     container_name: downloadLinks
     volumes:
       - ./projects/downloadLinks:/app/projects/downloadLinks
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-  
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
   extracted_text:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/extractedTextV2/dockerfile
     container_name: extractedText
@@ -24,9 +26,12 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - rabbitmq
-      - mongo
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
 
   download:
     build:
@@ -35,14 +40,16 @@ services:
     container_name: download
     volumes:
       - ./projects/download:/app/projects/download
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-      
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
   events:
     build:
       context: .
@@ -50,7 +57,6 @@ services:
     container_name: events
     volumes:
       - ./projects/events:/app/projects/events
-      - /app/projects/node_modules
     networks:
       - dev
     depends_on:
@@ -63,7 +69,6 @@ services:
     ports:
       - "3001:3001"
 
-
   frontend:
     container_name: frontend
     build:
@@ -71,25 +76,25 @@ services:
       dockerfile: ./projects/frontend/dockerfile
     volumes:
       - ./projects/frontend:/app/projects/frontend
-      -  /app/projects/node_modules
     networks:
       - dev
 
-      
   post_download:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/postDownload/dockerfile
     container_name: postDownload
     volumes:
       - ./projects/postDownload:/app/projects/postDownload
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   analyze_extracted_text:
     build:
@@ -98,13 +103,15 @@ services:
     container_name: analyzeExtractedText
     volumes:
       - ./projects/analyzeExtractedText:/app/projects/analyzeExtractedText
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   ai_text_analyze:
     build:
@@ -113,56 +120,61 @@ services:
     container_name: aiTextAnalyze
     volumes:
       - ./projects/aiTextAnalyze:/app/projects/aiTextAnalyze
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   insert_data:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/insertData/dockerfile
     container_name: insertData
     volumes:
       - ./projects/insertData:/app/projects/insertData
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   files_manager:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/filesManager/dockerfile
     container_name: filesManager
     volumes:
       - ./projects/filesManager:/app/projects/filesManager
       - ./data:/app/data
-      -  /app/projects/node_modules
     networks:
       - dev
 
   export_to_json:
-    build: 
+    build:
       context: .
       dockerfile: ./projects/exportToJson/dockerfile
     container_name: exportToJson
     volumes:
       - ./projects/exportToJson:/app/projects/exportToJson
-      -  /app/exportToJson/node_modules
-      -  /app/projects/node_modules
     networks:
       - dev
     depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -171,7 +183,7 @@ services:
       - ./volumes/rabbitmq/logs:/var/log/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin  
+      RABBITMQ_DEFAULT_PASS: admin
     networks:
       - dev
     healthcheck:
@@ -187,7 +199,7 @@ services:
     volumes:
       - ./volumes/mongo/data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root  
+      MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
       - dev
@@ -206,7 +218,7 @@ services:
     container_name: promtail
     volumes:
       - /var/log:/var/log
-      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
     networks:
       - dev
