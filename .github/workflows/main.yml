@@ -16,6 +16,4 @@ jobs:
         run: echo "login or docker context here"
 
       - name: Build & Restart only changed services
-        env:
-          SECRET_SERVER: $${{ secrets.SSH_SERVER_PASSWORD }}
-        run: ./build-changed-services.sh
+        run: echo ${{ secrets.SSH_SERVER_PASSWORD }} ./build-changed-services.sh

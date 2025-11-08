@@ -9,7 +9,7 @@ for SERVICE in "${!SERVICES[@]}"; do
 
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
-    echo $SECRET_SERVER | sudo -S docker compose -f docker-compose-pro.yml up $SERVICE -d --build
+    docker compose -f docker-compose-pro.yml up $SERVICE -d --build
   else
     echo "✅ No changes in $SERVICE"
   fi
