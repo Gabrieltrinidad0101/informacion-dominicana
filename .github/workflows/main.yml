@@ -11,6 +11,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      
+      - name: Make script executable
+        run: chmod +x build-changed-services.sh
 
-      - name: Build & Restart only changed services
-        run: echo ${{ secrets.SSH_SERVER_PASSWORD }} | sudo -S bash -c "cd $GITHUB_WORKSPACE && ./build-changed-services.sh"
+      - name: Run script
+        run: ./build-changed-services.sh
+
