@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Build & Restart only changed services
         run: echo ${{ secrets.SSH_SERVER_PASSWORD }} | sudo -S --preserve-env=GITHUB_WORKSPACE -- bash -c "cd $GITHUB_WORKSPACE && echo ${{ secrets.SSH_SERVER_PASSWORD }} | sudo -S bash ./build-changed-services.sh"
