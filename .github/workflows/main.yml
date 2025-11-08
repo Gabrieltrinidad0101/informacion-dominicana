@@ -9,44 +9,41 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      # ✅ Clean workspace so checkout is fresh
+      - name: Clean workspace
+        run: |
+          sudo rm -rf "$GITHUB_WORKSPACE"/*
+          sudo rm -rf "$GITHUB_WORKSPACE"/.??*
+
+      # ✅ Checkout FULL git history
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
 
-      # Detect changes in files/folders
+      # ✅ Detect changed files
       - name: Detect changed files
         id: changes
         uses: tj-actions/changed-files@v44
-  
 
-      - name: Debug - Print changed files
+      # Debug
+      - name: Print changed files
         run: echo "${{ steps.changes.outputs.all_changed_files }}"
 
-      # --------------------
-      # EVENTS SERVICE
-      # --------------------
-      - name: Rebuild events service
+      # === CONDITIONAL REBUILDS ===
+
+      - name: Rebuild events
         if: contains(steps.changes.outputs.all_changed_files, 'projects/events/')
         run: docker compose -f docker-compose-pro.yml up events --build -d
 
-      # --------------------
-      # EXPORT TO JSON SERVICE
-      # --------------------
-      - name: Rebuild exportTOjson service
+      - name: Rebuild exportTOjson
         if: contains(steps.changes.outputs.all_changed_files, 'projects/exportTOjson/')
         run: docker compose -f docker-compose-pro.yml up exportTOjson --build -d
 
-      # --------------------
-      # EVENT BUS SERVICE
-      # --------------------
-      - name: Rebuild eventBus service
+      - name: Rebuild eventBus
         if: contains(steps.changes.outputs.all_changed_files, 'projects/eventBus/')
         run: docker compose -f docker-compose-pro.yml up eventBus --build -d
 
-      # --------------------
-      # FILE MANAGER CLIENT SERVICE
-      # --------------------
-      - name: Rebuild fileManagerClient service
+      - name: Rebuild fileManagerClient
         if: contains(steps.changes.outputs.all_changed_files, 'projects/fileManagerClient/')
         run: docker compose -f docker-compose-pro.yml up fileManagerClient --build -d
