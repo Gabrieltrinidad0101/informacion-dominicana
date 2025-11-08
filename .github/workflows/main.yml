@@ -12,8 +12,5 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Login to registry (if needed)
-        run: echo "login or docker context here"
-
       - name: Build & Restart only changed services
-        run: echo ${{ secrets.SSH_SERVER_PASSWORD }} ./build-changed-services.sh
+        run: echo ${{ secrets.SSH_SERVER_PASSWORD }} | sudo -S ./build-changed-services.sh
