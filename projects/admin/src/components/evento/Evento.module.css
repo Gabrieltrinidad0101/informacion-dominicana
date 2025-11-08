@@ -1,0 +1,31 @@
+.dataGrid{
+    height: 400px;
+}
+.inputs {
+    display: grid;
+    grid-template-columns: 60% 40% ;
+    gap: 10px;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+}
+
+.filters > div {
+    display: flex;
+    gap: 10px;
+    height: 70px;
+}
+
+.select {
+    min-width: 200px;
+}

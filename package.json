@@ -12,6 +12,7 @@
     "download": "nodemon  --legacy-watch  ./projects/download/main.js --watch ./projects/download",
     "events": "nodemon  --legacy-watch  ./projects/events/main.js --watch ./projects/events",
     "frontend": "npm run start --prefix ./projects/frontend",
+    "admin": "npm run start --prefix ./projects/admin",
     "postDownload": "nodemon  --legacy-watch  ./projects/postDownload/main.js --watch ./projects/postDownload",
     "extractedText": "nodemon  --legacy-watch  ./projects/extractedText/main.js --watch ./projects/extractedText",
     "analyzeExtractedText": "nodemon  --legacy-watch  ./projects/analyzeExtractedText/main.js --watch ./projects/analyzeExtractedText",
