@@ -10,14 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      
+          fetch-depth: 2  # ensures HEAD~1 exists for git diff
+
+      - name: Fix git safe directory
+        run: sudo git config --system --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Make script executable
         run: chmod +x build-changed-services.sh
 
-      - name: Fix git safe directory
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
       - name: Run script
         run: ./build-changed-services.sh
-
