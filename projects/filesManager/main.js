@@ -96,6 +96,10 @@ app.post('/create-file', (req, res) => {
   res.json({ response: 'ok' });
 });
 
+app.get('/health', (req, res) => {
+  res.send('OK');
+});
+
 app.use(express.static('.'));
 
 app.listen(PORT, () => {
