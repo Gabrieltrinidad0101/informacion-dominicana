@@ -11,11 +11,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
 
       # Detect changes in files/folders
       - name: Detect changed files
         id: changes
         uses: tj-actions/changed-files@v44
+  
 
       - name: Debug - Print changed files
         run: echo "${{ steps.changes.outputs.all_changed_files }}"
