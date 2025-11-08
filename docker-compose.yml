@@ -209,6 +209,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
       - dev
+    ports:
+      - 27017:27017
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
