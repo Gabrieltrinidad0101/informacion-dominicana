@@ -1,17 +1,49 @@
-name: Build and Deploy
+name: Rebuild Only Changed Microservices
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  deploy:
+  rebuild:
     runs-on: self-hosted
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Containers
-        run: |
-          docker compose -f docker-compose-pro.yml up -d --build
+      # Detect changes in files/folders
+      - name: Detect changed files
+        id: changes
+        uses: tj-actions/changed-files@v44
+
+      - name: Debug - Print changed files
+        run: echo "${{ steps.changes.outputs.all_changed_files }}"
+
+      # --------------------
+      # EVENTS SERVICE
+      # --------------------
+      - name: Rebuild events service
+        if: contains(steps.changes.outputs.all_changed_files, 'projects/events/')
+        run: docker compose -f docker-compose-pro.yml up events --build -d
+
+      # --------------------
+      # EXPORT TO JSON SERVICE
+      # --------------------
+      - name: Rebuild exportTOjson service
+        if: contains(steps.changes.outputs.all_changed_files, 'projects/exportTOjson/')
+        run: docker compose -f docker-compose-pro.yml up exportTOjson --build -d
+
+      # --------------------
+      # EVENT BUS SERVICE
+      # --------------------
+      - name: Rebuild eventBus service
+        if: contains(steps.changes.outputs.all_changed_files, 'projects/eventBus/')
+        run: docker compose -f docker-compose-pro.yml up eventBus --build -d
+
+      # --------------------
+      # FILE MANAGER CLIENT SERVICE
+      # --------------------
+      - name: Rebuild fileManagerClient service
+        if: contains(steps.changes.outputs.all_changed_files, 'projects/fileManagerClient/')
+        run: docker compose -f docker-compose-pro.yml up fileManagerClient --build -d
