@@ -23,8 +23,10 @@ services:
     networks:
       - dev
     depends_on:
-      - files_manager
-      - rabbitmq
+      files_manager:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   download:
     restart: always
