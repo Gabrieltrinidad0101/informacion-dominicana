@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Informática Dominicana - Beta
+# Información Dominicana - Beta
 
 Es un sitio web no oficial de la Republica Dominicana que tiene como objetivo mostrar los datos del país de manera más accesible y organizada.
 
