@@ -1,49 +1,19 @@
-name: Rebuild Only Changed Microservices
+name: Deploy Changed Services
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  rebuild:
+  deploy:
     runs-on: self-hosted
-
     steps:
-      # ✅ Clean workspace so checkout is fresh
-      - name: Clean workspace
-        run: |
-          sudo rm -rf "$GITHUB_WORKSPACE"/*
-          sudo rm -rf "$GITHUB_WORKSPACE"/.??*
-
-      # ✅ Checkout FULL git history
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
-      # ✅ Detect changed files
-      - name: Detect changed files
-        id: changes
-        uses: tj-actions/changed-files@v44
+      - name: Login to registry (if needed)
+        run: echo "login or docker context here"
 
-      # Debug
-      - name: Print changed files
-        run: echo "${{ steps.changes.outputs.all_changed_files }}"
-
-      # === CONDITIONAL REBUILDS ===
-
-      - name: Rebuild events
-        if: contains(steps.changes.outputs.all_changed_files, 'projects/events/')
-        run: docker compose -f docker-compose-pro.yml up events --build -d
-
-      - name: Rebuild exportTOjson
-        if: contains(steps.changes.outputs.all_changed_files, 'projects/exportTOjson/')
-        run: docker compose -f docker-compose-pro.yml up exportTOjson --build -d
-
-      - name: Rebuild eventBus
-        if: contains(steps.changes.outputs.all_changed_files, 'projects/eventBus/')
-        run: docker compose -f docker-compose-pro.yml up eventBus --build -d
-
-      - name: Rebuild fileManagerClient
-        if: contains(steps.changes.outputs.all_changed_files, 'projects/fileManagerClient/')
-        run: docker compose -f docker-compose-pro.yml up fileManagerClient --build -d
+      - name: Build & Restart only changed services
+        run: ./build-changed-services.sh
