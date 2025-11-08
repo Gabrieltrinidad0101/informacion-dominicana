@@ -3,7 +3,7 @@ set -e
 source ./service-path-map.sh
 
 CHANGED=$(git diff HEAD~1 HEAD --name-only 2>/dev/null || echo "NO_PREVIOUS_COMMIT")
-
+echo $CHANGED
 for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
 

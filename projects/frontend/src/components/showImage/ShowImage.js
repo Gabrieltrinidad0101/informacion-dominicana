@@ -50,7 +50,7 @@ export function ShowImage({ employee, institution, currentDate }) {
       window.removeEventListener('resize', handleSelectPosition);
     };
   }, []);
-
+      
   return (
     <>
       <div className={showImageCss.overflowImage}>
