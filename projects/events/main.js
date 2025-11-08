@@ -16,19 +16,19 @@ eventsRepository.insertDefaultValues()
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
 
-app.get("/", (req, res) => res.send("OK"));
+app.get("/events", (req, res) => res.send("OK"));
 
-app.get('/find', async (req, res) => {
+app.get('/events/find', async (req, res) => {
     const events = await reExecuteEvents.getEvents(JSON.parse(JSON.stringify(req.query)))
     res.json(events)
 })
 
-app.post('/reExecuteEvents', async (req, res) => {
+app.post('/events/reExecuteEvents', async (req, res) => {
     const events = await reExecuteEvents.reExecuteEvents(req.body)
     res.json(events)
 })
 
-app.delete('/deleteEvents', async (req, res) => {
+app.delete('/events/deleteEvents', async (req, res) => {
     const events = await eventsRepository.deleteEvents(req.body)
     res.json(events)
 })
