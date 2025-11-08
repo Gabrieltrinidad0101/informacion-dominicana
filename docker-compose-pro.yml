@@ -128,7 +128,7 @@ services:
       retries: 5
       start_period: 10s
 
-  export_to_json:
+  export_to_json: 
     restart: always
     build: 
       context: .
