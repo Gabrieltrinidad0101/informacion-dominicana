@@ -174,7 +174,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
       - dev
-  
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+      
   loki:
     restart: always
     image: grafana/loki:2.9.0

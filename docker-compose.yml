@@ -69,15 +69,15 @@ services:
     ports:
       - "3001:3001"
 
-  frontend:
-    container_name: frontend
-    build:
-      context: .
-      dockerfile: ./projects/frontend/dockerfile
-    volumes:
-      - ./projects/frontend:/app/projects/frontend
-    networks:
-      - dev
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: .
+  #     dockerfile: ./projects/frontend/dockerfile
+  #   volumes:
+  #     - ./projects/frontend:/app/projects/frontend
+  #   networks:
+  #     - dev
 
   post_download:
     build:
@@ -157,6 +157,12 @@ services:
       - ./data:/app/data
     networks:
       - dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   export_to_json:
     build:
@@ -203,6 +209,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     networks:
       - dev
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   loki:
     image: grafana/loki:2.9.0
