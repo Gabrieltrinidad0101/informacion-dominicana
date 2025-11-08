@@ -12,12 +12,12 @@ services:
       - mongo
       - rabbitmq
   
-  extracted_text_v2:
+  extracted_text:
     restart: always
     build: 
       context: .
-      dockerfile: ./projects/extractedTextV2/dockerfile-pro
-    container_name: extracted_text_v2
+      dockerfile: ./projects/extractedTextV2/dockerfile
+    container_name: extracted_text
     networks:
       - dev
     depends_on:
@@ -55,19 +55,6 @@ services:
       context: .
       dockerfile: ./projects/postDownload/dockerfile-pro
     container_name: postDownload
-    networks:
-      - dev
-    depends_on:
-      - files_manager
-      - mongo
-      - rabbitmq
-
-  extracted_text:
-    restart: always
-    build:
-      context: .
-      dockerfile: ./projects/extractedText/dockerfile-pro
-    container_name: extractedText
     networks:
       - dev
     depends_on:

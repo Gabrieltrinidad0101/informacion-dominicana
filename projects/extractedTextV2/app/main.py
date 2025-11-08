@@ -23,9 +23,9 @@ def callback(data, metadata):
         response = fileManagerClient.get_file(image_url)
         img = Image.open(BytesIO(response.content))
         filename = f"./{uuid.uuid4()}.png"  
-        img.save(filename)
+        img.save(filename)  
         result_json = ocr.predict(filename)
-        fileManagerClient.create_text_file(extractedTextUrl, json.dumps(result_json))
+        fileManagerClient.create_text_file(extractedTextUrl, json.dumps({"res": result_json.get("res")}, default=str))
         os.remove(filename)
 
     bus.emit('analyzeExtractedTexts',{
