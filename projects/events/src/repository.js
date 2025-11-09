@@ -28,8 +28,8 @@ export class EventsRepository {
                 },
                 { upsert: true }
             );
-        } catch {
-            // manejar errores si quieres
+        } catch(error) {
+            console.log(error)
         }
     }
 
