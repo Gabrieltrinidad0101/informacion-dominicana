@@ -22,11 +22,19 @@ def callback(data, metadata):
         image_url = data.get("imageUrl")
         response = fileManagerClient.get_file(image_url)
         img = Image.open(BytesIO(response.content))
-        filename = f"./{uuid.uuid4()}.png"  
+        uuid = str(uuid.uuid4())
+        filename = f"./{uuid}.png"
         img.save(filename)  
-        result_json = ocr.predict(filename)
-        fileManagerClient.create_text_file(extractedTextUrl, json.dumps({"res": result_json.get("res")}, default=str))
+        result = ocr.predict(filename)
+        outfile = "output" + uuid
+        result.save_to_json(outfile)
+        result_json = ""
+        with open(outfile, "r") as f:
+            result_json = f
+
+        fileManagerClient.create_text_file(extractedTextUrl, result_json)
         os.remove(filename)
+        os.remove(outfile)
 
     bus.emit('analyzeExtractedTexts',{
         **data,

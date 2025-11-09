@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import { Evento } from "../../components/evento/Evento";
 import EventosCss from "./Eventos.module.css";
 import { useUser } from "@clerk/clerk-react";
+import { BrowserOnly } from "@docusaurus/core";
 
 export function Eventos({exchangeName}) {
   const {isSignedIn} = useUser();
@@ -22,7 +23,9 @@ export function Eventos({exchangeName}) {
   
   return (
     <div className={EventosCss.eventos} >
-      <Evento exchangeName={exchangeName} queryParams={queryParams} />
+      <BrowserOnly>
+        <Evento exchangeName={exchangeName} queryParams={queryParams} />
+      </BrowserOnly>
     </div>
   );
 }
