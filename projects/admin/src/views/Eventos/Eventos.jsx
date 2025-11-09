@@ -2,7 +2,7 @@ import { useLocation } from "react-router";
 import { Evento } from "../../components/evento/Evento";
 import EventosCss from "./Eventos.module.css";
 import { useUser } from "@clerk/clerk-react";
-import { BrowserOnly } from "@docusaurus/core";
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 export function Eventos({exchangeName}) {
   const {isSignedIn} = useUser();
