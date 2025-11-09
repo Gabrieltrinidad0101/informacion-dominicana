@@ -35,3 +35,4 @@ def callback(data, metadata):
     },metadata)
 
 bus.on("extractedText", "extractedTexts", callback)
+print("\n\n\n\nExtractedText Started\n\n\n\n")
