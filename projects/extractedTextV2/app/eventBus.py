@@ -85,7 +85,7 @@ class EventBus:
                     )
                     logs.error(message,str(e))
                 except Exception as parse_error:
-                    print(parse_error)
+                    logging.error(parse_error)
                     logging.error(json.dumps({
                         "eventBusInternalRetryError": str(parse_error),
                         "eventBusInternalLog": {

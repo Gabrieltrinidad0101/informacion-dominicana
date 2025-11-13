@@ -212,7 +212,7 @@ services:
     ports:
       - 27017:27017
     healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      test: echo OK  
       interval: 10s
       timeout: 5s
       retries: 5

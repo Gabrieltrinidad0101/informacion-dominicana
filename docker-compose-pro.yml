@@ -251,9 +251,6 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    restart: always
-    ports:
-      - "9000:9000"
     networks:
       - dev
     volumes:

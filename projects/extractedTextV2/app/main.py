@@ -3,10 +3,8 @@ from PIL import Image
 from paddleocr import PaddleOCR
 from eventBus import EventBus
 from fileManagerClient import FileManagerClient
-import json
 import uuid
 import os
-import logging
 
 fileManagerClient = FileManagerClient()
 bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
@@ -22,15 +20,17 @@ def callback(data, metadata):
         image_url = data.get("imageUrl")
         response = fileManagerClient.get_file(image_url)
         img = Image.open(BytesIO(response.content))
-        uuid = str(uuid.uuid4())
-        filename = f"./{uuid}.png"
+        uuid_ = str(uuid.uuid4())
+        filename = f"./{uuid_}.png"
         img.save(filename)  
         result = ocr.predict(filename)
-        outfile = "output" + uuid
-        result.save_to_json(outfile)
+        outfile = "output" + uuid_
+        for res in result:
+            res.save_to_json(outfile)
         result_json = ""
-        with open(outfile, "r") as f:
-            result_json = f
+        result_json_path = f"./{outfile}/{uuid_}.json"
+        with open(result_json_path, "r") as f:
+            result_json = f.read()
 
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
         os.remove(filename)

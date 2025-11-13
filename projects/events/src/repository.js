@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 
+console.log("🚀 Connecting to MongoDB...")
 await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
 
 const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
+const PayrollExportToJson = mongoose.model('PayrollExportToJson', dynamicSchema);
 
 export class EventsRepository {
-
+    
     async insertDefaultValues() {
         try {
             await PayrollExportToJson.updateOne(
