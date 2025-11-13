@@ -7,6 +7,6 @@ COPY projects/filesManager/package.json ./projects/filesManager/package.json
 
 RUN npm install
 
-COPY projects/fileManagerClient ./projects/fileManagerClient
+COPY projects/filesManager ./projects/filesManager
 
 CMD ["npm", "run", "filesManager"]
