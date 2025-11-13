@@ -24,7 +24,7 @@ services:
     volumes:
       - ./projects/extractedTextV2:/app/projects/extractedTextV2
     networks:
-      - dev
+      - dev 
     depends_on:
       files_manager:
         condition: service_healthy

@@ -13,7 +13,7 @@ SERVICES["ai_text_analyze"]="projects/aiTextAnalyze"
 SERVICES["insert_data"]="projects/insertData"
 SERVICES["files_manager"]="projects/filesManager"
 SERVICES["export_to_json"]="projects/exportToJson"
-SERVICES["apigetway"]="projects/apigetway"
+SERVICES["nginx"]="projects/apigetway"
 
 declare -A GLOBAL_FILES
 
