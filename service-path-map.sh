@@ -14,6 +14,7 @@ SERVICES["insert_data"]="projects/insertData"
 SERVICES["files_manager"]="projects/filesManager"
 SERVICES["export_to_json"]="projects/exportToJson"
 SERVICES["nginx"]="projects/apigetway"
+SERVICES["auth"]="projects/auth"
 
 declare -A GLOBAL_FILES
 

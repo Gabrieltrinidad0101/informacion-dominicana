@@ -20,7 +20,7 @@
     "insertData": "nodemon  --legacy-watch  ./projects/insertData/main.js --watch ./projects/insertData",
     "exportToJson": "nodemon  --legacy-watch  ./projects/exportToJson/main.js --watch ./projects/exportToJson",
     "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager",
-
+    "auth": "nodemon  --legacy-watch  ./projects/auth/main.js --watch ./projects/auth",
 
     "downloadLinks-pro": "node projects/downloadLinks/main.js",
     "download-pro": "node ./projects/download/main.js",
@@ -31,7 +31,8 @@
     "textAnalysisAI-pro": "node ./projects/aiTextAnalyze/main.js",
     "insertData-pro": "node ./projects/insertData/main.js",
     "exportToJson-pro": "node ./projects/exportToJson/main.js",
-    "filesManager-pro": "node ./projects/filesManager/main.js "
+    "filesManager-pro": "node ./projects/filesManager/main.js ",
+    "auth-pro": "node ./projects/auth/main.js "
   },
   "keywords": [],
   "author": "", 

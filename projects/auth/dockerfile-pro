@@ -1,0 +1,11 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY projects/auth/package.json ./projects/auth/package.json
+
+RUN npm install --omit=dev
+
+COPY projects/auth ./projects/auth
+
+CMD ["npm", "run", "auth-pro"]
