@@ -10,9 +10,10 @@ import shutil
 fileManagerClient = FileManagerClient()
 bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
 ocr = PaddleOCR(
-    use_doc_orientation_classify=False,
-    use_doc_unwarping=False,
-    use_textline_orientation=False
+    use_angle_cls=True,                 
+    use_doc_orientation_classify=True,  
+    use_textline_orientation=True,
+    use_doc_unwarping=True             
 )
 
 def callback(data, metadata):
