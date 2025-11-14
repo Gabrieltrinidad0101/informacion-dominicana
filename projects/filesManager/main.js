@@ -100,8 +100,6 @@ app.get('/health', (req, res) => {
   res.send('OK');
 });
 
-app.use(express.static('.'));
-
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

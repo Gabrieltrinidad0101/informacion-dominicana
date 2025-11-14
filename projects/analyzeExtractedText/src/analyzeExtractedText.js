@@ -13,9 +13,8 @@ export class AnalyzeExtractedText {
         const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${data.index}.json`)
         let textOfImage;
         if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
-            console.log({"data": data})
             const rawData = await this.fileManagerClient.getFile(data.extractedTextUrl);
-            if (data.extractedTextType === 'paddleocr') {
+            if (data.extractedTextType === 'PaddleOCR') {
                 textOfImage = paddleORC(rawData);
             }
             if (data.extractedTextType === 'azure') {
@@ -24,7 +23,7 @@ export class AnalyzeExtractedText {
             if (data.extractedTextType === 'ocrSpace') {
                 textOfImage = groupLinesOcrSpace(rawData);
             }
-            await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify(textOfImage));
+            await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: textOfImage}));
         }
         await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
     }

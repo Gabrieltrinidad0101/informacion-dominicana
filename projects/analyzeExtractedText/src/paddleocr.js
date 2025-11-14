@@ -1,5 +1,4 @@
-export const paddleORC = (resultJson) =>{
-    const ocrData = resultJson.res || {};
+export const paddleORC = (ocrData) =>{
     const recTexts = ocrData.rec_texts || [];
     const recScores = ocrData.rec_scores || [];
     const recBoxes = ocrData.rec_boxes || [];
@@ -26,13 +25,11 @@ export const paddleORC = (resultJson) =>{
     
         textRegions.push({
           text: cleanText,
-          bbox: {
-            x: parseInt(x1),
-            y: parseInt(y1),
-            width: parseInt(x2 - x1),
-            height: parseInt(y2 - y1),
-          },
-          confidence: Number(parseFloat(score).toFixed(3)),
+          x: parseInt(x1),
+          y: parseInt(y1),
+          width: parseInt(x2 - x1),
+          height: parseInt(y2 - y1),
+          confidence: Number(parseFloat(score)),
         });
       }
     }

@@ -5,6 +5,7 @@ from eventBus import EventBus
 from fileManagerClient import FileManagerClient
 import uuid
 import os
+import shutil
 
 fileManagerClient = FileManagerClient()
 bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
@@ -24,17 +25,16 @@ def callback(data, metadata):
         filename = f"./{uuid_}.png"
         img.save(filename)  
         result = ocr.predict(filename)
-        outfile = "output" + uuid_
+        outfile = "./output" + uuid_
         for res in result:
             res.save_to_json(outfile)
         result_json = ""
-        result_json_path = f"./{outfile}/{uuid_}.json"
+        result_json_path = f"./{outfile}/{uuid_}_res.json"
         with open(result_json_path, "r") as f:
             result_json = f.read()
 
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
-        os.remove(filename)
-        os.remove(outfile)
+        shutil.rmtree(outfile)
 
     bus.emit('analyzeExtractedTexts',{
         **data,
