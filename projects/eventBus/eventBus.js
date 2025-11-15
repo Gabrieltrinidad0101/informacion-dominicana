@@ -2,7 +2,7 @@ import amqplib from "amqplib"
 import crypto from "crypto"
 import { logs } from "./logs.js"
 
-const connection = await amqplib.connect("amqp://admin:admin@rabbitmq:5672")
+const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
 const channel = await connection.createChannel()
 await channel.prefetch(4)
 

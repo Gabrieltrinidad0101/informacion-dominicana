@@ -2,7 +2,7 @@ import Knex from 'knex';
 
 const knex = Knex({
   client: 'pg',
-  connection: 'postgresql://myuser:mypassword@postgres:5432/informacion-dominicana',
+  connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@postgres:5432/${process.env.POSTGRES_DB}`,
 });
 export class Repository {
   constructor() {}
