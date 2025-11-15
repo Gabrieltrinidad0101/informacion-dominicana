@@ -11,17 +11,14 @@ app.get("/verify", async (req, res) => {
   try {
     const header = req.headers["authorization"];
 
-    if (!header) return res.sendStatus(401);
+    return res.sendStatus(401);
 
     const token = header.replace("Bearer ", "");
 
-    const payload = await verifyToken(token, {
+    await verifyToken(token, {
       issuer: process.env.CLERK_JWT_ISSUER,
       audience: process.env.CLERK_JWT_AUDIENCE
     });
-
-    res.setHeader("X-User-Id", payload.sub);
-    res.setHeader("X-Email", payload.email);
 
     return res.sendStatus(200);
   } catch (err) {
