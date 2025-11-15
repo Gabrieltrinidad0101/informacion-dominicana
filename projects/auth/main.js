@@ -1,26 +1,16 @@
 import express from "express";
-import { verifyToken } from "@clerk/express";
 import dotenv from "dotenv";
+import { clerkMiddleware, requireAuth } from "@clerk/express";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(clerkMiddleware());
 
-app.get("/verify", async (req, res) => {
+app.get("/verify",requireAuth(), async (req, res) => {
   try {
-    const header = req.headers["authorization"];
-
-    return res.sendStatus(401);
-
-    const token = header.replace("Bearer ", "");
-
-    await verifyToken(token, {
-      issuer: process.env.CLERK_JWT_ISSUER,
-      audience: process.env.CLERK_JWT_AUDIENCE
-    });
-
-    return res.sendStatus(200);
+    res.status(200).send("OK");
   } catch (err) {
     return res.sendStatus(401);
   }
