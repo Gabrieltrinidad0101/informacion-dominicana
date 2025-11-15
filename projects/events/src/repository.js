@@ -1,36 +1,29 @@
 import mongoose from 'mongoose';
-
-console.log("🚀 Connecting to MongoDB...")
+import fs from 'fs/promises'
 await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
+console.log("🚀 Connected to MongoDB...")
 
 const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
-const PayrollExportToJson = mongoose.model('PayrollExportToJson', dynamicSchema);
+
 
 export class EventsRepository {
-    
     async insertDefaultValues() {
         try {
-            await PayrollExportToJson.updateOne(
-                { _id: new mongoose.Types.ObjectId("688fa9e6c1e5bf7298db4b9b") },
-                {
-                    $set: {
-                        institutionName: "Ayuntamiento de Jarabacoa"
-                    }
-                },
-                { upsert: true }
-            );
-
-            await PayrollExportToJson.updateOne(
-                { _id: new mongoose.Types.ObjectId("688fa9e6c1e5bf7298db4b9a") },
-                {
-                    $set: {
-                        institutionName: "Ayuntamiento de Moca"
-                    }
-                },
-                { upsert: true }
-            );
-        } catch(error) {
+            const data = JSON.parse(await fs.readFile('./projects/events/src/defaultEvents.json'))
+            for (const [key, value] of Object.entries(data.downloadLinks)) {
+                const Model = mongoose.model(key, dynamicSchema);
+                Model.updateOne(
+                    { _id: new mongoose.Types.ObjectId(value._id) },
+                    {
+                        $set: {
+                            ...value
+                        }
+                    },
+                    { upsert: true }
+                );
+            }
+        } catch (error) {
             console.log(error)
         }
     }

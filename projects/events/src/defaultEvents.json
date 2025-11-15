@@ -1,0 +1,37 @@
+{
+    "downloadLinks": [
+        {
+            "_id": "689e9621547c7a685a61cef2",
+            "link": "https:ayuntamientojarabacoa.gob.do/transparencia/documentos/nomina/",
+            "institutionName": "Ayuntamiento de Jarabacoa",
+            "institutionType": "ayuntamiento",
+            "exchangeName": "downloadLinks"
+        },
+        {
+            "_id": "68a66b94eb9cb0121c16670c",
+            "link": "https://ayuntamientomoca.gob.do/transparencia/documentos/nomina/",
+            "institutionName": "Ayuntamiento de Moca",
+            "institutionType": "ayuntamiento",
+            "exchangeName": "downloadLinks"
+        },
+        {
+            "_id": "68faf1abeccddb368aa302bd",
+            "link": "https://ayuntamientocotui.gob.do/transparencia/documentos/nomina/",
+            "institutionName": "Ayuntamiento de Cotuí",
+            "institutionType": "ayuntemineto",
+            "exchangeName": "downloadLinks"
+        }
+    ],
+    "PayrollExportToJson": [
+        {
+            "_id": "688fa9e6c1e5bf7298db4b9b",
+            "institutionName": "Ayuntamiento de Jarabacoa",
+            "exchangeName": "PayrollExportToJson"
+        },
+        {
+            "_id": "688fa9e6c1e5bf7298db4b9a",
+            "institutionName": "Ayuntamiento de Moca",
+            "exchangeName": "PayrollExportToJson"
+        }
+    ]
+}

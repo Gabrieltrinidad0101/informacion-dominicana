@@ -4,6 +4,14 @@ import cors from "cors"
 import { EventListener } from "./src/listener.js"
 import { EventsRepository } from "./src/repository.js"
 import { ReExecuteEvents } from "./src/reExecuteEvents.js"
+import path,{dirname} from "path"
+import { fileURLToPath } from 'url';
+import dotenv from "dotenv"
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({
+    path: path.join(__dirname,".env")
+})
 
 const app = express()
 app.use(express.json())
