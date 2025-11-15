@@ -18,7 +18,7 @@ services:
     restart: always
     build: 
       context: .
-      dockerfile: ./projects/extractedTextV2/dockerfile
+      dockerfile: ./projects/extractedText/dockerfile
     container_name: extracted_text
     networks:
       - dev

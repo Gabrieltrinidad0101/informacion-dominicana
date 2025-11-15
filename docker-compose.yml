@@ -19,10 +19,10 @@ services:
   extracted_text:
     build:
       context: .
-      dockerfile: ./projects/extractedTextV2/dockerfile
+      dockerfile: ./projects/extractedText/dockerfile
     container_name: extractedText
     volumes:
-      - ./projects/extractedTextV2:/app/projects/extractedTextV2
+      - ./projects/extractedText:/app/projects/extractedText
     networks:
       - dev 
     depends_on:

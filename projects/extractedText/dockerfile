@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-COPY projects/extractedTextV2/requirements.txt .
+COPY projects/extractedText/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir watchdog
 
-COPY projects/extractedTextV2/app/ .
+COPY projects/extractedText/app/ .
 
 ENV PATH="/usr/local/bin:${PATH}"
 

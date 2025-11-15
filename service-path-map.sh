@@ -3,7 +3,7 @@
 declare -A SERVICES
 
 SERVICES["download_links"]="projects/downloadLinks"
-SERVICES["extracted_text"]="projects/extractedTextV2"
+SERVICES["extracted_text"]="projects/extractedText"
 SERVICES["download"]="projects/download"
 SERVICES["events"]="projects/events"
 SERVICES["post_download"]="projects/postDownload"
