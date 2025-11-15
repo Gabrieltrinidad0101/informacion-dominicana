@@ -6,9 +6,9 @@ import dotenv from "dotenv"
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({
-    path: path.join(__dirname,".env")
+    path: path.join(__dirname,".env"),
+    override: true
 })
-console.log("CLERK_PUBLISHABLE_KEY:", process.env.CLERK_PUBLISHABLE_KEY);
 
 const app = express();
 app.use(express.json());

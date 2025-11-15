@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clerk HTML Example (Working)</title>
+
+    <!-- Clerk SDK -->
+    <script async crossorigin="anonymous"
+        data-clerk-publishable-key="pk_test_dmFsdWVkLXN3YW4tNDYuY2xlcmsuYWNjb3VudHMuZGV2JA"
+        src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100% !important;
+            height: 100vh;
+            background: #2980B9;
+            background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
+            background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);
+        }
+
+        #user-info {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <clerk-sign-in-button></clerk-sign-in-button>
+    <clerk-sign-up-button></clerk-sign-up-button>
+    <clerk-user-button></clerk-user-button>
+
+
+    <script>
+        window.addEventListener("load", async () => {
+            await window.Clerk.load();
+            window.Clerk.mountSignIn(document.body);
+            window.Clerk.mountSignUp(document.body);
+        });
+    </script>
+</body>
+
+</html>

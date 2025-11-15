@@ -105,7 +105,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: ./projects/auth/dockerfile
+      dockerfile: ./projects/auth/dockerfile-pro
     container_name: auth
     ports:
       - 3000:3000
@@ -211,12 +211,14 @@ services:
   nginx:
     restart: always
     image: staticfloat/nginx-certbot
+    container_name: nginx
     ports:
         - 443:443/tcp 
         - 80:80/tcp
     volumes:
       - ./projects/apigetway:/etc/nginx/user.conf.d:ro
       - ./letsencrypt:/etc/letsencrypt
+      - /projects/apigetway/auth.html:/var/www/html:ro
     networks:
       - dev
     environment:
