@@ -1,26 +1,32 @@
 import express from "express";
-import { 
-  requireAuth, 
-  clerkMiddleware, 
-} from "@clerk/express";
-import path,{dirname} from "path"
-import { fileURLToPath } from 'url';
-import dotenv from "dotenv"
+import { verifyToken } from "@clerk/express";
+import dotenv from "dotenv";
 
 dotenv.config();
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({
-    path: path.join(__dirname,".env")
-})
 
 const app = express();
 app.use(express.json());
 
-app.use(clerkMiddleware());
+app.get("/verify", async (req, res) => {
+  try {
+    const header = req.headers["authorization"];
 
-app.get("/verify",requireAuth(), async (req, res) => {
-  res.status(200).send("OK");
+    if (!header) return res.sendStatus(401);
+
+    const token = header.replace("Bearer ", "");
+
+    const payload = await verifyToken(token, {
+      issuer: process.env.CLERK_JWT_ISSUER,
+      audience: process.env.CLERK_JWT_AUDIENCE
+    });
+
+    res.setHeader("X-User-Id", payload.sub);
+    res.setHeader("X-Email", payload.email);
+
+    return res.sendStatus(200);
+  } catch (err) {
+    return res.sendStatus(401);
+  }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(3000, () => console.log("Auth server running on 3000"));
