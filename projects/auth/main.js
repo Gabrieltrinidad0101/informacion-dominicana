@@ -1,16 +1,25 @@
 import express from "express";
 import { 
-  ClerkExpressRequireAuth, 
-  ClerkExpressWithAuth, 
-  clerkClient 
+  requireAuth, 
+  clerkMiddleware, 
 } from "@clerk/express";
+import path,{dirname} from "path"
+import { fileURLToPath } from 'url';
+import dotenv from "dotenv"
+
+dotenv.config();
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({
+    path: path.join(__dirname,".env")
+})
 
 const app = express();
 app.use(express.json());
 
-app.use(ClerkExpressWithAuth());
+app.use(clerkMiddleware());
 
-app.get("/verify",ClerkExpressRequireAuth(), async (req, res) => {
+app.get("/verify",requireAuth(), async (req, res) => {
   res.status(200).send("OK");
 });
 
