@@ -18,7 +18,10 @@ export const requestJson = async (path) => {
   const fullUrl = `${constants.urlData}/${finalPath}.json`;
 
   const encodedURL = encodeURI(fullUrl);
-  const res = await fetch(encodedURL);
+  const res = await fetch(encodedURL,{
+    method: "GET",
+    credentials: "include"
+  });
 
   requests[path] = await res.json();
   return requests[path];
