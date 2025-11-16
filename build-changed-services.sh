@@ -19,12 +19,14 @@ echo "$CHANGED"
 
 for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
+  PATH_TO_WATCH_2=${GLOBAL_FILES_PATH[$SERVICE]}
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     docker compose -f docker-compose-pro.yml up $SERVICE -d --build
-  elif echo "$CHANGED" | grep -q "^$GLOBAL_FILES_PATH/"; then
-    echo "🔄 Changes detected in $GLOBAL_FILES_PATH → Rebuilding all services..."
+  elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH_2/"; then
+    echo "🔄 Changes detected in $PATH_TO_WATCH_2 → Rebuilding all services..."
     docker compose -f docker-compose-pro.yml up -d --build
+    break
   else
     echo "✅ No changes in $SERVICE"
   fi
