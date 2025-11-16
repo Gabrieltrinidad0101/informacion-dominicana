@@ -17,6 +17,7 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+
   extracted_text:
     restart: always
     build: 
@@ -51,7 +52,7 @@ services:
         condition: service_healthy  
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}    
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
   events:
     restart: always
@@ -136,9 +137,9 @@ services:
     networks:
       - dev
     environment:
-          CLERK_PUBLISHABLE_KEY: ${CLERK_PUBLISHABLE_KEY}
-          CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-  
+      CLERK_PUBLISHABLE_KEY: ${CLERK_PUBLISHABLE_KEY}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+
   insert_data:
     restart: always
     build: 
@@ -216,7 +217,6 @@ services:
       retries: 5
       start_period: 10s
 
-
   mongo:
     restart: always
     image: mongo:latest
@@ -224,17 +224,17 @@ services:
     volumes:
       - ./volumes/mongo/data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}  
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
     networks:
       - dev
     healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      test: ["CMD", "mongo", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
-      
+
   loki:
     restart: always
     image: grafana/loki:2.9.0
@@ -257,13 +257,13 @@ services:
     volumes:
       - ./projects/apigetway:/etc/nginx/user.conf.d:ro
       - ./letsencrypt:/etc/letsencrypt
-      - /projects/apigetway/auth.html:/var/www/html:ro
+      - ./projects/apigetway/html:/var/www/html:ro
     networks:
       - dev
     environment:
-        CERTBOT_EMAIL: gabrielqwes123@gmail.com
-        ENVSUBST_VARS: FQDN
-        FQDN: api.informacion-dominicana.com
+      CERTBOT_EMAIL: gabrielqwes123@gmail.com
+      ENVSUBST_VARS: FQDN
+      FQDN: api.informacion-dominicana.com
     profiles: ["optional"]
     depends_on:
       - events
@@ -317,8 +317,8 @@ services:
     image: mongo-express:latest
     container_name: mongo-express
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_DB_PASSWORD}
       ME_CONFIG_MONGODB_SERVER: mongo
     networks:
       - dev
@@ -342,4 +342,4 @@ volumes:
 
 networks:
   dev:
-    driver: bridge 
+    driver: bridge
