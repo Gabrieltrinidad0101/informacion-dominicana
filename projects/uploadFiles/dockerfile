@@ -1,0 +1,16 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json .
+COPY projects/uploadFiles/package.json ./projects/uploadFiles/package.json    
+COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
+COPY projects/eventBus/package.json ./projects/eventBus/package.json
+
+RUN npm install
+
+COPY projects/eventBus ./projects/eventBus
+COPY projects/uploadFiles ./projects/uploadFiles
+COPY projects/fileManagerClient ./projects/fileManagerClient
+
+CMD ["nodemon","./projects/uploadFiles/main.js"]
