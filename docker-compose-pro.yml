@@ -229,7 +229,7 @@ services:
     networks:
       - dev
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.runCommand({ ping: 1 })"]
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
       interval: 10s
       timeout: 5s
       retries: 5
