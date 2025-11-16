@@ -14,6 +14,9 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy  
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
   extracted_text:
     restart: always
     build: 
@@ -27,6 +30,9 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
   download:
     restart: always
@@ -42,7 +48,11 @@ services:
       rabbitmq:
         condition: service_healthy
       mongo:
-        condition: service_healthy      
+        condition: service_healthy  
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}    
+
   events:
     restart: always
     build:
@@ -54,6 +64,11 @@ services:
     depends_on: 
       - mongo
       - rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      MONGO_DB_USER: ${secrets.MONGO_DB_USER}
+      MONGO_DB_PASSWORD: ${secrets.MONGO_DB_PASSWORD}
 
   post_download:
     restart: always
@@ -70,6 +85,10 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+
   analyze_extracted_text:
     restart: always
     build:
@@ -85,6 +104,10 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+
   ai_text_analyze:
     restart: always
     build:
@@ -100,6 +123,9 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
   auth:
     restart: always
@@ -107,8 +133,6 @@ services:
       context: .
       dockerfile: ./projects/auth/dockerfile-pro
     container_name: auth
-    ports:
-      - 3000:3000
     networks:
       - dev
     environment:
@@ -130,6 +154,12 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      POSTGRES_DB_USER: ${secrets.POSTGRES_DB_USER}
+      POSTGRES_DB_PASSWORD: ${secrets.POSTGRES_DB_PASSWORD}
+
   files_manager:
     restart: always
     build: 
@@ -144,6 +174,9 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
   export_to_json: 
     restart: always
@@ -160,6 +193,10 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
