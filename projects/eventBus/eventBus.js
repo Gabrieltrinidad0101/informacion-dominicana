@@ -2,14 +2,14 @@ import amqplib from "amqplib"
 import crypto from "crypto"
 import { logs } from "./logs.js"
 import dotenv from "dotenv"
+import { env } from "process"
 
 dotenv.config({
     override: true
 })
 
 console.log({
-    RABBITMQ_USER: process.env.RABBITMQ_USER ?? 'admin',
-    RABBITMQ_PASSWORD: process.env.RABBITMQ_PASSWORD ?? 'admin' 
+    envs: process.env
 })
 
 const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
