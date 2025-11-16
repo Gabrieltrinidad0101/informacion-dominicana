@@ -1,7 +1,9 @@
 import amqplib from "amqplib"
 import crypto from "crypto"
 import { logs } from "./logs.js"
+import dotenv from "dotenv"
 
+dotenv.config()
 
 console.log({
     RABBITMQ_USER: process.env.RABBITMQ_USER ?? 'admin',
