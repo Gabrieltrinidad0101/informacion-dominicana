@@ -67,8 +67,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-      MONGO_DB_USER: ${secrets.MONGO_DB_USER}
-      MONGO_DB_PASSWORD: ${secrets.MONGO_DB_PASSWORD}
+      MONGO_DB_USER: ${MONGO_DB_USER}
+      MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
 
   post_download:
     restart: always
@@ -157,8 +157,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
-      POSTGRES_DB_USER: ${secrets.POSTGRES_DB_USER}
-      POSTGRES_DB_PASSWORD: ${secrets.POSTGRES_DB_PASSWORD}
+      POSTGRES_DB_USER: ${POSTGRES_DB_USER}
+      POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
 
   files_manager:
     restart: always
