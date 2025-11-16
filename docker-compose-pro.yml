@@ -16,7 +16,7 @@ services:
         condition: service_healthy  
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   extracted_text:
     restart: always
@@ -33,7 +33,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   download:
     restart: always
@@ -52,7 +52,7 @@ services:
         condition: service_healthy  
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   events:
     restart: always
@@ -67,7 +67,7 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
       MONGO_DB_USER: ${MONGO_DB_USER}
       MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
 
@@ -88,7 +88,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   analyze_extracted_text:
     restart: always
@@ -107,7 +107,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   ai_text_analyze:
     restart: always
@@ -126,7 +126,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   auth:
     restart: always
@@ -157,7 +157,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
       POSTGRES_DB_USER: ${POSTGRES_DB_USER}
       POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
 
@@ -177,7 +177,7 @@ services:
       start_period: 10s
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   export_to_json: 
     restart: always
@@ -196,7 +196,7 @@ services:
         condition: service_healthy
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:3-management
