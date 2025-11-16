@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import fs from 'fs/promises'
-await mongoose.connect('mongodb://root:root@mongo:27017/informacion-dominicana?authSource=admin');
+await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${process.env.MONGO_DB_PASSWORD ?? 'root'}@mongo:27017/informacion-dominicana?authSource=admin`);
 console.log("🚀 Connected to MongoDB...")
 
 const models = {}
