@@ -6,17 +6,21 @@ from fileManagerClient import FileManagerClient
 import uuid
 import os
 import shutil
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 fileManagerClient = FileManagerClient()
 bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
 ocr = PaddleOCR(
-    use_angle_cls=True,                 
-    use_doc_orientation_classify=True,  
     use_textline_orientation=True,
-    use_doc_unwarping=True             
+    use_doc_orientation_classify=True,
+    use_doc_unwarping=True,
+    lang="es"
 )
 
 def callback(data, metadata):
+    logging.info("Events")
     extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',str(data.get('index')) + '.json' )
     if metadata.get('force') or not fileManagerClient.file_exists(extractedTextUrl):
         image_url = data.get("imageUrl")
@@ -36,6 +40,7 @@ def callback(data, metadata):
 
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
         shutil.rmtree(outfile)
+        os.remove(filename)
 
     bus.emit('analyzeExtractedTexts',{
         **data,
@@ -44,4 +49,4 @@ def callback(data, metadata):
     },metadata)
 
 bus.on("extractedText", "extractedTexts", callback)
-print("\n\n\n\nExtractedText Started\n\n\n\n")
+logging.info("\n\n\n\nExtractedText Started\n\n\n\n")

@@ -17,4 +17,4 @@ COPY projects/extractedText/app/ .
 
 ENV PATH="/usr/local/bin:${PATH}"
 
-CMD ["python", "main.py"]
+CMD ["python","-u", "main.py"]
