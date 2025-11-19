@@ -260,11 +260,11 @@ services:
       - ./projects/apigetway/html:/var/www/html:ro
     networks:
       - dev
-    environment:
-      CERTBOT_EMAIL: gabrielqwes123@gmail.com
-      ENVSUBST_VARS: FQDN
-      FQDN: api.informacion-dominicana.com
-      STAGING: 1
+    # environment:
+    #   CERTBOT_EMAIL: gabrielqwes123@gmail.com
+    #   ENVSUBST_VARS: FQDN
+    #   FQDN: api.informacion-dominicana.com
+    #   STAGING: 1
     profiles: ["optional"]
     depends_on:
       - events
