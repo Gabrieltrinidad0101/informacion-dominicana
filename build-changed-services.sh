@@ -23,10 +23,6 @@ for SERVICE in "${!SERVICES[@]}"; do
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     docker compose -f docker-compose-pro.yml up $SERVICE -d --build
-  elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH_2/"; then
-    echo "🔄 Changes detected in $PATH_TO_WATCH_2 → Rebuilding all services..."
-    docker compose -f docker-compose-pro.yml up -d --build
-    break
   else
     echo "✅ No changes in $SERVICE"
   fi
