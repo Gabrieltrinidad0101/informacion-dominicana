@@ -264,8 +264,8 @@ services:
       CERTBOT_EMAIL: gabrielqwes123@gmail.com
       ENVSUBST_VARS: FQDN
       FQDN: api.informacion-dominicana.com
+      STAGING: 1
     profiles: ["optional"]
-    STAGING: 1
     depends_on:
       - events
       - grafana
