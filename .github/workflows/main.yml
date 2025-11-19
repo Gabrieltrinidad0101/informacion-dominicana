@@ -19,7 +19,7 @@ jobs:
         run: chmod +x build-changed-services.sh
 
       - name: Run script
-        run: docker compose -f docker-compose-pro.yml up -d --build
+        run: ./build-changed-services.sh
         env:
           POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }}
           POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
