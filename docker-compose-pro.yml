@@ -255,7 +255,7 @@ services:
         - 443:443/tcp
         - 80:80/tcp
     volumes:
-      - ./projects/apigetway:/etc/nginx/user.conf.d:ro
+      - ./projects/apigetway:/etc/nginx/conf.d/
       - ./letsencrypt:/etc/letsencrypt
       - ./projects/apigetway/html:/var/www/html:ro
     networks:
