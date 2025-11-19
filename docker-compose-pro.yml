@@ -249,7 +249,7 @@ services:
 
   nginx:
     restart: always
-    image: staticfloat/nginx-certbot
+    image: nginx:latest
     container_name: nginx
     ports:
         - 443:443/tcp
