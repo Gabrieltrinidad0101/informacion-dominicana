@@ -265,6 +265,7 @@ services:
       ENVSUBST_VARS: FQDN
       FQDN: api.informacion-dominicana.com
     profiles: ["optional"]
+    STAGING: 1
     depends_on:
       - events
       - grafana
