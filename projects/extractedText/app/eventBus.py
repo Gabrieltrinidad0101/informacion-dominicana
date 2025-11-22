@@ -9,7 +9,7 @@ class EventBus:
     def __init__(self, queue_name=None, exchange_name=None, host='rabbitmq', user='admin', password='admin', prefetch_count=4):
         credentials = pika.PlainCredentials(user, password)
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=host, credentials=credentials)
+            pika.ConnectionParameters(host=host, credentials=credentials,socket_timeout=20)
         )
         self.channel = self.connection.channel()
         self.channel.basic_qos(prefetch_count=prefetch_count)
