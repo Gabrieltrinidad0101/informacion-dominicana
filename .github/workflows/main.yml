@@ -17,6 +17,10 @@ jobs:
 
       - name: Make script executable
         run: chmod +x build-changed-services.sh
+      
+      - name: Install dependencies
+        run: mkdir -p ./letsencrypt/dns && ano ./letsencrypt/dns/cloudflare.ini && echo "dns_cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> ./letsencrypt/dns/cloudflare.ini
+
 
       - name: Run script
         run: ./build-changed-services.sh
