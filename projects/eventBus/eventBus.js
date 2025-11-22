@@ -14,6 +14,7 @@ class EventBus {
         try{
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             EventBus.channel = await connection.createChannel()
+            console.log("🚀 Connected to RabbitMQ...")
             await EventBus.channel.prefetch(4)
         }catch(error){
             console.log(error)
