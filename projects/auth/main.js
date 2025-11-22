@@ -14,7 +14,7 @@ const app = express();
 app.use(clerkMiddleware());
 app.use(express.json());
 
-app.get("/", (req, res) => res.status(401).json({ error: "Unauthorized" }));
+app.get("/", (req, res) => res.status(401).end());
 
 
 app.get("/verify", (req, res, next) => {
