@@ -104,6 +104,7 @@ services:
     environment:
       CLERK_PUBLISHABLE_KEY: ${CLERK_PUBLISHABLE_KEY}
       CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      CLERK_DEV_BROWSER: false
 
   insert_data:
     restart: always
