@@ -11,8 +11,9 @@ dotenv.config({
 })
 
 const app = express();
-app.use(express.json());
 app.use(clerkMiddleware());
+app.use(express.json());
+
 
 app.get("/verify",requireAuth(), async (req, res) => {
   try {
