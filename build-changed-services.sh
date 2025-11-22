@@ -20,7 +20,10 @@ echo "$CHANGED"
 for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
   PATH_TO_WATCH_2=${GLOBAL_FILES_PATH[$SERVICE]}
-  if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
+  if echo "$CHANGED" | grep -q "^apigetway/"; then
+    echo "🔄 Changes detected in apigetway → Reloading nginx..."
+    docker exec nginx nginx -s reload
+  elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     docker compose -f docker-compose-pro.yml up $SERVICE -d --build
   elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH_2/"; then
