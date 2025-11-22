@@ -19,6 +19,9 @@ services:
     container_name: extracted_text
     networks:
       - dev
+    depends_on:
+      - files_manager
+      - rabbitmq
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
@@ -30,7 +33,7 @@ services:
       dockerfile: ./projects/download/dockerfile-pro
     container_name: download
     networks:
-      -
+      - dev
     environment:
       RABBITMQ_USER: ${RABBITMQ_USER}
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
