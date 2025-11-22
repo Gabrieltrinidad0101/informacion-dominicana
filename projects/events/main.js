@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(cors("*"))
 
 const eventsRepository = new EventsRepository()
-eventsRepository.insertDefaultValues()
+await eventsRepository.insertDefaultValues()
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
 
