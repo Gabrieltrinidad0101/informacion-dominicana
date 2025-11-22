@@ -1,5 +1,4 @@
 import express from "express";
-import { clerkMiddleware, requireAuth } from "@clerk/express";
 import path,{dirname} from "path"
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
@@ -11,7 +10,6 @@ dotenv.config({
 })
 
 const app = express();
-app.use(clerkMiddleware());
 app.use(express.json());
 
 app.get("/", (req, res) => res.status(401).end());
