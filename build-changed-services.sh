@@ -20,22 +20,32 @@ echo "$CHANGED"
 for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
   PATH_TO_WATCH_2=${GLOBAL_FILES_PATH[$SERVICE]}
+
+  # --- HANDLE NGINX / APIGETWAY ---
   if echo "$CHANGED" | grep -q "^apigetway/"; then
-    if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
-      echo "🔄 Changes detected in apigetway → Reloading nginx..."
+    echo "🔄 Changes detected in apigetway"
+    if docker ps -q -f name=nginx > /dev/null; then
+      echo "🔁 Reloading nginx configuration..."
       docker exec nginx nginx -s reload
-    elif 
-      echo "🔄 Changes detected in apigetway → Restarting nginx..."
+    else
+      echo "♻️ Restarting nginx (container was not running)..."
       docker compose -f docker-compose-pro.yml up nginx -d --build
     fi
-  elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
+
+    continue
+  fi
+
+  if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     docker compose -f docker-compose-pro.yml up $SERVICE -d --build
-  elif echo "$CHANGED" | grep -q "^$PATH_TO_WATCH_2/"; then
-    echo "🔄 Changes detected in $PATH_TO_WATCH_2 → Rebuilding all services..."
+    continue
+  fi
+
+  if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH_2/"; then
+    echo "🔄 Global file updates detected in $PATH_TO_WATCH_2 → Rebuilding ALL SERVICES..."
     docker compose -f docker-compose-pro.yml up -d --build
     break
-  else
-    echo "✅ No changes in $SERVICE"
   fi
+
+  echo "✅ No changes in $SERVICE"
 done
