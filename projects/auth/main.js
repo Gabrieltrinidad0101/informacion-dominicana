@@ -18,11 +18,7 @@ app.get("/", (req, res) => res.status(401).end());
 
 
 app.get("/verify", (req, res, next) => {
-  requireAuth({ signInUrl: null })(req, res, () => {
-    return res.send("OK"); 
-  });
-}, (err, req, res, next) => {
-  return res.status(401).json({ error: "Unauthorized" });
+  return res.status(401).end();
 });
 
 
