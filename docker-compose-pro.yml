@@ -188,11 +188,14 @@ services:
       - ./projects/apigetway/default.conf:/etc/nginx/conf.d/default.conf
       - ./letsencrypt:/etc/letsencrypt
       - ./projects/apigetway/html:/var/www/html:ro
+      - ./projects/apigetway/html:/var/www/html
     networks:
       - dev
     environment:
       CERTBOT_EMAIL: gabrielqwes123@gmail.com
       ENVSUBST_VARS: FQDN
+      CERTBOT_DNS_PROVIDER: "cloudflare"
+      CERTBOT_DNS_CREDENTIALS: "/etc/letsencrypt/dns/cloudflare.ini"
       FQDN: api.informacion-dominicana.com
     profiles: ["optional"]
     depends_on:
