@@ -18,7 +18,7 @@ export class EventListener {
                 institutionType: event.institutionType,
                 typeOfData: event.typeOfData,
                 link: event.link,
-                year: event.year,
+                year: event.year, 
                 month: event.month,
                 institutionName: event.institutionName,
                 exchangeName: event.exchangeName
