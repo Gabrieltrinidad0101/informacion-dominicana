@@ -1,5 +1,5 @@
 import { Download } from "./uploadFiles.js"
-import { EventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 
 const eventBus = new EventBus()

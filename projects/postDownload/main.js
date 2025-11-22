@@ -1,4 +1,4 @@
-import { EventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 import { PostDownload } from "./postDownload.js"
 import { PdfToText } from "./pdfText/pdfToText.js"
