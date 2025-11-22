@@ -24,7 +24,7 @@ jobs:
       - name: Run script
         run: docker compose -f docker-compose-pro.yml up -d --build
         env:
-          POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }}
+          POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }} 
           POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
