@@ -7,59 +7,73 @@ dotenv.config({
     override: true
 })
 
-const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
-const channel = await connection.createChannel()
-await channel.prefetch(4)
 
-export class EventBus {
+class EventBus {
+
+    static async init(retryCount = 0) {
+        try{
+            const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
+            EventBus.channel = await connection.createChannel()
+            await EventBus.channel.prefetch(4)
+        }catch(error){
+            console.log(error)
+            if(retryCount < 3){
+                await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000))
+                EventBus.init(retryCount + 1)
+            }else{
+                throw error
+            }
+        }
+    }
+
     constructor({ queueName, exchangeName } = {}) {
         if (!queueName || !exchangeName) return
-        channel.assertQueue(queueName, { durable: true })
-        channel.assertExchange(exchangeName, "fanout", { durable: true })
-        channel.bindQueue(queueName, exchangeName, "")
+        EventBus.channel.assertQueue(queueName, { durable: true })
+        EventBus.channel.assertExchange(exchangeName, "fanout", { durable: true })
+        EventBus.channel.bindQueue(queueName, exchangeName, "")
         this.queueName = queueName
         this.exchangeName = exchangeName
 
-        channel.assertQueue(`${queueName}_try`, {
+        EventBus.channel.assertQueue(`${queueName}_try`, {
             durable: true,
             arguments: {
                 'x-message-ttl': 5000,
                 'x-dead-letter-exchange': exchangeName
             }
         })
-        channel.assertExchange(`${exchangeName}_try`, "fanout", { durable: true })
-        channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
+        EventBus.channel.assertExchange(`${exchangeName}_try`, "fanout", { durable: true })
+        EventBus.channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
 
     async bindQueue(queueName, exchangeName) {
-        await channel.assertQueue(queueName, { durable: true })
-        await channel.assertExchange(exchangeName, "fanout", { durable: true })
-        await channel.bindQueue(queueName, exchangeName, "")
+        await EventBus.channel.assertQueue(queueName, { durable: true })
+        await EventBus.channel.assertExchange(exchangeName, "fanout", { durable: true })
+        await EventBus.channel.bindQueue(queueName, exchangeName, "")
     }
 
     async tryQueue(queueName, exchangeName) {
-        await channel.assertQueue(`${queueName}_try`, {
+        await EventBus.channel.assertQueue(`${queueName}_try`, {
             durable: true,
             arguments: {
                 'x-message-ttl': 5000,
                 'x-dead-letter-exchange': exchangeName
             }
         })
-        await channel.assertExchange(`${exchangeName}_try`, "fanout", { durable: true })
-        await channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
+        await EventBus.channel.assertExchange(`${exchangeName}_try`, "fanout", { durable: true })
+        await EventBus.channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
     async on(queueName, exchangeName, callback) {
         await this.bindQueue(queueName, exchangeName)
-        await channel.consume(queueName, async (message) => {
+        await EventBus.channel.consume(queueName, async (message) => {
             if (!message) return
             try {
                 const content = JSON.parse(message.content.toString())
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
                 await callback(content,{force,typeOfExecute})
-                channel.ack(message)
+                EventBus.channel.ack(message)
                 logs.info(content)
             } catch (error) {
                 try {
@@ -72,11 +86,11 @@ export class EventBus {
                             eventBusMaxInternalRetryError: error.message,
                             eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
                         }))
-                        channel.ack(message)
+                        EventBus.channel.ack(message)
                         return
                     }
                     await this.tryQueue(queueName, exchangeName)
-                    channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
+                    EventBus.channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
                         headers: { "x-retry-count": content.retryCount }
                     })
                     logs.error(content)
@@ -87,7 +101,7 @@ export class EventBus {
                         eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
                     }))
                 }
-                channel.ack(message)
+                EventBus.channel.ack(message)
             }
         })
     }
@@ -97,7 +111,7 @@ export class EventBus {
         data.exchangeName = exchangeName
         if (metadata?.typeOfExecute === "onlyOne") return;
         if (metadata?.typeOfExecute === "onlyOneAndNext") metadata.typeOfExecute = "onlyOne"
-        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)),{
+        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)),{
             headers: metadata
         })
     }
@@ -105,8 +119,11 @@ export class EventBus {
     emitCustomExchange(exchangeName, event,metadata) {
         if (!event.traceId) event.traceId = crypto.randomUUID()
         event.exchangeName = exchangeName
-        channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)),{
+        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)),{
             headers: metadata
         })
     }
 }
+
+EventBus.init()
+export const eventBus = new EventBus()

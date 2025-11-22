@@ -10,6 +10,20 @@ const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
 
 export class EventsRepository {
+    static async init(retryCount = 0) {
+        try {
+            await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${process.env.MONGO_DB_PASSWORD ?? 'root'}@mongo:27017/informacion-dominicana?authSource=admin`);
+            console.log("🚀 Connected to MongoDB...")
+        } catch (error) {
+            console.log(error)
+            if (retryCount < 3) {
+                await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000))
+                EventsRepository.init(retryCount + 1)
+            } else {
+                throw error
+            }
+        }
+    }
     async insertDefaultValues() {
         try {
             const data = JSON.parse(await fs.readFile('./projects/events/src/defaultEvents.json'))
