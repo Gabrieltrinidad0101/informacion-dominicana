@@ -126,6 +126,8 @@ services:
       context: .
       dockerfile: ./projects/filesManager/dockerfile-pro
     container_name: filesManager
+    ports:
+      - 4000:4000
     networks:
       - dev
 

@@ -13,7 +13,7 @@ const generetedPath = (folderPath) => path.join(__dirname, '../../data', path.di
 const generetedFilePath = (filePath) => path.join(__dirname, '../../data', filePath)
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../../data")));
-
+ 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const { folderPath } = req.body;
