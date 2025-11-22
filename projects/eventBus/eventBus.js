@@ -126,5 +126,5 @@ class EventBus {
     }
 }
 
-EventBus.init()
+await EventBus.init()
 export const eventBus = new EventBus()
