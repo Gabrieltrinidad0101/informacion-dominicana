@@ -14,7 +14,7 @@ export class ReExecuteEvents {
                 force: data.force,
                 typeOfExecute: data.typeOfExecute,
             })
-        })
+        }) 
     }
     
     getEvents = async (data) => {
