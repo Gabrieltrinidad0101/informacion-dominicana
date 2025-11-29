@@ -150,9 +150,9 @@ services:
     volumes:
       - ./volumes/rabbitmq/data:/var/lib/rabbitmq
       - ./volumes/rabbitmq/logs:/var/log/rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}  
+    # environment:
+    #   RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+    #   RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}  
     networks:
       - dev
 
