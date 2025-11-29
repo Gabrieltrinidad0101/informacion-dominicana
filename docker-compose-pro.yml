@@ -246,7 +246,7 @@ services:
     container_name: portainer
     networks:
       - dev
-    ports:
+    ports: 
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
