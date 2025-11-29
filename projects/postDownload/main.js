@@ -3,7 +3,6 @@ import { FileManagerClient } from "../fileManagerClient/main.js"
 import { PostDownload } from "./postDownload.js"
 import { PdfToText } from "./pdfText/pdfToText.js"
 import { PdfToImages } from "./image/pdfToImages.js"
-const eventBus = new EventBus()
 
 const fileManagerClient = new FileManagerClient()
 const pdfToText = new PdfToText(eventBus, fileManagerClient)
