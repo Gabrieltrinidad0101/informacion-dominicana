@@ -17,12 +17,9 @@ jobs:
 
       - name: Make script executable
         run: chmod +x build-changed-services.sh
-      
-      - name: Install dependencies
-        run: mkdir -p ./letsencrypt/dns && echo "dns_cloudflare_api_token=TU_TOKEN_AQUI" > ./letsencrypt/dns/cloudflare.ini && chmod 600 ./letsencrypt/dns/cloudflare.ini
 
       - name: Run script
-        run: docker compose -f docker-compose-pro.yml up -d --build
+        run: ./build-changed-services.sh
         env:
           POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }} 
           POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}

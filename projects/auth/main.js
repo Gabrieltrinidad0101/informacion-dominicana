@@ -1,4 +1,5 @@
 import express from "express";
+import { clerkMiddleware, requireAuth } from "@clerk/express";
 import path,{dirname} from "path"
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
@@ -10,13 +11,18 @@ dotenv.config({
 })
 
 const app = express();
+app.use(clerkMiddleware());
 app.use(express.json());
 
-app.get("/", (req, res) => res.status(401).end());
+app.get("/", (req, res) => res.status(401).json({ error: "Unauthorized" }));
 
 
 app.get("/verify", (req, res, next) => {
-  return res.status(401).end();
+  requireAuth({ signInUrl: null })(req, res, () => {
+    return res.send("OK");
+  });
+}, (err, req, res, next) => {
+  return res.status(401).json({ error: "Unauthorized" });
 });
 
 
