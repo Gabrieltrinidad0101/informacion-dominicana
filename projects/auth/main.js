@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
 import axios from "axios";
+import { ok } from "assert";
 
 async function clerkAuth(sessionToken) {
   if (!sessionToken) return null;
@@ -50,7 +51,7 @@ app.get("/verify", async (req, res) => {
     return res.status(401).json({ error: "Unauthorized" }); 
   }
 
-  res.status(200).end();
+  return res.status(200).json({ ok: true });
 });
 
 
