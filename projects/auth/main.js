@@ -36,6 +36,7 @@ dotenv.config({
 const app = express();
 app.use(clerkMiddleware());
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => res.status(401).json({ error: "Unauthorized" }));
 
