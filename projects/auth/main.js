@@ -1,8 +1,31 @@
 import express from "express";
 import { clerkMiddleware, requireAuth } from "@clerk/express";
 import path,{dirname} from "path"
+import cookieParser from "cookie-parser";
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
+import axios from "axios";
+
+async function clerkAuth(sessionToken) {
+  if (!sessionToken) return null;
+
+  try {
+    const res = await axios.post(
+      `https://valued-swan-46.clerk.accounts.dev/v1/sessions/verify`,
+      { sessionToken },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.CLERK_SECRET_KEY}`,
+        },
+      }
+    );
+
+    return res.data; // sesión válida → datos del usuario
+  } catch (err) {
+    return null; // inválido
+  }
+}
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({
@@ -17,12 +40,15 @@ app.use(express.json());
 app.get("/", (req, res) => res.status(401).json({ error: "Unauthorized" }));
 
 
-app.get("/verify", (req, res, next) => {
-  requireAuth({ signInUrl: null })(req, res, () => {
-    return res.send("OK");
-  });
-}, (err, req, res, next) => {
-  return res.status(401).json({ error: "Unauthorized" });
+app.get("/verify", async (req, res) => {
+  const sessionToken = req.cookies["__session"]; // Clerk cookie
+  const auth = await clerkAuth(sessionToken);
+
+  if (!auth) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  res.status(200).end();
 });
 
 
