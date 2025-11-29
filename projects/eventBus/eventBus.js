@@ -7,7 +7,6 @@ dotenv.config({
     override: true
 })
 
-
 class EventBus {
 
     static async init(retryCount = 0) {
