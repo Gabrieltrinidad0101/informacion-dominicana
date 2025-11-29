@@ -41,6 +41,7 @@ app.get("/", (req, res) => res.status(401).json({ error: "Unauthorized" }));
 
 
 app.get("/verify", async (req, res) => {
+  console.log(req.cookies)
   const sessionToken = req.cookies["__session"]; // Clerk cookie
   const auth = await clerkAuth(sessionToken);
 
