@@ -274,10 +274,28 @@ services:
       - dev
     depends_on:
       - postgres
+      
+  dokploy:
+    image: dokploy/dokploy:latest
+    container_name: dokploy
+    restart: unless-stopped
+    networks:
+      - dev
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://$POSTGRES_DB_USER:$POSTGRES_DB_PASSWORD@postgres_db:5432/$POSTGRES_DB
+    volumes:
+      - dokploy_data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   pgdata:
   portainer_data:
+  dokploy_data:
 
 networks:
   dev:
