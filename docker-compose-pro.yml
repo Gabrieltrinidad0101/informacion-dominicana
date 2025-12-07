@@ -1,6 +1,6 @@
 services:
   download_links:
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/downloadLinks/dockerfile-pro
@@ -12,7 +12,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   extracted_text:
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/extractedText/dockerfile
@@ -27,7 +27,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   download:
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./projects/download/dockerfile-pro
@@ -39,7 +39,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   events:
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./projects/events/dockerfile-pro
@@ -58,7 +58,7 @@ services:
       MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
 
   post_download:
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/postDownload/dockerfile-pro
@@ -70,7 +70,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   analyze_extracted_text:
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./projects/analyzeExtractedText/dockerfile-pro
@@ -82,7 +82,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   ai_text_analyze:
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./projects/aiTextAnalyze/dockerfile-pro
@@ -94,7 +94,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   auth:
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./projects/auth/dockerfile-pro
@@ -107,7 +107,7 @@ services:
       CLERK_DEV_BROWSER: false
 
   insert_data:
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/insertData/dockerfile-pro
@@ -121,7 +121,7 @@ services:
       POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
 
   files_manager:
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/filesManager/dockerfile-pro
@@ -132,7 +132,7 @@ services:
       - dev
 
   export_to_json: 
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: ./projects/exportToJson/dockerfile-pro
@@ -145,7 +145,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
-    restart: always
+    restart: unless-stopped
     container_name: rabbitmq
     volumes:
       - ./volumes/rabbitmq/data:/var/lib/rabbitmq
@@ -157,7 +157,7 @@ services:
       - dev
 
   mongo:
-    restart: always
+    restart: unless-stopped
     image: mongo:latest
     container_name: mongo
     volumes:
@@ -171,7 +171,7 @@ services:
       - dev
 
   loki:
-    restart: always
+    restart: unless-stopped
     image: grafana/loki:2.9.0
     container_name: loki
     command: -config.file=/etc/loki/local-config.yaml
@@ -183,7 +183,7 @@ services:
       - dev
 
   nginx:
-    restart: always
+    restart: unless-stopped
     image: staticfloat/nginx-certbot
     container_name: nginx
     ports:
@@ -212,7 +212,7 @@ services:
       - mongo
 
   promtail:
-    restart: always
+    restart: unless-stopped
     image: grafana/promtail:2.9.0
     container_name: promtail
     volumes:
@@ -223,14 +223,14 @@ services:
       - dev
 
   grafana:
-    restart: always
+    restart: unless-stopped
     image: grafana/grafana:latest
     container_name: grafana
     networks:
       - dev
 
   postgres:
-    restart: always
+    restart: unless-stopped
     image: postgres:15
     container_name: postgres_db
     environment:
