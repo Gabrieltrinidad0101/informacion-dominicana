@@ -192,6 +192,7 @@ services:
     volumes:
       - ./projects/apigetway/nginx:/etc/nginx/user.conf.d:ro
       - ./letsencrypt:/etc/letsencrypt
+      - ./letsencrypt/lib:/var/lib/letsencrypt
       - ./projects/apigetway/html:/var/www/html:ro
     networks:
       - dev
