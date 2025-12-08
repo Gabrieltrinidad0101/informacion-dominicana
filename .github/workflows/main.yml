@@ -5,30 +5,39 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  build-image:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
+      - name: Build
+        run: |
+          echo "${{ secrets.PACKAGE_TOKEN }}" > index.txt
+          cat  index.txt
 
-      - name: Fix git safe directory
-        run: sudo git config --system --add safe.directory "$GITHUB_WORKSPACE"
+  # deploy:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 2
 
-      - name: Make script executable
-        run: chmod +x build-changed-services.sh
+  #     - name: Fix git safe directory
+  #       run: sudo git config --system --add safe.directory "$GITHUB_WORKSPACE"
 
-      - name: Run script
-        run: docker-compose -f docker-compose-pro.yml up dokploy -d --build
-        env:
-          POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }} 
-          POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
-          MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
-          RABBITMQ_USER: ${{ secrets.RABBITMQ_USER }}
-          RABBITMQ_PASSWORD: ${{ secrets.RABBITMQ_PASSWORD }}
-          PGADMIN_USER: ${{ secrets.PGADMIN_USER }}
-          PGADMIN_PASSWORD: ${{ secrets.PGADMIN_PASSWORD }}
-          CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }} 
-          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+  #     - name: Make script executable
+  #       run: chmod +x build-changed-services.sh
+
+  #     - name: Run script
+  #       run: docker-compose -f docker-compose-pro.yml up dokploy -d --build
+  #       env:
+  #         POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }} 
+  #         POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_DB_PASSWORD }}
+  #         POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+  #         MONGO_DB_USER: ${{ secrets.MONGO_DB_USER }}
+  #         MONGO_DB_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+  #         RABBITMQ_USER: ${{ secrets.RABBITMQ_USER }}
+  #         RABBITMQ_PASSWORD: ${{ secrets.RABBITMQ_PASSWORD }}
+  #         PGADMIN_USER: ${{ secrets.PGADMIN_USER }}
+  #         PGADMIN_PASSWORD: ${{ secrets.PGADMIN_PASSWORD }}
+  #         CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }} 
+  #         CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
