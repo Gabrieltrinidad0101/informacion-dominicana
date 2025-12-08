@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "${{ secrets.PACKAGE_TOKEN }}" | docker login -u gabrielopensource --password-stdin ghcr.io
           docker compose -f docker-compose-pro.yml build files_manager
-          docker tag files_manager:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-files_manager:latest
+          docker tag informacion-dominicana-files_manager:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-files_manager:latest
           docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-files_manager:latest
         env:
           POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }} 
