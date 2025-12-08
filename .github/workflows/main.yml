@@ -56,3 +56,4 @@ jobs:
           PGADMIN_PASSWORD: ${{ secrets.PGADMIN_PASSWORD }}
           CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }} 
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
