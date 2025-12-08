@@ -13,7 +13,7 @@ export class ReExecuteEvents {
             this.eventBus.emitCustomExchange(search.exchangeName,event,{
                 force: data.force,
                 typeOfExecute: data.typeOfExecute,
-            })
+            }) 
         }) 
     }
     
