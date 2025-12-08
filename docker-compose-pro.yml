@@ -182,35 +182,6 @@ services:
     networks:
       - dev
 
-  nginx:
-    restart: unless-stopped
-    image: staticfloat/nginx-certbot
-    container_name: nginx
-    ports:
-        - 443:443/tcp
-        - 80:80/tcp
-    volumes:
-      - ./projects/apigetway/nginx:/etc/nginx/user.conf.d:ro
-      - ./letsencrypt:/etc/letsencrypt
-      - ./letsencrypt/lib:/var/lib/letsencrypt
-      - ./projects/apigetway/html:/var/www/html:ro
-    networks:
-      - dev
-    environment:
-      CERTBOT_EMAIL: gabrielqwes123@gmail.com
-      ENVSUBST_VARS: FQDN
-      CERTBOT_DNS_PROVIDER: "cloudflare"
-      CERTBOT_DNS_CREDENTIALS: "/etc/letsencrypt/dns/cloudflare.ini"
-      FQDN: api.informacion-dominicana.com
-    profiles: ["optional"]
-    depends_on:
-      - events
-      - grafana
-      - promtail
-      - loki
-      - postgres
-      - mongo
-
   promtail:
     restart: unless-stopped
     image: grafana/promtail:2.9.0
