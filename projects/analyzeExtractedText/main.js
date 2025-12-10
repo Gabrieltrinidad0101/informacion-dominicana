@@ -4,5 +4,5 @@ import { AnalyzeExtractedText } from "./src/analyzeExtractedText.js";
 
 
 const fileManagerClient = new FileManagerClient();
-const analyzeExtractedText = new AnalyzeExtractedText(eventBus, fileManagerClient);
+new AnalyzeExtractedText(eventBus, fileManagerClient);
 console.log("AnalyzeExtractedText Started");
