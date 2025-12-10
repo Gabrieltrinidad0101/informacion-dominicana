@@ -16,4 +16,4 @@ new Payroll({
     validateIdNumberApi,
     encrypt,
     getId
-}) 
+})
