@@ -14,6 +14,7 @@ export class FileManagerClient {
         this.s3 = new S3Client({
             region: data?.REGION ?? "us-east-1",
             endpoint: data?.ENDPOINT ?? "http://localhost:9001",
+            forcePathStyle: true,
             credentials: {
                 accessKeyId: data?.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
                 secretAccessKey: data?.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD"
