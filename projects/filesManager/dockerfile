@@ -9,4 +9,4 @@ RUN npm install
 
 COPY projects/filesManager ./projects/filesManager
 
-CMD ["npm", "run", "filesManager"]
+CMD ["npm", "run", "filesManager"] 

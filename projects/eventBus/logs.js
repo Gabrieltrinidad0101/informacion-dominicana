@@ -8,7 +8,7 @@ class Logs {
         console.error(JSON.stringify({
             eventBusInternalError: error,
             eventBusInternalLog: { traceId: data.traceId, _id: data._id, exchangeName: data.exchangeName }
-        }))
+        })) 
     }
 }
 

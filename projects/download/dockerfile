@@ -10,7 +10,7 @@ COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/packag
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
 RUN npm install
-
+ 
 COPY projects/eventBus ./projects/eventBus
 COPY projects/download ./projects/download
 COPY projects/fileManagerClient ./projects/fileManagerClient

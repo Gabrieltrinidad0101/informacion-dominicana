@@ -8,7 +8,7 @@ COPY projects/aiTextAnalyze/package.json ./projects/aiTextAnalyze/package.json
 COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
-RUN npm install
+RUN npm install 
 
 COPY projects/eventBus ./projects/eventBus
 COPY projects/aiTextAnalyze ./projects/aiTextAnalyze

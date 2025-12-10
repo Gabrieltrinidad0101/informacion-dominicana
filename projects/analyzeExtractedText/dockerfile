@@ -7,7 +7,7 @@ COPY projects/analyzeExtractedText/package.json ./projects/analyzeExtractedText/
 COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
-RUN npm install
+RUN npm install 
 
 COPY projects/eventBus ./projects/eventBus
 COPY projects/analyzeExtractedText ./projects/analyzeExtractedText

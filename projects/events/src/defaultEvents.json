@@ -22,7 +22,7 @@
             "exchangeName": "downloadLinks"
         }
     ],
-    "PayrollExportToJson": [
+    "payrollExportToJson": [
         {
             "_id": "688fa9e6c1e5bf7298db4b9b",
             "institutionName": "Ayuntamiento de Jarabacoa",

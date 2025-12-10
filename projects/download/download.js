@@ -5,7 +5,7 @@ export class Download {
     constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus
         this.fileManagerClient = fileManagerClient
-        this.eventBus.on('download', 'downloads', async (data) => await this.download(data))
+        this.eventBus.on('download', 'downloads', async (data,metaData) => await this.download(data,metaData))
     }
 
     getFileNameFromUrl(urlString) {
@@ -13,7 +13,7 @@ export class Download {
         return path.basename(url.pathname);
     }
 
-    download = async (data) => {
+    download = async (data,metaData) => {
         const downloadUrl = path.join(data.institutionName, data.typeOfData, 'downloadData',this.getFileNameFromUrl(data.link))
         const fileExists = await this.fileManagerClient.fileExists(downloadUrl)
         if (!fileExists){
@@ -24,6 +24,6 @@ export class Download {
             {
                 ...data,
                 urlDownload: downloadUrl
-            })
+            },metaData)
     }
 }

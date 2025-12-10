@@ -10,7 +10,7 @@ export class InsertData {
         agosto: 8,
         septiembre: 9,
         octubre: 10,
-        noviembre: 11,
+        noviembre: 11, 
         diciembre: 12
     };
     constructor(eventBus, fileAccess, eventRepository) {
