@@ -1,85 +1,136 @@
-import axios from 'axios';
-import FormData from 'form-data';
-import fs from 'fs';
-import path from 'path';
+import {
+    S3Client,
+    PutObjectCommand,
+    HeadObjectCommand,
+    GetObjectCommand
+} from "@aws-sdk/client-s3";
+import fs from "fs";
+import path from "path";
+import axios from "axios";
+import { Readable } from "stream";
 
 export class FileManagerClient {
-    uploadFile = async (localFilePath, folderPath) => {
-        const form = new FormData();
-        form.append('folderPath', folderPath);
-        form.append('file', fs.createReadStream(localFilePath));
-        await axios.post(`${'http://filesManager:4000'}/upload`, form, {
-            headers: form.getHeaders()
+    constructor(data) {
+        this.s3 = new S3Client({
+            region: data?.REGION ?? "us-east-1",
+            endpoint: data?.ENDPOINT ?? "http://localhost:9001",
+            credentials: {
+                accessKeyId: data?.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
+                secretAccessKey: data?.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD"
+            }
         });
+
+        this.bucket = data.BUCKET ?? "informacion-dominicana";
     }
+
+    uploadFile = async (localFilePath, folderPath) => {
+        const fileStream = fs.createReadStream(localFilePath);
+        const fileName = path.basename(localFilePath);
+
+        const Key = `${folderPath}/${fileName}`;
+
+        await this.s3.send(new PutObjectCommand({
+            Bucket: this.bucket,
+            Key,
+            Body: fileStream
+        }));
+
+        return Key;
+    };
 
     uploadFileFromUrl = async (url, folderPath) => {
-        await axios.post(`${'http://filesManager:4000'}/upload-file-from-url`, {
-            url,
-            folderPath
-        }, {
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
+        const response = await axios.get(url, { responseType: "arraybuffer" });
+
+        const fileName = url.split("/").pop();
+        const Key = `${folderPath}/${fileName}`;
+
+        await this.s3.send(new PutObjectCommand({
+            Bucket: this.bucket,
+            Key,
+            Body: response.data
+        }));
+
+        return Key;
+    };
 
     createTextFile = async (folderPath, fileText) => {
-        await axios.post(`${'http://filesManager:4000'}/create-file`, {
-            folderPath,
-            fileText
-        }, {
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
+        const Key = `${folderPath}`;
+
+        await this.s3.send(new PutObjectCommand({
+            Bucket: this.bucket,
+            Key,
+            Body: fileText,
+            ContentType: "text/plain"
+        }));
+
+        return Key;
+    };
 
     fileExists = async (filePath) => {
-        const res = await axios.get(`${'http://filesManager:4000'}/file-exists?filePath=${filePath}`);
-        return res.data.exists;
-    }
+        try {
+            await this.s3.send(new HeadObjectCommand({
+                Bucket: this.bucket,
+                Key: filePath
+            }));
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
 
     getFile = async (fileUrl) => {
-        const res = await axios.get(`${'http://filesManager:4000'}/${fileUrl}`);
-        return res.data
-    }
+        const res = await this.s3.send(new GetObjectCommand({
+            Bucket: this.bucket,
+            Key: fileUrl
+        }));
+
+        return Buffer.from(await res.Body.transformToByteArray());
+    };
 
     getFileUint8Array = async (fileUrl) => {
-        const res = await axios.get(`${'http://filesManager:4000'}/${fileUrl}`);
-        return new Uint8Array(res.data)
-    }
+        const res = await this.s3.send(new GetObjectCommand({
+            Bucket: this.bucket,
+            Key: fileUrl
+        }));
+
+        return new Uint8Array(await res.Body.transformToByteArray());
+    };
 
     generateUrl = (data, microService, fileName) => {
-        return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`
-    }
+        return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`;
+    };
 
     getFileBuffer = async (fileUrl) => {
-        try{
-            const imageResponse = await axios.get(`http://filesManager:4000/data/${fileUrl}`, {
-                responseType: "arraybuffer",
-            });
-            return imageResponse.data;
-        }catch {
-            return null
+        try {
+            const res = await this.s3.send(new GetObjectCommand({
+                Bucket: this.bucket,
+                Key: fileUrl
+            }));
+            return Buffer.from(await res.Body.transformToByteArray());
+        } catch {
+            return null;
         }
-    }
-
+    };
 
     downloadFile = async (url) => {
+        const res = await this.s3.send(new GetObjectCommand({
+            Bucket: this.bucket,
+            Key: url
+        }));
+
         const filePath = path.join("downloads", url);
         const dirPath = path.dirname(filePath);
 
         fs.mkdirSync(dirPath, { recursive: true });
 
-        const response = await axios.get(`http://filesManager:4000/data/${url}`, {
-            responseType: "stream",
-        });
-
-
+        const stream = Readable.from(await res.Body.transformToByteArray());
         const writer = fs.createWriteStream(filePath);
-        response.data.pipe(writer);
+
+        stream.pipe(writer);
 
         return new Promise((resolve, reject) => {
             writer.on("finish", () => resolve(filePath));
             writer.on("error", reject);
         });
     };
-
 }
