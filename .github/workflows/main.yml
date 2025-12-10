@@ -12,6 +12,9 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Make script executable
+        run: chmod +x build-changed-services.sh
+
       - name: Run script
         run: ./build-changed-services.sh
         env:
