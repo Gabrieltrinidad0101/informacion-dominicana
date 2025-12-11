@@ -8,13 +8,6 @@ services:
       - ./projects/downloadLinks:/app/projects/downloadLinks
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   extracted_text:
     build:
@@ -25,13 +18,6 @@ services:
       - ./projects/extractedText:/app/projects/extractedText
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
 
   download:
     build:
@@ -42,13 +28,6 @@ services:
       - ./projects/download:/app/projects/download
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   events:
     build:
@@ -59,25 +38,8 @@ services:
       - ./projects/events:/app/projects/events
     networks:
       - dev
-    depends_on:
-      mongo:
-        condition: service_started
-      files_manager:
-        condition: service_started
-      rabbitmq:
-        condition: service_healthy
     ports:
       - "3001:3001"
-
-  # frontend:
-  #   container_name: frontend
-  #   build:
-  #     context: .
-  #     dockerfile: ./projects/frontend/dockerfile
-  #   volumes:
-  #     - ./projects/frontend:/app/projects/frontend
-  #   networks:
-  #     - dev
 
   post_download:
     build:
@@ -88,13 +50,6 @@ services:
       - ./projects/postDownload:/app/projects/postDownload
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   analyze_extracted_text:
     build:
@@ -105,13 +60,6 @@ services:
       - ./projects/analyzeExtractedText:/app/projects/analyzeExtractedText
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   ai_text_analyze:
     build:
@@ -122,13 +70,6 @@ services:
       - ./projects/aiTextAnalyze:/app/projects/aiTextAnalyze
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   insert_data:
     build:
@@ -139,13 +80,6 @@ services:
       - ./projects/insertData:/app/projects/insertData
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   files_manager:
     build:
@@ -159,12 +93,6 @@ services:
       - dev
     ports:
       - 4000:4000
-    healthcheck:
-      test: ["CMD", "ls"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   export_to_json:
     build:
@@ -175,13 +103,6 @@ services:
       - ./projects/exportToJson:/app/projects/exportToJson
     networks:
       - dev
-    depends_on:
-      files_manager:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -197,12 +118,6 @@ services:
       - 15672:15672
     networks:
       - dev
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   mongo:
     image: mongo:latest
@@ -216,12 +131,6 @@ services:
       - dev
     ports:
       - 27017:27017
-    healthcheck:
-      test: echo OK  
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   loki:
     image: grafana/loki:2.9.0
@@ -265,11 +174,6 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - dev
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
   
   minio:
     image: minio/minio
