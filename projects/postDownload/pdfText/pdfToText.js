@@ -19,8 +19,8 @@ export class PdfToText {
             const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${i}.json`)
             const pageText = []
             const fileExists = await this.fileManagerClient.fileExists(fileUrl)
-            if(fileExists) hasText = true
-            if (metadata?.force || !hasText) {
+            if(fileExists && !hasText) hasText = true;
+            if (metadata?.force || !fileExists) {
                 const page = await pdf.getPage(i);
                 const content = await page.getTextContent();
     
@@ -34,7 +34,7 @@ export class PdfToText {
                         height: item.height
                     });
                 }
-                hasText = pageText.length > 0;
+                if(!hasText) hasText = pageText.length > 0;
                 await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
             }
             await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
