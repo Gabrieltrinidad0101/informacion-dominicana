@@ -34,7 +34,7 @@ export class PdfToText {
                         height: item.height
                     });
                 }
-                if(!hasText) hasText = pageText.length > 0;
+                hasText = pageText.length > 0;
                 await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
             }
             await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);

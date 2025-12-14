@@ -24,8 +24,8 @@ def callback(data, metadata):
     extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',str(data.get('index')) + '.json' )
     if metadata.get('force') or not fileManagerClient.file_exists(extractedTextUrl):
         image_url = data.get("imageUrl")
-        response = fileManagerClient.get_file(image_url)
-        img = Image.open(BytesIO(response.content))
+        response = fileManagerClient.get_file_bytes(image_url)
+        img = Image.open(BytesIO(response))
         uuid_ = str(uuid.uuid4())
         filename = f"./{uuid_}.png"
         img.save(filename)  

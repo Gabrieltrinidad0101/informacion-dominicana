@@ -26,8 +26,7 @@ export class FileManagerClient {
 
     uploadFile = async (localFilePath, folderPath) => {
         const fileStream = fs.createReadStream(localFilePath);
-        const fileName = path.basename(localFilePath);
-        const Key = `${folderPath}/${fileName}`;
+        const Key = folderPath;
 
         await this.s3.send(new PutObjectCommand({
             Bucket: this.bucket,

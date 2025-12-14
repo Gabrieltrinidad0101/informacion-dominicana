@@ -1,72 +1,112 @@
-import requests
+import boto3
+from botocore.exceptions import ClientError
 from pathlib import Path
+import requests
+
 
 class FileManagerClient:
-    def __init__(self, base_url="http://filesManager:4000"):
-        self.base_url = base_url
+    def __init__(
+        self,
+        bucket_name="informacion-dominicana",
+        endpoint_url="http://minio:9000", 
+        access_key="MINIO_ROOT_USER",
+        secret_key="MINIO_ROOT_PASSWORD",
+        region="us-east-1"
+    ):
+        self.bucket = bucket_name
 
-    def upload_file(self, local_file_path, folder_path):
-        with open(local_file_path, "rb") as f:
-            files = {"file": f}
-            data = {"folderPath": folder_path}
-            response = requests.post(f"{self.base_url}/upload", files=files, data=data)
-        response.raise_for_status()
-        return response.json()
+        self.s3 = boto3.client(
+            "s3",
+            endpoint_url=endpoint_url,
+            aws_access_key_id=access_key,
+            aws_secret_access_key=secret_key,
+            region_name=region,
+        )
 
-    def generate_url(self,data, micro_service, file_name):
-        return f"{data['institutionName']}/{data['typeOfData']}/{micro_service}/{data['year']}/{data['month']}/{file_name}"
-
-
-    def upload_file_from_url(self, url, folder_path):
-        payload = {"url": url, "folderPath": folder_path}
-        headers = {"Content-Type": "application/json"}
-        response = requests.post(f"{self.base_url}/upload-file-from-url", json=payload, headers=headers)
-        response.raise_for_status()
-        return response.json()
-
-    def create_text_file(self, folder_path, file_text):
-        payload = {"folderPath": folder_path, "fileText": file_text}
-        headers = {"Content-Type": "application/json"}
-        response = requests.post(f"{self.base_url}/create-file", json=payload, headers=headers)
-        response.raise_for_status()
-        return response.json()
-
-    def file_exists(self, file_path):
-        response = requests.get(f"{self.base_url}/file-exists", params={"filePath": file_path})
-        response.raise_for_status()
-        return response.json().get("exists", False)
-
-    def get_file(self, file_url):
-        response = requests.get(f"{self.base_url}/{file_url}")
-        response.raise_for_status()
-        return response
-
-    def get_file_bytes(self, file_url):
-        response = requests.get(f"{self.base_url}/{file_url}", stream=True)
-        response.raise_for_status()
-        return response.content
-
+    # -------------------------
+    # Path generator (igual al tuyo)
+    # -------------------------
     def generate_url(self, data, micro_service, file_name):
-        return f"{data['institutionName']}/{data['typeOfData']}/{micro_service}/{data['year']}/{data['month']}/{file_name}"
+        return (
+            f"{data['institutionName']}/"
+            f"{data['typeOfData']}/"
+            f"{micro_service}/"
+            f"{data['year']}/"
+            f"{data['month']}/"
+            f"{file_name}"
+        )
 
-    def get_file_buffer(self, file_url):
+    # -------------------------
+    # Upload local file
+    # -------------------------
+    def upload_file(self, local_file_path, s3_key):
+        self.s3.upload_file(
+            Filename=local_file_path,
+            Bucket=self.bucket,
+            Key=s3_key
+        )
+        return {"bucket": self.bucket, "key": s3_key}
+
+    # -------------------------
+    # Upload file from URL
+    # -------------------------
+    def upload_file_from_url(self, url, s3_key):
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+
+        self.s3.upload_fileobj(
+            Fileobj=response.raw,
+            Bucket=self.bucket,
+            Key=s3_key
+        )
+
+        return {"bucket": self.bucket, "key": s3_key}
+
+    # -------------------------
+    # Create text file
+    # -------------------------
+    def create_text_file(self, s3_key, file_text):
+        self.s3.put_object(
+            Bucket=self.bucket,
+            Key=s3_key,
+            Body=file_text.encode("utf-8"),
+            ContentType="text/plain"
+        )
+        return {"bucket": self.bucket, "key": s3_key}
+
+    # -------------------------
+    # Exists
+    # -------------------------
+    def file_exists(self, s3_key) -> bool:
         try:
-            response = requests.get(f"{self.base_url}/data/{file_url}", stream=True)
-            response.raise_for_status()
-            return response.content
-        except requests.RequestException:
-            return None
+            self.s3.head_object(Bucket=self.bucket, Key=s3_key)
+            return True
+        except ClientError as e:
+            if e.response["Error"]["Code"] == "404":
+                return False
+            raise
 
-    def download_file(self, url):
-        file_path = Path("downloads") / url
+    # -------------------------
+    # Get file (bytes)
+    # -------------------------
+    def get_file_bytes(self, s3_key) -> bytes:
+        response = self.s3.get_object(
+            Bucket=self.bucket,
+            Key=s3_key
+        )
+        return response["Body"].read()
+
+    # -------------------------
+    # Download to disk
+    # -------------------------
+    def download_file(self, s3_key, download_dir="downloads"):
+        file_path = Path(download_dir) / s3_key
         file_path.parent.mkdir(parents=True, exist_ok=True)
 
-        response = requests.get(f"{self.base_url}/data/{url}", stream=True)
-        response.raise_for_status()
-
-        with open(file_path, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    f.write(chunk)
+        self.s3.download_file(
+            Bucket=self.bucket,
+            Key=s3_key,
+            Filename=str(file_path)
+        )
 
         return str(file_path)
