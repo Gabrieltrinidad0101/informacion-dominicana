@@ -9,6 +9,7 @@ echo "$CHANGED"
 
 for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
+  KEY_DEPLOY=${DEPLOY[$SERVICE]}
 
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
@@ -16,6 +17,7 @@ for SERVICE in "${!SERVICES[@]}"; do
     docker compose -f docker-compose-pro.yml build $SERVICE
     docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
     docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
+    curl -X POST $KEY_DEPLOY
     continue
   fi
 
