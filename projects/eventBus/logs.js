@@ -4,7 +4,7 @@ class Logs {
         console.log(JSON.stringify({ eventBusInternalLog: { traceId: data.traceId, _id: data._id, exchangeName: data.exchangeName } }))
     }
 
-    error(data) {
+    error(data,error = "") {
         console.error(JSON.stringify({
             eventBusInternalError: error,
             eventBusInternalLog: { traceId: data.traceId, _id: data._id, exchangeName: data.exchangeName }

@@ -17,7 +17,7 @@ COPY projects/postDownload/package.json ./projects/postDownload/package.json
 COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
-RUN npm install --omit=dev
+RUN npm install
 
 COPY projects/eventBus ./projects/eventBus
 COPY projects/postDownload ./projects/postDownload

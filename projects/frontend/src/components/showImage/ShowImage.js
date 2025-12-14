@@ -30,18 +30,17 @@ export function ShowImage({ employee, institution, currentDate }) {
   }, [url]);
 
   const handleSelectPosition = () => {
+    console.log(imageRef.current.getBoundingClientRect());
     positionSelect(selectEmployee, imageRef, employee);
   };
 
   useEffect(() => {
+    console.log(employee);
     const interval = setInterval(() => {
-      const image = imageRef.current;
-      if (!image?.complete) return;
+      if(!numPages) return;
       clearInterval(interval);
       handleSelectPosition();
     }, 500);
-
-    return () => clearInterval(interval);
   }, [employee]);
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export function ShowImage({ employee, institution, currentDate }) {
             <div ref={imageRef}>
               <Document
                 file={`${constants.urlData}/${employee.urlDownload}`}
-                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                onLoadSuccess={({ numPages }) =>{ setNumPages(numPages); handleSelectPosition()}}
               >
                 <Page pageNumber={employee.index} width={800} />
               </Document>

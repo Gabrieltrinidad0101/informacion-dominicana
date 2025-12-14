@@ -94,11 +94,11 @@ class EventBus {
                     EventBus.channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
                         headers: { "x-retry-count": content.retryCount }
                     })
-                    logs.error(content)
+                    logs.error(content,error)
                 } catch (parseError) {
                     const content = JSON.parse(message.content.toString())
                     console.error(JSON.stringify({
-                        eventBusInternalRetryError: error.message,
+                        eventBusInternalRetryError: parseError.message,
                         eventBusInternalLog: { traceId: content.traceId, _id: content._id, exchangeName: content.exchangeName }
                     }))
                 }
