@@ -137,7 +137,6 @@ services:
       context: .
       dockerfile: ./projects/exportToJson/dockerfile-pro
     container_name: exportToJson
-    image: export_to_json
     networks:
       - dev
     environment:
