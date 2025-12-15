@@ -31,18 +31,19 @@ export class EventsRepository {
     async insertDefaultValues() {
         try {
             const data = JSON.parse(await fs.readFile('./projects/events/src/defaultEvents.json'))
-            for (const [key, value] of Object.entries(data.downloadLinks)) {
-                console.log(value)
+            for (const [key,values] of Object.entries(data)) {
                 const Model = mongoose.model(key, dynamicSchema);
-                Model.updateOne(
-                    { _id: new mongoose.Types.ObjectId(value._id) },
-                    {
-                        $set: {
-                            ...value
-                        }
-                    },
-                    { upsert: true }
-                );
+                for (const value of values) {
+                    await Model.updateOne(
+                        { _id: new mongoose.Types.ObjectId(value._id) },
+                        {
+                            $set: {
+                                ...value
+                            }
+                        },
+                        { upsert: true }
+                    );
+                }
             }
         } catch (error) {
             console.log(error)
