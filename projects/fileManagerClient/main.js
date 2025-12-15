@@ -12,12 +12,12 @@ import { Readable } from "stream";
 export class FileManagerClient {
     constructor(data) {
         this.s3 = new S3Client({
-            region: data?.REGION ?? "us-east-1",
-            endpoint: data?.ENDPOINT ?? "http://minio:9000",
+            region: process.env.REGION ?? "us-east-1",
+            endpoint: process.env.ENDPOINT ?? "http://minio:9000",
             forcePathStyle: true,
             credentials: {
-                accessKeyId: data?.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
-                secretAccessKey: data?.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD"
+                accessKeyId: process.env.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
+                secretAccessKey: process.env.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD"
             }
         });
 

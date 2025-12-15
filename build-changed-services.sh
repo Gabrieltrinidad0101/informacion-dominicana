@@ -14,10 +14,10 @@ for SERVICE in "${!SERVICES[@]}"; do
 
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
-    # echo $PACKAGE_TOKEN | docker login -u gabrielopensource --password-stdin ghcr.io
-    # docker compose -f docker-compose-pro.yml build $SERVICE
-    # docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
-    # docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
+    echo $PACKAGE_TOKEN | docker login -u gabrielopensource --password-stdin ghcr.io
+    docker compose -f docker-compose-pro.yml build $SERVICE
+    docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
+    docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
     curl -X POST $WEBHOOK
     continue
   fi

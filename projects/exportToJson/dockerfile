@@ -14,5 +14,5 @@ RUN npm install
 COPY projects/eventBus ./projects/eventBus
 COPY projects/exportToJson ./projects/exportToJson
 COPY projects/fileManagerClient ./projects/fileManagerClient
-
+ 
 CMD ["npm", "run", "exportToJson"]
