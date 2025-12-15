@@ -12,7 +12,11 @@ for SERVICE in "${!SERVICES[@]}"; do
   KEY_DEPLOY=${DEPLOY[$SERVICE]}
   WEBHOOK="${!KEY_DEPLOY}"
 
-  curl -X POST $WEBHOOK
+  if [ "$WEBHOOK" ]; then
+    curl -X POST $WEBHOOK
+  fi
+
+
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     echo $PACKAGE_TOKEN | docker login -u gabrielopensource --password-stdin ghcr.io
