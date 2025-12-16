@@ -17,7 +17,7 @@ for SERVICE in "${!SERVICES[@]}"; do
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     echo $PACKAGE_TOKEN | docker login -u gabrielopensource --password-stdin ghcr.io
     docker compose -f docker-compose-pro.yml build $SERVICE
-    docker tag informacion-dominicana-$SERVICE:lastest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:$TAG
+    docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:$TAG
     docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:$TAG
     if [ "$WEBHOOK" ]; then
       echo "🚀 Deploying $SERVICE via Dokploy..."

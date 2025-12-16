@@ -15,7 +15,7 @@ export class ReExecuteEvents {
                 typeOfExecute: data.typeOfExecute,
             }) 
         }) 
-    }
+    } 
     
     getEvents = async (data) => {
         const events = await this.eventsRepository.find({...data})
