@@ -13,7 +13,7 @@ const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
 
-export class EventsRepository {
+export class EventsRepository { 
     static async init(retryCount = 0) {
         try {
             await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${process.env.MONGO_DB_PASSWORD ?? 'root'}@mongo:27017/informacion-dominicana?authSource=admin`);
