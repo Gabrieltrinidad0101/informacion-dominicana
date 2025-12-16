@@ -17,19 +17,10 @@ for SERVICE in "${!SERVICES[@]}"; do
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
     echo $PACKAGE_TOKEN | docker login -u gabrielopensource --password-stdin ghcr.io
     docker compose -f docker-compose-pro.yml build $SERVICE
-    docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:$TAG
-    docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:$TAG
+    docker tag informacion-dominicana-$SERVICE:latest ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
+    docker push ghcr.io/gabrieltrinidad0101/informacion-dominicana-$SERVICE:latest
     if [ "$WEBHOOK" ]; then
-      echo "🚀 Deploying $SERVICE via Dokploy..."
-
-      curl -X POST $WEBHOOK \
-        -H "Authorization: Bearer $DOKPLOY_TOKEN" \
-        -H "Content-Type: application/json" \
-        -d "{
-          \"env\": {
-            \"IMAGE_TAG\": \"$TAG\"
-          }
-        }"
+      curl -X POST $WEBHOOK
     fi
     continue
   fi
