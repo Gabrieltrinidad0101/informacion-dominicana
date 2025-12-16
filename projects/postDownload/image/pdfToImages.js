@@ -24,7 +24,7 @@ export class PdfToImages {
     return pdfData.numpages;
   };
 
-  convertPdfToImages = async (data,metadata) => {
+  convertPdfToImages = async (hasText,data,metadata) => {
     if (!data.urlDownload.includes("pdf")) return;
 
     // Directory where images will be saved
@@ -39,13 +39,10 @@ export class PdfToImages {
     const pdfPath = path.resolve(`downloads/${data.urlDownload}`);
     const numberOfPages = await this.#getNumbersOfPages(pdfPath);
     const convert = fromPath(pdfPath, options("_", saveImages));
-
     delete data._id;
 
-    await new Promise((resolve) => setTimeout(resolve, 1000 * Math.floor(Math.random() * 10)));
-
-
     for (let i = 1; i <= numberOfPages; i++) {
+      if(hasText.includes(i)) continue;
       const fileName = `_.${i}.jpg`;
       const imagePath = path.resolve(saveImages, fileName);
       const imageUrl = this.fileManagerClient.generateUrl(

@@ -14,7 +14,7 @@ export class PdfToText {
         const pdfData = new Uint8Array(fs.readFileSync(pdfPath));
         const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
         delete  data._id;
-        let hasText = false;
+        let hasText = [];
         for (let i = 1; i <= pdf.numPages; i++) {
             const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${i}.json`)
             const pageText = []
@@ -34,10 +34,14 @@ export class PdfToText {
                         height: item.height
                     });
                 }
-                if(!hasText) hasText = pageText.length > 0;
-                await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
+                if(pageText.length > 0) {
+                    hasText.push(i);
+                    await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
+                }
             }
-            await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
+            if(hasText.includes(i)) {
+                await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
+            }
         }
         fs.unlinkSync(pdfPath);
         return hasText;
