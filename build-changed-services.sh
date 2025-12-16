@@ -22,7 +22,14 @@ for SERVICE in "${!SERVICES[@]}"; do
     if [ "$WEBHOOK" ]; then
       echo "🚀 Deploying $SERVICE via Dokploy..."
 
-      curl -X POST $WEBHOOK
+      curl -X POST $WEBHOOK \
+        -H "Authorization: Bearer $DOKPLOY_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d "{
+          \"env\": {
+            \"IMAGE_TAG\": \"$TAG\"
+          }
+        }"
     fi
     continue
   fi

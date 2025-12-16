@@ -10,7 +10,7 @@ export class EventListener {
         this.eventBus.on('readAiTextAnalyzer', 'aiTextAnalyzers', this.saveEvent)
         this.eventBus.on('readInsertData', 'insertDatas', this.saveEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveEvent)
-    }
+    } 
   
     saveEvent = async (event) => {   
         if(event.exchangeName == 'downloads') {
