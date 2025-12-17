@@ -15,17 +15,18 @@ class FileManagerClient:
     ):
         self.endpoint_url = endpoint_url
         self.region = region or os.getenv("REGION", "us-east-1")
-        self.access_key = access_key or os.getenv["MINIO_ROOT_USER","MINIO_ROOT_USER"]
-        self.secret_key = secret_key or os.getenv["MINIO_ROOT_PASSWORD","MINIO_ROOT_PASSWORD"]
+        self.access_key = access_key or os.getenv("MINIO_ROOT_USER", "MINIO_ROOT_USER")
+        self.secret_key = secret_key or os.getenv("MINIO_ROOT_PASSWORD", "MINIO_ROOT_PASSWORD")
         self.bucket = bucket_name
 
         self.s3 = boto3.client(
             "s3",
-            endpoint_url=endpoint_url,
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            region_name=region,
+            endpoint_url=self.endpoint_url,
+            aws_access_key_id=self.access_key,
+            aws_secret_access_key=self.secret_key,
+            region_name=self.region,
         )
+
 
     # -------------------------
     # Path generator (igual al tuyo)
