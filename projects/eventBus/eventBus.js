@@ -7,8 +7,7 @@ dotenv.config({
     override: true
 })
 
-class EventBus {
-
+export class EventBus {
     static async init(retryCount = 0) {
         try{
             console.log(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
@@ -96,6 +95,7 @@ class EventBus {
                     })
                     logs.error(content,error)
                 } catch (parseError) {
+                    console.error(parseError)
                     const content = JSON.parse(message.content.toString())
                     console.error(JSON.stringify({
                         eventBusInternalRetryError: parseError.message,

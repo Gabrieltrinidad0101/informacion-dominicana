@@ -23,7 +23,7 @@ export class PdfToText {
             if (metadata?.force || !fileExists) {
                 const page = await pdf.getPage(i);
                 const content = await page.getTextContent();
-    
+      
                 for(const item of content.items) {
                     if(item.str.trim() === '') continue;
                     pageText.push({

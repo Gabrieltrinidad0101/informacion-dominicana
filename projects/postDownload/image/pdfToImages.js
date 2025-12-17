@@ -27,7 +27,6 @@ export class PdfToImages {
   convertPdfToImages = async (hasText,data,metadata) => {
     if (!data.urlDownload.includes("pdf")) return;
 
-    // Directory where images will be saved
     const saveImages = this.fileManagerClient.generateUrl(
       data,
       "postDownloads",
@@ -63,8 +62,7 @@ export class PdfToImages {
       }, metadata);
     }
     
-    // Clean up folder AFTER all pages processed
     fs.rmdirSync(saveImages, { recursive: true });
-    fs.unlink(pdfPath);
+    fs.unlinkSync(pdfPath);
   };
 }

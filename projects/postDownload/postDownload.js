@@ -8,6 +8,7 @@ export class PostDownload {
     }
 
     postDownload = async (data,metadata) => {
+        if (!data.urlDownload.includes("pdf")) return;
         const hasText = await this.pdfToText.extractTextWithPositionFromPdf(data,metadata);
         await this.pdfToImages.convertPdfToImages(hasText,data,metadata);
     }
