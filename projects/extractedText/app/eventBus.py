@@ -2,12 +2,13 @@ import pika
 import json
 import uuid
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 
 class EventBus:
     def __init__(self, queue_name=None, exchange_name=None, host='rabbitmq', user='admin', password='admin', prefetch_count=4):
-        credentials = pika.PlainCredentials(user, password)
+        credentials = pika.PlainCredentials(user or os.getenv("RABBITMQ_USER","admin"), password or os.getenv("RABBITMQ_PASSWORD","admin"))
         self.connection = pika.BlockingConnection(
             pika.ConnectionParameters(host=host, credentials=credentials,socket_timeout=20)
         )
