@@ -16,5 +16,5 @@ RUN pip install --no-cache-dir watchdog
 COPY projects/extractedText/app/ .
 
 ENV PATH="/usr/local/bin:${PATH}"
-
+ 
 CMD ["python","-u", "main.py"]

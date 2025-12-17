@@ -29,5 +29,3 @@ jobs:
           DOKPLOY_INSERT_DATA_WEBHOOK: ${{ secrets.DOKPLOY_INSERT_DATA_WEBHOOK }}
           DOKPLOY_EXPORT_TO_JSON_WEBHOOK: ${{ secrets.DOKPLOY_EXPORT_TO_JSON_WEBHOOK }}
           DOKPLOY_AUTH_WEBHOOK: ${{ secrets.DOKPLOY_AUTH_WEBHOOK }} 
-          TAG: ${{ github.sha }}
-          DOKPLOY_TOKEN: ${{ secrets.DOKPLOY_TOKEN }}
