@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 
 class EventBus:
     def __init__(self, queue_name=None, exchange_name=None, host='rabbitmq', user='admin', password='admin', prefetch_count=4):
-        credentials = pika.PlainCredentials(user or os.getenv("RABBITMQ_USER","admin"), password or os.getenv("RABBITMQ_PASSWORD","admin"))
+        credentials = pika.PlainCredentials(os.getenv("RABBITMQ_USER",user), password or os.getenv("RABBITMQ_PASSWORD",password))
         self.connection = pika.BlockingConnection(
             pika.ConnectionParameters(host=host, credentials=credentials,socket_timeout=20)
         )

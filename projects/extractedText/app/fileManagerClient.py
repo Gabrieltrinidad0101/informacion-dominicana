@@ -9,14 +9,14 @@ class FileManagerClient:
         self,
         bucket_name="informacion-dominicana",
         endpoint_url="http://minio:9000",
-        region=None,
-        access_key=None,
-        secret_key=None,
+        region="us-east-1",
+        access_key="MINIO_ROOT_USER",
+        secret_key="MINIO_ROOT_PASSWORD",
     ):
         self.endpoint_url = endpoint_url
-        self.region = region or os.getenv("REGION", "us-east-1")
-        self.access_key = access_key or os.getenv("MINIO_ROOT_USER", "MINIO_ROOT_USER")
-        self.secret_key = secret_key or os.getenv("MINIO_ROOT_PASSWORD", "MINIO_ROOT_PASSWORD")
+        self.region = os.getenv("REGION", region)
+        self.access_key = os.getenv("MINIO_ROOT_USER", access_key)
+        self.secret_key = os.getenv("MINIO_ROOT_PASSWORD", secret_key)
         self.bucket = bucket_name
 
         self.s3 = boto3.client(

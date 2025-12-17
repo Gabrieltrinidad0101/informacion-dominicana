@@ -5,11 +5,6 @@ services:
       context: .
       dockerfile: ./projects/downloadLinks/dockerfile-pro
     container_name: downloadLinks
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   extracted_text:
     restart: unless-stopped
@@ -17,14 +12,10 @@ services:
       context: .
       dockerfile: ./projects/extractedText/dockerfile
     container_name: extracted_text
-    networks:
-      - dev
     depends_on:
       - files_manager
       - rabbitmq
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+    
 
   download:
     restart: unless-stopped
@@ -32,11 +23,6 @@ services:
       context: .
       dockerfile: ./projects/download/dockerfile-pro
     container_name: download
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   events:
     restart: unless-stopped
@@ -44,18 +30,11 @@ services:
       context: .
       dockerfile: ./projects/events/dockerfile-pro
     container_name: events
-    networks:
-      - dev
     ports:
       - 3001:3001
     depends_on: 
       - mongo
       - rabbitmq
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
-      MONGO_DB_USER: ${MONGO_DB_USER}
-      MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
 
   post_download:
     restart: unless-stopped
@@ -63,11 +42,6 @@ services:
       context: .
       dockerfile: ./projects/postDownload/dockerfile-pro
     container_name: postDownload
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   analyze_extracted_text:
     restart: unless-stopped
@@ -75,11 +49,6 @@ services:
       context: .
       dockerfile: ./projects/analyzeExtractedText/dockerfile-pro
     container_name: analyzeExtractedText
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   ai_text_analyze:
     restart: unless-stopped
@@ -87,11 +56,6 @@ services:
       context: .
       dockerfile: ./projects/aiTextAnalyze/dockerfile-pro
     container_name: aiTextAnalyze
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   auth:
     restart: unless-stopped
@@ -99,12 +63,6 @@ services:
       context: .
       dockerfile: ./projects/auth/dockerfile-pro
     container_name: auth
-    networks:
-      - dev
-    environment:
-      CLERK_PUBLISHABLE_KEY: ${CLERK_PUBLISHABLE_KEY}
-      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-      CLERK_DEV_BROWSER: false
 
   insert_data:
     restart: unless-stopped
@@ -112,13 +70,6 @@ services:
       context: .
       dockerfile: ./projects/insertData/dockerfile-pro
     container_name: insertData
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
-      POSTGRES_DB_USER: ${POSTGRES_DB_USER}
-      POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
 
   files_manager:
     restart: unless-stopped
@@ -128,8 +79,6 @@ services:
     container_name: filesManager
     ports:
       - 4000:4000
-    networks:
-      - dev
 
   export_to_json: 
     restart: unless-stopped
@@ -137,11 +86,6 @@ services:
       context: .
       dockerfile: ./projects/exportToJson/dockerfile-pro
     container_name: exportToJson
-    networks:
-      - dev
-    environment:
-      RABBITMQ_USER: ${RABBITMQ_USER}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -150,11 +94,6 @@ services:
     volumes:
       - ./volumes/rabbitmq/data:/var/lib/rabbitmq
       - ./volumes/rabbitmq/logs:/var/log/rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}  
-    networks:
-      - dev
 
   mongo:
     restart: unless-stopped
@@ -164,11 +103,6 @@ services:
       - ./volumes/mongo/data:/data/db
     ports:
       - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_PASSWORD}
-    networks:
-      - dev
 
   loki:
     restart: unless-stopped
@@ -179,8 +113,6 @@ services:
       - 3100:3100
     volumes:
       - ./loki-config.yaml:/etc/loki/local-config.yaml
-    networks:
-      - dev
 
   promtail:
     restart: unless-stopped
@@ -190,15 +122,11 @@ services:
       - /var/log:/var/log
       - /var/run/docker.sock:/var/run/docker.sock:ro 
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
-    networks:
-      - dev
 
   grafana:
     restart: unless-stopped
     image: grafana/grafana:latest
     container_name: grafana
-    networks:
-      - dev
 
   postgres:
     restart: unless-stopped
@@ -210,48 +138,17 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - dev
 
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    networks:
-      - dev
     ports: 
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
-  mongo-express:
-    image: mongo-express:latest
-    container_name: mongo-express
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_DB_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_DB_PASSWORD}
-      ME_CONFIG_MONGODB_SERVER: mongo
-    networks:
-      - dev
-    depends_on:
-      - mongo
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    networks:
-      - dev
-    depends_on:
-      - postgres
-
+  
 volumes:
-  pgdata:
   portainer_data:
   dokploy_data:
-
-networks:
-  dev:
-    driver: bridge
