@@ -130,8 +130,7 @@ class EventBus:
 
 class Logs:
     def info(self, data):
-        print("test")
-        logging.info(json.dumps({
+        print(json.dumps({
             "eventBusInternalLog": {
                 "traceId": data.get('traceId'),
                 "_id": data.get('_id'),
@@ -140,7 +139,7 @@ class Logs:
         }))
 
     def error(self, data,error):
-        logging.error(json.dumps({
+        print(json.dumps({
             "eventBusInternalError": error,
             "eventBusInternalLog": {
                 "traceId": data.get('traceId'),
