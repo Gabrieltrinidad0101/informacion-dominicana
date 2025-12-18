@@ -36,8 +36,8 @@ export class PdfToText {
                 if(pageText.length > 0) {
                     hasText.push(i);
                     await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
+                    await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
                 }
-                await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
             }
         }
         fs.unlinkSync(pdfPath);
