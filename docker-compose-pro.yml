@@ -12,9 +12,6 @@ services:
       context: .
       dockerfile: ./projects/extractedText/dockerfile
     container_name: extracted_text
-    depends_on:
-      - files_manager
-      - rabbitmq
     
 
   download:
@@ -32,9 +29,6 @@ services:
     container_name: events
     ports:
       - 3001:3001
-    depends_on: 
-      - mongo
-      - rabbitmq
 
   post_download:
     restart: unless-stopped
@@ -77,8 +71,6 @@ services:
       context: .
       dockerfile: ./projects/filesManager/dockerfile-pro
     container_name: filesManager
-    ports:
-      - 4000:4000
 
   export_to_json: 
     restart: unless-stopped
@@ -87,67 +79,6 @@ services:
       dockerfile: ./projects/exportToJson/dockerfile-pro
     container_name: exportToJson
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    restart: unless-stopped
-    container_name: rabbitmq
-    volumes:
-      - ./volumes/rabbitmq/data:/var/lib/rabbitmq
-      - ./volumes/rabbitmq/logs:/var/log/rabbitmq
-
-  mongo:
-    restart: unless-stopped
-    image: mongo:latest
-    container_name: mongo
-    volumes:
-      - ./volumes/mongo/data:/data/db
-    ports:
-      - 27017:27017
-
-  loki:
-    restart: unless-stopped
-    image: grafana/loki:2.9.0
-    container_name: loki
-    command: -config.file=/etc/loki/local-config.yaml
-    ports:
-      - 3100:3100
-    volumes:
-      - ./loki-config.yaml:/etc/loki/local-config.yaml
-
-  promtail:
-    restart: unless-stopped
-    image: grafana/promtail:2.9.0
-    container_name: promtail
-    volumes:
-      - /var/log:/var/log
-      - /var/run/docker.sock:/var/run/docker.sock:ro 
-      - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
-
-  grafana:
-    restart: unless-stopped
-    image: grafana/grafana:latest
-    container_name: grafana
-
-  postgres:
-    restart: unless-stopped
-    image: postgres:15
-    container_name: postgres_db
-    environment:
-      POSTGRES_USER: ${POSTGRES_DB_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    ports: 
-      - 9000:9000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-  
   upload_files:
     restart: unless-stopped
     build: 
@@ -155,7 +86,3 @@ services:
       dockerfile: ./projects/uploadFiles/dockerfile-pro
     container_name: uploadFiles
   
-volumes:
-  portainer_data:
-  dokploy_data:
-  pgdata:
