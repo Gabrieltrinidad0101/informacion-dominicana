@@ -47,7 +47,7 @@ export class PdfToImages {
       const imageUrl = this.fileManagerClient.generateUrl(
         data,
         "postDownloads",
-        fileName
+        fileName 
       );
       
       if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
