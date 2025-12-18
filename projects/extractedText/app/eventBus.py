@@ -130,6 +130,7 @@ class EventBus:
 
 class Logs:
     def info(self, data):
+        print("test")
         logging.info(json.dumps({
             "eventBusInternalLog": {
                 "traceId": data.get('traceId'),

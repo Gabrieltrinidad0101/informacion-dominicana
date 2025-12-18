@@ -17,7 +17,7 @@ ocr = PaddleOCR(
     use_doc_orientation_classify=True,
     use_doc_unwarping=True,
     lang="es"
-)
+) 
 
 def callback(data, metadata):
     logging.info("Events")
