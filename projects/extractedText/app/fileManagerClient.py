@@ -13,10 +13,6 @@ class FileManagerClient:
         access_key="MINIO_ROOT_USER",
         secret_key="MINIO_ROOT_PASSWORD",
     ):
-        print(os.getenv("REGION", region))
-        print(os.getenv("MINIO_ROOT_USER", access_key))
-        print(os.getenv("MINIO_ROOT_PASSWORD", secret_key))
-        
         self.endpoint_url = endpoint_url
         self.region = os.getenv("REGION", region)
         self.access_key = os.getenv("MINIO_ROOT_USER", access_key)

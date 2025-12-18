@@ -7,7 +7,6 @@ import {
 import fs from "fs";
 import path from "path";
 import axios from "axios";
-import { Readable } from "stream";
 
 export class FileManagerClient {
     constructor(data) {
@@ -35,6 +34,15 @@ export class FileManagerClient {
         }));
 
         return Key;
+    };
+
+    uploadFileFromStream = async (fileStream, folderPath, contentType) => {
+        await this.s3.send(new PutObjectCommand({
+            Bucket: this.bucket,
+            Key: folderPath,
+            Body: fileStream,
+            ContentType: contentType
+        }));
     };
 
     uploadFileFromUrl = async (url, folderPath) => {
@@ -76,7 +84,6 @@ export class FileManagerClient {
     };
 
     getFile = async (fileUrl) => {
-        console.log(fileUrl)
         const res = await this.s3.send(new GetObjectCommand({
             Bucket: this.bucket,
             Key: fileUrl
@@ -84,6 +91,18 @@ export class FileManagerClient {
 
         return Buffer.from(await res.Body.transformToByteArray());
     };
+
+
+    getFileStream = async (fileUrl) => {
+        const res = await this.s3.send(new GetObjectCommand({
+            Bucket: this.bucket,
+            Key: fileUrl
+        }));
+
+        return res;
+    };
+
+
 
     getFileUint8Array = async (fileUrl) => {
         const res = await this.s3.send(new GetObjectCommand({
