@@ -185,7 +185,6 @@ export function Evento({ exchangeName,queryParams }) {
 
   return (
     <div>
-      <h2>{exchangeName}</h2>
       <SimpleSelect
         name="Instituciones"
         datas={columns.map((columns) => columns.field)}
