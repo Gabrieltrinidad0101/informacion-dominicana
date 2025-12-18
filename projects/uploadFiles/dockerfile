@@ -13,4 +13,4 @@ COPY projects/eventBus ./projects/eventBus
 COPY projects/uploadFiles ./projects/uploadFiles
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["nodemon","./projects/uploadFiles/main.js"]
+CMD ["nodemon","./projects/uploadFiles/main.js"] 
