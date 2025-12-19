@@ -2,15 +2,16 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+
 COPY package.json .
-COPY projects/analyzeExtractedText/package.json ./projects/analyzeExtractedText/package.json    
+COPY projects/extractedTextAnalyzer/package.json ./projects/extractedTextAnalyzer/package.json    
 COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 COPY projects/eventBus/package.json ./projects/eventBus/package.json
 
-RUN npm install 
+RUN npm install --omit=dev
 
 COPY projects/eventBus ./projects/eventBus
-COPY projects/analyzeExtractedText ./projects/analyzeExtractedText
+COPY projects/extractedTextAnalyzer ./projects/extractedTextAnalyzer
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "analyzeExtractedText"]
+CMD ["npm", "run", "extractedTextAnalyzer-pro"]

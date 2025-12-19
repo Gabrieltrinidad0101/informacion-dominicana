@@ -6,7 +6,7 @@ export class EventListener {
         this.eventBus.on('readGetPostDownloads', 'postDownloads', this.saveEvent)
         this.eventBus.on('readExtractedText', 'extractedTexts', this.saveEvent)
         this.eventBus.on('readDownload', 'downloads', this.saveEvent)
-        this.eventBus.on('readAnalyzeExtractedText', 'analyzeExtractedTexts', this.saveEvent)
+        this.eventBus.on('readextractedTextAnalyzer', 'extractedTextAnalyzers', this.saveEvent)
         this.eventBus.on('readAiTextAnalyzer', 'aiTextAnalyzers', this.saveEvent)
         this.eventBus.on('readInsertData', 'insertDatas', this.saveEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveEvent)

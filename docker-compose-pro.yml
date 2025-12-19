@@ -37,19 +37,19 @@ services:
       dockerfile: ./projects/postDownload/dockerfile-pro
     container_name: postDownload
 
-  analyze_extracted_text:
+  extracted_text_analyzer:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: ./projects/analyzeExtractedText/dockerfile-pro
-    container_name: analyzeExtractedText
+      dockerfile: ./projects/extractedTextAnalyzer/dockerfile-pro
+    container_name: extractedTextAnalyzer
 
-  ai_text_analyze:
+  ai_text_analyzer:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: ./projects/aiTextAnalyze/dockerfile-pro
-    container_name: aiTextAnalyze
+      dockerfile: ./projects/aiTextAnalyzer/dockerfile-pro
+    container_name: aiTextAnalyzer
 
   auth:
     restart: unless-stopped

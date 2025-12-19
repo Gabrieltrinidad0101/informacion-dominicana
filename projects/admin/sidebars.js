@@ -17,7 +17,7 @@ const sidebars = {
 
   tutorialSidebar: [
     'index',
-    "downloadLinks","downloads","postDownloads","extractedTexts","analyzeExtractedTexts","aiTextAnalyzers","insertDatas","payrollExportToJsons","payrolls"
+    "downloadLinks","downloads","postDownloads","extractedTexts","extractedTextAnalyzer","aiTextAnalyzers","insertDatas","payrollExportToJsons","payrolls"
   ],
 };
 

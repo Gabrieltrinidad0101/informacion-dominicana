@@ -16,7 +16,7 @@ export class PdfToText {
         delete  data._id;
         let hasText = [];
         for (let i = 1; i <= pdf.numPages; i++) {
-            const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${i}.json`)
+            const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', `${i}.json`)
             const pageText = []
             const fileExists = await this.fileManagerClient.fileExists(fileUrl)
             if (metadata?.force || !fileExists) {
@@ -36,7 +36,7 @@ export class PdfToText {
                 if(pageText.length > 0) {
                     hasText.push(i);
                     await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
-                    await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl,index: i },metadata);
+                    await this.eventBus.emit('aiTextAnalyzers', { ...data, extractedTextAnalyzerUrl: fileUrl,index: i },metadata);
                 }
             }
         }

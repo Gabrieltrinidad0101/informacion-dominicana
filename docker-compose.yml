@@ -51,23 +51,23 @@ services:
     networks:
       - dev
 
-  analyze_extracted_text:
+  extracted_text_analyzer:
     build:
       context: .
-      dockerfile: ./projects/analyzeExtractedText/dockerfile
-    container_name: analyzeExtractedText
+      dockerfile: ./projects/extractedTextAnalyzer/dockerfile
+    container_name: extractedTextAnalyzer
     volumes:
-      - ./projects/analyzeExtractedText:/app/projects/analyzeExtractedText
+      - ./projects/extractedTextAnalyzer:/app/projects/extractedTextAnalyzer
     networks:
       - dev
 
-  ai_text_analyze:
+  ai_text_analyzer:
     build:
       context: .
-      dockerfile: ./projects/aiTextAnalyze/dockerfile
-    container_name: aiTextAnalyze
+      dockerfile: ./projects/aiTextAnalyzer/dockerfile
+    container_name: aiTextAnalyzer
     volumes:
-      - ./projects/aiTextAnalyze:/app/projects/aiTextAnalyze
+      - ./projects/aiTextAnalyzer:/app/projects/aiTextAnalyzer
     networks:
       - dev
 

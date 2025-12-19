@@ -887,7 +887,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "expr": "count_over_time(\n  {container_name=\"extractedTextAnalyzer\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
           "hide": false,
           "queryType": "range",
           "refId": "A"
@@ -899,7 +899,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusInternalRetryError\"\n  [1m]\n)",
+          "expr": "count_over_time(\n  {container_name=\"extractedTextAnalyzer\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusInternalRetryError\"\n  [1m]\n)",
           "hide": false,
           "queryType": "range",
           "refId": "B"
@@ -911,7 +911,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time(\n  {container_name=\"analyzeExtractedText\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "expr": "count_over_time(\n  {container_name=\"extractedTextAnalyzer\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
           "hide": false,
           "queryType": "range",
           "refId": "C"

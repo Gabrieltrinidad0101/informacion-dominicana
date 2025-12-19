@@ -2,15 +2,15 @@ import { groupLinesOcrSpace } from "./groupLineOcr.js";
 import { groupLinesAzure } from "./groupLinesAzure.js";
 import { paddleORC } from "./paddleocr.js";
 
-export class AnalyzeExtractedText {
+export class extractedTextAnalyzer {
     constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus;
         this.fileManagerClient = fileManagerClient;
-        this.eventBus.on('analyzeExtractedText', 'analyzeExtractedTexts', (data,metadata) => this.analyzeExtractedText(data,metadata))
+        this.eventBus.on('extractedTextAnalyzer', 'extractedTextAnalyzers', (data,metadata) => this.extractedTextAnalyzer(data,metadata))
     }
 
-    analyzeExtractedText = async (data,metadata) => {
-        const fileUrl = this.fileManagerClient.generateUrl(data, 'analyzeExtractedText', `${data.index}.json`)
+    extractedTextAnalyzer = async (data,metadata) => {
+        const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', `${data.index}.json`)
         let textOfImage;
         if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
             const rawData = await this.fileManagerClient.getFile(data.extractedTextUrl);
@@ -25,6 +25,6 @@ export class AnalyzeExtractedText {
             }
             await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: textOfImage}));
         }
-        await this.eventBus.emit('aiTextAnalyzers', { ...data, analyzeExtractedTextUrl: fileUrl },metadata);
+        await this.eventBus.emit('aiTextAnalyzers', { ...data, extractedTextAnalyzerUrl: fileUrl },metadata);
     }
 }

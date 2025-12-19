@@ -42,7 +42,7 @@ def callback(data, metadata):
         shutil.rmtree(outfile)
         os.remove(filename)
 
-    bus.emit('analyzeExtractedTexts',{
+    bus.emit('extractedTextAnalyzers',{
         **data,
         "extractedTextUrl": extractedTextUrl,
         "extractedTextType": "PaddleOCR"

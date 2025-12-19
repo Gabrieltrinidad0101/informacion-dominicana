@@ -40,7 +40,7 @@ postDownload:
 extractedText:
 	docker compose up extracted_text -d --build
 
-analyzeExtractedText:
+extractedTextAnalyzer:
 	docker compose up analyze_extracted_text -d --build
 
 aiTextAnalyze:

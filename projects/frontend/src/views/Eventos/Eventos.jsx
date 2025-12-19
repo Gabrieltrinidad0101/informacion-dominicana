@@ -6,7 +6,7 @@ import EventosCss from "./Eventos.module.css";
 export function Eventos() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const exchangeNames = ["downloadLinks","downloads","postDownloads","extractedTexts","analyzeExtractedTexts","aiTextAnalyzers","insertDatas","payrollExportToJsons","payrolls"]
+  const exchangeNames = ["downloadLinks","downloads","postDownloads","extractedTexts","extractedTextAnalyzers","aiTextAnalyzers","insertDatas","payrollExportToJsons","payrolls"]
   const allData = queryParams.get("allData");
   if(allData){
     for(let exchangeName of exchangeNames){
