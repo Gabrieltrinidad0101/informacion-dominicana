@@ -39,7 +39,7 @@ export class PdfToImages {
     const numberOfPages = await this.#getNumbersOfPages(pdfPath);
     const convert = fromPath(pdfPath, options("_", saveImages));
     delete data._id;
-
+    console.log(hasText);
     for (let i = 1; i <= numberOfPages; i++) {
       if(hasText.includes(i)) continue;
       const fileName = `_.${i}.jpg`;
