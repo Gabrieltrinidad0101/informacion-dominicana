@@ -55,7 +55,7 @@ export class PdfToImages {
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
       }
 
-      this.eventBus.emit("extractedTexts", {
+      await this.eventBus.emit("extractedTexts", {
         ...data,
         index: i,
         imageUrl,

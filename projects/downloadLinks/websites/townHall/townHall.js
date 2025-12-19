@@ -44,7 +44,7 @@ export class DownloadTownHallData {
                 }, i)
                 const month = months.find(month => monthText.toLocaleLowerCase().trim().includes(month.toLocaleLowerCase()))
                 const link = await page.evaluate(el => el.href, downloadsLink[i])
-                this.eventBus.emit(
+                await this.eventBus.emit(
                     'downloads',
                     {
                         institutionType,

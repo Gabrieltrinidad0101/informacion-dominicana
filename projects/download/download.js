@@ -19,7 +19,7 @@ export class Download {
         if (!fileExists){
             await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
-        this.eventBus.emit(
+        await this.eventBus.emit(
             'postDownloads',
             {
                 ...data,

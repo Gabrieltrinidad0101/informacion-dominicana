@@ -25,7 +25,7 @@ export class Payroll {
             }
             await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl,  JSON.stringify({lines: response, angle: dataText.angle}));
         }
-        this.eventBus.emit("insertDatas",{
+        await this.eventBus.emit("insertDatas",{
             ...data,
             aiTextAnalyzeUrl,
         },metadata)
