@@ -49,11 +49,12 @@ export class PdfToImages {
         "postDownloads",
         fileName 
       );
-      logs.infoHistory(data,{fileName,index: i,imageUrl,message: "getting image"})
+      
       if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
       }
+      logs.infoHistory(data,{fileName,index: i,imageUrl,message: "getting image"})
 
       await this.eventBus.emit("extractedTexts", {
         ...data,
