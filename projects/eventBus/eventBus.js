@@ -108,12 +108,13 @@ export class EventBus {
     }
 
     emit(exchangeName, data,metadata) {
+        const metadataCopy = {...metadata}
         if (!data.traceId) data.traceId = crypto.randomUUID()
         data.exchangeName = exchangeName
-        if (metadata?.typeOfExecute === "onlyOne") return;
-        if (metadata?.typeOfExecute === "onlyOneAndNext") metadata.typeOfExecute = "onlyOne"
+        if (metadataCopy?.typeOfExecute === "onlyOne") return;
+        if (metadataCopy?.typeOfExecute === "onlyOneAndNext") metadataCopy.typeOfExecute = "onlyOne"
         EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)),{
-            headers: metadata
+            headers: metadataCopy
         })
     }
 

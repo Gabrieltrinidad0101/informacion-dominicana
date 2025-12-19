@@ -49,7 +49,7 @@ export class PdfToImages {
         "postDownloads",
         fileName 
       );
-      
+
       if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
@@ -60,7 +60,7 @@ export class PdfToImages {
         ...data,
         index: i,
         imageUrl,
-      }, metadata);
+      }, metadata); 
     }
     
     fs.rmdirSync(saveImages, { recursive: true });
