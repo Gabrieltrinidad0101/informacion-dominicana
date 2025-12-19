@@ -43,7 +43,7 @@ extractedText:
 extractedTextAnalyzer:
 	docker compose up analyze_extracted_text -d --build
 
-aiTextAnalyze:
+aiTextAnalyzer:
 	docker compose up ai_text_analyze -d --build
 
 insertData:

@@ -1245,7 +1245,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time(\n  {container_name=\"aiTextAnalyze\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "expr": "count_over_time(\n  {container_name=\"aiTextAnalyzer\"}\n  |= \"eventBusInternalLog\"\n  != \"eventBusInternalRetryError\"\n  != \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
           "hide": false,
           "queryType": "range",
           "refId": "A"
@@ -1257,7 +1257,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time({container_name=\"aiTextAnalyze\"} |= `eventBusInternalLog` |= `eventBusInternalRetryError` [1m])",
+          "expr": "count_over_time({container_name=\"aiTextAnalyzer\"} |= `eventBusInternalLog` |= `eventBusInternalRetryError` [1m])",
           "hide": false,
           "queryType": "range",
           "refId": "B"
@@ -1269,13 +1269,13 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "count_over_time(\n  {container_name=\"aiTextAnalyze\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
+          "expr": "count_over_time(\n  {container_name=\"aiTextAnalyzer\"}\n  |= \"eventBusInternalLog\"\n  |= \"eventBusMaxInternalRetryError\"\n  [1m]\n)\n",
           "hide": false,
           "queryType": "range",
           "refId": "C"
         }
       ],
-      "title": "aiTextAnalyze",
+      "title": "aiTextAnalyzer",
       "type": "timeseries"
     },
     {
@@ -1462,10 +1462,10 @@
       {
         "current": {
           "text": [
-            "aiTextAnalyze"
+            "aiTextAnalyzer"
           ],
           "value": [
-            "aiTextAnalyze"
+            "aiTextAnalyzer"
           ]
         },
         "definition": "",
