@@ -1,13 +1,17 @@
 class Logs {
 
-    info(data){
-        console.log(JSON.stringify({ eventBusInternalLog: { traceId: data.traceId, _id: data._id, exchangeName: data.exchangeName } }))
+    info(event){
+        console.log(JSON.stringify({ eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName } }))
     }
 
-    error(data,error = "") {
+    infoHistory(event,data){
+        console.log(JSON.stringify({ eventBusInternalLogHistory: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName, ...data } }))
+    }
+
+    error(event,error = "") {
         console.error(JSON.stringify({
             eventBusInternalError: error,
-            eventBusInternalLog: { traceId: data.traceId, _id: data._id, exchangeName: data.exchangeName }
+            eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName }
         })) 
     }
 }

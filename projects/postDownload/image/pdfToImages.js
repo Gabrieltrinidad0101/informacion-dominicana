@@ -39,7 +39,6 @@ export class PdfToImages {
     const numberOfPages = await this.#getNumbersOfPages(pdfPath);
     const convert = fromPath(pdfPath, options("_", saveImages));
     delete data._id;
-    console.log(hasText);
     for (let i = 1; i <= numberOfPages; i++) {
       if(hasText.includes(i)) continue;
       const fileName = `_.${i}.jpg`;
@@ -49,7 +48,7 @@ export class PdfToImages {
         "postDownloads",
         fileName 
       );
-      
+      logs.infoHistory(data,{fileName,index: i,imageUrl,message: "getting image"})
       if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
