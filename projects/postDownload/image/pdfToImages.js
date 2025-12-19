@@ -51,10 +51,10 @@ export class PdfToImages {
       );
 
       if (metadata?.force || !(await this.fileManagerClient.fileExists(imageUrl))) {
+        logs.infoHistory(data,{fileName,index: i,imageUrl,message: "getting image"})
         await convert(i); 
         await this.fileManagerClient.uploadFile(imagePath, imageUrl);
       }
-      logs.infoHistory(data,{fileName,index: i,imageUrl,message: "getting image"})
 
       await this.eventBus.emit("extractedTexts", {
         ...data,

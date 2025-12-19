@@ -32,7 +32,7 @@ export class PdfToText {
                         width: item.width,         
                         height: item.height
                     });
-                }
+                } 
                 if(pageText.length > 0) {
                     hasText.push(i);
                     await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));

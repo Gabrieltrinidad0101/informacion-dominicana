@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 import fs from 'fs/promises'
 
-console.log({
-    MONGO_DB_USER: process.env.MONGO_DB_USER,
-    MONGO_DB_PASSWORD: process.env.MONGO_DB_PASSWORD
-})
-
 await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${process.env.MONGO_DB_PASSWORD ?? 'root'}@mongo:27017/informacion-dominicana?authSource=admin`);
 console.log("🚀 Connected to MongoDB...") 
  
@@ -22,7 +17,7 @@ export class EventsRepository {
             console.log(error)
             if (retryCount < 3) {
                 await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000))
-                EventsRepository.init(retryCount + 1)
+                await EventsRepository.init(retryCount + 1)
             } else {
                 throw error
             }

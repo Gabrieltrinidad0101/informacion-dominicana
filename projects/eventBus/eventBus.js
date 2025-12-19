@@ -17,9 +17,9 @@ export class EventBus {
             await EventBus.channel.prefetch(4)
         }catch(error){
             console.log(error)
-            if(retryCount < 3){
-                await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 1000))
-                EventBus.init(retryCount + 1)
+            if(retryCount <= 3){
+                await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 5000))
+                await EventBus.init(retryCount + 1)
             }else{
                 throw error
             }
