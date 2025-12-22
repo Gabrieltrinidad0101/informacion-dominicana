@@ -19,6 +19,7 @@ export class PdfToText {
             const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', `${i}.json`)
             const pageText = []
             const fileExists = await this.fileManagerClient.fileExists(fileUrl)
+            if(fileExists) hasText.push(i);
             if (metadata?.force || !fileExists) {
                 const page = await pdf.getPage(i);
                 const content = await page.getTextContent();
