@@ -20,7 +20,6 @@ ocr = PaddleOCR(
 ) 
 
 def callback(data, metadata):
-    logging.info("Events")
     extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',str(data.get('index')) + '.json' )
     if metadata.get('force') or not fileManagerClient.file_exists(extractedTextUrl):
         image_url = data.get("imageUrl")
@@ -41,6 +40,8 @@ def callback(data, metadata):
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
         shutil.rmtree(outfile)
         os.remove(filename)
+    
+    print(f"----------------------ExtractedTextAnalyzers----------------------")
 
     bus.emit('extractedTextAnalyzers',{
         **data,

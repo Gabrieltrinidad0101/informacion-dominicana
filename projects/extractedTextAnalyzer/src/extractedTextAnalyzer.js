@@ -13,7 +13,7 @@ export class extractedTextAnalyzer {
         const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', `${data.index}.json`)
         let textOfImage;
         if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
-            const rawData = await this.fileManagerClient.getFile(data.extractedTextUrl);
+            const rawData = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextUrl)).toString('utf-8'));
             if (data.extractedTextType === 'PaddleOCR') {
                 textOfImage = paddleORC(rawData);
             }

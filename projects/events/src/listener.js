@@ -12,7 +12,7 @@ export class EventListener {
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveEvent)
     } 
   
-    saveEvent = async (event) => {   
+    saveEvent = async (event) => {  
         if(event.exchangeName == 'downloads') {
             const exist = await this.eventRepository.findOne({
                 institutionType: event.institutionType,

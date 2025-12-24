@@ -116,18 +116,6 @@ class EventBus:
             properties=pika.BasicProperties(headers=metadata)
         )
 
-    def emit_custom_exchange(self, exchange_name, event, metadata=None):
-        if 'traceId' not in event:
-            event['traceId'] = str(uuid.uuid4())
-        event['exchangeName'] = exchange_name
-        self.channel.basic_publish(
-            exchange=exchange_name,
-            routing_key='',
-            body=json.dumps(event),
-            properties=pika.BasicProperties(headers=metadata)
-        )
-
-
 class Logs:
     def info(self, data):
         print(json.dumps({

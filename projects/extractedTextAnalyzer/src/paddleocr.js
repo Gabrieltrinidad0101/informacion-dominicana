@@ -9,7 +9,6 @@ export const paddleORC = (ocrData) =>{
     }
     
     const textRegions = [];
-    
     for (let i = 0; i < recTexts.length; i++) {
       const text = recTexts[i] || "";
       const score = recScores[i] || 0;
