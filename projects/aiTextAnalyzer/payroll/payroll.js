@@ -13,7 +13,6 @@ export class Payroll {
     }
  
     payroll = async (data,metadata) => {
-        return;s
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data,'aiTextAnalyzer', `${data.index}.json`)
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl); 
         if (metadata?.force || !fileExists) {
