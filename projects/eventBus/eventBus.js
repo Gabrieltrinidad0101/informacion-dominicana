@@ -10,7 +10,6 @@ dotenv.config({
 export class EventBus {
     static async init(retryCount = 0) {
         try{
-            console.log(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             EventBus.channel = await connection.createChannel()
             console.log("🚀 Connected to RabbitMQ...")
