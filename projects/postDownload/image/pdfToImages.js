@@ -2,7 +2,6 @@ import { fromPath } from "pdf2pic";
 import fs from "fs";
 import pdf from "pdf-parse/lib/pdf-parse.js";
 import path from "path";
-import { logs } from "../../eventBus/logs.js"
 
 const options = (saveFilename, savePath) => ({
   density: 700,
