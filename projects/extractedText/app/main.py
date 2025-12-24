@@ -41,8 +41,6 @@ def callback(data, metadata):
         shutil.rmtree(outfile)
         os.remove(filename)
     
-    print(f"----------------------ExtractedTextAnalyzers----------------------")
-
     bus.emit('extractedTextAnalyzers',{
         **data,
         "extractedTextUrl": extractedTextUrl,

@@ -11,10 +11,10 @@ export class Payroll {
         
         this.eventBus.on('aiTextAnalyzer','aiTextAnalyzers', async (data,metadata) => await this.payroll(data,metadata))
     }
-
+ 
     payroll = async (data,metadata) => {
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data,'aiTextAnalyzer', `${data.index}.json`)
-        const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
+        const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl); 
         if (metadata?.force || !fileExists) {
             const dataText = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextAnalyzerUrl)).toString('utf-8'));
             const propt_ = propt(JSON.stringify(dataText.lines));
