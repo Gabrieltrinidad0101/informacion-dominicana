@@ -10,7 +10,7 @@ export const encrypt = (text) => {
 }
 
 export const decrypt = (encryptedText) => {
-    const iv = Buffer.alloc(16, 0);
+    const iv = Buffer.alloc(16, 0); 
     const key = crypto.scryptSync(encryptedText, 'salt', 32);
     const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
     let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
