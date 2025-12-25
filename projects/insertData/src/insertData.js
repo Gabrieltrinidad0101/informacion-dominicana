@@ -18,7 +18,7 @@ export class InsertData {
         this.eventRepository = eventRepository
         this.fileAccess = fileAccess
         this.eventBus.on('insertData', 'insertDatas', this.saveEvent)
-    }
+    } 
 
     formatLastDayOfMonth(year, month) {
         return new Date(year,  this.monthMap[month], 0);
