@@ -36,6 +36,7 @@ export class InsertData {
             payroll.income ??= 0
             payroll.document = data.document ?? null
             payroll.isDocumentValid = data.isDocumentValid ?? null
+            payroll.confidences = JSON.stringify(data.confidences)
             if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
