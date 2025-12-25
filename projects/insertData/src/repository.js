@@ -9,7 +9,6 @@ export class Repository {
 
   static async init() {
     const exists = await knex.schema.hasTable('payrolls');
-    knex.schema.dropTableIfExists('payrolls');
     if (!exists) {
       await knex.schema.createTable('payrolls', (table) => {
         table.text('_id').primary();
