@@ -37,7 +37,7 @@ export class InsertData {
             payroll.document = data.document ?? null
             payroll.isDocumentValid = data.isDocumentValid ?? null
             payroll.confidences = JSON.stringify(data.confidences)
-            if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
+            if(payroll.position?.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
         await this.eventRepository.delete({...data,date: this.formatLastDayOfMonth(data.year, data.month)})
