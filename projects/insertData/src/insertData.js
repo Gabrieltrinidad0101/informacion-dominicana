@@ -25,9 +25,10 @@ export class InsertData {
     }
 
     saveEvent = async (data) => {
-        console.log(data)
+        console.log({data})
         const file = await this.fileAccess.getFile(data.aiTextAnalyzeUrl)
         const payrolls = (file?.lines ?? file).map(payroll => {
+            console.log({payroll})
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId
@@ -40,7 +41,7 @@ export class InsertData {
             if(payroll.position.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
-        console.log(payrolls)
+        console.log({payrolls})
         await this.eventRepository.delete({...data,date: this.formatLastDayOfMonth(data.year, data.month)})
         await this.eventRepository.save(payrolls)
     }
