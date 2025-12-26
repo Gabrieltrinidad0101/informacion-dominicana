@@ -14,6 +14,7 @@
     "frontend": "npm run start --prefix ./projects/frontend",
     "admin": "npm run start --prefix ./projects/admin",
     "postDownload": "nodemon  --legacy-watch  ./projects/postDownload/main.js --watch ./projects/postDownload",
+    "postDownload-test": "vitest run ./projects/postDownload/test",
     "extractedText": "nodemon  --legacy-watch  ./projects/extractedText/main.js --watch ./projects/extractedText",
     "extractedTextAnalyzer": "nodemon  --legacy-watch  ./projects/extractedTextAnalyzer/main.js --watch ./projects/extractedTextAnalyzer",
     "textAnalysisAI": "nodemon  --legacy-watch  ./projects/aiTextAnalyzer/main.js --watch ./projects/aiTextAnalyzer",
@@ -22,7 +23,6 @@
     "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager",
     "auth": "nodemon  --legacy-watch  ./projects/auth/main.js --watch ./projects/auth",
     "uploadFiles": "nodemon  --legacy-watch  ./projects/uploadFiles/src/main.js --watch ./projects/uploadFiles",
-
     "downloadLinks-pro": "node projects/downloadLinks/main.js",
     "download-pro": "node ./projects/download/main.js",
     "events-pro": "node ./projects/events/main.js",
@@ -37,10 +37,13 @@
     "uploadFiles-pro": "node ./projects/uploadFiles/src/main.js"
   },
   "keywords": [],
-  "author": "", 
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.1",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.16"
   }
 }

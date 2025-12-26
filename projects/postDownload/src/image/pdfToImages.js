@@ -34,7 +34,6 @@ export class PdfToImages {
     );
 
     fs.mkdirSync(saveImages, { recursive: true });
-    await this.fileManagerClient.downloadFile(data.urlDownload);
     const pdfPath = path.resolve(`downloads/${data.urlDownload}`);
     const numberOfPages = await this.#getNumbersOfPages(pdfPath);
     const convert = fromPath(pdfPath, options("_", saveImages));
@@ -60,6 +59,5 @@ export class PdfToImages {
       }, metadata); 
     }
     fs.rmdirSync(saveImages, { recursive: true });
-    fs.unlinkSync(pdfPath);
   };
 }

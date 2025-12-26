@@ -9,7 +9,6 @@ export class PdfToText {
     }
 
     extractTextWithPositionFromPdf = async (data,metadata) => {
-        await this.fileManagerClient.downloadFile(data.urlDownload);
         const pdfPath = path.resolve(`downloads/${data.urlDownload}`);
         const pdfData = new Uint8Array(fs.readFileSync(pdfPath));
         const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
@@ -41,7 +40,6 @@ export class PdfToText {
                 }
             }
         }
-        fs.unlinkSync(pdfPath);
         return hasText;
     }
 }

@@ -136,7 +136,6 @@ export class FileManagerClient {
                 Key: url,
             })
         );
-
         const filePath = path.join("downloads", url);
         const dirPath = path.dirname(filePath);
 
