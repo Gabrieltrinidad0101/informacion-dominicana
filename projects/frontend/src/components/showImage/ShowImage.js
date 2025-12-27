@@ -18,7 +18,8 @@ const monthNames = [
 
 export function ShowImage({ employee, institution, currentDate }) {
   const selectEmployee = useRef(null);
-  const imageRef = useRef(null);
+  const pdfRef = useRef(null);
+  const linksRef = useRef(null);
   const [numPages, setNumPages] = useState(null);
 
   const monthName = monthNames[currentDate?.getMonth() ?? 0];
@@ -30,12 +31,11 @@ export function ShowImage({ employee, institution, currentDate }) {
   }, [url]);
 
   const handleSelectPosition = () => {
-    console.log(imageRef.current.getBoundingClientRect());
-    positionSelect(selectEmployee, imageRef, employee);
+    const offsetY = linksRef.current.getBoundingClientRect().height;
+    positionSelect({selectEmployee, pdfRef, employee,offsetY});
   };
 
   useEffect(() => {
-    console.log(employee);
     const interval = setInterval(() => {
       if(!numPages) return;
       clearInterval(interval);
@@ -44,6 +44,11 @@ export function ShowImage({ employee, institution, currentDate }) {
   }, [employee]);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      if(!numPages) return;
+      clearInterval(interval);
+      handleSelectPosition();
+    }, 500);
     window.addEventListener('resize', handleSelectPosition);
     return () => {
       window.removeEventListener('resize', handleSelectPosition);
@@ -53,18 +58,21 @@ export function ShowImage({ employee, institution, currentDate }) {
   return (
     <>
       <div className={showImageCss.overflowImage}>
-        <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
-          VER FUENTE ORIGINAL
-        </a>
-        <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
-          Pagina {employee.index}
-        </a>
+        <div className={showImageCss.links} ref={linksRef}>
+          <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
+            VER FUENTE ORIGINAL 📌
+          </a>
+          <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
+            Pagina {employee.index}
+          </a>
+        </div>
+
         <BrowserOnly>
           {() => (
-            <div ref={imageRef}>
+            <div ref={pdfRef}>
               <Document
                 file={`${constants.urlData}/${employee.urlDownload}`}
-                onLoadSuccess={({ numPages }) =>{ setNumPages(numPages); handleSelectPosition()}}
+                onLoadSuccess={(data) =>{ setNumPages(data._pdfInfo.numPages);}}
               >
                 <Page pageNumber={employee.index} width={800} />
               </Document>

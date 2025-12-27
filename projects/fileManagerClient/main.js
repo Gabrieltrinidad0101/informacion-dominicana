@@ -98,7 +98,6 @@ export class FileManagerClient {
             Bucket: this.bucket,
             Key: fileUrl
         }));
-
         return res;
     };
 

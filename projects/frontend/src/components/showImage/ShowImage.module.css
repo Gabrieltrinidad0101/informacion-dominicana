@@ -31,3 +31,9 @@
   width: 100% !important;
   height: 100% !important;
 }
+
+.links{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}

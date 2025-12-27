@@ -86,9 +86,6 @@ services:
       context: .
       dockerfile: ./projects/filesManager/dockerfile
     container_name: filesManager
-    volumes:
-      - ./projects/filesManager:/app/projects/filesManager
-      - ./data:/app/data
     networks:
       - dev
     ports:
