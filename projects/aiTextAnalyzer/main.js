@@ -1,4 +1,3 @@
-import './envs.js'
 import { eventBus } from "../eventBus/eventBus.js"
 import { Payroll } from "./payroll/payroll.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"

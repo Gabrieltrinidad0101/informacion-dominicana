@@ -1,15 +1,14 @@
 import { propt } from "./propt.js";
 
 export class Payroll {
-    constructor({ eventBus, apiLLMClient, fileManagerClient, validateIdNumberApi, encrypt, getId }) {
+    async init({ eventBus, apiLLMClient, fileManagerClient, validateIdNumberApi, getId }){
         this.eventBus = eventBus;
         this.fileManagerClient = fileManagerClient;
         this.apiLLMClient = apiLLMClient;
         this.validateIdNumberApi = validateIdNumberApi;
-        this.encrypt = encrypt;
         this.getId = getId;
+        await this.eventBus.on('aiTextAnalyzer', 'aiTextAnalyzers', async (data, metadata) => await this.payroll(data, metadata))
 
-        this.eventBus.on('aiTextAnalyzer', 'aiTextAnalyzers', async (data, metadata) => await this.payroll(data, metadata))
     }
 
     payroll = async (data, metadata) => {
