@@ -186,6 +186,16 @@ services:
     ports:
       - 9000:9000
       - 9001:9001
+  
+  test:
+    build:
+      context: .
+      dockerfile: ./projects/test/dockerfile
+    container_name: test
+    volumes:
+      - ./projects/test:/app/projects/test
+    networks:
+      - dev
 
 volumes:
   pgdata:

@@ -8,6 +8,7 @@
     "projects/*"
   ],
   "scripts": {
+    "test": "vitest run ./projects/test",
     "downloadLinks": "nodemon --legacy-watch ./projects/downloadLinks/main.js --watch projects/downloadLinks",
     "download": "nodemon  --legacy-watch  ./projects/download/main.js --watch ./projects/download",
     "events": "nodemon  --legacy-watch  ./projects/events/main.js --watch ./projects/events",
