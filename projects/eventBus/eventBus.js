@@ -9,24 +9,24 @@ dotenv.config({
 
 export class EventBus {
     static async init(retryCount = 0) {
-        try{
+        try {
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             EventBus.channel = await connection.createChannel()
             console.log("🚀 Connected to RabbitMQ...")
             await EventBus.channel.prefetch(4)
-        }catch(error){
+        } catch (error) {
             console.log(error)
-            if(retryCount <= 3){
+            if (retryCount <= 3) {
                 await new Promise(resolve => setTimeout(resolve, (retryCount + 1) * 5000))
                 await EventBus.init(retryCount + 1)
-            }else{
+            } else {
                 throw error
             }
         }
     }
 
     constructor({ queueName, exchangeName } = {}) {
-        if (!queueName || !exchangeName) return
+        if (!queueName || !exchangeName) return;
         EventBus.channel.assertQueue(queueName, { durable: true })
         EventBus.channel.assertExchange(exchangeName, "fanout", { durable: true })
         EventBus.channel.bindQueue(queueName, exchangeName, "")
@@ -63,6 +63,10 @@ export class EventBus {
         await EventBus.channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
+    set disableLogs(value) {
+        logs.disabled = value
+    }
+
     async on(queueName, exchangeName, callback) {
         await this.bindQueue(queueName, exchangeName)
         await EventBus.channel.consume(queueName, async (message) => {
@@ -71,7 +75,7 @@ export class EventBus {
                 const content = JSON.parse(message.content.toString())
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
-                await callback(content,{force,typeOfExecute})
+                await callback(content, { force, typeOfExecute })
                 EventBus.channel.ack(message)
                 logs.info(content)
             } catch (error) {
@@ -92,7 +96,7 @@ export class EventBus {
                     EventBus.channel.publish(`${exchangeName}_try`, '', Buffer.from(JSON.stringify(content)), {
                         headers: { "x-retry-count": content.retryCount }
                     })
-                    logs.error(content,error)
+                    logs.error(content, error)
                 } catch (parseError) {
                     console.error(parseError)
                     const content = JSON.parse(message.content.toString())
@@ -106,21 +110,21 @@ export class EventBus {
         })
     }
 
-    emit(exchangeName, data,metadata) {
-        const metadataCopy = {...metadata}
+    emit(exchangeName, data, metadata) {
+        const metadataCopy = { ...metadata }
         if (!data.traceId) data.traceId = crypto.randomUUID()
         data.exchangeName = exchangeName
         if (metadataCopy?.typeOfExecute === "onlyOne") return;
         if (metadataCopy?.typeOfExecute === "onlyOneAndNext") metadataCopy.typeOfExecute = "onlyOne"
-        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)),{
+        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)), {
             headers: metadataCopy
         })
     }
 
-    emitCustomExchange(exchangeName, event,metadata) {
+    emitCustomExchange(exchangeName, event, metadata) {
         if (!event.traceId) event.traceId = crypto.randomUUID()
         event.exchangeName = exchangeName
-        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)),{
+        EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)), {
             headers: metadata
         })
     }

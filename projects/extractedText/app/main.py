@@ -6,9 +6,6 @@ from fileManagerClient import FileManagerClient
 import uuid
 import os
 import shutil
-import logging
-
-logging.basicConfig(level=logging.INFO)
 
 fileManagerClient = FileManagerClient()
 bus = EventBus(queue_name="extractedText", exchange_name="extractedTexts")
@@ -48,4 +45,4 @@ def callback(data, metadata):
     },metadata)
 
 bus.on("extractedText", "extractedTexts", callback)
-logging.info("\n\n\n\nExtractedText Started\n\n\n\n")
+print("\n\n\n\nExtractedText Started\n\n\n\n")

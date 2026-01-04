@@ -14,11 +14,13 @@ export class Download {
     }
 
     download = async (data,metaData) => {
+        console.log(data)
         const downloadUrl = path.join(data.institutionName, data.typeOfData, 'downloadData',this.getFileNameFromUrl(data.link))
         const fileExists = await this.fileManagerClient.fileExists(downloadUrl)
         if (!fileExists){
             await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
+        console.log(downloadUrl)
         await this.eventBus.emit(
             'postDownloads',
             {

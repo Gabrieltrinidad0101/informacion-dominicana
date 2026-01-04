@@ -13,12 +13,16 @@ export class PdfToText {
         const pdfData = new Uint8Array(fs.readFileSync(pdfPath));
         const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
         delete  data._id;
-        let hasText = [];
+        let hasText = new Set();
         for (let i = 1; i <= pdf.numPages; i++) {
             const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', `${i}.json`)
             const pageText = []
             const fileExists = await this.fileManagerClient.fileExists(fileUrl)
-            if(fileExists) hasText.push(i);
+            if(fileExists){
+                const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedText', `${i}.json`)
+                const fileExists = await this.fileManagerClient.fileExists(fileUrl)
+                if(!fileExists) hasText.add(i);
+            } 
             if (metadata?.force || !fileExists) {
                 const page = await pdf.getPage(i);
                 const content = await page.getTextContent();
@@ -34,7 +38,7 @@ export class PdfToText {
                     });
                 } 
                 if(pageText.length > 0) {
-                    hasText.push(i);
+                    hasText.add(i);
                     await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({lines: pageText, angle: 0}));
                     await this.eventBus.emit('aiTextAnalyzers', { ...data, extractedTextAnalyzerUrl: fileUrl,index: i },metadata);
                 }

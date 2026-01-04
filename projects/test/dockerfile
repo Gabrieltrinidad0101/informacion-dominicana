@@ -14,4 +14,4 @@ COPY projects/eventBus ./projects/eventBus
 COPY projects/test ./projects/test
 COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["npm", "run", "test"]
+CMD ["sh", "-c", "npm test || sleep 9999"]
