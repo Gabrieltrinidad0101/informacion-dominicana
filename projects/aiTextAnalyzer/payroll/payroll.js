@@ -1,5 +1,4 @@
 import { propt } from "./propt.js";
-
 export class Payroll {
     async init({ eventBus, apiLLMClient, fileManagerClient, validateIdNumberApi, getId }){
         this.eventBus = eventBus;

@@ -18,15 +18,12 @@ class EventBusTest {
   promises = {
     downloads: new Promise(res => (this.resolvers.downloads = res)),
     postDownloads: new Promise(res => (this.resolvers.postDownloads = res)),
-    extractedTexts: new Promise(res => (this.resolvers.extractedTexts = res)),
-    extractedTextAnalyzers: new Promise(res => (this.resolvers.extractedTextAnalyzers = res)),
     aiTextAnalyzers: new Promise(res => (this.resolvers.aiTextAnalyzers = res)),
     insertDatas: new Promise(res => (this.resolvers.insertDatas = res))
   }
 
   constructor() {
-    this.eventBus.disableLogs = true
-
+    this.eventBus.testMode = true
     this.eventBus.on('testDownload', 'downloads', this.downloads)
     this.eventBus.on('testGetPostDownloads', 'postDownloads', this.postDownloads)
     this.eventBus.on('testExtractedText', 'extractedTexts', this.extractedTexts)
@@ -56,36 +53,29 @@ class EventBusTest {
   }
 
   postDownloads = async (data) => {
-    console.log("1")
     expect(await this.fileManagerClient.fileExists(data.urlDownload)).toBe(true)
     this.resolvers.postDownloads()
   }
 
-  extractedTexts = async () => {
-    console.log("2")
-    expect(await this.fileManagerClient.fileExists('Test/nomina/postDownloads/2023/1/1.jpg')).toBe(true)
-    expect(await this.fileManagerClient.fileExists('Test/nomina/postDownloads/2023/1/2.jpg')).toBe(true)
+  extractedTexts = async (data) => {
+    expect(data.index).toBe(16)
+    expect(await this.fileManagerClient.fileExists('Test/nomina/postDownloads/2025/diciembre/_.16.jpg')).toBe(true)
     this.resolvers.extractedTexts()
   }
 
-  extractedTextAnalyzers = async () => {
-    console.log("3")
-    expect(await this.fileManagerClient.fileExists('Test/nomina/extractedTextAnalyzer/2023/1/1.json')).toBe(true)
-    expect(await this.fileManagerClient.fileExists('Test/nomina/extractedTextAnalyzer/2023/1/2.json')).toBe(true)
+  extractedTextAnalyzers = async (data) => {
+    expect(data.index).toBe(16)
+    expect(await this.fileManagerClient.fileExists('Test/nomina/extractedText/2025/diciembre/16.json')).toBe(true)
     this.resolvers.extractedTextAnalyzers()
   }
 
-  aiTextAnalyzers = async () => {
-    console.log("4")
-    expect(await this.fileManagerClient.fileExists('Test/nomina/aiTextAnalyzer/2023/1/1.json')).toBe(true)
-    expect(await this.fileManagerClient.fileExists('Test/nomina/aiTextAnalyzer/2023/1/2.json')).toBe(true)
+  aiTextAnalyzers = async (data) => {
+    expect(await this.fileManagerClient.fileExists(data.extractedTextAnalyzerUrl)).toBe(true)
     this.resolvers.aiTextAnalyzers()
   }
 
-  insertDatas = async () => {
-    console.log("5")
-    expect(await this.fileManagerClient.fileExists('Test/nomina/insertData/2023/1/1.json')).toBe(true)
-    expect(await this.fileManagerClient.fileExists('Test/nomina/insertData/2023/1/2.json')).toBe(true)
+  insertDatas = async (data) => {
+    expect(await this.fileManagerClient.fileExists(data.aiTextAnalyzeUrl)).toBe(true)
     this.resolvers.insertDatas()
   }
 

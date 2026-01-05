@@ -8,6 +8,7 @@ dotenv.config({
 })
 
 export class EventBus {
+    isTestMode = false
     static async init(retryCount = 0) {
         try {
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
@@ -63,7 +64,7 @@ export class EventBus {
         await EventBus.channel.bindQueue(`${queueName}_try`, `${exchangeName}_try`, "")
     }
 
-    set disableLogs(value) {
+    set testMode(value) {
         logs.disabled = value
     }
 
@@ -80,6 +81,10 @@ export class EventBus {
                 logs.info(content)
             } catch (error) {
                 try {
+                    if(this.isTestMode) {
+                        console.log(error)
+                        return
+                    }
                     const content = JSON.parse(message.content.toString())
                     content.retryCount = (content.retryCount || 0) + 1
                     content.errors ??= []
