@@ -115,6 +115,16 @@ services:
       - 15672:15672
     networks:
       - dev
+  
+  pii:
+    build:
+      context: .
+      dockerfile: ./projects/pII/dockerfile
+    container_name: pii
+    volumes:
+      - ./projects/pII:/app/projects/pII
+    networks:
+      - dev 
 
   mongo:
     image: mongo:latest

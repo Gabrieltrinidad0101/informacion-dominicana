@@ -25,8 +25,6 @@ export class PdfToImages {
   };
 
   convertPdfToImages = async (hasText,data,metadata) => {
-    if (!data.urlDownload.includes("pdf")) return;
-
     const saveImages = this.fileManagerClient.generateUrl(
       data,
       "postDownloads",
@@ -40,7 +38,6 @@ export class PdfToImages {
     delete data._id;
     for (let i = 1; i <= numberOfPages; i++) {
       if(hasText.has(i)) continue;
-      console.log("PASS")
       const fileName = `_.${i}.jpg`;
       const imagePath = path.resolve(saveImages, fileName);
       const imageUrl = this.fileManagerClient.generateUrl(
