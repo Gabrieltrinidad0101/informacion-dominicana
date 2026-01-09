@@ -10,4 +10,4 @@ COPY projects/fileManagerClientPy ./fileManagerClientPy
 COPY projects/eventBusPy ./eventBusPy
 COPY projects/pII/ ./pII
 
-CMD ["python3","-m", "pII.main"]
+CMD ["python3","-u","-m", "pII.main"]
