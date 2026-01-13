@@ -8,8 +8,6 @@ const options = (saveFilename, savePath) => ({
   savePath,
   saveFilename,
   format: "jpg",
-  width: 2000,
-  height: 2000,
 });
 
 export class PdfToImages {

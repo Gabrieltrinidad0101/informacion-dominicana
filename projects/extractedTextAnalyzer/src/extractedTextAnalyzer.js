@@ -1,6 +1,6 @@
 import { groupLinesOcrSpace } from "./groupLineOcr.js";
 import { groupLinesAzure } from "./groupLinesAzure.js";
-import { paddleORC } from "./paddleocr.js";
+import { paddleOCR } from "./paddleocr.js";
 
 export class extractedTextAnalyzer {
     constructor(eventBus, fileManagerClient) {
@@ -15,7 +15,8 @@ export class extractedTextAnalyzer {
         if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
             const rawData = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextUrl)).toString('utf-8'));
             if (data.extractedTextType === 'PaddleOCR') {
-                textOfImage = paddleORC(rawData);
+                const {regions} = paddleOCR(rawData);
+                textOfImage = regions;
             }
             if (data.extractedTextType === 'azure') {
                 textOfImage = groupLinesAzure(rawData);

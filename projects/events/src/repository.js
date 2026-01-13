@@ -7,7 +7,6 @@ console.log("🚀 Connected to MongoDB...")
 const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
-
 export class EventsRepository {
     static async init(retryCount = 0) {
         try {

@@ -1,38 +1,41 @@
-export const paddleORC = (ocrData) =>{
-    const recTexts = ocrData.rec_texts || [];
-    const recScores = ocrData.rec_scores || [];
-    const recBoxes = ocrData.rec_boxes || [];
-    let angle = (ocrData.doc_preprocessor_res && ocrData.doc_preprocessor_res.angle) || 0;
-    
-    if (angle === -1) {
-      angle = 0;
-    }
-    
-    const textRegions = [];
-    for (let i = 0; i < recTexts.length; i++) {
-      const text = recTexts[i] || "";
-      const score = recScores[i] || 0;
-      const box = recBoxes[i] || [];
-    
-      const cleanText = text.trim();
-    
-      if (box.length >= 4) {
-        const x1 = box[0];
-        const y1 = box[1];
-        const x2 = box[2];
-        const y2 = box[3];
-    
-        textRegions.push({
-          text: cleanText,
-          x: parseInt(x1),
-          y: parseInt(y1),
-          width: parseInt(x2 - x1),
-          height: parseInt(y2 - y1),
-          confidence: Number(parseFloat(score)),
-        });
-      }
-    }
+export const paddleOCR = (ocrData) => {
+  const recTexts  = ocrData.rec_texts  || [];
+  const recScores = ocrData.rec_scores || [];
+  const recPolys  = ocrData.rec_polys  || [];
 
-    return textRegions;
-}
+  let angle = ocrData?.doc_preprocessor_res?.angle ?? 0;
+  if (angle === -1) angle = 0;
 
+  const textRegions = [];
+
+  for (let i = 0; i < recPolys.length; i++) {
+    const text  = (recTexts[i] || "").trim();
+    const score = Number(recScores[i] || 0);
+    const poly  = recPolys[i];
+
+    if (!poly || poly.length !== 4) continue;
+
+    // Extraer Xs e Ys de los 4 puntos
+    const xs = poly.map(p => p[0]);
+    const ys = poly.map(p => p[1]);
+
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+
+    textRegions.push({
+      text,
+      confidence: score,
+      x: minX,
+      y: minY,
+      width:  maxX - minX,
+      height: maxY - minY,
+    });
+  }
+
+  return {
+    angle,
+    regions: textRegions
+  };
+};
