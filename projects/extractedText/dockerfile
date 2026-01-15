@@ -9,12 +9,14 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-COPY projects/extractedText/requirements.txt . 
+COPY projects/extractedText/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir watchdog
 
 COPY projects/extractedText/app/ .
 
 ENV PATH="/usr/local/bin:${PATH}"
- 
+ENV FLAGS_use_onednn=false
+ENV FLAGS_use_mkldnn=false
+
 CMD ["python","-u", "main.py"]

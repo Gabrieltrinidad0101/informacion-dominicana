@@ -4,31 +4,45 @@
   <meta charset="UTF-8">
   <title>Image Bounding Boxes</title>
   <style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-    .box {
-      position: fixed;
-      border: 2px solid red;
-      box-sizing: border-box;
-      pointer-events: none;
-    }
-  </style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    position: relative;
+    width: 768px;
+    height: 512px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-orientation: none; /* 🔑 */
+  }
+
+  .box {
+    position: absolute;
+    border: 2px solid red;
+    pointer-events: none;
+  }
+</style>
+
 </head>
 <body>
 
-  <img src="data/Ayuntamiento de Jarabacoa/nomina/postDownloads/2020/mayo/_.11.jpg" width="2000px" height="2000px" alt="OCR Image">
+  <div class="container">
+    <img src="cut.png" alt="OCR Image">
 
-  <!-- Caja ejemplo -->
-  <div class="box"
-       style="
-         left: 1455.0px;
-         top: 311.0px;
-         width: 172.0px;
-         height: 40.0px;
-       ">
-</div>
-
+    <div class="box"
+      style="
+        left: 265px;
+        top: 84px;
+        width: calc(525.0px - 265.0px);
+        height: calc(98.0px - 84.0px);
+      ">
+    </div>
+  </div>
 </body>
 </html>

@@ -26,15 +26,30 @@ def callback(data, metadata):
         filename = f"./{uuid_}.png"
         img.save(filename)  
         result = ocr.predict(filename)
-        outfile = "./output" + uuid_
+        outfile = "output"
         for res in result:
+            res.save_to_img(outfile)
             res.save_to_json(outfile)
         result_json = ""
-        result_json_path = f"./{outfile}/{uuid_}_res.json"
+        result_json_path = f"{outfile}/{uuid_}_res.json"
         with open(result_json_path, "r") as f:
             result_json = f.read()
+        imgPreProcessed = Image.open(f"{outfile}/{uuid_}_preprocessed_img.png")
+        width, height = imgPreProcessed.size  
+        segment = width // 3
+        last_img = imgPreProcessed.crop((
+            segment * 2,  
+            0,            
+            width,        
+            height
+        ))
 
+        imgPath = f"{outfile}/{uuid_}_preprocessed_img_upload.png"
+        last_img.save(imgPath)
+        
+        imgProcessedUrl = fileManagerClient.generate_url(data,'imgProcessed',str(data.get('index')) + '.png' )
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
+        fileManagerClient.upload_file(imgPath, imgProcessedUrl)
         shutil.rmtree(outfile)
         os.remove(filename)
     

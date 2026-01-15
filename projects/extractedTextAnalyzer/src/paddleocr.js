@@ -14,23 +14,23 @@ export const paddleOCR = (ocrData) => {
     const poly  = recPolys[i];
 
     if (!poly || poly.length !== 4) continue;
+    
+    const [p0, p1, p2, p3] = poly;
 
-    // Extraer Xs e Ys de los 4 puntos
-    const xs = poly.map(p => p[0]);
-    const ys = poly.map(p => p[1]);
-
-    const minX = Math.min(...xs);
-    const maxX = Math.max(...xs);
-    const minY = Math.min(...ys);
-    const maxY = Math.max(...ys);
+    const cx = (p0[0] + p2[0]) / 2;
+    const cy = (p0[1] + p2[1]) / 2;
+    
+    const width  = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+    const height = Math.hypot(p3[0] - p0[0], p3[1] - p0[1]);
 
     textRegions.push({
       text,
       confidence: score,
-      x: minX,
-      y: minY,
-      width:  maxX - minX,
-      height: maxY - minY,
+      x: cx - width / 2,
+      y: cy - height / 2,
+      width,
+      height,
+      poly 
     });
   }
 

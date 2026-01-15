@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import fs from 'fs/promises'
 
 await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${process.env.MONGO_DB_PASSWORD ?? 'root'}@mongo:27017/informacion-dominicana?authSource=admin`);
-console.log("🚀 Connected to MongoDB...") 
- 
+console.log("🚀 Connected to MongoDB...")
+
 const models = {}
 const dynamicSchema = new mongoose.Schema({}, { strict: false });
 
@@ -25,7 +25,7 @@ export class EventsRepository {
     async insertDefaultValues() {
         try {
             const data = JSON.parse(await fs.readFile('./projects/events/src/defaultEvents.json'))
-            for (const [key,values] of Object.entries(data)) {
+            for (const [key, values] of Object.entries(data)) {
                 const Model = mongoose.model(key, dynamicSchema);
                 for (const value of values) {
                     await Model.updateOne(
@@ -61,7 +61,27 @@ export class EventsRepository {
     async find(data_) {
         const data = { ...data_ }
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        delete data.exchangeName
+        delete data.exchangeName;
+
+        const { page, limit } = data;
+        if (page !== undefined && limit !== undefined) {
+            delete data.page;
+            delete data.limit;
+
+            const query = this.dataToQuery(data);
+            const skip = parseInt(page) * parseInt(limit);
+
+            const [result, count] = await Promise.all([
+                Model.find({ ...query }).skip(skip).limit(parseInt(limit)),
+                Model.countDocuments({ ...query })
+            ]);
+
+            return {
+                data: result,
+                total: count
+            }
+        }
+
         const query = this.dataToQuery(data)
         return await Model.find({ ...query })
     }

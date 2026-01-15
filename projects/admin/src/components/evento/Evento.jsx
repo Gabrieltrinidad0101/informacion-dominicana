@@ -37,7 +37,7 @@ function JsonPreview({ file }) {
 }
 
 
-export function Evento({ exchangeName,queryParams }) {
+export function Evento({ exchangeName, queryParams }) {
   const [downloadLinks, setDownloadLinks] = useState([]);
   const [columns, setColumns] = useState([]);
   const [search, setSearch] = useState(JSON.parse(queryParams.get(exchangeName)) ?? {});
@@ -47,22 +47,29 @@ export function Evento({ exchangeName,queryParams }) {
   const [force, setForce] = useState(false);
   const [typeOfExecute, setTypeOfExecute] = useState('completeExecution');
 
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 10,
+    page: 0,
+  });
+  const [rowCount, setRowCount] = useState(0);
+
   const history = useHistory();
 
   const searchData = async () => {
     try {
+      const { page, pageSize } = paginationModel;
       const data = await fetch(
         Object.keys(search).length > 0
-          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}${Object.keys(search).map((key) => `&${key}=${search[key]}`).join('')}`
-          : `${constants.apiEvents}/find?exchangeName=${exchangeName}`
+          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}${Object.keys(search).map((key) => `&${key}=${search[key]}`).join('')}`
+          : `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}`
       );
 
       const searchString = JSON.stringify(search);
-      if(searchString === '{}'){
+      if (searchString === '{}') {
         queryParams.delete(exchangeName);
       }
 
-      if(queryParams.get(exchangeName) !== searchString){
+      if (queryParams.get(exchangeName) !== searchString) {
         queryParams.set(exchangeName, searchString);
         history.push({
           pathname: history.location.pathname,
@@ -71,11 +78,21 @@ export function Evento({ exchangeName,queryParams }) {
       }
 
       const json = await data.json();
-      if (!json || json.length === 0) {
+
+      let rows = [];
+      if (Array.isArray(json)) {
+        rows = json;
+        setRowCount(json.length);
+      } else if (json && json.data) {
+        rows = json.data;
+        setRowCount(json.total);
+      }
+
+      if (!rows || rows.length === 0) {
         setDownloadLinks([]);
         return;
       }
-      const columns_ = Object.keys(json[0])
+      const columns_ = Object.keys(rows[0])
         .map((key) => {
           if (key === "__v") return;
           return {
@@ -87,7 +104,7 @@ export function Evento({ exchangeName,queryParams }) {
         })
         .filter((column) => column);
       setColumns(columns_);
-      setDownloadLinks(json);
+      setDownloadLinks(rows);
     } catch { }
   };
 
@@ -126,14 +143,14 @@ export function Evento({ exchangeName,queryParams }) {
 
   useEffect(() => {
     searchData();
-  }, []);
+  }, [paginationModel]);
 
   const onChangeValue = (key, value) => {
     setSearch((prev) => ({
       ...prev,
       [key]: value,
     }));
-  };  
+  };
 
   const onChangeKey = (e) => {
     setSearch((prev) => ({
@@ -198,7 +215,7 @@ export function Evento({ exchangeName,queryParams }) {
                 <InputText label={key} key={index} onChangeSearch={(e) => onChangeValue(key, e.target.value)} name={key} value={search[key]} />
                 <Button sx={{
                   height: 55
-                }} variant="contained" color="error" height="10px" onClick={() => onRemoveKey(key)}>Eliminar</Button>
+                }} variant="contained" color="error" height="10px" onClick={() => onRemoveKey(key)}>Delete</Button>
               </div>
             )
           }
@@ -206,7 +223,7 @@ export function Evento({ exchangeName,queryParams }) {
         <div className={EventsCss.buttons}>
           <Button onClick={searchData}>Buscar</Button>
           <Button onClick={() => setOpenExecuteModal(true)}>Ejecutar</Button>
-          <Button onClick={deleteEvents}>Eliminar</Button>
+          <Button onClick={deleteEvents}>Delete</Button>
         </div>
       </div>
 
@@ -216,11 +233,10 @@ export function Evento({ exchangeName,queryParams }) {
           pageSizeOptions={[10]}
           className={EventsCss.dataGrid}
           density="compact"
-          initialState={{
-            pagination: {
-              paginationModel: { pageSize: 10, page: 0 },
-            },
-          }}
+          paginationMode="server"
+          rowCount={rowCount}
+          onPaginationModelChange={setPaginationModel}
+          paginationModel={paginationModel}
           columns={columns}
           getRowId={(row) => row._id}
           onCellDoubleClick={(params) => {

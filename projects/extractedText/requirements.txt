@@ -1,5 +1,5 @@
+paddlepaddle==3.0.0
 paddleocr
-paddlepaddle
 opencv-python
 matplotlib
 pillow
