@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import path, { dirname } from "path"
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
-import { eventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js" 
 import { Payroll } from "./payroll/payroll.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 import { apiLLMClient } from "./payroll/apiLLMClient.js"

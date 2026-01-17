@@ -1,5 +1,5 @@
 import "./env.js"
-import { eventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js" 
 import { Payroll } from "./payroll/payroll.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 import { apiLLMClient } from "./payroll/apiLLMClient.js"

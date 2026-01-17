@@ -1,4 +1,4 @@
-import { eventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js" 
 import express from "express"
 import cors from "cors"
 import { EventListener } from "./src/listener.js"

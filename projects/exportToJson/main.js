@@ -1,6 +1,6 @@
 import { Payroll } from './payroll.js';
 import { Repository } from './repository.js';
-import { eventBus } from "../eventBus/eventBus.js"
+import { eventBus } from "../eventBus/eventBus.js" 
 import { FileManagerClient } from "../fileManagerClient/main.js"
 
 const fileAccess = new FileManagerClient();
