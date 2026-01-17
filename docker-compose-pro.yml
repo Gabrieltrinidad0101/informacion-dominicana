@@ -86,3 +86,10 @@ services:
       dockerfile: ./projects/uploadFiles/dockerfile-pro
     container_name: uploadFiles
   
+  pii:
+    restart: unless-stopped
+    build: 
+      context: .
+      dockerfile: ./projects/uploadFiles/dockerfile-pro
+    container_name: uploadFiles
+  
