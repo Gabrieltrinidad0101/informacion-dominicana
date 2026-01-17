@@ -11,7 +11,7 @@ export class DownloadTownHallData {
         link,
         institutionType,
         institutionName
-    }) => {
+    },metadata) => {
         const browser = await puppeteer.launch({
             executablePath:'/usr/bin/chromium',
             headless: "new",
@@ -53,7 +53,7 @@ export class DownloadTownHallData {
                         year,
                         month,
                         institutionName
-                    })
+                    },metadata)
             }
         }
         browser.close()
