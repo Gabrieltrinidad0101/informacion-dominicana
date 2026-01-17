@@ -2,7 +2,6 @@
 set -e
 source ./service-path-map.sh
 
-# Normal case → find changed files
 CHANGED=$(git diff HEAD~1 HEAD --name-only)
 echo "Changed files:"
 echo "$CHANGED"
@@ -11,7 +10,6 @@ for SERVICE in "${!SERVICES[@]}"; do
   PATH_TO_WATCH=${SERVICES[$SERVICE]}
   KEY_DEPLOY=${DEPLOY[$SERVICE]}
   WEBHOOK="${!KEY_DEPLOY}"
-
 
   if echo "$CHANGED" | grep -q "^$PATH_TO_WATCH/"; then
     echo "🔄 Changes detected in $PATH_TO_WATCH → Rebuilding $SERVICE..."
