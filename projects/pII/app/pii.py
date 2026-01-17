@@ -66,6 +66,6 @@ class PII():
             f'{index}.png'
         )
         self.fileManagerClient.upload_file(outImg, imgPIIUrl)
-
+ 
         os.remove(outImg)
  

@@ -14,6 +14,7 @@ SERVICES["insert_data"]="projects/insertData"
 SERVICES["export_to_json"]="projects/exportToJson"
 SERVICES["auth"]="projects/auth"
 SERVICES["upload_files"]="projects/uploadFiles"
+SERVICES["pii"]="projects/pii"
 
 declare -A DEPLOY
 
@@ -28,3 +29,4 @@ DEPLOY["insert_data"]="DOKPLOY_INSERT_DATA_WEBHOOK"
 DEPLOY["export_to_json"]="DOKPLOY_EXPORT_TO_JSON_WEBHOOK"
 DEPLOY["auth"]="DOKPLOY_AUTH_WEBHOOK"
 DEPLOY["upload_files"]="DOKPLOY_UPLOAD_FILES_WEBHOOK"
+DEPLOY["pii"]="DOKPLOY_UPLOAD_PII"
