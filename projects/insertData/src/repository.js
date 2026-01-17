@@ -28,12 +28,9 @@ export class Repository {
         table.integer('y');
         table.string('sex', 1);
         table.text('urlDownload');
-        table.text('institutionName');
+        table.text('confidences');
       });
     }
-    await knex.schema.alterTable('payrolls', (table) => {
-      table.text('confidences');
-    });
   }
 
   async save(payrolls) {
