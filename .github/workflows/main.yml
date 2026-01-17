@@ -1,31 +1,31 @@
-# name: Deploy Changed Services
+name: Deploy Changed Services
 
-# on:
-#   push:
-#     branches: [ main ]
+on:
+  push:
+    branches: [ main ]
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           fetch-depth: 2
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
-#       - name: Make script executable
-#         run: chmod +x build-changed-services.sh
+      - name: Make script executable
+        run: chmod +x build-changed-services.sh
 
-#       - name: Run script
-#         run: ./build-changed-services.sh
-#         env:
-#           PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-#           DOKPLOY_DOWNLOAD_LINKS_WEBHOOK: ${{ secrets.DOKPLOY_DOWNLOAD_LINKS_WEBHOOK }}
-#           DOKPLOY_EXTRACTED_TEXT_WEBHOOK: ${{ secrets.DOKPLOY_EXTRACTED_TEXT_WEBHOOK }}
-#           DOKPLOY_DOWNLOAD_WEBHOOK: ${{ secrets.DOKPLOY_DOWNLOAD_WEBHOOK }}
-#           DOKPLOY_EVENTS_WEBHOOK: ${{ secrets.DOKPLOY_EVENTS_WEBHOOK }}
-#           DOKPLOY_POST_DOWNLOAD_WEBHOOK: ${{ secrets.DOKPLOY_POST_DOWNLOAD_WEBHOOK }}
-#           DOKPLOY_ANALYZE_EXTRACTED_TEXT_WEBHOOK: ${{ secrets.DOKPLOY_ANALYZE_EXTRACTED_TEXT_WEBHOOK }}
-#           DOKPLOY_AI_TEXT_ANALYZE_WEBHOOK: ${{ secrets.DOKPLOY_AI_TEXT_ANALYZE_WEBHOOK }}
-#           DOKPLOY_INSERT_DATA_WEBHOOK: ${{ secrets.DOKPLOY_INSERT_DATA_WEBHOOK }}
-#           DOKPLOY_EXPORT_TO_JSON_WEBHOOK: ${{ secrets.DOKPLOY_EXPORT_TO_JSON_WEBHOOK }}
-#           DOKPLOY_AUTH_WEBHOOK: ${{ secrets.DOKPLOY_AUTH_WEBHOOK }} 
+      - name: Run script
+        run: ./build-changed-services.sh
+        env:
+          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          DOKPLOY_DOWNLOAD_LINKS_WEBHOOK: ${{ secrets.DOKPLOY_DOWNLOAD_LINKS_WEBHOOK }}
+          DOKPLOY_EXTRACTED_TEXT_WEBHOOK: ${{ secrets.DOKPLOY_EXTRACTED_TEXT_WEBHOOK }}
+          DOKPLOY_DOWNLOAD_WEBHOOK: ${{ secrets.DOKPLOY_DOWNLOAD_WEBHOOK }}
+          DOKPLOY_EVENTS_WEBHOOK: ${{ secrets.DOKPLOY_EVENTS_WEBHOOK }}
+          DOKPLOY_POST_DOWNLOAD_WEBHOOK: ${{ secrets.DOKPLOY_POST_DOWNLOAD_WEBHOOK }}
+          DOKPLOY_ANALYZE_EXTRACTED_TEXT_WEBHOOK: ${{ secrets.DOKPLOY_ANALYZE_EXTRACTED_TEXT_WEBHOOK }}
+          DOKPLOY_AI_TEXT_ANALYZE_WEBHOOK: ${{ secrets.DOKPLOY_AI_TEXT_ANALYZE_WEBHOOK }}
+          DOKPLOY_INSERT_DATA_WEBHOOK: ${{ secrets.DOKPLOY_INSERT_DATA_WEBHOOK }}
+          DOKPLOY_EXPORT_TO_JSON_WEBHOOK: ${{ secrets.DOKPLOY_EXPORT_TO_JSON_WEBHOOK }}
+          DOKPLOY_AUTH_WEBHOOK: ${{ secrets.DOKPLOY_AUTH_WEBHOOK }} 
