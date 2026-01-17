@@ -18,7 +18,7 @@ export class PostDownload {
         await this.fileManagerClient.downloadFile(data.urlDownload);
         // TODO: Extract text from pdf
         // const hasText = await this.pdfToText.extractTextWithPositionFromPdf(data,metadata);
-        await this.pdfToImages.convertPdfToImages([],data,metadata);
+        await this.pdfToImages.convertPdfToImages(new Set(),data,metadata);
         const pdfPath = path.resolve(`downloads/${data.urlDownload}`);
         fs.unlinkSync(pdfPath);
     }
