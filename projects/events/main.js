@@ -28,7 +28,7 @@ app.get('/events/find', async (req, res) => {
     const events = await reExecuteEvents.getEvents(JSON.parse(JSON.stringify(req.query)))
     res.json(events)
 })
-
+ 
 app.post('/events/reExecuteEvents', async (req, res) => {
     const events = await reExecuteEvents.reExecuteEvents(req.body)
     res.json(events)
