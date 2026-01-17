@@ -27,7 +27,7 @@
     "downloadLinks-pro": "node projects/downloadLinks/main.js",
     "download-pro": "node ./projects/download/main.js",
     "events-pro": "node ./projects/events/main.js",
-    "postDownload-pro": "node ./projects/postDownload/main.js",
+    "postDownload-pro": "node ./projects/postDownload/src/main.js",
     "extractedText-pro": "node ./projects/extractedText/main.js",
     "extractedTextAnalyzer-pro": "node ./projects/extractedTextAnalyzer/main.js",
     "textAnalysisAI-pro": "node ./projects/aiTextAnalyzer/main.js",
