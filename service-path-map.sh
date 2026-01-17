@@ -14,7 +14,7 @@ SERVICES["insert_data"]="projects/insertData"
 SERVICES["export_to_json"]="projects/exportToJson"
 SERVICES["auth"]="projects/auth"
 SERVICES["upload_files"]="projects/uploadFiles"
-SERVICES["pii"]="projects/pii"
+SERVICES["pii"]="projects/pII"
 
 declare -A DEPLOY
 
