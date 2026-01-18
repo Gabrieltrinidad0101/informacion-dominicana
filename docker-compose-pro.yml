@@ -34,8 +34,8 @@ services:
     restart: unless-stopped
     build: 
       context: .
-      dockerfile: ./projects/postDownload/dockerfile-pro
-    container_name: postDownload
+      dockerfile: ./projects/postDownloadPy/dockerfile-pro
+    container_name: postDownloadPy
 
   extracted_text_analyzer:
     restart: unless-stopped
@@ -90,6 +90,6 @@ services:
     restart: unless-stopped
     build: 
       context: .
-      dockerfile: ./projects/uploadFiles/dockerfile-pro
-    container_name: uploadFiles
+      dockerfile: ./projects/pII/dockerfile-pro
+    container_name: pii
   

@@ -44,10 +44,10 @@ services:
   post_download:
     build:
       context: .
-      dockerfile: ./projects/postDownload/dockerfile
+      dockerfile: ./projects/postDownloadPy/dockerfile
     container_name: postDownload
     volumes:
-      - ./projects/postDownload:/app/projects/postDownload
+      - ./projects/postDownloadPy:/app/projects/postDownloadPy
     networks:
       - dev
 

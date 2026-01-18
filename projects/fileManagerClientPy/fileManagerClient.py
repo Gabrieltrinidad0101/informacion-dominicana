@@ -40,6 +40,19 @@ class FileManagerClient:
             f"{data['month']}/"
             f"{file_name}"
         )
+        
+    # -------------------------
+    # Create binary file (images, pdfs, etc.)
+    # -------------------------
+    def create_binary_file(self, s3_key, data: bytes, content_type="application/octet-stream"):
+        self.s3.put_object(
+            Bucket=self.bucket,
+            Key=s3_key,
+            Body=data,
+            ContentType=content_type
+        )
+        return {"bucket": self.bucket, "key": s3_key}
+
 
     # -------------------------
     # Upload local file
