@@ -68,7 +68,7 @@ class PostDownload:
                 )
                 
             self.event_bus.emit(
-                'extractedText',
+                'extractedTexts',
                 {
                     **data,
                     "page": page_index,
