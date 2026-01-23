@@ -47,7 +47,7 @@ def callback(data, metadata):
         imgPath = f"{outfile}/{uuid_}_preprocessed_img_upload.png"
         last_img.save(imgPath)
         
-        imgProcessedUrl = fileManagerClient.generate_url(data,'imgProcessed',str(data.get('index')) + '.png' )
+        imgProcessedUrl = fileManagerClient.generate_url(data,'imgProcessed',f'page_{data.get('page')}_img_{data.get('imageIndex')}.png')
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
         fileManagerClient.upload_file(imgPath, imgProcessedUrl)
         shutil.rmtree(outfile)

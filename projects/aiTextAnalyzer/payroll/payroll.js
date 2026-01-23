@@ -10,7 +10,8 @@ export class Payroll {
     }
 
     payroll = async (data, metadata) => {
-        const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data, 'aiTextAnalyzer', `${data.index}.json`)
+        const fileName = data.index ? `${data.index}.json` : `page_${data.page}_img_${data.imageIndex}.json`;
+        const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data, 'aiTextAnalyzer', fileName)
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
         if (metadata?.force || !fileExists) {
             const dataText = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextAnalyzerUrl)).toString('utf-8'));

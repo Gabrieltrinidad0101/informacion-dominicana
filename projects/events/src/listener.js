@@ -28,18 +28,10 @@ export class EventListener {
 
         if(event.exchangeName == 'extractedTexts') {
             const exist = await this.eventRepository.findOne({
-                institutionType: event.institutionType,
-                typeOfData: event.typeOfData,
-                link: event.link,
-                year: event.year,
-                month: event.month,
-                traceId: event.traceId,
-                index: event.index,
-                urlDownload: event.urlDownload,
-                institutionName: event.institutionName,
+                imageUrl: event.imageUrl,
                 exchangeName: event.exchangeName
             })
-            if(exist) return
+            if(exist) event = {...exist,"_id": exist._id}
         }
 
         await this.eventRepository.save(event);

@@ -15,11 +15,12 @@ class PostDownload:
         self.event_bus.on('postDownload', 'postDownloads', self.postDownload)
 
     def postDownload(self, data, metadata):
+        data.pop("_id", None)
         file_path = self.file_manager_client.download_file(data["urlDownload"])
         doc = fitz.open(file_path)
         for page_index, page in enumerate(doc):
-            self.extract_text_from_pdf(data, metadata,page,page_index + 1)
-            self.extract_images_from_pdf(data, metadata,doc,page,page_index + 1)
+            self.extract_text_from_pdf(data, metadata,page,page_index)
+            self.extract_images_from_pdf(data, metadata,doc,page,page_index)
     
     def extract_images_from_pdf(self, data, metadata,doc,page,page_index):
         image_list = page.get_images(full=True)
@@ -49,7 +50,7 @@ class PostDownload:
                     image_bytes,
                     self.CONTENT_TYPES.get(image_ext, "application/octet-stream")
                 )
-            if metadata.get('force') and not images_meta_exist:
+            if metadata.get('force') or not images_meta_exist:
                 rect = page.get_image_rects(xref)[0]
                 self.file_manager_client.create_text_file(
                     images_meta_url,
@@ -66,13 +67,13 @@ class PostDownload:
                         }
                     })
                 )
-                
             self.event_bus.emit(
                 'extractedTexts',
                 {
                     **data,
                     "page": page_index,
                     "imageUrl": image_url,
+                    "imageIndex": img_index,
                     "imageMetaDataUrl": images_meta_url
                 },
                 metadata
@@ -105,10 +106,9 @@ class PostDownload:
                 "lines": lines
             })
             self.file_manager_client.create_text_file(extracted_text_url,payload)
-
-        self.event_bus.emit('extractedTextAnalyzers',{
-            **data,
-            "extractedTextUrl": extracted_text_url,
-            "extractedTextType": "Text"
-        },metadata)
+        # self.event_bus.emit('extractedTextAnalyzers',{
+        #     **data,
+        #     "extractedTextUrl": extracted_text_url,
+        #     "extractedTextType": "Text"
+        # },metadata)
 

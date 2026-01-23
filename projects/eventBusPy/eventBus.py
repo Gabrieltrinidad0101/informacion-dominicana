@@ -100,10 +100,12 @@ class EventBus:
         self.channel.basic_consume(queue=queue_name, on_message_callback=_consume_callback)
         self.channel.start_consuming()
 
-    def emit(self, exchange_name, data, metadata=None):
+    def emit(self, exchange_name, dataOriginal, metadataOriginal=None):
+        data = {**dataOriginal}
         if 'traceId' not in data:
             data['traceId'] = str(uuid.uuid4())
         data['exchangeName'] = exchange_name
+        metadata = {**metadataOriginal}
         if metadata:
             if metadata.get('typeOfExecute') == 'onlyOne':
                 return

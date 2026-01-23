@@ -1,5 +1,4 @@
 from PIL import Image, ImageDraw
-import json
 import re
 import uuid
 import os
@@ -18,7 +17,6 @@ class PII:
         )
 
     def pii(self, data, metadata):
-
         original_pdf_path = self.fileManagerClient.download_file(
             data['urlDownload']
         )
@@ -33,6 +31,7 @@ class PII:
             pii_pdf_path = self.fileManagerClient.download_file(pii_pdf_url)
         except Exception as e:
             pii_pdf_path = f'./downloads/{pii_pdf_url}'
+            
         if not os.path.exists(pii_pdf_path):
             shutil.copyfile(original_pdf_path, pii_pdf_path)
 
@@ -40,13 +39,12 @@ class PII:
 
         if extracted_text_type == 'PaddleOCR':
             img_without_pii = self.piiImage(data, metadata)
-
             self.replace_images_in_pdf(
                 input_pdf=pii_pdf_path,
                 output_pdf=pii_pdf_path,
                 new_image_path=img_without_pii,
                 page_number=data['page'],
-                image_index=data['image']['imageIndex']
+                image_index=data['imageIndex']
             )
 
             os.remove(img_without_pii)
@@ -79,25 +77,22 @@ class PII:
         doc.close()
 
     def piiImage(self, data, metadata):
-        index = str(data.get('index'))
+        index = str(data.get('imageIndex'))
 
         imgProcessedUrl = self.fileManagerClient.generate_url(
-            data, 'imgProcessed', f'{index}.png'
+            data, 'imgProcessed', f"page_{data.get('page')}_img_{index}.png"
         )
+        
         imgPath = self.fileManagerClient.download_file(imgProcessedUrl)
 
         extractedTextAnalyzer = self.fileManagerClient.generate_url(
-            data, 'extractedTextAnalyzer', f'{index}.json'
+            data, 'extractedTextAnalyzer', f"page_{data.get('page')}_img_{index}.json"
         )
+        
 
-        words = json.loads(
-            self.fileManagerClient
-                .get_file_bytes(extractedTextAnalyzer)
-                .decode('utf-8')
-        )
+        words = self.fileManagerClient.get_file_json(extractedTextAnalyzer)
 
         ID_REGEX = re.compile(r'^(\d{3}-\d{7}-\d{1}|\d{11})$')
-
         img = Image.open(imgPath).convert("RGB")
         draw = ImageDraw.Draw(img)
 
@@ -116,6 +111,7 @@ class PII:
             )
 
         outImg = f'./{uuid.uuid4()}.png'
+        
         img.save(outImg)
         os.remove(imgPath)
 
@@ -154,5 +150,7 @@ class PII:
                 keep_proportion=True
             )
 
-        doc.save(output_pdf)
+        doc.save(output_pdf, 
+                 incremental=True,
+                encryption=fitz.PDF_ENCRYPT_KEEP)
         doc.close()

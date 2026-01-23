@@ -112,4 +112,6 @@ export class EventsRepository {
         const query = this.dataToQuery(data)
         return await Model.deleteMany({ ...query })
     }
+
+
 }

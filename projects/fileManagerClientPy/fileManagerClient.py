@@ -3,6 +3,7 @@ from botocore.exceptions import ClientError
 from pathlib import Path
 import requests
 import os
+import json
 
 class FileManagerClient:
     def __init__(
@@ -113,6 +114,16 @@ class FileManagerClient:
             Key=s3_key
         )
         return response["Body"].read()
+    
+    # -------------------------
+    # Get file (json)
+    # -------------------------
+    def get_file_json(self, s3_key) -> bytes:
+        response = self.s3.get_object(
+            Bucket=self.bucket,
+            Key=s3_key
+        )
+        return json.loads(response["Body"].read().decode('utf-8'))
 
     # -------------------------
     # Download to disk
