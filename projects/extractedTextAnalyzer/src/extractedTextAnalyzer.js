@@ -6,7 +6,7 @@ export class extractedTextAnalyzer {
     constructor(eventBus, fileManagerClient) {
         this.eventBus = eventBus;
         this.fileManagerClient = fileManagerClient;
-        // this.eventBus.on('extractedTextAnalyzer', 'extractedTextAnalyzers', (data,metadata) => this.extractedTextAnalyzer(data,metadata))
+        this.eventBus.on('extractedTextAnalyzer', 'extractedTextAnalyzers', (data,metadata) => this.extractedTextAnalyzer(data,metadata))
     }
 
     extractedTextAnalyzer = async (data,metadata) => {

@@ -62,7 +62,7 @@ class PII:
         )
 
     def piiText(self, pdf_path, data, metadata):
-        ID_REGEX = re.compile(r'\b(\d{3}-\d{7}-\d{1}|\d{11})\b')
+        ID_REGEX = re.compile(r'\b(\d{3}-\d{7}-\d{1}\b')
 
         doc = fitz.open(pdf_path)
         page = doc[data['page']]

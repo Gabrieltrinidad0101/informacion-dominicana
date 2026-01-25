@@ -19,4 +19,4 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV FLAGS_use_onednn=false
 ENV FLAGS_use_mkldnn=false
 
-CMD ["python","-u", "main.py"]
+CMD ["python","-u","-m", "main.py"]
