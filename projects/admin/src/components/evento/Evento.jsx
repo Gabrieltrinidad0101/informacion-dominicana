@@ -258,15 +258,18 @@ export function Evento({ exchangeName, queryParams }) {
       >
         <DialogTitle>Cell Content</DialogTitle>
         <DialogContent>
-          <p>
-            <b>Column:</b> {cellData?.column}
-          </p>
-          <p>
-            <b>Value:</b> {String(cellData?.value)}
-          </p>
           <pre style={{ whiteSpace: "pre-wrap" }}>
             {JSON.stringify(cellData?.row, null, 2)}
           </pre>
+          <Box display="flex" justifyContent="space-between">
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['link']}))}}>Link</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['urlDownload']}))}}>Downloaded</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['imageUrl']}))}}>Image</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['text']}))}}>Text</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['analyzerText']}))}}>AnalyzerText</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['ia']}))}}>IA</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['pii']}))}}>Pii</Button>
+          </Box>
           {renderCellContent()}
         </DialogContent>
       </Dialog>

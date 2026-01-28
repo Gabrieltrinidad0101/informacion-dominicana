@@ -4,9 +4,11 @@ WORKDIR /app
 
 COPY package.json .
 COPY projects/filesManager/package.json ./projects/filesManager/package.json
+COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
 
 RUN npm install
 
+COPY projects/fileManagerClient ./projects/fileManagerClient
 COPY projects/filesManager ./projects/filesManager
 
 CMD ["npm", "run", "filesManager"] 
