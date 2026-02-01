@@ -81,10 +81,11 @@ class PostDownload:
 
     def extract_text_from_pdf(self, data, metadata,page,page_index):
         extracted_text_url = self.file_manager_client.generate_url(data,'extractedText',str(page_index + 1) + '.json' )
-        
-        if metadata.get('force') or not self.file_manager_client.file_exists(extracted_text_url):
+        file_exist = self.file_manager_client.file_exists(extracted_text_url)
+        if metadata.get('force') or not file_exist:
             lines = []
             blocks = page.get_text("dict")["blocks"]
+            
 
             for block in blocks:
                 if block["type"] != 0:
@@ -106,9 +107,8 @@ class PostDownload:
                 "lines": lines
             })
             self.file_manager_client.create_text_file(extracted_text_url,payload)
-        # self.event_bus.emit('extractedTextAnalyzers',{
-        #     **data,
-        #     "extractedTextUrl": extracted_text_url,
-        #     "extractedTextType": "Text"
-        # },metadata)
-
+        self.event_bus.emit('extractedTextAnalyzers',{
+            **data,
+            "extractedTextUrl": extracted_text_url,
+            "extractedTextType": "Text"
+        },metadata)
