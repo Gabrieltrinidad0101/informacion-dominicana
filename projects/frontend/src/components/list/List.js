@@ -1,9 +1,7 @@
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import Collapse from '@mui/material/Collapse';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Box, Button, createTheme, Fade, Modal, TextField, ThemeProvider, Typography, Backdrop } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import { esES } from '@mui/x-data-grid/locales';
 import { formatYYMM, requestJson } from '../../utils/request';
 import ListCss from './List.module.css';
 import { formattedMoney } from '../../utils/format';
@@ -23,46 +21,7 @@ const getSalary = (position) =>
     0
   ) / (positionBySalary[position]?.length ?? 1);
 
-
 const getSalaryFormat = (position) => formattedMoney(getSalary(position));
-
-
-
-export const PositionAndSalary = ({ position, employees, showImage, search }) => {
-  const [open, setOpen] = useState(false);
-  const salary = getSalaryFormat(position);
-  return (
-    <>
-      <ListItemButton onClick={() => setOpen(prev => !prev)}>
-        <Box display="flex" justifyContent="space-between" width="100%">
-          <Typography>{position}</Typography>
-          <Typography>{salary}</Typography>
-          <Typography>{employees.length}</Typography>
-        </Box>
-        <Box ml={3}>{open ? <i>⬆️</i> : <i>⬇️</i>}</Box>
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {employees.map((employee, i) => (
-            (employee.name.toLowerCase().includes(search.toLowerCase()) ||
-              employee.income.toString().includes(search.toLowerCase()) ||
-              salary.toString().toLowerCase().includes(search.toLowerCase())
-            ) &&
-            <ListItemButton key={i}>
-              <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{employee.name}</Typography>
-                <Typography variant="body1" sx={{ fontSize: '10px', m: 0, p: 0 }}>{formattedMoney(employee.income)}</Typography>
-                <div>
-                  <Button variant="text" onClick={() => showImage(employee)} sx={{ fontSize: '10px', m: '10px', p: 0 }}>Ver fuente</Button>
-                </div>
-              </Box>
-            </ListItemButton>
-          ))}
-        </List>
-      </Collapse>
-    </>
-  );
-};
 
 const lightTheme = {
   mb: 2,
@@ -88,12 +47,42 @@ const style = {
   boxShadow: 24,
 };
 
-export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url }) => {
+const CustomFooter = ({ positionBySalary, positions }) => {
+  const { totalIncome, totalEmployees } = useMemo(() => {
+    let sum = 0;
+    let count = 0;
+    positions.forEach(pos => {
+      const employees = positionBySalary[pos] || [];
+      count += employees.length;
+      employees.forEach(emp => {
+        const income = parseFloat(emp.income);
+        if (!isNaN(income)) {
+          sum += income;
+        }
+      })
+    })
+    return { totalIncome: sum, totalEmployees: count };
+  }, [positionBySalary, positions]);
+
+  return (
+    <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end', gap: 4, borderTop: '1px solid #e0e0e0' }}>
+      <Typography variant="h6">
+        Total Empleados: {totalEmployees}
+      </Typography>
+      <Typography variant="h6">
+        Total General: {formattedMoney(totalIncome)}
+      </Typography>
+    </Box>
+  );
+};
+
+export const ListGroup = ({ title, currentDate, setCurrentDate, url }) => {
   const [search, setSearch] = useState("");
   const [employee, setEmployee] = useState({});
   const [positions, setPositions] = useState([]);
   const [open, setOpen] = useState(false);
   const [allowedMonths, setAllowedMonths] = useState(new Set());
+  const [expandedPositions, setExpandedPositions] = useState({});
 
   const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
@@ -128,7 +117,7 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
     );
   };
 
-  const showImage = (employee) => {
+  const showImageModal = (employee) => {
     setEmployee(employee);
     setOpen(true);
   };
@@ -139,6 +128,108 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
     const key = month.format("YYYY-MM");
     return !allowedMonths.has(key);
   };
+
+  const toggleExpand = (positionName) => {
+    setExpandedPositions(prev => ({
+      ...prev,
+      [positionName]: !prev[positionName]
+    }));
+  };
+
+  const columns = [
+    {
+      field: 'expand',
+      headerName: '',
+      width: 70,
+      sortable: false,
+      renderCell: (params) => {
+        if (!params.row.isParent) return null;
+        return (
+          <Button onClick={() => toggleExpand(params.row.positionName)}>
+            {expandedPositions[params.row.positionName] ? '⬆️' : '⬇️'}
+          </Button>
+        );
+      },
+    },
+    {
+      field: 'name',
+      headerName: 'Posición / Nombre',
+      flex: 1,
+      minWidth: 200,
+    },
+    {
+      field: 'income',
+      headerName: 'Salario / Ingreso',
+      width: 150,
+    },
+    {
+      field: 'actions',
+      headerName: 'Cantidad / Acciones',
+      width: 150,
+      renderCell: (params) => {
+        if (params.row.isParent) {
+          return params.value; // Display count for parent
+        }
+        return (
+          <Button variant="text" onClick={() => showImageModal(params.row.originalData)} sx={{ fontSize: '10px' }}>
+            Ver fuente
+          </Button>
+        );
+      },
+    },
+  ];
+
+  const rows = useMemo(() => {
+    let result = [];
+    const sortedPositions = positions.sort((a, b) => getSalary(b) - getSalary(a));
+
+    sortedPositions.forEach((position, index) => {
+      // Add Parent Row
+      result.push({
+        id: `parent-${index}`,
+        isParent: true,
+        positionName: position,
+        name: position,
+        income: getSalaryFormat(position),
+        actions: positionBySalary[position]?.length || 0,
+      });
+
+      // Add Child Rows if expanded
+      if (expandedPositions[position]) {
+        const employees = positionBySalary[position] || [];
+        employees.forEach((emp, empIndex) => {
+          // Apply filtering logic to children as well if search is active
+          const text = search.toLowerCase();
+          if (
+            !text ||
+            position.toLowerCase().includes(text) || // If parent matches, show all children? Or adhere to specific child match?
+            // The original logic showed children if ANY match happened in the group. 
+            // Let's stick to showing the children if the group is showing, but we might want to filter children too.
+            // Re-reading original logic:
+            // It filters the *positions* list.
+            // Then inside the map, it filters *Rendered ListItemButtons*.
+            // So if I search "Juan", the position "Gerente" appears.
+            // But only "Juan" should appear under "Gerente".
+
+            emp.name.toLowerCase().includes(text) ||
+            emp.income.toString().includes(text) ||
+            getSalaryFormat(position).toString().toLowerCase().includes(text)
+          ) {
+            result.push({
+              id: `child-${index}-${empIndex}`,
+              isParent: false,
+              name: emp.name,
+              income: formattedMoney(emp.income),
+              actions: '',
+              originalData: emp,
+            });
+          }
+        });
+      }
+    });
+    return result;
+  }, [positions, expandedPositions, search]);
+
 
   return (
     <>
@@ -153,7 +244,6 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
           <Fade in={open}>
             <Box sx={style}>
               <ShowImage
-                institution={institution}
                 currentDate={currentDate}
                 employee={employee}
               />
@@ -199,40 +289,41 @@ export const ListGroup = ({ title, institution, currentDate, setCurrentDate, url
           </Button>
 
           <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
-            <a href={`Eventos?allData=${JSON.stringify({traceId: Object.values(positionBySalary)?.[0]?.[0]?.traceId ?? ''})}`} target="_blank" rel="noopener noreferrer">
+            <a href={`Eventos?allData=${JSON.stringify({ traceId: Object.values(positionBySalary)?.[0]?.[0]?.traceId ?? '' })}`} target="_blank" rel="noopener noreferrer">
               DEBBUG
             </a>
           </Button>
         </Box>
 
-
-        <List
-          className={ListCss.list}
-          sx={{ bgcolor: '#fff', color: '#000', borderRadius: 2, p: 1 }}
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              <Box display="flex" justifyContent="space-between" width="calc(100% - 48px)">
-                <Typography>Posición</Typography>
-                <Typography>Salario</Typography>
-                <Typography>Cantidad</Typography>
-              </Box>
-            </ListSubheader>
-          }
-        >
-          <div className={ListCss.scrollbar}>
-            {positions.sort((a, b) => getSalary(b) - getSalary(a)).map((position, index) => (
-              <PositionAndSalary
-                key={index}
-                position={position}
-                employees={positionBySalary[position]}
-                showImage={showImage}
-                search={search}
-              />
-            ))}
-          </div>
-        </List>
+        <Box sx={{ height: 600, width: '100%', bgcolor: 'white' }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={100}
+            rowsPerPageOptions={[10, 50, 100]}
+            disableRowSelectionOnClick
+            getRowClassName={(params) => `super-app-theme--${params.row.isParent ? 'Parent' : 'Child'}`}
+            sx={{
+              '& .super-app-theme--Parent': {
+                fontWeight: 'bold',
+                bgcolor: '#f5f5f5',
+                '&:hover': {
+                  bgcolor: '#e0e0e0',
+                }
+              },
+              '& .super-app-theme--Child': {
+                pl: 4
+              }
+            }}
+            slots={{
+              footer: CustomFooter,
+            }}
+            slotProps={{
+              footer: { positionBySalary, positions }
+            }}
+            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+          />
+        </Box>
       </div>
     </>
   );

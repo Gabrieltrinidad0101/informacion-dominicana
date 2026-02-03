@@ -9,43 +9,28 @@ import constants from '../../constants';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-let lastUrl = '';
-
-const monthNames = [
-  'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-];
-
-export function ShowImage({ employee, institution, currentDate }) {
+export function ShowImage({ employee, currentDate }) {
   const selectEmployee = useRef(null);
   const pdfRef = useRef(null);
   const linksRef = useRef(null);
   const [numPages, setNumPages] = useState(null);
-
-  const monthName = monthNames[currentDate?.getMonth() ?? 0];
-  const url = `${constants.urlData}/${institution}/nomina/postDownloads/${currentDate.getFullYear()}/${monthName}/_.${employee.index}.jpg`;
-
-  useEffect(() => {
-    if (lastUrl !== '') selectEmployee.current?.classList.add(positionSelectCss.selecteEmployeeOpacity);
-    lastUrl = url;
-  }, [url]);
-
-  const handleSelectPosition = () => {
-    const offsetY = linksRef.current.getBoundingClientRect().height;
-    positionSelect({selectEmployee, pdfRef, employee,offsetY});
-  };
+  const [pageDimension, setPageDimension] = useState({
+    width: 0,
+    height: 0,
+  });
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if(!numPages) return;
-      clearInterval(interval);
-      handleSelectPosition();
-    }, 500);
+    selectEmployee.current?.classList.add(positionSelectCss.selecteEmployeeOpacity);
   }, [employee]);
 
+  const handleSelectPosition = (pageWidth, pageHeight) => {
+    positionSelect({ selectEmployee, pdfRef, employee, pageWidth: pageWidth ?? pageDimension.width, pageHeight: pageHeight ?? pageDimension.height });
+  };
+
+
   useEffect(() => {
     const interval = setInterval(() => {
-      if(!numPages) return;
+      if (!numPages) return;
       clearInterval(interval);
       handleSelectPosition();
     }, 500);
@@ -54,7 +39,7 @@ export function ShowImage({ employee, institution, currentDate }) {
       window.removeEventListener('resize', handleSelectPosition);
     };
   }, []);
-      
+
   return (
     <>
       <div className={showImageCss.overflowImage}>
@@ -72,9 +57,22 @@ export function ShowImage({ employee, institution, currentDate }) {
             <div ref={pdfRef}>
               <Document
                 file={`${constants.urlData}/${employee.urlDownload}`}
-                onLoadSuccess={(data) =>{ setNumPages(data._pdfInfo.numPages);}}
+                onLoadSuccess={({ numPages }) => {
+                  setNumPages(numPages);
+                }}
               >
-                <Page pageNumber={employee.index} width={800} />
+                <Page
+                  pageNumber={employee.index}
+                  width={800}
+                  onLoadSuccess={(page) => {
+                    const viewport = page.getViewport({ scale: 1 });
+                    setPageDimension({
+                      width: viewport.width,
+                      height: viewport.height,
+                    });
+                    handleSelectPosition(viewport.width, viewport.height);
+                  }}
+                />
               </Document>
             </div>
           )}

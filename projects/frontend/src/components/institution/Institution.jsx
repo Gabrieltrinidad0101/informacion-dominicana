@@ -5,7 +5,9 @@ import { PieChartComponent } from "../pie/Pie";
 import InstitutionCss from "./Institution.module.css";
 
 export function Institution({institutionName}) {
-  const [currentDate, setCurrentDate] = useState();
+const [currentDate, setCurrentDate] = useState(
+  new Date("2019-04-30T00:00:00.000Z")
+);
 
   const data = [
     {
@@ -46,6 +48,7 @@ export function Institution({institutionName}) {
         compare={true}
         onClickSources={(date)=> setCurrentDate(date)}
       />
+      {currentDate?.toISOString()}
       <ListGroup
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}
