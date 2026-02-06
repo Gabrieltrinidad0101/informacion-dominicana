@@ -68,14 +68,24 @@ export class EventBus {
         logs.disabled = value
     }
 
-    async on(queueName, exchangeName, callback) {
+    async on(queueName, exchangeName, callback,completed = true) {
         await this.bindQueue(queueName, exchangeName)
         await EventBus.channel.consume(queueName, async (message) => {
             if (!message) return
+            const content = JSON.parse(message.content.toString())
             try {
-                const content = JSON.parse(message.content.toString())
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
+                EventBus.channel.publish(
+                    "", 
+                    "completed_event", 
+                    Buffer.from(JSON.stringify({
+                        traceId: content.traceId,
+                        _id: content._id,
+                        exchangeName: content.exchangeName,
+                        progressDate: new Date()
+                    }))
+                )
                 await callback(content, { force, typeOfExecute })
                 EventBus.channel.ack(message)
                 logs.info(content)
@@ -85,7 +95,6 @@ export class EventBus {
                         console.log(error)
                         return
                     }
-                    const content = JSON.parse(message.content.toString())
                     content.retryCount = (content.retryCount || 0) + 1
                     content.errors ??= []
                     content.errors.push(error.message)
@@ -111,6 +120,18 @@ export class EventBus {
                     }))
                 }
                 EventBus.channel.ack(message)
+            } finally {
+                if(!completed) return
+                EventBus.channel.publish(
+                    "", 
+                    "completed_event", 
+                    Buffer.from(JSON.stringify({
+                        traceId: content.traceId,
+                        _id: content._id,
+                        exchangeName: content.exchangeName,
+                        completedDate: new Date()
+                    }))
+                )
             }
         })
     }

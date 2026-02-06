@@ -15,15 +15,13 @@ export class Payroll {
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
         if (metadata?.force || !fileExists) {
             const dataText = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextAnalyzerUrl)).toString('utf-8'));
-            if (dataText.lines.length > 0) {
-                const propt_ = propt(JSON.stringify(dataText.lines));
-                const response = JSON.parse(await this.apiLLMClient(propt_));
-                for (let payroll_ of response) {
-                    if (payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
-                    payroll_._id = this.getId()
-                }
-                await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: response, angle: dataText.angle }));
+            const propt_ = propt(JSON.stringify(dataText.lines));
+            const response = JSON.parse(await this.apiLLMClient(propt_));
+            for (let payroll_ of response) {
+                if (payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
+                payroll_._id = this.getId()
             }
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: response, angle: dataText.angle }));
         }
         await this.eventBus.emit("insertDatas", {
             ...data,

@@ -19,6 +19,7 @@ export class ReExecuteEvents {
     
     getEvents = async (data) => {
         const events = await this.eventsRepository.find({...data})
+        await this.eventsRepository.updateEvent({...data})
         return events ?? {}
     }
 }

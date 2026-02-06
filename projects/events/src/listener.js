@@ -10,8 +10,9 @@ export class EventListener {
         this.eventBus.on('readAiTextAnalyzer', 'aiTextAnalyzers', this.saveEvent)
         this.eventBus.on('readInsertData', 'insertDatas', this.saveEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveEvent)
-    } 
-  
+        this.eventBus.on('', 'completed_event', this.saveEvent,false)
+    }
+
     saveEvent = async (event) => {  
         if(event.exchangeName == 'downloads') {
             const exist = await this.eventRepository.findOne({
@@ -23,7 +24,7 @@ export class EventListener {
                 institutionName: event.institutionName,
                 exchangeName: event.exchangeName
             })
-            if(exist) return
+            if(exist) event = {...exist,"_id": exist._id}
         }
 
         if(event.exchangeName == 'extractedTexts') {

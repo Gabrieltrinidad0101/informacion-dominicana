@@ -170,7 +170,6 @@ export function Evento({ exchangeName, queryParams }) {
     if (!cellData?.value) return null;
 
     const value = String(cellData.value).trim();
-
     if (value.match(/\.(jpeg|jpg|png|gif|webp)$/i)) {
       return (
         <img
@@ -265,9 +264,9 @@ export function Evento({ exchangeName, queryParams }) {
             <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['link']}))}}>Link</Button>
             <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['urlDownload']}))}}>Downloaded</Button>
             <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['imageUrl']}))}}>Image</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['text']}))}}>Text</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['analyzerText']}))}}>AnalyzerText</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['ia']}))}}>IA</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['extractedTextUrl']}))}}>Text</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['extractedTextAnalyzerUrl']}))}}>AnalyzerText</Button>
+            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['aiTextAnalyzeUrl']}))}}>IA</Button>
             <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['pii']}))}}>Pii</Button>
           </Box>
           {renderCellContent()}

@@ -113,5 +113,12 @@ export class EventsRepository {
         return await Model.deleteMany({ ...query })
     }
 
+    async updateEvent(data) {
+        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        delete data.exchangeName
+        const query = this.dataToQuery(data)
+        return await Model.updateMany({ ...query }, { $set: { startDate: new Date() } })
+    }
+
 
 }

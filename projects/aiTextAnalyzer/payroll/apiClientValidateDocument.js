@@ -4,8 +4,8 @@ export const validateIdNumberApi = async (idNumber) => {
   try {
     const url = `${process.env.VALIDATE_ID_NUMBER_API}/${idNumber.replace(/\D+/g, '')}/validate`;
     const response = await axios.get(url);
-    return response.data?.['valid'] ? "Valid" : "Invalid";
+    return response.data?.['valid'] ? true : false;
   } catch (error) {
-    return "None";
+    return null;
   }
 }
