@@ -13,18 +13,18 @@ export class Repository {
       .where('institutionName', institutionName)
       .groupBy('time')
       .orderBy('time', 'asc');
-      
+
     return result;
   }
 
-  async payrollTotal(institutionName) { 
-    const result = await knex('payrolls') 
-      .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`)) 
-      .select(knex.raw('COUNT(income)::FLOAT AS value')) 
-      .where('institutionName', institutionName) 
-      .groupBy('time') 
-      .orderBy('time', 'asc'); 
-    return result; 
+  async payrollTotal(institutionName) {
+    const result = await knex('payrolls')
+      .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
+      .select(knex.raw('COUNT(income)::FLOAT AS value'))
+      .where('institutionName', institutionName)
+      .groupBy('time')
+      .orderBy('time', 'asc');
+    return result;
   }
 
   async payrollBySex(institutionName, sex) {
@@ -64,27 +64,34 @@ export class Repository {
 
   async percentageOfSpendingByPosition(institutionName) {
     const rows = await knex('payrolls').select(
-    knex.raw(`TO_CHAR("date", 'YYYY-MM') AS date_key`),
-    'position',
-    knex.raw('COUNT(*) AS "employeeCount"'),
-    knex.raw(`
-      ROUND(
-        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY TO_CHAR("date", 'YYYY-MM')),
+      knex.raw(`TO_CHAR("date", 'YYYY-MM') AS date_key`),
+      'position',
+      knex.raw('COUNT(*) AS "employeeCount"'),
+      knex.raw(`ROUND(
+        COUNT(*) * 100.0 
+        / NULLIF(
+            SUM(COUNT(*)) OVER (PARTITION BY TO_CHAR("date", 'YYYY-MM')),
+            0
+          ),
         6
       ) AS "employeeCountPercentage"
     `),
-    knex.raw('ROUND(AVG(income)::numeric, 2) AS "averageSalary"'),
-    knex.raw(`
-      ROUND(
-        AVG(income) * 100.0 / SUM(AVG(income)) OVER (PARTITION BY TO_CHAR("date", 'YYYY-MM')),
-        6
-      ) AS "averageSalaryPercentage"
-    `)
-  )
-  .where('institutionName', institutionName)
-  .groupBy('date_key', 'position')
-  .orderBy('date_key', 'asc')
-  .orderBy('employeeCount', 'desc');
+      knex.raw('ROUND(AVG(income)::numeric, 2) AS "averageSalary"'),
+      knex.raw(`
+        ROUND(
+          AVG(income) * 100.0 
+          / NULLIF(
+              SUM(AVG(income)) OVER (PARTITION BY TO_CHAR("date", 'YYYY-MM')),
+              0
+            ),
+          6
+        ) AS "averageSalaryPercentage"
+      `)
+    )
+      .where('institutionName', institutionName)
+      .groupBy('date_key', 'position')
+      .orderBy('date_key', 'asc')
+      .orderBy('employeeCount', 'desc');
 
 
     const nested = {};

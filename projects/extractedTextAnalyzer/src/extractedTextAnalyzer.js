@@ -19,6 +19,10 @@ export class extractedTextAnalyzer {
                 const {regions} = paddleOCR(rawData);
                 textOfImage = regions;
             }
+            if (data.extractedTextType === 'PaddleOCR') {
+                const {regions} = paddleOCR(rawData);
+                textOfImage = regions;
+            }
             if (data.extractedTextType === 'azure') {
                 textOfImage = groupLinesAzure(rawData);
             }

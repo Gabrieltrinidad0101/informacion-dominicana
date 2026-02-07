@@ -33,8 +33,9 @@ export function CompareData() {
   const [dates, setDates] = useState([]);
   const [currentDate, setCurrentDate] = useState(queryParams.get("date") ?? '');
   const [index, setIndex] = useState(1);
-  const [employee, setEmployee] = useState({ index: 1 });
+  const [employee, setEmployee] = useState({ index: 0 });
   const selectEmployee = useRef(null);
+  const [ internalLink, setInternalLink] = useState('');
   const [institution, setinstitution] = useState(
     queryParams.get("institution") ?? institutions[0]
   );
@@ -78,8 +79,8 @@ export function CompareData() {
       setDates(res);
       setFirstLoad(false)
       if(firstLoad && currentDate) return
-      setCurrentDate(res[0].time);
       queryParams.set("date", res[0].time);
+      setCurrentDate(res[0].time);
       history.push({ search: queryParams.toString() });
     });
   }, [institution]);
@@ -92,7 +93,8 @@ export function CompareData() {
       )}`
     ).then((res) => {
       data = Object.values(res).flat();
-      setRows(data);
+      setInternalLink(data[0].internalLink);
+      setRows(data); 
     });
   }, [currentDate]);
 
@@ -140,8 +142,8 @@ export function CompareData() {
     queryParams.set("institution", event.target.value);
     history.push({ search: queryParams.toString() });
     setinstitution(event.target.value);
-    setIndex(1);
-    setEmployee({ index: 1 });
+    setIndex(0);
+    setEmployee({ index: 0 });
   };
 
   return (
@@ -182,10 +184,10 @@ export function CompareData() {
       <div className={compareData.comparar}>
         <div className={compareData.overflowImage}>
           <div>
-            {currentDate && employee && (
+            {employee && internalLink && (
               <ShowImage
                 institution={institution}
-                currentDate={new Date(currentDate)}
+                internalLink={internalLink}
                 employee={employee}
               />
             )}

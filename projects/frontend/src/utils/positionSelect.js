@@ -14,13 +14,6 @@ export const positionSelect = ({selectEmployee, pdfRef, employee, pageWidth, pag
     const width = imageDimentions.width * (porWidth / 100);
     const height = imageDimentions.height * (porHeight / 100);
 
-    console.log({
-        positionX,
-        positionY,
-        width,
-        height,
-    })
-
     element.style.left = `${positionX}px`;
     element.style.top = `${positionY}px`;
     element.style.width = `${width}px`;

@@ -19,6 +19,7 @@ export class Repository {
         table.text('institutionName');
         table.boolean('isDocumentValid');
         table.text('link');
+        table.text('internalLink');
         table.text('name');
         table.text('position');
         table.boolean('isHonorific');

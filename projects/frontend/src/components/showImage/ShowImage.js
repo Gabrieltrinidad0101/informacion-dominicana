@@ -9,7 +9,7 @@ import constants from '../../constants';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-export function ShowImage({ employee, currentDate }) {
+export function ShowImage({ employee, internalLink }) {
   const selectEmployee = useRef(null);
   const pdfRef = useRef(null);
   const linksRef = useRef(null);
@@ -48,21 +48,20 @@ export function ShowImage({ employee, currentDate }) {
             VER FUENTE ORIGINAL 📌
           </a>
           <a href={`${employee.link}#page=${employee.index}`} target="_blank" rel="noopener noreferrer">
-            Pagina {employee.index}
+            Pagina {employee.index + 1}
           </a>
         </div>
-
         <BrowserOnly>
           {() => (
-            <div ref={pdfRef}>
+            <div ref={pdfRef} className={showImageCss.pdfContainer}>
               <Document
-                file={`${constants.urlData}/${employee.urlDownload}`}
+                file={`${constants.urlData}/${internalLink ?? employee.internalLink}`}
                 onLoadSuccess={({ numPages }) => {
                   setNumPages(numPages);
                 }}
               >
                 <Page
-                  pageNumber={employee.index}
+                  pageNumber={employee.index + 1}
                   width={800}
                   onLoadSuccess={(page) => {
                     const viewport = page.getViewport({ scale: 1 });
@@ -74,12 +73,12 @@ export function ShowImage({ employee, currentDate }) {
                   }}
                 />
               </Document>
+              <div className={positionSelectCss.selecteEmployee} ref={selectEmployee}></div>
             </div>
           )}
         </BrowserOnly>
       </div>
 
-      <div className={positionSelectCss.selecteEmployee} ref={selectEmployee}></div>
     </>
   );
 }

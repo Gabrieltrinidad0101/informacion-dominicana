@@ -124,7 +124,7 @@ export const ListGroup = ({ title, currentDate, setCurrentDate, url }) => {
 
   const handleClose = () => setOpen(false);
 
-  const shouldDisableMonth = (month) => {
+  const shouldDisableMonth = (month) => { 
     const key = month.format("YYYY-MM");
     return !allowedMonths.has(key);
   };

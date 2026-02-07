@@ -27,6 +27,7 @@ const [currentDate, setCurrentDate] = useState(
       url: `${institutionName}/nomina/exportToJson/employeersF`,
     },
   ];
+  
   const customTheme = {
     "Cantidad Total de Empleados Femeninos": {
       line: "#ab47bc",
@@ -48,7 +49,6 @@ const [currentDate, setCurrentDate] = useState(
         compare={true}
         onClickSources={(date)=> setCurrentDate(date)}
       />
-      {currentDate?.toISOString()}
       <ListGroup
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}

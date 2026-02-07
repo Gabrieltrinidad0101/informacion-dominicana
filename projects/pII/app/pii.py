@@ -6,9 +6,9 @@ import shutil
 import fitz
 
 class PII:
-    def __init__(self, eventBus, fileManagerClient):
+    def __init__(self, eventBus, file_manager_client):
         self.eventBus = eventBus
-        self.fileManagerClient = fileManagerClient
+        self.file_manager_client = file_manager_client
 
         self.eventBus.on(
             'extractedTextAnalyzerPII',
@@ -17,18 +17,18 @@ class PII:
         )
 
     def pii(self, data, metadata):
-        original_pdf_path = self.fileManagerClient.download_file(
+        original_pdf_path = self.file_manager_client.download_file(
             data['urlDownload']
         )
 
-        pii_pdf_url = self.fileManagerClient.generate_url(
+        pii_pdf_url = self.file_manager_client.generate_url(
             data,
             'pii',
             'document.pdf'
         )
 
         try:
-            pii_pdf_path = self.fileManagerClient.download_file(pii_pdf_url)
+            pii_pdf_path = self.file_manager_client.download_file(pii_pdf_url)
         except Exception as e:
             pii_pdf_path = f'./downloads/{pii_pdf_url}'
             
@@ -56,7 +56,7 @@ class PII:
                 metadata=metadata
             )
 
-        self.fileManagerClient.upload_file(
+        self.file_manager_client.upload_file(
             pii_pdf_path,
             pii_pdf_url
         )
@@ -79,7 +79,7 @@ class PII:
     def piiImage(self, data, metadata):
         index = str(data.get('imageIndex'))
 
-        imgProcessedUrl = self.fileManagerClient.generate_url(
+        imgProcessedUrl = self.file_manager_client.generate_url(
             data, 'imgProcessed', f"page_{data.get('page')}_img_{index}.png"
         )
         

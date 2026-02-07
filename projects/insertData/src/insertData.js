@@ -30,16 +30,17 @@ export class InsertData {
             payroll.institutionName = data.institutionName
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId
-            payroll.index = data.index
-            payroll.link = data.link
+            payroll.index = data.index ?? data.page
+            payroll.internalLink = this.fileAccess.generateUrl(data,'pii','document.pdf')
             payroll.urlDownload = data.urlDownload
             payroll.income ??= 0
             if (payroll.income === 'Honorífico') {
                 payroll.isHonorific = true
                 payroll.income = 0
             }
-            payroll.document = data.document ?? null
-            payroll.confidences = JSON.stringify(data.confidences)
+            payroll.isDocumentValid = payroll.isDocumentValid === 'None' ? null : payroll.isDocumentValid === 'Valid'
+            payroll.document = payroll.document ?? null
+            payroll.confidences = JSON.stringify(payroll.confidences)
             if(payroll.position?.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
