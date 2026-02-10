@@ -62,10 +62,10 @@ class PII:
         )
 
     def piiText(self, pdf_path, data, metadata):
-        ID_REGEX = re.compile(r'\b(\d{3}-\d{7}-\d{1}\b')
+        ID_REGEX = re.compile(r'\b\d{3}-\d{7}-\d{1}\b')
 
         doc = fitz.open(pdf_path)
-        page = doc[data['page']]
+        page = doc[data['index']]
 
         text_instances = page.search_for(ID_REGEX.pattern)
 
@@ -73,7 +73,7 @@ class PII:
             page.add_redact_annot(rect, fill=(0, 0, 0))
 
         page.apply_redactions()
-        doc.save(pdf_path)
+        doc.save(pdf_path, incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP)
         doc.close()
 
     def piiImage(self, data, metadata):
@@ -85,14 +85,9 @@ class PII:
         
         imgPath = self.fileManagerClient.download_file(imgProcessedUrl)
 
-        extractedTextAnalyzer = self.fileManagerClient.generate_url(
-            data, 'extractedTextAnalyzer', f"page_{data.get('page')}_img_{index}.json"
-        )
-        
+        words = self.fileManagerClient.get_file_json(data['extractedTextAnalyzerUrl'])
 
-        words = self.fileManagerClient.get_file_json(extractedTextAnalyzer)
-
-        ID_REGEX = re.compile(r'^(\d{3}-\d{7}-\d{1}|\d{11})$')
+        ID_REGEX = re.compile(r'\b\d{3}-\d{7}-\d{1}\b')
         img = Image.open(imgPath).convert("RGB")
         draw = ImageDraw.Draw(img)
 

@@ -6,9 +6,11 @@ import EventsCss from "./Evento.module.css";
 import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlLabel, RadioGroup, Radio } from "@mui/material";
 import constants from "../../constants";
 import { useHistory } from "react-router";
+import { PdfViewer } from "../pdf/PdfViewer";
 
 function JsonPreview({ file }) {
   const [data, setData] = useState(null);
+
 
   useEffect(() => {
     fetch(`${constants.urlData}/${file}`)
@@ -183,13 +185,7 @@ export function Evento({ exchangeName, queryParams }) {
     // PDFs
     if (value.match(/\.pdf$/i)) {
       return (
-        <iframe
-          src={value.includes('http') ? value : `${constants.urlData}/${value}`}
-          width="100%"
-          height="500px"
-          style={{ border: "none" }}
-          title="PDF Viewer"
-        />
+        <PdfViewer url={value.includes('http') ? value : `${constants.urlData}/${value}`} />
       );
     }
 
@@ -261,13 +257,14 @@ export function Evento({ exchangeName, queryParams }) {
             {JSON.stringify(cellData?.row, null, 2)}
           </pre>
           <Box display="flex" justifyContent="space-between">
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['link']}))}}>Link</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['urlDownload']}))}}>Downloaded</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['imageUrl']}))}}>Image</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['extractedTextUrl']}))}}>Text</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['extractedTextAnalyzerUrl']}))}}>AnalyzerText</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['aiTextAnalyzeUrl']}))}}>IA</Button>
-            <Button variant="contained" onClick={()=>{setCellData(prev => ({...prev,value: prev.row['pii']}))}}>Pii</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['link'] })) }}>Link</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['urlDownload'] })) }}>Downloaded</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['imageUrl'] })) }}>Image</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: `${cellData.row.institutionName}/${cellData.row.typeOfData}/imgProcessed/${cellData.row.year}/${cellData.row.month}/page_${cellData.row.page}_img_${cellData.row.imageIndex}.png` })) }}>imgProcessed</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextUrl'] })) }}>Text</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextAnalyzerUrl'] })) }}>AnalyzerText</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['aiTextAnalyzeUrl'] })) }}>IA</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: `${cellData.row.institutionName}/${cellData.row.typeOfData}/pii/${cellData.row.year}/${cellData.row.month}/document.pdf` })) }}>Pii</Button>
           </Box>
           {renderCellContent()}
         </DialogContent>

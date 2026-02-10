@@ -109,6 +109,7 @@ class PostDownload:
             self.file_manager_client.create_text_file(extracted_text_url,payload)
         self.event_bus.emit('extractedTextAnalyzers',{
             **data,
+            "index": page_index,
             "extractedTextUrl": extracted_text_url,
             "extractedTextType": "Text"
         },metadata)
