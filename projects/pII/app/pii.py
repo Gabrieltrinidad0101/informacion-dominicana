@@ -83,9 +83,9 @@ class PII:
             data, 'imgProcessed', f"page_{data.get('page')}_img_{index}.png"
         )
         
-        imgPath = self.fileManagerClient.download_file(imgProcessedUrl)
+        imgPath = self.file_manager_client.download_file(imgProcessedUrl)
 
-        words = self.fileManagerClient.get_file_json(data['extractedTextAnalyzerUrl'])
+        words = self.file_manager_client.get_file_json(data['extractedTextAnalyzerUrl'])
 
         ID_REGEX = re.compile(r'\b\d{3}-\d{7}-\d{1}\b')
         img = Image.open(imgPath).convert("RGB")

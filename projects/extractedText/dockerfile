@@ -19,4 +19,9 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV FLAGS_use_onednn=false
 ENV FLAGS_use_mkldnn=false
 
-CMD ["python","-u","-m", "main.py"]
+CMD if [ -d "/app/projects/extractedText/app" ]; then \
+        cd /app/projects/extractedText/app && \
+        watchmedo auto-restart --directory=. --pattern=*.py --recursive -- python -u -m main; \
+    else \
+        python -u -m main; \
+    fi

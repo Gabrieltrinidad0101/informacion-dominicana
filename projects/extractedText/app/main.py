@@ -17,7 +17,7 @@ ocr = PaddleOCR(
 ) 
 
 def callback(data, metadata):
-    extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',str(data.get('index')) + '.json' )
+    extractedTextUrl = fileManagerClient.generate_url(data,'extractedText',f"page_{data.get('page')}_img_{data.get('imageIndex')}.json")
     imgProcessedUrl = fileManagerClient.generate_url(data,'imgProcessed',f"page_{data.get('page')}_img_{data.get('imageIndex')}.png")
     if metadata.get('force') or not fileManagerClient.file_exists(extractedTextUrl) or not fileManagerClient.file_exists(imgProcessedUrl):
         image_url = data.get("imageUrl")
