@@ -10,29 +10,40 @@ export class EventListener {
         this.eventBus.on('readAiTextAnalyzer', 'aiTextAnalyzers', this.saveEvent)
         this.eventBus.on('readInsertData', 'insertDatas', this.saveEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveEvent)
-        this.eventBus.on('', 'completed_event', this.saveEvent,false)
+        this.eventBus.on('', 'completed_event', this.saveEvent, false)
     }
 
-    saveEvent = async (event) => {  
-        if(event.exchangeName == 'downloads') {
+    saveEvent = async (event) => {
+        if (event.exchangeName == 'downloads') {
             const exist = await this.eventRepository.findOne({
                 institutionType: event.institutionType,
                 typeOfData: event.typeOfData,
                 link: event.link,
-                year: event.year, 
+                year: event.year,
                 month: event.month,
                 institutionName: event.institutionName,
                 exchangeName: event.exchangeName
             })
-            if(exist) event = {...exist,"_id": exist._id}
+            if (exist) event = { ...exist, "_id": exist._id }
         }
 
-        if(event.exchangeName == 'extractedTexts') {
+        if (event.exchangeName == 'extractedTexts') {
             const exist = await this.eventRepository.findOne({
                 imageUrl: event.imageUrl,
+                traceId: event.traceId,
                 exchangeName: event.exchangeName
             })
-            if(exist) event = {...exist,"_id": exist._id}
+            if (exist) event = { ...exist, "_id": exist._id }
+        }
+
+        if (event.exchangeName == 'extractedTextAnalyzers') {
+            const exist = await this.eventRepository.findOne({
+                extractedTextAnalyzerUrl: event.extractedTextAnalyzerUrl,
+                index: event.index,
+                traceId: event.traceId,
+                exchangeName: event.exchangeName
+            })
+            if (exist) event = { ...exist, "_id": exist._id }
         }
 
         await this.eventRepository.save(event);

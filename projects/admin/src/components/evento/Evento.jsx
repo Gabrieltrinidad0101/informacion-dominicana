@@ -260,6 +260,7 @@ export function Evento({ exchangeName, queryParams }) {
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['link'] })) }}>Link</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['urlDownload'] })) }}>Downloaded</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['imageUrl'] })) }}>Image</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['imageMetaDataUrl'] })) }}>ImageMetaData</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: `${cellData.row.institutionName}/${cellData.row.typeOfData}/imgProcessed/${cellData.row.year}/${cellData.row.month}/page_${cellData.row.page}_img_${cellData.row.imageIndex}.png` })) }}>imgProcessed</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextUrl'] })) }}>Text</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextAnalyzerUrl'] })) }}>AnalyzerText</Button>

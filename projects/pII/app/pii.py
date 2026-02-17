@@ -85,7 +85,11 @@ class PII:
         
         imgPath = self.file_manager_client.download_file(imgProcessedUrl)
 
-        words = self.file_manager_client.get_file_json(data['extractedTextAnalyzerUrl'])
+        extractedTextAnalyzerUrl = self.file_manager_client.generate_url(
+            data, 'extractedTextAnalyzer', f"page_{data.get('page')}_img_{index}.json"
+        )
+        
+        words = self.file_manager_client.get_file_json(extractedTextAnalyzerUrl)
 
         ID_REGEX = re.compile(r'\b\d{3}-\d{7}-\d{1}\b')
         img = Image.open(imgPath).convert("RGB")
@@ -94,7 +98,6 @@ class PII:
         for word in words['lines']:
             if not ID_REGEX.match(word['text']):
                 continue
-
             x = int(float(word['x']))
             y = int(float(word['y']))
             w = int(float(word['width']))

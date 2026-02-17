@@ -146,8 +146,8 @@ export class FileManagerClient {
         body.pipe(writer);
 
         return new Promise((resolve, reject) => {
-        writer.on("finish", () => resolve(filePath));
-        writer.on("error", reject);
+            writer.on("finish", () => resolve(filePath));
+            writer.on("error", reject);
         });
 
     };

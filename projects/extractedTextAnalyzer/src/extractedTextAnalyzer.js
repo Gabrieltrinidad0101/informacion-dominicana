@@ -13,23 +13,26 @@ export class extractedTextAnalyzer {
     extractedTextAnalyzer = async (data, metadata) => {
         const fileName = data.index ? `${data.index}.json` : `page_${data.page}_img_${data.imageIndex}.json`;
         const fileUrl = this.fileManagerClient.generateUrl(data, 'extractedTextAnalyzer', fileName)
-        let textOfImage;
+        let textFormatted;
+        let angle = 0;
         if (metadata.force || !await this.fileManagerClient.fileExists(fileUrl)) {
             const rawData = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextUrl)).toString('utf-8'));
             if (data.extractedTextType === 'Text') {
-                textOfImage = text(rawData);
+                textFormatted = text(rawData.lines);
             }
             if (data.extractedTextType === 'PaddleOCR') {
                 const { regions } = paddleOCR(rawData);
-                textOfImage = regions;
+                angle = rawData['doc_preprocessor_result']['angle'];
+                textFormatted = regions;
             }
             if (data.extractedTextType === 'azure') {
-                textOfImage = groupLinesAzure(rawData);
+                textFormatted = groupLinesAzure(rawData);
             }
             if (data.extractedTextType === 'ocrSpace') {
-                textOfImage = groupLinesOcrSpace(rawData);
+                textFormatted = groupLinesOcrSpace(rawData);
+                angle = rawData['OCRExitCode'];
             }
-            await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({ lines: textOfImage }));
+            await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({ lines: textFormatted, angle }));
         }
         await this.eventBus.emit('aiTextAnalyzers', { ...data, extractedTextAnalyzerUrl: fileUrl }, metadata);
     }
