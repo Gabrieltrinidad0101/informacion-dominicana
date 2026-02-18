@@ -67,14 +67,20 @@ class PII:
         doc = fitz.open(pdf_path)
         page = doc[data['index']]
 
-        text_instances = page.search_for(ID_REGEX.pattern)
+        text = page.get_text()
 
-        for rect in text_instances:
-            page.add_redact_annot(rect, fill=(0, 0, 0))
+        matches = ID_REGEX.finditer(text)
+
+        for match in matches:
+            found_text = match.group()
+            rects = page.search_for(found_text)
+            for rect in rects:
+                page.add_redact_annot(rect, fill=(0, 0, 0))
 
         page.apply_redactions()
         doc.save(pdf_path, incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP)
         doc.close()
+
 
     def piiImage(self, data, metadata):
         index = str(data.get('imageIndex'))
