@@ -7,22 +7,26 @@ Example Output:
   "position": "MUSICIAN",
   "income": "2645",
   "sex": "M",
+  "accountBack": "1234567890",
+  "phoneNumber": "809-555-1234",
   "x": 10,
   "y": 10,
   "width": 1000,
   "height": 43,
-  "confidences": [0.9, 0.8, 0.7,0.95]
+  "confidences": [0.9, 0.8, 0.7, 0.95, 0.85, 0.88]
 }
 
 Extraction Rules:
   - Based on the text position, group the text line by line.
   - Get all the score values for each word and set into scores array.
   - Each object represents either an individual or an institutional entry.
-  - Add the confidence for name, document, position, and income to confidences.
+  - Add the confidence for name, document, position, income, accountBack, and phoneNumber to confidences (in that order).
   - For individuals:
     - Include \`name\`, \`position\`, \`income\`, and \`sex\` (M/F) where available.
+    - Include \`accountBack\` (bank account/back account number) if available.
+    - Include \`phoneNumber\` if available.
     - income can be \`Honorífico\`.
-    - Omit \`document\` and \`sex\` if unavailable.
+    - Omit \`document\`, \`sex\`, \`accountBack\`, and \`phoneNumber\` if unavailable.
     - Include bounding box: \`x\`, \`y\`, \`width\`, \`height\` of the line containing the main record.
   - Combine multi-line text blocks if a single logical entry spans several lines.
   - Remove or replace any internal \`"\` characters inside values with \`'\`.
@@ -37,6 +41,8 @@ Extraction Rules:
         9.000.00 → 9000
     - Correct OCR misreads of symbols within numbers (like £, ¥, or spaces) and interpret as intended numeric value:
         3,7£3.60 → 3104.60
+    - For phone numbers, standardize format (e.g., 8095551234, 809-555-1234, (809)555-1234).
+    - For accountBack, extract numeric bank account numbers, removing any special characters.
 
 **CRITICAL: POSITION NORMALIZATION & TEXT CLEANING**
   - Before creating the JSON, normalize all \`position\` values and correct encoding errors in the text.
