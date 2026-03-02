@@ -13,15 +13,8 @@ COPY projects/extractedText/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir watchdog
 
-COPY projects/extractedText/app/ .
+COPY projects/eventBusPy/ ./eventBusPy/
+COPY projects/fileManagerClientPy/ ./fileManagerClientPy/
+COPY projects/extractedText/ ./extractedText
 
-ENV PATH="/usr/local/bin:${PATH}"
-ENV FLAGS_use_onednn=false
-ENV FLAGS_use_mkldnn=false
-
-CMD if [ -d "/app/projects/extractedText/app" ]; then \
-        cd /app/projects/extractedText/app && \
-        watchmedo auto-restart --directory=. --pattern=*.py --recursive -- python -u -m main; \
-    else \
-        python -u -m main; \
-    fi
+CMD ["python3","-u","-m", "extractedText.main"]

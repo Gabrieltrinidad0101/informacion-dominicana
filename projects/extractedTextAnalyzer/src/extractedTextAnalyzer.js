@@ -22,7 +22,7 @@ export class extractedTextAnalyzer {
             }
             if (data.extractedTextType === 'PaddleOCR') {
                 const { regions } = paddleOCR(rawData);
-                angle = rawData['doc_preprocessor_result']['angle'];
+                angle = rawData?.['doc_preprocessor_result']?.['angle'] ?? 0;
                 textFormatted = regions;
             }
             if (data.extractedTextType === 'azure') {
@@ -30,7 +30,6 @@ export class extractedTextAnalyzer {
             }
             if (data.extractedTextType === 'ocrSpace') {
                 textFormatted = groupLinesOcrSpace(rawData);
-                angle = rawData['OCRExitCode'];
             }
             await this.fileManagerClient.createTextFile(fileUrl, JSON.stringify({ lines: textFormatted, angle }));
         }

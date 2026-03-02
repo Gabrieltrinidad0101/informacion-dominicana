@@ -24,7 +24,7 @@ export class EventListener {
                 institutionName: event.institutionName,
                 exchangeName: event.exchangeName
             })
-            if (exist) event = { ...exist, "_id": exist._id }
+            if (exist) event = { ...exist, ...event, "_id": exist._id }
         }
 
         if (event.exchangeName == 'extractedTexts') {
@@ -33,17 +33,16 @@ export class EventListener {
                 traceId: event.traceId,
                 exchangeName: event.exchangeName
             })
-            if (exist) event = { ...exist, "_id": exist._id }
+            if (exist) event = { ...exist, ...event, "_id": exist._id }
         }
 
         if (event.exchangeName == 'extractedTextAnalyzers') {
             const exist = await this.eventRepository.findOne({
-                extractedTextAnalyzerUrl: event.extractedTextAnalyzerUrl,
-                index: event.index,
+                extractedTextUrl: event.extractedTextUrl,
                 traceId: event.traceId,
                 exchangeName: event.exchangeName
             })
-            if (exist) event = { ...exist, "_id": exist._id }
+            if (exist) event = { ...exist, ...event, "_id": exist._id }
         }
 
         await this.eventRepository.save(event);

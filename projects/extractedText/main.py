@@ -1,8 +1,8 @@
 from io import BytesIO
 from PIL import Image
 from paddleocr import PaddleOCR
-from eventBus import EventBus
-from fileManagerClient import FileManagerClient
+from eventBusPy.eventBus import EventBus
+from fileManagerClientPy.fileManagerClient import FileManagerClient
 import uuid
 import os
 import shutil
@@ -62,14 +62,6 @@ def callback(data, metadata):
         
         new_width, new_height = calculate_rotated_dimensions(width, height, angle)
         
-        print({
-            "width": width,
-            "height": height,
-            "angle": angle,
-            "new_width": new_width,
-            "new_height": new_height
-        })
-        
         corrected_img = imgPreProcessed.crop((
             width,                          
             0,           
@@ -82,11 +74,9 @@ def callback(data, metadata):
         
         fileManagerClient.create_text_file(extractedTextUrl, result_json)
         fileManagerClient.upload_file(imgPath, imgProcessedUrl)
+        shutil.rmtree(outfile)
+        os.remove(filename)
         
-        
-        
-        
-
     bus.emit('extractedTextAnalyzers',{
         **data,
         "extractedTextUrl": extractedTextUrl,

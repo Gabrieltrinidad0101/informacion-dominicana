@@ -14,6 +14,7 @@ services:
       context: .
       dockerfile: ./projects/extractedText/dockerfile
     container_name: extractedText
+    restart: unless-stopped
     volumes:
       - ./projects/extractedText:/app/projects/extractedText
     networks:
