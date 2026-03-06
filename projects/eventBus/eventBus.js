@@ -68,17 +68,18 @@ export class EventBus {
         logs.disabled = value
     }
 
-    async on(queueName, exchangeName, callback,completed = true) {
+    async on(queueName, exchangeName, callback, completed = true) {
         await this.bindQueue(queueName, exchangeName)
         await EventBus.channel.consume(queueName, async (message) => {
             if (!message) return
             const content = JSON.parse(message.content.toString())
+            let success = false
             try {
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
                 EventBus.channel.publish(
-                    "", 
-                    "completed_event", 
+                    "",
+                    "completed_event",
                     Buffer.from(JSON.stringify({
                         traceId: content.traceId,
                         _id: content._id,
@@ -88,6 +89,7 @@ export class EventBus {
                 )
                 await callback(content, { force, typeOfExecute })
                 EventBus.channel.ack(message)
+                success = true
                 logs.info(content)
             } catch (error) {
                 try {
@@ -121,10 +123,10 @@ export class EventBus {
                 }
                 EventBus.channel.ack(message)
             } finally {
-                if(!completed) return
+                if (!completed || !success) return
                 EventBus.channel.publish(
-                    "", 
-                    "completed_event", 
+                    "",
+                    "completed_event",
                     Buffer.from(JSON.stringify({
                         traceId: content.traceId,
                         _id: content._id,

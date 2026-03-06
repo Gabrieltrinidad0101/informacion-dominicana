@@ -7,6 +7,7 @@ import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlL
 import constants from "../../constants";
 import { useHistory } from "react-router";
 import { PdfViewer } from "../pdf/PdfViewer";
+import { EventStatusBadges } from "./EventStatusBadges";
 
 function JsonPreview({ file }) {
   const [data, setData] = useState(null);
@@ -197,6 +198,7 @@ export function Evento({ exchangeName, queryParams }) {
 
   return (
     <div>
+      <EventStatusBadges exchangeName={exchangeName} />
       <SimpleSelect
         name="Instituciones"
         datas={columns.map((columns) => columns.field)}

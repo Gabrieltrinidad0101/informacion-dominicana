@@ -34,6 +34,11 @@ app.post('/events/reExecuteEvents', async (req, res) => {
     res.json(events)
 })
 
+app.get('/events/stats', async (req, res) => {
+    const stats = await eventsRepository.getStats(req.query.exchangeName)
+    res.json(stats)
+})
+
 app.delete('/events/deleteEvents', async (req, res) => {
     const events = await eventsRepository.deleteEvents(req.body)
     res.json(events)

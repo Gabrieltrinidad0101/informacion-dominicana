@@ -1,0 +1,92 @@
+.badges {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #fff;
+  position: relative;
+  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge:hover {
+  transform: translateY(-3px);
+}
+
+.badge::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  opacity: 0.35;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.count {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.label {
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 3px;
+  opacity: 0.9;
+}
+
+.pending {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.5);
+}
+
+.pending::before {
+  background: #f59e0b;
+}
+
+.pending:hover {
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.65);
+}
+
+.inProgress {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.5);
+}
+
+.inProgress::before {
+  background: #6366f1;
+}
+
+.inProgress:hover {
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.65);
+}
+
+.completed {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.5);
+}
+
+.completed::before {
+  background: #10b981;
+}
+
+.completed:hover {
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.65);
+}

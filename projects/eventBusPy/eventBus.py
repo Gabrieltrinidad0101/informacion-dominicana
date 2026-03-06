@@ -3,6 +3,7 @@ import json
 import uuid
 import logging
 import os
+from datetime import datetime, timezone
 
 logging.basicConfig(level=logging.INFO)
 
@@ -47,22 +48,38 @@ class EventBus:
     def try_queue(self, queue_name, exchange_name):
         self._setup_try_queue(queue_name, exchange_name)
 
+    def _publish_completed_event(self, payload):
+        self.channel.basic_publish(
+            exchange='',
+            routing_key='completed_event',
+            body=json.dumps(payload)
+        )
+
     def on(self, queue_name, exchange_name, callback):
         self.bind_queue(queue_name, exchange_name)
 
         def _consume_callback(ch, method, properties, body):
+            message = json.loads(body)
+            completed = False
             try:
-                message = json.loads(body)
                 headers = properties.headers or {}
                 force = headers.get('force')
                 type_of_execute = headers.get('typeOfExecute')
+
+                self._publish_completed_event({
+                    'traceId': message.get('traceId'),
+                    '_id': message.get('_id'),
+                    'exchangeName': message.get('exchangeName'),
+                    'progressDate': datetime.now(timezone.utc).isoformat()
+                })
+
                 callback(message, {'force': force, 'typeOfExecute': type_of_execute})
                 ch.basic_ack(delivery_tag=method.delivery_tag)
+                completed = True
                 logs.info(message)
             except Exception as e:
                 print(e)
                 try:
-                    message = json.loads(body)
                     message['retryCount'] = message.get('retryCount', 0) + 1
                     message.setdefault('errors', []).append(str(e))
                     if message['retryCount'] >= 3:
@@ -84,7 +101,7 @@ class EventBus:
                         body=json.dumps(message),
                         properties=pika.BasicProperties(headers={"x-retry-count": message['retryCount']})
                     )
-                    logs.error(message,str(e))
+                    logs.error(message, str(e))
                 except Exception as parse_error:
                     logging.error(parse_error)
                     logging.error(json.dumps({
@@ -96,6 +113,15 @@ class EventBus:
                         }
                     }))
                 ch.basic_ack(delivery_tag=method.delivery_tag)
+            finally:
+                if not completed:
+                    return
+                self._publish_completed_event({
+                    'traceId': message.get('traceId'),
+                    '_id': message.get('_id'),
+                    'exchangeName': message.get('exchangeName'),
+                    'completedDate': datetime.now(timezone.utc).isoformat()
+                })
 
         self.channel.basic_consume(queue=queue_name, on_message_callback=_consume_callback)
         self.channel.start_consuming()

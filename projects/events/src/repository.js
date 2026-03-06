@@ -113,11 +113,32 @@ export class EventsRepository {
         return await Model.deleteMany({ ...query })
     }
 
+    async getStats(exchangeName) {
+        const Model = models[exchangeName] ?? mongoose.model(exchangeName, dynamicSchema);
+        const [pending, inProgress, completed] = await Promise.all([
+            Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false } }),
+            Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
+            Model.countDocuments({ completedDate: { $exists: true } }),
+        ]);
+        return { pending, inProgress, completed };
+    }
+
+    async saveProgress(data) {
+        const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
+        const update = {}
+        if (data.progressDate) update.progressDate = data.progressDate
+        if (data.completedDate) update.completedDate = data.completedDate
+        if (!Object.keys(update).length) return
+        await Model.findByIdAndUpdate(data._id, { $set: update })
+    }
+
     async updateEvent(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName
         const query = this.dataToQuery(data)
-        return await Model.updateMany({ ...query }, { $set: { startDate: new Date() } })
+        return await Model.updateMany({ ...query }, {
+            $unset: { progressDate: "", completedDate: "" }
+        })
     }
 
 
