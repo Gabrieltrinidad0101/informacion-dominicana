@@ -18,12 +18,19 @@
 .filters {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
-.filters > div {
+.filterRow {
     display: flex;
-    gap: 10px;
-    height: 70px;
+    align-items: center;
+    gap: 8px;
+}
+
+.filterKey {
+    min-width: 120px;
+    max-width: 160px;
+    font-weight: 600 !important;
 }
 
 .select {

@@ -1,11 +1,22 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { SimpleSelect } from "../inputs/simpleSelects";
-import { InputText } from "../inputs/inputText";
 import EventsCss from "./Evento.module.css";
-import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlLabel, RadioGroup, Radio } from "@mui/material";
+import { Button, Dialog, DialogTitle, DialogContent, Box, Checkbox, FormControlLabel, RadioGroup, Radio, Select, MenuItem, TextField, Chip } from "@mui/material";
 import constants from "../../constants";
 import { useHistory } from "react-router";
+import { lightTheme } from "../../themes/light";
+
+const OPERATORS = [
+  { value: 'contains', label: 'Contiene' },
+  { value: 'equals', label: 'Igual' },
+  { value: 'notEquals', label: 'No igual' },
+  { value: 'exists', label: 'Existe' },
+  { value: 'notExists', label: 'No existe' },
+  { value: 'dateRange', label: 'Rango fecha' },
+]
+
+const DATE_FIELD_PATTERN = /date/i
 import { PdfViewer } from "../pdf/PdfViewer";
 import { EventStatusBadges } from "./EventStatusBadges";
 
@@ -47,7 +58,12 @@ const generateUrl = (data, microService, fileName) => {
 export function Evento({ exchangeName, queryParams }) {
   const [downloadLinks, setDownloadLinks] = useState([]);
   const [columns, setColumns] = useState([]);
-  const [search, setSearch] = useState(JSON.parse(queryParams.get(exchangeName)) ?? {});
+  const [filters, setFilters] = useState(() => {
+    try {
+      const parsed = JSON.parse(queryParams.get(exchangeName))
+      return Array.isArray(parsed) ? parsed : []
+    } catch { return [] }
+  });
   const [open, setOpen] = useState(false);
   const [cellData, setCellData] = useState(null);
   const [openExecuteModal, setOpenExecuteModal] = useState(false);
@@ -65,18 +81,15 @@ export function Evento({ exchangeName, queryParams }) {
   const searchData = async () => {
     try {
       const { page, pageSize } = paginationModel;
+      const filtersJson = encodeURIComponent(JSON.stringify(filters))
       const data = await fetch(
-        Object.keys(search).length > 0
-          ? `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}${Object.keys(search).map((key) => `&${key}=${search[key]}`).join('')}`
-          : `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}`
+        `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}&filters=${filtersJson}`
       );
 
-      const searchString = JSON.stringify(search);
-      if (searchString === '{}') {
+      const searchString = JSON.stringify(filters);
+      if (searchString === '[]') {
         queryParams.delete(exchangeName);
-      }
-
-      if (queryParams.get(exchangeName) !== searchString) {
+      } else if (queryParams.get(exchangeName) !== searchString) {
         queryParams.set(exchangeName, searchString);
         history.push({
           pathname: history.location.pathname,
@@ -115,11 +128,19 @@ export function Evento({ exchangeName, queryParams }) {
     } catch { }
   };
 
+  const filtersToSimpleQuery = () => {
+    const query = {}
+    for (const f of filters) {
+      if (['contains', 'equals'].includes(f.operator) && f.value) query[f.key] = f.value
+    }
+    return query
+  }
+
   const execute = async () => {
     try {
       await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
-          event: { ...search, exchangeName },
+          event: { ...filtersToSimpleQuery(), exchangeName },
           force: force,
           typeOfExecute: typeOfExecute,
         }),
@@ -135,7 +156,7 @@ export function Evento({ exchangeName, queryParams }) {
     try {
       await fetch(`${constants.apiEvents}/deleteEvents`, {
         body: JSON.stringify({
-          ...search,
+          ...filtersToSimpleQuery(),
           exchangeName: exchangeName,
         }),
         method: "DELETE",
@@ -152,26 +173,24 @@ export function Evento({ exchangeName, queryParams }) {
     searchData();
   }, [paginationModel]);
 
-  const onChangeValue = (key, value) => {
-    setSearch((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  const addFilter = (key) => {
+    if (!key) return
+    setFilters(prev => [...prev, {
+      key,
+      operator: DATE_FIELD_PATTERN.test(key) ? 'dateRange' : 'contains',
+      value: '',
+      from: '',
+      to: '',
+    }])
+  }
 
-  const onChangeKey = (e) => {
-    setSearch((prev) => ({
-      ...prev,
-      [e.target.value]: '',
-    }));
-  };
+  const updateFilter = (index, changes) => {
+    setFilters(prev => prev.map((f, i) => i === index ? { ...f, ...changes } : f))
+  }
 
-  const onRemoveKey = (key) => {
-    setSearch((prev) => {
-      delete prev[key];
-      return { ...prev };
-    });
-  };
+  const removeFilter = (index) => {
+    setFilters(prev => prev.filter((_, i) => i !== index))
+  }
 
   const renderCellContent = () => {
     if (!cellData?.value) return null;
@@ -204,22 +223,61 @@ export function Evento({ exchangeName, queryParams }) {
     <div>
       <EventStatusBadges exchangeName={exchangeName} />
       <SimpleSelect
-        name="Instituciones"
-        datas={columns.map((columns) => columns.field)}
-        onChange={(e) => onChangeKey(e)}
+        name="Agregar filtro"
+        datas={columns.map((col) => col.field)}
+        onChange={(e) => addFilter(e.target.value)}
       />
       <div className={EventsCss.inputs}>
         <div className={EventsCss.filters}>
-          {
-            Object.keys(search).map((key, index) =>
-              <div>
-                <InputText label={key} key={index} onChangeSearch={(e) => onChangeValue(key, e.target.value)} name={key} value={search[key]} />
-                <Button sx={{
-                  height: 55
-                }} variant="contained" color="error" height="10px" onClick={() => onRemoveKey(key)}>Delete</Button>
-              </div>
-            )
-          }
+          {filters.map((filter, index) => (
+            <div key={index} className={EventsCss.filterRow}>
+              <Chip label={filter.key} size="small" className={EventsCss.filterKey} />
+              <Select
+                size="small"
+                value={filter.operator}
+                variant="filled"
+                sx={{ minWidth: 140 }}
+                onChange={e => updateFilter(index, { operator: e.target.value, value: '', from: '', to: '' })}
+              >
+                {OPERATORS.map(op => <MenuItem key={op.value} value={op.value}>{op.label}</MenuItem>)}
+              </Select>
+              {!['exists', 'notExists', 'dateRange'].includes(filter.operator) && (
+                <TextField
+                  size="small"
+                  label="Valor"
+                  variant="filled"
+                  value={filter.value}
+                  sx={{ ...lightTheme, flex: 1 }}
+                  onChange={e => updateFilter(index, { value: e.target.value })}
+                />
+              )}
+              {filter.operator === 'dateRange' && (
+                <>
+                  <TextField
+                    size="small"
+                    type="date"
+                    label="Desde"
+                    variant="filled"
+                    value={filter.from}
+                    InputLabelProps={{ shrink: true }}
+                    sx={{ ...lightTheme, flex: 1 }}
+                    onChange={e => updateFilter(index, { from: e.target.value })}
+                  />
+                  <TextField
+                    size="small"
+                    type="date"
+                    label="Hasta"
+                    variant="filled"
+                    value={filter.to}
+                    InputLabelProps={{ shrink: true }}
+                    sx={{ ...lightTheme, flex: 1 }}
+                    onChange={e => updateFilter(index, { to: e.target.value })}
+                  />
+                </>
+              )}
+              <Button size="small" color="error" variant="outlined" onClick={() => removeFilter(index)}>✕</Button>
+            </div>
+          ))}
         </div>
         <div className={EventsCss.buttons}>
           <Button onClick={searchData}>Buscar</Button>

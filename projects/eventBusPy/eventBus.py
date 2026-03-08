@@ -78,7 +78,6 @@ class EventBus:
                 completed = True
                 logs.info(message)
             except Exception as e:
-                print(e)
                 try:
                     message['retryCount'] = message.get('retryCount', 0) + 1
                     message.setdefault('errors', []).append(str(e))

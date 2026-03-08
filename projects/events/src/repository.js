@@ -44,6 +44,8 @@ export class EventsRepository {
         }
     }
 
+    escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
     dataToQuery = (data) => {
         const query = {};
         for (const key in data) {
@@ -52,7 +54,24 @@ export class EventsRepository {
             } else if (key == 'index') {
                 query[key] = parseInt(data[key]);
             } else if (data[key] !== undefined && data[key] !== null) {
-                query[key] = { $regex: data[key].toString(), $options: "i" };
+                query[key] = { $regex: this.escapeRegex(data[key].toString()), $options: "i" };
+            }
+        }
+        return query
+    }
+
+    filtersToQuery = (filters) => {
+        const query = {}
+        for (const f of filters) {
+            if (f.operator === 'contains') query[f.key] = { $regex: this.escapeRegex(f.value), $options: 'i' }
+            else if (f.operator === 'equals') query[f.key] = f.value
+            else if (f.operator === 'notEquals') query[f.key] = { $ne: f.value }
+            else if (f.operator === 'exists') query[f.key] = { $exists: true }
+            else if (f.operator === 'notExists') query[f.key] = { $exists: false }
+            else if (f.operator === 'dateRange') {
+                query[f.key] = {}
+                if (f.from) query[f.key].$gte = new Date(f.from)
+                if (f.to) query[f.key].$lte = new Date(f.to + 'T23:59:59.999Z')
             }
         }
         return query
@@ -63,12 +82,15 @@ export class EventsRepository {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         delete data.exchangeName;
 
-        const { page, limit } = data;
+        const { page, limit, filters: filtersJson } = data;
+        const filters = filtersJson ? JSON.parse(filtersJson) : null
+
         if (page !== undefined && limit !== undefined) {
             delete data.page;
             delete data.limit;
+            delete data.filters;
 
-            const query = this.dataToQuery(data);
+            const query = filters ? this.filtersToQuery(filters) : this.dataToQuery(data);
             const skip = parseInt(page) * parseInt(limit);
 
             const [result, count] = await Promise.all([
@@ -82,7 +104,8 @@ export class EventsRepository {
             }
         }
 
-        const query = this.dataToQuery(data)
+        delete data.filters;
+        const query = filters ? this.filtersToQuery(filters) : this.dataToQuery(data)
         return await Model.find({ ...query })
     }
 
@@ -119,7 +142,7 @@ export class EventsRepository {
             Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false } }),
             Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
             Model.countDocuments({ completedDate: { $exists: true } }),
-            Model.countDocuments({ retryCount: { $gte: 3 } }),
+            Model.countDocuments({ errors: { $exists: true } }),
         ]);
         return { pending, inProgress, completed, withErrors };
     }
