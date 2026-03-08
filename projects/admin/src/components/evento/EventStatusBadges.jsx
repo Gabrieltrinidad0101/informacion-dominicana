@@ -15,7 +15,7 @@ export function EventStatusBadges({ exchangeName }) {
 
   useEffect(() => {
     fetchStats();
-    const interval = setInterval(fetchStats, 10_000);
+    const interval = setInterval(fetchStats, 3_000);
     return () => clearInterval(interval);
   }, [exchangeName]);
 

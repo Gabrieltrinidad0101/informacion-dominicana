@@ -19,6 +19,7 @@ app.use(cors("*"))
 
 const eventsRepository = new EventsRepository()
 await eventsRepository.insertDefaultValues()
+eventBus.complete = false
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
 

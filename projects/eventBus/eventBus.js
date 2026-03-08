@@ -8,7 +8,7 @@ dotenv.config({
 })
 
 export class EventBus {
-    isTestMode = false
+    complete = true
     static async init(retryCount = 0) {
         try {
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
@@ -68,7 +68,7 @@ export class EventBus {
         logs.disabled = value
     }
 
-    async on(queueName, exchangeName, callback, completed = true) {
+    async on(queueName, exchangeName, callback) {
         await this.bindQueue(queueName, exchangeName)
         await EventBus.channel.consume(queueName, async (message) => {
             if (!message) return
@@ -77,16 +77,18 @@ export class EventBus {
             try {
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
-                EventBus.channel.publish(
-                    "",
-                    "completed_event",
-                    Buffer.from(JSON.stringify({
-                        traceId: content.traceId,
-                        _id: content._id,
-                        exchangeName: content.exchangeName,
-                        progressDate: new Date()
-                    }))
-                )
+                if(this.complete){
+                    EventBus.channel.publish(
+                        "",
+                        "completed_event",
+                        Buffer.from(JSON.stringify({
+                            traceId: content.traceId,
+                            _id: content._id,
+                            exchangeName: content.exchangeName,
+                            progressDate: new Date()
+                        }))
+                    )
+                }
                 await callback(content, { force, typeOfExecute })
                 EventBus.channel.ack(message)
                 success = true
@@ -123,7 +125,7 @@ export class EventBus {
                 }
                 EventBus.channel.ack(message)
             } finally {
-                if (!completed || !success) return
+                if (this.complete && !success) return
                 EventBus.channel.publish(
                     "",
                     "completed_event",
