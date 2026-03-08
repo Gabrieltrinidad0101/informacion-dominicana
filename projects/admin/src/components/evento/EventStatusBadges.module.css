@@ -90,3 +90,16 @@
 .completed:hover {
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.65);
 }
+
+.withErrors {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.5);
+}
+
+.withErrors::before {
+  background: #ef4444;
+}
+
+.withErrors:hover {
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.65);
+}

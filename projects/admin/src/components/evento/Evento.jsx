@@ -39,6 +39,10 @@ function JsonPreview({ file }) {
   );
 }
 
+const generateUrl = (data, microService, fileName) => {
+  return `${data.institutionName}/${data.typeOfData}/${microService}/${data.year}/${data.month}/${fileName}`;
+};
+
 
 export function Evento({ exchangeName, queryParams }) {
   const [downloadLinks, setDownloadLinks] = useState([]);
@@ -261,13 +265,13 @@ export function Evento({ exchangeName, queryParams }) {
           <Box display="flex" justifyContent="space-between">
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['link'] })) }}>Link</Button>
             <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['urlDownload'] })) }}>Downloaded</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['imageUrl'] })) }}>Image</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['imageMetaDataUrl'] })) }}>ImageMetaData</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: `${cellData.row.institutionName}/${cellData.row.typeOfData}/imgProcessed/${cellData.row.year}/${cellData.row.month}/page_${cellData.row.page}_img_${cellData.row.imageIndex}.png` })) }}>imgProcessed</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextUrl'] })) }}>Text</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['extractedTextAnalyzerUrl'] })) }}>AnalyzerText</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: prev.row['aiTextAnalyzeUrl'] })) }}>IA</Button>
-            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: `${cellData.row.institutionName}/${cellData.row.typeOfData}/pii/${cellData.row.year}/${cellData.row.month}/document.pdf` })) }}>Pii</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'postDownloads', `page_${prev.row.page}_img_${prev.row.imageIndex}.jpeg`) })) }}>Image</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'postDownloads', `page_${prev.row.page}_img_${prev.row.imageIndex}.json`) })) }}>ImageMetaData</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'imgProcessed', `page_${prev.row.page}_img_${prev.row.imageIndex}.png`) })) }}>imgProcessed</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'extractedText', `page_${prev.row.page}_img_${prev.row.imageIndex}.json`) })) }}>Text</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'extractedTextAnalyzer', `page_${prev.row.page}_img_${prev.row.imageIndex}.json`) })) }}>AnalyzerText</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'aiTextAnalyzer', `page_${prev.row.page}_img_${prev.row.imageIndex}.json`) })) }}>IA</Button>
+            <Button variant="contained" onClick={() => { setCellData(prev => ({ ...prev, value: generateUrl(prev.row, 'pii', 'document.pdf') })) }}>Pii</Button>
           </Box>
           {renderCellContent()}
         </DialogContent>

@@ -115,12 +115,13 @@ export class EventsRepository {
 
     async getStats(exchangeName) {
         const Model = models[exchangeName] ?? mongoose.model(exchangeName, dynamicSchema);
-        const [pending, inProgress, completed] = await Promise.all([
+        const [pending, inProgress, completed, withErrors] = await Promise.all([
             Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false } }),
             Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
             Model.countDocuments({ completedDate: { $exists: true } }),
+            Model.countDocuments({ retryCount: { $gte: 3 } }),
         ]);
-        return { pending, inProgress, completed };
+        return { pending, inProgress, completed, withErrors };
     }
 
     async saveProgress(data) {

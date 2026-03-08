@@ -144,6 +144,11 @@ export class EventBus {
         data.exchangeName = exchangeName
         if (metadataCopy?.typeOfExecute === "onlyOne") return;
         if (metadataCopy?.typeOfExecute === "onlyOneAndNext") metadataCopy.typeOfExecute = "onlyOne"
+        delete data.errors
+        delete data.retryCount
+        delete data.progressDate
+        delete data.completedDate
+        delete data.startDate
         EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(data)), {
             headers: metadataCopy
         })

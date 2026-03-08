@@ -137,7 +137,11 @@ class EventBus:
                 return
             if metadata.get('typeOfExecute') == 'onlyOneAndNext':
                 metadata['typeOfExecute'] = 'onlyOne'
-        print(data.get('_id'))
+        data.pop("errors", None)
+        data.pop("retryCount", None)
+        data.pop("progressDate", None)
+        data.pop("completedDate", None)
+        data.pop("startDate", None)
         self.channel.basic_publish(
             exchange=exchange_name,
             routing_key='',

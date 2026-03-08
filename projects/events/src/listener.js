@@ -10,7 +10,7 @@ export class EventListener {
         this.eventBus.on('readAiTextAnalyzer', 'aiTextAnalyzers', this.saveBusinessEvent)
         this.eventBus.on('readInsertData', 'insertDatas', this.saveBusinessEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveBusinessEvent)
-        this.eventBus.on('', 'completed_event', this.saveProgress, false)
+        this.eventBus.on('completed_event', 'completed_event', this.saveProgress, false)
     }
 
     saveBusinessEvent = async (event) => {

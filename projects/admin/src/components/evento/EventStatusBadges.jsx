@@ -3,7 +3,7 @@ import constants from "../../constants";
 import styles from "./EventStatusBadges.module.css";
 
 export function EventStatusBadges({ exchangeName }) {
-  const [stats, setStats] = useState({ pending: 0, inProgress: 0, completed: 0 });
+  const [stats, setStats] = useState({ pending: 0, inProgress: 0, completed: 0, withErrors: 0 });
 
   const fetchStats = async () => {
     try {
@@ -32,6 +32,10 @@ export function EventStatusBadges({ exchangeName }) {
       <div className={`${styles.badge} ${styles.completed}`}>
         <span className={styles.count}>{stats.completed}</span>
         <span className={styles.label}>Completado</span>
+      </div>
+      <div className={`${styles.badge} ${styles.withErrors}`}>
+        <span className={styles.count}>{stats.withErrors}</span>
+        <span className={styles.label}>Con error</span>
       </div>
     </div>
   );
