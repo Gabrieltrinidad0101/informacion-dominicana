@@ -31,7 +31,17 @@ export class Repository {
         table.string('sex', 1);
         table.text('urlDownload');
         table.text('confidences');
+        table.text('accountBack');
+        table.text('phoneNumber');
       });
+    } else {
+      const hasAccountBack = await knex.schema.hasColumn('payrolls', 'accountBack');
+      if (!hasAccountBack) {
+        await knex.schema.alterTable('payrolls', (table) => {
+          table.text('accountBack');
+          table.text('phoneNumber');
+        });
+      }
     }
   }
 

@@ -10,7 +10,7 @@ export class InsertData {
         agosto: 8,
         septiembre: 9,
         octubre: 10,
-        noviembre: 11, 
+        noviembre: 11,
         diciembre: 12
     };
     constructor(eventBus, fileAccess, eventRepository) {
@@ -18,10 +18,10 @@ export class InsertData {
         this.eventRepository = eventRepository
         this.fileAccess = fileAccess
         this.eventBus.on('insertData', 'insertDatas', this.saveEvent)
-    } 
+    }
 
     formatLastDayOfMonth(year, month) {
-        return new Date(year,  this.monthMap[month], 0);
+        return new Date(year, this.monthMap[month], 0);
     }
 
     saveEvent = async (data) => {
@@ -31,21 +31,24 @@ export class InsertData {
             payroll.date = this.formatLastDayOfMonth(data.year, data.month)
             payroll.traceId = data.traceId
             payroll.index = data.index ?? data.page
-            payroll.internalLink = this.fileAccess.generateUrl(data,'pii','document.pdf')
+            payroll.internalLink = this.fileAccess.generateUrl(data, 'pii', 'document.pdf')
             payroll.urlDownload = data.urlDownload
-            payroll.income ??= 0
+            if (payroll.income === '' || payroll.income == null) payroll.income = 0
             if (payroll.income === 'Honorífico') {
                 payroll.isHonorific = true
                 payroll.income = 0
             }
+            for (const f of ['x', 'y', 'width', 'height']) {
+                if (payroll[f] === '' || payroll[f] == null) payroll[f] = null
+            }
             payroll.isDocumentValid = payroll.isDocumentValid === 'None' ? null : payroll.isDocumentValid === 'Valid'
             payroll.document = payroll.document ?? null
             payroll.confidences = JSON.stringify(payroll.confidences)
-            if(payroll.position?.includes('regidor')) payroll.position = 'Regidor'
+            if (payroll.position?.includes('regidor')) payroll.position = 'Regidor'
             return payroll
         })
-        if(payrolls.length <= 0) return
-        await this.eventRepository.delete({...data,date: this.formatLastDayOfMonth(data.year, data.month)})
+        if (payrolls.length <= 0) return
+        await this.eventRepository.delete({ ...data, date: this.formatLastDayOfMonth(data.year, data.month) })
         await this.eventRepository.save(payrolls)
     }
 }

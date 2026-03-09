@@ -95,6 +95,7 @@ export const chartBase = async ({container, data, customTheme,deparment,onClickS
 				dateStr = param.time;
 				toolTip.style.display = 'block';
 				const data_ = param.seriesData.get(areaSeries);
+				if (!data_) { toolTip.style.display = 'none'; return; }
 				const price = data_.value !== undefined ? data_.value : data_.close;
 				toolTip.innerHTML = `<div>
             fecha: ${dateStr}

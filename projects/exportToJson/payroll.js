@@ -24,15 +24,14 @@ export class Payroll {
         await this.save(data, "employeersM.json", employeersM);
         await this.save(data, "employeersF.json", employeersF);
         await this.save(data, "employeersTotal.json", employeersTotal);
-        for(const key of Object.keys(employeersByPosition) ){
+        for (const key of Object.keys(employeersByPosition)) {
             await this.save(data, `employeersByPosition${key}.json`, employeersByPosition[key]);
             header.push(key);
         }
-        
-        for(const key of Object.keys(percentageOfSpendingByPosition) ){
+
+        for (const key of Object.keys(percentageOfSpendingByPosition)) {
             await this.save(data, `percentageOfSpendingByPosition${key}.json`, percentageOfSpendingByPosition[key]);
         }
-
         await this.save(data, `header.json`, header);
     }
 }

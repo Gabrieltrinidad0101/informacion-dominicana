@@ -32,6 +32,11 @@
             "_id": "688fa9e6c1e5bf7298db4b9a",
             "institutionName": "Ayuntamiento de Moca",
             "exchangeName": "PayrollExportToJson"
+        },
+        {
+            "_id": "688fa9e6c1e5bf7298db4b9c",
+            "institutionName": "Ayuntamiento de Cotuí",
+            "exchangeName": "PayrollExportToJson"
         }
     ]
 }
