@@ -1,18 +1,29 @@
-import jsonData from "./readXmlFile.js"
-import {analyzeJson} from "./analyzeJson.js"
-import fs from 'fs'
-import { constants } from "../../backend/src/constants.js"
-import path from "path"
+import { eventBus } from '../eventBus/eventBus.js'
+import { FileManagerClient } from '../fileManagerClient/main.js'
+import { analyzeJson } from './analyzeJson.js'
+import { downloadWorldBank } from './downloadWorldBank.js'
 
-const concepts = analyzeJson(jsonData)
+const fileAccess = new FileManagerClient()
 
-for (const concept of Object.keys(concepts)){
-    fs.mkdir(`../../../datas/worldBank/${concept}`,{},_=> {})
-    concepts[concept].forEach((value,description)=>{
-        const fileDirrection = path.join(constants.dataWorldBank(concept),`/${description
-            .replaceAll(":","-")
-            .replaceAll(">","mayor")
-        }.json`)
-        fs.writeFile(fileDirrection,JSON.stringify(value),_=> {})
-    })
-}
+eventBus.on('worldBank', 'worldBanks', async () => {
+    const records = await downloadWorldBank()
+    const concepts = analyzeJson(records)
+
+    for (const concept of Object.keys(concepts)) {
+        const entries = concepts[concept]
+        const headers = []
+
+        for (const [description, { indicatorId, data }] of entries) {
+            await fileAccess.createTextFile(
+                `worldBank/${concept}/${description}.json`,
+                JSON.stringify(data)
+            )
+            headers.push({ title: description, indicatorId })
+        }
+
+        await fileAccess.createTextFile(
+            `worldBank/${concept}/headers.json`,
+            JSON.stringify(headers)
+        )
+    }
+})

@@ -52,7 +52,10 @@ export function Chart({ data, customTheme,compare,deparment,onClickSources }) {
         <div className="custom-chart-card-title">
           <h3>{data.title}</h3>
           <div>
-            <a href="#">Fuentes</a>
+            {data.indicatorId
+              ? <a href={`https://data.worldbank.org/indicator/${data.indicatorId}?locations=DO`} target="_blank" rel="noopener noreferrer">Fuentes</a>
+              : <a href="#">Fuentes</a>
+            }
             {compare && <a href="#" onClick={() => setOpenModal(true)}>
               Comparar
             </a>}

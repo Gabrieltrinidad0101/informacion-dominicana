@@ -11,9 +11,12 @@ export function Charts({ data,url, deparment, customTheme, compare,onClickSource
     requestJson(`${url}/headers`).then(async (res) => {
       const urls = []
       res.forEach((item) => {
+        const isObj = typeof item === 'object' && item !== null
+        const name = isObj ? item.title : item
         urls.push({
-          title: `${url}/${item}`,
-          url: `${url}/${item}`,
+          title: `${url}/${name}`,
+          url: `${url}/${name}`,
+          indicatorId: item?.indicatorId ?? null,
         });
       });
       setDatas(urls);

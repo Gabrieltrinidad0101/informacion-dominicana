@@ -22,6 +22,12 @@
             "exchangeName": "downloadLinks" 
         }
     ],
+    "worldBank": [
+        {
+            "_id": "68faf1abeccddb368aa302bf",
+            "exchangeName": "worldBanks"
+        }
+    ],
     "payrollExportToJson": [
         {
             "_id": "688fa9e6c1e5bf7298db4b9b",

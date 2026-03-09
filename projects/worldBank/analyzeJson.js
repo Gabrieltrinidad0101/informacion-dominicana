@@ -1,12 +1,9 @@
-import { constants } from "../../backend/src/constants.js"
-import {getConcept} from "./getConcept.js"
-import fs from 'fs'
+import { getConcept } from './getConcept.js'
 
-/**
- * 
- * @param {Object} records 
- */
-export const analyzeJson = (records)=>{
+const sanitize = (name) =>
+    name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9._-]/g, '_')
+
+export const analyzeJson = (records) => {
     const dataByConcept = {
         Social: new Map(),
         Medioambiente: new Map(),
@@ -14,36 +11,28 @@ export const analyzeJson = (records)=>{
         Educacion: new Map(),
         Salud: new Map(),
         Militar: new Map(),
-        "./": new Map()
-    } 
-    let testLimit = Infinity
-    for(const record of records){
-        const description = record.field[1]._text.replaceAll("U+00a0"," ").replaceAll(":","-").replaceAll(",","")
-        .replaceAll(">","mayor")
-        const time = record.field[2]._text
-        const value = record.field[3]._text 
-        
+        './': new Map()
+    }
+
+    for (const record of records) {
+        if (record.value == null) continue
+        const indicatorId = record.indicator.id
+        const description = sanitize(record.indicator.value)
+        const time = record.date
+        const value = record.value
+
         const conceptName = getConcept(description)
         const concept = dataByConcept[conceptName]
 
-        if(!concept.has(description)) concept.set(description,[])
-        const data = concept.get(description)
-        data.push(dataFormat({time,value}))
-        if(testLimit === 0) break
-        --testLimit
+        if (!concept.has(description)) concept.set(description, { indicatorId, data: [] })
+        concept.get(description).data.push({ time: `${time}-01-01`, value: Number(value) })
     }
-    generateFileDescriptions(dataByConcept)
+
+    for (const concept of Object.values(dataByConcept)) {
+        for (const [, entry] of concept) {
+            entry.data.sort((a, b) => a.time.localeCompare(b.time))
+        }
+    }
+
     return dataByConcept
-}
-
-const dataFormat = ({time,value})=>{
-    return {time: `${time}-01-01`,value: parseInt(value ?? "0")}
-}
-
-const generateFileDescriptions = (dataByConcept)=>{
-    Object.keys(dataByConcept).forEach(concept=>{
-        const path = constants.dataWorldBank(`${concept}/headers.json`)
-        const data = JSON.stringify(Array.from(dataByConcept[concept].keys()))
-        fs.writeFileSync(path,data)
-    })
 }
