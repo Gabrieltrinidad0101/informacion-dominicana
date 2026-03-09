@@ -1,17 +1,14 @@
+import AdmZip from 'adm-zip'
+import convert from 'xml-js'
+
 export const downloadWorldBank = async () => {
-    const records = []
-    let page = 1
-    let pages = 1
+    const response = await fetch('https://api.worldbank.org/v2/es/country/DOM?downloadformat=xml')
+    const buffer = Buffer.from(await response.arrayBuffer())
 
-    while (page <= pages) {
-        const res = await fetch(
-            `https://api.worldbank.org/v2/country/DOM/indicator?language=es&format=json&per_page=1000&page=${page}`
-        )
-        const [meta, data] = await res.json()
-        pages = meta.pages
-        if (data) records.push(...data)
-        page++
-    }
+    const zip = new AdmZip(buffer)
+    const xmlEntry = zip.getEntries().find(e => e.entryName.endsWith('.xml'))
+    const xml = xmlEntry.getData().toString('utf-8')
 
-    return records
+    const jsonData = convert.xml2js(xml, { compact: true, spaces: 0 })
+    return jsonData.Root.data.record
 }

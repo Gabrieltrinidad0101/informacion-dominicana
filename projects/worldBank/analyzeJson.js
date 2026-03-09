@@ -15,11 +15,19 @@ export const analyzeJson = (records) => {
     }
 
     for (const record of records) {
-        if (record.value == null) continue
-        const indicatorId = record.indicator.id
-        const description = sanitize(record.indicator.value)
-        const time = record.date
-        const value = record.value
+        const rawDescription = record.field[1]._text
+        const indicatorId = record.field[1]._attributes?.key
+        const time = record.field[2]._text
+        const value = record.field[3]._text
+        if (!value) continue
+
+        const description = sanitize(
+            rawDescription
+                .replaceAll('U+00a0', ' ')
+                .replaceAll(':', '-')
+                .replaceAll(',', '')
+                .replaceAll('>', 'mayor')
+        )
 
         const conceptName = getConcept(description)
         const concept = dataByConcept[conceptName]

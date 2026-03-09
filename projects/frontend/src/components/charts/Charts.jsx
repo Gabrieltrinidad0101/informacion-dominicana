@@ -13,8 +13,9 @@ export function Charts({ data,url, deparment, customTheme, compare,onClickSource
       res.forEach((item) => {
         const isObj = typeof item === 'object' && item !== null
         const name = isObj ? item.title : item
+        const displayTitle = isObj ? name.replaceAll('_', ' ') : name
         urls.push({
-          title: `${url}/${name}`,
+          title: displayTitle,
           url: `${url}/${name}`,
           indicatorId: item?.indicatorId ?? null,
         });

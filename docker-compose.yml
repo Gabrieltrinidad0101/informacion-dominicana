@@ -92,6 +92,16 @@ services:
     ports:
       - 4000:4000
 
+  world_bank:
+    build:
+      context: .
+      dockerfile: ./projects/worldBank/dockerfile
+    container_name: worldBank
+    volumes:
+      - ./projects/worldBank:/app/projects/worldBank
+    networks:
+      - dev
+
   export_to_json:
     build:
       context: .

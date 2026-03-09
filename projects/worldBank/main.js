@@ -9,7 +9,7 @@ eventBus.on('worldBank', 'worldBanks', async () => {
     const records = await downloadWorldBank()
     const concepts = analyzeJson(records)
 
-    for (const concept of Object.keys(concepts)) {
+    for (const concept of Object.keys(concepts).filter(c => c !== './')) {
         const entries = concepts[concept]
         const headers = []
 

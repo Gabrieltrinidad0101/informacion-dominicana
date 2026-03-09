@@ -1,0 +1,17 @@
+{
+  "name": "worldbank",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "worldBank": "nodemon --legacy-watch main.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "xml-js": "^1.6.11"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
