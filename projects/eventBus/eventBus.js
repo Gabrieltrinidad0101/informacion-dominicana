@@ -77,7 +77,7 @@ export class EventBus {
             try {
                 const force = message.properties.headers['force']
                 const typeOfExecute = message.properties.headers['typeOfExecute']
-                if(this.complete){
+                if (this.complete) {
                     EventBus.channel.publish(
                         "",
                         "completed_event",
@@ -95,10 +95,6 @@ export class EventBus {
                 logs.info(content)
             } catch (error) {
                 try {
-                    if(this.isTestMode) {
-                        console.log(error)
-                        return
-                    }
                     content.retryCount = (content.retryCount || 0) + 1
                     content.errors ??= []
                     content.errors.push(error.message)

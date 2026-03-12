@@ -60,8 +60,11 @@ export function Evento({ exchangeName, queryParams }) {
   const [columns, setColumns] = useState([]);
   const [filters, setFilters] = useState(() => {
     try {
-      const parsed = JSON.parse(queryParams.get(exchangeName))
-      return Array.isArray(parsed) ? parsed : []
+      const exchangeFilters = JSON.parse(queryParams.get(exchangeName))
+      const globalFilters = JSON.parse(localStorage.getItem('globalFilters'))
+      const local = Array.isArray(exchangeFilters) ? exchangeFilters : []
+      const global_ = Array.isArray(globalFilters) ? globalFilters.map(f => ({ ...f, global: true })) : []
+      return [...global_, ...local]
     } catch { return [] }
   });
   const [open, setOpen] = useState(false);
@@ -81,21 +84,24 @@ export function Evento({ exchangeName, queryParams }) {
   const searchData = async () => {
     try {
       const { page, pageSize } = paginationModel;
-      const filtersJson = encodeURIComponent(JSON.stringify(filters))
+      const filtersJson = encodeURIComponent(JSON.stringify(filters.map(({ global: _, ...f }) => f)))
       const data = await fetch(
         `${constants.apiEvents}/find?exchangeName=${exchangeName}&page=${page}&limit=${pageSize}&filters=${filtersJson}`
       );
 
-      const searchString = JSON.stringify(filters);
-      if (searchString === '[]') {
-        queryParams.delete(exchangeName);
-      } else if (queryParams.get(exchangeName) !== searchString) {
-        queryParams.set(exchangeName, searchString);
-        history.push({
-          pathname: history.location.pathname,
-          search: queryParams.toString(),
-        });
-      }
+      const globalFilters = filters.filter(f => f.global).map(({ global: _, ...f }) => f)
+      const localFilters = filters.filter(f => !f.global)
+
+      if (globalFilters.length === 0) localStorage.removeItem('globalFilters')
+      else localStorage.setItem('globalFilters', JSON.stringify(globalFilters))
+
+      if (localFilters.length === 0) queryParams.delete(exchangeName)
+      else queryParams.set(exchangeName, JSON.stringify(localFilters))
+
+      history.push({
+        pathname: history.location.pathname,
+        search: queryParams.toString(),
+      });
 
       const json = await data.json();
 
@@ -181,6 +187,7 @@ export function Evento({ exchangeName, queryParams }) {
       value: '',
       from: '',
       to: '',
+      global: false,
     }])
   }
 
@@ -275,6 +282,17 @@ export function Evento({ exchangeName, queryParams }) {
                   />
                 </>
               )}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    size="small"
+                    checked={!!filter.global}
+                    onChange={e => updateFilter(index, { global: e.target.checked })}
+                  />
+                }
+                label="Global"
+                sx={{ margin: 0 }}
+              />
               <Button size="small" color="error" variant="outlined" onClick={() => removeFilter(index)}>✕</Button>
             </div>
           ))}

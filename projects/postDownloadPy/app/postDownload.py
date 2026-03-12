@@ -15,6 +15,8 @@ class PostDownload:
         self.event_bus.on('postDownload', 'postDownloads', self.postDownload)
 
     def postDownload(self, data, metadata):
+        if not data.get("urlDownload").endswith(".pdf"):
+            return
         data.pop("_id", None)
         file_path = self.file_manager_client.download_file(data["urlDownload"])
         doc = fitz.open(file_path)

@@ -1,18 +1,27 @@
 services:
   download_links:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/downloadLinks/dockerfile-pro
     container_name: downloadLinks
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   extracted_text:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/extractedText/dockerfile
     container_name: extracted_text
-    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   download:
     restart: unless-stopped
@@ -20,6 +29,11 @@ services:
       context: .
       dockerfile: ./projects/download/dockerfile-pro
     container_name: download
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   events:
     restart: unless-stopped
@@ -29,13 +43,23 @@ services:
     container_name: events
     ports:
       - 3001:3001
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   post_download:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/postDownloadPy/dockerfile-pro
     container_name: postDownloadPy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   extracted_text_analyzer:
     restart: unless-stopped
@@ -43,6 +67,11 @@ services:
       context: .
       dockerfile: ./projects/extractedTextAnalyzer/dockerfile-pro
     container_name: extractedTextAnalyzer
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   ai_text_analyzer:
     restart: unless-stopped
@@ -50,6 +79,11 @@ services:
       context: .
       dockerfile: ./projects/aiTextAnalyzer/dockerfile-pro
     container_name: aiTextAnalyzer
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   auth:
     restart: unless-stopped
@@ -57,39 +91,68 @@ services:
       context: .
       dockerfile: ./projects/auth/dockerfile-pro
     container_name: auth
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   insert_data:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/insertData/dockerfile-pro
     container_name: insertData
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   files_manager:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/filesManager/dockerfile-pro
     container_name: filesManager
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-  export_to_json: 
+  export_to_json:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/exportToJson/dockerfile-pro
     container_name: exportToJson
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   upload_files:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/uploadFiles/dockerfile-pro
     container_name: uploadFiles
-  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   pii:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: ./projects/pII/dockerfile-pro
     container_name: pii
-  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -161,7 +161,7 @@ export class EventsRepository {
         delete data.exchangeName
         const query = this.dataToQuery(data)
         return await Model.updateMany({ ...query }, {
-            $unset: { progressDate: "", completedDate: "" }
+            $unset: { progressDate: "", completedDate: "", startDate: new Date() }
         })
     }
 

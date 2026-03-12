@@ -12,17 +12,17 @@ export class Payroll {
     payroll = async (data, metadata) => {
         const fileName = data.index ? `${data.index}.json` : `page_${data.page}_img_${data.imageIndex}.json`;
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data, 'aiTextAnalyzer', fileName)
-        // const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
-        // if (metadata?.force || !fileExists) {
-        //     const dataText = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextAnalyzerUrl)).toString('utf-8'));
-        //     const propt_ = propt(JSON.stringify(dataText.lines));
-        //     const response = JSON.parse(await this.apiLLMClient(propt_));
-        //     for (let payroll_ of response) {
-        //         if (payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
-        //         payroll_._id = this.getId()
-        //     }
-        //     await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: response, angle: dataText.angle }));
-        // }
+        const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl);
+        if (metadata?.force || !fileExists) {
+            const dataText = JSON.parse((await this.fileManagerClient.getFile(data.extractedTextAnalyzerUrl)).toString('utf-8'));
+            const propt_ = propt(JSON.stringify(dataText.lines));
+            const response = JSON.parse(await this.apiLLMClient(propt_));
+            for (let payroll_ of response) {
+                if (payroll_.document) payroll_.isDocumentValid = await this.validateIdNumberApi(payroll_.document)
+                payroll_._id = this.getId()
+            }
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: response, angle: dataText.angle }));
+        }
         await this.eventBus.emit("insertDatas", {
             ...data,
             aiTextAnalyzeUrl,

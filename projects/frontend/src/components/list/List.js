@@ -289,7 +289,7 @@ export const ListGroup = ({ title, currentDate, setCurrentDate, url }) => {
           </Button>
 
           <Button variant="text" sx={{ fontSize: '10px', m: 0, p: 0 }}>
-            <a href={`Eventos?allData=${JSON.stringify({ traceId: Object.values(positionBySalary)?.[0]?.[0]?.traceId ?? '' })}`} target="_blank" rel="noopener noreferrer">
+            <a href={`http://localhost:8080/insertDatas?insertDatas=${encodeURIComponent(JSON.stringify([{ key: 'traceId', operator: 'contains', value: Object.values(positionBySalary)?.[0]?.[0]?.traceId ?? '', from: '', to: '' }]))}`} target="_blank" rel="noopener noreferrer">
               DEBBUG
             </a>
           </Button>

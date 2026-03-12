@@ -29,7 +29,6 @@ const sidebars = {
       items: ['Jarabacoa','Moca','Cotuí'],
     },
     'Fuentes',
-    'Eventos',
   ],
   
 };

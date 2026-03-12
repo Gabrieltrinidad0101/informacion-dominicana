@@ -8,6 +8,11 @@ services:
       - ./projects/downloadLinks:/app/projects/downloadLinks
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   extracted_text:
     build:
@@ -19,6 +24,11 @@ services:
       - ./projects/extractedText:/app/projects/extractedText
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   download:
     build:
@@ -29,6 +39,11 @@ services:
       - ./projects/download:/app/projects/download
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   events:
     build:
@@ -41,6 +56,11 @@ services:
       - dev
     ports:
       - "3001:3001"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   post_download:
     build:
@@ -51,6 +71,11 @@ services:
       - ./projects/postDownloadPy:/app/projects/postDownloadPy
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   extracted_text_analyzer:
     build:
@@ -61,6 +86,11 @@ services:
       - ./projects/extractedTextAnalyzer:/app/projects/extractedTextAnalyzer
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   ai_text_analyzer:
     build:
@@ -71,6 +101,11 @@ services:
       - ./projects/aiTextAnalyzer:/app/projects/aiTextAnalyzer
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   insert_data:
     build:
@@ -81,6 +116,11 @@ services:
       - ./projects/insertData:/app/projects/insertData
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   files_manager:
     build:
@@ -91,6 +131,11 @@ services:
       - dev
     ports:
       - 4000:4000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   world_bank:
     build:
@@ -101,6 +146,11 @@ services:
       - ./projects/worldBank:/app/projects/worldBank
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   export_to_json:
     build:
@@ -111,6 +161,11 @@ services:
       - ./projects/exportToJson:/app/projects/exportToJson
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -126,7 +181,12 @@ services:
       - 15672:15672
     networks:
       - dev
-  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   pii:
     build:
       context: .
@@ -135,7 +195,12 @@ services:
     volumes:
       - ./projects/pII:/app/projects/pII
     networks:
-      - dev 
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mongo:
     image: mongo:latest
@@ -149,6 +214,11 @@ services:
       - dev
     ports:
       - 27017:27017
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   loki:
     image: grafana/loki:2.9.0
@@ -160,6 +230,11 @@ services:
       - 3100:3100
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   promtail:
     image: grafana/promtail:2.9.0
@@ -170,6 +245,11 @@ services:
       - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   grafana:
     image: grafana/grafana:latest
@@ -178,6 +258,11 @@ services:
       - "5000:3000"
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   postgres:
     image: postgres:15
@@ -192,7 +277,12 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - dev
-  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   minio:
     image: minio/minio
     volumes:
@@ -207,7 +297,12 @@ services:
     ports:
       - 9000:9000
       - 9001:9001
-  
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   test:
     build:
       context: .
@@ -217,6 +312,11 @@ services:
       - ./projects/test:/app/projects/test
     networks:
       - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   pgdata:
