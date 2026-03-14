@@ -1,8 +1,9 @@
-import { eventBus } from "../eventBus/eventBus.js" 
+import { eventBus } from "../eventBus/eventBus.js"
 import { FileManagerClient } from "../fileManagerClient/main.js"
 import { InsertData } from './src/insertData.js';
 import { Repository } from "./src/repository.js";
 
-const fileManagerClient = new FileManagerClient() 
+const fileManagerClient = new FileManagerClient()
 const repository = new Repository()
+eventBus.prefetch(100)
 new InsertData(eventBus, fileManagerClient, repository)

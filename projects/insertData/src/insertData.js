@@ -48,7 +48,7 @@ export class InsertData {
             return payroll
         })
         if (payrolls.length <= 0) return
-        await this.eventRepository.delete({ ...data, date: this.formatLastDayOfMonth(data.year, data.month) })
+        await this.eventRepository.delete({ date: this.formatLastDayOfMonth(data.year, data.month), institutionName: data.institutionName, link: data.link, _ids: payrolls.map(p => p._id) })
         await this.eventRepository.save(payrolls)
     }
 }

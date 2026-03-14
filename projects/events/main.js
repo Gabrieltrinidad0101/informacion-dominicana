@@ -1,9 +1,10 @@
-import { eventBus } from "../eventBus/eventBus.js" 
+import { eventBus } from "../eventBus/eventBus.js"
 import express from "express"
 import cors from "cors"
 import { EventListener } from "./src/listener.js"
 import { EventsRepository } from "./src/repository.js"
 import { ReExecuteEvents } from "./src/reExecuteEvents.js"
+import { CustomDispatch } from "./src/customDispatch.js"
 import path,{dirname} from "path"
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv"
@@ -22,6 +23,8 @@ await eventsRepository.insertDefaultValues()
 eventBus.complete = false
 const reExecuteEvents = new ReExecuteEvents(eventBus, eventsRepository)
 new EventListener(eventBus, eventsRepository)
+const customDispatch = new CustomDispatch(eventBus, eventsRepository)
+await customDispatch.dispatch()
 
 app.get("/events", (req, res) => res.send("OK"));
 

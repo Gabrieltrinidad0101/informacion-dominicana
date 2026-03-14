@@ -1,22 +1,22 @@
 class Logs {
     disabled = false
 
-    info(event){
-        if(this.disabled) return
-        console.log(JSON.stringify({ eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName } }))
+    info(event) {
+        if (this.disabled) return
+        console.log(JSON.stringify({ eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName, force: event.force } }))
     }
 
-    infoHistory(event,data){
-        if(this.disabled) return
+    infoHistory(event, data) {
+        if (this.disabled) return
         console.log(JSON.stringify({ eventBusInternalLogHistory: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName, ...data } }))
     }
 
-    error(event,error = "") {
-        if(this.disabled) return
+    error(event, error = "") {
+        if (this.disabled) return
         console.error(JSON.stringify({
             eventBusInternalError: error,
-            eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName }
-        })) 
+            eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName, force: event.force }
+        }))
     }
 }
 

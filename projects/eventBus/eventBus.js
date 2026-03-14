@@ -9,12 +9,12 @@ dotenv.config({
 
 export class EventBus {
     complete = true
-    static async init(retryCount = 0) {
+    static async init(retryCount = 0, prefetch = 4) {
         try {
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             EventBus.channel = await connection.createChannel()
             console.log("🚀 Connected to RabbitMQ...")
-            await EventBus.channel.prefetch(4)
+            await EventBus.channel.prefetch(prefetch)
         } catch (error) {
             console.log(error)
             if (retryCount <= 3) {
@@ -24,6 +24,10 @@ export class EventBus {
                 throw error
             }
         }
+    }
+
+    prefetch(prefetch) {
+        EventBus.channel.prefetch(prefetch)
     }
 
     constructor({ queueName, exchangeName } = {}) {

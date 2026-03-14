@@ -5,7 +5,7 @@ const knex = Knex({
   connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@postgres:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`,
 });
 export class Repository {
-  constructor() {}
+  constructor() { }
 
   static async init() {
     const exists = await knex.schema.hasTable('payrolls');
@@ -49,9 +49,12 @@ export class Repository {
     return knex('payrolls').insert(payrolls);
   }
 
-  async delete({ date, institutionName, index,page, traceId, link }) {
+  async delete({ date, institutionName, link, _ids }) {
+    knex('payrolls')
+      .whereIn('_id', _ids)
+      .del();
     return knex('payrolls')
-      .where({ date, institutionName, index: index ?? page, traceId, link })
+      .where({ date, institutionName, link })
       .del();
   }
 }
