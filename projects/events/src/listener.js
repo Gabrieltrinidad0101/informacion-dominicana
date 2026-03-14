@@ -11,7 +11,7 @@ export class EventListener {
         this.eventBus.on('readInsertData', 'insertDatas', this.saveBusinessEvent)
         this.eventBus.on('readPayrollExportToJsons', 'payrollExportToJsons', this.saveBusinessEvent)
         this.eventBus.on('readWorldBank', 'worldBanks', this.saveBusinessEvent)
-        this.eventBus.on('completed_event', 'completed_event', this.saveProgress, false)
+        this.eventBus.on('completed_event', 'completed_event', this.saveProgress)
     }
 
     saveBusinessEvent = async (event) => {
@@ -22,7 +22,6 @@ export class EventListener {
     }
 
     saveProgress = async (event) => {
-        console.log(event)
         await this.eventRepository.saveProgress(event)
     }
 }

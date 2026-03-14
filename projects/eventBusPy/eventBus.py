@@ -5,11 +5,12 @@ import hashlib
 import logging
 import os
 import copy
+import signal
 from datetime import datetime, timezone
 
 def _deterministic_id(*parts):
-    key = ':'.join(str(p or '') for p in parts)
-    return hashlib.sha256(key.encode()).hexdigest()[:24]
+    key = '\x00'.join(str(p) if p is not None else '' for p in parts)
+    return hashlib.sha256(key.encode()).hexdigest()
 
 DETERMINISTIC_KEYS = {
     'downloads':              lambda e: _deterministic_id(e.get('link'), e.get('year'), e.get('month'), e.get('institutionName'), e.get('typeOfData')),
@@ -78,8 +79,9 @@ class EventBus:
 
         def _consume_callback(ch, method, properties, body):
             message = json.loads(body)
+            headers = properties.headers or {}
+            success = False
             try:
-                headers = properties.headers or {}
                 force = headers.get('force', False)
                 type_of_execute = headers.get('typeOfExecute', None)
 
@@ -93,33 +95,42 @@ class EventBus:
 
                 callback(copy.deepcopy(message), {'force': force, 'typeOfExecute': type_of_execute})
                 ch.basic_ack(delivery_tag=method.delivery_tag)
+                success = True
                 logs.info(message)
             except Exception as e:
                 try:
-                    message['retryCount'] = message.get('retryCount', 0) + 1
-                    message.setdefault('errors', []).append(str(e))
-                    if message['retryCount'] >= 3:
+                    retry_count = (headers.get('x-retry-count') or 0) + 1
+                    updated_message = {
+                        **message,
+                        '_retryCount': retry_count,
+                        '_errors': [
+                            *(message.get('_errors') or []),
+                            { 'message': str(e), 'date': datetime.now(timezone.utc).isoformat() }
+                        ]
+                    }
+                    if retry_count >= 3:
                         logging.error(json.dumps({
                             "eventBusMaxInternalRetryError": str(e),
                             "eventBusInternalLog": {
                                 "traceId": message.get('traceId'),
                                 "_id": message.get('_id'),
-                                "exchangeName": message.get('exchangeName')
+                                "exchangeName": message.get('exchangeName'),
+                                "retryCount": retry_count
                             }
                         }))
-                        ch.basic_ack(delivery_tag=method.delivery_tag)
+                        ch.basic_nack(delivery_tag=method.delivery_tag, multiple=False, requeue=False)
                         return
                     self.try_queue(queue_name, exchange_name)
                     try_exchange = f"{exchange_name}_try"
                     ch.basic_publish(
                         exchange=try_exchange,
                         routing_key='',
-                        body=json.dumps(message),
-                        properties=pika.BasicProperties(headers={"x-retry-count": message['retryCount']})
+                        body=json.dumps(updated_message),
+                        properties=pika.BasicProperties(headers={**headers, 'x-retry-count': retry_count})
                     )
+                    ch.basic_ack(delivery_tag=method.delivery_tag)
                     logs.error(message, str(e))
                 except Exception as parse_error:
-                    logging.error(parse_error)
                     logging.error(json.dumps({
                         "eventBusInternalRetryError": str(parse_error),
                         "eventBusInternalLog": {
@@ -128,14 +139,24 @@ class EventBus:
                             "exchangeName": message.get('exchangeName')
                         }
                     }))
-                ch.basic_ack(delivery_tag=method.delivery_tag)
+                    ch.basic_nack(delivery_tag=method.delivery_tag, multiple=False, requeue=False)
             finally:
+                if not self.complete:
+                    return
                 self._publish_completed_event({
                     'traceId': message.get('traceId'),
                     '_id': message.get('_id'),
                     'exchangeName': message.get('exchangeName'),
-                    'completedDate': datetime.now(timezone.utc).isoformat()
+                    **({'completedDate': datetime.now(timezone.utc).isoformat()} if success else {'errorDate': datetime.now(timezone.utc).isoformat()})
                 })
+
+        def _shutdown(sig, frame):
+            logging.info(json.dumps({"gracefulShutdown": signal.Signals(sig).name}))
+            self.channel.stop_consuming()
+            self.connection.close()
+
+        signal.signal(signal.SIGTERM, _shutdown)
+        signal.signal(signal.SIGINT, _shutdown)
 
         self.channel.basic_consume(queue=queue_name, on_message_callback=_consume_callback)
         self.channel.start_consuming()
@@ -153,8 +174,8 @@ class EventBus:
             return
         if metadata.get('typeOfExecute') == 'onlyOneAndNext':
             metadata['typeOfExecute'] = 'onlyOne'
-        data.pop("errors", None)
-        data.pop("retryCount", None)
+        data.pop("_errors", None)
+        data.pop("_retryCount", None)
         data.pop("progressDate", None)
         data.pop("completedDate", None)
         data.pop("startDate", None)

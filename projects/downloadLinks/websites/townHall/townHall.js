@@ -11,17 +11,17 @@ export class DownloadTownHallData {
         link,
         institutionType,
         institutionName
-    },metadata) => {
+    }, metadata) => {
         const browser = await puppeteer.launch({
-            executablePath:'/usr/bin/chromium',
+            executablePath: '/usr/bin/chromium',
             headless: "new",
-              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         })
         const page = await browser.newPage()
         await page.setUserAgent(
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-);
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        );
         await page.goto(link)
         const nominationsByYearLink = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6 > a")
         const nominationsByYear = await page.$$(".el-folder.col-lg-6.col-md-6.col-sm-6")
@@ -53,7 +53,7 @@ export class DownloadTownHallData {
                         year,
                         month,
                         institutionName
-                    },metadata)
+                    }, metadata)
             }
         }
         browser.close()

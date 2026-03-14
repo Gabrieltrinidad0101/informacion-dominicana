@@ -45,17 +45,11 @@ export class Repository {
     }
   }
 
-  async save(payrolls) {
-    return knex('payrolls').insert(payrolls);
-  }
-
-  async delete({ date, institutionName, link, _ids }) {
-    knex('payrolls')
-      .whereIn('_id', _ids)
-      .del();
-    return knex('payrolls')
-      .where({ date, institutionName, link })
-      .del();
+  async deleteAndSave({ date, institutionName, link }, payrolls) {
+    return knex.transaction(async (trx) => {
+      await trx('payrolls').where({ date, institutionName, link, index: payrolls.index ?? payrolls.page }).del()
+      await trx('payrolls').insert(payrolls)
+    })
   }
 }
 

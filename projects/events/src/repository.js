@@ -5,7 +5,7 @@ await mongoose.connect(`mongodb://${process.env.MONGO_DB_USER ?? 'root'}:${proce
 console.log("🚀 Connected to MongoDB...")
 
 const models = {}
-const dynamicSchema = new mongoose.Schema({}, { strict: false });
+const dynamicSchema = new mongoose.Schema({ _id: String }, { strict: false });
 
 export class EventsRepository {
     static async init(retryCount = 0) {
@@ -29,7 +29,7 @@ export class EventsRepository {
                 const Model = mongoose.model(key, dynamicSchema);
                 for (const value of values) {
                     await Model.updateOne(
-                        { _id: new mongoose.Types.ObjectId(value._id) },
+                        { _id: value._id },
                         {
                             $set: {
                                 ...value
@@ -83,7 +83,14 @@ export class EventsRepository {
         delete data.exchangeName;
 
         const { page, limit, filters: filtersJson } = data;
-        const filters = filtersJson ? JSON.parse(filtersJson) : null
+        let filters = null
+        if (filtersJson) {
+            try {
+                filters = JSON.parse(filtersJson)
+            } catch {
+                throw new Error(`Invalid filters JSON: ${filtersJson}`)
+            }
+        }
 
         if (page !== undefined && limit !== undefined) {
             delete data.page;
@@ -118,15 +125,11 @@ export class EventsRepository {
 
     async save(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
-        if (!data._id) data._id = new mongoose.Types.ObjectId()
         const { _id, ...fields } = data
-        await Model.findByIdAndUpdate(
-            _id,
+        await Model.findOneAndUpdate(
+            { _id },
             { $set: fields },
-            {
-                upsert: true,
-                new: true,
-            }
+            { upsert: true, new: true }
         );
     }
 
@@ -142,8 +145,8 @@ export class EventsRepository {
         const [pending, inProgress, completed, withErrors] = await Promise.all([
             Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false }, completedDate: { $exists: false } }),
             Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
-            Model.countDocuments({ completedDate: { $exists: true }, errors: { $exists: false } }),
-            Model.countDocuments({ errors: { $exists: true } }),
+            Model.countDocuments({ completedDate: { $exists: true }, _errors: { $exists: false } }),
+            Model.countDocuments({ _errors: { $exists: true } }),
         ]);
         return { pending, inProgress, completed, withErrors };
     }
@@ -155,7 +158,7 @@ export class EventsRepository {
         if (data.completedDate) update.completedDate = data.completedDate
         if (!Object.keys(update).length) return
         console.log({ update })
-        await Model.findByIdAndUpdate(data._id, { $set: update })
+        await Model.findOneAndUpdate({ _id: data._id }, { $set: update })
     }
 
     async updateEvent(data) {

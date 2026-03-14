@@ -8,14 +8,13 @@ export class ReExecuteEvents {
         const search = data.event
         const events = await this.getEvents(search)
         await this.eventsRepository.updateEvent({ ...search })
-        events.forEach(async event => {
-            event.retryCount = event.retryCount ?? 0
-            event.retryCount++
+        for (const event of events) {
+            console.log(event)
             await this.eventBus.emitCustomExchange(search.exchangeName, event, {
                 force: data.force,
                 typeOfExecute: data.typeOfExecute,
             })
-        })
+        }
     }
 
     getEvents = async (data) => {
