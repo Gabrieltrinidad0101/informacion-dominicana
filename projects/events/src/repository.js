@@ -119,9 +119,10 @@ export class EventsRepository {
     async save(data) {
         const Model = models[data.exchangeName] ?? mongoose.model(data.exchangeName, dynamicSchema);
         if (!data._id) data._id = new mongoose.Types.ObjectId()
+        const { _id, ...fields } = data
         await Model.findByIdAndUpdate(
-            data._id,
-            data,
+            _id,
+            { $set: fields },
             {
                 upsert: true,
                 new: true,
@@ -139,7 +140,7 @@ export class EventsRepository {
     async getStats(exchangeName) {
         const Model = models[exchangeName] ?? mongoose.model(exchangeName, dynamicSchema);
         const [pending, inProgress, completed, withErrors] = await Promise.all([
-            Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false } }),
+            Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false }, completedDate: { $exists: false } }),
             Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
             Model.countDocuments({ completedDate: { $exists: true } }),
             Model.countDocuments({ errors: { $exists: true } }),

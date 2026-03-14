@@ -9,7 +9,7 @@ dotenv.config({
 
 export class EventBus {
     complete = true
-    static async init(retryCount = 0, prefetch = 4) {
+    static async init(retryCount = 0, prefetch = 100) {
         try {
             const connection = await amqplib.connect(`amqp://${process.env.RABBITMQ_USER ?? 'admin'}:${process.env.RABBITMQ_PASSWORD ?? 'admin'}@rabbitmq:5672`)
             EventBus.channel = await connection.createChannel()
@@ -26,8 +26,8 @@ export class EventBus {
         }
     }
 
-    prefetch(prefetch) {
-        EventBus.channel.prefetch(prefetch)
+    async prefetch(prefetch) {
+        await EventBus.channel.prefetch(prefetch)
     }
 
     constructor({ queueName, exchangeName } = {}) {
@@ -125,7 +125,7 @@ export class EventBus {
                 }
                 EventBus.channel.ack(message)
             } finally {
-                if (this.complete && !success) return
+                if (!this.complete || !success) return
                 EventBus.channel.publish(
                     "",
                     "completed_event",

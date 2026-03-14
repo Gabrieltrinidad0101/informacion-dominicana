@@ -37,7 +37,7 @@ npm run postDownload-pro
 npm test                        # Run all vitest tests in projects/test/
 npm run postDownload-test       # Run postDownload-specific tests
 ```
-Tests run via **Vitest**. The integration test in `projects/test/happyPath.test.js` requires a running RabbitMQ and MinIO (use Docker).
+Tests run via **Vitest**. The integration test in `projects/test/happyPath.test.js` requires a running RabbitMQ and MinIO (use Docker). Tests use `eventBus.testMode = true` and bind to prefixed test queues (e.g., `testDownload`). Use a Promise/resolver pattern to await async pipeline events. Timeout: 60s.
 
 ### Docker (via Makefile)
 ```bash
@@ -82,11 +82,15 @@ Each service listens on a RabbitMQ exchange and emits to the next. The `events` 
 | `exportToJson` | Node.js | Exports aggregated stats to MinIO as JSON |
 | `events` | Node.js (Express, port 3001) | Event tracking, re-execution API |
 | `filesManager` | Node.js (Express, port 4000) | HTTP proxy for MinIO files |
+| `worldBank` | Node.js | World Bank data source (separate pipeline) |
 | `pII` | Python | PII handling |
 | `auth` | Node.js | Authentication |
 | `uploadFiles` | Node.js | File upload |
+| `apigetway` | Node.js | API gateway |
 | `frontend` | Docusaurus | Public-facing data visualization site |
 | `admin` | Node.js | Admin interface |
+
+> **Naming note**: Docker Compose service names use underscores (`download_links`, `post_download`); npm scripts and directory names use camelCase (`downloadLinks`, `postDownload`). `service-path-map.sh` maps between them for CI/CD.
 
 ### Shared Libraries (imported directly by path across services)
 
@@ -105,9 +109,25 @@ Each service listens on a RabbitMQ exchange and emits to the next. The `events` 
 | MinIO | S3-compatible file storage | 9000, 9001 (console) |
 | Loki + Promtail + Grafana | Log aggregation | 3100, 5000 |
 
+### Events Service REST API (port 3001)
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/events` | Health check |
+| `GET` | `/events/find` | Query events (supports filter params) |
+| `GET` | `/events/stats?exchangeName={name}` | Get counts: pending/inProgress/completed/withErrors |
+| `POST` | `/events/reExecuteEvents` | Re-queue failed events |
+| `DELETE` | `/events/deleteEvents` | Delete events by query |
+
+Listens on all pipeline exchanges and stores lifecycle state in MongoDB: `startDate` → `progressDate` → `completedDate`. On startup, loads `defaultEvents.json` via `insertDefaultValues()`.
+
 ### Event Message Schema
 
 Events carry a `traceId` (UUID), `exchangeName`, `institutionName`, `typeOfData`, `year`, `month`, and service-specific fields. The `events` service tracks `progressDate` and `completedDate` per event.
+
+Special message headers control execution:
+- `force` — bypass deduplication checks
+- `typeOfExecute` — `onlyOne` or `onlyOneAndNext` to limit execution scope
 
 ### File Storage Path Convention
 
@@ -118,10 +138,17 @@ Example: `Test/nomina/postDownloads/2025/diciembre/_.16.jpg`
 
 - `RABBITMQ_USER`, `RABBITMQ_PASSWORD` — defaults: `admin`/`admin`
 - `MONGO_INITDB_ROOT_USERNAME`, `MONGO_INITDB_ROOT_PASSWORD` — defaults: `root`/`root`
+- `MONGO_DB_USER`, `MONGO_DB_PASSWORD` — runtime connection credentials (defaults: `root`/`root`)
 - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`
 - `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD` — defaults: `MINIO_ROOT_USER`/`MINIO_ROOT_PASSWORD`
+- `ENDPOINT` — MinIO endpoint, default `http://minio:9000`
+- `REGION` — S3 region, default `us-east-1`
 - `API_AI_KEY` — DeepSeek API key for `aiTextAnalyzer`
+- `ENCRYPTION_KEY` — encrypts sensitive fields in `aiTextAnalyzer`
+- `VALIDATE_ID_NUMBER_API` — Dominican national ID validation API endpoint
 - `DATAS` — data source selection
+- `PACKAGE_TOKEN` — GitHub Container Registry token (CI/CD only)
+- `DOKPLOY_{SERVICE}_WEBHOOK` — Dokploy deployment webhook per service (e.g., `DOKPLOY_DOWNLOAD_LINKS_WEBHOOK`)
 
 Each service has its own `.env` file loaded via `dotenv`.
 
@@ -129,6 +156,8 @@ Each service has its own `.env` file loaded via `dotenv`.
 
 - **ES Modules**: All JS services use `"type": "module"` and `.js` extensions in imports.
 - **Retry logic**: EventBus auto-retries up to 3 times via dead-letter exchanges (`{queue}_try`).
+- **Prefetch/concurrency**: `EventBus.init(exchange, handler, prefetch?)` defaults to `prefetch=4`. High-throughput services (e.g., `insertData`) override with `eventBus.prefetch(100)`.
 - **Test mode**: `eventBus.testMode = true` disables logging for unit tests.
 - **Mixed language**: JS services for business logic/API, Python services for OCR (`extractedText`) and PDF processing (`postDownloadPy`, `pII`).
 - **Monorepo workspaces**: Root `package.json` uses npm workspaces (`"workspaces": ["projects/*"]`).
+- **CI/CD**: `build-changed-services.sh` diffs `HEAD~1..HEAD`, builds only changed service Docker images, pushes to `ghcr.io/gabrieltrinidad0101/informacion-dominicana-{service}:latest`, and triggers Dokploy webhooks.

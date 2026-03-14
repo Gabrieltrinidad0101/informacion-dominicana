@@ -8,10 +8,12 @@ from datetime import datetime, timezone
 logging.basicConfig(level=logging.INFO)
 
 class EventBus:
+    complete = True
+
     def __init__(self, queue_name=None, exchange_name=None, host='rabbitmq', user='admin', password='admin', prefetch_count=4):
-        credentials = pika.PlainCredentials(os.getenv("RABBITMQ_USER",user),os.getenv("RABBITMQ_PASSWORD",password))
+        credentials = pika.PlainCredentials(os.getenv("RABBITMQ_USER", user), os.getenv("RABBITMQ_PASSWORD", password))
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=host, credentials=credentials,socket_timeout=20)
+            pika.ConnectionParameters(host=host, credentials=credentials, socket_timeout=20)
         )
         self.channel = self.connection.channel()
         self.channel.basic_qos(prefetch_count=prefetch_count)
@@ -48,6 +50,9 @@ class EventBus:
     def try_queue(self, queue_name, exchange_name):
         self._setup_try_queue(queue_name, exchange_name)
 
+    def prefetch(self, prefetch_count):
+        self.channel.basic_qos(prefetch_count=prefetch_count)
+
     def _publish_completed_event(self, payload):
         self.channel.basic_publish(
             exchange='',
@@ -60,22 +65,23 @@ class EventBus:
 
         def _consume_callback(ch, method, properties, body):
             message = json.loads(body)
-            completed = False
+            success = False
             try:
                 headers = properties.headers or {}
                 force = headers.get('force')
                 type_of_execute = headers.get('typeOfExecute')
 
-                self._publish_completed_event({
-                    'traceId': message.get('traceId'),
-                    '_id': message.get('_id'),
-                    'exchangeName': message.get('exchangeName'),
-                    'progressDate': datetime.now(timezone.utc).isoformat()
-                })
+                if self.complete:
+                    self._publish_completed_event({
+                        'traceId': message.get('traceId'),
+                        '_id': message.get('_id'),
+                        'exchangeName': message.get('exchangeName'),
+                        'progressDate': datetime.now(timezone.utc).isoformat()
+                    })
 
                 callback(message, {'force': force, 'typeOfExecute': type_of_execute})
                 ch.basic_ack(delivery_tag=method.delivery_tag)
-                completed = True
+                success = True
                 logs.info(message)
             except Exception as e:
                 try:
@@ -113,7 +119,7 @@ class EventBus:
                     }))
                 ch.basic_ack(delivery_tag=method.delivery_tag)
             finally:
-                if not completed:
+                if not self.complete or not success:
                     return
                 self._publish_completed_event({
                     'traceId': message.get('traceId'),
@@ -127,15 +133,14 @@ class EventBus:
 
     def emit(self, exchange_name, dataOriginal, metadataOriginal=None):
         data = {**dataOriginal}
+        metadata = {**(metadataOriginal or {})}
         if 'traceId' not in data:
             data['traceId'] = str(uuid.uuid4())
         data['exchangeName'] = exchange_name
-        metadata = {**metadataOriginal}
-        if metadata:
-            if metadata.get('typeOfExecute') == 'onlyOne':
-                return
-            if metadata.get('typeOfExecute') == 'onlyOneAndNext':
-                metadata['typeOfExecute'] = 'onlyOne'
+        if metadata.get('typeOfExecute') == 'onlyOne':
+            return
+        if metadata.get('typeOfExecute') == 'onlyOneAndNext':
+            metadata['typeOfExecute'] = 'onlyOne'
         data.pop("errors", None)
         data.pop("retryCount", None)
         data.pop("progressDate", None)
@@ -148,6 +153,18 @@ class EventBus:
             properties=pika.BasicProperties(headers=metadata)
         )
 
+    def emit_custom_exchange(self, exchange_name, event, metadata=None):
+        if 'traceId' not in event:
+            event['traceId'] = str(uuid.uuid4())
+        event['exchangeName'] = exchange_name
+        self.channel.basic_publish(
+            exchange=exchange_name,
+            routing_key='',
+            body=json.dumps(event),
+            properties=pika.BasicProperties(headers=metadata or {})
+        )
+
+
 class Logs:
     def info(self, data):
         print(json.dumps({
@@ -158,7 +175,7 @@ class Logs:
             }
         }))
 
-    def error(self, data,error):
+    def error(self, data, error):
         print(json.dumps({
             "eventBusInternalError": error,
             "eventBusInternalLog": {
