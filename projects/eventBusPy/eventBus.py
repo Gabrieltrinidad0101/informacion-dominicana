@@ -1,9 +1,22 @@
 import pika
 import json
 import uuid
+import hashlib
 import logging
 import os
+import copy
 from datetime import datetime, timezone
+
+def _deterministic_id(*parts):
+    key = ':'.join(str(p or '') for p in parts)
+    return hashlib.sha256(key.encode()).hexdigest()[:24]
+
+DETERMINISTIC_KEYS = {
+    'downloads':              lambda e: _deterministic_id(e.get('link'), e.get('year'), e.get('month'), e.get('institutionName'), e.get('typeOfData')),
+    'extractedTexts':         lambda e: _deterministic_id(e.get('imageUrl'), e.get('traceId')),
+    'extractedTextAnalyzers': lambda e: _deterministic_id(e.get('extractedTextUrl'), e.get('traceId')),
+    'aiTextAnalyzers':        lambda e: _deterministic_id(e.get('extractedTextAnalyzerUrl'), e.get('traceId')),
+}
 
 logging.basicConfig(level=logging.INFO)
 
@@ -65,11 +78,10 @@ class EventBus:
 
         def _consume_callback(ch, method, properties, body):
             message = json.loads(body)
-            success = False
             try:
                 headers = properties.headers or {}
-                force = headers.get('force')
-                type_of_execute = headers.get('typeOfExecute')
+                force = headers.get('force', False)
+                type_of_execute = headers.get('typeOfExecute', None)
 
                 if self.complete:
                     self._publish_completed_event({
@@ -79,9 +91,8 @@ class EventBus:
                         'progressDate': datetime.now(timezone.utc).isoformat()
                     })
 
-                callback(message, {'force': force, 'typeOfExecute': type_of_execute})
+                callback(copy.deepcopy(message), {'force': force, 'typeOfExecute': type_of_execute})
                 ch.basic_ack(delivery_tag=method.delivery_tag)
-                success = True
                 logs.info(message)
             except Exception as e:
                 try:
@@ -119,8 +130,6 @@ class EventBus:
                     }))
                 ch.basic_ack(delivery_tag=method.delivery_tag)
             finally:
-                if not self.complete or not success:
-                    return
                 self._publish_completed_event({
                     'traceId': message.get('traceId'),
                     '_id': message.get('_id'),
@@ -137,6 +146,9 @@ class EventBus:
         if 'traceId' not in data:
             data['traceId'] = str(uuid.uuid4())
         data['exchangeName'] = exchange_name
+        if not data.get('_id'):
+            id_fn = DETERMINISTIC_KEYS.get(exchange_name)
+            if id_fn: data['_id'] = id_fn(data)
         if metadata.get('typeOfExecute') == 'onlyOne':
             return
         if metadata.get('typeOfExecute') == 'onlyOneAndNext':
@@ -157,6 +169,9 @@ class EventBus:
         if 'traceId' not in event:
             event['traceId'] = str(uuid.uuid4())
         event['exchangeName'] = exchange_name
+        if not event.get('_id'):
+            id_fn = DETERMINISTIC_KEYS.get(exchange_name)
+            if id_fn: event['_id'] = id_fn(event)
         self.channel.basic_publish(
             exchange=exchange_name,
             routing_key='',

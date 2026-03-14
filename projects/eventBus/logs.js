@@ -3,7 +3,7 @@ class Logs {
 
     info(event) {
         if (this.disabled) return
-        console.log(JSON.stringify({ eventBusInternalLog: { traceId: event.traceId, _id: event._id, exchangeName: event.exchangeName, force: event.force } }))
+        console.log(JSON.stringify({ eventBusInternalLog: { traceId: event.traceId, _id: event._id ?? "", exchangeName: event.exchangeName, force: event.force ?? false } }))
     }
 
     infoHistory(event, data) {

@@ -142,7 +142,7 @@ export class EventsRepository {
         const [pending, inProgress, completed, withErrors] = await Promise.all([
             Model.countDocuments({ startDate: { $exists: true }, progressDate: { $exists: false }, completedDate: { $exists: false } }),
             Model.countDocuments({ progressDate: { $exists: true }, completedDate: { $exists: false } }),
-            Model.countDocuments({ completedDate: { $exists: true } }),
+            Model.countDocuments({ completedDate: { $exists: true }, errors: { $exists: false } }),
             Model.countDocuments({ errors: { $exists: true } }),
         ]);
         return { pending, inProgress, completed, withErrors };
@@ -154,6 +154,7 @@ export class EventsRepository {
         if (data.progressDate) update.progressDate = data.progressDate
         if (data.completedDate) update.completedDate = data.completedDate
         if (!Object.keys(update).length) return
+        console.log({ update })
         await Model.findByIdAndUpdate(data._id, { $set: update })
     }
 

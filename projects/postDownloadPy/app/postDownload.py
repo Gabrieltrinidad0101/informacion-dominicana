@@ -17,14 +17,14 @@ class PostDownload:
     def postDownload(self, data, metadata):
         if not data.get("urlDownload").endswith(".pdf"):
             return
-        data.pop("_id", None)
+
         file_path = self.file_manager_client.download_file(data["urlDownload"])
         doc = fitz.open(file_path)
         for page_index, page in enumerate(doc):
-            self.extract_text_from_pdf(data, metadata,page,page_index)
-            self.extract_images_from_pdf(data, metadata,doc,page,page_index)
-    
-    def extract_images_from_pdf(self, data, metadata,doc,page,page_index):
+            self.extract_text_from_pdf(data, metadata, page, page_index)
+            self.extract_images_from_pdf(data, metadata, doc, page, page_index)
+
+    def extract_images_from_pdf(self, data, metadata, doc, page, page_index):
         image_list = page.get_images(full=True)
 
         for img_index, img in enumerate(image_list):
@@ -33,17 +33,17 @@ class PostDownload:
 
             image_bytes = base_image["image"]
             image_ext = base_image["ext"]
-            
+
             image_url = self.file_manager_client.generate_url(
                 data,
                 'postDownloads',
                 f'page_{page_index}_img_{img_index}.{image_ext}'
             )
-            
+
             images_meta_url = self.file_manager_client.generate_url(
                 data, 'postDownloads', f'page_{page_index}_img_{img_index}.json'
             )
-            
+
             image_exist = self.file_manager_client.file_exists(image_url)
             images_meta_exist = self.file_manager_client.file_exists(images_meta_url)
             if metadata.get('force') or not image_exist:
@@ -81,13 +81,12 @@ class PostDownload:
                 metadata
             )
 
-    def extract_text_from_pdf(self, data, metadata,page,page_index):
-        extracted_text_url = self.file_manager_client.generate_url(data,'extractedText',str(page_index + 1) + '.json' )
+    def extract_text_from_pdf(self, data, metadata, page, page_index):
+        extracted_text_url = self.file_manager_client.generate_url(data, 'extractedText', str(page_index + 1) + '.json')
         file_exist = self.file_manager_client.file_exists(extracted_text_url)
         if metadata.get('force') or not file_exist:
             lines = []
             blocks = page.get_text("dict")["blocks"]
-            
 
             for block in blocks:
                 if block["type"] != 0:
@@ -108,10 +107,10 @@ class PostDownload:
                 "pageAngle": page.rotation,
                 "lines": lines
             })
-            self.file_manager_client.create_text_file(extracted_text_url,payload)
-        self.event_bus.emit('extractedTextAnalyzers',{
+            self.file_manager_client.create_text_file(extracted_text_url, payload)
+        self.event_bus.emit('extractedTextAnalyzers', {
             **data,
             "index": page_index,
             "extractedTextUrl": extracted_text_url,
             "extractedTextType": "Text"
-        },metadata)
+        }, metadata)

@@ -3,6 +3,16 @@ import crypto from "crypto"
 import { logs } from "./logs.js"
 import dotenv from "dotenv"
 
+const deterministicId = (...parts) =>
+    crypto.createHash('sha256').update(parts.join(':')).digest('hex').slice(0, 24)
+
+const DETERMINISTIC_KEYS = {
+    downloads:              (e) => deterministicId(e.link, e.year, e.month, e.institutionName, e.typeOfData),
+    extractedTexts:         (e) => deterministicId(e.imageUrl, e.traceId),
+    extractedTextAnalyzers: (e) => deterministicId(e.extractedTextUrl, e.traceId),
+    aiTextAnalyzers:        (e) => deterministicId(e.extractedTextAnalyzerUrl, e.traceId),
+}
+
 dotenv.config({
     override: true
 })
@@ -125,7 +135,7 @@ export class EventBus {
                 }
                 EventBus.channel.ack(message)
             } finally {
-                if (!this.complete || !success) return
+                if (!this.complete) return
                 EventBus.channel.publish(
                     "",
                     "completed_event",
@@ -144,6 +154,10 @@ export class EventBus {
         const metadataCopy = { ...metadata }
         if (!data.traceId) data.traceId = crypto.randomUUID()
         data.exchangeName = exchangeName
+        if (!data._id) {
+            const idFn = DETERMINISTIC_KEYS[exchangeName]
+            if (idFn) data._id = idFn(data)
+        }
         if (metadataCopy?.typeOfExecute === "onlyOne") return;
         if (metadataCopy?.typeOfExecute === "onlyOneAndNext") metadataCopy.typeOfExecute = "onlyOne"
         delete data.errors
@@ -159,6 +173,10 @@ export class EventBus {
     emitCustomExchange(exchangeName, event, metadata) {
         if (!event.traceId) event.traceId = crypto.randomUUID()
         event.exchangeName = exchangeName
+        if (!event._id) {
+            const idFn = DETERMINISTIC_KEYS[exchangeName]
+            if (idFn) event._id = idFn(event)
+        }
         EventBus.channel.publish(exchangeName, '', Buffer.from(JSON.stringify(event)), {
             headers: metadata
         })

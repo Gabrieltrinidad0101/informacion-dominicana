@@ -15,46 +15,6 @@ export class EventListener {
     }
 
     saveBusinessEvent = async (event) => {
-        if (event.exchangeName == 'downloads') {
-            const exist = await this.eventRepository.findOne({
-                institutionType: event.institutionType,
-                typeOfData: event.typeOfData,
-                link: event.link,
-                year: event.year,
-                month: event.month,
-                institutionName: event.institutionName,
-                exchangeName: event.exchangeName
-            })
-            if (exist) event = { ...event, "_id": exist._id }
-        }
-
-        if (event.exchangeName == 'extractedTexts') {
-            const exist = await this.eventRepository.findOne({
-                imageUrl: event.imageUrl,
-                traceId: event.traceId,
-                exchangeName: event.exchangeName
-            })
-            if (exist) event = { ...event, "_id": exist._id }
-        }
-
-        if (event.exchangeName == 'extractedTextAnalyzers') {
-            const exist = await this.eventRepository.findOne({
-                extractedTextUrl: event.extractedTextUrl,
-                traceId: event.traceId,
-                exchangeName: event.exchangeName
-            })
-            if (exist) event = { ...event, "_id": exist._id }
-        }
-
-        if (event.exchangeName == 'aiTextAnalyzers') {
-            const exist = await this.eventRepository.findOne({
-                extractedTextAnalyzerUrl: event.extractedTextAnalyzerUrl,
-                traceId: event.traceId,
-                exchangeName: event.exchangeName
-            })
-            if (exist) event = { ...event, "_id": exist._id }
-        }
-
         event.startDate = new Date()
         delete event.progressDate
         delete event.completedDate
@@ -62,6 +22,7 @@ export class EventListener {
     }
 
     saveProgress = async (event) => {
+        console.log(event)
         await this.eventRepository.saveProgress(event)
     }
 }
