@@ -107,6 +107,21 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  full_ai_process:
+    build:
+      context: .
+      dockerfile: ./projects/fullAIProcess/dockerfile
+    container_name: fullAIProcess
+    volumes:
+      - ./projects/fullAIProcess:/app/projects/fullAIProcess
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   insert_data:
     build:
       context: .

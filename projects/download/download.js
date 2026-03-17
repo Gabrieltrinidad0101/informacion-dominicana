@@ -19,8 +19,9 @@ export class Download {
         if (!fileExists) {
             await this.fileManagerClient.uploadFileFromUrl(data.link, downloadUrl)
         }
+        const nextExchange = data.fullAIProcess ? 'fullAIProcess' : 'postDownloads'
         await this.eventBus.emit(
-            'postDownloads',
+            nextExchange,
             {
                 ...data,
                 urlDownload: downloadUrl

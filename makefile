@@ -46,6 +46,9 @@ extractedTextAnalyzer:
 aiTextAnalyzer:
 	docker compose up ai_text_analyze -d --build
 
+fullAIProcess:
+	docker compose up full_ai_process -d --build
+
 insertData:
 	docker compose up insert_data -d --build
 

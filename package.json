@@ -25,6 +25,7 @@
     "auth": "nodemon  --legacy-watch  ./projects/auth/main.js --watch ./projects/auth",
     "uploadFiles": "nodemon  --legacy-watch  ./projects/uploadFiles/src/main.js --watch ./projects/uploadFiles",
     "worldBank": "nodemon --legacy-watch ./projects/worldBank/main.js --watch ./projects/worldBank",
+    "fullAIProcess": "nodemon --legacy-watch ./projects/fullAIProcess/main.js --watch ./projects/fullAIProcess",
     "downloadLinks-pro": "node projects/downloadLinks/main.js",
     "download-pro": "node ./projects/download/main.js",
     "events-pro": "node ./projects/events/main.js",
@@ -37,7 +38,8 @@
     "filesManager-pro": "node ./projects/filesManager/main.js ",
     "auth-pro": "node ./projects/auth/main.js",
     "uploadFiles-pro": "node ./projects/uploadFiles/src/main.js",
-    "worldBank-pro": "node ./projects/worldBank/main.js"
+    "worldBank-pro": "node ./projects/worldBank/main.js",
+    "fullAIProcess-pro": "node ./projects/fullAIProcess/main.js"
   },
   "keywords": [],
   "author": "",

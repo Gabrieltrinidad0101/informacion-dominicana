@@ -11,6 +11,7 @@ const DETERMINISTIC_KEYS = {
     extractedTexts:         (e) => deterministicId(e.imageUrl, e.traceId),
     extractedTextAnalyzers: (e) => deterministicId(e.extractedTextUrl, e.traceId),
     aiTextAnalyzers:        (e) => deterministicId(e.extractedTextAnalyzerUrl, e.traceId),
+    fullAIProcess:          (e) => deterministicId(e.urlDownload, e.traceId),
 }
 
 dotenv.config({
