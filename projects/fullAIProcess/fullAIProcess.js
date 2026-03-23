@@ -18,7 +18,8 @@ export class FullAIProcess {
         const pdfDoc = await PDFDocument.load(pdfBuffer)
         const pageCount = pdfDoc.getPageCount()
 
-        for (let pageIndex = 0; pageIndex < pageCount; pageIndex++) {
+        for (let pageIndex = pageCount - 1; pageIndex < pageCount; pageIndex++) {
+            console.log("stated")
             await this.processPage(data, metaData, pdfDoc, pageIndex)
         }
     }
@@ -26,7 +27,7 @@ export class FullAIProcess {
     processPage = async (data, metaData, pdfDoc, pageIndex) => {
         const aiTextAnalyzeUrl = this.fileManagerClient.generateUrl(data, 'fullAIProcess', `${pageIndex}.json`)
         const fileExists = await this.fileManagerClient.fileExists(aiTextAnalyzeUrl)
-
+        return
         if (metaData?.force || !fileExists) {
             const singlePageDoc = await PDFDocument.create()
             const [copiedPage] = await singlePageDoc.copyPages(pdfDoc, [pageIndex])
@@ -55,14 +56,10 @@ export class FullAIProcess {
                     ]
                 }]
             })
-
-            const rawText = message.content[0].text
-                .replaceAll('```json', '')
-                .replaceAll('```', '')
-                .trim()
-
-            const parsed = JSON.parse(rawText)
-            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: parsed }))
+            const rawText = this.parse(message.content[0].text)
+            console.log(rawText)
+            const json = JSON.parse(rawText)
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: json }))
         }
 
         await this.eventBus.emit('insertDatas', {
@@ -71,4 +68,24 @@ export class FullAIProcess {
             aiTextAnalyzeUrl
         }, metaData)
     }
+
+    parse = (text) => {
+        return text.split("\n").map(line => {
+            const [
+                name, document, position, income, sex,accountBack, phoneNumber
+            ] = line.split("|");
+
+            return {
+                name,
+                document,
+                position,
+                income,
+                sex,
+                accountBack,
+                phoneNumber,
+            };
+        });
+    };
 }
+
+

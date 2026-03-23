@@ -20,6 +20,13 @@
             "institutionName": "Ayuntamiento de Cotuí",
             "institutionType": "ayuntemineto",
             "exchangeName": "downloadLinks" 
+        },
+        {
+            "_id": "68faf1abeccddb368aa302b3",
+            "link": "https://www.intrant.gob.do/transparencia/recursos-humanos/nomina",
+            "institutionName": "Intrant",
+            "institutionType": "intrant",
+            "exchangeName": "downloadLinks" 
         }
     ],
     "worldBank": [

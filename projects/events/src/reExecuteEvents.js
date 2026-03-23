@@ -6,11 +6,12 @@ export class ReExecuteEvents {
 
     reExecuteEvents = async (data) => {
         const search = data.event
+        const overrides = data.overrides ?? {}
         const events = await this.getEvents(search)
         await this.eventsRepository.updateEvent({ ...search })
         for (const event of events) {
             console.log(event)
-            await this.eventBus.emitCustomExchange(search.exchangeName, event, {
+            await this.eventBus.emitCustomExchange(search.exchangeName, { ...event, ...overrides }, {
                 force: data.force,
                 typeOfExecute: data.typeOfExecute,
             })

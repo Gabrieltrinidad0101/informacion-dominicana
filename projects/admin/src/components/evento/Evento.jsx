@@ -72,6 +72,7 @@ export function Evento({ exchangeName, queryParams }) {
   const [openExecuteModal, setOpenExecuteModal] = useState(false);
   const [force, setForce] = useState(false);
   const [typeOfExecute, setTypeOfExecute] = useState('completeExecution');
+  const [fullAIProcess, setFullAIProcess] = useState(false);
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
@@ -144,11 +145,14 @@ export function Evento({ exchangeName, queryParams }) {
 
   const execute = async () => {
     try {
+      const overrides = {}
+      if (exchangeName === 'downloads' && fullAIProcess) overrides.fullAIProcess = true
       await fetch(`${constants.apiEvents}/reExecuteEvents`, {
         body: JSON.stringify({
           event: { ...filtersToSimpleQuery(), exchangeName },
           force: force,
           typeOfExecute: typeOfExecute,
+          overrides,
         }),
         method: "POST",
         headers: {
@@ -360,8 +364,13 @@ export function Evento({ exchangeName, queryParams }) {
       >
         <DialogTitle>Type of execute</DialogTitle>
         <DialogContent>
-          <Box display="flex">
-            <FormControlLabel control={<Checkbox checked={force} onChange={(e) => setForce(e.target.checked)} />} label="Force" />
+          <Box display="flex" flexDirection="column" gap={1}>
+            <Box display="flex" alignItems="center" gap={2}>
+              <FormControlLabel control={<Checkbox checked={force} onChange={(e) => setForce(e.target.checked)} />} label="Force" />
+              {exchangeName === 'downloads' && (
+                <FormControlLabel control={<Checkbox checked={fullAIProcess} onChange={(e) => setFullAIProcess(e.target.checked)} />} label="Full AI Process" />
+              )}
+            </Box>
             <RadioGroup
               defaultValue="completeExecution"
               row

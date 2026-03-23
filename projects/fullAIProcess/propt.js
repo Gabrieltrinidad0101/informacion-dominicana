@@ -1,58 +1,50 @@
-export const propt = () => `"""Convert the given OCR-extracted text into a JSON array following this structure:
+export const propt = () => `"""Extract structured data from OCR text.
 
-Example Output:
-{
-  "name": "Gabriel",
-  "document": "050-9999999-9",
-  "position": "MUSICIAN",
-  "income": "2645",
-  "sex": "M",
-  "accountBack": "1234567890",
-  "phoneNumber": "809-555-1234",
-  "x": 10,
-  "y": 10,
-  "width": 1000,
-  "height": 43,
-  "confidences": [0.9, 0.8, 0.7, 0.95, 0.85, 0.88]
-}
+OUTPUT FORMAT (STRICT):
+Return a list of records using this compact format:
 
-Extraction Rules:
-  - Based on the text position, group the text line by line.
-  - Get all the score values for each word and set into scores array.
-  - Each object represents either an individual or an institutional entry.
-  - Add the confidence for name, document, position, income, accountBack, and phoneNumber to confidences (in that order).
-  - For individuals:
-    - Include \`name\`, \`position\`, \`income\`, and \`sex\` (M/F) where available.
-    - Include \`accountBack\` (bank account/back account number) if available.
-    - Include \`phoneNumber\` if available.
-    - income can be \`Honorífico\`.
-    - Omit \`document\`, \`sex\`, \`accountBack\`, and \`phoneNumber\` if unavailable.
-    - Include bounding box: \`x\`, \`y\`, \`width\`, \`height\` of the line containing the main record.
-  - Combine multi-line text blocks if a single logical entry spans several lines.
-  - Remove or replace any internal \`"\` characters inside values with \`'\`.
-  - Fix numbers and clean OCR artifacts:
-    - Remove extra trailing zeros after the decimal or comma. Examples:
-        12,00000 → 12000
-        120,00000 → 120000
-    - Remove redundant decimals or commas and unify formatting:
-        10,000.00 → 10000
-        10,00000 → 10000
-        12,000.00 → 12000
-        9.000.00 → 9000
-    - Correct OCR misreads of symbols within numbers (like £, ¥, or spaces) and interpret as intended numeric value:
-        3,7£3.60 → 3104.60
-    - For phone numbers, standardize format (e.g., 8095551234, 809-555-1234, (809)555-1234).
-    - For accountBack, extract numeric bank account numbers, removing any special characters.
+name|document|position|income|sex|accountBack|phoneNumber
 
-**CRITICAL: POSITION NORMALIZATION & TEXT CLEANING**
-  - Before creating the JSON, normalize all \`position\` values and correct encoding errors in the text.
-  - **Encoding/Typo Correction:** Fix common OCR/encoding errors (e.g., \`TÃ% CNICO\` -> \`TÉCNICO\`, \`ALCALDÃ•A\` -> \`ALCALDÍA\`, \`Ã'\` -> \`Ñ\`).
-  - **Position Normalization Rules:**
-    - Convert all variants of a position to a single, standardized term.
-    - **Gendered Terms:** Standardize to the masculine singular form (e.g., \`regidora\`/\`regidores\` -> \`regidor\`, \`abogada\` -> \`abogado\`, \`presidenta\` -> \`presidente\`).
-    - **Group/Department Names:** Apply the same normalization to the role within a group name (e.g., \`cuerpo de bomberas\` -> \`cuerpo de bombero\`). The final \`position\` value for the entry should be the normalized role (e.g., \`bombero\`).
+RULES:
+- One record per line.
+- Use "|" as field separator.
+- Use "," for confidences.
+- If a field is missing, leave it empty (e.g., ||).
+- Do NOT output JSON.
+- Do NOT add explanations.
 
-**Filtering Rule:**
-  - If the text does **not** represent a valid person or institution, do **not** include it in the JSON output.
-  - Output should be **strictly valid JSON**, as a list of objects, with no explanations.
-"""`
+EXAMPLE:
+Gabriel|05099999999|musician|2645|M|1234567890|8095551234
+
+EXTRACTION:
+- Group text line by line based on position.
+- Combine multi-line entries when needed.
+- Each line = one person or institution.
+
+CLEANING:
+- Fix OCR encoding errors (e.g., TÃ% CNICO → TÉCNICO).
+- Normalize positions:
+  - Use masculine singular (regidora → regidor).
+  - Normalize roles inside groups (bomberos → bombero).
+
+NUMBERS:
+- Normalize numbers:
+  - 10,000.00 → 10000
+  - 9.000.00 → 9000
+  - Remove noise symbols (£, ¥, spaces).
+- income can be "Honorífico".
+
+PHONE:
+- Normalize to digits only (8095551234).
+
+ACCOUNT:
+- Keep only numeric characters.
+
+FILTER:
+- Ignore lines that are not valid persons or institutions.
+
+OUTPUT:
+- ONLY the records.
+- NO JSON.
+- NO TEXT.
+"""`;
