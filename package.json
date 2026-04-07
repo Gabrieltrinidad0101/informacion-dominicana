@@ -39,7 +39,10 @@
     "auth-pro": "node ./projects/auth/main.js",
     "uploadFiles-pro": "node ./projects/uploadFiles/src/main.js",
     "worldBank-pro": "node ./projects/worldBank/main.js",
-    "fullAIProcess-pro": "node ./projects/fullAIProcess/main.js"
+    "fullAIProcess-pro": "node ./projects/fullAIProcess/main.js",
+    "download": "node reBuild/download/main.js",
+    "aiProcess": "node reBuild/aiProcess/main.js",
+    "insertData": "node reBuild/insertData/main.js"
   },
   "keywords": [],
   "author": "",

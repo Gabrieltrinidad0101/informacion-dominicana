@@ -56,10 +56,8 @@ export class FullAIProcess {
                     ]
                 }]
             })
-            const rawText = this.parse(message.content[0].text)
-            console.log(rawText)
-            const json = JSON.parse(rawText)
-            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines: json }))
+            const lines = this.parse(message.content[0].text)
+            await this.fileManagerClient.createTextFile(aiTextAnalyzeUrl, JSON.stringify({ lines }))
         }
 
         await this.eventBus.emit('insertDatas', {
