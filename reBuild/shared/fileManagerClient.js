@@ -11,14 +11,14 @@ export class FileManagerClient {
     constructor() {
         this.s3 = new S3Client({
             region: process.env.REGION ?? "us-east-1",
-            endpoint: process.env.ENDPOINT ?? "http://minio:9000",
+            endpoint: process.env.ENDPOINT ?? "http://localhost:9000",
             forcePathStyle: true,
             credentials: {
                 accessKeyId: process.env.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
                 secretAccessKey: process.env.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD"
             }
         })
-        this.bucket = "informacion-dominicana"
+        this.bucket = "informacion-dominicana-v2"
     }
 
     uploadFileFromUrl = async (url, key) => {
@@ -87,7 +87,7 @@ export class FileManagerClient {
     // e.g. InstitutionName/nomina/download/2024/enero/file.pdf
     //    → InstitutionName/nomina/aiProcess/2024/enero/file.json
     toAiPath = (downloadKey) => {
-        return downloadKey
+        return "/" + downloadKey
             .replace("/download/", "/aiProcess/")
             .replace(/\.[^/.]+$/, ".json")
     }

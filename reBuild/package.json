@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "download": "node reBuild/download/main.js",
-    "aiProcess": "node reBuild/aiProcess/main.js",
-    "insertData": "node reBuild/insertData/main.js"
+    "download": "node ./download/main.js",
+    "aiProcess": "node ./aiProcess/main.js",
+    "insertData": "node ./insertData/main.js",
+    "exportToJson": "node ./exportToJson/main.js",
+    "validateId": "node ./validateId/main.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",

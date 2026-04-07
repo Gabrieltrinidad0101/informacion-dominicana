@@ -81,26 +81,23 @@ const processPdfPage = async (pdfDoc, pageIndex) => {
 // ── args ─────────────────────────────────────────────────────────────────────
 
 const parseArgs = (argv) => {
-    const args = { institutionKey: null, file: null, page: null }
+    const args = { institutionKey: null, file: null, page: null, year: null, force: false }
     for (let i = 2; i < argv.length; i++) {
         if (argv[i] === '--file') { args.file = argv[++i]; continue }
         if (argv[i] === '--page') { args.page = parseInt(argv[++i], 10); continue }
+        if (argv[i] === '--year') { args.year = argv[++i]; continue }
+        if (argv[i] === '--force') { args.force = true; continue }
         if (!args.institutionKey) args.institutionKey = argv[i]
     }
     return args
 }
 
 const args = parseArgs(process.argv)
+const force = args.force
 
-// If --file or --page is provided, recalculate unconditionally
-const force = args.file !== null || args.page !== null
+if (force) console.log('Force mode: existing AI results will be overwritten')
 
-if (force) {
-    const reasons = []
-    if (args.file !== null) reasons.push(`--file ${args.file}`)
-    if (args.page !== null) reasons.push(`--page ${args.page}`)
-    console.log(`Force mode (${reasons.join(', ')}): existing AI results will be overwritten`)
-}
+if (args.year) console.log(`Filtering by year: ${args.year}`)
 
 // ── main ─────────────────────────────────────────────────────────────────────
 
@@ -119,6 +116,10 @@ for (const institution of targetInstitutions) {
 
     let downloadKeys = await fileManagerClient.listFiles(prefix)
 
+    if (args.year) {
+        downloadKeys = downloadKeys.filter(k => k.split('/')[3] === args.year)
+    }
+
     // Filter by --file if provided (matches full key or just the filename)
     if (args.file) {
         downloadKeys = downloadKeys.filter(k =>
@@ -131,17 +132,8 @@ for (const institution of targetInstitutions) {
     }
 
     console.log(`Found ${downloadKeys.length} file(s) to process`)
-
     for (const downloadKey of downloadKeys) {
         const aiKey = fileManagerClient.toAiPath(downloadKey)
-
-        if (!force) {
-            const exists = await fileManagerClient.fileExists(aiKey)
-            if (exists) {
-                console.log(`Skip (AI result exists): ${downloadKey}`)
-                continue
-            }
-        }
 
         const ext = downloadKey.split('.').pop().toLowerCase()
         console.log(`Processing [${ext}]: ${downloadKey}`)
@@ -149,9 +141,13 @@ for (const institution of targetInstitutions) {
         const buffer = await fileManagerClient.getFile(downloadKey)
 
         if (ext === 'xlsx' || ext === 'xls') {
+            if (!force && await fileManagerClient.fileExists(aiKey)) {
+                console.log(`  Skipping (already exists): ${aiKey}`)
+                continue
+            }
             const lines = await processExcel(buffer)
             await fileManagerClient.createTextFile(aiKey, JSON.stringify({ lines }))
-            console.log(`  Saved (Excel→DeepSeek): ${aiKey} — ${lines.length} record(s)`)
+            console.log(`  Saved (Excel->DeepSeek): ${aiKey} — ${lines.length} record(s)`)
 
         } else if (ext === 'pdf') {
             const pdfDoc = await PDFDocument.load(buffer)
@@ -167,11 +163,15 @@ for (const institution of targetInstitutions) {
                     console.error(`  Page ${pageIndex} out of range (0–${pageCount - 1}), skipping`)
                     continue
                 }
+                const pageKey = aiKey.replace('.json', `_page${pageIndex}.json`)
+                if (!force && await fileManagerClient.fileExists(pageKey)) {
+                    console.log(`  Skipping (already exists): ${pageKey}`)
+                    continue
+                }
                 console.log(`  Processing page ${pageIndex + 1}/${pageCount}`)
                 const lines = await processPdfPage(pdfDoc, pageIndex)
-                const pageKey = aiKey.replace('.json', `_page${pageIndex}.json`)
                 await fileManagerClient.createTextFile(pageKey, JSON.stringify({ lines }))
-                console.log(`  Saved (PDF→Claude p${pageIndex}): ${pageKey} — ${lines.length} record(s)`)
+                console.log(`  Saved (PDF->Claude p${pageIndex}): ${pageKey} — ${lines.length} record(s)`)
             }
 
         } else {

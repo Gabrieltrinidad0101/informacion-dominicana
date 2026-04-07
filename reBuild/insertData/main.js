@@ -5,7 +5,7 @@ import { FileManagerClient } from '../shared/fileManagerClient.js'
 
 const knex = Knex({
     client: 'pg',
-    connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@${process.env.POSTGRES_HOST ?? 'postgres'}:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`
+    connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@${process.env.POSTGRES_HOST ?? 'localhost'}:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`
 })
 
 const monthMap = {
@@ -113,5 +113,11 @@ async function ensureTable() {
             t.text('internalLink')
         })
         console.log('Created table: payrolls')
+    } else {
+        const has_id = await knex.schema.hasColumn('payrolls', '_id')
+        if (has_id) {
+            await knex.raw('ALTER TABLE payrolls ALTER COLUMN "_id" SET DEFAULT gen_random_uuid()')
+            console.log('Set default gen_random_uuid() on _id column')
+        }
     }
 }
