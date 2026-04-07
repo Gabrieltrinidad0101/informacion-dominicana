@@ -65,6 +65,10 @@ export class FileManagerClient {
         return Buffer.from(await res.Body.transformToByteArray())
     }
 
+    getFileStream = async (key) => {
+        return await this.s3.send(new GetObjectCommand({ Bucket: this.bucket, Key: key }))
+    }
+
     // Returns all object keys under a given prefix
     listFiles = async (prefix) => {
         const keys = []

@@ -7,7 +7,9 @@
     "aiProcess": "node ./aiProcess/main.js",
     "insertData": "node ./insertData/main.js",
     "exportToJson": "node ./exportToJson/main.js",
-    "validateId": "node ./validateId/main.js"
+    "validateId": "node ./validateId/main.js",
+    "pii": "python3 ./pii/main.py",
+    "filesManager": "node ./filesManager/main.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",

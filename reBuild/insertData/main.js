@@ -98,19 +98,28 @@ async function ensureTable() {
     const exists = await knex.schema.hasTable('payrolls')
     if (!exists) {
         await knex.schema.createTable('payrolls', (t) => {
-            t.increments('id').primary()
-            t.timestamp('date', { useTz: true })
-            t.text('name')
-            t.text('document')
-            t.text('position')
-            t.decimal('income', 15, 2)
-            t.boolean('isHonorific')
-            t.string('sex', 1)
-            t.text('accountBack')
-            t.text('phoneNumber')
-            t.text('institutionName')
-            t.text('urlDownload')
-            t.text('internalLink')
+            table.text('_id').primary();
+            table.timestamp('date', { useTz: true });
+            table.text('document');
+            table.decimal('income', 15, 2);
+            table.integer('index');
+            table.text('institutionName');
+            table.boolean('isDocumentValid');
+            table.text('link');
+            table.text('internalLink');
+            table.text('name');
+            table.text('position');
+            table.boolean('isHonorific');
+            table.uuid('traceId');
+            table.decimal('x', 10, 4);
+            table.decimal('y', 10, 4);
+            table.decimal('width', 10, 4);
+            table.decimal('height', 10, 4);
+            table.string('sex', 1);
+            table.text('urlDownload');
+            table.text('confidences');
+            table.text('accountBack');
+            table.text('phoneNumber');
         })
         console.log('Created table: payrolls')
     } else {
