@@ -1,42 +1,11 @@
 services:
-  download_links:
-    build:
-      context: .
-      dockerfile: ./projects/downloadLinks/dockerfile
-    container_name: downloadLinks
-    volumes:
-      - ./projects/downloadLinks:/app/projects/downloadLinks
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  extracted_text:
-    build:
-      context: .
-      dockerfile: ./projects/extractedText/dockerfile
-    container_name: extractedText
-    restart: unless-stopped
-    volumes:
-      - ./projects/extractedText:/app/projects/extractedText
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
   download:
     build:
-      context: .
-      dockerfile: ./projects/download/dockerfile
+      context: ./reBuild
+      dockerfile: ./download/dockerfile
     container_name: download
     volumes:
-      - ./projects/download:/app/projects/download
+      - ./reBuild/download:/app/download
     networks:
       - dev
     logging:
@@ -45,75 +14,13 @@ services:
         max-size: "10m"
         max-file: "3"
 
-  events:
+  ai_process:
     build:
-      context: .
-      dockerfile: ./projects/events/dockerfile
-    container_name: events
+      context: ./reBuild
+      dockerfile: ./aiProcess/dockerfile
+    container_name: aiProcess
     volumes:
-      - ./projects/events:/app/projects/events
-    networks:
-      - dev
-    ports:
-      - "3001:3001"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  post_download:
-    build:
-      context: .
-      dockerfile: ./projects/postDownloadPy/dockerfile
-    container_name: postDownload
-    volumes:
-      - ./projects/postDownloadPy:/app/projects/postDownloadPy
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  extracted_text_analyzer:
-    build:
-      context: .
-      dockerfile: ./projects/extractedTextAnalyzer/dockerfile
-    container_name: extractedTextAnalyzer
-    volumes:
-      - ./projects/extractedTextAnalyzer:/app/projects/extractedTextAnalyzer
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  ai_text_analyzer:
-    build:
-      context: .
-      dockerfile: ./projects/aiTextAnalyzer/dockerfile
-    container_name: aiTextAnalyzer
-    volumes:
-      - ./projects/aiTextAnalyzer:/app/projects/aiTextAnalyzer
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  full_ai_process:
-    build:
-      context: .
-      dockerfile: ./projects/fullAIProcess/dockerfile
-    container_name: fullAIProcess
-    volumes:
-      - ./projects/fullAIProcess:/app/projects/fullAIProcess
+      - ./reBuild/aiProcess:/app/aiProcess
     networks:
       - dev
     logging:
@@ -124,11 +31,41 @@ services:
 
   insert_data:
     build:
-      context: .
-      dockerfile: ./projects/insertData/dockerfile
+      context: ./reBuild
+      dockerfile: ./insertData/dockerfile
     container_name: insertData
     volumes:
-      - ./projects/insertData:/app/projects/insertData
+      - ./reBuild/insertData:/app/insertData
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  export_to_json:
+    build:
+      context: ./reBuild
+      dockerfile: ./exportToJson/dockerfile
+    container_name: exportToJson
+    volumes:
+      - ./reBuild/exportToJson:/app/exportToJson
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  validate_id:
+    build:
+      context: ./reBuild
+      dockerfile: ./validateId/dockerfile
+    container_name: validateId
+    volumes:
+      - ./reBuild/validateId:/app/validateId
     networks:
       - dev
     logging:
@@ -139,8 +76,8 @@ services:
 
   files_manager:
     build:
-      context: .
-      dockerfile: ./projects/filesManager/dockerfile
+      context: ./reBuild
+      dockerfile: ./filesManager/dockerfile
     container_name: filesManager
     networks:
       - dev
@@ -152,28 +89,13 @@ services:
         max-size: "10m"
         max-file: "3"
 
-  world_bank:
+  pii:
     build:
-      context: .
-      dockerfile: ./projects/worldBank/dockerfile
-    container_name: worldBank
+      context: ./reBuild/pii
+      dockerfile: dockerfile
+    container_name: pii
     volumes:
-      - ./projects/worldBank:/app/projects/worldBank
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  export_to_json:
-    build:
-      context: .
-      dockerfile: ./projects/exportToJson/dockerfile
-    container_name: exportToJson
-    volumes:
-      - ./projects/exportToJson:/app/projects/exportToJson
+      - ./reBuild/pii:/app
     networks:
       - dev
     logging:
@@ -194,21 +116,6 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  pii:
-    build:
-      context: .
-      dockerfile: ./projects/pII/dockerfile
-    container_name: pii
-    volumes:
-      - ./projects/pII:/app/projects/pII
     networks:
       - dev
     logging:
@@ -312,21 +219,6 @@ services:
     ports:
       - 9000:9000
       - 9001:9001
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  test:
-    build:
-      context: .
-      dockerfile: ./projects/test/dockerfile
-    container_name: test
-    volumes:
-      - ./projects/test:/app/projects/test
-    networks:
-      - dev
     logging:
       driver: "json-file"
       options:

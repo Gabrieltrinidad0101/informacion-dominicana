@@ -42,3 +42,69 @@
 .pdfContainer {
   position: relative;
 }
+
+.excelContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.excelTableWrapper {
+  overflow: auto;
+  max-height: 500px;
+  border: 1px solid #ddd;
+}
+
+.excelTable {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.excelTable th,
+.excelTable td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.excelTable th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.excelTable tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+.sheetTabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 0;
+  flex-wrap: wrap;
+}
+
+.sheetTab {
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  font-size: 13px;
+}
+
+.sheetTabActive {
+  background: #f0f0f0;
+  border-bottom-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.excelStatus {
+  padding: 20px;
+  text-align: center;
+  color: #555;
+}

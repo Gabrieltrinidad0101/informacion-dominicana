@@ -36,7 +36,8 @@
     "react-chartjs-2": "^5.3.0",
     "react-datepicker": "^8.3.0",
     "react-dom": "^18.0.0",
-    "react-pdf": "^5.7.2"
+    "react-pdf": "^5.7.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.1.0",

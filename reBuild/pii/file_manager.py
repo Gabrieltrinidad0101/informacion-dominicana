@@ -94,6 +94,19 @@ class FileManagerClient:
         return key
 
     @staticmethod
+    def ai_key_to_pii_pdf_key(ai_key: str) -> str:
+        """
+        /InstitutionName/nomina/aiProcess/2024/enero/file_page0.json
+        → InstitutionName/nomina/pii/2024/enero/file_page0_corrected.pdf
+
+        Only generated when the source page had a non-zero rotation.
+        """
+        key = ai_key.lstrip("/")
+        key = key.replace("/aiProcess/", "/pii/")
+        key = key.replace(".json", "_corrected.pdf")
+        return key
+
+    @staticmethod
     def extract_page_index(ai_key: str) -> int:
         """Extract page index from filename like file_page3.json → 3."""
         import re
