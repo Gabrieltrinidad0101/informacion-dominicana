@@ -1,5 +1,5 @@
 boto3
-paddlepaddle
+paddlepaddle==3.0.0
 paddleocr
 pymupdf
 pillow

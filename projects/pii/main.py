@@ -24,16 +24,22 @@ Usage
   python main.py [institutionKey] [--file <filename>] [--year <year>] [--force]
 """
 
+import os
 import argparse
 import io
+import json
+import math
 import re
+import shutil
 import sys
+import uuid
+from io import BytesIO
 
-import cv2
 import fitz          # PyMuPDF
-import numpy as np
 from dotenv import load_dotenv
 from paddleocr import PaddleOCR
+from PIL import Image
+
 
 from db import connect, update_payroll_position
 from file_manager import FileManagerClient
@@ -60,7 +66,11 @@ INSTITUTIONS = {
 # ── OCR engine (loaded once) ──────────────────────────────────────────────────
 
 print("Loading PaddleOCR …")
-ocr_engine = PaddleOCR(use_textline_orientation=True, lang="es")
+ocr_engine = PaddleOCR(
+    use_textline_orientation=True,
+    use_doc_orientation_classify=True,
+    lang="es"
+)
 print("PaddleOCR ready.")
 
 
@@ -116,11 +126,62 @@ def build_corrected_pdf(pdf_bytes: bytes, page_index: int) -> bytes:
 
 # ── OCR ───────────────────────────────────────────────────────────────────────
 
-def run_ocr(image_bytes: bytes) -> list[dict]:
-    arr = np.frombuffer(image_bytes, dtype=np.uint8)
-    decoded = cv2.imdecode(arr, cv2.IMREAD_COLOR)
-    raw = ocr_engine.ocr(decoded, cls=True)
-    return parse_ocr_result(raw)
+def _calculate_rotated_dimensions(width, height, angle_degrees):
+    angle_rad = math.radians(angle_degrees)
+    cos_theta = abs(math.cos(angle_rad))
+    sin_theta = abs(math.sin(angle_rad))
+    return (
+        width * cos_theta + height * sin_theta,
+        width * sin_theta + height * cos_theta,
+    )
+
+
+def run_ocr(image_bytes: bytes) -> tuple[list[dict], bytes]:
+    """
+    Run PaddleOCR on image_bytes using the new predict() API.
+
+    Returns (ocr_words, corrected_image_bytes) where corrected_image_bytes is
+    the preprocessed/orientation-corrected image that OCR coordinates reference.
+    PaddleOCR saves a side-by-side preprocessed_img.png [original | corrected];
+    we crop the right half to get the corrected image.
+    """
+    uuid_ = str(uuid.uuid4())
+    filename = f"./{uuid_}.png"
+    outfile = "output"
+
+    img = Image.open(BytesIO(image_bytes))
+    img.save(filename)
+
+    result = ocr_engine.predict(filename)
+    for res in result:
+        res.save_to_img(outfile)
+        res.save_to_json(outfile)
+
+    result_json_path = f"{outfile}/{uuid_}_res.json"
+    with open(result_json_path, "r") as f:
+        result_obj = json.load(f)
+
+    # Crop corrected half from preprocessed_img (PaddleOCR: [original | corrected])
+    original_img = Image.open(filename)
+    preprocessed_img = Image.open(f"{outfile}/{uuid_}_preprocessed_img.png")
+    width, height = original_img.size
+
+    angle = (result_obj or {}).get("doc_preprocessor_res", {}).get("angle") or 0
+    if angle == -1:
+        angle = 0
+    new_width, new_height = _calculate_rotated_dimensions(width, height, angle)
+
+    corrected_img = preprocessed_img.crop((width, 0, width + new_width, new_height))
+
+    corrected_io = io.BytesIO()
+    corrected_img.save(corrected_io, format="PNG")
+    corrected_image_bytes = corrected_io.getvalue()
+
+    shutil.rmtree(outfile)
+    os.remove(filename)
+
+    ocr_words = parse_ocr_result(result_obj)
+    return ocr_words, corrected_image_bytes
 
 
 # ── core processing ───────────────────────────────────────────────────────────
@@ -165,7 +226,7 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
 
     # ── OCR ───────────────────────────────────────────────────────────────────
     print("  Running OCR …")
-    ocr_words = run_ocr(image_bytes)
+    ocr_words, corrected_image_bytes = run_ocr(image_bytes)
     if not ocr_words:
         print("  OCR returned no words, skipping.")
         return
@@ -224,8 +285,10 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
         print(f"    Updated {updated} payroll row(s).")
 
     # ── redact image ──────────────────────────────────────────────────────────
+    # OCR coordinates reference the corrected (preprocessed) image, so we
+    # redact on that image — not the original render.
     print(f"  Redacting {len(redaction_boxes)} sensitive region(s) …")
-    redacted = redact_image(image_bytes, redaction_boxes)
+    redacted = redact_image(corrected_image_bytes, redaction_boxes)
     fm.upload_bytes(pii_img_key, redacted, content_type="image/png")
     print(f"  Uploaded redacted image: {pii_img_key}")
 

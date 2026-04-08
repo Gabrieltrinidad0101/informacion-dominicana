@@ -96,6 +96,9 @@ services:
     container_name: pii
     volumes:
       - ./projects/pii:/app
+    depends_on:
+      - postgres
+      - minio
     networks:
       - dev
     logging:
@@ -159,6 +162,7 @@ services:
 volumes:
   pgdata:
   minio-data:
+
 
 networks:
   dev:

@@ -43,38 +43,48 @@ def _similarity(a: str, b: str) -> float:
 
 # ── OCR parsing ───────────────────────────────────────────────────────────────
 
-def parse_ocr_result(ocr_result) -> list[dict]:
+def parse_ocr_result(result_obj: dict) -> list[dict]:
     """
-    Convert raw PaddleOCR output to a flat list of word records.
+    Convert new PaddleOCR predict() JSON output to a flat list of word records.
 
-    ocr_result structure (list of pages, each page is list of lines):
-      [ [ [[x1,y1],[x2,y2],[x3,y3],[x4,y4]], (text, conf) ], ... ]
+    result_obj structure:
+      {
+        "rec_texts":  ["text", ...],
+        "rec_scores": [confidence, ...],
+        "rec_polys":  [[[x1,y1],[x2,y2],[x3,y3],[x4,y4]], ...]
+      }
+    Bounding box uses diagonal p0→p2 for center, edge lengths for width/height
+    (same logic as extractedTextAnalyzer/src/paddleocr.js).
     """
+    import math as _math
+
     words = []
-    if not ocr_result:
+    if not result_obj:
         return words
 
-    for page in ocr_result:
-        if page is None:
+    rec_texts  = result_obj.get("rec_texts",  [])
+    rec_scores = result_obj.get("rec_scores", [])
+    rec_polys  = result_obj.get("rec_polys",  [])
+
+    for text, conf, poly in zip(rec_texts, rec_scores, rec_polys):
+        text = (text or "").strip()
+        if not poly or len(poly) != 4:
             continue
-        for line in page:
-            if not line or len(line) < 2:
-                continue
-            box_points, (text, conf) = line[0], line[1]
-            xs = [p[0] for p in box_points]
-            ys = [p[1] for p in box_points]
-            x = min(xs)
-            y = min(ys)
-            w = max(xs) - x
-            h = max(ys) - y
-            words.append({
-                "text": text,
-                "x": float(x),
-                "y": float(y),
-                "w": float(w),
-                "h": float(h),
-                "conf": float(conf),
-            })
+
+        p0, p1, p2, p3 = poly
+        cx = (p0[0] + p2[0]) / 2
+        cy = (p0[1] + p2[1]) / 2
+        w  = _math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+        h  = _math.hypot(p3[0] - p0[0], p3[1] - p0[1])
+
+        words.append({
+            "text": text,
+            "x": float(cx - w / 2),
+            "y": float(cy - h / 2),
+            "w": float(w),
+            "h": float(h),
+            "conf": float(conf),
+        })
     return words
 
 
