@@ -1,18 +1,11 @@
 FROM node:20-alpine
 
-RUN npm install -g nodemon
-
 WORKDIR /app
 
 COPY package.json .
-COPY projects/download/package.json ./projects/download/package.json    
-COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
-COPY projects/eventBus/package.json ./projects/eventBus/package.json
-
 RUN npm install
- 
-COPY projects/eventBus ./projects/eventBus
-COPY projects/download ./projects/download
-COPY projects/fileManagerClient ./projects/fileManagerClient
 
-CMD ["nodemon","./projects/download/main.js"]
+COPY shared ./shared
+COPY download ./download
+
+CMD ["node", "./download/main.js"]

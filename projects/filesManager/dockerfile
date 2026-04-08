@@ -3,12 +3,10 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json .
-COPY projects/filesManager/package.json ./projects/filesManager/package.json
-COPY projects/fileManagerClient/package.json ./projects/fileManagerClient/package.json
+COPY filesManager/package.json ./filesManager/package.json
+RUN npm install && cd filesManager && npm install
 
-RUN npm install
+COPY shared ./shared
+COPY filesManager ./filesManager
 
-COPY projects/fileManagerClient ./projects/fileManagerClient
-COPY projects/filesManager ./projects/filesManager
-
-CMD ["npm", "run", "filesManager"] 
+CMD ["node", "./filesManager/main.js"]

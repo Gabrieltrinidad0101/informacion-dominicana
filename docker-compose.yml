@@ -1,11 +1,11 @@
 services:
   download:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./download/dockerfile
     container_name: download
     volumes:
-      - ./reBuild/download:/app/download
+      - ./projects/download:/app/download
     networks:
       - dev
     logging:
@@ -16,11 +16,11 @@ services:
 
   ai_process:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./aiProcess/dockerfile
     container_name: aiProcess
     volumes:
-      - ./reBuild/aiProcess:/app/aiProcess
+      - ./projects/aiProcess:/app/aiProcess
     networks:
       - dev
     logging:
@@ -31,11 +31,11 @@ services:
 
   insert_data:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./insertData/dockerfile
     container_name: insertData
     volumes:
-      - ./reBuild/insertData:/app/insertData
+      - ./projects/insertData:/app/insertData
     networks:
       - dev
     logging:
@@ -46,11 +46,11 @@ services:
 
   export_to_json:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./exportToJson/dockerfile
     container_name: exportToJson
     volumes:
-      - ./reBuild/exportToJson:/app/exportToJson
+      - ./projects/exportToJson:/app/exportToJson
     networks:
       - dev
     logging:
@@ -61,11 +61,11 @@ services:
 
   validate_id:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./validateId/dockerfile
     container_name: validateId
     volumes:
-      - ./reBuild/validateId:/app/validateId
+      - ./projects/validateId:/app/validateId
     networks:
       - dev
     logging:
@@ -76,7 +76,7 @@ services:
 
   files_manager:
     build:
-      context: ./reBuild
+      context: ./projects
       dockerfile: ./filesManager/dockerfile
     container_name: filesManager
     networks:
@@ -91,11 +91,11 @@ services:
 
   pii:
     build:
-      context: ./reBuild/pii
+      context: ./projects/pii
       dockerfile: dockerfile
     container_name: pii
     volumes:
-      - ./reBuild/pii:/app
+      - ./projects/pii:/app
     networks:
       - dev
     logging:
@@ -104,80 +104,11 @@ services:
         max-size: "10m"
         max-file: "3"
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    volumes:
-      - ./volumes/rabbitmq/data:/var/lib/rabbitmq
-      - ./volumes/rabbitmq/logs:/var/log/rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-    ports:
-      - 5672:5672
-      - 15672:15672
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    volumes:
-      - ./volumes/mongo/data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    networks:
-      - dev
-    ports:
-      - 27017:27017
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  loki:
-    image: grafana/loki:2.9.0
-    container_name: loki
-    command: -config.file=/etc/loki/local-config.yaml
-    volumes:
-      - ./loki-config.yaml:/etc/loki/local-config.yaml
-    ports:
-      - 3100:3100
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  promtail:
-    image: grafana/promtail:2.9.0
-    container_name: promtail
-    volumes:
-      - /var/log:/var/log
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml
-    networks:
-      - dev
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "5000:3000"
+  world_bank:
+    build:
+      context: ./projects
+      dockerfile: ./worldBank/dockerfile
+    container_name: worldBank
     networks:
       - dev
     logging:

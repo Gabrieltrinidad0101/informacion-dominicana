@@ -1,0 +1,30 @@
+.list {
+  z-index: 0;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 75% 22%;
+  gap: 10px;
+}
+
+
+.datePicker {
+    width: 50%;
+    height: 50px;
+    opacity: 0;
+}
+
+.scrollbar {
+    overflow-y: auto;
+    height: 800px;
+}
+
+.icon{
+  font-size: 200%;
+  position: relative;
+}
+
+.icon > div {
+  position: absolute;
+}

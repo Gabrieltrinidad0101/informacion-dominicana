@@ -1,11 +1,11 @@
 import express from 'express';
-import { FileManagerClient } from "../fileManagerClient/main.js"
+import { FileManagerClient } from "../shared/fileManagerClient.js"
 import cors from "cors";
 
 const app = express();
 const PORT = 4000;
 app.use(express.json());
-app.use(cors("*"));
+app.use(cors({ origin: "*" }));
 const fileManagerClient = new FileManagerClient();
 
 // Execute that fucntion for any url
