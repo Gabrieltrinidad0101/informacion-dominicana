@@ -107,6 +107,18 @@ class FileManagerClient:
         return key
 
     @staticmethod
+    def ai_key_to_pii_month_pdf_key(ai_key: str) -> str:
+        """
+        /InstitutionName/nomina/aiProcess/2024/enero/file_page0.json
+        → InstitutionName/nomina/pii/2024/enero/nomina.pdf
+
+        One PDF per month accumulating all corrected pages.
+        """
+        key = ai_key.lstrip("/")
+        parts = key.split("/")
+        return f"{parts[0]}/{parts[1]}/pii/{parts[3]}/{parts[4]}/nomina.pdf"
+
+    @staticmethod
     def extract_page_index(ai_key: str) -> int:
         """Extract page index from filename like file_page3.json → 3."""
         import re

@@ -44,14 +44,11 @@ from PIL import Image
 from db import connect, update_payroll_position
 from file_manager import FileManagerClient
 from matcher import find_match, parse_ocr_result
-from redactor import redact_image
-
 load_dotenv()
 
 # ── constants ─────────────────────────────────────────────────────────────────
 
 ALL_FIELDS = ["name", "document", "position", "income", "sex", "accountBack", "phoneNumber"]
-SENSITIVE_FIELDS = {"document", "accountBack", "phoneNumber"}
 
 # Scale used when rendering the page for OCR (2× ≈ 144 DPI)
 RENDER_SCALE = 2.0
@@ -96,31 +93,19 @@ def render_page(pdf_bytes: bytes, page_index: int, scale: float) -> bytes:
     return pix.tobytes("png")
 
 
-def build_corrected_pdf(pdf_bytes: bytes, page_index: int) -> bytes:
+def append_page_to_pdf(base_pdf_bytes: bytes | None, image_bytes: bytes) -> bytes:
     """
-    Create a new single-page PDF from the correctly-oriented render of
-    `page_index`.  The result has rotation = 0 and matches the coordinate
-    space used by OCR (after dividing by RENDER_SCALE).
-
-    Called only when the source page has rotation != 0.
+    Append a new page built from `image_bytes` to `base_pdf_bytes`.
+    If `base_pdf_bytes` is None, creates a new PDF with that single page.
     """
-    # Render at 1× so that 1 pixel == 1 PDF point in the new document
-    img_bytes = render_page(pdf_bytes, page_index, scale=1.0)
-
-    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    orig_page = doc[page_index]
-    # After rotation, the effective dimensions swap for 90/270
-    effective_w = orig_page.rect.width  if orig_page.rotation % 180 == 0 else orig_page.rect.height
-    effective_h = orig_page.rect.height if orig_page.rotation % 180 == 0 else orig_page.rect.width
-    doc.close()
-
-    new_doc = fitz.open()
-    new_page = new_doc.new_page(width=effective_w, height=effective_h)
-    new_page.insert_image(fitz.Rect(0, 0, effective_w, effective_h), stream=img_bytes)
-
+    doc = fitz.open(stream=base_pdf_bytes, filetype="pdf") if base_pdf_bytes else fitz.open()
+    pil_img = Image.open(io.BytesIO(image_bytes))
+    img_w, img_h = pil_img.size
+    new_page = doc.new_page(width=img_w, height=img_h)
+    new_page.insert_image(fitz.Rect(0, 0, img_w, img_h), stream=image_bytes)
     out = io.BytesIO()
-    new_doc.save(out)
-    new_doc.close()
+    doc.save(out)
+    doc.close()
     return out.getvalue()
 
 
@@ -186,12 +171,7 @@ def run_ocr(image_bytes: bytes) -> tuple[list[dict], bytes]:
 
 # ── core processing ───────────────────────────────────────────────────────────
 
-def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False):
-    pii_img_key = FileManagerClient.ai_key_to_pii_image_key(ai_key)
-    if not force and fm.file_exists(pii_img_key):
-        print(f"  Skipping (exists): {pii_img_key}")
-        return
-
+def process_ai_key(ai_key: str, fm: FileManagerClient, conn):
     # ── AI data ───────────────────────────────────────────────────────────────
     ai_json = fm.get_file_json(ai_key)
     lines = ai_json.get("lines", [])
@@ -213,13 +193,6 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
     rotation = get_page_rotation(pdf_bytes, page_index)
     print(f"  Page rotation: {rotation}°")
 
-    if rotation != 0:
-        print(f"  Building corrected PDF (rotation={rotation}° → 0°) …")
-        corrected_pdf_bytes = build_corrected_pdf(pdf_bytes, page_index)
-        pii_pdf_key = FileManagerClient.ai_key_to_pii_pdf_key(ai_key)
-        fm.upload_bytes(pii_pdf_key, corrected_pdf_bytes, content_type="application/pdf")
-        print(f"  Uploaded corrected PDF: {pii_pdf_key}")
-
     # ── render for OCR (always correctly oriented) ────────────────────────────
     print(f"  Rendering page {page_index} at {RENDER_SCALE}× …")
     image_bytes = render_page(pdf_bytes, page_index, scale=RENDER_SCALE)
@@ -232,9 +205,7 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
         return
     print(f"  OCR found {len(ocr_words)} word(s).")
 
-    # ── match + redact per person ─────────────────────────────────────────────
-    redaction_boxes: list[dict] = []
-
+    # ── match fields per person ───────────────────────────────────────────────
     for line in lines:
         name = (line.get("name") or "").strip()
         if not name:
@@ -259,9 +230,6 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
                 f"box=({m['x']:.0f},{m['y']:.0f},{m['w']:.0f},{m['h']:.0f})"
             )
 
-            if field in SENSITIVE_FIELDS:
-                redaction_boxes.append(m)
-
         if not matched:
             continue
 
@@ -284,13 +252,18 @@ def process_ai_key(ai_key: str, fm: FileManagerClient, conn, force: bool = False
             updated = update_payroll_position(conn, alt, name, x, y, width, height, confidences)
         print(f"    Updated {updated} payroll row(s).")
 
-    # ── redact image ──────────────────────────────────────────────────────────
-    # OCR coordinates reference the corrected (preprocessed) image, so we
-    # redact on that image — not the original render.
-    print(f"  Redacting {len(redaction_boxes)} sensitive region(s) …")
-    redacted = redact_image(corrected_image_bytes, redaction_boxes)
-    fm.upload_bytes(pii_img_key, redacted, content_type="image/png")
-    print(f"  Uploaded redacted image: {pii_img_key}")
+    # ── append corrected page to monthly PDF ──────────────────────────────────
+    pii_pdf_key = FileManagerClient.ai_key_to_pii_month_pdf_key(ai_key)
+    try:
+        base_pdf_bytes = fm.get_file_bytes(pii_pdf_key)
+        print(f"  Appending to existing monthly PDF: {pii_pdf_key}")
+    except Exception:
+        base_pdf_bytes = None
+        print(f"  Creating new monthly PDF: {pii_pdf_key}")
+
+    pii_pdf_bytes = append_page_to_pdf(base_pdf_bytes, corrected_image_bytes)
+    fm.upload_bytes(pii_pdf_key, pii_pdf_bytes, content_type="application/pdf")
+    print(f"  Uploaded monthly pii PDF: {pii_pdf_key}")
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
@@ -300,7 +273,6 @@ def parse_args():
     p.add_argument("institution_key", nargs="?")
     p.add_argument("--file")
     p.add_argument("--year")
-    p.add_argument("--force", action="store_true")
     return p.parse_args()
 
 
@@ -341,7 +313,7 @@ def main():
         for ai_key in page_keys:
             print(f"\nProcessing: {ai_key}")
             try:
-                process_ai_key(ai_key, fm, conn, force=args.force)
+                process_ai_key(ai_key, fm, conn)
             except Exception as exc:
                 print(f"  ERROR: {exc}")
 

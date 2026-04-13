@@ -81,11 +81,12 @@ const processPdfPage = async (pdfDoc, pageIndex) => {
 // ── args ─────────────────────────────────────────────────────────────────────
 
 const parseArgs = (argv) => {
-    const args = { institutionKey: null, file: null, page: null, year: null, force: false }
+    const args = { institutionKey: null, file: null, page: null, year: null, month: null, force: false }
     for (let i = 2; i < argv.length; i++) {
         if (argv[i] === '--file') { args.file = argv[++i]; continue }
         if (argv[i] === '--page') { args.page = parseInt(argv[++i], 10); continue }
         if (argv[i] === '--year') { args.year = argv[++i]; continue }
+        if (argv[i] === '--month') { args.month = argv[++i]; continue }
         if (argv[i] === '--force') { args.force = true; continue }
         if (!args.institutionKey) args.institutionKey = argv[i]
     }
@@ -118,6 +119,9 @@ for (const institution of targetInstitutions) {
 
     if (args.year) {
         downloadKeys = downloadKeys.filter(k => k.split('/')[3] === args.year)
+    }
+    if (args.month) {
+        downloadKeys = downloadKeys.filter(k => k.split('/')[4] === args.month)
     }
 
     // Filter by --file if provided (matches full key or just the filename)
