@@ -6,45 +6,53 @@ import { URL } from 'url'
 import { institutions } from '../shared/institutions.js'
 import { FileManagerClient } from '../shared/fileManagerClient.js'
 import { scrapeTownHallLinks } from './scrapers/townHall.js'
+import { scrapeIntrantLinks } from './scrapers/intrant.js'
+import { scrapeDigesettLinks } from './scrapers/digesett.js'
 
 const scrapers = {
-    ayuntamiento: scrapeTownHallLinks
+    ayuntamiento: scrapeTownHallLinks,
+    intrant: scrapeIntrantLinks,
+    digesett: scrapeDigesettLinks
 }
 
-const args = process.argv.slice(2)
-const retryMode = args.includes('--retry')
-const institutionKey = args.find(a => !a.startsWith('--'))
-
-if (!institutionKey) {
-    console.error('Usage: node ./download/main.js <institutionKey> [--retry]')
-    console.error('Available:', Object.keys(institutions).join(', '))
-    process.exit(1)
+function parseArgs() {
+    const args = process.argv.slice(2)
+    return {
+        institutionKey: args.find(a => !a.startsWith('--')),
+        retryMode: args.includes('--retry')
+    }
 }
 
-const institution = institutions[institutionKey]
-if (!institution) {
-    console.error(`Unknown institution: "${institutionKey}"`)
-    console.error('Available:', Object.keys(institutions).join(', '))
-    process.exit(1)
-}
-
-const errorsFile = `./download/errors-${institutionKey}.json`
-
-const fileManagerClient = new FileManagerClient()
-
-let links
-
-if (retryMode) {
-    let erroredLinks
-    try {
-        erroredLinks = JSON.parse(await fs.readFile(errorsFile, 'utf-8'))
-    } catch {
-        console.error(`No errors file found for "${institutionKey}" (${errorsFile})`)
+function resolveInstitution(institutionKey) {
+    if (!institutionKey) {
+        console.error('Usage: node ./download/main.js <institutionKey> [--retry]')
+        console.error('Available:', Object.keys(institutions).join(', '))
         process.exit(1)
     }
-    links = erroredLinks
-    console.log(`Retry mode: ${links.length} failed file(s) to retry`)
-} else {
+
+    const institution = institutions[institutionKey]
+    if (!institution) {
+        console.error(`Unknown institution: "${institutionKey}"`)
+        console.error('Available:', Object.keys(institutions).join(', '))
+        process.exit(1)
+    }
+
+    return institution
+}
+
+async function loadLinksToRetry(errorsFile) {
+    try {
+        const content = await fs.readFile(errorsFile, 'utf-8')
+        const links = JSON.parse(content)
+        console.log(`Retry mode: ${links.length} failed file(s) to retry`)
+        return links
+    } catch {
+        console.error(`No errors file found (${errorsFile})`)
+        process.exit(1)
+    }
+}
+
+async function scrapeLinks(institution) {
     const scrape = scrapers[institution.institutionType]
     if (!scrape) {
         console.error(`No scraper for institutionType: "${institution.institutionType}"`)
@@ -54,7 +62,7 @@ if (retryMode) {
     console.log(`Scraping links for: ${institution.institutionName}`)
     const browser = await puppeteer.launch({
         executablePath: process.env.CHROMIUM_PATH ?? '/usr/bin/chromium',
-        headless: "new",
+        headless: false,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
 
@@ -64,39 +72,58 @@ if (retryMode) {
         "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
 
-    links = await scrape(page, institution.link)
+    const links = await scrape(page, institution.link)
     await browser.close()
     console.log(`Found ${links.length} file(s) to download`)
+    return links
 }
 
-const failed = []
+async function downloadLinks(links, institution, fileManagerClient) {
+    const failed = []
 
-for (const { link, year, month } of links) {
-    const filename = path.basename(new URL(link).pathname)
-    const minioKey = `${institution.institutionName}/${institution.typeOfData}/download/${year}/${month}/${filename}`
+    for (const { link, year, month } of links) {
+        const filename = path.basename(new URL(link).pathname)
+        const minioKey = `${institution.institutionName}/${institution.typeOfData}/download/${year}/${month}/${filename}`
 
-    const exists = await fileManagerClient.fileExists(minioKey)
-    if (exists) {
-        console.log(`Skip (already exists): ${minioKey}`)
-        continue
+        const alreadyDownloaded = await fileManagerClient.fileExists(minioKey)
+        if (alreadyDownloaded) {
+            console.log(`Skip (already exists): ${minioKey}`)
+            continue
+        }
+
+        try {
+            console.log(`Downloading: ${link}`)
+            await fileManagerClient.uploadFileFromUrl(link, minioKey)
+            console.log(`Uploaded: ${minioKey}`)
+        } catch (err) {
+            console.error(`Failed: ${link} — ${err.message}`)
+            failed.push({ link, year, month })
+        }
     }
 
-    try {
-        console.log(`Downloading: ${link}`)
-        await fileManagerClient.uploadFileFromUrl(link, minioKey)
-        console.log(`Uploaded: ${minioKey}`)
-    } catch (err) {
-        console.error(`Failed: ${link} — ${err.message}`)
-        failed.push({ link, year, month })
+    return failed
+}
+
+async function saveErrors(failed, errorsFile, retryMode) {
+    if (failed.length > 0) {
+        await fs.writeFile(errorsFile, JSON.stringify(failed, null, 2))
+        console.log(`\n${failed.length} error(s) saved to ${errorsFile}`)
+    } else if (retryMode) {
+        await fs.rm(errorsFile, { force: true })
+        console.log(`All retries succeeded, removed ${errorsFile}`)
     }
 }
 
-if (failed.length > 0) {
-    await fs.writeFile(errorsFile, JSON.stringify(failed, null, 2))
-    console.log(`\n${failed.length} error(s) saved to ${errorsFile}`)
-} else if (retryMode) {
-    await fs.rm(errorsFile, { force: true })
-    console.log(`All retries succeeded, removed ${errorsFile}`)
-}
+const { institutionKey, retryMode } = parseArgs()
+const institution = resolveInstitution(institutionKey)
+const errorsFile = `./download/errors-${institutionKey}.json`
+const fileManagerClient = new FileManagerClient()
+
+const links = retryMode
+    ? await loadLinksToRetry(errorsFile)
+    : await scrapeLinks(institution)
+
+const failed = await downloadLinks(links, institution, fileManagerClient)
+await saveErrors(failed, errorsFile, retryMode)
 
 console.log('Done.')

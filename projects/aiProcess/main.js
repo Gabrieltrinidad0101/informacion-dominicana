@@ -40,14 +40,23 @@ const processWithDeepSeek = async (content) => {
     return response.data?.choices?.[0]?.message?.content ?? ''
 }
 
+const CHUNK_SIZE = 200
+
 const processExcel = async (buffer) => {
     const workbook = xlsxRead(buffer)
     const allLines = []
     for (const sheetName of workbook.SheetNames) {
         const sheet = workbook.Sheets[sheetName]
         const csv = xlsxUtils.sheet_to_csv(sheet)
-        const raw = await processWithDeepSeek(csv)
-        allLines.push(...parseLines(raw))
+        const rows = csv.split('\n')
+        const header = rows[0]
+        const dataRows = rows.slice(1)
+
+        for (let i = 0; i < dataRows.length; i += CHUNK_SIZE) {
+            const chunk = [header, ...dataRows.slice(i, i + CHUNK_SIZE)].join('\n')
+            const raw = await processWithDeepSeek(chunk)
+            allLines.push(...parseLines(raw))
+        }
     }
     return allLines
 }
