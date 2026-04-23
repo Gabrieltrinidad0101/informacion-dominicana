@@ -12,9 +12,6 @@ function fmtMonthLabel(isoDate) {
   return d.toLocaleDateString('es-DO', { month: 'short', year: '2-digit' })
 }
 
-function toInitials(name) {
-  return (name || '').trim().split(/\s+/).slice(0, 2).map(p => p[0] || '').join('')
-}
 
 export async function fetchInstitutionData(institution) {
   const institutionName = INSTITUTION_NAMES[institution]
@@ -39,36 +36,11 @@ export async function fetchInstitutionData(institution) {
 
   const latestMonth = header[header.length - 1]
 
-  const [positionStats, employeesByPosition] = await Promise.all([
-    requestJson(`${base}/percentageOfSpendingByPosition${latestMonth}`),
-    requestJson(`${base}/employeersByPosition${latestMonth}`),
-  ])
+  const positionStats = await requestJson(`${base}/percentageOfSpendingByPosition${latestMonth}`)
 
   const deptData = Object.entries(positionStats)
     .map(([name, d]) => ({ name, count: Number(d.employeeCount) }))
     .sort((a, b) => b.count - a.count)
-
-  const employees = Object.entries(employeesByPosition).flatMap(([position, rows]) =>
-    rows.map(r => {
-      const id = r.document || r.name || 'EMP'
-      return {
-        id,
-        name:      r.name || '—',
-        initials:  toInitials(r.name),
-        email:     '',
-        dept:      position,
-        title:     position,
-        level:     '',
-        location:  '',
-        salary:    Number(r.income) || 0,
-        startDate: r.date ? String(r.date).slice(0, 10) : '',
-        status:    r.isHonorific ? 'Honorífico' : 'Active',
-        perf:      '',
-      }
-    })
-  )
-
-  const depts = [...new Set(employees.map(e => e.dept))]
 
   const totalHeadcount = deptData.reduce((s, d) => s + d.count, 0)
   const contractData = [
@@ -77,5 +49,5 @@ export async function fetchInstitutionData(institution) {
     { name: 'Eventual',   count: Math.round(totalHeadcount * 0.12) },
   ]
 
-  return { months, series, deptData, contractData, employees, depts }
+  return { months, series, deptData, contractData }
 }

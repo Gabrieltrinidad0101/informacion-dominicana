@@ -28,23 +28,67 @@ export function DeptDonut({ data, accent }) {
   });
 
   return (
-    <div ref={wrap} style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
-      <svg width={w} height={h} style={{ display: 'block' }}>
+    <div style={{ display: 'flex', width: '100%', height: '100%', gap: '8px', minWidth: 0 }}>
+      <div ref={wrap} style={{ position: 'relative', flex: '1 1 0', minWidth: 0, height: '100%' }}>
+        <svg width={w} height={h} style={{ display: 'block' }}>
+          {arcs.map((a, i) => (
+            <path key={i} d={a.d} fill={a.color}
+              opacity={hover === null || hover === i ? 1 : 0.35}
+              onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}
+              style={{ cursor: 'pointer', transition: 'opacity 120ms' }} />
+          ))}
+          <text x={cx} y={cy - 4} textAnchor="middle" fill="var(--text-dim)"
+            fontSize="10" fontFamily="'Geist Mono', monospace">
+            {hover === null ? "TOTAL" : arcs[hover].name.toUpperCase()}
+          </text>
+          <text x={cx} y={cy + 16} textAnchor="middle" fill="var(--text)"
+            fontSize="22" fontWeight="600" fontFamily="'Geist Mono', monospace">
+            {hover === null ? total : arcs[hover].count}
+          </text>
+        </svg>
+      </div>
+      <div style={{
+        width: '160px',
+        height: '100%',
+        overflowY: 'scroll',
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '4px',
+        padding: '4px 0',
+      }}>
         {arcs.map((a, i) => (
-          <path key={i} d={a.d} fill={a.color}
-            opacity={hover === null || hover === i ? 1 : 0.35}
-            onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}
-            style={{ cursor: 'pointer', transition: 'opacity 120ms' }} />
+          <div key={i}
+            onMouseEnter={() => setHover(i)}
+            onMouseLeave={() => setHover(null)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              opacity: hover === null || hover === i ? 1 : 0.35,
+              transition: 'opacity 120ms',
+            }}>
+            <div style={{
+              width: '10px',
+              height: '10px',
+              borderRadius: '2px',
+              backgroundColor: a.color,
+              flexShrink: 0,
+            }} />
+            <span style={{
+              fontSize: '11px',
+              fontFamily: "'Geist Mono', monospace",
+              color: 'var(--text)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>
+              {a.name}
+            </span>
+          </div>
         ))}
-        <text x={cx} y={cy - 4} textAnchor="middle" fill="var(--text-dim)"
-          fontSize="10" fontFamily="'Geist Mono', monospace">
-          {hover === null ? "TOTAL" : arcs[hover].name.toUpperCase()}
-        </text>
-        <text x={cx} y={cy + 16} textAnchor="middle" fill="var(--text)"
-          fontSize="22" fontWeight="600" fontFamily="'Geist Mono', monospace">
-          {hover === null ? total : arcs[hover].count}
-        </text>
-      </svg>
+      </div>
     </div>
   );
 }

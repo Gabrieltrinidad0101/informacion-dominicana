@@ -1,18 +1,59 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSize } from '../../hooks/useSize';
+import { requestJson } from '../../utils/request';
+import { fmtMoney } from '../../utils/format';
 
 const PALETTE = ['#6ad2f2', '#f2b76a', '#b06af2', '#6af2a1'];
 
-export function ComparisonChart({ seriesA, extras, labels, accent }) {
+const INSTITUTION_NAMES = {
+  jarabacoa: 'Ayuntamiento de Jarabacoa',
+  moca:      'Ayuntamiento de Moca',
+  cotui:     'Ayuntamiento de Cotuí',
+  intrant:   'Intrant',
+};
+
+function fmtMonthLabel(isoDate) {
+  const d = new Date(isoDate + 'T12:00:00Z');
+  return d.toLocaleDateString('es-DO', { month: 'short', year: '2-digit' });
+}
+
+export function ComparisonChart({ seriesA: seriesAProp, extras = [], labels: labelsProp, accent, institution }) {
   const wrap = useRef(null);
   const { w, h } = useSize(wrap);
   const [hover, setHover] = useState(null);
-  const pad = { t: 16, r: 56, b: 28, l: 56 };
-  const iw = Math.max(100, w - pad.l - pad.r);
-  const ih = Math.max(60, h - pad.t - pad.b);
+  const [fetched, setFetched] = useState(null);
+
+  useEffect(() => {
+    if (!institution || seriesAProp) return;
+    const name = INSTITUTION_NAMES[institution];
+    if (!name) return;
+    requestJson(`${name}/nomina/exportToJson/payroll`).then(payroll => {
+      setFetched({
+        labels: payroll.map(p => fmtMonthLabel(p.time)),
+        series: { key: 'total', label: 'Total consolidado', data: payroll.map(p => p.value), fmt: fmtMoney },
+      });
+    });
+  }, [institution]);
+
+  const seriesA = seriesAProp ?? fetched?.series;
+  const labels  = labelsProp  ?? fetched?.labels ?? [];
+
+  if (!seriesA || seriesA.data.length === 0) {
+    return <div ref={wrap} style={{ width: '100%', height: '100%' }} />;
+  }
+
+  const n = seriesA.data.length;
+  const prelimIw = Math.max(100, w - 112);
+  const pixPerLabel = n > 1 ? prelimIw / (n - 1) : prelimIw;
+  const shouldRotate = pixPerLabel < 40;
+  const tickEvery = Math.max(1, Math.ceil(40 / pixPerLabel));
+
+  const pad = { t: 16, r: 56, b: shouldRotate ? 46 : 28, l: 56 };
+  const iw  = Math.max(100, w - pad.l - pad.r);
+  const ih  = Math.max(60,  h - pad.t - pad.b);
   const maxA = Math.max(...seriesA.data) * 1.1;
   const minA = Math.min(...seriesA.data) * 0.9;
-  const x = i => pad.l + (i / (seriesA.data.length - 1)) * iw;
+  const x  = i => pad.l + (i / (seriesA.data.length - 1)) * iw;
   const yA = v => pad.t + ih - ((v - minA) / (maxA - minA || 1)) * ih;
 
   const extrasWithScale = extras.map((s, idx) => {
@@ -20,7 +61,6 @@ export function ComparisonChart({ seriesA, extras, labels, accent }) {
     const mn = Math.min(...s.data) * 0.9;
     return {
       ...s,
-      mx, mn,
       color: PALETTE[idx % PALETTE.length],
       y: v => pad.t + ih - ((v - mn) / (mx - mn || 1)) * ih,
     };
@@ -73,12 +113,20 @@ export function ComparisonChart({ seriesA, extras, labels, accent }) {
           <circle key={s.key + i} cx={x(i)} cy={s.y(v)} r={hover === i ? 4 : 2}
             fill={hover === i ? s.color : "var(--panel)"} stroke={s.color} strokeWidth="1.25" />
         )))}
-        {labels.map((l, i) => (
-          <text key={i} x={x(i)} y={pad.t + ih + 18} fill="var(--text-dimmer)"
-            fontSize="10" textAnchor="middle" fontFamily="'Geist Mono', monospace">
-            {l.split(' ')[0]}
-          </text>
-        ))}
+        {labels.map((l, i) => {
+          if (i % tickEvery !== 0) return null;
+          const lx = x(i);
+          const ly = pad.t + ih + (shouldRotate ? 12 : 18);
+          return (
+            <text key={i} x={lx} y={ly} fill="var(--text-dimmer)"
+              fontSize={shouldRotate ? 9 : 10}
+              textAnchor={shouldRotate ? 'end' : 'middle'}
+              fontFamily="'Geist Mono', monospace"
+              transform={shouldRotate ? `rotate(-45,${lx},${ly})` : undefined}>
+              {l.split(' ')[0]}
+            </text>
+          );
+        })}
         {hover !== null && (
           <line x1={x(hover)} x2={x(hover)} y1={pad.t} y2={pad.t + ih}
             stroke="var(--line)" strokeDasharray="2 3" />
