@@ -7,7 +7,10 @@ export async function requestJson(path) {
 
   const parts = path.split('/')
   const last = parts.pop()
-  const sanitized = last.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9._-]/g, '_')
+  const sanitized = last
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^A-Za-z0-9._-]/g, '_')
   parts.push(sanitized)
 
   const fullUrl = `${SERVER_URL}/${parts.join('/')}.json`

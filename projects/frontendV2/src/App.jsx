@@ -4,6 +4,7 @@ import { Sidebar } from './components/ui/Sidebar';
 import { Header } from './components/ui/Header';
 import { Icon } from './components/ui/Icon';
 import { Analytics } from './pages/Analytics';
+import { WorldBankPage } from './pages/WorldBankPage';
 import { InstitutionPayroll } from './pages/InstitutionPayroll';
 
 const TWEAKS_DEFAULT = {
@@ -71,12 +72,12 @@ export function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Navigate to="/economia" replace />} />
-            <Route path="/economia"      element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="/social"        element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="/salud"         element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="/educacion"     element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="/medioambiente" element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="/militar"       element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
+            <Route path="/economia"      element={<WorldBankPage category="Economia"      accent={accent} />} />
+            <Route path="/social"        element={<WorldBankPage category="Social"        accent={accent} />} />
+            <Route path="/salud"         element={<WorldBankPage category="Salud"         accent={accent} />} />
+            <Route path="/educacion"     element={<WorldBankPage category="Educacion"     accent={accent} />} />
+            <Route path="/medioambiente" element={<WorldBankPage category="Medioambiente" accent={accent} />} />
+            <Route path="/militar"       element={<WorldBankPage category="Militar"       accent={accent} />} />
             <Route path="/jarabacoa"     element={<InstitutionPayroll institution="jarabacoa" accent={accent} />} />
             <Route path="/moca"          element={<InstitutionPayroll institution="moca"      accent={accent} />} />
             <Route path="/cotui"         element={<InstitutionPayroll institution="cotui"     accent={accent} />} />

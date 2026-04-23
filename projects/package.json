@@ -9,7 +9,8 @@
     "exportToJson": "node ./exportToJson/main.js",
     "validateId": "node ./validateId/main.js",
     "pii": "python3 ./pii/main.py",
-    "filesManager": "node ./filesManager/main.js"
+    "filesManager": "node ./filesManager/main.js",
+    "worldBank": "node ./worldBank/main.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",

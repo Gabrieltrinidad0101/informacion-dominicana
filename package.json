@@ -10,7 +10,7 @@
   "scripts": {
     "test": "vitest run ./projects/test",
     "downloadLinks": "nodemon --legacy-watch ./projects/downloadLinks/main.js --watch projects/downloadLinks",
-    "download": "nodemon  --legacy-watch  ./projects/download/main.js --watch ./projects/download",
+    "download": "node reBuild/download/main.js",
     "events": "nodemon  --legacy-watch  ./projects/events/main.js --watch ./projects/events",
     "frontend": "npm run start --prefix ./projects/frontend",
     "admin": "npm run start --prefix ./projects/admin",
@@ -19,7 +19,7 @@
     "extractedText": "nodemon  --legacy-watch  ./projects/extractedText/main.js --watch ./projects/extractedText",
     "extractedTextAnalyzer": "nodemon  --legacy-watch  ./projects/extractedTextAnalyzer/main.js --watch ./projects/extractedTextAnalyzer",
     "textAnalysisAI": "nodemon  --legacy-watch  ./projects/aiTextAnalyzer/main.js --watch ./projects/aiTextAnalyzer",
-    "insertData": "nodemon  --legacy-watch  ./projects/insertData/main.js --watch ./projects/insertData",
+    "insertData": "node reBuild/insertData/main.js",
     "exportToJson": "nodemon  --legacy-watch  ./projects/exportToJson/main.js --watch ./projects/exportToJson",
     "filesManager": "nodemon  --legacy-watch  ./projects/filesManager/main.js --watch ./projects/filesManager",
     "auth": "nodemon  --legacy-watch  ./projects/auth/main.js --watch ./projects/auth",
@@ -40,16 +40,16 @@
     "uploadFiles-pro": "node ./projects/uploadFiles/src/main.js",
     "worldBank-pro": "node ./projects/worldBank/main.js",
     "fullAIProcess-pro": "node ./projects/fullAIProcess/main.js",
-    "download": "node reBuild/download/main.js",
-    "aiProcess": "node reBuild/aiProcess/main.js",
-    "insertData": "node reBuild/insertData/main.js"
+    "aiProcess": "node reBuild/aiProcess/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "adm-zip": "^0.5.17",
     "dotenv": "^17.2.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "vitest": "^4.0.16"
