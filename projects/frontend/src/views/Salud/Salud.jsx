@@ -1,9 +1,0 @@
-import React from 'react'
-import { Charts } from '../../components/charts/Charts'
-export function Salud() {
-  return (
-    <div>
-      <Charts url="worldBank/Salud" />
-    </div>
-  )
-}

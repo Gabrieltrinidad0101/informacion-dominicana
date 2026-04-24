@@ -39,7 +39,7 @@ const compareCharts = ["Ayuntamiento de Jarabacoa", "Ayuntamiento de Moca"].map(
     },
     {
       text: `Cantidad Total de Empleados Masculinos - ${institution}`,
-      url: `${institution}/nomina/exportToJson/employeersF`,
+      url: `${institution}/nomina/exportToJson/employeersM`,
     },
     {
       text: `Cantidad Total de Empleados Femeninos - ${institution}`,

@@ -1,8 +1,9 @@
-export const formattedMoney = (number) =>{
-  if(!number) return "0.00"
-  if(number.toLowerCase?.().includes('honor')) return "honorífico"
-  return "RD"+new Intl.NumberFormat("en-US", {
-   style: "currency",
-   currency: "USD",
- }).format(number);
+export function fmtMoney(n) {
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+  if (n >= 1e3) return "$" + (n / 1e3).toFixed(0) + "k";
+  return "$" + n;
+}
+
+export function fmtNum(n) {
+  return n.toLocaleString();
 }

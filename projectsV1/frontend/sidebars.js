@@ -26,11 +26,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Ayuntamientos',
-      items: ['Jarabacoa','Moca','Cotuí'],
+      items: ['Jarabacoa', 'Moca', 'Cotuí'],
     },
+    'Intrant',
     'Fuentes',
   ],
-  
+
 };
 
 export default sidebars;
