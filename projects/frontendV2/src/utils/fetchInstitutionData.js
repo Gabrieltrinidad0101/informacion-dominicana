@@ -5,6 +5,7 @@ const INSTITUTION_NAMES = {
   moca:      'Ayuntamiento de Moca',
   cotui:     'Ayuntamiento de Cotuí',
   intrant:   'Intrant',
+  ogtic:     'Ogtic',
 }
 
 function fmtMonthLabel(isoDate) {

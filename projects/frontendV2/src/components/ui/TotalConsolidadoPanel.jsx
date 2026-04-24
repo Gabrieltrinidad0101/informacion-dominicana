@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ComparisonChart } from '../charts/ComparisonChart';
+import { LightweightChart } from '../charts/LightweightChart';
 import { Icon } from './Icon';
 import { requestJson } from '../../utils/request.js';
 import { fmtMoney, fmtNum } from '../../utils/format.js';
@@ -11,12 +11,8 @@ const INSTITUTION_NAMES = {
   moca:      'Ayuntamiento de Moca',
   cotui:     'Ayuntamiento de Cotuí',
   intrant:   'Intrant',
+  ogtic:     'Ogtic',
 };
-
-function fmtMonthLabel(isoDate) {
-  const d = new Date(isoDate + 'T12:00:00Z');
-  return d.toLocaleDateString('es-DO', { month: 'short', year: '2-digit' });
-}
 
 const seriesConfig = Object.values(INSTITUTION_NAMES).map(name => [
   { name, key: 'payroll',         label: `Nómina - ${name}`,               url: `${name}/nomina/exportToJson/payroll`,         fmt: fmtMoney },
@@ -29,8 +25,8 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
   const [compareWith, setCompareWith]   = useState([]);
   const [compareOpen, setCompareOpen]   = useState(false);
   const [draftCompare, setDraftCompare] = useState([]);
+  // data stored as {time, value}[] — the format lightweight-charts expects
   const [seriesA, setSeriesA]           = useState(null);
-  const [months, setMonths]             = useState([]);
   const [extraSeries, setExtraSeries]   = useState({});
   const [search, setSearch]             = useState('');
 
@@ -43,8 +39,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
     if (!config) return;
 
     requestJson(config.url).then(raw => {
-      setSeriesA({ ...config, data: raw.map(p => p.value) });
-      setMonths(raw.map(p => fmtMonthLabel(p.time)));
+      setSeriesA({ ...config, data: raw });
     });
   }, [institution, seriesKey]);
 
@@ -60,7 +55,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
     const next    = { ...extraSeries };
     toFetch.forEach((url, i) => {
       const config = seriesConfig.find(s => s.url === url);
-      next[url] = { ...config, data: results[i].map(p => p.value) };
+      next[url] = { ...config, data: results[i] };
     });
     setExtraSeries(next);
     setCompareWith(draftCompare);
@@ -70,6 +65,8 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
   const resolvedTitle = compareWith.length
     ? `${title} vs ${compareWith.map(url => seriesConfig.find(s => s.url === url)?.label).join(' · ')}`
     : title;
+
+  const extrasForChart = compareWith.map(url => extraSeries[url]).filter(Boolean);
 
   return (
     <>
@@ -106,11 +103,11 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
           </div>
         </div>
         <div style={{ height: 220, padding: '6px 18px 14px' }}>
-          <ComparisonChart
-            seriesA={seriesA}
-            extras={compareWith.map(url => extraSeries[url]).filter(Boolean)}
-            labels={months}
+          <LightweightChart
+            primary={seriesA?.data}
+            extras={extrasForChart}
             accent={accent}
+            fmt={seriesA?.fmt}
           />
         </div>
       </div>
@@ -176,9 +173,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button className="ghost-btn" onClick={() => setDraftCompare([])}>Limpiar</button>
-                <button className="primary-btn" onClick={handleApply}>
-                  Aplicar
-                </button>
+                <button className="primary-btn" onClick={handleApply}>Aplicar</button>
               </div>
             </div>
           </div>

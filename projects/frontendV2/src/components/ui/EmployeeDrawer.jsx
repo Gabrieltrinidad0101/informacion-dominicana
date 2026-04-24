@@ -51,15 +51,15 @@ function ExcelViewer({ fileUrl }) {
   }, [fileUrl]);
 
   if (status === 'loading') return <StatusBox>Cargando Excel…</StatusBox>;
-  if (status === 'error')   return <StatusBox>No se pudo cargar el archivo.</StatusBox>;
-  if (!sheets.length)       return <StatusBox>Archivo vacío.</StatusBox>;
+  if (status === 'error') return <StatusBox>No se pudo cargar el archivo.</StatusBox>;
+  if (!sheets.length) return <StatusBox>Archivo vacío.</StatusBox>;
 
   const { data } = sheets[activeSheet];
 
   return (
-    <div style={{ width: '100%', border: '1px solid var(--line-soft)', borderRadius: 6, overflow: 'hidden' }}>
+    <div style={{ width: '100%', height: '100%', border: '1px solid var(--line-soft)', borderRadius: 6, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
       {sheets.length > 1 && (
-        <div style={{ display: 'flex', gap: 4, padding: '6px 8px', borderBottom: '1px solid var(--line-soft)', background: 'var(--surface-2)' }}>
+        <div style={{ display: 'flex', gap: 4, padding: '6px 8px', borderBottom: '1px solid var(--line-soft)', background: 'var(--surface-2)', flexShrink: 0 }}>
           {sheets.map((s, i) => (
             <button
               key={s.name}
@@ -75,7 +75,7 @@ function ExcelViewer({ fileUrl }) {
           ))}
         </div>
       )}
-      <div style={{ overflowX: 'auto', maxHeight: 380 }}>
+      <div style={{ flex: 1, overflow: 'auto' }}>
         <table style={{ borderCollapse: 'collapse', fontSize: 11, width: '100%', fontFamily: "'Geist Mono', monospace" }}>
           <tbody>
             {data.map((row, ri) => (
@@ -196,13 +196,6 @@ export function EmployeeDrawer({ employee, onClose, accent }) {
             <div className="detail">
               <div className="detail-k">Fecha</div>
               <div className="detail-v mono">{employee.startDate}</div>
-            </div>
-            <div className="detail" style={{ gridColumn: 'span 2' }}>
-              <div className="detail-k">Estado</div>
-              <div className="detail-v">
-                <span className="dot" style={{ background: employee.status === 'Activo' ? accent : '#b88a3b' }} />
-                {employee.status}
-              </div>
             </div>
           </div>
 

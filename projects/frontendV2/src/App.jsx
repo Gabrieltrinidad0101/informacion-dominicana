@@ -6,6 +6,7 @@ import { Icon } from './components/ui/Icon';
 import { Analytics } from './pages/Analytics';
 import { WorldBankPage } from './pages/WorldBankPage';
 import { InstitutionPayroll } from './pages/InstitutionPayroll';
+import { PresentationPage } from './pages/PresentationPage';
 
 const TWEAKS_DEFAULT = {
   accent: "#c9f26a",
@@ -15,22 +16,24 @@ const TWEAKS_DEFAULT = {
 };
 
 const PAGE_TITLES = {
-  economia:     ["Economía",     "Indicadores económicos nacionales"],
-  social:       ["Social",       "Estadísticas sociales y demográficas"],
-  salud:        ["Salud",        "Sistema de salud pública"],
-  educacion:    ["Educación",    "Indicadores del sistema educativo"],
-  medioambiente:["Medioambiente","Indicadores ambientales"],
-  militar:      ["Militar",      "Defensa y seguridad"],
-  jarabacoa:    ["Jarabacoa",    "Ayuntamiento de Jarabacoa"],
-  moca:         ["Moca",         "Ayuntamiento de Moca"],
-  cotui:        ["Cotuí",        "Ayuntamiento de Cotuí"],
-  intrant:      ["Intrant",      "Instituto Nacional de Tránsito y Transporte Terrestre"],
-  fuentes:      ["Fuentes",      "Orígenes de datos oficiales"],
+  "":           ["Inicio",        "Plataforma de inteligencia pública"],
+  economia:     ["Economía",      "Indicadores económicos nacionales"],
+  social:       ["Social",        "Estadísticas sociales y demográficas"],
+  salud:        ["Salud",         "Sistema de salud pública"],
+  educacion:    ["Educación",     "Indicadores del sistema educativo"],
+  medioambiente:["Medioambiente", "Indicadores ambientales"],
+  militar:      ["Militar",       "Defensa y seguridad"],
+  jarabacoa:    ["Jarabacoa",     "Ayuntamiento de Jarabacoa"],
+  moca:         ["Moca",          "Ayuntamiento de Moca"],
+  cotui:        ["Cotuí",         "Ayuntamiento de Cotuí"],
+  intrant:      ["Intrant",       "Instituto Nacional de Tránsito y Transporte Terrestre"],
+  ogtic:        ["OGTIC",         "Oficina Gubernamental de Tecnologías de la Información y Comunicación"],
+  fuentes:      ["Fuentes",       "Orígenes de datos oficiales"],
 };
 
 export function App() {
   const location = useLocation();
-  const page = location.pathname.slice(1) || 'economia';
+  const page = location.pathname.slice(1);
 
   const [tweaks, setTweaks] = useState(TWEAKS_DEFAULT);
   const [tweaksOpen, setTweaksOpen] = useState(false);
@@ -68,10 +71,10 @@ export function App() {
       <Sidebar density={tweaks.density} accent={accent} />
 
       <main className="main">
-        <Header title={title} subtitle={sub} accent={accent} />
-        <div className="content">
+        {page !== '' && <Header title={title} subtitle={sub} accent={accent} />}
+        <div className={"content" + (page === '' ? " content--home" : "")}>
           <Routes>
-            <Route path="/" element={<Navigate to="/economia" replace />} />
+            <Route path="/"              element={<PresentationPage />} />
             <Route path="/economia"      element={<WorldBankPage category="Economia"      accent={accent} />} />
             <Route path="/social"        element={<WorldBankPage category="Social"        accent={accent} />} />
             <Route path="/salud"         element={<WorldBankPage category="Salud"         accent={accent} />} />
@@ -82,7 +85,9 @@ export function App() {
             <Route path="/moca"          element={<InstitutionPayroll institution="moca"      accent={accent} />} />
             <Route path="/cotui"         element={<InstitutionPayroll institution="cotui"     accent={accent} />} />
             <Route path="/intrant"       element={<InstitutionPayroll institution="intrant"   accent={accent} />} />
+            <Route path="/ogtic"         element={<InstitutionPayroll institution="ogtic"     accent={accent} />} />
             <Route path="/fuentes"       element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
+            <Route path="*"             element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </main>

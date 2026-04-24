@@ -1,12 +1,13 @@
-import { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Icon } from './Icon';
 import { requestJson } from '../../utils/request.js';
 
 const INSTITUTION_NAMES = {
   jarabacoa: 'Ayuntamiento de Jarabacoa',
-  moca:      'Ayuntamiento de Moca',
-  cotui:     'Ayuntamiento de Cotuí',
-  intrant:   'Intrant',
+  moca: 'Ayuntamiento de Moca',
+  cotui: 'Ayuntamiento de Cotuí',
+  intrant: 'Intrant',
+  ogtic: 'Ogtic',
 };
 
 export function EmployeeTable({ institution, accent, onOpen }) {
@@ -189,8 +190,8 @@ export function EmployeeTable({ institution, accent, onOpen }) {
           </thead>
           <tbody>
             {groupedShown.map(({ position: pos, employees: emps }) => (
-              <>
-                <tr key={`group-${pos}`} style={{ background: 'var(--surface-2, rgba(255,255,255,0.04))' }}>
+              <React.Fragment key={`group-${pos}`}>
+                <tr style={{ background: 'var(--surface-2, rgba(255,255,255,0.04))' }}>
                   <td colSpan={5} style={{ fontWeight: 600, color: 'var(--text)', padding: '8px 12px', fontSize: 12 }}>
                     {pos}
                     <span style={{ fontWeight: 400, color: 'var(--text-dim)', marginLeft: 8 }}>
@@ -214,7 +215,7 @@ export function EmployeeTable({ institution, accent, onOpen }) {
                     <td><Icon name="arrow" size={14} /></td>
                   </tr>
                 ))}
-              </>
+              </React.Fragment>
             ))}
             {shown.length === 0 && (
               <tr>

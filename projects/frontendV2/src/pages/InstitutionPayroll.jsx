@@ -20,7 +20,7 @@ export function InstitutionPayroll({ institution, accent }) {
       .catch(e => { setError(e.message); setLoading(false); });
   }, [institution]);
 
-  const deptData     = data?.deptData     ?? [];
+  const deptData = data?.deptData ?? [];
   const contractData = data?.contractData ?? [];
 
   return (
@@ -78,7 +78,7 @@ export function InstitutionPayroll({ institution, accent }) {
                 <div className="panel-sub">Empleados por departamento</div>
               </div>
             </div>
-            <div style={{ display: 'flex', padding: '6px 18px 18px', gap: 16, alignItems: 'center' }}>
+            <div style={{ display: 'flex', padding: '6px 18px 18px', gap: 16, alignItems: 'center', height: '250px' }}>
               <div style={{ flex: '0 0 180px', height: 180 }}>
                 <DeptDonut data={deptData} accent={accent} />
               </div>

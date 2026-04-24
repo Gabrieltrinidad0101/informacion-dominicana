@@ -8,11 +8,13 @@ import { FileManagerClient } from '../shared/fileManagerClient.js'
 import { scrapeTownHallLinks } from './scrapers/townHall.js'
 import { scrapeIntrantLinks } from './scrapers/intrant.js'
 import { scrapeDigesettLinks } from './scrapers/digesett.js'
+import { scrapeOgticLinks } from './scrapers/optic.js'
 
 const scrapers = {
     ayuntamiento: scrapeTownHallLinks,
     intrant: scrapeIntrantLinks,
-    digesett: scrapeDigesettLinks
+    digesett: scrapeDigesettLinks,
+    ogtic: scrapeOgticLinks
 }
 
 function parseArgs() {

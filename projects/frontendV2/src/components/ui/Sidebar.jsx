@@ -17,7 +17,8 @@ const items = [
       { id: "cotui",     label: "Cotuí" },
     ],
   },
-  { id: "intrant", label: "Intrant", icon: "chart" },
+  { id: "intrant", label: "Intrant", logo: "https://wp.intrant.gob.do/wp-content/uploads/2024/05/intrant-log2.png" },
+  { id: "ogtic",   label: "OGTIC",   logo: "https://ogtic.gob.do/wp-content/uploads/2024/01/logo-nuevo.png" },
   { id: "fuentes", label: "Fuentes", icon: "doc" },
 ];
 
@@ -37,6 +38,20 @@ export function Sidebar({ density, accent }) {
           <div className="brand-name">Lumen</div>
           <div className="brand-sub">Datos · Estadísticos</div>
         </div>
+      </div>
+
+      <div className="nav-section" style={{ marginBottom: 4 }}>
+        <NavLink to="/" end
+          className={({ isActive }) => "nav-item" + (isActive ? " active" : "")}
+          style={{ paddingTop: padY, paddingBottom: padY }}>
+          {({ isActive }) => (
+            <>
+              <span className="nav-ic"><Icon name="grid" /></span>
+              <span>Inicio</span>
+              {isActive && <span className="nav-rail" style={{ background: accent }} />}
+            </>
+          )}
+        </NavLink>
       </div>
 
       <div className="nav-section">
@@ -79,7 +94,11 @@ export function Sidebar({ density, accent }) {
               style={{ paddingTop: padY, paddingBottom: padY }}>
               {({ isActive }) => (
                 <>
-                  <span className="nav-ic"><Icon name={it.icon} /></span>
+                  <span className="nav-ic">
+                    {it.logo
+                      ? <img src={it.logo} alt={it.label} style={{ width: 32, height: 32, objectFit: 'contain', borderRadius: 2 }} />
+                      : <Icon name={it.icon} />}
+                  </span>
                   <span>{it.label}</span>
                   {isActive && <span className="nav-rail" style={{ background: accent }} />}
                 </>

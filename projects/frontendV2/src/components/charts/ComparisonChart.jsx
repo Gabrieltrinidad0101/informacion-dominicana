@@ -17,7 +17,7 @@ function fmtMonthLabel(isoDate) {
   return d.toLocaleDateString('es-DO', { month: 'short', year: '2-digit' });
 }
 
-export function ComparisonChart({ seriesA: seriesAProp, extras = [], labels: labelsProp, accent, institution }) {
+export function ComparisonChart({ seriesA: seriesAProp, extras = [], labels: labelsProp, tooltipLabels, accent, institution }) {
   const wrap = useRef(null);
   const { w, h } = useSize(wrap);
   const [hover, setHover] = useState(null);
@@ -146,7 +146,7 @@ export function ComparisonChart({ seriesA: seriesAProp, extras = [], labels: lab
           whiteSpace: 'nowrap',
         }}>
           <div style={{ color: 'var(--text-dim)', fontFamily: "'Geist Mono', monospace", marginBottom: 4 }}>
-            {labels[hover]}
+            {(tooltipLabels ?? labels)[hover]}
           </div>
           <div style={{ fontFamily: "'Geist Mono', monospace", color: accent, fontWeight: 600, fontSize: 12 }}>
             ● {seriesA.label}: {seriesA.fmt(seriesA.data[hover])}

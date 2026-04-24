@@ -17,10 +17,22 @@ export const institutions = {
         institutionType: "intrant",
         typeOfData: "nomina"
     },
+    ayuntamientoLasCharcas: {
+        link: "https://ayuntamientolascharcas.gob.do/transparencia/documentos/nomina/",
+        institutionName: "Ayuntamiento de Las Charcas",
+        institutionType: "ayuntamiento",
+        typeOfData: "nomina"
+    },
     digesett: {
         link: "https://digesett.gob.do/transparencia/index.php/recursos-humanos/nomina/",
         institutionName: "Digesett",
         institutionType: "digesett",
+        typeOfData: "nomina"
+    },
+    ogtic: {
+        link: "https://ogtic.gob.do/transparencia/recursos-humanos/nomina/",
+        institutionName: "Ogtic",
+        institutionType: "ogtic",
         typeOfData: "nomina"
     }
 }
