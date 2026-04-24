@@ -40,8 +40,6 @@ export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt
         vertLine: { color: 'rgba(232,236,242,0.25)', width: 1, style: 3 },
         horzLine: { color: 'rgba(232,236,242,0.25)', width: 1, style: 3 },
       },
-      handleScroll: { mouseWheel: false, pressedMouseMove: false },
-      handleScale: false,
     });
 
     state.current.chart = chart;
