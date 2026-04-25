@@ -3,10 +3,12 @@ import { createChart } from 'lightweight-charts';
 
 const EXTRA_COLORS = ['#6ad2f2', '#f2b76a', '#b06af2', '#6af2a1'];
 
-export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt }) {
+export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt, onDoubleClick }) {
   const containerRef = useRef(null);
   // Keep chart + series refs in a single object to avoid stale-closure issues
   const state = useRef({ chart: null, primarySeries: null, extraSeries: [] });
+  const onDoubleClickRef = useRef(onDoubleClick);
+  useEffect(() => { onDoubleClickRef.current = onDoubleClick; }, [onDoubleClick]);
 
   // ── Mount / unmount ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -43,7 +45,17 @@ export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt
     });
 
     state.current.chart = chart;
+
+    const handleDblClick = (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const time = state.current.chart?.timeScale().coordinateToTime(x);
+      if (time && onDoubleClickRef.current) onDoubleClickRef.current(String(time));
+    };
+    el.addEventListener('dblclick', handleDblClick);
+
     return () => {
+      el.removeEventListener('dblclick', handleDblClick);
       chart.remove();
       state.current = { chart: null, primarySeries: null, extraSeries: [] };
     };

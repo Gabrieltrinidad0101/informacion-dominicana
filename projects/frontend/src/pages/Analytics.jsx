@@ -19,7 +19,7 @@ const SERIES = {
   attrition:  { key: 'attrition', label: 'Attrition %',      data: [6.2,5.9,5.7,5.4,5.2,5.0,5.1,4.9,4.8,4.6,4.7,4.8], fmt: n => n.toFixed(1) + '%' },
 };
 
-export function Analytics({ accent, payrollStyle }) {
+export function Analytics({ accent }) {
   const [selected, setSelected] = useState(null);
   const [compareOpen, setCompareOpen] = useState(false);
   const [compareWith, setCompareWith] = useState([]);
@@ -69,7 +69,7 @@ export function Analytics({ accent, payrollStyle }) {
                 accent={accent}
               />
             ) : (
-              <PayrollChart data={D.payrollSeries} labels={D.MONTHS} accent={accent} variant={payrollStyle} />
+              <PayrollChart data={D.payrollSeries} labels={D.MONTHS} accent={accent} />
             )}
           </div>
         </div>

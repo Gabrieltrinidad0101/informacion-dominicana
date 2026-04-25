@@ -11,7 +11,6 @@ import { PresentationPage } from './pages/PresentationPage';
 const TWEAKS_DEFAULT = {
   accent: "#c9f26a",
   density: "comfy",
-  payrollStyle: "area",
   theme: "dark",
 };
 
@@ -86,7 +85,7 @@ export function App() {
             <Route path="/cotui" element={<InstitutionPayroll institution="cotui" accent={accent} />} />
             <Route path="/intrant" element={<InstitutionPayroll institution="intrant" accent={accent} />} />
             <Route path="/ogtic" element={<InstitutionPayroll institution="ogtic" accent={accent} />} />
-            <Route path="/fuentes" element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
+            <Route path="/fuentes" element={<Analytics accent={accent} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
@@ -127,14 +126,6 @@ export function App() {
               <div className="seg">
                 {["dark", "light"].map(t => (
                   <button key={t} className={tweaks.theme === t ? "on" : ""} onClick={() => setTweak('theme', t)}>{t}</button>
-                ))}
-              </div>
-            </div>
-            <div className="tweak-row">
-              <label>Payroll chart</label>
-              <div className="seg">
-                {["area", "line", "bars"].map(s => (
-                  <button key={s} className={tweaks.payrollStyle === s ? "on" : ""} onClick={() => setTweak('payrollStyle', s)}>{s}</button>
                 ))}
               </div>
             </div>

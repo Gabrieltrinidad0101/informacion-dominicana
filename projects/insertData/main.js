@@ -63,7 +63,7 @@ for (const institution of targetInstitutions) {
                     date,
                     name: p.name ?? null,
                     document: p.document ?? null,
-                    position: p.position?.includes('regidor') ? 'Regidor' : (p.position ?? null),
+                    position: p.position?.toLowerCase().includes('regidor') ? 'Regidor' : (p.position ?? null),
                     income,
                     isHonorific,
                     sex: p.sex?.slice(0, 1) ?? null,

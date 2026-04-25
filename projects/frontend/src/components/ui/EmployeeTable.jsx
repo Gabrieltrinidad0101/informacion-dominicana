@@ -10,9 +10,11 @@ const INSTITUTION_NAMES = {
   ogtic: 'Ogtic',
 };
 
-export function EmployeeTable({ institution, accent, onOpen }) {
+export function EmployeeTable({ institution, accent, onOpen, externalDate }) {
   const [q, setQ] = useState("");
   const [posFilter, setPosFilter] = useState("All");
+  const [salaryVal, setSalaryVal] = useState("");
+  const [sexFilter, setSexFilter] = useState("All");
   const [sort, setSort] = useState({ key: "name", dir: "asc" });
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -66,6 +68,12 @@ export function EmployeeTable({ institution, accent, onOpen }) {
     fetchByDate(date, base);
   };
 
+  useEffect(() => {
+    if (!externalDate || !allowedMonths.length) return;
+    const match = allowedMonths.find(m => externalDate.startsWith(m) || m.startsWith(externalDate));
+    if (match && match !== currentDate) handleDateChange(match);
+  }, [externalDate]);
+
   const rows = useMemo(() => {
     return Object.entries(positionBySalary).flatMap(([pos, emps]) =>
       (emps || []).map((r, i) => ({
@@ -73,6 +81,7 @@ export function EmployeeTable({ institution, accent, onOpen }) {
         name: r.name || '—',
         dept: pos,
         salary: Number(r.income) || 0,
+        sex: r.sex || '',
         startDate: r.date ? String(r.date).slice(0, 10) : '',
         status: r.isHonorific ? 'Honorífico' : 'Activo',
         urlDownload: r.urlDownload ?? null,
@@ -83,10 +92,14 @@ export function EmployeeTable({ institution, accent, onOpen }) {
   const positions = useMemo(() => Object.keys(positionBySalary), [positionBySalary]);
 
   const filtered = useMemo(() => {
+    const salaryNum = Number(salaryVal);
+    const salaryActive = salaryVal !== '' && !isNaN(salaryNum);
     let r = rows.filter(e => {
       const hit = !q || (e.name + ' ' + e.dept + ' ' + e.id).toLowerCase().includes(q.toLowerCase());
       const posOk = posFilter === 'All' || e.dept === posFilter;
-      return hit && posOk;
+      const sexOk = sexFilter === 'All' || e.sex === sexFilter;
+      const salaryOk = !salaryActive || e.salary >= salaryNum;
+      return hit && posOk && sexOk && salaryOk;
     });
     r.sort((a, b) => {
       const av = a[sort.key], bv = b[sort.key];
@@ -94,9 +107,9 @@ export function EmployeeTable({ institution, accent, onOpen }) {
       return sort.dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
     });
     return r;
-  }, [rows, q, posFilter, sort]);
+  }, [rows, q, posFilter, salaryVal, sexFilter, sort]);
 
-  useEffect(() => { setPage(0); }, [q, posFilter]);
+  useEffect(() => { setPage(0); }, [q, posFilter, salaryVal, sexFilter]);
 
   const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const shown = filtered.slice(page * pageSize, page * pageSize + pageSize);
@@ -172,6 +185,26 @@ export function EmployeeTable({ institution, accent, onOpen }) {
             </select>
             {posFilter !== 'All' && (
               <button className="ghost-btn" onClick={() => setPosFilter('All')}>Limpiar</button>
+            )}
+          </div>
+          <div className="date-filter">
+            <span className="date-label">Salario ≥</span>
+            <input
+              type="number"
+              className="select"
+              style={{ width: 110 }}
+              placeholder="Monto…"
+              value={salaryVal}
+              onChange={e => setSalaryVal(e.target.value)}
+            />
+            <span className="date-label" style={{ marginLeft: 4 }}>Género</span>
+            <select className="select" value={sexFilter} onChange={e => setSexFilter(e.target.value)}>
+              <option value="All">todos</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+            {(salaryVal !== '' || sexFilter !== 'All') && (
+              <button className="ghost-btn" onClick={() => { setSalaryVal(''); setSexFilter('All'); }}>Limpiar</button>
             )}
           </div>
         </div>

@@ -21,7 +21,7 @@ const seriesConfig = Object.values(INSTITUTION_NAMES).map(name => [
   { name, key: 'employeersF',     label: `Empleadas Femeninas - ${name}`,  url: `${name}/nomina/exportToJson/employeersF`,     fmt: fmtNum   },
 ]).flat();
 
-export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'payroll', institution, accent }) {
+export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'payroll', institution, accent, onDoubleClick }) {
   const [compareWith, setCompareWith]   = useState([]);
   const [compareOpen, setCompareOpen]   = useState(false);
   const [draftCompare, setDraftCompare] = useState([]);
@@ -108,6 +108,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
             extras={extrasForChart}
             accent={accent}
             fmt={seriesA?.fmt}
+            onDoubleClick={onDoubleClick}
           />
         </div>
       </div>

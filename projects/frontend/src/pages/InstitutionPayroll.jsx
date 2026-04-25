@@ -10,11 +10,13 @@ export function InstitutionPayroll({ institution, accent }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [chartDate, setChartDate] = useState(null);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
     setData(null);
+    setChartDate(null);
     fetchInstitutionData(institution)
       .then(d => { setData(d); setLoading(false); })
       .catch(e => { setError(e.message); setLoading(false); });
@@ -33,6 +35,7 @@ export function InstitutionPayroll({ institution, accent }) {
           seriesKey="payroll"
           institution={institution}
           accent={accent}
+          onDoubleClick={setChartDate}
         />
 
         <TotalConsolidadoPanel
@@ -60,7 +63,7 @@ export function InstitutionPayroll({ institution, accent }) {
         />
       </div>
 
-      <EmployeeTable institution={institution} accent={accent} onOpen={setSelected} />
+      <EmployeeTable institution={institution} accent={accent} onOpen={setSelected} externalDate={chartDate} />
 
       {loading && (
         <div style={{ padding: 48, color: 'var(--text-dim)', textAlign: 'center' }}>Cargando datos…</div>
