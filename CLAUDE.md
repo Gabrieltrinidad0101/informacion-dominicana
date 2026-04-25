@@ -4,27 +4,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Información Dominicana** scrapes, processes, and publishes Dominican government transparency data (payrolls). It downloads PDFs/Excel files from government websites, uses AI to extract structured data, stores it in PostgreSQL, and serves it via a Docusaurus frontend.
+**Información Dominicana** scrapes, processes, and publishes Dominican government transparency data (payrolls). It downloads PDFs/Excel files from government websites, uses AI to extract structured data, stores it in PostgreSQL, and serves it via a Vite + React SPA frontend.
 
 ## Data Pipeline
 
-The `reBuild` branch replaces the old RabbitMQ event-driven pipeline with direct CLI scripts that read/write from MinIO:
+The `reBuild` branch uses direct CLI scripts that read/write from MinIO:
 
 ```
-download → aiProcess → insertData
+download → aiProcess → insertData → exportToJson
 ```
 
-Run each stage manually (invoke directly, the npm scripts in package.json point to a non-existent path):
+All scripts live under `projects/` and are run from that directory:
 
 ```bash
 node projects/download/main.js <institutionKey> [--retry]
-# Downloads PDFs/Excel from institution website → MinIO at {institutionName}/{typeOfData}/download/...
+# Scrapes institution site with Puppeteer → uploads PDFs/Excel to MinIO at:
+# {institutionName}/{typeOfData}/download/{year}/{month}/{filename}
 
 node projects/aiProcess/main.js [institutionKey] [--file <name>] [--page <n>] [--year <year>] [--month <month>] [--force]
-# Reads from download/ in MinIO, runs AI, writes JSON to aiProcess/ in MinIO
+# Reads from download/ in MinIO, runs AI extraction, writes JSON to aiProcess/ in MinIO
 
 node projects/insertData/main.js [institutionKey]
 # Reads from aiProcess/ in MinIO, upserts records into PostgreSQL payrolls table
+
+node projects/exportToJson/main.js [institutionKey]
+# Queries PostgreSQL and writes aggregated stats JSON to MinIO at:
+# {institutionName}/nomina/exportToJson/{filename}.json
 ```
 
 `institutionKey` values are defined in `projects/shared/institutions.js` (e.g., `ayuntamientoJarabacoa`).
@@ -32,8 +37,10 @@ node projects/insertData/main.js [institutionKey]
 ### AI providers
 
 `aiProcess` uses two AI providers depending on file type:
-- **PDFs** → Anthropic Claude API (`claude-sonnet-4-6`) via `ANTHROPIC_API_KEY`
-- **Excel (.xlsx/.xls)** → DeepSeek API via `API_AI_KEY`
+- **PDFs** → Anthropic Claude API (`claude-sonnet-4-6`) via `ANTHROPIC_API_KEY`. Each page is extracted as a separate JSON file.
+- **Excel (.xlsx/.xls)** → DeepSeek API (`deepseek-chat`) via `API_AI_KEY`. Processed in 200-row chunks.
+
+Both providers use the same pipe-delimited prompt (`aiProcess/prompt.js`) that returns records as `name|document|position|income|sex|accountBack|phoneNumber`.
 
 ### File Storage Path Convention
 
@@ -46,22 +53,46 @@ Path: `{institutionName}/{typeOfData}/{microService}/{year}/{month}/{filename}`
 - `fileManagerClient.js` — `FileManagerClient` class wrapping AWS SDK S3. Key methods: `uploadFileFromUrl`, `getFile`, `listFiles`, `fileExists`, `createTextFile`, `toAiPath(downloadKey)`, `parsePathMeta(key)`.
 - `institutions.js` — Registry of all target institutions with `link`, `institutionName`, `institutionType`, `typeOfData`. Add new institutions here to include them in the pipeline.
 
+## Scraper Architecture
+
+`download/main.js` maps `institution.institutionType` → scraper function. Add new scrapers to `projects/download/scrapers/` and register in the `scrapers` map.
+
+Most scrapers delegate to `scrapers/scrapeYearMonthFiles.js`, a shared helper that navigates a year → month → file hierarchy using CSS selectors passed per institution. The selectors for year folders, month folders, and download links differ per institution type. Scrapers that use it: `townHall.js`, `intrant.js`, `digesett.js`, `optic.js`.
+
+`--retry` mode reads `download/errors-{institutionKey}.json` (written when downloads fail) instead of re-scraping.
+
+## Frontend (`projects/frontend/`)
+
+Vite + React SPA. Reads data exclusively from `filesManager` (port 4000), which proxies MinIO.
+
+**Data flow**: `exportToJson` → MinIO → `filesManager` (port 4000 HTTP proxy) → frontend.
+
+**Pages:**
+- `/` — `PresentationPage` (landing)
+- `/:institution` (jarabacoa, moca, cotui, intrant, ogtic) — `InstitutionPayroll`: payroll charts + employee table + drawer
+- `/economia`, `/social`, `/salud`, `/educacion`, `/medioambiente`, `/militar` — `WorldBankPage`: World Bank indicators by category
+- `/fuentes` — `Analytics`: data sources
+
+**Key architecture notes:**
+- `App.jsx` owns routing, theme (CSS vars `--accent`, `data-theme`), and density state. Passes `accent` prop down to pages.
+- `fetchInstitutionData.js` (`utils/`) has its own `INSTITUTION_NAMES` mapping (short key → display name) that must stay in sync with `shared/institutions.js` when adding institutions.
+- `filesManager` at port 4000 is required for the frontend to load any data.
+
 ## Other Services
 
 | Service | Language | Role |
 |---|---|---|
-| `exportToJson` | Node.js | Exports aggregated stats to MinIO as JSON |
 | `filesManager` | Node.js (port 4000) | HTTP proxy for MinIO files |
 | `worldBank` | Node.js | World Bank data source (separate pipeline) |
 | `pii` | Python | PII handling |
 | `validateId` | Node.js | Dominican national ID validation |
-| `frontend` | Docusaurus | Public-facing data visualization site |
 
 ```bash
-npm run filesManager        # File proxy server (port 4000)
-npm run frontend            # Docusaurus site
-npm run worldBank
-npm run exportToJson
+# Run from projects/
+node projects/filesManager/main.js   # File proxy server (port 4000)
+node projects/worldBank/main.js
+node projects/exportToJson/main.js
+cd projects/frontend && npm run dev  # Vite dev server
 ```
 
 ### Docker (via Makefile)
@@ -112,5 +143,4 @@ Each service has its own `.env` file loaded via `dotenv`.
 - **ES Modules**: All JS services use `"type": "module"` and `.js` extensions in imports.
 - **Monorepo workspaces**: Root `package.json` uses npm workspaces (`"workspaces": ["projects/*"]`).
 - **Idempotency**: Both `aiProcess` and `insertData` skip already-processed files unless `--force` is passed. `insertData` deletes existing rows for the same `(date, institutionName, internalLink)` before re-inserting.
-- **Scraper registry**: `download/main.js` maps `institution.institutionType` to a scraper function. Add new scrapers to `projects/download/scrapers/` and register them in the `scrapers` map.
 - **CI/CD**: `build-changed-services.sh` diffs `HEAD~1..HEAD`, builds only changed service Docker images, pushes to `ghcr.io/gabrieltrinidad0101/informacion-dominicana-{service}:latest`, and triggers Dokploy webhooks.

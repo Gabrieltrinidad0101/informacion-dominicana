@@ -16,19 +16,19 @@ const TWEAKS_DEFAULT = {
 };
 
 const PAGE_TITLES = {
-  "":           ["Inicio",        "Plataforma de inteligencia pública"],
-  economia:     ["Economía",      "Indicadores económicos nacionales"],
-  social:       ["Social",        "Estadísticas sociales y demográficas"],
-  salud:        ["Salud",         "Sistema de salud pública"],
-  educacion:    ["Educación",     "Indicadores del sistema educativo"],
-  medioambiente:["Medioambiente", "Indicadores ambientales"],
-  militar:      ["Militar",       "Defensa y seguridad"],
-  jarabacoa:    ["Jarabacoa",     "Ayuntamiento de Jarabacoa"],
-  moca:         ["Moca",          "Ayuntamiento de Moca"],
-  cotui:        ["Cotuí",         "Ayuntamiento de Cotuí"],
-  intrant:      ["Intrant",       "Instituto Nacional de Tránsito y Transporte Terrestre"],
-  ogtic:        ["OGTIC",         "Oficina Gubernamental de Tecnologías de la Información y Comunicación"],
-  fuentes:      ["Fuentes",       "Orígenes de datos oficiales"],
+  "": ["Inicio", "Plataforma de inteligencia pública"],
+  economia: ["Economía", "Indicadores económicos nacionales"],
+  social: ["Social", "Estadísticas sociales y demográficas"],
+  salud: ["Salud", "Sistema de salud pública"],
+  educacion: ["Educación", "Indicadores del sistema educativo"],
+  medioambiente: ["Medioambiente", "Indicadores ambientales"],
+  militar: ["Militar", "Defensa y seguridad"],
+  jarabacoa: ["Jarabacoa", "Ayuntamiento de Jarabacoa"],
+  moca: ["Moca", "Ayuntamiento de Moca"],
+  cotui: ["Cotuí", "Ayuntamiento de Cotuí"],
+  intrant: ["Intrant", "Instituto Nacional de Tránsito y Transporte Terrestre"],
+  ogtic: ["OGTIC", "Oficina Gubernamental de Tecnologías de la Información y Comunicación"],
+  fuentes: ["Fuentes", "Orígenes de datos oficiales"],
 };
 
 export function App() {
@@ -36,7 +36,7 @@ export function App() {
   const page = location.pathname.slice(1);
 
   const [tweaks, setTweaks] = useState(TWEAKS_DEFAULT);
-  const [tweaksOpen, setTweaksOpen] = useState(false);
+  const [tweaksOpen, setTweaksOpen] = useState(true);
 
   const accent = tweaks.accent;
   const [title, sub] = PAGE_TITLES[page] ?? PAGE_TITLES.economia;
@@ -74,20 +74,20 @@ export function App() {
         {page !== '' && <Header title={title} subtitle={sub} accent={accent} />}
         <div className={"content" + (page === '' ? " content--home" : "")}>
           <Routes>
-            <Route path="/"              element={<PresentationPage />} />
-            <Route path="/economia"      element={<WorldBankPage category="Economia"      accent={accent} />} />
-            <Route path="/social"        element={<WorldBankPage category="Social"        accent={accent} />} />
-            <Route path="/salud"         element={<WorldBankPage category="Salud"         accent={accent} />} />
-            <Route path="/educacion"     element={<WorldBankPage category="Educacion"     accent={accent} />} />
+            <Route path="/" element={<PresentationPage />} />
+            <Route path="/economia" element={<WorldBankPage category="Economia" accent={accent} />} />
+            <Route path="/social" element={<WorldBankPage category="Social" accent={accent} />} />
+            <Route path="/salud" element={<WorldBankPage category="Salud" accent={accent} />} />
+            <Route path="/educacion" element={<WorldBankPage category="Educacion" accent={accent} />} />
             <Route path="/medioambiente" element={<WorldBankPage category="Medioambiente" accent={accent} />} />
-            <Route path="/militar"       element={<WorldBankPage category="Militar"       accent={accent} />} />
-            <Route path="/jarabacoa"     element={<InstitutionPayroll institution="jarabacoa" accent={accent} />} />
-            <Route path="/moca"          element={<InstitutionPayroll institution="moca"      accent={accent} />} />
-            <Route path="/cotui"         element={<InstitutionPayroll institution="cotui"     accent={accent} />} />
-            <Route path="/intrant"       element={<InstitutionPayroll institution="intrant"   accent={accent} />} />
-            <Route path="/ogtic"         element={<InstitutionPayroll institution="ogtic"     accent={accent} />} />
-            <Route path="/fuentes"       element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
-            <Route path="*"             element={<Navigate to="/" replace />} />
+            <Route path="/militar" element={<WorldBankPage category="Militar" accent={accent} />} />
+            <Route path="/jarabacoa" element={<InstitutionPayroll institution="jarabacoa" accent={accent} />} />
+            <Route path="/moca" element={<InstitutionPayroll institution="moca" accent={accent} />} />
+            <Route path="/cotui" element={<InstitutionPayroll institution="cotui" accent={accent} />} />
+            <Route path="/intrant" element={<InstitutionPayroll institution="intrant" accent={accent} />} />
+            <Route path="/ogtic" element={<InstitutionPayroll institution="ogtic" accent={accent} />} />
+            <Route path="/fuentes" element={<Analytics accent={accent} payrollStyle={tweaks.payrollStyle} />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </main>
