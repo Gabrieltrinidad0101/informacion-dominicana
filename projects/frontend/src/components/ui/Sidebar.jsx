@@ -3,31 +3,31 @@ import { NavLink } from 'react-router-dom';
 import { Icon } from './Icon';
 
 const items = [
-  { id: "economia",     label: "Economía",      icon: "cash" },
-  { id: "social",       label: "Social",         icon: "users" },
-  { id: "salud",        label: "Salud",          icon: "bell" },
-  { id: "educacion",    label: "Educación",      icon: "doc" },
-  { id: "medioambiente",label: "Medioambiente",  icon: "grid" },
-  { id: "militar",      label: "Militar",        icon: "building" },
+  { id: "economia", label: "Economía", icon: "cash" },
+  { id: "social", label: "Social", icon: "users" },
+  { id: "salud", label: "Salud", icon: "bell" },
+  { id: "educacion", label: "Educación", icon: "doc" },
+  { id: "medioambiente", label: "Medioambiente", icon: "grid" },
+  { id: "militar", label: "Militar", icon: "building" },
   {
     type: "category", label: "Ayuntamientos", icon: "building",
     items: [
       { id: "jarabacoa", label: "Jarabacoa" },
-      { id: "moca",      label: "Moca" },
-      { id: "cotui",     label: "Cotuí" },
+      { id: "moca", label: "Moca" },
+      { id: "cotui", label: "Cotuí" },
     ],
   },
   { id: "intrant", label: "Intrant", logo: "https://wp.intrant.gob.do/wp-content/uploads/2024/05/intrant-log2.png" },
-  { id: "ogtic",   label: "OGTIC",   logo: "https://ogtic.gob.do/wp-content/uploads/2024/01/logo-nuevo.png" },
+  { id: "ogtic", label: "OGTIC", logo: "https://ogtic.gob.do/wp-content/uploads/2024/01/logo-nuevo.png" },
   { id: "fuentes", label: "Fuentes", icon: "doc" },
 ];
 
-export function Sidebar({ density, accent }) {
+export function Sidebar({ density, accent, open }) {
   const [openCat, setOpenCat] = useState(true);
   const padY = density === "compact" ? 7 : 10;
 
   return (
-    <aside className="sidebar">
+    <aside className={"sidebar" + (open ? " open" : "")}>
       <div className="brand">
         <div className="brand-mark" style={{ background: accent }}>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#0a0d12" strokeWidth="2.4" strokeLinecap="round">
@@ -35,7 +35,7 @@ export function Sidebar({ density, accent }) {
           </svg>
         </div>
         <div>
-          <div className="brand-name">Lumen</div>
+          <div className="brand-name">Información Dominicana</div>
           <div className="brand-sub">Datos · Estadísticos</div>
         </div>
       </div>

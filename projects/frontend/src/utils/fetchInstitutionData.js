@@ -39,16 +39,13 @@ export async function fetchInstitutionData(institution) {
 
   const positionStats = await requestJson(`${base}/percentageOfSpendingByPosition${latestMonth}`)
 
+  const spendingData = Object.entries(positionStats)
+    .map(([name, d]) => ({ name, count: Number(d.averageSalaryPercentage) }))
+    .sort((a, b) => b.count - a.count)
+
   const deptData = Object.entries(positionStats)
     .map(([name, d]) => ({ name, count: Number(d.employeeCount) }))
     .sort((a, b) => b.count - a.count)
 
-  const totalHeadcount = deptData.reduce((s, d) => s + d.count, 0)
-  const contractData = [
-    { name: 'Permanente', count: Math.round(totalHeadcount * 0.60) },
-    { name: 'Contratado', count: Math.round(totalHeadcount * 0.28) },
-    { name: 'Eventual',   count: Math.round(totalHeadcount * 0.12) },
-  ]
-
-  return { months, series, deptData, contractData }
+  return { months, series, spendingData, deptData }
 }

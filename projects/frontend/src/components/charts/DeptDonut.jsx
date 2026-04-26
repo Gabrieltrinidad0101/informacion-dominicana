@@ -2,6 +2,10 @@ import { useState, useRef } from 'react';
 import { useSize } from '../../hooks/useSize';
 
 export function DeptDonut({ data, accent }) {
+  const container = useRef(null);
+  const { w: containerW } = useSize(container);
+  const isMobile = containerW < 420;
+
   const wrap = useRef(null);
   const { w, h } = useSize(wrap);
   const size = Math.min(w, h);
@@ -27,9 +31,54 @@ export function DeptDonut({ data, accent }) {
     return { d: path, color: colors[i], name: d.name, count: d.count };
   });
 
+  const legend = (
+    <div style={{
+      display: 'flex',
+      flexDirection: isMobile ? 'row' : 'column',
+      flexWrap: isMobile ? 'wrap' : 'nowrap',
+      gap: isMobile ? '6px 14px' : '6px',
+      overflowY: isMobile ? 'visible' : 'auto',
+      padding: isMobile ? '8px 0 0' : '4px 0',
+      width: isMobile ? '100%' : '160px',
+      flexShrink: 0,
+    }}>
+      {arcs.map((a, i) => (
+        <div key={i}
+          onMouseEnter={() => setHover(i)}
+          onMouseLeave={() => setHover(null)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            cursor: 'pointer',
+            opacity: hover === null || hover === i ? 1 : 0.35,
+            transition: 'opacity 120ms',
+          }}>
+          <div style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '2px',
+            backgroundColor: a.color,
+            flexShrink: 0,
+          }} />
+          <span style={{
+            fontSize: '11px',
+            fontFamily: "'Geist Mono', monospace",
+            color: 'var(--text)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>
+            {a.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100%', gap: '8px', minWidth: 0 }}>
-      <div ref={wrap} style={{ position: 'relative', flex: '1 1 0', minWidth: 0, height: '100%' }}>
+    <div ref={container} style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', width: '100%', height: '100%', gap: '8px', minWidth: 0 }}>
+      <div ref={wrap} style={{ position: 'relative', flex: '1 1 0', minWidth: 0, minHeight: isMobile ? '220px' : 0 }}>
         <svg width={w} height={h} style={{ display: 'block' }}>
           {arcs.map((a, i) => (
             <path key={i} d={a.d} fill={a.color}
@@ -47,48 +96,7 @@ export function DeptDonut({ data, accent }) {
           </text>
         </svg>
       </div>
-      <div style={{
-        width: '160px',
-        height: '100%',
-        overflowY: 'scroll',
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '4px',
-        padding: '4px 0',
-      }}>
-        {arcs.map((a, i) => (
-          <div key={i}
-            onMouseEnter={() => setHover(i)}
-            onMouseLeave={() => setHover(null)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-              opacity: hover === null || hover === i ? 1 : 0.35,
-              transition: 'opacity 120ms',
-            }}>
-            <div style={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '2px',
-              backgroundColor: a.color,
-              flexShrink: 0,
-            }} />
-            <span style={{
-              fontSize: '11px',
-              fontFamily: "'Geist Mono', monospace",
-              color: 'var(--text)',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}>
-              {a.name}
-            </span>
-          </div>
-        ))}
-      </div>
+      {legend}
     </div>
   );
 }

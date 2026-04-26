@@ -22,8 +22,8 @@ export function InstitutionPayroll({ institution, accent }) {
       .catch(e => { setError(e.message); setLoading(false); });
   }, [institution]);
 
+  const spendingData = data?.spendingData ?? [];
   const deptData = data?.deptData ?? [];
-  const contractData = data?.contractData ?? [];
 
   return (
     <>
@@ -55,8 +55,8 @@ export function InstitutionPayroll({ institution, accent }) {
         />
 
         <TotalConsolidadoPanel
-          title="Empleadas Femeninas"
-          subtitle="Cantidad de empleadas femeninas · histórico mensual"
+          title="Empleadas"
+          subtitle="Cantidad de Empleadas · histórico mensual"
           seriesKey="employeersF"
           institution={institution}
           accent={accent}
@@ -77,46 +77,24 @@ export function InstitutionPayroll({ institution, accent }) {
           <div className="panel" style={{ gridColumn: 'span 6' }}>
             <div className="panel-head">
               <div>
-                <div className="panel-title">Distribución por área</div>
-                <div className="panel-sub">Empleados por departamento</div>
+                <div className="panel-title">Porcentaje de gasto por puesto</div>
+                <div className="panel-sub">Distribución del gasto salarial por posición</div>
               </div>
             </div>
-            <div style={{ display: 'flex', padding: '6px 18px 18px', gap: 16, alignItems: 'center', height: '250px' }}>
-              <div style={{ flex: '0 0 180px', height: 180 }}>
-                <DeptDonut data={deptData} accent={accent} />
-              </div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {deptData.map((d, i) => (
-                  <div key={d.name} className="legend-row">
-                    <span className="dot" style={{ background: `oklch(0.75 0.14 ${90 + i * 32})` }} />
-                    <span style={{ flex: 1, color: 'rgba(255,255,255,0.75)' }}>{d.name}</span>
-                    <span style={{ fontFamily: "'Geist Mono', monospace", color: '#e5e9ef' }}>{d.count}</span>
-                  </div>
-                ))}
-              </div>
+            <div style={{ padding: '6px 18px 18px', height: '280px' }}>
+              <DeptDonut data={spendingData} accent={accent} />
             </div>
           </div>
 
           <div className="panel" style={{ gridColumn: 'span 6' }}>
             <div className="panel-head">
               <div>
-                <div className="panel-title">Distribución por contrato</div>
-                <div className="panel-sub">Empleados por tipo de vinculación</div>
+                <div className="panel-title">Cantidad de empleados por posición</div>
+                <div className="panel-sub">Empleados por puesto</div>
               </div>
             </div>
-            <div style={{ display: 'flex', padding: '6px 18px 18px', gap: 16, alignItems: 'center' }}>
-              <div style={{ flex: '0 0 180px', height: 180 }}>
-                <DeptDonut data={contractData} accent={accent} />
-              </div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {contractData.map((d, i) => (
-                  <div key={d.name} className="legend-row">
-                    <span className="dot" style={{ background: `oklch(0.75 0.14 ${90 + i * 32})` }} />
-                    <span style={{ flex: 1, color: 'rgba(255,255,255,0.75)' }}>{d.name}</span>
-                    <span style={{ fontFamily: "'Geist Mono', monospace", color: '#e5e9ef' }}>{d.count}</span>
-                  </div>
-                ))}
-              </div>
+            <div style={{ padding: '6px 18px 18px', height: '280px' }}>
+              <DeptDonut data={deptData} accent={accent} />
             </div>
           </div>
         </div>

@@ -15,7 +15,8 @@ const paths = {
   arrow: "M5 12h14M12 5l7 7-7 7",
   filter: "M22 3H2l8 9.46V19l4 2v-8.54L22 3z",
   sort: "M3 6h18M6 12h12M10 18h4",
-  dot: ""
+  dot: "",
+  menu: "M3 6h18M3 12h18M3 18h18",
 };
 
 export function Icon({ name, size = 16 }) {

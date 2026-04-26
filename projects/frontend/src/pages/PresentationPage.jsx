@@ -72,10 +72,6 @@ function Slide1({ active }) {
           ))}
         </div>
       </div>
-      <div className="chrome-bot">
-        <div>LAT 18.48 · LON -69.93 · SANTO DOMINGO</div>
-        <div className="pn">PRESENTACIÓN EJECUTIVA</div>
-      </div>
     </section>
   );
 }
@@ -97,11 +93,11 @@ function Slide2({ active }) {
             los <span className="hl">lee</span>.
           </p>
           <p className="body anim-up-3 sans">
-            Información Dominicana conecta, normaliza y analiza la información pública dispersa en cientos de organismos — y la vuelve útil, comparable y accionable para quienes toman decisiones de estado.
+            Información Dominicana conecta, normaliza y analiza la información pública dispersa en cientos de organismos — y la vuelve útil, comparable y accionable para todos los dominicanos y dominicanas.
           </p>
         </div>
         <div className="s2-right anim-wipe">
-          <div className="rh"><span>// VOLUMEN INSTITUCIONAL</span><b>2025</b></div>
+          <div className="rh"><span>// VOInformación Dominicana INSTITUCIONAL</span><b>2025</b></div>
           <div className="big-num">
             <Counter target={2.4} decimals={1} active={active} />
             <span className="pct">M</span>
@@ -129,7 +125,6 @@ function Slide2({ active }) {
         </div>
       </div>
       <div className="chrome-bot">
-        <div>FUENTE · DIGEIG + OFICINA NACIONAL DE ESTADÍSTICA + MODELADO INTERNO</div>
         <div className="pn">INFORMACIÓN DOMINICANA / 2026</div>
       </div>
     </section>
@@ -137,14 +132,14 @@ function Slide2({ active }) {
 }
 
 const DOMAINS = [
-  { n: '01', tag: 'FISCAL',          title: 'Presupuestos y ejecución', desc: 'Partidas, transferencias y ejecución mensual por ministerio, región y programa.',      metric: 72,  yell: false, anim: 'anim-up'   },
-  { n: '02', tag: 'COMPRAS PÚBLICAS', title: 'Licitaciones y contratos', desc: 'Cada orden de compra, proveedor adjudicado y trazabilidad de montos.',                  metric: 118, yell: true,  anim: 'anim-up-2' },
-  { n: '03', tag: 'PERSONAS',        title: 'Nómina y funcionarios',    desc: 'Personal del estado, cargos, remuneraciones y trayectoria inter-institucional.',          metric: 9.8, decimals: 1, yell: false, anim: 'anim-up-3' },
-  { n: '04', tag: 'SALUD',           title: 'Red hospitalaria',         desc: 'Lista de espera, atenciones, fármacos y capacidad instalada por establecimiento.',        metric: 46,  yell: false, anim: 'anim-up-4' },
-  { n: '05', tag: 'EDUCACIÓN',       title: 'Matrícula y desempeño',    desc: 'Establecimientos, cobertura, deserción y resultados estandarizados.',                    metric: 38,  yell: false, anim: 'anim-up'   },
-  { n: '06', tag: 'INFRAESTRUCTURA', title: 'Obras y concesiones',      desc: 'Avance físico, desviaciones de plazo y costo, concesiones vigentes.',                    metric: 21,  yell: false, anim: 'anim-up-2' },
-  { n: '07', tag: 'JUSTICIA',        title: 'Causas y sentencias',      desc: 'Flujo judicial, tiempos de tramitación y carga por tribunal.',                           metric: 64,  yell: true,  anim: 'anim-up-3' },
-  { n: '08', tag: 'TERRITORIO',      title: 'Municipios y regiones',    desc: 'Indicadores locales consolidados por comuna, provincia y región.',                       metric: 43,  yell: false, anim: 'anim-up-4' },
+  { n: '01', tag: 'FISCAL', title: 'Presupuestos y ejecución', desc: 'Partidas, transferencias y ejecución mensual por ministerio, región y programa.', metric: 72, yell: false, anim: 'anim-up' },
+  { n: '02', tag: 'COMPRAS PÚBLICAS', title: 'Licitaciones y contratos', desc: 'Cada orden de compra, proveedor adjudicado y trazabilidad de montos.', metric: 118, yell: true, anim: 'anim-up-2' },
+  { n: '03', tag: 'PERSONAS', title: 'Nómina y funcionarios', desc: 'Personal del estado, cargos, remuneraciones y trayectoria inter-institucional.', metric: 9.8, decimals: 1, yell: false, anim: 'anim-up-3' },
+  { n: '04', tag: 'SALUD', title: 'Red hospitalaria', desc: 'Lista de espera, atenciones, fármacos y capacidad instalada por establecimiento.', metric: 46, yell: false, anim: 'anim-up-4' },
+  { n: '05', tag: 'EDUCACIÓN', title: 'Matrícula y desempeño', desc: 'Establecimientos, cobertura, deserción y resultados estandarizados.', metric: 38, yell: false, anim: 'anim-up' },
+  { n: '06', tag: 'INFRAESTRUCTURA', title: 'Obras y concesiones', desc: 'Avance físico, desviaciones de plazo y costo, concesiones vigentes.', metric: 21, yell: false, anim: 'anim-up-2' },
+  { n: '07', tag: 'JUSTICIA', title: 'Causas y sentencias', desc: 'Flujo judicial, tiempos de tramitación y carga por tribunal.', metric: 64, yell: true, anim: 'anim-up-3' },
+  { n: '08', tag: 'TERRITORIO', title: 'Municipios y regiones', desc: 'Indicadores locales consolidados por comuna, provincia y región.', metric: 43, yell: false, anim: 'anim-up-4' },
 ];
 
 function DomainCard({ d, active }) {
@@ -177,8 +172,8 @@ function Slide3({ active }) {
         </div>
         <div className="count anim-up-3">
           TOTAL DE REGISTROS INGERIDOS<br />
-          <b><Counter target={412} suffix="M" active={active} /></b>
-          ACTUALIZADO EN TIEMPO REAL
+          <b><Counter target={130} suffix="K" active={active} /></b>
+          APRIL 2026
         </div>
       </div>
       <div className="s3-grid">
@@ -196,13 +191,13 @@ function Slide3({ active }) {
 }
 
 const BARS = [
-  { year: '2019', total: 48,  b: 5,  y: 7  },
-  { year: '2020', total: 92,  b: 11, y: 12 },
-  { year: '2021', total: 164, b: 18, y: 22 },
-  { year: '2022', total: 247, b: 28, y: 34 },
-  { year: '2023', total: 356, b: 42, y: 48 },
-  { year: '2024', total: 491, b: 56, y: 68 },
-  { year: '2025', total: 672, b: 74, y: 92 },
+  { year: '2026/4', total: 4, b: 4, y: 4 },
+  { year: '2026/8', total: 92, b: 11, y: 12 },
+  { year: '2026/12', total: 164, b: 18, y: 22 },
+  { year: '2027/4', total: 247, b: 28, y: 34 },
+  { year: '2027/8', total: 356, b: 42, y: 48 },
+  { year: '2027/12', total: 491, b: 56, y: 68 },
+  { year: '2028/4', total: 672, b: 74, y: 92 }
 ];
 
 function Slide4({ active }) {
@@ -225,7 +220,7 @@ function Slide4({ active }) {
         <div className="s4-chart anim-wipe">
           <div className="delta-tag">Δ 2019 → 2025</div>
           <div className="chart-head">
-            <div className="title">Crecimiento de cobertura · Información Dominicana</div>
+            <div className="title">Crecimiento de cobertura esperado · Información Dominicana</div>
             <div className="sub">UNIDADES · ORGANISMOS + DATASETS</div>
           </div>
           <div className="bars">
@@ -241,7 +236,7 @@ function Slide4({ active }) {
             ))}
           </div>
           <div className="chart-foot">
-            <div>CAGR <b>·</b> <b><Counter target={55} suffix="%" active={active} /></b></div>
+            <div>CAGR <b>·</b> <b><Counter target={1} suffix="%" active={active} /></b></div>
             <div>ORGANISMOS <b>·</b> <b><Counter target={348} active={active} /></b></div>
             <div>DATASETS <b>·</b> <b><Counter target={324} active={active} /></b></div>
             <div>ACTUALIZACIÓN <b>·</b> <b>DIARIO</b></div>
@@ -249,7 +244,7 @@ function Slide4({ active }) {
         </div>
       </div>
       <div className="chrome-bot">
-        <div>DATOS INTERNOS · INFORMACION-DOMINICANA.OPS</div>
+        <div>DATOS INTERNOS · INFORMACION-DOMINICANA</div>
         <div className="pn">04 / 05</div>
       </div>
     </section>
@@ -276,20 +271,17 @@ function Slide5({ active }) {
           </div>
           <div className="s5-stat">
             <div className="n"><Counter target={412} suffix="M" active={active} /></div>
-            <div className="l">Registros analizados</div>
+            <div className="l">Registros totales</div>
           </div>
           <div className="s5-stat">
-            <div className="n"><Counter target={24} suffix="/7" active={active} /></div>
-            <div className="l">Ingesta continua, sin interrupción</div>
+            <div className="n"><Counter target={103} suffix="K" active={active} /></div>
+            <div className="l">Registros analizados</div>
           </div>
           <div className="s5-stat">
             <div className="n">01</div>
             <div className="l">Una sola plataforma, una sola lectura</div>
           </div>
         </div>
-      </div>
-      <div className="chrome-bot">
-        <div>PRESENTACIÓN EJECUTIVA · GOBIERNO + SECTOR PÚBLICO</div>
       </div>
     </section>
   );
@@ -298,11 +290,11 @@ function Slide5({ active }) {
 const SLIDE_COMPONENTS = [Slide1, Slide2, Slide3, Slide4, Slide5];
 
 function SlideRow({ SlideComp, scale }) {
-  const [ref, active] = useInView(0.35);
-  const scaledH = Math.round(DESIGN_H * scale);
+  const [ref, active] = useInView(0.3);
+  const containerH = Math.round(DESIGN_H * scale);
   return (
-    <div ref={ref} style={{ width: '100%', height: scaledH, overflow: 'hidden', flexShrink: 0 }}>
-      <div style={{ width: DESIGN_W, height: DESIGN_H, transformOrigin: 'top left', transform: `scale(${scale})` }}>
+    <div ref={ref} style={{ width: '100%', height: containerH, overflow: 'hidden', flexShrink: 0, display: 'flex', justifyContent: 'center' }}>
+      <div style={{ width: DESIGN_W, height: DESIGN_H, flexShrink: 0, transformOrigin: 'top center', transform: `scale(${scale})` }}>
         <SlideComp active={active} />
       </div>
     </div>
@@ -310,21 +302,17 @@ function SlideRow({ SlideComp, scale }) {
 }
 
 export function PresentationPage() {
-  const wrapRef = useRef(null);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setScale(entry.contentRect.width / DESIGN_W);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
+    const update = () => setScale(Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H));
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
 
   return (
-    <div ref={wrapRef} className="pres-page">
+    <div className="pres-page">
       {SLIDE_COMPONENTS.map((SlideComp, i) => (
         <SlideRow key={i} SlideComp={SlideComp} scale={scale} />
       ))}

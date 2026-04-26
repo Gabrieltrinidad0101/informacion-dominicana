@@ -74,6 +74,10 @@ body::before {
     radial-gradient(ellipse 60% 40% at 95% 100%, var(--gradient-2), transparent 60%);
 }
 
+a {
+  text-decoration: none;
+}
+
 .app {
   position: relative;
   z-index: 1;
@@ -381,8 +385,8 @@ body::before {
   padding: 0;
   background-color: #000;
   background-image:
-    linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -565,7 +569,7 @@ body::before {
 
 .date-label {
   font-size: 11px;
-  color: var(--text-dimmer);
+  color: var(--text-dim);
   font-family: 'Geist Mono', monospace;
   text-transform: uppercase;
   letter-spacing: 1px
@@ -697,7 +701,7 @@ body::before {
   font-size: 11px;
   font-family: 'Geist Mono', monospace;
   background: var(--tag-bg);
-  color: var(--text-dim);
+  color: var(--text);
 }
 
 .perf {
@@ -1103,4 +1107,174 @@ body::before {
 
 ::-webkit-scrollbar-track {
   background: transparent
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 0 10px;
+  border-top: 1px solid var(--line)
+}
+
+.pg-btn {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s
+}
+
+.pg-btn:hover:not(:disabled) {
+  background: var(--line)
+}
+
+.pg-btn:disabled {
+  opacity: 0.35;
+  cursor: default
+}
+
+.pg-info {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: 'Geist Mono', monospace;
+  min-width: 60px;
+  text-align: center
+}
+
+/* ---------- Mobile ---------- */
+.mobile-topbar {
+  display: none;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 200;
+    width: 260px;
+    height: 100dvh;
+    transform: translateX(-100%);
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow-y: auto;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 190;
+    background: var(--overlay);
+    backdrop-filter: blur(2px);
+    animation: fade 160ms ease-out;
+  }
+
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .hamburger {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--line-soft);
+    background: var(--hover-bg);
+    color: var(--text);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 120ms;
+    flex-shrink: 0;
+  }
+
+  .hamburger:hover {
+    background: var(--active-bg);
+  }
+
+  .topbar {
+    padding: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .content {
+    padding: 16px 16px 40px;
+  }
+
+  .kpi-row-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table-tools {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chips {
+    justify-content: flex-start;
+  }
+
+  .drawer {
+    flex-direction: column;
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  .drawer-sidebar {
+    width: 100%;
+    min-width: unset;
+    max-height: 40dvh;
+    border-right: none;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .tweaks {
+    right: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+  }
+
+  .topbar-actions {
+    flex-wrap: wrap;
+  }
 }

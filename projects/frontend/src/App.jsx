@@ -36,6 +36,11 @@ export function App() {
 
   const [tweaks, setTweaks] = useState(TWEAKS_DEFAULT);
   const [tweaksOpen, setTweaksOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
 
   const accent = tweaks.accent;
   const [title, sub] = PAGE_TITLES[page] ?? PAGE_TITLES.economia;
@@ -67,9 +72,16 @@ export function App() {
 
   return (
     <div className="app">
-      <Sidebar density={tweaks.density} accent={accent} />
+      {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
+      <Sidebar density={tweaks.density} accent={accent} open={sidebarOpen} />
 
       <main className="main">
+        <div className="mobile-topbar">
+          <button className="hamburger" onClick={() => setSidebarOpen(o => !o)}>
+            <Icon name={sidebarOpen ? "close" : "menu"} size={18} />
+          </button>
+          <span className="brand-name">Información Dominicana</span>
+        </div>
         {page !== '' && <Header title={title} subtitle={sub} accent={accent} />}
         <div className={"content" + (page === '' ? " content--home" : "")}>
           <Routes>

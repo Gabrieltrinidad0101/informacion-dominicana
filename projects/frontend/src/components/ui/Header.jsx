@@ -6,7 +6,7 @@ export function Header({ title, subtitle, accent }) {
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ fontSize: 11, color: 'var(--text-dimmer)', fontFamily: "'Geist Mono', monospace", textTransform: 'uppercase', letterSpacing: 1 }}>
-            Lumen · People
+            Información Dominicana · People
           </div>
           <span style={{ color: 'var(--line)' }}>/</span>
           <div style={{ fontSize: 11, color: 'var(--text-dim)', fontFamily: "'Geist Mono', monospace" }}>{title.toLowerCase()}</div>

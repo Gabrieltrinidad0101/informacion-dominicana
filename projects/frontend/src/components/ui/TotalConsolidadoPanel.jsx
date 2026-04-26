@@ -8,33 +8,33 @@ const CMP_PALETTE = ['#6ad2f2', '#f2b76a', '#b06af2', '#6af2a1'];
 
 const INSTITUTION_NAMES = {
   jarabacoa: 'Ayuntamiento de Jarabacoa',
-  moca:      'Ayuntamiento de Moca',
-  cotui:     'Ayuntamiento de Cotuí',
-  intrant:   'Intrant',
-  ogtic:     'Ogtic',
+  moca: 'Ayuntamiento de Moca',
+  cotui: 'Ayuntamiento de Cotuí',
+  intrant: 'Intrant',
+  ogtic: 'Ogtic',
 };
 
 const seriesConfig = Object.values(INSTITUTION_NAMES).map(name => [
-  { name, key: 'payroll',         label: `Nómina - ${name}`,               url: `${name}/nomina/exportToJson/payroll`,         fmt: fmtMoney },
-  { name, key: 'employeersTotal', label: `Total de Empleados - ${name}`,   url: `${name}/nomina/exportToJson/employeersTotal`, fmt: fmtNum   },
-  { name, key: 'employeersM',     label: `Empleados Masculinos - ${name}`, url: `${name}/nomina/exportToJson/employeersM`,     fmt: fmtNum   },
-  { name, key: 'employeersF',     label: `Empleadas Femeninas - ${name}`,  url: `${name}/nomina/exportToJson/employeersF`,     fmt: fmtNum   },
+  { name, key: 'payroll', label: `Nómina - ${name}`, url: `${name}/nomina/exportToJson/payroll`, fmt: fmtMoney },
+  { name, key: 'employeersTotal', label: `Total de Empleados - ${name}`, url: `${name}/nomina/exportToJson/employeersTotal`, fmt: fmtNum },
+  { name, key: 'employeersM', label: `Empleados Masculinos - ${name}`, url: `${name}/nomina/exportToJson/employeersM`, fmt: fmtNum },
+  { name, key: 'employeersF', label: `Empleadas - ${name}`, url: `${name}/nomina/exportToJson/employeersF`, fmt: fmtNum },
 ]).flat();
 
 export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'payroll', institution, accent, onDoubleClick }) {
-  const [compareWith, setCompareWith]   = useState([]);
-  const [compareOpen, setCompareOpen]   = useState(false);
+  const [compareWith, setCompareWith] = useState([]);
+  const [compareOpen, setCompareOpen] = useState(false);
   const [draftCompare, setDraftCompare] = useState([]);
   // data stored as {time, value}[] — the format lightweight-charts expects
-  const [seriesA, setSeriesA]           = useState(null);
-  const [extraSeries, setExtraSeries]   = useState({});
-  const [search, setSearch]             = useState('');
+  const [seriesA, setSeriesA] = useState(null);
+  const [extraSeries, setExtraSeries] = useState({});
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     setSeriesA(null);
     setCompareWith([]);
     setExtraSeries({});
-    const name   = INSTITUTION_NAMES[institution];
+    const name = INSTITUTION_NAMES[institution];
     const config = seriesConfig.find(s => s.name === name && s.key === seriesKey);
     if (!config) return;
 
@@ -43,7 +43,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
     });
   }, [institution, seriesKey]);
 
-  const primaryUrl     = seriesA?.url;
+  const primaryUrl = seriesA?.url;
   const compareOptions = seriesConfig.filter(s =>
     s.url !== primaryUrl &&
     s.label.toLowerCase().includes(search.toLowerCase())
@@ -52,7 +52,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
   const handleApply = async () => {
     const toFetch = draftCompare.filter(url => !extraSeries[url]);
     const results = await Promise.all(toFetch.map(url => requestJson(url)));
-    const next    = { ...extraSeries };
+    const next = { ...extraSeries };
     toFetch.forEach((url, i) => {
       const config = seriesConfig.find(s => s.url === url);
       next[url] = { ...config, data: results[i] };
@@ -143,7 +143,7 @@ export function TotalConsolidadoPanel({ title, subtitle, legend, seriesKey = 'pa
                 </thead>
                 <tbody>
                   {compareOptions.map(s => {
-                    const on       = draftCompare.includes(s.url);
+                    const on = draftCompare.includes(s.url);
                     const colorIdx = draftCompare.indexOf(s.url);
                     return (
                       <tr key={s.url}
