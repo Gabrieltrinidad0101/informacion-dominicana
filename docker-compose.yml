@@ -1,0 +1,192 @@
+services:
+  download:
+    build:
+      context: ./projects
+      dockerfile: ./download/dockerfile
+    container_name: download
+    volumes:
+      - ./projects/download:/app/download
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  ai_process:
+    build:
+      context: ./projects
+      dockerfile: ./aiProcess/dockerfile
+    container_name: aiProcess
+    volumes:
+      - ./projects/aiProcess:/app/aiProcess
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  insert_data:
+    build:
+      context: ./projects
+      dockerfile: ./insertData/dockerfile
+    container_name: insertData
+    volumes:
+      - ./projects/insertData:/app/insertData
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  export_to_json:
+    build:
+      context: ./projects
+      dockerfile: ./exportToJson/dockerfile
+    container_name: exportToJson
+    volumes:
+      - ./projects/exportToJson:/app/exportToJson
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  validate_id:
+    build:
+      context: ./projects
+      dockerfile: ./validateId/dockerfile
+    container_name: validateId
+    volumes:
+      - ./projects/validateId:/app/validateId
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  files_manager:
+    build:
+      context: ./projects
+      dockerfile: ./filesManager/dockerfile
+    container_name: filesManager
+    networks:
+      - dev
+    ports:
+      - 4000:4000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  pii:
+    build:
+      context: ./projects/pii
+      dockerfile: dockerfile
+    container_name: pii
+    volumes:
+      - ./projects/pii:/app
+    depends_on:
+      - postgres
+      - minio
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  minio_to_r2:
+    build:
+      context: ./projects
+      dockerfile: ./minioToR2/dockerfile
+    container_name: minioToR2
+    environment:
+      - ENDPOINT=http://minio:9000
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-MINIO_ROOT_PASSWORD}
+      - MINIO_BUCKET=${MINIO_BUCKET:-informacion-dominicana-v2}
+      - R2_ACCOUNT_ID=${R2_ACCOUNT_ID}
+      - R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
+      - R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
+      - R2_BUCKET=${R2_BUCKET:-informacion-dominicana-v2}
+    depends_on:
+      - minio
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  world_bank:
+    build:
+      context: ./projects
+      dockerfile: ./worldBank/dockerfile
+    container_name: worldBank
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: informacion-dominicana
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - dev
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  minio:
+    image: minio/minio
+    volumes:
+      - minio-data:/data
+    networks:
+      - dev
+    environment:
+      - MINIO_ROOT_USER=MINIO_ROOT_USER
+      - MINIO_ROOT_PASSWORD=MINIO_ROOT_PASSWORD
+      - MINIO_BROWSER_REDIRECT_URL=http://localhost:9001
+    command: server /data --console-address ":9001"
+    ports:
+      - 9000:9000
+      - 9001:9001
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  pgdata:
+  minio-data:
+
+networks:
+  dev:
+    driver: bridge

@@ -1,0 +1,5 @@
+volumes/
+node_modules
+build
+.docusaurus
+.cache-loader

@@ -1,0 +1,9 @@
+boto3
+paddlepaddle==3.0.0
+paddleocr
+pymupdf
+pillow
+numpy
+opencv-python-headless
+psycopg2-binary
+python-dotenv

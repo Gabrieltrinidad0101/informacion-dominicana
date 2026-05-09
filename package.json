@@ -1,0 +1,29 @@
+{
+  "name": "informacion-dominicana-rebuild",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "download": "node ./projects/download/main.js",
+    "aiProcess": "node ./projects/aiProcess/main.js",
+    "insertData": "node ./projects/insertData/main.js",
+    "exportToJson": "node ./projects/exportToJson/main.js",
+    "validateId": "node ./projects/validateId/main.js",
+    "pii": "python3 ./projects/pii/main.py",
+    "filesManager": "node ./projects/filesManager/main.js",
+    "worldBank": "node ./projects/worldBank/main.js",
+    "minioToR2": "node ./projects/minioToR2/main.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@aws-sdk/client-s3": "^3.0.0",
+    "adm-zip": "^0.5.16",
+    "axios": "^1.7.0",
+    "dotenv": "^16.0.0",
+    "knex": "^3.0.0",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.0.0",
+    "puppeteer": "^23.0.0",
+    "xml-js": "^1.6.11",
+    "xlsx": "^0.18.5"
+  }
+}
