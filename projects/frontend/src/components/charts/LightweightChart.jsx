@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { createChart } from 'lightweight-charts';
+import { createChart, AreaSeries } from 'lightweight-charts';
 
 const EXTRA_COLORS = ['#6ad2f2', '#f2b76a', '#b06af2', '#6af2a1'];
 
@@ -99,7 +99,7 @@ export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt
     }
     if (!primary?.length) return;
 
-    const series = s.chart.addAreaSeries({
+    const series = s.chart.addSeries(AreaSeries, {
       lineColor: accent,
       topColor: accent + '55',
       bottomColor: accent + '00',
@@ -125,7 +125,7 @@ export function LightweightChart({ primary, extras = [], accent = '#c9f26a', fmt
     extras.forEach((ex, i) => {
       if (!ex?.data?.length) return;
       const color = EXTRA_COLORS[i % EXTRA_COLORS.length];
-      const series = s.chart.addAreaSeries({
+      const series = s.chart.addSeries(AreaSeries, {
         lineColor: color,
         topColor: color + '22',
         bottomColor: color + '00',
