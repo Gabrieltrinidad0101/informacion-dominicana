@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar } from './components/ui/Sidebar';
 import { Header } from './components/ui/Header';
 import { Icon } from './components/ui/Icon';
-import { Analytics } from './pages/Analytics';
-import { WorldBankPage } from './pages/WorldBankPage';
-import { InstitutionPayroll } from './pages/InstitutionPayroll';
-import { PresentationPage } from './pages/PresentationPage';
 import { AlphaAlert } from './components/ui/AlphaAlert';
+
+const Analytics = lazy(() => import('./pages/Analytics').then(m => ({ default: m.Analytics })));
+const WorldBankPage = lazy(() => import('./pages/WorldBankPage').then(m => ({ default: m.WorldBankPage })));
+const InstitutionPayroll = lazy(() => import('./pages/InstitutionPayroll').then(m => ({ default: m.InstitutionPayroll })));
+const PresentationPage = lazy(() => import('./pages/PresentationPage').then(m => ({ default: m.PresentationPage })));
 
 const TWEAKS_DEFAULT = {
   accent: "#c9f26a",
@@ -86,22 +87,24 @@ export function App() {
         </div>
         {page !== '' && <Header title={title} subtitle={sub} accent={accent} onOpenTweaks={() => setTweaksOpen(o => !o)} />}
         <div className={"content" + (page === '' ? " content--home" : "")}>
-          <Routes>
-            <Route path="/" element={<PresentationPage />} />
-            <Route path="/economia" element={<WorldBankPage category="Economia" accent={accent} />} />
-            <Route path="/social" element={<WorldBankPage category="Social" accent={accent} />} />
-            <Route path="/salud" element={<WorldBankPage category="Salud" accent={accent} />} />
-            <Route path="/educacion" element={<WorldBankPage category="Educacion" accent={accent} />} />
-            <Route path="/medioambiente" element={<WorldBankPage category="Medioambiente" accent={accent} />} />
-            <Route path="/militar" element={<WorldBankPage category="Militar" accent={accent} />} />
-            <Route path="/jarabacoa" element={<InstitutionPayroll institution="jarabacoa" accent={accent} />} />
-            <Route path="/moca" element={<InstitutionPayroll institution="moca" accent={accent} />} />
-<Route path="/intrant" element={<InstitutionPayroll institution="intrant" accent={accent} />} />
-            <Route path="/ogtic" element={<InstitutionPayroll institution="ogtic" accent={accent} />} />
-            <Route path="/mopc" element={<InstitutionPayroll institution="mopc" accent={accent} />} />
-            <Route path="/fuentes" element={<Analytics accent={accent} />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<PresentationPage />} />
+              <Route path="/economia" element={<WorldBankPage category="Economia" accent={accent} />} />
+              <Route path="/social" element={<WorldBankPage category="Social" accent={accent} />} />
+              <Route path="/salud" element={<WorldBankPage category="Salud" accent={accent} />} />
+              <Route path="/educacion" element={<WorldBankPage category="Educacion" accent={accent} />} />
+              <Route path="/medioambiente" element={<WorldBankPage category="Medioambiente" accent={accent} />} />
+              <Route path="/militar" element={<WorldBankPage category="Militar" accent={accent} />} />
+              <Route path="/jarabacoa" element={<InstitutionPayroll institution="jarabacoa" accent={accent} />} />
+              <Route path="/moca" element={<InstitutionPayroll institution="moca" accent={accent} />} />
+              <Route path="/intrant" element={<InstitutionPayroll institution="intrant" accent={accent} />} />
+              <Route path="/ogtic" element={<InstitutionPayroll institution="ogtic" accent={accent} />} />
+              <Route path="/mopc" element={<InstitutionPayroll institution="mopc" accent={accent} />} />
+              <Route path="/fuentes" element={<Analytics accent={accent} />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </div>
       </main>
 
