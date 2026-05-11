@@ -8,7 +8,7 @@ import {
 } from "@aws-sdk/client-s3"
 
 const MINIO_BUCKET = process.env.MINIO_BUCKET ?? "informacion-dominicana-v2"
-const R2_BUCKET = process.env.R2_BUCKET ?? "informacion-dominicana-v2"
+const R2_BUCKET = process.env.R2_BUCKET ?? "informaciondominicana"
 const FORCE = process.argv.includes("--force")
 const PREFIX = process.argv.find((a, i) => process.argv[i - 1] === "--prefix") ?? ""
 
@@ -67,6 +67,7 @@ const transfer = async (key) => {
         Key: key,
         Body: body,
         ContentType: res.ContentType ?? "application/octet-stream",
+        ACL: "public-read",
     }))
     console.log(`done  ${key}`)
 }
