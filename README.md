@@ -1,4 +1,4 @@
-# Información Dominicana
+# Información Dominicana 
 
 A data pipeline and frontend that scrapes, processes, and visualizes public payroll data from Dominican Republic government institutions, making government transparency data accessible to everyone.
 
