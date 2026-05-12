@@ -19,6 +19,7 @@ export function AlphaAlert() {
         <p>
           Este sitio web se encuentra en versión alpha y está en desarrollo activo.
           <strong> No es un sitio oficial del gobierno dominicano</strong> y ninguna institución pública ni privada financia este proyecto.
+          {' '}Los datos obtenidos aún están sujetos a error; siempre valide con las <strong>fuentes oficiales</strong>.
         </p>
       </div>
       <button className="alpha-alert-close" onClick={dismiss} aria-label="Cerrar aviso">✕</button>
