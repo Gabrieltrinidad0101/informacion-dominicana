@@ -9,7 +9,7 @@ async function resolveExcelUrl(base) {
   for (const ext of EXCEL_EXTENSIONS) {
     const url = `${SERVER_URL}/${base}${ext}`;
     try {
-      const res = await fetch(url, { method: 'HEAD' });
+      const res = await fetch(url, { method: 'GET' });
       if (res.ok) return url;
     } catch { /* try next */ }
   }
