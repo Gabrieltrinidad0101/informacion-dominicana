@@ -14,26 +14,42 @@ const monthMap = {
     septiembre: 9, octubre: 10, noviembre: 11, diciembre: 12
 }
 
+const parseArgs = (argv) => {
+    const args = { institutionKey: null, year: null, month: null }
+    for (let i = 2; i < argv.length; i++) {
+        if (argv[i] === '--year') { args.year = argv[++i]; continue }
+        if (argv[i] === '--month') { args.month = argv[++i]; continue }
+        if (!args.institutionKey) args.institutionKey = argv[i]
+    }
+    return args
+}
+
+const args = parseArgs(process.argv)
+
 try {
     await ensureTable()
 
     const fileManagerClient = new FileManagerClient()
 
-    const institutionKey = process.argv[2]
-    const targetInstitutions = institutionKey
-        ? [institutions[institutionKey]].filter(Boolean)
+    const targetInstitutions = args.institutionKey
+        ? [institutions[args.institutionKey]].filter(Boolean)
         : Object.values(institutions)
 
-    if (institutionKey && targetInstitutions.length === 0) {
-        console.error(`Unknown institution: "${institutionKey}"`)
+    if (args.institutionKey && targetInstitutions.length === 0) {
+        console.error(`Unknown institution: "${args.institutionKey}"`)
         process.exit(1)
     }
+
+    if (args.year) console.log(`Filtering by year: ${args.year}`)
+    if (args.month) console.log(`Filtering by month: ${args.month}`)
 
     for (const institution of targetInstitutions) {
         const prefix = `${institution.institutionName}/${institution.typeOfData}/aiProcess/`
         console.log(`\nScanning MinIO: ${prefix}`)
 
-        const aiKeys = await fileManagerClient.listFiles(prefix)
+        let aiKeys = await fileManagerClient.listFiles(prefix)
+        if (args.year) aiKeys = aiKeys.filter(k => k.split('/')[3] === args.year)
+        if (args.month) aiKeys = aiKeys.filter(k => k.split('/')[4] === args.month)
         console.log(`Found ${aiKeys.length} AI result file(s)`)
 
         for (const aiKey of aiKeys) {
@@ -49,7 +65,7 @@ try {
             const buffer = await fileManagerClient.getFile(aiKey)
             const json = JSON.parse(buffer.toString('utf-8'))
             const rawLines = json?.lines ?? json
-
+            let test = 0
             const payrolls = rawLines
                 .filter(p => p.name)
                 .map(p => {
@@ -59,6 +75,7 @@ try {
                         isHonorific = true
                         income = 0
                     }
+                    test += income
                     return {
                         date,
                         name: p.name ?? null,
@@ -74,7 +91,7 @@ try {
                         internalLink: aiKey
                     }
                 })
-
+            console.log({ test })
             if (payrolls.length === 0) {
                 console.log(`  No payrolls in: ${aiKey}`)
                 continue
