@@ -103,6 +103,10 @@ npm run build    # production build → dist/
 
 Pages: institution payroll explorer, cross-institution analytics, World Bank data visualizations.
 
+## Previous version
+
+An older version of this project is available at [github.com/gabrieltrinidad0101/informacion-dominicana-v1](https://github.com/gabrieltrinidad0101/informacion-dominicana-v1).
+
 ## Contributing
 
 Issues and pull requests are welcome at [github.com/Gabrieltrinidad0101/informacion-dominicana/issues](https://github.com/Gabrieltrinidad0101/informacion-dominicana/issues).
