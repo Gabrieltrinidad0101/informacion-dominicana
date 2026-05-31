@@ -6,7 +6,13 @@ import { DeptDonut } from '../components/charts/DeptDonut';
 
 export function InstitutionPayroll({ institution, accent }) {
   const [selected, setSelected] = useState(null);
+  const [allEmployees, setAllEmployees] = useState([]);
   const [chartDate, setChartDate] = useState(null);
+
+  const handleOpen = (emp, rows) => {
+    setSelected(emp);
+    setAllEmployees(rows ?? []);
+  };
 
   return (
     <>
@@ -46,7 +52,7 @@ export function InstitutionPayroll({ institution, accent }) {
         />
       </div>
 
-      <EmployeeTable institution={institution} accent={accent} onOpen={setSelected} externalDate={chartDate} />
+      <EmployeeTable institution={institution} accent={accent} onOpen={handleOpen} externalDate={chartDate} />
 
       <div className="charts-grid">
         <div className="panel" style={{ gridColumn: 'span 6' }}>
@@ -74,7 +80,13 @@ export function InstitutionPayroll({ institution, accent }) {
         </div>
       </div>
 
-      <EmployeeDrawer employee={selected} onClose={() => setSelected(null)} accent={accent} />
+      <EmployeeDrawer
+        employee={selected}
+        allEmployees={allEmployees}
+        onSelect={setSelected}
+        onClose={() => setSelected(null)}
+        accent={accent}
+      />
     </>
   );
 }

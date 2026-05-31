@@ -1,9 +1,18 @@
 export const prompt = `Extract structured payroll data.
 
-OUTPUT FORMAT (STRICT):
-Return records in this pipe-separated format, one per line:
+Return ONLY rows in this exact pipe-separated format:
 
 name|document|position|income|sex|accountBack|phoneNumber
+
+Rules:
+  One employee per line.
+  No JSON, markdown, headers, or explanations.
+  Keep empty fields blank:
+  name|document|position|income|sex|accountBack|phoneNumber
+  Income, accountBack, and phoneNumber must contain digits only.
+  Normalize sex:
+    M = Male
+    F = Female
 
 Example:
 Gabriel Trinidad|402-123456-7|Programador|100000|M|123456789|8095551234

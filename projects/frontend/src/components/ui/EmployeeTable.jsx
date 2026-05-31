@@ -119,13 +119,15 @@ export function EmployeeTable({ institution, accent, onOpen, externalDate }) {
       if (!map.has(e.dept)) map.set(e.dept, []);
       map.get(e.dept).push(e);
     });
+    const avgSalary = arr => arr.reduce((s, e) => s + e.salary, 0) / arr.length;
     return Array.from(map.entries())
       .map(([position, employees]) => ({ position, employees }))
-      .sort((a, b) => {
-        const avgSalary = arr => arr.reduce((s, e) => s + e.salary, 0) / arr.length;
-        return avgSalary(b.employees) - avgSalary(a.employees);
-      });
-  }, [filtered]);
+      .sort((a, b) =>
+        salaryMin !== null
+          ? avgSalary(a.employees) - avgSalary(b.employees)
+          : avgSalary(b.employees) - avgSalary(a.employees)
+      );
+  }, [filtered, salaryMin]);
 
   useEffect(() => { setPage(1); }, [q, sexFilter, minSalary, sort, institution]);
 
@@ -287,7 +289,7 @@ export function EmployeeTable({ institution, accent, onOpen, externalDate }) {
                     </td>
                   </tr>
                   {isOpen && emps.map(e => (
-                    <tr key={e.id} onClick={() => onOpen(e)}>
+                    <tr key={e.id} onClick={() => onOpen(e, rows)}>
                       <td>
                         <div className="emp-name">
                           <div>

@@ -45,14 +45,14 @@ async function exportInstitution(institutionName) {
 
     const employeersTotal = await knex('payrolls')
         .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
-        .select(knex.raw('COUNT(income)::FLOAT AS value'))
+        .select(knex.raw('COUNT(_id)::FLOAT AS value'))
         .where('institutionName', institutionName)
         .groupBy('time')
         .orderBy('time', 'asc')
 
     const employeersM = await knex('payrolls')
         .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
-        .select(knex.raw('COUNT(income)::FLOAT AS value'))
+        .select(knex.raw('COUNT(_id)::FLOAT AS value'))
         .where('sex', 'M')
         .where('institutionName', institutionName)
         .groupBy('time')
@@ -60,7 +60,7 @@ async function exportInstitution(institutionName) {
 
     const employeersF = await knex('payrolls')
         .select(knex.raw(`TO_CHAR("date", 'YYYY-MM-DD') AS time`))
-        .select(knex.raw('COUNT(income)::FLOAT AS value'))
+        .select(knex.raw('COUNT(_id)::FLOAT AS value'))
         .where('sex', 'F')
         .where('institutionName', institutionName)
         .groupBy('time')

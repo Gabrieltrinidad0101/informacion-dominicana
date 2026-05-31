@@ -112,7 +112,7 @@ const processPdfPage = async (pdfDoc, pageIndex, downloadKey) => {
 
     const call = async () => {
         const message = await anthropic.messages.create({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-opus-4-8',
             max_tokens: 8192,
             messages: [{
                 role: 'user',
@@ -125,6 +125,7 @@ const processPdfPage = async (pdfDoc, pageIndex, downloadKey) => {
                 ]
             }]
         })
+        console.log(message.content[0].text)
         return parseLines(message.content[0].text)
     }
     try {

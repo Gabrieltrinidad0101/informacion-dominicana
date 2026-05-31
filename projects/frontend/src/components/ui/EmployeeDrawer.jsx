@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import * as XLSX from 'xlsx';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -9,7 +9,91 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.vers
 
 import { isPdfDownload, resolveDownloadUrl } from '../../utils/fileUrl.js';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL ?? 'http://localhost:4000';
+const SERVER_URL = import.meta.env.VITE_SERVER_URL ?? 'http://localhost:9000/informacion-dominicana-v2';
+
+function normalizeText(s) {
+  return (s || '')
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function parseOcrWords(json) {
+  const texts  = json?.rec_texts  || [];
+  const scores = json?.rec_scores || [];
+  const polys  = json?.rec_polys  || [];
+  const words = [];
+  for (let i = 0; i < texts.length; i++) {
+    const poly = polys[i];
+    if (!poly || poly.length !== 4) continue;
+    const [p0, p1, p2, p3] = poly;
+    const cx = (p0[0] + p2[0]) / 2;
+    const cy = (p0[1] + p2[1]) / 2;
+    const w  = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+    const h  = Math.hypot(p3[0] - p0[0], p3[1] - p0[1]);
+    words.push({
+      text: (texts[i] || '').trim(),
+      x: cx - w / 2,
+      y: cy - h / 2,
+      w, h,
+      conf: scores[i] ?? 0,
+    });
+  }
+  return words;
+}
+
+function mergeBoxes(boxes) {
+  const x  = Math.min(...boxes.map(b => b.x));
+  const y  = Math.min(...boxes.map(b => b.y));
+  const x2 = Math.max(...boxes.map(b => b.x + b.w));
+  const y2 = Math.max(...boxes.map(b => b.y + b.h));
+  return { x, y, w: x2 - x, h: y2 - y };
+}
+
+function findOcrMatches(words, query) {
+  const q = normalizeText(query);
+  if (!q || !words.length) return [];
+
+  const nTokens = q.split(' ').length;
+  const windowSizes = nTokens === 1 ? [1] : [nTokens, nTokens - 1, nTokens + 1];
+
+  const hits = [];
+  for (const winSize of windowSizes) {
+    if (winSize < 1 || winSize > words.length) continue;
+    for (let start = 0; start <= words.length - winSize; start++) {
+      const span = words.slice(start, start + winSize);
+      const combined = span.map(w => normalizeText(w.text)).join(' ');
+      if (!combined) continue;
+      const hit = combined.includes(q) || (q.length > 4 && q.includes(combined));
+      if (hit) {
+        hits.push({
+          ...mergeBoxes(span),
+          text: span.map(w => w.text).join(' '),
+        });
+      }
+    }
+  }
+
+  hits.sort((a, b) => (a.w * a.h) - (b.w * b.h));
+  const uniq = [];
+  for (const m of hits) {
+    if (!uniq.some(u => Math.abs(u.x - m.x) < 10 && Math.abs(u.y - m.y) < 10)) {
+      uniq.push(m);
+    }
+  }
+  return uniq;
+}
+
+function loadImageDims(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload  = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    img.onerror = reject;
+    img.src = url;
+  });
+}
 
 function ExcelViewer({ fileUrl, employeeName }) {
   const [sheets, setSheets] = useState([]);
@@ -137,29 +221,87 @@ function StatusBox({ children }) {
   );
 }
 
-function PdfViewer({ urlDownload }) {
+function PdfViewer({ urlDownload, employeeName }) {
   const [pdfData, setPdfData] = useState(null);
   const [rotation, setRotation] = useState(0);
+  const [pageDims, setPageDims] = useState(null);
+  const [ocrData, setOcrData] = useState(null);
+  const [searchQ, setSearchQ] = useState(employeeName ?? '');
+  const firstMatchRef = useRef(null);
+
   const pageMatch = urlDownload.match(/_page(\d+)$/);
   const pageNumber = pageMatch ? parseInt(pageMatch[1]) + 1 : 1;
-  const pdfUrl = `${SERVER_URL}/${urlDownload.replace(/_page\d+$/, '')}.pdf`;
+  const pdfUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/pdfFixed/').replace(/_page\d+$/, '')}.pdf`;
+  const renderedWidth = Math.floor(window.innerWidth * 0.78);
 
   useEffect(() => {
     setPdfData(null);
     setRotation(0);
+    setPageDims(null);
     fetch(pdfUrl)
       .then(r => { if (!r.ok) throw new Error(); return r.arrayBuffer(); })
       .then(buf => setPdfData(buf))
       .catch(() => setPdfData('error'));
   }, [pdfUrl]);
 
+  useEffect(() => {
+    let cancelled = false;
+    setOcrData(null);
+    const ocrUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/extractedText/')}_img0.json`;
+    const imgUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/imgProcessed/')}_img0.png`;
+
+    Promise.all([
+      fetch(ocrUrl).then(r => r.ok ? r.json() : null).catch(() => null),
+      loadImageDims(imgUrl).catch(() => null),
+    ]).then(([json, dims]) => {
+      if (cancelled || !json || !dims) return;
+      setOcrData({ width: dims.width, height: dims.height, words: parseOcrWords(json) });
+    });
+    return () => { cancelled = true; };
+  }, [urlDownload]);
+
+  useEffect(() => { setSearchQ(employeeName ?? ''); }, [employeeName]);
+
+  const matches = useMemo(() => {
+    if (!ocrData || !searchQ) return [];
+    return findOcrMatches(ocrData.words, searchQ);
+  }, [ocrData, searchQ]);
+
+  useEffect(() => {
+    if (firstMatchRef.current) {
+      firstMatchRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [matches]);
+
   if (!pdfData) return <StatusBox>Cargando PDF…</StatusBox>;
   if (pdfData === 'error') return <StatusBox>No se pudo cargar el PDF.</StatusBox>;
 
+  const renderedHeight = pageDims ? renderedWidth * pageDims.height / pageDims.width : 0;
+  const sx = ocrData ? renderedWidth  / ocrData.width  : 1;
+  const sy = ocrData && renderedHeight ? renderedHeight / ocrData.height : 1;
+  const showOverlay = rotation === 0 && ocrData && pageDims && matches.length > 0;
+
   return (
     <div style={{ width: '100%', borderRadius: 6, overflow: 'hidden', background: '#525659', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', gap: 6, padding: '8px 12px', background: '#3a3d40', flexShrink: 0, alignItems: 'center' }}>
-        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginRight: 4, letterSpacing: '0.4px' }}>ROTAR</span>
+      <div style={{ display: 'flex', gap: 6, padding: '8px 12px', background: '#3a3d40', flexShrink: 0, alignItems: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 4, padding: '3px 8px', flex: '1 1 200px', minWidth: 160 }}>
+          <Icon name="search" size={12} />
+          <input
+            value={searchQ}
+            onChange={e => setSearchQ(e.target.value)}
+            placeholder="Buscar en el PDF…"
+            style={{ border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.9)', fontSize: 11, outline: 'none', width: '100%' }}
+          />
+          {searchQ && (
+            <button onClick={() => setSearchQ('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', lineHeight: 1, padding: 0, fontSize: 14 }}>×</button>
+          )}
+        </div>
+        {ocrData && (
+          <span style={{ fontSize: 11, color: matches.length > 0 ? 'var(--accent, #c9f26a)' : 'rgba(255,255,255,0.5)' }}>
+            {matches.length} resultado{matches.length === 1 ? '' : 's'}
+          </span>
+        )}
+        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginLeft: 8, letterSpacing: '0.4px' }}>ROTAR</span>
         {[0, 90, 270].map(deg => (
           <button
             key={deg}
@@ -176,9 +318,34 @@ function PdfViewer({ urlDownload }) {
         ))}
       </div>
       <div style={{ overflow: 'auto' }}>
-        <Document file={pdfData}>
-          <Page pageNumber={pageNumber} width={Math.floor(window.innerWidth * 0.78)} rotate={rotation} />
-        </Document>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <Document file={pdfData}>
+            <Page
+              pageNumber={pageNumber}
+              width={renderedWidth}
+              rotate={rotation}
+              onLoadSuccess={page => setPageDims({ width: page.width, height: page.height })}
+            />
+          </Document>
+          {showOverlay && matches.map((m, i) => (
+            <div
+              key={i}
+              ref={i === 0 ? firstMatchRef : null}
+              style={{
+                position: 'absolute',
+                left: m.x * sx,
+                top: m.y * sy,
+                width: m.w * sx,
+                height: m.h * sy,
+                background: 'rgba(255, 235, 59, 0.35)',
+                border: '2px solid rgb(255, 193, 7)',
+                borderRadius: 2,
+                pointerEvents: 'none',
+                boxShadow: '0 0 12px rgba(255, 235, 59, 0.6)',
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -200,15 +367,25 @@ function FileViewer({ urlDownload, employeeName }) {
 
   if (!urlDownload) return null;
 
-  if (isPdfDownload(urlDownload)) return <PdfViewer urlDownload={urlDownload} />;
+  if (isPdfDownload(urlDownload)) return <PdfViewer urlDownload={urlDownload} employeeName={employeeName} />;
 
   if (!checked) return <StatusBox>Cargando…</StatusBox>;
   if (excelUrl === 'error') return <StatusBox>No se pudo cargar el archivo.</StatusBox>;
   return <ExcelViewer fileUrl={excelUrl} employeeName={employeeName} />;
 }
 
-export function EmployeeDrawer({ employee, onClose, accent }) {
+export function EmployeeDrawer({ employee, allEmployees = [], onSelect, onClose, accent }) {
   if (!employee) return null;
+
+  const sameSource = isPdfDownload(employee.urlDownload)
+    ? Array.from(
+        new Map(
+          (allEmployees || [])
+            .filter(e => e.urlDownload === employee.urlDownload && e.id !== employee.id)
+            .map(e => [e.id, e])
+        ).values()
+      )
+    : [];
 
   return (
     <div className="drawer-overlay" onClick={onClose}>
@@ -244,6 +421,43 @@ export function EmployeeDrawer({ employee, onClose, accent }) {
               <div className="detail-v mono">{employee.salary}</div>
             </div>
           </div>
+
+          {sameSource.length > 0 && (
+            <div style={{ padding: '12px 16px 0', borderTop: '1px solid var(--line-soft)', marginTop: 12, flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <span>Otros en esta página</span>
+                <span style={{ color: 'var(--text-dimmer)', fontWeight: 400 }}>{sameSource.length}</span>
+              </div>
+              <div style={{ overflowY: 'auto', flex: 1, marginRight: -8, paddingRight: 8 }}>
+                {sameSource.map(e => (
+                  <button
+                    key={e.id}
+                    onClick={() => onSelect && onSelect(e)}
+                    style={{
+                      display: 'block', width: '100%', textAlign: 'left',
+                      padding: '8px 10px', marginBottom: 4, borderRadius: 6,
+                      background: 'var(--panel-2)', border: '1px solid var(--line-soft)',
+                      cursor: 'pointer', color: 'var(--text)',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--panel-3, rgba(255,255,255,0.04))'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'var(--panel-2)'}
+                  >
+                    <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {e.name}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, marginTop: 2 }}>
+                      <span style={{ fontSize: 10, color: 'var(--text-dim)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                        {e.dept}
+                      </span>
+                      <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: "'Geist Mono', monospace", whiteSpace: 'nowrap' }}>
+                        {Number(e.salary).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="drawer-foot">
             <button className="icon-btn" onClick={onClose}><Icon name="close" /></button>
