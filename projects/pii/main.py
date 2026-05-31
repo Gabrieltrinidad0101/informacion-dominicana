@@ -28,6 +28,10 @@ INSTITUTIONS = {
         "institutionName": "Ayuntamiento de Jarabacoa",
         "typeOfData": "nomina",
     },
+    "ayuntamientoMoca": {
+        "institutionName": "Ayuntamiento de Moca",
+        "typeOfData": "nomina",
+    }
 }
 
 print("Loading PaddleOCR ...")
