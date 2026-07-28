@@ -1,12 +1,9 @@
 import 'dotenv/config'
-import Knex from 'knex'
 import { institutions } from '../shared/institutions.js'
 import { FileManagerClient } from '../shared/fileManagerClient.js'
+import { createKnex } from '../shared/db.js'
 
-const knex = Knex({
-    client: 'pg',
-    connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@${process.env.POSTGRES_HOST ?? 'localhost'}:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`
-})
+const knex = createKnex()
 
 const fileManagerClient = new FileManagerClient()
 
@@ -66,8 +63,15 @@ async function exportInstitution(institutionName) {
         .groupBy('time')
         .orderBy('time', 'asc')
 
+    // Only expose fields the frontend consumes. Sensitive columns
+    // (accountBack, phoneNumber, OCR boxes x/y/width/height/confidences,
+    // internalLink, _id) are intentionally excluded from public JSON.
     const positionRows = await knex('payrolls')
-        .select(knex.raw(`TO_CHAR("date", 'YYYY-MM') AS date_key`), '*')
+        .select(
+            knex.raw(`TO_CHAR("date", 'YYYY-MM') AS date_key`),
+            'name', 'document', 'position', 'income', 'sex',
+            'date', 'isHonorific', 'urlDownload'
+        )
         .where('institutionName', institutionName)
         .orderBy('income', 'asc')
 

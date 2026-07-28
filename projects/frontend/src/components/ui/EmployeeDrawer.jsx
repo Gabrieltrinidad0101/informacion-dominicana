@@ -1,11 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import * as XLSX from 'xlsx';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
 import { Icon } from './Icon';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 import { isPdfDownload, resolveDownloadUrl } from '../../utils/fileUrl.js';
 
@@ -23,21 +18,29 @@ function normalizeText(s) {
 function parseOcrWords(json) {
   const texts  = json?.rec_texts  || [];
   const scores = json?.rec_scores || [];
+  const boxes  = json?.rec_boxes  || [];
   const polys  = json?.rec_polys  || [];
   const words = [];
   for (let i = 0; i < texts.length; i++) {
-    const poly = polys[i];
-    if (!poly || poly.length !== 4) continue;
-    const [p0, p1, p2, p3] = poly;
-    const cx = (p0[0] + p2[0]) / 2;
-    const cy = (p0[1] + p2[1]) / 2;
-    const w  = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
-    const h  = Math.hypot(p3[0] - p0[0], p3[1] - p0[1]);
+    let x, y, w, h;
+    const box = boxes[i];
+    if (box && box.length === 4) {
+      // rec_boxes are axis-aligned [x1, y1, x2, y2] in OCR image pixels — use
+      // them directly (matches the reference viewer, exact placement).
+      const [x1, y1, x2, y2] = box;
+      x = x1; y = y1; w = x2 - x1; h = y2 - y1;
+    } else {
+      // Fallback: derive the axis-aligned bbox from the polygon's extents.
+      const poly = polys[i];
+      if (!poly || poly.length !== 4) continue;
+      const xs = poly.map(p => p[0]);
+      const ys = poly.map(p => p[1]);
+      x = Math.min(...xs); y = Math.min(...ys);
+      w = Math.max(...xs) - x; h = Math.max(...ys) - y;
+    }
     words.push({
       text: (texts[i] || '').trim(),
-      x: cx - w / 2,
-      y: cy - h / 2,
-      w, h,
+      x, y, w, h,
       conf: scores[i] ?? 0,
     });
   }
@@ -84,15 +87,6 @@ function findOcrMatches(words, query) {
     }
   }
   return uniq;
-}
-
-function loadImageDims(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload  = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
-    img.onerror = reject;
-    img.src = url;
-  });
 }
 
 function ExcelViewer({ fileUrl, employeeName }) {
@@ -221,65 +215,73 @@ function StatusBox({ children }) {
   );
 }
 
+const MAX_IMAGES_PER_PAGE = 20;
+
+// Renders the OCR-corrected page images (imgProcessed/..._imgN.png) and draws
+// search highlights directly on them. The OCR boxes live in these images' pixel
+// space, so placement is an exact per-axis scale (renderedWidth / imgWidth) —
+// the same trivial mapping as the reference viewer. We deliberately do NOT
+// overlay on the rebuilt PDF page: that page is squished + /Rotate'd, which made
+// the coordinate mapping ambiguous and imprecise.
 function PdfViewer({ urlDownload, employeeName }) {
-  const [pdfData, setPdfData] = useState(null);
-  const [rotation, setRotation] = useState(0);
-  const [pageDims, setPageDims] = useState(null);
-  const [ocrData, setOcrData] = useState(null);
+  const [images, setImages] = useState(null);   // [{ meta, words, src }]
   const [searchQ, setSearchQ] = useState(employeeName ?? '');
   const firstMatchRef = useRef(null);
 
-  const pageMatch = urlDownload.match(/_page(\d+)$/);
-  const pageNumber = pageMatch ? parseInt(pageMatch[1]) + 1 : 1;
-  const pdfUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/pdfFixed/').replace(/_page\d+$/, '')}.pdf`;
   const renderedWidth = Math.floor(window.innerWidth * 0.78);
 
-  useEffect(() => {
-    setPdfData(null);
-    setRotation(0);
-    setPageDims(null);
-    fetch(pdfUrl)
-      .then(r => { if (!r.ok) throw new Error(); return r.arrayBuffer(); })
-      .then(buf => setPdfData(buf))
-      .catch(() => setPdfData('error'));
-  }, [pdfUrl]);
-
+  // Discover every image on this page (img0, img1, …) by probing its _meta.json
+  // until one is missing, then load each image's OCR words. PII now writes
+  // contiguous 0-based indices, so the first 404 marks the end of the list.
   useEffect(() => {
     let cancelled = false;
-    setOcrData(null);
-    const ocrUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/extractedText/')}_img0.json`;
-    const imgUrl = `${SERVER_URL}/${urlDownload.replace('/download/', '/imgProcessed/')}_img0.png`;
+    setImages(null);
+    const metaBase = urlDownload.replace('/download/', '/imgProcessed/');
+    const ocrBase  = urlDownload.replace('/download/', '/extractedText/');
 
-    Promise.all([
-      fetch(ocrUrl).then(r => r.ok ? r.json() : null).catch(() => null),
-      loadImageDims(imgUrl).catch(() => null),
-    ]).then(([json, dims]) => {
-      if (cancelled || !json || !dims) return;
-      setOcrData({ width: dims.width, height: dims.height, words: parseOcrWords(json) });
-    });
+    (async () => {
+      const found = [];
+      for (let i = 0; i < MAX_IMAGES_PER_PAGE; i++) {
+        const meta = await fetch(`${SERVER_URL}/${metaBase}_img${i}_meta.json`)
+          .then(r => r.ok ? r.json() : null).catch(() => null);
+        if (!meta) break;
+        const json = await fetch(`${SERVER_URL}/${ocrBase}_img${i}.json`)
+          .then(r => r.ok ? r.json() : null).catch(() => null);
+        found.push({
+          meta,
+          words: json ? parseOcrWords(json) : [],
+          src: `${SERVER_URL}/${metaBase}_img${i}.png`,
+        });
+      }
+      if (!cancelled) setImages(found);
+    })();
     return () => { cancelled = true; };
   }, [urlDownload]);
 
   useEffect(() => { setSearchQ(employeeName ?? ''); }, [employeeName]);
 
-  const matches = useMemo(() => {
-    if (!ocrData || !searchQ) return [];
-    return findOcrMatches(ocrData.words, searchQ);
-  }, [ocrData, searchQ]);
+  // Search each image's words independently and keep the hits per image so they
+  // can be drawn on that image with its own pixel scale.
+  const perImage = useMemo(() => {
+    if (!images) return [];
+    return images.map(img => ({
+      ...img,
+      matches: searchQ ? findOcrMatches(img.words, searchQ) : [],
+    }));
+  }, [images, searchQ]);
+
+  const totalMatches = perImage.reduce((n, img) => n + img.matches.length, 0);
 
   useEffect(() => {
     if (firstMatchRef.current) {
       firstMatchRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }, [matches]);
+  }, [totalMatches]);
 
-  if (!pdfData) return <StatusBox>Cargando PDF…</StatusBox>;
-  if (pdfData === 'error') return <StatusBox>No se pudo cargar el PDF.</StatusBox>;
+  if (!images) return <StatusBox>Cargando imagen…</StatusBox>;
+  if (!images.length) return <StatusBox>No se pudo cargar la imagen.</StatusBox>;
 
-  const renderedHeight = pageDims ? renderedWidth * pageDims.height / pageDims.width : 0;
-  const sx = ocrData ? renderedWidth  / ocrData.width  : 1;
-  const sy = ocrData && renderedHeight ? renderedHeight / ocrData.height : 1;
-  const showOverlay = rotation === 0 && ocrData && pageDims && matches.length > 0;
+  let firstAssigned = false;
 
   return (
     <div style={{ width: '100%', borderRadius: 6, overflow: 'hidden', background: '#525659', display: 'flex', flexDirection: 'column' }}>
@@ -289,63 +291,53 @@ function PdfViewer({ urlDownload, employeeName }) {
           <input
             value={searchQ}
             onChange={e => setSearchQ(e.target.value)}
-            placeholder="Buscar en el PDF…"
+            placeholder="Buscar en el documento…"
             style={{ border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.9)', fontSize: 11, outline: 'none', width: '100%' }}
           />
           {searchQ && (
             <button onClick={() => setSearchQ('')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', lineHeight: 1, padding: 0, fontSize: 14 }}>×</button>
           )}
         </div>
-        {ocrData && (
-          <span style={{ fontSize: 11, color: matches.length > 0 ? 'var(--accent, #c9f26a)' : 'rgba(255,255,255,0.5)' }}>
-            {matches.length} resultado{matches.length === 1 ? '' : 's'}
-          </span>
-        )}
-        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', marginLeft: 8, letterSpacing: '0.4px' }}>ROTAR</span>
-        {[0, 90, 270].map(deg => (
-          <button
-            key={deg}
-            onClick={() => setRotation(deg)}
-            style={{
-              padding: '3px 10px', fontSize: 11, borderRadius: 4, border: 'none', cursor: 'pointer',
-              background: rotation === deg ? 'var(--accent, #c9f26a)' : 'rgba(255,255,255,0.1)',
-              color: rotation === deg ? '#0a0d12' : 'rgba(255,255,255,0.8)',
-              fontWeight: rotation === deg ? 700 : 400,
-            }}
-          >
-            {deg}°
-          </button>
-        ))}
+        <span style={{ fontSize: 11, color: totalMatches > 0 ? 'var(--accent, #c9f26a)' : 'rgba(255,255,255,0.5)' }}>
+          {totalMatches} resultado{totalMatches === 1 ? '' : 's'}
+        </span>
       </div>
       <div style={{ overflow: 'auto' }}>
-        <div style={{ position: 'relative', display: 'inline-block' }}>
-          <Document file={pdfData}>
-            <Page
-              pageNumber={pageNumber}
-              width={renderedWidth}
-              rotate={rotation}
-              onLoadSuccess={page => setPageDims({ width: page.width, height: page.height })}
-            />
-          </Document>
-          {showOverlay && matches.map((m, i) => (
-            <div
-              key={i}
-              ref={i === 0 ? firstMatchRef : null}
-              style={{
-                position: 'absolute',
-                left: m.x * sx,
-                top: m.y * sy,
-                width: m.w * sx,
-                height: m.h * sy,
-                background: 'rgba(255, 235, 59, 0.35)',
-                border: '2px solid rgb(255, 193, 7)',
-                borderRadius: 2,
-                pointerEvents: 'none',
-                boxShadow: '0 0 12px rgba(255, 235, 59, 0.6)',
-              }}
-            />
-          ))}
-        </div>
+        {perImage.map((img, ii) => {
+          const scale = renderedWidth / img.meta.imgWidth;
+          return (
+            <div key={ii} style={{ position: 'relative', display: 'block', width: renderedWidth }}>
+              <img
+                src={img.src}
+                width={renderedWidth}
+                style={{ display: 'block', width: renderedWidth, height: 'auto' }}
+                alt=""
+              />
+              {img.matches.map((m, mi) => {
+                const isFirst = !firstAssigned;
+                if (isFirst) firstAssigned = true;
+                return (
+                  <div
+                    key={mi}
+                    ref={isFirst ? firstMatchRef : null}
+                    style={{
+                      position: 'absolute',
+                      left: m.x * scale,
+                      top: m.y * scale,
+                      width: m.w * scale,
+                      height: m.h * scale,
+                      background: 'rgba(255, 235, 59, 0.35)',
+                      border: '2px solid rgb(255, 193, 7)',
+                      borderRadius: 2,
+                      pointerEvents: 'none',
+                      boxShadow: '0 0 12px rgba(255, 235, 59, 0.6)',
+                    }}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

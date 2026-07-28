@@ -1,11 +1,8 @@
 import 'dotenv/config'
-import Knex from 'knex'
 import axios from 'axios'
+import { createKnex } from '../shared/db.js'
 
-const knex = Knex({
-    client: 'pg',
-    connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@${process.env.POSTGRES_HOST ?? 'localhost'}:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`
-})
+const knex = createKnex()
 
 const validateIdNumberApi = async (idNumber) => {
     try {
@@ -20,8 +17,12 @@ const validateIdNumberApi = async (idNumber) => {
 // ── args ─────────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2)
-const year = args[args.indexOf('--year') + 1] ?? null
-const month = args[args.indexOf('--month') + 1] ?? null
+const flagValue = (flag) => {
+    const i = args.indexOf(flag)
+    return i !== -1 && i + 1 < args.length ? args[i + 1] : null
+}
+const year = flagValue('--year')
+const month = flagValue('--month')
 
 if (year) console.log(`Filtering by year: ${year}`)
 if (month) console.log(`Filtering by month: ${month}`)
@@ -35,7 +36,7 @@ const query = knex('payrolls')
 if (year) query.whereRaw(`EXTRACT(YEAR FROM date) = ?`, [year])
 if (month) query.whereRaw(`EXTRACT(MONTH FROM date) = ?`, [month])
 
-const records = await query.select('id', 'document')
+const records = await query.select('_id', 'document')
 console.log(`Found ${records.length} record(s) to validate`)
 
 // ── validate ──────────────────────────────────────────────────────────────────
@@ -45,12 +46,12 @@ let failed = 0
 
 for (const record of records) {
     const isValid = await validateIdNumberApi(record.document)
-    await knex('payrolls').where('id', record.id).update({ isDocumentValid: isValid })
+    await knex('payrolls').where('_id', record._id).update({ isDocumentValid: isValid })
     if (isValid === null) {
-        console.error(`  API error for document: ${record.document} (id: ${record.id})`)
+        console.error(`  API error for document: ${record.document} (id: ${record._id})`)
         failed++
     } else {
-        console.log(`  id: ${record.id} | document: ${record.document} | valid: ${isValid}`)
+        console.log(`  id: ${record._id} | document: ${record.document} | valid: ${isValid}`)
         updated++
     }
 }

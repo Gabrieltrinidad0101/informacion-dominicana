@@ -91,11 +91,12 @@ services:
 
   pii:
     build:
-      context: ./projects/pii
-      dockerfile: dockerfile
+      context: ./projects
+      dockerfile: ./pii/dockerfile
     container_name: pii
     volumes:
-      - ./projects/pii:/app
+      - ./projects/pii:/app/pii
+      - ./projects/shared:/app/shared
     depends_on:
       - postgres
       - minio

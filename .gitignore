@@ -241,3 +241,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# PII service — OCR temp artifacts (may contain real payroll PII, never commit)
+projects/pii/output/
+projects/pii/tmp/
+projects/pii/*.png
+projects/pii/*.pdf
+projects/pii/errors-*.json
+
+# download service — per-institution scrape error logs
+projects/download/errors-*.json

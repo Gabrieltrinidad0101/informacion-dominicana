@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pii/requirements.txt ./pii/requirements.txt
+RUN pip install --no-cache-dir -r pii/requirements.txt
 
-COPY . .
+COPY shared ./shared
+COPY pii ./pii
 
-ENTRYPOINT ["python3", "-u", "main.py"]
+ENTRYPOINT ["python3", "-u", "pii/main.py"]

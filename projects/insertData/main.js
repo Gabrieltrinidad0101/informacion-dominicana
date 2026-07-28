@@ -1,12 +1,9 @@
 import 'dotenv/config'
-import Knex from 'knex'
 import { institutions } from '../shared/institutions.js'
 import { FileManagerClient } from '../shared/fileManagerClient.js'
+import { createKnex } from '../shared/db.js'
 
-const knex = Knex({
-    client: 'pg',
-    connection: `postgresql://${process.env.POSTGRES_DB_USER ?? 'myuser'}:${process.env.POSTGRES_DB_PASSWORD ?? 'mypassword'}@${process.env.POSTGRES_HOST ?? 'localhost'}:5432/${process.env.POSTGRES_DB ?? 'informacion-dominicana'}`
-})
+const knex = createKnex()
 
 const monthMap = {
     enero: 1, febrero: 2, marzo: 3, abril: 4,
@@ -65,7 +62,6 @@ try {
             const buffer = await fileManagerClient.getFile(aiKey)
             const json = JSON.parse(buffer.toString('utf-8'))
             const rawLines = json?.lines ?? json
-            let test = 0
             const payrolls = rawLines
                 .filter(p => p.name)
                 .map(p => {
@@ -75,7 +71,6 @@ try {
                         isHonorific = true
                         income = 0
                     }
-                    test += income
                     return {
                         date,
                         name: p.name ?? null,
@@ -91,7 +86,6 @@ try {
                         internalLink: aiKey
                     }
                 })
-            console.log({ test })
             if (payrolls.length === 0) {
                 console.log(`  No payrolls in: ${aiKey}`)
                 continue
@@ -124,35 +118,35 @@ async function ensureTable() {
     const exists = await knex.schema.hasTable('payrolls')
     if (!exists) {
         await knex.schema.createTable('payrolls', (t) => {
-            table.text('_id').primary();
-            table.timestamp('date', { useTz: true });
-            table.text('document');
-            table.decimal('income', 15, 2);
-            table.integer('index');
-            table.text('institutionName');
-            table.boolean('isDocumentValid');
-            table.text('link');
-            table.text('internalLink');
-            table.text('name');
-            table.text('position');
-            table.boolean('isHonorific');
-            table.uuid('traceId');
-            table.decimal('x', 10, 4);
-            table.decimal('y', 10, 4);
-            table.decimal('width', 10, 4);
-            table.decimal('height', 10, 4);
-            table.string('sex', 1);
-            table.text('urlDownload');
-            table.text('confidences');
-            table.text('accountBack');
-            table.text('phoneNumber');
+            t.text('_id').primary().defaultTo(knex.raw('gen_random_uuid()::text'));
+            t.timestamp('date', { useTz: true });
+            t.text('document');
+            t.decimal('income', 15, 2);
+            t.integer('index');
+            t.text('institutionName');
+            t.boolean('isDocumentValid');
+            t.text('link');
+            t.text('internalLink');
+            t.text('name');
+            t.text('position');
+            t.boolean('isHonorific');
+            t.uuid('traceId');
+            t.decimal('x', 10, 4);
+            t.decimal('y', 10, 4);
+            t.decimal('width', 10, 4);
+            t.decimal('height', 10, 4);
+            t.string('sex', 1);
+            t.text('urlDownload');
+            t.text('confidences');
+            t.text('accountBack');
+            t.text('phoneNumber');
         })
         console.log('Created table: payrolls')
     } else {
         const has_id = await knex.schema.hasColumn('payrolls', '_id')
         if (has_id) {
-            await knex.raw('ALTER TABLE payrolls ALTER COLUMN "_id" SET DEFAULT gen_random_uuid()')
-            console.log('Set default gen_random_uuid() on _id column')
+            await knex.raw('ALTER TABLE payrolls ALTER COLUMN "_id" SET DEFAULT gen_random_uuid()::text')
+            console.log('Set default gen_random_uuid()::text on _id column')
         }
     }
 }

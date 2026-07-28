@@ -1,0 +1,65 @@
+{
+  "ayuntamientoJarabacoa": {
+    "link": "https://ayuntamientojarabacoa.gob.do/transparencia/documentos/nomina/",
+    "institutionName": "Ayuntamiento de Jarabacoa",
+    "institutionType": "ayuntamiento",
+    "typeOfData": "nomina",
+    "slug": "jarabacoa",
+    "pii": true,
+    "frontend": true
+  },
+  "ayuntamientoMoca": {
+    "link": "https://ayuntamientomoca.gob.do/transparencia/documentos/nomina/",
+    "institutionName": "Ayuntamiento de Moca",
+    "institutionType": "ayuntamiento",
+    "typeOfData": "nomina",
+    "slug": "moca",
+    "pii": true,
+    "frontend": true
+  },
+  "intrant": {
+    "link": "https://intrant.gob.do/transparencia/recursos-humanos/nomina/",
+    "institutionName": "Intrant",
+    "institutionType": "intrant",
+    "typeOfData": "nomina",
+    "slug": "intrant",
+    "pii": false,
+    "frontend": true
+  },
+  "ayuntamientoLasCharcas": {
+    "link": "https://ayuntamientolascharcas.gob.do/transparencia/documentos/nomina/",
+    "institutionName": "Ayuntamiento de Las Charcas",
+    "institutionType": "ayuntamiento",
+    "typeOfData": "nomina",
+    "slug": "lasCharcas",
+    "pii": false,
+    "frontend": false
+  },
+  "digesett": {
+    "link": "https://digesett.gob.do/transparencia/index.php/recursos-humanos/nomina/",
+    "institutionName": "Digesett",
+    "institutionType": "digesett",
+    "typeOfData": "nomina",
+    "slug": "digesett",
+    "pii": false,
+    "frontend": false
+  },
+  "ogtic": {
+    "link": "https://ogtic.gob.do/transparencia/recursos-humanos/nomina/",
+    "institutionName": "Ogtic",
+    "institutionType": "ogtic",
+    "typeOfData": "nomina",
+    "slug": "ogtic",
+    "pii": false,
+    "frontend": true
+  },
+  "mopc": {
+    "link": "https://www.mopc.gob.do/transparencia/recursos-humanos/nomina/",
+    "institutionName": "Mopc",
+    "institutionType": "mopc",
+    "typeOfData": "nomina",
+    "slug": "mopc",
+    "pii": false,
+    "frontend": true
+  }
+}

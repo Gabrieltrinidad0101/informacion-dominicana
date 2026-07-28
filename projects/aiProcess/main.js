@@ -15,6 +15,7 @@ const errorsDir = join(__dirname, 'errors')
 
 const fileManagerClient = new FileManagerClient()
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+const CLAUDE_MODEL = 'claude-opus-4-8'
 
 // ── error logging ─────────────────────────────────────────────────────────────
 
@@ -112,7 +113,7 @@ const processPdfPage = async (pdfDoc, pageIndex, downloadKey) => {
 
     const call = async () => {
         const message = await anthropic.messages.create({
-            model: 'claude-opus-4-8',
+            model: CLAUDE_MODEL,
             max_tokens: 8192,
             messages: [{
                 role: 'user',
@@ -136,7 +137,7 @@ const processPdfPage = async (pdfDoc, pageIndex, downloadKey) => {
             return await call()
         } catch (retryErr) {
             console.error(`  Claude API failed after retry, skipping page ${pageIndex}.`)
-            await saveError({ provider: 'claude', downloadKey, pageIndex, model: 'claude-sonnet-4-6', prompt }, retryErr)
+            await saveError({ provider: 'claude', downloadKey, pageIndex, model: CLAUDE_MODEL, prompt }, retryErr)
             return null
         }
     }

@@ -1,26 +1,18 @@
 import "dotenv/config"
 import {
     S3Client,
-    GetObjectCommand,
     PutObjectCommand,
     HeadObjectCommand,
-    ListObjectsV2Command,
 } from "@aws-sdk/client-s3"
+import { FileManagerClient } from "../shared/fileManagerClient.js"
 
-const MINIO_BUCKET = process.env.MINIO_BUCKET ?? "informacion-dominicana-v2"
 const R2_BUCKET = process.env.R2_BUCKET ?? "informaciondominicana"
 const FORCE = process.argv.includes("--force")
 const PREFIX = process.argv.find((a, i) => process.argv[i - 1] === "--prefix") ?? ""
 
-const minio = new S3Client({
-    region: process.env.REGION ?? "us-east-1",
-    endpoint: process.env.ENDPOINT ?? "http://localhost:9000",
-    forcePathStyle: true,
-    credentials: {
-        accessKeyId: process.env.MINIO_ROOT_USER ?? "MINIO_ROOT_USER",
-        secretAccessKey: process.env.MINIO_ROOT_PASSWORD ?? "MINIO_ROOT_PASSWORD",
-    },
-})
+// Source side (MinIO) reuses the shared client; only the R2 destination needs
+// its own S3 client because it points at a different endpoint/bucket.
+const minio = new FileManagerClient()
 
 const r2 = new S3Client({
     region: "auto",
@@ -30,21 +22,6 @@ const r2 = new S3Client({
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
     },
 })
-
-const listAllKeys = async (prefix) => {
-    const keys = []
-    let continuationToken = undefined
-    do {
-        const res = await minio.send(new ListObjectsV2Command({
-            Bucket: MINIO_BUCKET,
-            Prefix: prefix,
-            ContinuationToken: continuationToken,
-        }))
-        for (const obj of res.Contents ?? []) keys.push(obj.Key)
-        continuationToken = res.IsTruncated ? res.NextContinuationToken : undefined
-    } while (continuationToken)
-    return keys
-}
 
 const existsInR2 = async (key) => {
     try {
@@ -58,9 +35,9 @@ const existsInR2 = async (key) => {
 const transfer = async (key) => {
     if (!FORCE && await existsInR2(key)) {
         console.log(`skip  ${key}`)
-        return
+        return 'skip'
     }
-    const res = await minio.send(new GetObjectCommand({ Bucket: MINIO_BUCKET, Key: key }))
+    const res = await minio.getFileStream(key)
     const body = Buffer.from(await res.Body.transformToByteArray())
     await r2.send(new PutObjectCommand({
         Bucket: R2_BUCKET,
@@ -70,19 +47,19 @@ const transfer = async (key) => {
         ACL: "public-read",
     }))
     console.log(`done  ${key}`)
+    return 'done'
 }
 
 const main = async () => {
     console.log(`Listing MinIO files with prefix "${PREFIX}"…`)
-    const keys = await listAllKeys(PREFIX)
+    const keys = await minio.listFiles(PREFIX)
     console.log(`Found ${keys.length} files. FORCE=${FORCE}`)
 
     let ok = 0, skipped = 0, failed = 0
     for (const key of keys) {
         try {
-            const before = skipped
-            await transfer(key)
-            if (skipped > before) skipped++
+            const status = await transfer(key)
+            if (status === 'skip') skipped++
             else ok++
         } catch (err) {
             console.error(`error ${key}: ${err.message}`)

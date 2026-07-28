@@ -2,7 +2,9 @@ import 'dotenv/config'
 import puppeteer from 'puppeteer'
 import path from 'path'
 import fs from 'fs/promises'
-import { URL } from 'url'
+import { URL, fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 import { institutions } from '../shared/institutions.js'
 import { FileManagerClient } from '../shared/fileManagerClient.js'
 import { scrapeTownHallLinks } from './scrapers/townHall.js'
@@ -66,7 +68,7 @@ async function scrapeLinks(institution) {
     console.log(`Scraping links for: ${institution.institutionName}`)
     const browser = await puppeteer.launch({
         executablePath: process.env.CHROMIUM_PATH ?? '/usr/bin/chromium',
-        headless: false,
+        headless: process.env.HEADLESS !== 'false',
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
 
@@ -120,7 +122,7 @@ async function saveErrors(failed, errorsFile, retryMode) {
 
 const { institutionKey, retryMode } = parseArgs()
 const institution = resolveInstitution(institutionKey)
-const errorsFile = `./download/errors-${institutionKey}.json`
+const errorsFile = path.join(__dirname, `errors-${institutionKey}.json`)
 const fileManagerClient = new FileManagerClient()
 
 const links = retryMode

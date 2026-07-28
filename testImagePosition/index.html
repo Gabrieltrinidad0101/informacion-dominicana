@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR position viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        #toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #222;
+            color: #fff;
+            padding: 8px 12px;
+            z-index: 10;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        #stage {
+            position: relative;
+            margin-top: 44px;
+        }
+
+        #stage img {
+            display: block;
+        }
+
+        .box {
+            position: absolute;
+            border: 1px solid red;
+            background: rgba(255, 0, 0, 0.12);
+            pointer-events: none;
+        }
+
+        .box .label {
+            position: absolute;
+            top: -14px;
+            left: 0;
+            font-size: 10px;
+            color: #00f;
+            background: #fff;
+            white-space: nowrap;
+            line-height: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="toolbar">
+        <span>Escala: <input id="scale" type="range" min="0.1" max="1" step="0.05" value="0.25"> <span
+                id="scaleVal">0.25</span></span>
+        <label><input id="showText" type="checkbox"> mostrar texto</label>
+        <span id="info"></span>
+    </div>
+    <div id="stage">
+        <img id="img" src="./nomina-marzo-2025_page5_img0.png" alt="">
+    </div>
+
+    <script>
+        const JSON_FILE = './nomina-marzo-2025_page5_img0.json';
+        const stage = document.getElementById('stage');
+        const img = document.getElementById('img');
+        const scaleInput = document.getElementById('scale');
+        const scaleVal = document.getElementById('scaleVal');
+        const showText = document.getElementById('showText');
+        const info = document.getElementById('info');
+
+        let data;
+
+        function render() {
+            const scale = parseFloat(scaleInput.value);
+            scaleVal.textContent = scale;
+
+            // escalar la imagen
+            img.style.width = (data.naturalW * scale) + 'px';
+
+            // limpiar cajas previas
+            document.querySelectorAll('.box').forEach(b => b.remove());
+
+            data.boxes.forEach((b, i) => {
+                const [x1, y1, x2, y2] = b;
+                const div = document.createElement('div');
+                div.className = 'box';
+                div.style.left = (x1 * scale) + 'px';
+                div.style.top = (y1 * scale) + 'px';
+                div.style.width = ((x2 - x1) * scale) + 'px';
+                div.style.height = ((y2 - y1) * scale) + 'px';
+                if (showText.checked && data.texts[i]) {
+                    const lbl = document.createElement('span');
+                    lbl.className = 'label';
+                    lbl.textContent = data.texts[i];
+                    div.appendChild(lbl);
+                }
+                stage.appendChild(div);
+            });
+            info.textContent = `${data.boxes.length} cajas · PNG ${data.naturalW}×${data.naturalH}`;
+        }
+
+        async function init() {
+            const json = await (await fetch(JSON_FILE)).json();
+            data = {
+                boxes: json.rec_boxes,
+                texts: json.rec_texts,
+                naturalW: img.naturalWidth,
+                naturalH: img.naturalHeight,
+            };
+            render();
+        }
+
+        scaleInput.addEventListener('input', render);
+        showText.addEventListener('change', render);
+
+        if (img.complete) init();
+        else img.addEventListener('load', init);
+    </script>
+</body>
+
+</html>
