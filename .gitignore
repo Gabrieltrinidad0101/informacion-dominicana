@@ -251,3 +251,9 @@ projects/pii/errors-*.json
 
 # download service — per-institution scrape error logs
 projects/download/errors-*.json
+
+# aiProcess batch runs — local PDF copies and model answers (real payroll PII)
+projects/aiProcess/batches/
+
+# aiProcess model benchmark (renders and transcriptions of payroll pages)
+projects/aiProcess/benchmark/out/

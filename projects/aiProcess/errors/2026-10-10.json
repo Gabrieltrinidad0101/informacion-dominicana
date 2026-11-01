@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2026-10-10T13:32:12.540Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2021/diciembre/nomina-las-chacas-diciembre-5-fusionado.pdf",
+      "pageIndex": 18
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  }
+]

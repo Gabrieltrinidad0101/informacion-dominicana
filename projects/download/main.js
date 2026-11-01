@@ -12,13 +12,15 @@ import { scrapeIntrantLinks } from './scrapers/intrant.js'
 import { scrapeDigesettLinks } from './scrapers/digesett.js'
 import { scrapeOgticLinks } from './scrapers/optic.js'
 import { scrapeMopcLinks } from './scrapers/mopc.js'
+import { scrapeCoraavegaLinks } from './scrapers/coraavega.js'
 
 const scrapers = {
     ayuntamiento: scrapeTownHallLinks,
     intrant: scrapeIntrantLinks,
     digesett: scrapeDigesettLinks,
     ogtic: scrapeOgticLinks,
-    mopc: scrapeMopcLinks
+    mopc: scrapeMopcLinks,
+    coraavega: scrapeCoraavegaLinks
 }
 
 function parseArgs() {

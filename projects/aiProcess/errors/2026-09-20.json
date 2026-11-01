@@ -1,0 +1,56 @@
+[
+  {
+    "timestamp": "2026-09-20T00:18:01.762Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2021/noviembre/NOMINA-NOVIEMBRE.pdf",
+      "pageIndex": 10
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjJRUSFrSBspdkJpZEB\"}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjJRUSFrSBspdkJpZEB\"}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BetaMessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/BetaMessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-09-20T00:18:02.562Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2021/noviembre/NOMINA-NOVIEMBRE.pdf",
+      "pageIndex": 11
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjMqKyaQMFFfShRYQLg\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjMqKyaQMFFfShRYQLg\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-20T00:18:05.552Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2023/enero/Nomina-Mes-de-enero-2023.xlsx",
+      "errors": [
+        {
+          "step": "mapColumns",
+          "sheet": "Reporte",
+          "error": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjN4UVxHoyaGTiYKcJn\"}"
+        }
+      ]
+    },
+    "error": "partial errors"
+  },
+  {
+    "timestamp": "2026-09-20T00:18:06.766Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2023/febrero/NOMINA-FEBRERO.xlsx",
+      "errors": [
+        {
+          "step": "mapColumns",
+          "sheet": "Reporte",
+          "error": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDjN9tvdPMbvuAWCfq48\"}"
+        }
+      ]
+    },
+    "error": "partial errors"
+  }
+]

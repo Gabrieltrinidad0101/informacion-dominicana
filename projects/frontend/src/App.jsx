@@ -29,6 +29,7 @@ const PAGE_TITLES = {
   intrant: ["Intrant", "Instituto Nacional de Tránsito y Transporte Terrestre"],
   ogtic: ["OGTIC", "Oficina Gubernamental de Tecnologías de la Información y Comunicación"],
   mopc: ["MOPC", "Ministerio de Obras Públicas y Comunicaciones"],
+  coraavega: ["CORAAVEGA", "Corporación del Acueducto y Alcantarillado de La Vega"],
   fuentes: ["Fuentes", "Orígenes de datos oficiales"],
 };
 
@@ -101,6 +102,7 @@ export function App() {
               <Route path="/intrant" element={<InstitutionPayroll institution="intrant" accent={accent} />} />
               <Route path="/ogtic" element={<InstitutionPayroll institution="ogtic" accent={accent} />} />
               <Route path="/mopc" element={<InstitutionPayroll institution="mopc" accent={accent} />} />
+              <Route path="/coraavega" element={<InstitutionPayroll institution="coraavega" accent={accent} />} />
               <Route path="/fuentes" element={<Analytics accent={accent} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

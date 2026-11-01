@@ -1,0 +1,11 @@
+[
+  { "id": "jar2018-p19-rot270", "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf", "pageIndex": 19, "reference": "stored" },
+  { "id": "jar2018-p7-rot90", "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf", "pageIndex": 7, "reference": "stored" },
+  { "id": "jar2019-p4", "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2019/agosto/NOMINA-AGOSTO-2019-3.pdf", "pageIndex": 4, "reference": "stored" },
+  { "id": "jar2020-p10", "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2020/abril/NOMINA-ABRIL-2020.pdf", "pageIndex": 10, "reference": "stored" },
+  { "id": "jar2021-p0-rot270", "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2021/noviembre/NOMINA-NOVIEMBRE.pdf", "pageIndex": 0, "reference": "stored" },
+  { "id": "lch2022-p0-digital", "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/marzo/Nomina-correspondiente-al-mes-de-marzo-2022-1.pdf", "pageIndex": 0, "reference": "opus" },
+  { "id": "lch2022-p20-digital", "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/marzo/Nomina-correspondiente-al-mes-de-marzo-2022-1.pdf", "pageIndex": 20, "reference": "opus" },
+  { "id": "cor2020-p0-digital", "downloadKey": "Coraavega/nomina/download/2020/septiembre/7020209114728.pdf", "pageIndex": 0, "reference": "opus" },
+  { "id": "lch2025-p5-labelAbove", "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2025/agosto/NOMINA-AGOSTO-2025.pdf", "pageIndex": 5, "reference": "opus" }
+]

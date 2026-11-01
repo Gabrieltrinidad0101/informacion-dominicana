@@ -10,6 +10,11 @@ const R2_BUCKET = process.env.R2_BUCKET ?? "informaciondominicana"
 const FORCE = process.argv.includes("--force")
 const PREFIX = process.argv.find((a, i) => process.argv[i - 1] === "--prefix") ?? ""
 
+// These pipeline stages stay in MinIO only and must never reach R2.
+const EXCLUDED_SEGMENTS = ["images", "imgProcessed"]
+const isExcluded = (key) =>
+    EXCLUDED_SEGMENTS.some((seg) => key.split("/").includes(seg))
+
 // Source side (MinIO) reuses the shared client; only the R2 destination needs
 // its own S3 client because it points at a different endpoint/bucket.
 const minio = new FileManagerClient()
@@ -57,6 +62,11 @@ const main = async () => {
 
     let ok = 0, skipped = 0, failed = 0
     for (const key of keys) {
+        if (isExcluded(key)) {
+            console.log(`skip  ${key} (excluded stage)`)
+            skipped++
+            continue
+        }
         try {
             const status = await transfer(key)
             if (status === 'skip') skipped++

@@ -1,0 +1,230 @@
+[
+  {
+    "timestamp": "2026-09-19T20:40:12.565Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 20
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSgtgBeDiN4PAb4TBSv\"}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSgtgBeDiN4PAb4TBSv\"}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BetaMessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/BetaMessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:13.220Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 21
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkS97ktzpg3WZixGZX\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkS97ktzpg3WZixGZX\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:13.658Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 22
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkUeBkPnxzC8ubJaHV\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkUeBkPnxzC8ubJaHV\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:14.004Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 23
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkWGAfhgVgK3HGg2Yg\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkWGAfhgVgK3HGg2Yg\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:14.407Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 24
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkXw8A7bwcDpM39pT7\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkXw8A7bwcDpM39pT7\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:14.869Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 25
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkZgJBF3cChfUM7YvU\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkZgJBF3cChfUM7YvU\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:15.255Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 26
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkbZA2y39f4aKZj4YN\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkbZA2y39f4aKZj4YN\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:15.858Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 27
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkdPYTvxp8RPPkEnxT\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkdPYTvxp8RPPkEnxT\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:16.263Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 28
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkfqsmsCQdUQtiYxcJ\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkfqsmsCQdUQtiYxcJ\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:16.714Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 29
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkhfGTqNu2iJqzMivL\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkhfGTqNu2iJqzMivL\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:17.329Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 30
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkjZs2YxwPmYWuF6uQ\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkjZs2YxwPmYWuF6uQ\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:17.781Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 31
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSknCceFq132JYqLYev\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSknCceFq132JYqLYev\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:18.240Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 32
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkpBviaP6wjKqF919h\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkpBviaP6wjKqF919h\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:18.661Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 33
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkr8G4epB29iZcwaMZ\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkr8G4epB29iZcwaMZ\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:19.039Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 34
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkskyzHhaaCpZ7wPZX\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkskyzHhaaCpZ7wPZX\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T20:40:19.448Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 35
+    },
+    "error": {
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkuLyuoGqPja85kdLY\"}",
+      "stack": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CfDSkuLyuoGqPja85kdLY\"}\n    at APIError.generate (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/error.mjs:42:20)\n    at Anthropic.makeStatusError (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:384:36)\n    at Anthropic.makeRequest (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/client.mjs:611:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T22:54:18.182Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 19
+    },
+    "error": {
+      "message": "terminated",
+      "stack": "Error: terminated\n    at file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/BetaMessageStream.mjs:50:44\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T23:09:07.203Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 29
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"overloaded_error\",\"message\":\"Overloaded\"},\"request_id\":\"req_011CfDe6Gifwpq6DkcpbPNfd\"}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"overloaded_error\",\"message\":\"Overloaded\"},\"request_id\":\"req_011CfDe6Gifwpq6DkcpbPNfd\"}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BetaMessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/BetaMessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-09-19T23:09:20.679Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Jarabacoa/nomina/download/2018/abril/Nomina-de-Abril-2018.pdf",
+      "pageIndex": 30
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"overloaded_error\",\"message\":\"Overloaded\"},\"request_id\":\"req_011CfDe72wiq5a313AtmYXmL\"}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"details\":null,\"type\":\"overloaded_error\",\"message\":\"Overloaded\"},\"request_id\":\"req_011CfDe72wiq5a313AtmYXmL\"}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BetaMessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/BetaMessageStream.mjs:157:34)"
+    }
+  }
+]

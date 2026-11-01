@@ -1,0 +1,386 @@
+{
+  "52cca9d2e0d797a2573389c07e65633fdc34b93c": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 12,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 5,
+        "position": 3
+      },
+      "notes": "Column 2 is department, column 4 employment status, column 18 'Sub-Cuenta No.' is a code (1) not a bank account. No cédula column."
+    },
+    "headerOffset": 12,
+    "ok": true
+  },
+  "e2e0736932086cec3a7dcd046796fdfedf096cc2": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 3,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 5,
+        "position": 2,
+        "sex": 4
+      },
+      "notes": "Column c3 'Tarjeta' is a card number, not a cédula, so document is null."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "55d08e202cef2d86b0ebc6a4a414ac9f5f30c156": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 6,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 6,
+        "position": 3,
+        "sex": 5
+      },
+      "notes": "No cédula column. c2 is department, c4 is servant category."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "a994d4deacdfc525e32927bad8086be80ce1764c": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 4,
+        "position": 6,
+        "accountBack": 5
+      },
+      "notes": "Column 0 is 'Carnet' (card number), not cédula. Column 2 is hire date with placeholder values 0000-00-00. Column 3 is empty."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "0232d9f377fc321bf18bbd2afb16128ca61e7d01": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 4,
+        "position": 6,
+        "accountBack": 5
+      },
+      "notes": "Column c0 'Carnet' is a card/employee number, not a cédula; no document column present. c2 is hire date (many invalid '0000-00-00' or Excel serials). c8 'Est.' status appears partly merged into the position text."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "6aca6c372c089e30d33d3d63b77d55a8c80e4f52": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 4,
+        "position": 6,
+        "accountBack": 5
+      },
+      "notes": "Column 0 is 'Carnet' (employee card number), not cédula. Column 2 is hire date (all 0000-00-00). Column 7 'Est.' holds status but some rows have overflow text from position column."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "fb94346e0272da8fc73f24b7691df31f7862b50f": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 2,
+      "columns": {
+        "name": [
+          4
+        ],
+        "income": 5,
+        "position": 3
+      },
+      "notes": "c1 'Lugar Funciones' is department/location, c2 employee type; no cédula column."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "ed242d1c2b51b3be569f4885b94cd1e192e1d320": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 2,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 3,
+        "position": 4
+      },
+      "notes": "Carnet (c0) is an employee/card number, not a cédula. c2 is hire date (all zeros). c6 'Departamento' header has no data."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "59a4bfc642b19687d71d317b4d4bbf0d932461b1": {
+    "mapping": {
+      "isPayroll": false,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "position": 2
+      },
+      "notes": "Employee listing without any pay amounts; column 1 merges the name with a garbled ingreso date (0000-00-00). Column 0 is a carnet (card) number, not a cédula. 'Departamento' header has no data."
+    },
+    "headerOffset": 1,
+    "ok": false
+  },
+  "cdac0a58cc77e99b07c0e735024fbf7020ee98b1": {
+    "mapping": {
+      "isPayroll": false,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "position": 3
+      },
+      "notes": "Employee listing with carnet, entry date, position and department, but no salary/pay column, so not a payroll."
+    },
+    "headerOffset": 1,
+    "ok": false
+  },
+  "c1c49a424fe68b216d11ac4524222a219d2ff533": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 1,
+      "columns": {
+        "name": [
+          1
+        ],
+        "income": 3,
+        "position": 4
+      },
+      "notes": "Column 0 is 'Carnet' (employee card number), not cédula. Column 5 'Departamento' header exists but has no data."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "72768fa692b8210956a5c316f01d3c5dc8943f47": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 11,
+      "columns": {
+        "name": [
+          4
+        ],
+        "income": 8,
+        "position": 5
+      },
+      "notes": "Military compensation payroll. c3 = Reg. No. (record number, not cédula). c6 = institution (INTRANT), c7 = 'Accion' (PERSONAL MILITAR), c9 = ISR (Ley 11-92) withholding. Header labels split across rows 10-11; data starts at r13."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "ce84a750b447db9972f0bd015c6fa059d430a645": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 8,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 5,
+        "position": 1,
+        "sex": 14
+      },
+      "notes": "Column 2 holds an unlabeled numeric category/level code; c13 is locality. Names contain mojibake (PEÃ‘A = PEÑA)."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "bea4fc51f29bf88bebc3c2708fe2c058b4601e49": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 4,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 3,
+        "position": 2
+      },
+      "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+    },
+    "headerOffset": 0,
+    "ok": false
+  },
+  "2327b19b6a204f3741560659bc7834ec359ca545": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 8,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 4,
+        "position": 1,
+        "sex": 12
+      },
+      "notes": "Nómina de empleados fijos (diciembre 2021). No hay cédula, cuenta bancaria ni teléfono. c2 departamento y c11 localidad no se mapean; c10 es ingreso neto. Algunos nombres tienen caracteres mal codificados (PEÃ‘A)."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "2a607e5c7cdefe1161905af43b787196ba16aaed": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 8,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 5,
+        "position": 1,
+        "sex": 13
+      },
+      "notes": "Column c2 is an unlabeled numeric level/category code. c3 is department (not position), c4 contract category, c12 locality. Names contain mojibake (PEÃ‘A = PEÑA)."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "db3bdbe93ef00177e39e07a95d6d75500c53cdf4": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 8,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 4,
+        "position": 1,
+        "sex": 14
+      },
+      "notes": "Column 10 is unlabeled and sparse (appears to be a hierarchy/level flag); c11 is JERARQUIA, c13 LOCALIDAD, c2 DEPARTAMENTO, c3 CATEGORIA. Names contain mojibake encoding (PEÃ‘A for PEÑA). No cédula column."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "27fb7debbf27ea62478d660b5927f6c98c8f5ecc": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 4,
+      "columns": {
+        "name": [
+          0
+        ],
+        "income": 4,
+        "document": 2,
+        "position": 1
+      },
+      "notes": "Column 1 is labelled 'NOTA:' but holds the job title prefixed with 'CONTRATO: '. Columns 3 and 5 hold contract duration. Some cédula values repeat (047-0086450-9 appears for several different people), likely data-entry errors."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "9515ab1bd737a3f12c7061a894c70de5fa1d264d": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 8,
+      "columns": {
+        "name": [
+          2
+        ],
+        "income": 6,
+        "position": 3,
+        "sex": 14
+      },
+      "notes": "Contracted employees payroll. Columns c0/c1 are contract start/end dates (Excel serial numbers). No cédula column. c4 department, c5 category, c13 locality."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "f43c10464a56cc52075bbf40bd300f4ec15ce96d": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": null,
+      "columns": {
+        "name": [
+          2
+        ],
+        "income": 6,
+        "position": 3,
+        "sex": 14
+      },
+      "notes": "No header row; data starts at r0. c0/c1 appear to be Excel date serials (start/end dates), c4 department, c5 employee type (FIJOS), c7-c10 deductions (AFP/ISR/SFS/other), c11 total deductions, c12 net pay, c13 location/branch. No cédula, bank account, or phone columns. Text has mojibake encoding (e.g., DIRECCIÃ“N)."
+    },
+    "headerOffset": 0,
+    "ok": false
+  },
+  "7e9ecbbd056865c56239802280e4d0f900857bb1": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 4,
+      "columns": {
+        "name": [
+          3
+        ],
+        "income": 7,
+        "document": 2,
+        "position": 4,
+        "sex": 15
+      },
+      "notes": "Cédulas are stored as 11-digit numbers without dashes (leading zeros lost in some rows). Dates (c1, r3) appear as Excel serial numbers."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "5497cbe1431c76a18afaaf99022a646ea55912a7": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 4,
+      "columns": {
+        "name": [
+          3
+        ],
+        "income": 7,
+        "document": 2,
+        "position": 4,
+        "sex": 15
+      },
+      "notes": "Dates in c1 (FECHA_INGRESO) and r3 appear as Excel serial numbers. c5 is program, c14 cost center, c6 servant category."
+    },
+    "headerOffset": 0,
+    "ok": true
+  },
+  "05949a1a0fe9364300611a636b8ad82cc83c351b": {
+    "mapping": {
+      "isPayroll": true,
+      "headerRow": 4,
+      "columns": {
+        "name": [
+          3
+        ],
+        "income": 7,
+        "document": 2,
+        "position": 4,
+        "sex": 15
+      },
+      "notes": "Cédulas stored as 11-digit numbers without separators (some missing leading zeros). Column 1 (FECHA_INGRESO) and row 3 hold Excel date serials."
+    },
+    "headerOffset": 0,
+    "ok": true
+  }
+}

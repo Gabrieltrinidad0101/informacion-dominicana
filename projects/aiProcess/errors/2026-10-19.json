@@ -1,0 +1,138 @@
+[
+  {
+    "timestamp": "2026-10-19T05:47:00.662Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/abril/973202242675142.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 40,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:00.725Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/agosto/60420228873914.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 33,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:00.851Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/febrero/54520223278229.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 34,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:00.924Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/julio/75820227474712.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 32,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:00.960Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/junio/7302022619101514.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 31,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:00.997Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/marzo/83720223278358.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 38,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:01.001Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/mayo/4062022513101040.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 40,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  },
+  {
+    "timestamp": "2026-10-19T05:47:10.716Z",
+    "data": {
+      "source": "spreadsheet",
+      "downloadKey": "Coraavega/nomina/download/2022/septiembre/601202297141411.xls",
+      "sheets": [
+        {
+          "sheet": "Contratados",
+          "rows": 33,
+          "payroll": false,
+          "reason": "no usable column mapping",
+          "notes": "Contractor list (contratados). Column 1 is department, columns 4-5 are contract start/end dates (some as Excel serial numbers). Income values are inconsistently formatted (e.g. 'U$50 DOLARES LA HORA', '15,000,00 + IMP.'). Row 7 'BPS & TEC' is a company, not a person."
+        }
+      ]
+    },
+    "error": "no payroll rows extracted"
+  }
+]

@@ -61,5 +61,14 @@
     "slug": "mopc",
     "pii": false,
     "frontend": true
+  },
+  "coraavega": {
+    "link": "https://coraavega.gob.do/#/transparencia/33-recursos-humanos/90-nomina-de-empleados",
+    "institutionName": "Coraavega",
+    "institutionType": "coraavega",
+    "typeOfData": "nomina",
+    "slug": "coraavega",
+    "pii": false,
+    "frontend": true
   }
 }

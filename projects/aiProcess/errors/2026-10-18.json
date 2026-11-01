@@ -1,0 +1,218 @@
+[
+  {
+    "timestamp": "2026-10-18T02:40:20.142Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2021/diciembre/nomina-las-chacas-diciembre-5-fusionado.pdf",
+      "pageIndex": 18
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:06.322Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/agosto/61620208151399.pdf",
+      "pageIndex": 4
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:10.222Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 23
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:10.852Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "step": "detectLayout"
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:14.007Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 24
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:14.316Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 0
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:18.025Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 25
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:18.607Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 1
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:21.854Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 2
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:21.923Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 26
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:24.982Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 3
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:25.253Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 27
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:28.236Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 4
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:28.397Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 28
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:32.801Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/402202101311326.pdf",
+      "pageIndex": 5
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:33.033Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 29
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:36.733Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Coraavega/nomina/download/2020/diciembre/838202111112567.pdf",
+      "step": "detectLayout"
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  },
+  {
+    "timestamp": "2026-10-18T19:31:36.943Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 30
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"API Error: Unable to connect to API: SSL certificate verification failed (UNABLE_TO_VERIFY_LEAF_SIGNATURE). The certificate comes from an authority Claude Code doesn't trust, usually a TLS-inspecting corporate proxy or a gateway signed by a private CA: set NODE_EXTRA_CA_CERTS to that CA bundle, or add it to the system certificate store · see https://code.claude.com/docs/en/network-config\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  }
+]

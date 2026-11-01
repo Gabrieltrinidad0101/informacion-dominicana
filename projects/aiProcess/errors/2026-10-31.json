@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2026-10-31T05:37:29.892Z",
+    "data": {
+      "source": "pdf",
+      "downloadKey": "Ayuntamiento de Las Charcas/nomina/download/2022/abril/Nomina-abril-2022.pdf",
+      "pageIndex": 26
+    },
+    "error": {
+      "message": "{\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}",
+      "stack": "Error: {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"claude salió con código null\"}}\n    at Stream.iterator (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/core/streaming.mjs:114:35)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MessageStream._createMessage (file:///home/gabrieltrinidad/Desktop/javascript/informacion-dominicana/node_modules/@anthropic-ai/sdk/lib/MessageStream.mjs:157:34)"
+    }
+  }
+]

@@ -19,6 +19,7 @@ const items = [
   { id: "intrant", label: "Intrant", icon: "building" },
   { id: "ogtic", label: "OGTIC", icon: "building" },
   { id: "mopc", label: "MOPC", icon: "building" },
+  { id: "coraavega", label: "CORAAVEGA", icon: "building" },
   { id: "fuentes", label: "Fuentes", icon: "doc" },
 ];
 

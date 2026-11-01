@@ -46,6 +46,15 @@ const PAYROLL_SOURCES = [
     format: 'PDF',
     route: '/mopc',
   },
+  {
+    key: 'coraavega',
+    name: 'CORAAVEGA',
+    type: 'Institución Gubernamental',
+    link: 'https://coraavega.gob.do/#/transparencia/33-recursos-humanos/90-nomina-de-empleados',
+    data: 'Nómina',
+    format: 'PDF / Excel',
+    route: '/coraavega',
+  },
 ];
 
 const WORLDBANK_CATEGORIES = [
